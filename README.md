@@ -1,5 +1,7 @@
 # Graded Unit 2 Project
 
+Yeah two graded unit project created for HND Software Development at City of Glasgow College. The site is a college admissions site, developed using Ruby on Rails. Students sign up for account, apply for courses, and accept/decline offers. The initial brief is included below.
+
 *Project Brief*
 
 A group of colleges has asked for a system to create and track applications for their respective courses.

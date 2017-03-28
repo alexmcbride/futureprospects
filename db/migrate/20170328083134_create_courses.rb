@@ -5,9 +5,13 @@ class CreateCourses < ActiveRecord::Migration[5.0]
       t.text :description
       t.text :entry_requirements
       t.text :career_prospects
-      t.datetime :start_date
-      t.datetime :end_date
+      t.date :start_date
+      t.date :end_date
       t.string :level
+
+      # Foreign keys
+      t.integer :college_id
+      t.integer :category_id
 
       t.timestamps
     end

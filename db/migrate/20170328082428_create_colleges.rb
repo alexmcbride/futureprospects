@@ -6,6 +6,8 @@ class CreateColleges < ActiveRecord::Migration[5.0]
       t.string :address
       t.string :postcode
       t.string :telephone
+      t.string :email
+      t.string :website
 
       t.timestamps
     end

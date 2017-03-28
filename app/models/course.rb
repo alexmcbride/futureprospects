@@ -1,5 +1,5 @@
 class Course < ApplicationRecord
-  validates :title, presence: true, length: 100
+  validates :title, presence: true, length: { maximum: 100 }, uniqueness: true
   validates :description, presence: true
   validates :entry_requirements, presence: true
   validates :career_prospects, presence: true

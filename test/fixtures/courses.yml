@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  entry_requirements: MyText
+  career_prospects: MyText
+  start_date: 2017-03-28 09:31:34
+  end_date: 2017-03-28 09:31:34
+  level: MyString
+
+two:
+  title: MyString
+  description: MyText
+  entry_requirements: MyText
+  career_prospects: MyText
+  start_date: 2017-03-28 09:31:34
+  end_date: 2017-03-28 09:31:34
+  level: MyString

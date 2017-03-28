@@ -1,2 +1,37 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<div class="row">
+  <div class="col-md-5 fp-column">
+    <div class="row">
+      <h2>Search Courses</h2>
+      <p>Search our course listings to find the one that's perfect for you.</p>
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search for...">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">Go!</button>
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <h2>Browse Courses</h2>
+      <p>Browse the categories list to view all of the opportunities we offer.</p>
+      <ul>
+        <% @categories.each do |category| %>
+          <li><%= category.name %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-5 col-md-offset-2 fp-column">
+    <div class="row">
+      <h2>Students</h2>
+      <p>Register now to apply for your dream course.</p>
+      <a href="#" class="btn btn-info btn-block" role="button">Register</a>
+      <p>Sign in to track your application.</p>
+      <a href="#" class="btn btn-info btn-block" role="button">Sign In</a>
+    </div>
+    <div class="row">
+      <h2>Colleges</h2>
+      <p>Sign in to manage your student intake.</p>
+      <a href="#" class="btn btn-info btn-block" role="button">Sign In</a>
+    </div>
+  </div>
+</div>

@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+
+.fp-column {
+    border: 1px solid #CCCCCC;
+}

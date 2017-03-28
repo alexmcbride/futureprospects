@@ -13,11 +13,11 @@
     <div class="row">
       <h2>Browse Courses</h2>
       <p>Browse the categories list to view all of the opportunities we offer.</p>
-      <ul>
+      <div class="list-group">
         <% @categories.each do |category| %>
-          <li><%= category.name %></li>
+          <%= link_to category.name, nil, class: 'list-group-item list-group-item-action' %>
         <% end %>
-      </ul>
+      </div>
     </div>
   </div>
   <div class="col-md-5 col-md-offset-2 fp-column">

@@ -59,6 +59,226 @@ end
 
 # Seed courses
 course = Course.new
+course.category_id = categories['Accounting']
+course.college = cogc
+course.title = 'Accounting HNC'
+course.description = 'The HNC Accounting Award has been designed to meet the demands and requirements of the Accounting Industry.\n\n
+
+Opportunities are provided to develop your skills, knowledge and understanding in preparation for employment, or for progression to courses such as AAT level 8, or HND Accounting.  Further detail of the topics covered is provided in the section “What You Study” below.
+
+You\'ll be assessed throughout this course with the assessments taking the form of practical assessments, assignment and case studies. Towards the end of your course you\'ll undertake a Graded Unit examination, which is designed to assess your ability to integrate the knowledge and skills gained through the mandatory units.
+
+Throughout the course you\'ll undertake a programme of guidance activities designed to help you make the most of your qualification and college experience.
+
+You\'ll be required to attend college on 4 days every week from 9 am to 5 pm for one academic year.
+
+The course is placed on the Scottish Credit Qualifications Framework at Level 7. For more information on the framework visit: www.scqf.org.uk/the-framework/.'
+course.entry_requirements = 'One relevant* Higher at grade C or above; OR
+Three relevant National 5 courses at grade A; OR
+Successful completion of an NC/NQ** containing more than one unit at SCQF level 6; OR
+Relevant work experience will be considered where employer referee details have been supplied.
+Equivalent qualifications will be considered.
+*Qualifications cannot include any from the following list: Art and Design, Design and Manufacture, Drama, Graphic Communications, Health and Food Technology, Languages, Music, Media, Photography, Physical Education, ESOL.
+
+**Internal applicants must complete all 16 credits undertaken in the NC qualification.
+
+You\'ll be invited to attend a compulsory interview. The interview dates are:
+
+Thursday 30 March 2017 at 9.30 am
+Thursday 27 April 2017 at 1.30 pm
+The interview will begin with a 30 minute presentation from the faculty about the course and the college. This will be followed by a 10 minute one to one discussion on your application form and your suitability for the course. You\'ll be given the opportunity to ask questions. You must bring a copy of qualification certificates.'
+course.career_prospects = 'This course prepares you for a career in:
+
+Bookkeeping.
+Financial and/or Management Accounting.
+Accounts Technician.
+Assistant Accountant.
+Accounts Supervisor.
+Financial Reporting.
+Taxation.'
+course.start_date = Date.new 2017, 8, 28
+course.end_date = Date.new 2018, 6, 15
+course.level = 'SCQF level 7'
+course.save!
+
+
+
+
+
+
+
+course = Course.new
+course.category_id = categories['Accounting']
+course.college = cogc
+course.title = 'Accounting HC'
+course.description = 'This course provides an introduction to both Financial and Management Accounting and gives sufficient training in accounting procedures and techniques to enable you to progress further academically, or to be equipped sufficiently to attempt clerical level types of employment in an accounting environment.
+
+Further details of the topics covered is provided in the section “What you Study” below.
+
+You\'ll be assessed continuously throughout this course with the assessments taking the form of practical assessments, assignment and case studies. There is no final examination.
+
+You\'ll undertake a programme of guidance activities designed to help you make the most of your qualification and college experience.
+
+You\'ll be required to attend college on 4 days every week from 9 am to 5 pm for one academic year.
+This course is placed on the Scottish Credit Qualifications Framework at Level 5/6. For more information on the framework visit www.scqf.org.uk/the-framework/.'
+course.entry_requirements = 'Three relevant* courses at National 4 and National 5** level at grade C or above, or equivalent qualifications;
+Relevant work experience will be considered where employer referee details have been supplied.
+*Qualifications can include a maximum of one from the following list: Art and Design, Design and Manufacture, Drama, Graphic Communications, Health and Food Technology, Languages, Music, Media, Photography, Physical Education, ESOL.
+
+** A minimum of one qualification must be at National 5 level.
+
+You\'ll be invited to attend a compulsory interview. The interview dates are:
+Thursday 23 March 2017 at  4.15 pm
+Tuesday 25 April 2017 at  4.15 pm
+The interview will begin with a 30 minute presentation from the faculty about the course and the college. This will be followed by a 10 minute one to one discussion on your application form and your suitability for the course. You\'ll be given the opportunity to ask questions. You must bring a copy of qualification certificates.'
+course.career_prospects = 'You can apply for administrative, or technical level employment in accounting, or business.'
+course.start_date = Date.new 2017, 8, 28
+course.end_date = Date.new 2018, 6, 15
+course.level = 'SCQF level 5'
+course.save!
+
+
+
+
+
+course = Course.new
+course.category_id = categories['Accounting']
+course.college = cogc
+course.title = 'Accounting HND'
+course.description = 'The HND Accounting Award has been designed to meet the demands and requirements of the accounting industry. Opportunities are provided to develop your skills, knowledge and understanding in preparation for employment or for progression to further study at university, or for courses run by professional accounting organisations like ACCA, CIPFA and CIMA. Further details of the topics covered is provided in the section “what you study” below.
+
+You\'ll be assessed throughout this course with the assessments taking the form of practical assessments, assignment and case studies. Towards the end of the first year of the course you\'ll undertake a Graded Unit examination, which is designed to assess your ability to integrate the knowledge and skills gained through the mandatory units. There are a further 2 Graded Units in the second year of the HND – a project based Graded Unit and a Graded Unit examination.
+
+Throughout the course you\'ll undertake a programme of guidance activities designed to help you make the most of your qualification and college experience.
+
+You\'ll be required to attend college on 4 days every week from 9 am to 5 pm for two academic years.
+
+This course accepts year two direct entrants only for applicants who have already attained HNC Accounting.
+
+The course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework visit: www.scqf.org.uk/the-framework/.'
+course.entry_requirements = "Two relevant* Highers at grade C or above; OR
+Successful completion of an NC/NQ** with a minimum of 2 units at SCQF level 6; OR
+Relevant work experience will be considered where employer referee details have been supplied.
+Equivalent qualifications will be considered.
+*Qualifications cannot include any from the following list: Art and Design, Design and Manufacture, Drama, Graphic Communications, Health and Food Technology, Languages, Music, Media, Photography, Physical Education, ESOL.
+
+**Internal applicants must complete all 16 credits undertaken in the NC qualification.
+
+Year 2
+
+Successful completion of a full time HNC Accounting course with 15 credits, with a Grade A in the graded unit and all mandatory units, OR
+Successful completion of a part time HNC Accounting course with 12 credits, with a Grade A in the graded unit and all mandatory units.
+Applications for HND Accounting year 2 will not be processed until June 2017.
+
+You'll be invited to attend a compulsory interview. The interview dates are:
+
+Thursday 30 March 2017 at 1.30pm
+Thursday 27 April 2017 at 9.30am
+The interview will begin with a 30 minute presentation from the faculty about the course and the college. This will be followed by a 10 minute one to one discussion on your application form and your suitability for the course. You will be given the opportunity to ask questions. You must bring a copy of qualification certificates."
+course.career_prospects = 'This course prepares you for a career in:
+
+Bookkeeping.
+Financial and/or Management Accounting.
+Accounts Technician.
+Assistant Accountant.
+Accounts Supervisor.
+Financial Reporting.
+Management Accounting.
+Taxation.'
+course.start_date = Date.new 2017, 8, 28
+course.end_date = Date.new 2018, 6, 15
+course.level = 'SCQF level 8'
+course.save!
+
+
+
+
+course = Course.new
+course.category_id = categories['Administration, Human Resources & Law']
+course.college = cogc
+course.title = 'Administration and Information Technology HNC'
+course.description = "This course will provide you with a broad range of office-based skills and knowledge required for a career in office administration. This is a challenging course, where you'll develop specialist skills in IT, desktop publishing, communication, research and planning.
+
+Your stimulating programme will be delivered by our highly professional teaching staff with significant experience in office administration and a proven track record of bringing out the best in their students.
+
+This course accepts year two direct entrants (you must have a completed HNC Administration, please see further information in direct entry section)
+
+This course is placed on the Scottish Credit Qualifications Framework at Level 7 (year 1) and Level 8 (year 2).  For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course.entry_requirements ="Two Highers in a relevant* academic subject OR
+Relevant Work experience may be considered.
+* relevant academic subjects include English, Administration, Business Management, Economics, Geography, History, Mathematics, Modern Studies or a Science subject.
+
+You'll be invited to attend a group presentation and interview session.  The presentation will give you all of the information you need about the course, this will be followed on the same day by an individual interview where you can tell us why you are interested in this course and ask any specific questions related to your own application."
+course.career_prospects = "This course prepares you for a career as a Personal Assistant or Administrator in both the public and private sector. The HND can provide progression into employment in a general administrative role within small to medium enterprises. It'll also provide opportunities to develop the skills and knowledge required for more specialist posts demanded by larger organisations.
+
+The qualification will allow you to develop:
+
+Technical and administrative knowledge relevant to current practice.
+Interpersonal skills relevant to an administrative role.
+Personal effectiveness.
+Communication.
+Presentation techniques."
+course.start_date = Date.new 2017, 8, 28
+course.end_date = Date.new 2018, 6, 15
+course.level = 'SCQF level 8'
+course.save!
+
+
+
+
+course = Course.new
+course.category_id = categories['Administration, Human Resources & Law']
+course.college = cogc
+course.title = 'Legal Services HND (Year 2)'
+course.description = "The course is recommended for you if you're planning a professional career in the legal field, progressing to study law in depth following the HND, or if you might be interested in consolidating your career in a related field.
+
+The course will consist of lectures, tutorials, practical based tasks such as mock trials and the presentation of evidence under court conditions. You'll consider numerous common aspects of life and how the law affects individuals every day when facing problems in business, relationships, employment and the courts.
+
+Emphasis is placed on developing both your academic and vocational skills to equip you to progress into employment or further study. You'll be introduced to notions of equality, society, discrimination, prejudice and the rule of law.
+
+The HND in Legal services is an excellent foundation course in law which provides a recognised professional qualification for an application to enter the Scottish paralegal profession.
+
+The course is full-time covering at least 4 days per week and addresses a broad range of legal topics including business law, private and public law, employment law, criminal law, Sheriff Court procedure and corporate law.
+
+This course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course.entry_requirements = "HNC Legal Services; OR
+First year HND Legal Services.
+You'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject."
+course.career_prospects = 'On successful completion of your HND you may enter a related field, working as a trainee paralegal or as part of an in-house legal team. You can find employment with local authorities, the Sheriff Court, or Procurator Fiscal office.
+There are also opportunities for you in the Banking and Insurance Sectors, and a number of graduates have joined Police Scotland.'
+course.start_date = Date.new 2017, 8, 28
+course.end_date = Date.new 2018, 6, 15
+course.level = 'SCQF level 8'
+course.save!
+
+
+
+
+course = Course.new
+course.category_id = categories['Administration, Human Resources & Law']
+course.college = cogc
+course.title = 'Administration NC'
+course.description = "This course gives you the skills and knowledge required for making the first step into a career in administration in a business environment (please see the \"What you Study\" section, below, to find out more).
+
+You'll be taught by highly qualified lecturers who have a wealth of experience within the industry. Assessments during the course are ongoing and involve theory and practical based elements.
+
+After successful completion of the course, you'll be awarded with an NC Administration. This course is placed on the Scottish Credit Qualifications Framework at Level 5. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course.entry_requirements = "*Three or more National 4 qualifications and a minimum of 1 National 5 qualification in a relevant subject (or equivalent qualifications)
+* Relevant work experience will be considered
+Relevant academic subjects include English, Administration, Business Management, Economics, Geography, History, Mathematics, Modern Studies or a Science subject.
+
+You'll be invited to attend a group presentation and interview session.  The presentation will give you all of the information you need about the course, this will be followed on the same day by an individual interview where you can tell us why you're interested in this course and ask any specific questions related to your own application."
+course.career_prospects = 'This course prepares you for a career in administration in a range of businesses.'
+course.start_date = Date.new 2017, 8, 28
+course.end_date = Date.new 2018, 6, 15
+course.level = 'SCQF level 5'
+course.save!
+
+
+
+
+
+course = Course.new
 course.category_id = categories['Applied Computing & Digital Technologies']
 course.college = cogc
 course.title = 'Information Technology HNC'
@@ -79,6 +299,13 @@ course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 7'
 course.save!
+
+
+
+
+
+
+
 
 course = Course.new
 course.category_id = categories['Applied Computing & Digital Technologies']
@@ -101,6 +328,12 @@ course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 8'
 course.save!
+
+
+
+
+
+
 
 course = Course.new
 course.category_id = categories['Applied Computing & Digital Technologies']

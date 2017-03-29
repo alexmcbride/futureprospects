@@ -13,7 +13,7 @@ class CoursesController < ApplicationController
   def category
     @categories = Category.all
     @category = Category.left_outer_joins(:courses).find params[:id] # Left outer join as courses can be empty
-    @courses = @category.courses.paginate(:page => params[:page]).includes(:college)
+    @courses = @category.courses.paginate(:page => params[:page]).includes(:college).order(:title)
     render :index # Reuse the index view
   end
 
@@ -22,7 +22,7 @@ class CoursesController < ApplicationController
   def search
     @search_term = params[:s]
     @categories = Category.all
-    @courses = Course.paginate(:page => params[:page]).includes(:category, :college).search(@search_term)
+    @courses = Course.paginate(:page => params[:page]).includes(:category, :college).search(@search_term).order(:title)
     render :index
   end
 

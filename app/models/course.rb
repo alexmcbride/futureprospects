@@ -14,12 +14,14 @@ class Course < ApplicationRecord
 
   # Simple course search that looks in course title, category name, and college name.
   def self.search(search_term)
-    unless search_term.empty?
-      search_term = "%#{search_term}%".downcase # Prepare search term.
-      sql = 'LOWER(courses.title) LIKE :term OR '\
-            'LOWER(categories.name) LIKE :term OR '\
-            'LOWER(colleges.name) LIKE :term'
-      Course.joins(:category).joins(:college).where(sql, term: search_term)
+    if search_term.nil? or search_term.empty?
+      return Course.none
     end
+
+    search_term = "%#{search_term}%".downcase # Prepare search term.
+    sql = 'LOWER(courses.title) LIKE :term OR '\
+          'LOWER(categories.name) LIKE :term OR '\
+          'LOWER(colleges.name) LIKE :term'
+    Course.joins(:category).joins(:college).where(sql, term: search_term)
   end
 end

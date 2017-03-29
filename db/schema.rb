@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20170328083134) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_categories_on_name"
   end
 
   create_table "colleges", force: :cascade do |t|
@@ -28,6 +29,7 @@ ActiveRecord::Schema.define(version: 20170328083134) do
     t.string   "website"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["name"], name: "index_colleges_on_name"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -42,6 +44,7 @@ ActiveRecord::Schema.define(version: 20170328083134) do
     t.integer  "category_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.index ["title"], name: "index_courses_on_title"
   end
 
 end

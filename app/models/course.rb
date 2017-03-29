@@ -1,5 +1,5 @@
 class Course < ApplicationRecord
-  self.per_page = 11
+  self.per_page = 10
 
   validates :title, presence: true, length: { maximum: 100 }, uniqueness: true
   validates :description, presence: true

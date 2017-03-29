@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
+  resources :courses
+
   get 'home/index'
+  get 'courses/category/:id', to: 'courses#category', as: 'courses_category'
 
   root to: 'home#index'
 

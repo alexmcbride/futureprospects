@@ -16,7 +16,7 @@
         <p>Browse the categories list to view all of the opportunities we offer.</p>
         <ul>
           <% @categories.each do |category| %>
-              <li><%= link_to category.name, nil %></li>
+              <li><%=link_to category.name, courses_category_path(category) %></li>
           <% end %>
         </ul>
       </div>

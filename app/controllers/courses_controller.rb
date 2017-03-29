@@ -5,7 +5,7 @@ class CoursesController < ApplicationController
   # GET /courses.json
   def index
     @courses = Course.paginate(:page => params[:page]).includes(:category).includes(:college).order(:title)
-    @categories = Category.all.order(:name)
+    @categories = Category.all
   end
 
   # GET /courses/category/1
@@ -14,7 +14,7 @@ class CoursesController < ApplicationController
     @categories = Category.all
     @category = Category.left_outer_joins(:courses).find params[:id] # Left outer join as courses can be empty
     @courses = @category.courses.paginate(:page => params[:page]).includes(:college).order(:title)
-    render :index # Reuse the index view
+    render :index
   end
 
   # GET /courses/search?s=example

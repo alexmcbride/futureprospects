@@ -10,12 +10,12 @@ class Course < ApplicationRecord
   belongs_to :college
   belongs_to :category
 
-  # Simple course search, that looks in course title, category name, and college name.
+  # Simple course search that looks in course title, category name, and college name.
   def self.search(term)
-    term = "%#{term}%" # Add wildcards
-    sql = 'LOWER(courses.title) LIKE LOWER(:term) OR '\
-          'LOWER(categories.name) LIKE LOWER(:term) OR '\
-          'LOWER(colleges.name) LIKE LOWER(:term)'
+    term = "%#{term}%".downcase # Prepare search term.
+    sql = 'LOWER(courses.title) LIKE :term OR '\
+          'LOWER(categories.name) LIKE :term OR '\
+          'LOWER(colleges.name) LIKE :term'
     Course.joins(:category).joins(:college).where(sql, term: term)
   end
 end

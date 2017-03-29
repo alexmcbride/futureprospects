@@ -12,5 +12,12 @@
  *
  */
 
+// Important that variables comes before default bootstrap
+// import and our own theme (bootswatch) comes after.
+
+@import "variables";
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+@import "bootswatch";

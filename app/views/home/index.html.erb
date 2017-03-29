@@ -11,6 +11,7 @@
         <h2>Browse Courses</h2>
         <p>Browse the categories list to view all of the opportunities we offer.</p>
         <ul>
+          <li><%=link_to 'All Courses', courses_path %></li>
           <% @categories.each do |category| %>
               <li><%=link_to category.name, courses_category_path(category) %></li>
           <% end %>

@@ -12,9 +12,15 @@ class CoursesController < ApplicationController
   # GET /courses/category/1.json
   def category
     @categories = Category.all
-    # We use left outer as sometimes the courses can be empty.
-    @category = Category.left_outer_joins(:courses).find params[:id]
+    @category = Category.left_outer_joins(:courses).find params[:id] # Left outer join as courses can be empty
     @courses = @category.courses
+    render :index # Reuse the index view
+  end
+
+  def search
+    @search_term = params[:term]
+    @categories = Category.all
+    @courses = Course.search(@search_term)
     render :index
   end
 

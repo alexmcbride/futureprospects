@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'courses/search'
+
   resources :courses
 
   get 'home/index'

@@ -2,12 +2,7 @@
 
 <div class="col-md-3">
   <div class="row">
-    <div class="input-group">
-      <input type="text" class="form-control" placeholder="Search Courses">
-      <span class="input-group-btn">
-        <button class="btn btn-info" type="button">Go</button>
-      </span>
-    </div>
+    <%= render partial: 'shared/course_search' %>
 
     <h4>Categories</h4>
     <div class="list-group small">
@@ -19,15 +14,19 @@
   </div>
 </div>
 <div class="col-md-9">
-  <div class="list-group">
-    <% @courses.each do |course| %>
-      <a href="<%= url_for(course) %>" class="list-group-item list-group-item-action flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-between">
-          <h3 class="mb-1"><%= course.title %></h3>
-          <small style="float: right;"><%= course.college.name %></small>
-          <small><%= course.start_date %> &rarr; <%= course.end_date %></small>
-        </div>
-      </a>
-    <% end %>
-  </div>
+  <% if @courses.nil? or @courses.empty? %>
+      <p class="text-center text-warning"><em>There are no courses that match your query.</em></p>
+  <% else %>
+    <div class="list-group">
+      <% @courses.each do |course| %>
+          <a href="<%= url_for(course) %>" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+              <h3 class="mb-1"><%= course.title %></h3>
+              <small style="float: right;"><%= course.college.name %></small>
+              <small><%= course.start_date %> &rarr; <%= course.end_date %></small>
+            </div>
+          </a>
+      <% end %>
+    </div>
+  <% end %>
 </div>

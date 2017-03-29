@@ -364,3 +364,111 @@ course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 8'
 course.save!
+
+
+
+
+#Built Environment
+course = Course.new
+course.category_id = categories['Built Environment']
+course.college = cogc
+course.title = 'Architectural Technology HND'
+course.description = "This course gives you a technician level qualification, combining a broad first year curriculum with a specialist second year curriculum. It'll give you the skills required for employment in this high demand industry sector.
+
+You'll also have the opportunity to go on site visits around the West of Scotland, to give you an understanding of contemporary relevance.
+
+This is a two-year HND which accepts direct entrants to year two.
+
+This course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course.entry_requirements="Year one:
+Two Higher Grade passes, preferably including Mathematics or a science, OR
+A National Certificate in Built Environment or equivalent qualification at SCQF level 6, OR
+Relevant experience and the ability to show the commitment and capacity required to cope with the academic content of the course.
+Year two:
+HNC in Construction.
+It may also be possible to gain entry with an HNC in Architectural Technology. This will depend on the units that have been covered in the HNC. Students who gain entry with this qualification will require a bespoke infill programme, so each application will be considered on an individual basis.
+
+You'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject."
+course.career_prospects = 'This course prepares you for a career as an Architectural Technician, or Architectural Technologist in a variety of sectors including:
+
+Built Environment.
+Construction.
+Property.
+Private consultant practices (architects and surveyors).
+Design and build services divisions of construction contractors.
+Local authorities.
+Health trusts.
+Housing associations.
+Building component manufacturers.
+Government organisations.'
+course.start_date = Date.new 2017, 8, 28
+course.end_date = Date.new 2018, 6, 15
+course.level = 'SCQF level 8'
+course.save!
+
+
+
+
+
+course = Course.new
+course.category_id = categories['Built Environment']
+course.college = cogc
+course.title = 'Built Environment NC'
+course.description = "Would you like to work in the construction industry in roles such as a Quantity surveying or Architectural technician? This stimulating course offers a nationally recognised qualification that prepares you for an entry level technician position in the Construction Industry, or paves the way for further study (read the ‘After The Course” section below to find out more).
+
+Although mainly theory-based, the course offers practical site visits to help you place your learning in context, with opportunities found within Glasgow wherever possible. During the course you'll receive all the basic knowledge and skills you need, delivered by staff with first-hand industry experience.
+
+This means that the NC Built Environment course is a great launch pad for a career in the Construction Industry as well as an ideal starting point if you:
+
+Want to build your confidence about engaging in academic learning.
+Have previously failed to achieve the results that demonstrate your full potential.
+Are returning to learning after a break.
+Find useful resources and case studies on the Built Environment Forum Scotland website."
+course.entry_requirements="Relevant group of units or courses at Intermediate Level 1 or 2; OR
+
+Three Standard Grade passes at Credit Level, preferably with maths, English and a science;OR
+
+Three National 5 qualifications, preferably with maths, English and a science; OR
+
+Relevant construction industry experience and the commitment and capacity to cope with the academic content of the course.
+
+You'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject."
+course.career_prospects = 'This course prepares you for a career as a:
+
+Quantity surveying technician.
+
+Building control technician.
+
+Architectural technician.
+
+Building technician.
+
+Building site supervisor.'
+course.start_date = Date.new 2017, 8, 28
+course.end_date = Date.new 2018, 6, 15
+course.level = 'SCQF level 6'
+course.save!
+
+
+
+
+
+course = Course.new
+course.category_id = categories['Built Environment']
+course.college = cogc
+course.title = 'Quantity Surveying HND'
+course.description = "Quantity Surveyors (also known as a Construction Cost Consultants or Commercial Managers) manage all costs relating to building and civil engineering projects, from the early design plans, through to completion. Quantity Surveyors seek to minimise the costs of a project and enhance value, while still achieving the required standards and quality. Many of these are specified by statutory building regulations, which the surveyor needs to understand and adhere to.
+
+The HND in Quantity Surveying is a technician level qualification that combines a construction industry specific first year curriculum with a more specialist second year curriculum that equips you with the skills required for employment in this specialist industry sector.
+
+You'll be taught by staff with significant Construction Industry experience and a proven track record of bringing out the best in their students."
+course.entry_requirements="Two Higher Grade passes, preferably including Mathematics or a Science; OR
+A National Certificate in Built Environment or equivalent qualification at SCQF level 6; OR
+Relevant construction industry experience and the ability to evidence the commitment and capacity required to cope with the academic content of the course.
+
+You'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject."
+course.career_prospects = 'This course prepares you for a career in private practice QS consultancies, contracting organisations, property companies, financial institutions, local and central government, commercial clients, and housing associations.'
+course.start_date = Date.new 2017, 8, 28
+course.end_date = Date.new 2018, 6, 15
+course.level = 'SCQF level 8'
+course.save!

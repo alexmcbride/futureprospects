@@ -17,8 +17,10 @@ class CoursesController < ApplicationController
     render :index # Reuse the index view
   end
 
+  # GET /courses/search?s=example
+  # GET /courses/search.json?s=example
   def search
-    @search_term = params[:term]
+    @search_term = params[:s]
     @categories = Category.all
     @courses = Course.search(@search_term)
     render :index

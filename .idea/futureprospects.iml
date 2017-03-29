@@ -226,6 +226,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="html5shiv" level="application" />
+    <orderEntry type="library" name="html5shiv" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="actioncable (v5.0.2, ruby-2.2.4-p230) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="actionmailer (v5.0.2, ruby-2.2.4-p230) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="actionpack (v5.0.2, ruby-2.2.4-p230) [gem]" level="application" />
@@ -283,7 +284,7 @@
     <orderEntry type="library" scope="PROVIDED" name="web-console (v3.4.0, ruby-2.2.4-p230) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="websocket-driver (v0.6.5, ruby-2.2.4-p230) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="websocket-extensions (v0.1.2, ruby-2.2.4-p230) [gem]" level="application" />
-    <orderEntry type="library" name="html5shiv" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="will_paginate (v3.1.5, ruby-2.2.4-p230) [gem]" level="application" />
   </component>
   <component name="RModuleSettingsStorage">
     <LOAD_PATH number="0" />

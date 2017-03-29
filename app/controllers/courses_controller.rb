@@ -4,8 +4,8 @@ class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
-    @courses = Course.all
-    @categories = Category.all
+    @courses = Course.includes(:category).includes(:college).order(:title)
+    @categories = Category.all.order(:name)
   end
 
   # GET /courses/category/1
@@ -13,7 +13,7 @@ class CoursesController < ApplicationController
   def category
     @categories = Category.all
     @category = Category.left_outer_joins(:courses).find params[:id] # Left outer join as courses can be empty
-    @courses = @category.courses
+    @courses = @category.courses.includes(:college)
     render :index # Reuse the index view
   end
 
@@ -22,7 +22,7 @@ class CoursesController < ApplicationController
   def search
     @search_term = params[:s]
     @categories = Category.all
-    @courses = Course.search(@search_term)
+    @courses = Course.includes(:category, :college).search(@search_term)
     render :index
   end
 

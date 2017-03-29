@@ -368,6 +368,7 @@ course.save!
 
 
 
+
 #Built Environment
 course = Course.new
 course.category_id = categories['Built Environment']

@@ -14,13 +14,34 @@ cogc.description = 'City of Glasgow College, like Scotland as a nation, is a rea
 To date we have delivered 420 modern apprenticeships; 3162 work experience placements; 3467 work-based learning projects and we work directly with 1500 industry partners.
 
 So, whether it’s full-time, part-time or distance learning, we’ll help find you a course that suits you and equips you to succeed. '
-cogc.address = 'City Campus
-190 Cathedral Street'
+cogc.address = '* City Campus
+* 190 Cathedral Street
+* G4 0RF'
 cogc.postcode = 'G4 0RF'
 cogc.telephone = '0141 375 5555'
 cogc.email = 'enquiries@cityofglasgowcollege.ac.uk'
 cogc.website = 'https://www.cityofglasgowcollege.ac.uk'
 cogc.save
+
+
+
+kelvin = College.new
+kelvin.name = 'Glasgow Kelvin College'
+kelvin.description = 'Glasgow Kelvin College is the newest of Glasgow’s three regional further education colleges.  Formed by the merger of John Wheatley, North Glasgow and Stow colleges in November 2013, Glasgow Kelvin has all the expertise, facilities and resources to ensure that students receive a high quality learning experience that will provide them with the skills and knowledge to enable them to compete in today’s challenging jobs market, or to move on to further, more advanced learning.
+
+The range of courses available at Glasgow Kelvin is designed to meet the needs of learners of all ages and all levels of ability from introductory tasters and National Qualifications, through Higher Nationals, right up to degree level qualifications.
+
+We welcome enquiries and applications from individuals from all backgrounds and abilities.  So whatever your plans and career aspirations, Glasgow Kelvin is uniquely positioned to help you achieve your potential and realise your ambitions.  Please take a good look at the exciting range of learning opportunities we have and think about how a course at Glasgow Kelvin could start you on the road to success.'
+kelvin.address = '* 123 Flemington St
+* Glasgow
+* G21 4TD'
+kelvin.postcode = 'G21 4TD'
+kelvin.telephone = '0141 630 5000'
+kelvin.email = 'info@glasgowkelvin.ac.uk'
+kelvin.website = 'http://www.glasgowkelvin.ac.uk/'
+kelvin.save
+
+
 
 # Seed categories
 category_names = 'Accounting

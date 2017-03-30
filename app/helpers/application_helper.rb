@@ -34,4 +34,9 @@ module ApplicationHelper
 
     markdown.render(text).html_safe
   end
+
+  def replace_spaces(text)
+    text = ''
+
+  end
 end

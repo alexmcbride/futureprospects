@@ -6,17 +6,22 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# Seed college
+# Seed colleges
 cogc = College.new
 cogc.name = 'City of Glasgow College'
-cogc.description = 'City of Glasgow College, like Scotland as a nation, is a real melting pot of diversity, equality and excellence. Our innovative approaches to teaching and learning enable personalised development for all our 27,000 students across a range of nearly 2,000 courses from Access Level to Masters.
+cogc.description = 'This is a truly exciting time to join City of Glasgow College.
+
+Since our merger in 2010, we have transformed the delivery of college education in terms of our physical estate, our performance levels and our reach. The quality of our learning and teaching is sector leading and our new twin site super campus development is heralding a new era in college education.
+
+We are in the top two in the UK for WorldSkills and composite overall number one in the Scottish sector for success in student attainment in combined Further and Higher Education.
+
+City of Glasgow College, like Scotland as a nation, is a real melting pot of diversity, equality and excellence. Our innovative approaches to teaching and learning enable personalised development for all our 27,000 students across a range of nearly 2,000 courses from Access Level to Masters.
 
 To date we have delivered 420 modern apprenticeships; 3162 work experience placements; 3467 work-based learning projects and we work directly with 1500 industry partners.
 
-So, whether it’s full-time, part-time or distance learning, we’ll help find you a course that suits you and equips you to succeed. '
-cogc.address = '* City Campus
-* 190 Cathedral Street
-* G4 0RF'
+So, whether it’s full-time, part-time or distance learning, we’ll help find you a course that suits you and equips you to succeed.'
+cogc.address = 'City Campus
+190 Cathedral Street'
 cogc.postcode = 'G4 0RF'
 cogc.telephone = '0141 375 5555'
 cogc.email = 'enquiries@cityofglasgowcollege.ac.uk'
@@ -32,14 +37,91 @@ kelvin.description = 'Glasgow Kelvin College is the newest of Glasgow’s three 
 The range of courses available at Glasgow Kelvin is designed to meet the needs of learners of all ages and all levels of ability from introductory tasters and National Qualifications, through Higher Nationals, right up to degree level qualifications.
 
 We welcome enquiries and applications from individuals from all backgrounds and abilities.  So whatever your plans and career aspirations, Glasgow Kelvin is uniquely positioned to help you achieve your potential and realise your ambitions.  Please take a good look at the exciting range of learning opportunities we have and think about how a course at Glasgow Kelvin could start you on the road to success.'
-kelvin.address = '* 123 Flemington St
-* Glasgow
-* G21 4TD'
+kelvin.address = '123 Flemington St
+Glasgow'
 kelvin.postcode = 'G21 4TD'
 kelvin.telephone = '0141 630 5000'
 kelvin.email = 'info@glasgowkelvin.ac.uk'
 kelvin.website = 'http://www.glasgowkelvin.ac.uk/'
 kelvin.save
+
+
+
+
+clyde = College.new
+clyde.name = 'Glasgow Clyde College'
+clyde.description = 'Glasgow Clyde College is one of the largest further education institutions in Scotland.
+
+Situated in the thriving city of Glasgow, the multi-campus college offers a wide array of educational and career opportunities across its three locations. Sites are conveniently located across the expanse of the city, composed of three key campuses - Anniesland, Cardonald and Langside - following the merger of each individual college in August, 2013.
+
+Glasgow Clyde College is assigned to the Glasgow Colleges\' Regional Board.
+
+**Why Glasgow Clyde College?**
+
+Today, Glasgow Clyde College is home to over 7,000 full-time students and 20,000 part-time students. Join us and benefit from years of industry experience and exceptional teaching standards, all delivered in modern facilities.
+
+Whether you are looking to return to education, enhance your professional skills or take up a new hobby, our innovative student-led approach means you’ll walk away equipped with not just the knowledge needed to reach your objectives, but the essential life skills needed to thrive in the real world.
+
+We’re champions of developing the local and national economy, so no matter your goals, our experienced teaching staff will be on hand to help you succeed, whether it’s taking your first steps into a new career, or overcoming your own personal challenges. Glasgow Clyde College sees your potential.
+
+We understand in a modern-day world real experience is critical to career progression. That’s why we’ll help you to gain practical hands-on experience through our exclusive employer partnerships and mentorship from industry experts.'
+clyde.address = 'Anniesland Campus
+Hatfield Drive
+Glasgow'
+clyde.postcode = 'G12 0YE'
+clyde.telephone = '0141 272 9000'
+clyde.email = 'admissions@slc.ac.uk'
+clyde.website = 'http://www.glasgowclyde.ac.uk'
+clyde.save
+
+
+
+lanark = College.new
+lanark.name = 'South Lanarkshire College'
+lanark.description = 'SLC is a bright, modern and forward thinking college where we put our students and partners at the heart of everything we do. At our state-of-the-art campus in East Kilbride we offer excellent programmes in outstanding facilities, delivered by well qualified, highly trained staff. We collaborate with employers and local businesses to make sure that we provide relevant, up-to-date courses that are really of benefit to our students when they go out into the world of work.
+
+We have a fantastic portfolio of courses across a variety of different areas which can be studied on a full time, part time, day release and evening basis so there’s something to suit everyone. Of course, if there’s anything we can advise you on please get in touch and we’ll be happy to help.
+
+We really believe that now is your time to be successful and we’re looking forward to working with you to help you achieve your goals. For many of our students, success in their chosen course of study means an assured future in employment or higher education. We hope that you’ll join us and open the door to a brighter future for you.'
+lanark.address = 'Scottish Enterprise Technology Park
+College Way
+East Kilbride'
+lanark.postcode = 'G75 0NE'
+lanark.telephone = '01355 807780'
+lanark.email = 'info@glasgowclyde.ac.uk'
+lanark.website = 'http://www.south-lanarkshire-college.ac.uk'
+lanark.save
+
+
+
+
+
+west = College.new
+west.name = 'West College Scotland'
+west.description = 'West College Scotland is modern, ambitious and innovative.
+
+Created on 1 August 2013 by the merger of Clydebank College, Reid Kerr College in Paisley and James Watt College in Greenock, the College has 30,000 students and 1,200 staff, making it one of the biggest educational institutions in the country.
+
+This large scale allows us to provide greater choice to students, better facilities and enhanced services.
+
+We play a key role in supporting our local communities, providing courses to more than 3,000 senior-phase school pupils in College, in school and online.
+
+We also provide training for a huge range of business partners, from small- and medium-sized local companies to some of the biggest companies in the world.
+
+And we are also an enterprising college, with partners from across the globe, including China, Vietnam, Finland and Brazil.
+
+We offer a huge range of courses – full-time, part-time, evening and distance learning -- all designed to help our students get a job, keep a job or get a better job and to help businesses with their training needs.
+
+So, please have a look at what’s on offer.'
+west.address = 'Clydebank Campus
+Queens\' Quay'
+west.postcode = 'G81 1BF'
+west.telephone = '0300 600 60 60'
+west.email = 'info@wcs.ac.uk'
+west.website = 'http://www.westcollegescotland.ac.uk'
+west.save
+
+
 
 
 

@@ -3,7 +3,7 @@ class Course < ApplicationRecord
   scoped_search on: :title
   scoped_search relation: :category, on: :name
   scoped_search relation: :college, on: :name
-  mount_uploader :course_image, CourseImageUploader
+  mount_uploader :image, ImageUploader
 
   validates :title, presence: true, length: { maximum: 100 }, uniqueness: true
   validates :description, presence: true

@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20170330161057) do
     t.integer  "category_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
-    t.string   "course_image"
+    t.string   "image"
     t.index ["title"], name: "index_courses_on_title"
   end
 

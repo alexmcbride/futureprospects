@@ -204,7 +204,7 @@ course.career_prospects = 'This course prepares you for a career in:
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 7'
-course.course_image = Rails.root.join('app/assets/images/seed_images/accounting-hnc.jpg').open
+course.image = Rails.root.join('app/assets/images/seed_images/accounting-hnc.jpg').open
 course.save!
 
 
@@ -242,7 +242,7 @@ course.career_prospects = 'You can apply for administrative, or technical level 
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 5'
-course.course_image = Rails.root.join('app/assets/images/seed_images/accounting-nc.jpg').open
+course.image = Rails.root.join('app/assets/images/seed_images/accounting-nc.jpg').open
 course.save!
 
 
@@ -301,7 +301,7 @@ course.career_prospects = 'This course prepares you for a career in:
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 8'
-course.course_image = Rails.root.join('app/assets/images/seed_images/accounting-hnd.jpg').open
+course.image = Rails.root.join('app/assets/images/seed_images/accounting-hnd.jpg').open
 course.save!
 
 
@@ -336,7 +336,7 @@ The qualification will allow you to develop:
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 8'
-course.course_image = Rails.root.join('app/assets/images/seed_images/admin-hnc.jpg').open
+course.image = Rails.root.join('app/assets/images/seed_images/admin-hnc.jpg').open
 course.save!
 
 
@@ -367,7 +367,7 @@ There are also opportunities for you in the Banking and Insurance Sectors, and a
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 8'
-course.course_image = Rails.root.join('app/assets/images/seed_images/legal-hnd.jpg').open
+course.image = Rails.root.join('app/assets/images/seed_images/legal-hnd.jpg').open
 course.save!
 
 
@@ -392,7 +392,7 @@ course.career_prospects = 'This course prepares you for a career in administrati
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 5'
-course.course_image = Rails.root.join('app/assets/images/seed_images/admin-digital-hnc.jpg').open
+course.image = Rails.root.join('app/assets/images/seed_images/admin-digital-hnc.jpg').open
 course.save!
 
 
@@ -419,7 +419,7 @@ course.career_prospects = 'The course will develop your core and employability s
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 7'
-course.course_image = Rails.root.join('app/assets/images/seed_images/info-tech-hnc.jpg').open
+course.image = Rails.root.join('app/assets/images/seed_images/info-tech-hnc.jpg').open
 course.save!
 
 
@@ -449,7 +449,7 @@ course.career_prospects = 'After completing the HND you may pursue a career in b
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 8'
-course.course_image = Rails.root.join('app/assets/images/seed_images/info-tech-hnd.jpg').open
+course.image = Rails.root.join('app/assets/images/seed_images/info-tech-hnd.jpg').open
 course.save!
 
 
@@ -487,7 +487,7 @@ course.career_prospects = 'Apply for various job vacancies, such as a junior web
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 8'
-course.course_image = Rails.root.join('app/assets/images/seed_images/web-dev-hnd.jpg').open
+course.image = Rails.root.join('app/assets/images/seed_images/web-dev-hnd.jpg').open
 course.save!
 
 
@@ -534,7 +534,7 @@ course.career_prospects = 'This course prepares you for a career as an Architect
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 8'
-course.course_image = Rails.root.join('app/assets/images/seed_images/archi-tech-hnd.jpg').open
+course.image = Rails.root.join('app/assets/images/seed_images/archi-tech-hnd.jpg').open
 course.save!
 
 
@@ -571,7 +571,7 @@ course.career_prospects = 'This course prepares you for a career as a:
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 6'
-course.course_image = Rails.root.join('app/assets/images/seed_images/built-env-nc.jpg').open
+course.image = Rails.root.join('app/assets/images/seed_images/built-env-nc.jpg').open
 course.save!
 
 
@@ -596,7 +596,7 @@ course.career_prospects = 'This course prepares you for a career in private prac
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 8'
-course.course_image = Rails.root.join('app/assets/images/seed_images/build-surv-hnd.jpg').open
+course.image = Rails.root.join('app/assets/images/seed_images/build-surv-hnd.jpg').open
 course.save!
 
 
@@ -624,7 +624,7 @@ course.career_prospects = 'You could expect to apply for a trainee management po
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 7'
-course.course_image = Rails.root.join('app/assets/images/seed_images/business-hnc.jpg').open
+course.image = Rails.root.join('app/assets/images/seed_images/business-hnc.jpg').open
 course.save!
 
 
@@ -650,7 +650,7 @@ course.career_prospects = 'This course prepares you for a career in supply chain
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 8'
-course.course_image = Rails.root.join('app/assets/images/seed_images/supply-chain-hnd.jpg').open
+course.image = Rails.root.join('app/assets/images/seed_images/supply-chain-hnd.jpg').open
 course.save!
 
 
@@ -674,5 +674,5 @@ course.career_prospects = 'This course prepares you for a career in marketing, l
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 8'
-course.course_image = Rails.root.join('app/assets/images/seed_images/buisness-diplo.jpg').open
+course.image = Rails.root.join('app/assets/images/seed_images/buisness-diplo.jpg').open
 course.save!

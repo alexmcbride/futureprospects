@@ -1,6 +1,5 @@
 class CollegesController < ApplicationController
   # GET /colleges
-  # GET /colleges.json
   def index
     # If no college selected then select the first one available
     if params[:id].nil?

@@ -1,8 +1,10 @@
 module ApplicationHelper
+  # Helper function for flash_messages.
   def bootstrap_class_for flash_type
     { success: 'alert-success', error: 'alert-danger', warning: 'alert-warning'}[flash_type.to_sym]
   end
 
+  # Displays any flash messages in a bootstrap compatible way.
   def flash_messages(opts = {})
     flash.each do |msg_type, message|
       concat(content_tag(:div, message, class: "text-center alert #{bootstrap_class_for(msg_type)} fade in") do
@@ -13,7 +15,8 @@ module ApplicationHelper
     end
     nil
   end
-
+  
+  # Returns the specified text as markdown.
   def markdown(text)
     options = {
         filter_html:     true,

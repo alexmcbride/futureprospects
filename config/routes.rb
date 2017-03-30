@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'courses/search'
-
   resources :courses
 
   get 'home/index'
@@ -8,7 +6,6 @@ Rails.application.routes.draw do
 
   get 'colleges/:id', to: 'colleges#index', as: 'college'
   get 'colleges', to: 'colleges#index', as: 'colleges'
-
 
   root to: 'home#index'
 

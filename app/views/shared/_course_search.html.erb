@@ -1,6 +1,6 @@
 <%= form_tag(courses_path, method: 'get') do %>
   <div class="input-group">
-    <input type="text" class="form-control" name="s" placeholder="Search course, category, or college..." value="<%= @search_term %>">
+    <input type="text" class="form-control" name="search" placeholder="Search course, category, or college..." value="<%= @search_term %>">
     <span class="input-group-btn">
       <button class="btn btn-info" type="submit">Go</button>
     </span>

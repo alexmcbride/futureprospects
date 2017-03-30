@@ -62,14 +62,17 @@
       <%= flash_messages %>
 
       <% unless @page_title.nil? %>
-          <h2><%= @page_title %></h2>
-          <%= breadcrumbs separator: ' &rsaquo; ' %>
-          <hr class="small">
+          <div class="page-title">
+            <h2><%= @page_title %></h2>
+            <%= breadcrumbs separator: ' &rsaquo; ' %>
+            <hr class="small">
+          </div>
       <% end %>
 
       <%= yield %>
 
       <footer class="text-center">
+        <hr class="small">
         <small>&copy; Future Prospects <%= DateTime.now.year %></small>
       </footer>
     </div>

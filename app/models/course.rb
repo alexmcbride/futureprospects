@@ -1,5 +1,8 @@
 class Course < ApplicationRecord
   self.per_page = 10
+  scoped_search on: :title
+  scoped_search relation: :category, on: :name
+  scoped_search relation: :college, on: :name
 
   validates :title, presence: true, length: { maximum: 100 }, uniqueness: true
   validates :description, presence: true
@@ -11,17 +14,4 @@ class Course < ApplicationRecord
 
   belongs_to :college
   belongs_to :category
-
-  # Simple course search that looks in course title, category name, and college name.
-  def self.search(search_term)
-    if search_term.nil? or search_term.empty?
-      return Course.none
-    end
-
-    search_term = "%#{search_term}%".downcase # Prepare search term.
-    sql = 'LOWER(courses.title) LIKE :term OR '\
-          'LOWER(categories.name) LIKE :term OR '\
-          'LOWER(colleges.name) LIKE :term'
-    Course.joins(:category).joins(:college).where(sql, term: search_term)
-  end
 end

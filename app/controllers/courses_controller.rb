@@ -4,7 +4,8 @@ class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
-    @courses = Course.paginate(:page => params[:page]).includes(:category).includes(:college).order(:title)
+    @search_term = params[:s]
+    @courses = Course.search_for(@search_term).paginate(:page => params[:page])
     @categories = Category.all
   end
 
@@ -17,14 +18,14 @@ class CoursesController < ApplicationController
     render :index
   end
 
-  # GET /courses/search?s=example
-  # GET /courses/search.json?s=example
-  def search
-    @search_term = params[:s]
-    @categories = Category.all
-    @courses = Course.paginate(:page => params[:page]).includes(:category, :college).search(@search_term).order(:title)
-    render :index
-  end
+  # # GET /courses/search?s=example
+  # # GET /courses/search.json?s=example
+  # def search
+  #   @categories = Category.all
+  #   # @courses = Course.paginate(:page => params[:page]).includes(:category, :college).search(@search_term).order(:title)
+  #   @courses = Course.search_for(params[:s]).paginate(:page => params[:page])
+  #   render :index
+  # end
 
   # GET /courses/1
   # GET /courses/1.json

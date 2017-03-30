@@ -62,7 +62,7 @@ course = Course.new
 course.category_id = categories['Accounting']
 course.college = cogc
 course.title = 'Accounting HNC'
-course.description = 'The HNC Accounting Award has been designed to meet the demands and requirements of the Accounting Industry.\n\n
+course.description = 'The HNC Accounting Award has been designed to meet the demands and requirements of the Accounting Industry.
 
 Opportunities are provided to develop your skills, knowledge and understanding in preparation for employment, or for progression to courses such as AAT level 8, or HND Accounting.  Further detail of the topics covered is provided in the section “What You Study” below.
 

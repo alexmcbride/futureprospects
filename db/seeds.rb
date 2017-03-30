@@ -483,3 +483,78 @@ course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 8'
 course.save!
+
+
+
+course = Course.new
+course.category_id = categories['Business & Procurement']
+course.college = cogc
+course.title = 'Business HNC'
+course.description = "Are you looking for a career in banking, insurance, civil service, local government or distribution? This course gives you the skills and knowledge necessary to succeed, with excellent career opportunities and progression routes.
+
+You'll be taught by staff with relevant industry experience and a proven track record of bringing out the best in their students.
+
+Today, the internet is an important part of business, so we've updated the course to include analysing and using information for strategic purposes.
+
+This course is placed on the Scottish Credit Qualifications Framework at Level 7. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course.entry_requirements="* One Higher pass in a relevant\* academic subject OR
+* National Certificate in Business (with at least 3 units at level 6) OR
+* Other appropriate and relevant National Certificate courses (with at least 3 units at level 6) may be considered.
+* Relevant Work experience may be considered.
+
+\*Relevant academic subjects include English, Administration, Business Management, Economics, Geography, History, Mathematics, Modern Studies or a Science subject.
+
+You'll be invited to attend a group presentation and interview session.  The presentation will give you all of the information you need about the course, this will be followed on the same day by an individual interview where you can tell us why you're interested in this course and ask any specific questions related to your own application."
+course.career_prospects = 'You could expect to apply for a trainee management position and/or a team leader in industry or commerce.'
+course.start_date = Date.new 2017, 8, 28
+course.end_date = Date.new 2018, 6, 15
+course.level = 'SCQF level 7'
+course.save!
+
+
+
+
+
+course = Course.new
+course.category_id = categories['Business & Procurement']
+course.college = cogc
+course.title = 'Supply Chain Management HND'
+course.description = "This course will provide you with the knowledge and skills you need to work within the operational supply chains of a business organisation.
+
+The course is delivered by highly qualified lecturers who have a wealth of experience within the industry. You'll gain insight, learning and transferable skills across all core operational areas of supply chain management, procurement, logistics, storage and operations.
+
+Career prospects and employment opportunities are excellent with many of our students progressing to degree level study and careers within supply chain management or international logistics.
+
+This course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework: visit www.scqf.org.uk/the-framework/."
+course.entry_requirements="* Two Higher Grade passes at grade C or above including English (Modern Studies, Economics, History or Business); OR
+* Adult learners with some relevant experience, or who hope to move into this area, may be accepted subject to interview.
+
+You'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject."
+course.career_prospects = 'This course prepares you for a career in supply chain management, procurement, and international Logistics across all  major industry sectors'
+course.start_date = Date.new 2017, 8, 28
+course.end_date = Date.new 2018, 6, 15
+course.level = 'SCQF level 8'
+course.save!
+
+
+
+
+
+course = Course.new
+course.category_id = categories['Business & Procurement']
+course.college = cogc
+course.title = 'Business Diploma of Higher Education'
+course.description = 'This course is designed to give you direct entry into the third year of the BA degree programme in Business at Strathclyde Business School, a qualification highly regarded by employers. It is run as a collaboration between City of Glasgow College and the University of Strathclyde, Glasgow.
+
+This course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework visit: www.scqf.org.uk/the-framework/.'
+course.entry_requirements="* A minimum of three Higher Grade passes, 2 at Grade B and 1 at grade C in suitable academic subjects\*, one of which must be English (or equivalent).  AND
+* Two other passes at National 5 (or equivalent) including Mathematics.
+
+\*Relevant academic subjects include Administration, Business Management, Economics, Geography, History, Mathematics, Modern Studies or Natural Sciences.
+
+You'll be invited to attend a group presentation and interview session. The presentation will give you all of the information you need about the course, this will be followed on the same day by an individual interview where you can tell us why you are interested in this course and ask any specific questions related to your own application."
+course.career_prospects = 'This course prepares you for a career in marketing, legal services, management, human resources, administration in industrial and commercial sectors, teaching, public sector employment or research.'
+course.start_date = Date.new 2017, 8, 28
+course.end_date = Date.new 2018, 6, 15
+course.level = 'SCQF level 8'
+course.save!

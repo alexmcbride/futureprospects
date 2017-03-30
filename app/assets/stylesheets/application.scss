@@ -40,3 +40,16 @@ footer {
 .breadcrumbs {
   font-size: small;
 }
+
+.course-image {
+}
+
+.text-darkish {
+  color: #2E2F30;
+}
+
+.course-title {
+  @extend .h3;
+  margin-top: 6px;
+  font-weight: bold;
+}

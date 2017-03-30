@@ -53,4 +53,6 @@ gem 'bootstrap-sass', '~> 3.3.6' # bootstrap
 gem 'will_paginate', '~> 3.1.0' # pagination
 gem 'scoped_search' # search
 gem 'redcarpet'  # markdown
-gem 'gretel'
+gem 'gretel' # breadcrumb
+gem 'carrierwave', '~> 1.0' # image upload
+

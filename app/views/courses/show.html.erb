@@ -29,10 +29,12 @@
   <%= markdown(@course.career_prospects) %>
 </div>
 
-<div class="col-md-3 left-border ">
-  <div class="panel">
+<div class="col-md-3">
+  <div class="panel panel-default">
     <div class="panel-body">
-      <h4 class="no-top-margin"><strong><%= @course.college.name %></strong></h4>
+      <%= image_tag @course.course_image, size: '220x185', class: 'course-image no-top-margin' %>
+
+      <h4><strong><%= @course.college.name %></strong></h4>
 
       <ul class="list-unstyled">
         <li><%= @course.start_date %></li>

@@ -15,7 +15,7 @@ module ApplicationHelper
     end
     nil
   end
-  
+
   # Returns the specified text as markdown.
   def markdown(text)
     options = {

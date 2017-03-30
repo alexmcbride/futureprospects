@@ -18,15 +18,6 @@ class CoursesController < ApplicationController
     render :index
   end
 
-  # # GET /courses/search?s=example
-  # # GET /courses/search.json?s=example
-  # def search
-  #   @categories = Category.all
-  #   # @courses = Course.paginate(:page => params[:page]).includes(:category, :college).search(@search_term).order(:title)
-  #   @courses = Course.search_for(params[:s]).paginate(:page => params[:page])
-  #   render :index
-  # end
-
   # GET /courses/1
   # GET /courses/1.json
   def show

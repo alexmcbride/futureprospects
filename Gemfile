@@ -49,6 +49,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Custom Gems
-gem 'bootstrap-sass', '~> 3.3.6'
-gem 'will_paginate', '~> 3.1.0'
-gem 'scoped_search'
+gem 'bootstrap-sass', '~> 3.3.6' # bootstrap
+gem 'will_paginate', '~> 3.1.0' # pagination
+gem 'scoped_search' # search
+gem 'redcarpet'  # markdown

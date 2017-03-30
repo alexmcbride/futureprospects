@@ -20,18 +20,13 @@
 
 <div class="col-md-6">
   <h2><%= @course.title %></h2>
+  <%= markdown(@course.description) %>
 
-  <p class="course-description">
-    <%= @course.description %>
-  </p>
+  <h3>Entry Requirements</h3>
+  <%= markdown(@course.entry_requirements) %>
 
-  <p class="course-entry-requirements">
-    <%= @course.entry_requirements %>
-  </p>
-
-  <p class="course-entry-requirements">
-    <%= @course.career_prospects %>
-  </p>
+  <h3>Career Prospects</h3>
+  <%= markdown(@course.career_prospects) %>
 </div>
 
 <div class="col-md-3 left-border">

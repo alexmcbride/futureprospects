@@ -14,4 +14,9 @@ class Course < ApplicationRecord
 
   belongs_to :college
   belongs_to :category
+
+  # Gets the number of years the course will last
+  def duration
+    end_date.year - start_date.year
+  end
 end

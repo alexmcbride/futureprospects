@@ -1,4 +1,53 @@
+<h1>View Course</h1>
+<hr class="small">
 
+<div class="col-md-3">
+  <div class="row">
+    <%= render partial: 'shared/course_search' %>
 
-<%= link_to 'Edit', edit_course_path(@course) %> |
-<%= link_to 'Back', courses_path %>
+    <h4>Course Categories</h4>
+
+    <div class="list-group small">
+      <% active = @category.nil? || (@category.nil? && @search_term.nil?) ? 'active' : '' %>
+      <%= link_to 'All Courses', courses_path, class: "list-group-item #{active}" %>
+      <% @categories.each do |category| %>
+          <% active = category == @category ? 'active' : '' %>
+          <%= link_to category.name, courses_category_path(category), class: "list-group-item #{active}" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-6">
+  <h2><%= @course.title %></h2>
+
+  <div class="course-description">
+    <%= @course.description %>
+  </div>
+
+  <div class="course-entry-requirements">
+    <%= @course.entry_requirements %>
+  </div>
+
+  <div class="course-entry-requirements">
+    <%= @course.career_prospects %>
+  </div>
+</div>
+
+<div class="col-md-3 left-border">
+  <div class="panel">
+    <div class="panel-body">
+      <h4><%= @course.college.name %></h4>
+
+      <ul class="list-unstyled">
+        <li><%= @course.start_date %></li>
+        <li><%= pluralize(@course.duration, 'Year') %></li>
+        <li>Full Time</li>
+        <li><%= @course.level %></li>
+      </ul>
+
+      <a href="#" class="btn btn-info btn-block" role="button">Apply for Course</a>
+      <a href="#" class="btn btn-info btn-block" role="button">View College Info</a>
+    </div>
+  </div>
+</div>

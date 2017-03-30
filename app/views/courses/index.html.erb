@@ -1,7 +1,7 @@
 <h1>Browse Available Courses</h1>
 <hr class="small">
 
-<div class="col-md-4">
+<div class="col-md-3">
   <div class="row">
     <%= render partial: 'shared/course_search' %>
 
@@ -18,7 +18,7 @@
   </div>
 </div>
 
-<div class="col-md-8">
+<div class="col-md-9">
   <% if @courses.empty? %>
       <p class="text-center text-warning"><em>There are no courses that match your query.</em></p>
   <% else %>

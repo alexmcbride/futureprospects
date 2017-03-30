@@ -61,6 +61,12 @@
     <div class="container">
       <%= flash_messages %>
 
+      <% unless @page_title.nil? %>
+          <h2><%= @page_title %></h2>
+          <%= breadcrumbs separator: ' &rsaquo; ' %>
+          <hr class="small">
+      <% end %>
+
       <%= yield %>
 
       <footer class="text-center">

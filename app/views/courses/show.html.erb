@@ -1,5 +1,6 @@
-<h1>View Course</h1>
-<hr class="small">
+<% breadcrumb :course, @course %>
+
+<% @page_title = 'View Course' %>
 
 <div class="col-md-3">
   <div class="row">
@@ -19,20 +20,20 @@
 </div>
 
 <div class="col-md-6">
-  <h2><%= @course.title %></h2>
+  <h3 class="no-top-margin"><%= @course.title %></h3>
   <%= markdown(@course.description) %>
 
-  <h3>Entry Requirements</h3>
+  <h4>Entry Requirements</h4>
   <%= markdown(@course.entry_requirements) %>
 
-  <h3>Career Prospects</h3>
+  <h4>Career Prospects</h4>
   <%= markdown(@course.career_prospects) %>
 </div>
 
-<div class="col-md-3 left-border">
+<div class="col-md-3 left-border ">
   <div class="panel">
     <div class="panel-body">
-      <h4><%= @course.college.name %></h4>
+      <h4 class="no-top-margin"><%= @course.college.name %></h4>
 
       <ul class="list-unstyled">
         <li><%= @course.start_date %></li>

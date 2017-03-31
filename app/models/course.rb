@@ -16,13 +16,13 @@ class Course < ApplicationRecord
   belongs_to :college
   belongs_to :category
 
-  # Gets the number of years the course will last
+  # Gets the number of years the course lasts for
   def years
-    end_date.year - start_date.year
+    ((end_date - start_date).to_i / 365.0).ceil
   end
 
+  # Gets if the course if full time or part time
   def course_type
-    # All courses are full time, so...
     'Full Time'
   end
 end

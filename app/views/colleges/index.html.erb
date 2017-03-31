@@ -1,11 +1,11 @@
 <% breadcrumb :college, @college %>
-<% @page_title = 'Browse Colleges' %>
+<% @title = 'Browse Colleges' %>
 
 <div class="col-md-3">
   <div class="row">
     <div class="list-group small">
       <% @colleges.each do |college| %>
-          <% active = college == @college ? 'active' : '' %>
+          <% active = 'active' if college == @college %>
           <%= link_to college.name, college_path(college), class: "list-group-item #{active}" %>
       <% end %>
     </div>
@@ -28,6 +28,7 @@
         <%= @college.postcode %>
       </address>
     </div>
+
     <div class="col-sm-6">
       <h3>Contact</h3>
       <ul class="list-unstyled">

@@ -1,5 +1,5 @@
 class Course < ApplicationRecord
-  self.per_page = 10
+  self.per_page = 10 # Pagination
   scoped_search on: :title
   scoped_search relation: :category, on: :name
   scoped_search relation: :college, on: :name
@@ -17,7 +17,12 @@ class Course < ApplicationRecord
   belongs_to :category
 
   # Gets the number of years the course will last
-  def duration
+  def years
     end_date.year - start_date.year
+  end
+
+  def course_type
+    # All courses are full time, so...
+    'Full Time'
   end
 end

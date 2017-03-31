@@ -304,7 +304,7 @@ course.career_prospects = 'This course prepares you for a career in:
 * Management Accounting.
 * Taxation.'
 course.start_date = Date.new 2017, 8, 28
-course.end_date = Date.new 2018, 6, 15
+course.end_date = Date.new 2019, 6, 15
 course.level = 'SCQF level 8'
 course.image = Rails.root.join('app/assets/images/seed_images/accounting-hnd.jpg').open
 course.save!
@@ -452,7 +452,7 @@ course.entry_requirements='* Two Higher and three Standard Grades at Credit leve
 You\'ll be invited for a group and/or individual interview where you can find out more about the course and tell us why you\'re interested in this subject.'
 course.career_prospects = 'After completing the HND you may pursue a career in business intelligence analysis, information management, database administration, trainer/teacher, hardware and software support, or web development.'
 course.start_date = Date.new 2017, 8, 28
-course.end_date = Date.new 2018, 6, 15
+course.end_date = Date.new 2019, 6, 15
 course.level = 'SCQF level 8'
 course.image = Rails.root.join('app/assets/images/seed_images/info-tech-hnd.jpg').open
 course.save!
@@ -490,7 +490,7 @@ course.entry_requirements='* Two Higher and three Intermediate 2 courses (includ
 You\'ll be invited for a group and/or individual interview where you will get the opportunity to find out more about the course and tell us why you\'re interested in this subject area. It is important that you prepare a personal statement which reflects your desire to study on this course.'
 course.career_prospects = 'Apply for various job vacancies, such as a junior web developer/designer.'
 course.start_date = Date.new 2017, 8, 28
-course.end_date = Date.new 2018, 6, 15
+course.end_date = Date.new 2019, 6, 15
 course.level = 'SCQF level 8'
 course.image = Rails.root.join('app/assets/images/seed_images/web-dev-hnd.jpg').open
 course.save!
@@ -537,7 +537,7 @@ course.career_prospects = 'This course prepares you for a career as an Architect
 * Building component manufacturers.
 * Government organisations.'
 course.start_date = Date.new 2017, 8, 28
-course.end_date = Date.new 2018, 6, 15
+course.end_date = Date.new 2019, 6, 15
 course.level = 'SCQF level 8'
 course.image = Rails.root.join('app/assets/images/seed_images/archi-tech-hnd.jpg').open
 course.save!
@@ -599,7 +599,7 @@ course.entry_requirements="* Two Higher Grade passes, preferably including Mathe
 You'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject."
 course.career_prospects = 'This course prepares you for a career in private practice QS consultancies, contracting organisations, property companies, financial institutions, local and central government, commercial clients, and housing associations.'
 course.start_date = Date.new 2017, 8, 28
-course.end_date = Date.new 2018, 6, 15
+course.end_date = Date.new 2019, 6, 15
 course.level = 'SCQF level 8'
 course.image = Rails.root.join('app/assets/images/seed_images/build-surv-hnd.jpg').open
 course.save!
@@ -653,7 +653,7 @@ course.entry_requirements="* Two Higher Grade passes at grade C or above includi
 You'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject."
 course.career_prospects = 'This course prepares you for a career in supply chain management, procurement, and international Logistics across all  major industry sectors'
 course.start_date = Date.new 2017, 8, 28
-course.end_date = Date.new 2018, 6, 15
+course.end_date = Date.new 2019, 6, 15
 course.level = 'SCQF level 8'
 course.image = Rails.root.join('app/assets/images/seed_images/supply-chain-hnd.jpg').open
 course.save!

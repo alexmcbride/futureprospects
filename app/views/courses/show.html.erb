@@ -1,6 +1,6 @@
 <% breadcrumb :course, @course %>
 
-<% @page_title = 'View Course' %>
+<% @title = 'View Course' %>
 
 <div class="col-md-3">
   <div class="row">
@@ -9,9 +9,10 @@
     <h4>Course Categories</h4>
 
     <div class="list-group small">
-      <%= link_to 'All Courses', courses_path, class: "list-group-item" %>
+      <%= link_to 'All Courses', courses_path, class: 'list-group-item' %>
       <% @categories.each do |category| %>
-          <% active = category == @course.category ? 'active' : '' %>
+          <%# Set active if this is the current category. %>
+          <% active = 'active' if category == @course.category %>
           <%= link_to category.name, courses_category_path(category), class: "list-group-item #{active}" %>
       <% end %>
     </div>
@@ -38,13 +39,13 @@
 
       <ul class="list-unstyled">
         <li><%= @course.start_date %></li>
-        <li><%= pluralize(@course.duration, 'Year') %></li>
-        <li>Full Time</li>
+        <li><%= pluralize(@course.years, 'Year') %></li>
+        <li><%= @course.course_type %></li>
         <li><%= @course.level %></li>
       </ul>
 
-      <a href="#" class="btn btn-default btn-block" role="button">Apply for Course</a>
-      <%= link_to 'View College Information', college_path(@course.college), class: 'btn btn-default btn-block' %>
+      <%= link_to 'Apply for Course', nil, class: 'btn btn-default btn-block', role: 'button' %>
+      <%= link_to 'View College Details', college_path(@course.college), class: 'btn btn-default btn-block', role: 'button' %>
     </div>
   </div>
 </div>

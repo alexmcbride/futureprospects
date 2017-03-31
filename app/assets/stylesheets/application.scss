@@ -42,7 +42,12 @@ footer {
 }
 
 .course-image {
-  border: 1px dotted #666;
+  border: 1px solid #666;
+}
+
+.college-image {
+  @extend .course-image;
+  margin-bottom: 12px;
 }
 
 .text-darkish {
@@ -53,9 +58,4 @@ footer {
   @extend .h3;
   margin-top: 6px;
   font-weight: bold;
-}
-
-.college-image {
-  border: 1px solid #666;
-  margin-bottom: 12px;
 }

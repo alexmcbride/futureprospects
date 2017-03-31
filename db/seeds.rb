@@ -26,6 +26,7 @@ cogc.postcode = 'G4 0RF'
 cogc.telephone = '0141 375 5555'
 cogc.email = 'enquiries@cityofglasgowcollege.ac.uk'
 cogc.website = 'https://www.cityofglasgowcollege.ac.uk'
+cogc.image = Rails.root.join('app/assets/images/seed_images/college-cogc.jpg').open
 cogc.save
 
 
@@ -43,6 +44,7 @@ kelvin.postcode = 'G21 4TD'
 kelvin.telephone = '0141 630 5000'
 kelvin.email = 'info@glasgowkelvin.ac.uk'
 kelvin.website = 'http://www.glasgowkelvin.ac.uk/'
+kelvin.image = Rails.root.join('app/assets/images/seed_images/college-kelvin.jpg').open
 kelvin.save
 
 
@@ -72,6 +74,7 @@ clyde.postcode = 'G12 0YE'
 clyde.telephone = '0141 272 9000'
 clyde.email = 'admissions@slc.ac.uk'
 clyde.website = 'http://www.glasgowclyde.ac.uk'
+clyde.image = Rails.root.join('app/assets/images/seed_images/college-clyde.jpg').open
 clyde.save
 
 
@@ -90,6 +93,7 @@ lanark.postcode = 'G75 0NE'
 lanark.telephone = '01355 807780'
 lanark.email = 'info@glasgowclyde.ac.uk'
 lanark.website = 'http://www.south-lanarkshire-college.ac.uk'
+lanark.image = Rails.root.join('app/assets/images/seed_images/college-lanark.jpg').open
 lanark.save
 
 
@@ -119,6 +123,7 @@ west.postcode = 'G81 1BF'
 west.telephone = '0300 600 60 60'
 west.email = 'info@wcs.ac.uk'
 west.website = 'http://www.westcollegescotland.ac.uk'
+west.image = Rails.root.join('app/assets/images/seed_images/college-west.jpg').open
 west.save
 
 

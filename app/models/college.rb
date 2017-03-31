@@ -1,4 +1,6 @@
 class College < ApplicationRecord
+  mount_uploader :image, CollegeImageUploader
+
   validates :name, presence: true, length: { maximum: 70 }, uniqueness: true
   validates :description, presence: true
   validates :address, presence: true, length: { maximum: 255 }

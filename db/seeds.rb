@@ -681,3 +681,74 @@ course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 8'
 course.image = Rails.root.join('app/assets/images/seed_images/buisness-diplo.jpg').open
 course.save!
+
+
+
+
+
+course = Course.new
+course.category_id = categories['Construction Crafts']
+course.college = cogc
+course.title = 'Construction Crafts NQ'
+course.description = 'This course offers you practical, transferable skills and theoretical knowledge of the Construction Industry to help you find a job.
+
+This course is placed on the Scottish Credit Qualifications Framework at Level 6. For more information on the framework visit: www.scqf.org.uk/the-framework/.'
+course.entry_requirements="* One National 5 qualification; OR
+* Completion of NPA Construction course.
+
+You'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in the subject."
+course.career_prospects = 'This course prepares you for a career within the Construction Industry.'
+course.start_date = Date.new 2017, 8, 28
+course.end_date = Date.new 2018, 6, 15
+course.level = 'SCQF level 6'
+course.image = Rails.root.join('app/assets/images/seed_images/con-craft-nq.jpg').open
+course.save!
+
+
+
+
+
+course = Course.new
+course.category_id = categories['Construction Crafts']
+course.college = cogc
+course.title = 'Carpentry and Joinery City and Guilds'
+course.description = 'This course is suited to those who have previous experience in Carpentry and Joinery and would like to develop their skills further.
+
+The course runs for 6 months from January - June.
+
+On successful completion of this course candidates will receive a Diploma in Painting and Decorating at SCQF Level 5.'
+course.entry_requirements='* City and Guilds Diploma in Carpentry and Joinery at SCQF Level 4 or equivalent; OR
+* Relevant qualifications at National 4 (technical); OR
+* Relevant industrial experience.
+
+You will be invited for a group and/or individual interview where you can find out more about the course and tell us why you are interested in this subject.'
+course.career_prospects = 'On successful completion of the course learners will be better placed to progress to a career in the construction industry.'
+course.start_date = Date.new 2018, 1, 8
+course.end_date = Date.new 2018, 6, 15
+course.level = 'SCQF level 5'
+course.image = Rails.root.join('app/assets/images/seed_images/car-join-cag.jpg').open
+course.save!
+
+
+
+
+course = Course.new
+course.category_id = categories['Construction Crafts']
+course.college = cogc
+course.title = 'Painting and Decorating City and Guilds'
+course.description = 'This course is suited to those who have previous experience in painting and decorating and would like to develop their skills further.
+
+On successful completion of this course candidates will receive a Diploma in Painting and Decorating at SCQF Level 5.
+
+This course runs for 6 months from January - June.'
+course.entry_requirements='* City and Guilds Diploma in Painting and Decorating at SCQF Level 4 or equivalent; OR
+* Relevant qualifications at National 4 (technical); OR
+* Relevant industrial experience.
+
+You will be invited for a group and/or individual interview where you can find out more about the course and tell us why you are interested in this subject.'
+course.career_prospects = 'On successful completion of the course learners will be better placed to progress to a career in the construction industry.'
+course.start_date = Date.new 2018, 1, 8
+course.end_date = Date.new 2018, 6, 15
+course.level = 'SCQF level 5'
+course.image = Rails.root.join('app/assets/images/seed_images/paint-dec-cag.jpg').open
+course.save!

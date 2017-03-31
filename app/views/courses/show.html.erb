@@ -37,15 +37,17 @@
 
       <h4><strong><%= @course.college.name %></strong></h4>
 
-      <ul class="list-unstyled">
-        <li><%= @course.start_date %></li>
-        <li><%= pluralize(@course.years, 'Year') %></li>
-        <li><%= @course.course_type %></li>
-        <li><%= @course.level %></li>
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-heading"><%= @course.college.name %></li>
+        <li class="list-group-item list-group-item-heading"><%= @course.start_date %></li>
+        <li class="list-group-item list-group-item-heading"><%= pluralize(@course.years, 'Year') %></li>
+        <li class="list-group-item list-group-item-heading"><%= @course.course_type %></li>
+        <li class="list-group-item list-group-item-heading"><%= @course.level %></li>
       </ul>
 
-      <%= link_to 'Apply for Course', nil, class: 'btn btn-default btn-block', role: 'button' %>
-      <%= link_to 'View College Details', college_path(@course.college), class: 'btn btn-default btn-block', role: 'button' %>
+      <%= link_to 'Apply for Course', nil, class: 'btn btn-success btn-block', role: 'button' %>
+      <%= link_to 'View College Details', college_path(@course.college), class: 'btn btn-success btn-block', role: 'button' %>
+
     </div>
   </div>
 </div>

@@ -13,9 +13,9 @@
 </div>
 
 <div class="col-md-9">
-  <h2 class="no-top-margin"><%= @college.name %></h2>
+  <%= image_tag @college.image, class: 'img-responsive college-image' %>
 
-  <%= image_tag @college.image, class: 'img-responsive img-rounded college-image' %>
+  <h2 class="no-top-margin"><%= @college.name %></h2>
 
   <%= markdown(@college.description) %>
 

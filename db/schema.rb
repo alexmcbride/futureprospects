@@ -12,11 +12,14 @@
 
 ActiveRecord::Schema.define(version: 20170331144529) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "categories", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_categories_on_name"
+    t.index ["name"], name: "index_categories_on_name", using: :btree
   end
 
   create_table "colleges", force: :cascade do |t|
@@ -30,7 +33,7 @@ ActiveRecord::Schema.define(version: 20170331144529) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "image"
-    t.index ["name"], name: "index_colleges_on_name"
+    t.index ["name"], name: "index_colleges_on_name", using: :btree
   end
 
   create_table "courses", force: :cascade do |t|
@@ -46,7 +49,7 @@ ActiveRecord::Schema.define(version: 20170331144529) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.string   "image"
-    t.index ["title"], name: "index_courses_on_title"
+    t.index ["title"], name: "index_courses_on_title", using: :btree
   end
 
 end

@@ -16,8 +16,12 @@ crumb :course do |course|
   link course.title, course
 end
 
-crumb :college do |college|
+crumb :colleges do
   parent :root
   link 'Colleges', colleges_path
+end
+
+crumb :college do |college|
+  parent :colleges
   link college.name, college_path(college)
 end

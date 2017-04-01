@@ -63,3 +63,9 @@ footer {
 .full-width {
   width: 100%;
 }
+
+.college-title {
+  @extend .h3;
+  margin-top: 0px;
+  font-weight: bold;
+}

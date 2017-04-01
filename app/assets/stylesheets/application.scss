@@ -50,6 +50,11 @@ footer {
   margin-bottom: 12px;
 }
 
+.college-header-image {
+  @extend .course-image;
+  margin-bottom: 25px;
+}
+
 .text-darkish {
   color: #2E2F30;
 }

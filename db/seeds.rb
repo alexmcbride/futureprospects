@@ -146,7 +146,6 @@ First Aid, Hygiene & Safety
 Food, Events, Hospitality & Tourism
 Hair & Beauty
 Health, Social Care & Early Education
-Inspiring Later Life
 Languages
 Licensing & Security
 Marketing & Retail
@@ -154,7 +153,6 @@ Media
 Nautical Studies & Marine Engineering
 Social Sciences
 Sport & Fitness
-Adult Learning and Supported Programmes
 Teacher and Training Development
 Trade Union Education'
 

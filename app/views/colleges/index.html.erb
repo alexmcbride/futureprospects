@@ -3,6 +3,14 @@
 <% @title = 'View Colleges' %>
 
 <div class="row">
+  <div class="col-md-12">
+    <%= image_tag 'colleges-header.jpg', class: 'college-image img-responsive' %>
+  </div>
+</div>
+
+<br>
+
+<div class="row">
   <div class="col-md-6">
     <div class="panel panel-default">
       <div class="panel-body">
@@ -10,7 +18,7 @@
         <p>You can browse details of the various colleges supported by Future Prospects.</p>
         <div class="list-group">
           <% @colleges.each do |college| %>
-            <%= link_to college.name, college, class: 'list-group-item' %>
+              <%= link_to college.name, college, class: 'list-group-item' %>
           <% end %>
         </div>
       </div>
@@ -20,15 +28,17 @@
   <div class="col-md-6">
     <div class="panel panel-default">
       <div class="panel-body">
+
         <h3>Future Prospects</h3>
+
         <p>Future Prospects is a site that aggregates courses from multiple different colleges, all over Scotland, and
-        groups them together into a easily searchable and browsable repository.</p>
+          groups them together into a easily searchable and browsable repository.</p>
         <p>Student's are then able to create apply for courses, create applications, pay course application fee, and then
-        track their applications and offers.</p>
+          track their applications and offers.</p>
         <p>College staff can view applications, make decisions, offer student's places, manage the course lists and
-        college details, as well as check payment details and generate reports.</p>
+          college details, as well as check payment details and generate reports.</p>
         <p>In order to apply to have your college added to the site, please contact the
-        <%= mail_to 'futureprospectsapp@gmail.com', 'site admin' %>.</p>
+          <%= mail_to 'futureprospectsapp@gmail.com', 'site admin' %>.</p>
       </div>
     </div>
   </div>

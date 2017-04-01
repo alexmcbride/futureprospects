@@ -23,7 +23,7 @@
     <div class="col-sm-6">
       <h3>Address</h3>
       <address>
-        <strong><%= @college.name %></strong><br>
+        <%= @college.name %><br>
         <%= simple_format(@college.address, {}, wrapper_tag: 'span') %><br>
         <%= @college.postcode %>
       </address>

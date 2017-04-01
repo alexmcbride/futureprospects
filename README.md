@@ -6,7 +6,7 @@ Year two graded unit project created for HND Software Development at City of Gla
 
 To get the site running you need to create a file `config/application.yml` that contains the following:
 
-```
+```YML
 development:
   secret_key_base: <SECRET DEVELOPMENT KEY>
 

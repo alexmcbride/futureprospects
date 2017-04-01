@@ -38,7 +38,8 @@ module ApplicationHelper
     markdown.render(text).html_safe
   end
 
-  def college_url(url)
+  # Removes the http:// bit from the start of URLs
+  def clean_url(url)
     (URI.split url).compact.slice(1, 1).join
   end
 end

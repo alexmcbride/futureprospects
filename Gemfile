@@ -57,5 +57,5 @@ gem 'scoped_search' # search
 gem 'redcarpet'  # markdown
 gem 'gretel' # breadcrumb
 gem 'carrierwave', '~> 1.0' # image upload
-gem 'figaro'
+gem 'figaro' # configuration (for heroku)
 

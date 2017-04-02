@@ -1,1 +1,0 @@
-Deploy app to Heroku with devise (need to look into email on Heroku)

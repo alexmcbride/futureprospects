@@ -1,7 +1,8 @@
+<% breadcrumb :sign_in %>
+<% @title = 'Sign In' %>
+
 <div class="row">
-  <div class="col-sm-4 col-sm-offset-4">
-    <h1 class="text-center">Sign in</h1>
-    <hr>
+  <div class="col-sm-6 col-sm-offset-3">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="form-group">
         <%= f.email_field :email, autofocus: true, placeholder: 'Email Address', class: 'form-control' %>
@@ -19,10 +20,10 @@
       <% end -%>
 
       <div class="form-group">
-          <%= f.submit 'Sign in', class: 'btn btn-primary btn-block btn-lg' %>
+          <%= f.submit 'Sign in', class: 'btn btn-primary btn-block btn-md' %>
       </div>
     <% end %>
-      <div class="text-center">
+      <div class="text-right">
         <%= render 'devise/shared/links' %>
       </div>
     </div>

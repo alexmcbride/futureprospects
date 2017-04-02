@@ -58,7 +58,7 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   # Devise and SendGrid
-  config.action_mailer.default_url_options = { host: 'strawberry-custard-46489.herokuapp.com', port: 3000 }
+  config.action_mailer.default_url_options = { host: 'strawberry-custard-46489.herokuapp.com' }
   ActionMailer::Base.smtp_settings = {
       :address        => 'smtp.sendgrid.net',
       :port           => '587',

@@ -82,5 +82,11 @@ footer {
 @media (max-width: 767px) {
   .course-item {
     text-align: center;
+
+    .course-image {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 }

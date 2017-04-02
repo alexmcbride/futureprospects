@@ -28,11 +28,11 @@
       <% @courses.each do |course| %>
         <a href="<%= url_for(course) %>" class="course-item list-group-item">
           <div class="row">
-            <div class="col-md-2 col-md-offset-0 col-xs-offset-2 col-xs-8">
+            <div class="col-sm-2 col-xs-12">
               <%= image_tag course.image, class: 'img-responsive course-image' %>
             </div>
 
-            <div class="col-md-10 col-xs-12">
+            <div class="col-sm-10 col-xs-12">
               <div class="row">
                 <div class="h3 course-title"><%= course.title %></div>
               </div>

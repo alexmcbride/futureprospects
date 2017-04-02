@@ -72,11 +72,9 @@
 
       <%# Displays title and breadcrumb if required %>
       <% unless @title.nil? %>
-          <div class="page-title">
-            <h2><%= @title %></h2>
-            <%= breadcrumbs separator: ' &rsaquo; ' %>
-            <hr class="small">
-          </div>
+          <h2 class="no-top-margin"><%= @title %></h2>
+          <%= breadcrumbs separator: ' &rsaquo; ' %>
+          <hr class="small">
       <% end %>
 
       <%# Main Content %>

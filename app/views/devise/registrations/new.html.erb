@@ -6,19 +6,32 @@
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= devise_error_messages! %>
 
+      <p>Enter your personal info in order to create an account with the site. Once your account is activated you will be
+        able to create your application.</p>
+
       <div class="form-group">
-        <%= f.label :email %><br />
+        <%= f.label :email %><br>
         <%= f.email_field :email, autofocus: false, class: 'form-control' %>
       </div>
 
       <div class="form-group">
-        <%= f.label :first_name %><br />
+        <%= f.label :first_name %><br>
         <%= f.text_field :first_name, autofocus: false, class: 'form-control' %>
       </div>
 
       <div class="form-group">
-        <%= f.label :family_name %><br />
+        <%= f.label :family_name %><br>
         <%= f.text_field :family_name, autofocus: false, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :scottish_candidate_number %><br>
+        <%= f.text_field :scottish_candidate_number, autofocus: false, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :national_insurance_number %><br>
+        <%= f.text_field :national_insurance_number, autofocus: false, class: 'form-control' %>
       </div>
 
       <div class="form-group">
@@ -30,7 +43,7 @@
       </div>
 
       <div class="form-group">
-        <%= f.label :password_confirmation %><br />
+        <%= f.label :password_confirmation %><br>
         <%= f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control' %>
       </div>
 

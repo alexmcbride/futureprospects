@@ -71,6 +71,15 @@ footer {
   font-weight: bold;
 }
 
+#error_explanation {
+  @extend .alert;
+  @extend .alert-danger;
+
+  h2 {
+    @extend .h4;
+  }
+}
+
 /* Styles for extra small mobile screens */
 @media (max-width: 767px) {
   .course-item {

@@ -58,4 +58,8 @@ gem 'redcarpet'  # markdown
 gem 'gretel' # breadcrumb
 gem 'carrierwave', '~> 1.0' # image upload
 gem 'figaro' # configuration (for heroku)
+gem 'devise'
+gem 'devise-bootstrapped'
+gem 'rolify'
+
 

@@ -38,8 +38,12 @@
             <li><%= link_to 'Home', root_path %></li>
             <li><%= link_to 'Courses', courses_path %></li>
             <li><%= link_to 'Colleges', colleges_path %></li>
-            <li><a href="#">Register</a></li>
-            <li><a href="#">Sign In</a></li>
+            <% if student_signed_in? %>
+                <li><%= link_to 'Sign Out', destroy_student_session_path, method: :delete %></li>
+              <% else %>
+                <li><%= link_to 'Register', new_student_registration_path %></li>
+                <li><%= link_to 'Sign In', new_student_session_path %></li>
+              <% end %>
           </ul>
         </div>
       </div>

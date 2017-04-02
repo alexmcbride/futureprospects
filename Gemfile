@@ -62,4 +62,3 @@ gem 'devise'
 gem 'devise-bootstrapped'
 gem 'rolify'
 
-

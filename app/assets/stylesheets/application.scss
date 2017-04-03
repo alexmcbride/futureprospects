@@ -88,13 +88,11 @@ footer {
   }
 }
 
-.application-next {
-  @extend .text-right;
-
-  a, input {
-    width: 20%;
-    border: 1px solid #2C3E50;
-  }
+.next-button {
+  @extend .btn;
+  @extend .btn-success;
+  width: 12em;
+  border: 1px solid #2C3E50;
 }
 
 .text-darkish {

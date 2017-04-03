@@ -1,2 +1,26 @@
-<h1>Application#education</h1>
-<p>Find me in app/views/application/education.html.erb</p>
+<% breadcrumb :application_profile %>
+<% @title = 'Education' %>
+
+<div class="row">
+  <div class="col-sm-3">
+    <%= render partial: 'stages', locals: {stage: :education} %>
+  </div>
+
+  <div class="col-sm-9">
+    <h3 class="no-top-margin">Education History</h3>
+
+    <%= form_for applications_profile_next_path do |f| %>
+        <%= form_errors @application %>
+
+        <div class="row">
+          <div class="col-sm-6 small text-darkish">
+            <p><em>* Optional</em></p>
+          </div>
+          <div class="col-sm-6 text-right">
+            <p class="text-darkish small">When ready continue to the next section.</p>
+            <%= f.submit 'Next', class: 'next-button' %>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>

@@ -24,6 +24,10 @@
 /* Adds different styles for will_paginate */
 @import "pagination";
 
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+
 footer {
   clear: both;
   padding-bottom: 20px;
@@ -77,6 +81,15 @@ footer {
 
   h2 {
     @extend .h4;
+  }
+}
+
+.application-next {
+  @extend .text-right;
+
+  a {
+    width: 20%;
+    border: 1px solid #2C3E50;
   }
 }
 

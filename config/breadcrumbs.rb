@@ -73,3 +73,13 @@ crumb :resend_confirmation do
   parent :root
   link 'Resend Confirmation Instructions', new_student_confirmation_path
 end
+
+crumb :application do
+  parent :root
+  link 'Application', applications_index_path
+end
+
+crumb :application_profile do
+  parent :application
+  link 'Profile', applications_profile_path
+end

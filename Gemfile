@@ -61,4 +61,4 @@ gem 'figaro' # configuration (for heroku)
 gem 'devise'
 gem 'devise-bootstrapped'
 gem 'rolify'
-
+gem 'font-awesome-sass', '~> 4.7.0'

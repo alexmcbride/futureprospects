@@ -1,0 +1,41 @@
+<%
+  stages = {
+      :intro => ['Introduction', applications_index_path],
+      :profile => ['Profile', applications_profile_path],
+      :education => ['Education', applications_education_url],
+      :employment => ['Employment', applications_employment_path],
+      :references => ['References', applications_references_path],
+      :statement => ['Personal Statement', applications_statement_path],
+      :courses => ['Add Courses', applications_courses_path],
+      :submit => ['Submit', applications_submit_path],
+  }
+%>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <p><em>This section will guide you through the process of creating your college application.</em></p>
+
+    <h3>Application Stages</h3>
+
+    <div class="list-group">
+
+      <% stages.each do |k, v| name, path = v %>
+          <% if stage == k %>
+              <div class="list-group-item active">
+                <div class="row">
+                  <div class="col-sm-10">
+                    <%= name %>
+                  </div>
+                  <div class="col-sm-1">
+                    <%= icon('arrow-circle-right', style: 'font-size: 14pt') %>
+                  </div>
+                </div>
+              </div>
+          <% else %>
+              <%= link_to name, path, class: 'list-group-item' %>
+          <% end %>
+      <% end %>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<% breadcrumb :application %>
+<% @title = 'Create Application' %>
+
+<div class="row">
+  <div class="col-sm-3">
+    <%= render partial: 'stages', locals: {stage: :intro} %>
+  </div>
+
+  <div class="col-sm-9">
+    <h3 class="no-top-margin">Create Application</h3>
+    <p>Here you will create your application, letting the colleges know all about you, your <strong>skills</strong>,
+      <strong>qualities</strong>, and <strong>experience</strong>. Make sure the information you enter is as
+      <strong>accurate</strong> as possible. You may be asked to provide evidence of your <strong>education</strong>
+      and <strong>employment</strong> history, and will be asked to provide <strong>references</strong>.</p>
+
+    <h3>Pricing</h3>
+    <p>You can <strong>apply for</strong> a maximum of <strong>five college courses</strong>, the pricing is as
+    follows:</p>
+    <div class="alert alert-warning">
+      <ul class="list-unstyled">
+        <li>Single Course: <strong>£10</strong></li>
+        <li>Multiple Courses: <strong>£20</strong></li>
+      </ul>
+    </div>
+    <p>You will be <strong>required</strong> to pay this before your application can be processed.</p>
+
+    <h3>Decisions</h3>
+    <p>Once <strong>submitted</strong> your application will be considered and, if successful, the colleges will make
+      you an <strong>offer</strong>. You can then prioritise offers so as to select the college and course that's best
+      for you. Once submitted you can sign back in to the site to <strong>track</strong> you application.</p>
+
+    <div class="application-next">
+      <%= link_to 'Next', applications_profile_path, class: 'btn btn-success', role: 'button' %>
+    </div>
+  </div>
+</div>

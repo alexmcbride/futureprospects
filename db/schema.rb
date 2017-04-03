@@ -10,10 +10,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170402121611) do
+ActiveRecord::Schema.define(version: 20170403074309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "applications", force: :cascade do |t|
+    t.integer  "student_id"
+    t.string   "title"
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "family_name"
+    t.string   "previous_name"
+    t.integer  "gender"
+    t.string   "telephone"
+    t.string   "mobile"
+    t.string   "email"
+    t.string   "disability"
+    t.text     "personal_statement"
+    t.string   "permanent_house_number"
+    t.string   "permanent_address_1"
+    t.string   "permanent_address_2"
+    t.string   "permanent_postcode"
+    t.string   "permanent_country"
+    t.string   "correspondence_house_number"
+    t.string   "correspondence_address_1"
+    t.string   "correspondence_address_2"
+    t.string   "correspondence_postcode"
+    t.string   "correspondence_country"
+    t.integer  "state"
+    t.datetime "submitted_date"
+    t.decimal  "payment_amount",              precision: 4, scale: 2
+    t.integer  "payment_type"
+    t.datetime "payment_date"
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"

@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  get 'applications/index'
+  get 'applications/profile'
+  get 'applications/education'
+  get 'applications/employment'
+  get 'applications/statement'
+  get 'applications/references'
+  get 'applications/courses'
+  get 'applications/submit'
+
   devise_for :students
   resources :courses
   resources :colleges

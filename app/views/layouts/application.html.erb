@@ -45,7 +45,7 @@
             <li><%= link_to 'Colleges', colleges_path %></li>
 
             <% if student_signed_in? %>
-              <li><%= link_to 'My Application', nil %></li>
+              <li><%= link_to 'My Application', applications_index_path %></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                   My Account <span class="caret"></span>

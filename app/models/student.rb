@@ -11,6 +11,9 @@ class Student < ApplicationRecord
   validates :scottish_candidate_number, presence: true, uniqueness: true
   validates :national_insurance_number, presence: true, uniqueness: true
 
+  # Foreign Key
+  has_many :applications
+
   # Properties
   attr_accessor :login
 

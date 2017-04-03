@@ -1,0 +1,137 @@
+<% breadcrumb :application_profile %>
+<% @title = 'Profile' %>
+
+<div class="row">
+  <div class="col-sm-3">
+    <%= render partial: 'stages', locals: {stage: :profile} %>
+  </div>
+
+  <div class="col-sm-9">
+    <h3 class="no-top-margin">Personal Profile</h3>
+
+    <%= form_for applications_index_path do |f| %>
+        <div class="row text-capitalize">
+          <div class="col-sm-6">
+            <table class="table">
+              <tr>
+                <td><%= f.label :title %></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><%= f.label :first_name %></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><%= f.label :middle_name %></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><%= f.label :family_name %></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><%= f.label :previous_name %></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><%= f.label :gender %></td>
+                <td></td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="col-sm-6">
+            <table class="table">
+              <tr>
+                <td><%= f.label :email %></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><%= f.label :telephone %></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><%= f.label :mobile %></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><%= f.label :disability %></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><%= f.label :scottish_candidate_number %></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><%= f.label :national_insurance_number %></td>
+                <td></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <h4>Permanent Address</h4>
+            <table class="table">
+              <tr>
+                <td><%= f.label 'House Number' %></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><%= f.label 'Address 1' %></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><%= f.label 'Address 2' %></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><%= f.label 'Post Code' %></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><%= f.label 'Country' %></td>
+                <td></td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="col-sm-6">
+            <h4>Correspondence Address</h4>
+            <table class="table">
+              <tr>
+                <td><%= f.label 'House Number' %></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><%= f.label 'Address 1' %></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><%= f.label 'Address 2' %></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><%= f.label 'Post Code' %></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><%= f.label 'Country' %></td>
+                <td></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+    <% end %>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="application-next">
+          <br>
+          <%= link_to 'Next', applications_education_path, class: 'btn btn-success', role: 'button' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

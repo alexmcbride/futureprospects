@@ -28,12 +28,15 @@
         <% if student_signed_in? %>
           <h2>My Application</h2>
 
+          <p>Your Username: <strong><%= current_student.username %></strong></p>
+
           <p>Here you can see your current application and its current status.</p>
 
           <!-- if has other (old) apps, show them in list here... -->
 
           <div class="list-group">
-            <%= link_to 'Current Application', applications_index_path(current_student.current_application), class: 'list-group-item' %>
+            <% app = current_student.current_application %>
+            <%= link_to app_status_text(app), applications_index_path(app), class: 'list-group-item' %>
           </div>
         <% else %>
           <h2>Students</h2>

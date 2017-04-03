@@ -58,6 +58,7 @@ class Student < ApplicationRecord
     end
   end
 
+  # Called after student is first created and adds a default application.
   def after_create
     app = Application.new
     app.scottish_candidate_number = self.scottish_candidate_number

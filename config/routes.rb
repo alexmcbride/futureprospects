@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'applications/:id/index', to: 'applications#index', as: 'applications_index'
+  get 'applications/:id', to: 'applications#index', as: 'applications_index'
   get 'applications/:id/profile', to: 'applications#profile', as: 'applications_profile'
   post 'applications/:id/profile', to: 'applications#profile_next', as: 'applications_profile_next'
   get 'applications/:id/education', to: 'applications#education', as: 'applications_education'

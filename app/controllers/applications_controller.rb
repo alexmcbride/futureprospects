@@ -1,17 +1,17 @@
 class ApplicationsController < ApplicationController
   before_action :authenticate_student!
 
-  # GET: /applications
+  # GET: /applications/:id
   def index
      Application.find(params[:id]) or not_found
   end
 
-  # GET: /applications/profile
+  # GET: /applications/:id/profile
   def profile
     @application = (Application.find(params[:id]) or not_found)
   end
 
-  # POST: /applications/profile
+  # POST: /applications/:id/profile
   def profile_next
     @application = (Application.find(params[:id]) or not_found)
     @application.attributes = post_params
@@ -25,12 +25,12 @@ class ApplicationsController < ApplicationController
     end
   end
 
-  # GET: /applications/education
+  # GET: /applications/:id/education
   def education
     @application = (Application.find(params[:id]) or not_found)
   end
 
-  # POST: /applications/education
+  # POST: /applications/:id/education
   def education_next
     @application = (Application.find(params[:id]) or not_found)
   end

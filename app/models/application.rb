@@ -36,9 +36,4 @@ class Application < ApplicationRecord
 
   # Foreign Keys
   belongs_to :student
-
-  # Gets the current application or a new one if it doesn't exist yet
-  def self.current
-    Application.where(state: :active).first
-  end
 end

@@ -3,19 +3,18 @@ class ApplicationsController < ApplicationController
 
   # GET: /applications
   def index
-
+     Application.find(params[:id]) or not_found
   end
 
   # GET: /applications/profile
   def profile
-    @application = Application.current
+    @application = (Application.find(params[:id]) or not_found)
   end
 
   # POST: /applications/profile
   def profile_next
-    @application = Application.current
+    @application = (Application.find(params[:id]) or not_found)
     @application.attributes = post_params
-    @application.student = current_student
     @application.state = :active
     respond_to do |format|
       if @application.save
@@ -28,12 +27,12 @@ class ApplicationsController < ApplicationController
 
   # GET: /applications/education
   def education
-    @application = Application.current
+    @application = (Application.find(params[:id]) or not_found)
   end
 
   # POST: /applications/education
   def education_next
-    @application = Application.current
+    @application = (Application.find(params[:id]) or not_found)
   end
 
   def employment

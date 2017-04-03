@@ -1,15 +1,14 @@
 class Student < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable, :lockable, :timeoutable, :authentication_keys => [:login]
+  # Include devise modules.
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable,
+         :lockable, :timeoutable, :authentication_keys => [:login]
 
   # Validators
-  validates :first_name, presence: true
-  validates :family_name, presence: true
-  validates :scottish_candidate_number, presence: true, uniqueness: true
-  validates :national_insurance_number, presence: true, uniqueness: true
+  validates :first_name, presence: true, length: {maximum: 35, minimum: 1}
+  validates :family_name, presence: true, length: {maximum: 35, minimum: 2}
+  validates :scottish_candidate_number, presence: true, uniqueness: true, length: {minimum: 9, maximum: 9}, numericality: {only_integer: true}
+  validate :validate_scn
+  validates :national_insurance_number, presence: true, uniqueness: true, length: {maximum: 9}
 
   # Foreign Key
   has_many :applications
@@ -58,7 +57,7 @@ class Student < ApplicationRecord
     end
   end
 
-  # Called after student is first created and adds a default application.
+  # Called after student is created, adds a default application.
   def after_create
     app = Application.new
     app.scottish_candidate_number = self.scottish_candidate_number
@@ -79,7 +78,19 @@ class Student < ApplicationRecord
 
   # Gets a boolean indicating if the username is in use or not.
   def username_free?(username)
-    student = Student.find_by_username username
-    student.nil?
+      Student.find_by_username(username).nil?
+  end
+
+  # Checks if a scottish candidate number is correct: https://www.hesa.ac.uk/collection/c15051/a/scn
+  def validate_scn
+    nums = self.scottish_candidate_number.chars.map { |c| c.to_i }
+    sum = 0
+    [3, 2, 7, 6, 5, 4, 3, 2].each.with_index do |v, i|
+      sum += nums[i] * v
+    end
+    check_digit = 11 - (sum % 11)
+    if check_digit == 1 or check_digit != nums.last
+      errors.add(:scottish_candidate_number, 'did not pass checksum')
+    end
   end
 end

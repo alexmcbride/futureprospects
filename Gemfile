@@ -58,7 +58,7 @@ gem 'redcarpet'  # markdown
 gem 'gretel' # breadcrumb
 gem 'carrierwave', '~> 1.0' # image upload
 gem 'figaro' # configuration (for heroku)
-gem 'devise'
-gem 'devise-bootstrapped'
-gem 'rolify'
-gem 'font-awesome-sass', '~> 4.7.0'
+gem 'devise' # authentication
+gem 'devise-bootstrapped' # authentication views
+gem 'rolify' # roles
+gem 'font-awesome-sass', '~> 4.7.0' # glyphs and icons

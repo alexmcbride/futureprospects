@@ -9,33 +9,35 @@
   <div class="col-sm-9">
     <h3 class="no-top-margin">Personal Profile</h3>
 
-    <%= form_for applications_index_path do |f| %>
+    <p class="text-darkish small">Enter your personal information, so that the college knows all about you.</p>
+
+    <%= form_for applications_profile_next_path do |f| %>
         <div class="row text-capitalize">
           <div class="col-sm-6">
             <table class="table">
               <tr>
-                <td><%= f.label :title %></td>
-                <td></td>
+                <td class="full-width"><%= f.label :title %></td>
+                <td><%= f.text_field :title %></td>
               </tr>
               <tr>
                 <td><%= f.label :first_name %></td>
-                <td></td>
+                <td><%= f.text_field :first_name %></td>
               </tr>
               <tr>
                 <td><%= f.label :middle_name %></td>
-                <td></td>
+                <td><%= f.text_field :middle_name %></td>
               </tr>
               <tr>
                 <td><%= f.label :family_name %></td>
-                <td></td>
+                <td><%= f.text_field :family_name %></td>
               </tr>
               <tr>
                 <td><%= f.label :previous_name %></td>
-                <td></td>
+                <td><%= f.text_field :previous_name %></td>
               </tr>
               <tr>
                 <td><%= f.label :gender %></td>
-                <td></td>
+                <td><%= f.select :gender, options_for_select(Application.genders.keys.map { |w| [w.humanize, w] }), {}, {:class => 'full-width'} %></td>
               </tr>
             </table>
           </div>
@@ -43,28 +45,28 @@
           <div class="col-sm-6">
             <table class="table">
               <tr>
-                <td><%= f.label :email %></td>
-                <td></td>
+                <td class="full-width"><%= f.label :email %></td>
+                <td><%= f.email_field :email %></td>
               </tr>
               <tr>
                 <td><%= f.label :telephone %></td>
-                <td></td>
+                <td><%= f.text_field :telephone %></td>
               </tr>
               <tr>
                 <td><%= f.label :mobile %></td>
-                <td></td>
+                <td><%= f.text_field :mobile %></td>
               </tr>
               <tr>
                 <td><%= f.label :disability %></td>
-                <td></td>
+                <td><%= f.text_field :disability %></td>
               </tr>
               <tr>
                 <td><%= f.label :scottish_candidate_number %></td>
-                <td></td>
+                <td><%= f.text_field :scottish_candidate_number %></td>
               </tr>
               <tr>
                 <td><%= f.label :national_insurance_number %></td>
-                <td></td>
+                <td><%= f.text_field :national_insurance_number %></td>
               </tr>
             </table>
           </div>
@@ -73,65 +75,65 @@
         <div class="row">
           <div class="col-sm-6">
             <h4>Permanent Address</h4>
+            <p class="text-darkish small">This is the address that you live at.</p>
             <table class="table">
               <tr>
-                <td><%= f.label 'House Number' %></td>
-                <td></td>
+                <td class="full-width"><%= f.label 'House Number' %></td>
+                <td><%= f.text_field :permanent_house_number %></td>
               </tr>
               <tr>
                 <td><%= f.label 'Address 1' %></td>
-                <td></td>
+                <td><%= f.text_field :permanent_address_1 %></td>
               </tr>
               <tr>
                 <td><%= f.label 'Address 2' %></td>
-                <td></td>
+                <td><%= f.text_field :permanent_address_2 %></td>
               </tr>
               <tr>
                 <td><%= f.label 'Post Code' %></td>
-                <td></td>
+                <td><%= f.text_field :permanent_postcode %></td>
               </tr>
               <tr>
                 <td><%= f.label 'Country' %></td>
-                <td></td>
+                <td><%= f.text_field :permanent_country %></td>
               </tr>
             </table>
           </div>
 
           <div class="col-sm-6">
             <h4>Correspondence Address</h4>
+            <p class="text-darkish small">This is the address where you want you letters sent.</p>
             <table class="table">
               <tr>
-                <td><%= f.label 'House Number' %></td>
-                <td></td>
+                <td class="full-width"><%= f.label 'House Number' %></td>
+                <td><%= f.text_field :correspondence_house_number %></td>
               </tr>
               <tr>
                 <td><%= f.label 'Address 1' %></td>
-                <td></td>
+                <td><%= f.text_field :correspondence_address_1 %></td>
               </tr>
               <tr>
                 <td><%= f.label 'Address 2' %></td>
-                <td></td>
+                <td><%= f.text_field :correspondence_address_2 %></td>
               </tr>
               <tr>
                 <td><%= f.label 'Post Code' %></td>
-                <td></td>
+                <td><%= f.text_field :correspondence_postcode %></td>
               </tr>
               <tr>
                 <td><%= f.label 'Country' %></td>
-                <td></td>
+                <td><%= f.text_field :correspondence_country %></td>
               </tr>
             </table>
           </div>
         </div>
-    <% end %>
 
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="application-next">
-          <br>
-          <%= link_to 'Next', applications_education_path, class: 'btn btn-success', role: 'button' %>
+        <div class="row">
+          <div class="col-sm-12 application-next">
+            <p class="text-darkish small">When ready continue to the next section.</p>
+            <%= f.submit 'Next', class: 'btn btn-success' %>
+          </div>
         </div>
-      </div>
-    </div>
+    <% end %>
   </div>
 </div>

@@ -41,6 +41,10 @@ footer {
   margin-top: 0px;
 }
 
+.no-bottom-padding {
+  padding-bottom: 0px;
+}
+
 .breadcrumbs {
   font-size: small;
 }
@@ -87,10 +91,14 @@ footer {
 .application-next {
   @extend .text-right;
 
-  a {
+  a, input {
     width: 20%;
     border: 1px solid #2C3E50;
   }
+}
+
+.text-darkish {
+  color: #7b8a8b;
 }
 
 /* Styles for extra small mobile screens */

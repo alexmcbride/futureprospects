@@ -7,6 +7,10 @@ class ApplicationsController < ApplicationController
     @application = Application.new
   end
 
+  def profile_next
+    # submit data, move to next section.
+  end
+
   def education
   end
 

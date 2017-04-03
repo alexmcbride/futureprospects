@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'applications/index'
   get 'applications/profile'
+  post 'applications/profile', to: 'applications#profile_next', as: 'applications_profile_next'
   get 'applications/education'
   get 'applications/employment'
   get 'applications/statement'

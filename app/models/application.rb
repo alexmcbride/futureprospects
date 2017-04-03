@@ -36,4 +36,9 @@ class Application < ApplicationRecord
 
   # Foreign Keys
   belongs_to :student
+
+  # Checks if the application is owned by this student
+  def owned_by?(student)
+    student.id == self.student_id
+  end
 end

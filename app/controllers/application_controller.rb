@@ -14,4 +14,10 @@ class ApplicationController < ActionController::Base
     def not_found
       raise ActionController::RoutingError.new('Not Found')
     end
+
+    # Redirects unauthorized users back from whence they came.
+    def user_not_authorized
+      flash[:alert] = 'You are not authorized to perform this action.'
+      redirect_to(request.referrer || root_path)
+    end
 end

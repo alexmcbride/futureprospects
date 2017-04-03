@@ -25,16 +25,28 @@
   <div class="col-md-6">
     <div class="panel panel-default">
       <div class="panel-body">
-        <h2>Students</h2>
-        <p>Register now to apply for your dream course.</p>
-        <%= link_to 'Register', new_student_registration_path, class: 'btn btn-default btn-block' %>
-        <br>
-        <p>Sign in to track your application.</p>
-        <%= link_to 'Sign In', new_student_session_path, class: 'btn btn-default btn-block' %>
+        <% if student_signed_in? %>
+          <h2>My Application</h2>
 
-        <h2>Colleges</h2>
-        <p>Sign in to manage your student intake.</p>
-        <a href="#" class="btn btn-default btn-block" role="button">Sign In</a>
+          <p>Here you can see your current application and its current status.</p>
+
+          <!-- if has other (old) apps, show them in list here... -->
+
+          <div class="list-group">
+            <%= link_to 'Current Application', applications_index_path(current_student.current_application), class: 'list-group-item' %>
+          </div>
+        <% else %>
+          <h2>Students</h2>
+          <p>Register now to apply for your dream course.</p>
+          <%= link_to 'Register', new_student_registration_path, class: 'btn btn-default btn-block' %>
+          <br>
+          <p>Sign in to track your application.</p>
+          <%= link_to 'Sign In', new_student_session_path, class: 'btn btn-default btn-block' %>
+
+          <h2>Colleges</h2>
+          <p>Sign in to manage your student intake.</p>
+          <a href="#" class="btn btn-default btn-block" role="button">Sign In</a>
+        <% end %>
       </div>
     </div>
   </div>

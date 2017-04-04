@@ -16,8 +16,6 @@ class Application < ApplicationRecord
   validates :email, presence: true, length: { maximum: 254 }
   validates :disability, presence: false, length: { maximum: 100 }
   validates :personal_statement, presence: false, length: { maximum: 500 }
-  validates :scottish_candidate_number, presence: true, length: { maximum: 9 }
-  validates :national_insurance_number, presence: true, length: { maximum: 9 }
   validates :permanent_house_number, presence: true, length: { maximum: 12 }
   validates :permanent_address_1, presence: true, length: { maximum: 35 }
   validates :permanent_address_2, presence: false, length: { maximum: 35 }
@@ -33,6 +31,9 @@ class Application < ApplicationRecord
   validates :payment_amount, presence: false
   validates :payment_type, presence: false
   validates :payment_date, presence: false
+
+  # Validations shared between application and student.
+  include StudentValidator
 
   # Foreign Keys
   belongs_to :student

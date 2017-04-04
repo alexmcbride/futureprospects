@@ -1,4 +1,7 @@
 module ApplicationHelper
+  @renderer = nil
+  @markdown = nil
+
   # Helper function for flash_messages.
   def bootstrap_class_for(flash_type)
     { notice: 'alert-success', alert: 'alert-warning', success: 'alert-success', error: 'alert-danger', warning: 'alert-warning'}[flash_type.to_sym]
@@ -52,10 +55,11 @@ module ApplicationHelper
         disable_indented_code_blocks: true
     }
 
-    renderer = Redcarpet::Render::HTML.new(options)
-    markdown = Redcarpet::Markdown.new(renderer, extensions)
+    # Create if they don't exist.
+    @renderer ||= Redcarpet::Render::HTML.new(options)
+    @markdown ||= Redcarpet::Markdown.new(@renderer, extensions)
 
-    markdown.render(text).html_safe
+    @markdown.render(text).html_safe
   end
 
   # Removes the http:// bit from the start of URLs

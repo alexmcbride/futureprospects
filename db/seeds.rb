@@ -6,6 +6,25 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+
+# Seed students
+john = Student.create first_name: 'John', family_name: 'Smith', email: 'johnsmith@email.com',
+                      scottish_candidate_number: '173515731', national_insurance_number: 'NR672354B',
+                      password: 'secret', password_confirmation: 'secret', confirmed_at: DateTime.now
+
+steve = Student.create first_name: 'Steve', family_name: 'Purchase', email: 'stevepurchase@email.com',
+                      scottish_candidate_number: '172105955', national_insurance_number: 'NR622454B',
+                      password: 'secret', password_confirmation: 'secret', confirmed_at: DateTime.now
+
+gemma = Student.create first_name: 'Gemma', family_name: 'McNiel', email: 'gemmamcniel@email.com',
+                       scottish_candidate_number: '176266201', national_insurance_number: 'NR627454B',
+                       password: 'secret', password_confirmation: 'secret', confirmed_at: DateTime.now
+
+susan = Student.create first_name: 'Susan', family_name: 'Mitchell', email: 'susanmitchell@email.com',
+                       scottish_candidate_number: '172205100', national_insurance_number: 'NR724454B',
+                       password: 'secret', password_confirmation: 'secret', confirmed_at: DateTime.now
+
+
 # Seed colleges
 cogc = College.new
 cogc.name = 'City of Glasgow College'

@@ -104,6 +104,15 @@ footer {
   border: 1px solid darkslategray;
 }
 
+.app-arrow {
+  font-size: 15pt;
+}
+
+.app-tick {
+  @extend .app-arrow;
+  color: limegreen;
+}
+
 /* Styles for extra small mobile screens */
 @media (max-width: 767px) {
   .course-item {

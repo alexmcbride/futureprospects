@@ -5,7 +5,7 @@
         <%= name %>
       </div>
       <div class="col-xs-1">
-        <%= icon('arrow-circle-right', style: 'font-size: 15pt') %>
+        <%= icon('arrow-circle-right', class: 'app-arrow') %>
       </div>
     </div>
   </a>
@@ -17,7 +17,8 @@
       </div>
       <% if completed %>
         <div class="col-xs-1">
-          <i class="fa fa-check-circle" aria-hidden="true" style="color: green; font-size: 15pt;"></i>
+          <!--<i class="fa fa-check-circle app-tick" aria-hidden="true" style="color: limegreen; font-size: 15pt;"></i>-->
+          <%= icon('check-circle', class: 'app-tick') %>
         </div>
       <% end %>
     </div>

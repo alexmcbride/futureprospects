@@ -99,6 +99,11 @@ footer {
   color: #7b8a8b;
 }
 
+.panel-bg {
+  background-color: cornsilk;
+  border: 1px solid darkslategray;
+}
+
 /* Styles for extra small mobile screens */
 @media (max-width: 767px) {
   .course-item {

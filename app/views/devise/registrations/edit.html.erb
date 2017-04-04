@@ -6,18 +6,28 @@
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
       <%= devise_error_messages! %>
 
-      <div class="panel panel-default panel-warning">
-        <div class="panel-body">
-          <h3 class="no-top-margin">Username</h3>
+      <p>Keep your login details up to date. Make sure you don't lose them!</p>
 
-          <p>
-            Your automatically generated username:
-            <strong><%= current_student.username %></strong>
-          </p>
+      <div class="panel panel-default panel-bg">
+        <div class="panel-body no-bottom-padding">
+          <h3 class="no-top-margin">Personal Information</h3>
+
+          <table class="table">
+            <tr>
+              <td>Username:</td>
+              <td><strong><%= current_student.username %></strong></td>
+            </tr>
+            <tr>
+              <td>Scottish Candidate Number:</td>
+              <td><strong><%= current_student.scottish_candidate_number %></strong></td>
+            </tr>
+            <tr>
+              <td>National Insurance Number:</td>
+              <td><strong><%= current_student.national_insurance_number %></strong></td>
+            </tr>
+          </table>
         </div>
       </div>
-
-      <p>Keep your login details up to date. Make sure you don't lose them!</p>
 
       <div class="form-group">
         <%= f.label :email, class: 'text-capitalize' %><br>

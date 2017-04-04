@@ -7,14 +7,14 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-# Seed students
+# Seed students (generate a new SCN with Student.generate_scn)
 john = Student.create first_name: 'John', family_name: 'Smith', email: 'johnsmith@email.com',
                       scottish_candidate_number: '173515731', national_insurance_number: 'NR672354B',
                       password: 'secret', password_confirmation: 'secret', confirmed_at: DateTime.now
 
 steve = Student.create first_name: 'Steve', family_name: 'Purchase', email: 'stevepurchase@email.com',
-                      scottish_candidate_number: '172105955', national_insurance_number: 'NR622454B',
-                      password: 'secret', password_confirmation: 'secret', confirmed_at: DateTime.now
+                       scottish_candidate_number: '172105955', national_insurance_number: 'NR622454B',
+                       password: 'secret', password_confirmation: 'secret', confirmed_at: DateTime.now
 
 gemma = Student.create first_name: 'Gemma', family_name: 'McNiel', email: 'gemmamcniel@email.com',
                        scottish_candidate_number: '176266201', national_insurance_number: 'NR627454B',
@@ -768,4 +768,160 @@ course.start_date = Date.new 2018, 1, 8
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 5'
 course.image = Rails.root.join('app/assets/images/seed_images/paint-dec-cag.jpg').open
+course.save!
+
+
+
+
+
+course = Course.new
+course.category_id = categories['Design Crafts & Graphic Arts']
+course.college = cogc
+course.title = '3D Design: Interior Design HND'
+course.description = "This course will enable you to develop the creative, analytical and technical skills for a career in interior design. It's a two year course that can lead to direct entry to the third year of a degree programme.
+
+This course also accepts year two direct entrants.
+
+The course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course.entry_requirements="* NC Interior Design or related subject, OR
+* Higher Art and Design, and English at minimum Intermediate 2, OR
+* Higher Art and Design, and English at National 5 level.
+
+You'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject. At the interview you'll be asked to provide examples of your art and design work."
+course.career_prospects = 'This course may lead to a variety of careers in interior design and architectural practices, such as space planning, property development – shop and office fitting, and museum and exhibition design.
+
+Continuing Study
+
+After successfully completing the HND course, you can apply for direct entry to 3rd year BA (Hons) Interior Design program at a choice of universities such as: Glasgow School of Art, Edinburgh College of Art, Duncan of Jordonstone College of Art or Heriot Watt University.'
+course.start_date = Date.new 2017, 8, 28
+course.end_date = Date.new 2019, 6, 15
+course.level = 'SCQF level 8'
+course.image = Rails.root.join('app/assets/images/seed_images/art-and-design-nc.jpg').open
+course.save!
+
+
+
+
+course = Course.new
+course.category_id = categories['Design Crafts & Graphic Arts']
+course.college = cogc
+course.title = 'Art and Design: Interior Design NC'
+course.description = "This course offers you an ideal first step into the Interior Design Industry, providing you with the theoretical and practical knowledge and skills required to begin your career journey.
+
+You'll learn the knowledge and skills necessary to work on projects - from initial conceptual ideas to a fully functional interior design scheme you could present to a commercial client (please see further information in the 'what you study' section below).
+
+Your programme will be delivered by our highly professional teaching staff with significant Interior Design experience and a proven track record of bringing out the best in their students.
+
+This course is placed on the Scottish Credit Qualifications Framework at Level 6. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course.entry_requirements='* Two Standard Grades at Credit Level in Art and Design and English; OR
+* Two National 5 qualifications in Art and Design and English.
+
+* Two Standard Grades at Credit Level in Art and Design, and English; OR
+* Two National 5 qualifications in Art and Design, and English.'
+course.career_prospects = 'You could work in interior design in retail outlets, space planning consultants or property development where an HND or degree is not essential.'
+course.start_date = Date.new 2017, 8, 28
+course.end_date = Date.new 2018, 6, 15
+course.level = 'SCQF level 6'
+course.image = Rails.root.join('app/assets/images/seed_images/ed-interior-hnd.jpg').open
+course.save!
+
+
+
+course = Course.new
+course.category_id = categories['Design Crafts & Graphic Arts']
+course.college = cogc
+course.title = '3D Design: Model Making for the Creative Industries HND (Year 2)'
+course.description = 'This course will help you develop multiple skills and knowledge of materials and processes relevant to the Model Making Industry, whether for film/TV props, miniatures, prototyping, engineering, architecture, or exhibition models.
+
+As part of the course, previous students have had the opportunity to work with live clients throughout the UK and Europe and have made industry visits to London, Liverpool, Manchester, Barcelona and beyond.
+
+This course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework visit: www.scqf.org.uk/the-framework/.'
+course.entry_requirements="* HNC 3D Design: Model Making for the Creative Industries; OR
+* First year HND 3D Design: Model Making for the Creative Industries.
+
+You'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject. At the interview you're asked to bring your best examples of both 2D and 3D art and design work, in original, photographic or portfolio form."
+course.career_prospects = 'Many graduates work as model makers all over the world, including New Zealand, Dubai and Australia.
+
+Previous students have gone directly into second year at university to study Model Making Design and a range of related courses at BA (Hons) level.'
+course.start_date = Date.new 2017, 8, 28
+course.end_date = Date.new 2018, 6, 15
+course.level = 'SCQF level 8'
+course.image = Rails.root.join('app/assets/images/seed_images/3d-model-hnd-y2.jpg').open
+course.save!
+
+
+#Drama & Creative Writing
+course = Course.new
+course.category_id = categories['Drama & Creative Writing']
+course.college = cogc
+course.title = 'Creative Industries: Professional Writing Skills HNC'
+course.description = "This course is for you, if you are looking for a career in writing. It will help you to develop the skills you'll need to work in a variety of fields. We cover scripting for TV and radio, short story writing, poetry and journalism, as well as vital freelance skills and industry knowledge.
+
+This stimulating, learner-focused course is delivered by highly professional teaching staff, with significant Communications Industry experience and a proven track record of bringing out the best in their students.
+
+Previous students on this course have had scripts produced, novels and poetry published, or worked professionally in a range of relevant disciplines. Others have gone on to complete degree and postgraduate courses.
+
+This course is placed on the Scottish Credit Qualifications Framework at Level 7. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course.entry_requirements="* A Higher in English at minimum B or above or relevant group of units (e.g. Literature 1, Communication 4); OR
+* Relevant experience.
+
+You'll be invited for a group pre-entry guidance session and individual interview where you can find out more about the course and tell us why you are interested in this subject.
+
+At interview you'll be asked to write a short factual piece and provide a folio of three or four typed pieces of work. This may include poetry collections, short stories or prose extracts, script extracts, or journalism articles.
+
+Please note that school essays are not suitable."
+course.career_prospects = 'This course prepares you for a career in creative writing, freelance writing, journalism, script editing, scriptwriting or broadcasting. Previous students have gone on to work in publishing, script tutoring, ghost writing, and speech writing.'
+course.start_date = Date.new 2017, 8, 28
+course.end_date = Date.new 2018, 6, 15
+course.level = 'SCQF level 7'
+course.image = Rails.root.join('app/assets/images/seed_images/creative-writing-hnc.jpg').open
+course.save!
+
+
+
+course = Course.new
+course.category_id = categories['Drama & Creative Writing']
+course.college = cogc
+course.title = 'Creative Industries: Radio HND (Year 2)'
+course.description = "This course builds on the skills you developed in the HNC. The focus is still on programme making, but goes beyond radio and develops a more sophisticated skillset – technical, production and creative. This course is an excellent opportunity for you to study and train for a career in radio production, with excellent career opportunities and progression routes.
+
+The course is delivered by highly qualified lecturers who have a wealth of experience within the radio industry and have well established industry contacts.
+
+After successful completion of the course, you'll be awarded with an HND Creative Industries: Radio.
+
+This course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course.entry_requirements='* HNC Creative Industries: Radio, including A or B in graded unit one.'
+course.career_prospects = 'There are opportunities in radio for those with a variety of up to date skills, broadcasting knowledge and experience.'
+course.start_date = Date.new 2017, 8, 28
+course.end_date = Date.new 2018, 6, 15
+course.level = 'SCQF level 8'
+course.image = Rails.root.join('app/assets/images/seed_images/radio-hnd.jpg').open
+course.save!
+
+
+
+
+course = Course.new
+course.category_id = categories['Drama & Creative Writing']
+course.college = cogc
+course.title = 'Acting and Performance HNC'
+course.description = "This course develops the skills you require for acting and performance. It is designed to focus on the practical skills required by the actor, while also supporting the practical experiences with knowledge of theatre and performance.
+
+This creative, learner-focused course is delivered by highly professional teaching staff, with significant acting and performance experience and a proven track record of bringing out the best in their students.
+
+On completion of the course, you'll be awarded a HNC Acting and Performance and you may be eligible for direct entry into the second year of HND Acting and Performance.
+
+This course is placed on the Scottish Credit Qualifications Framework at Level 7. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course.entry_requirements="* Two Higher Grades, including English; OR
+* NQ Drama; OR
+* Equivalent qualification.
+
+You'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject.
+
+If your application is successful, you'll also be asked to audition where you will perform a monologue."
+course.career_prospects = 'There are a wide range of career opportunities which include working in theatre, television, community drama, and theatre production.'
+course.start_date = Date.new 2017, 8, 28
+course.end_date = Date.new 2018, 6, 15
+course.level = 'SCQF level 7'
+course.image = Rails.root.join('app/assets/images/seed_images/performance-hnc.jpg').open
 course.save!

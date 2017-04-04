@@ -12,7 +12,7 @@ class ApplicationsController < ApplicationController
     @application.scottish_candidate_number = current_student.scottish_candidate_number
     @application.national_insurance_number = current_student.scottish_candidate_number
     @application.student = current_student
-    @application.save validate: false
+    @application.save validate: false # Can't validate at this point
     respond_to do |format|
       format.html { redirect_to applications_index_path(@application) }
     end
@@ -113,7 +113,7 @@ class ApplicationsController < ApplicationController
   end
 
   private
-    # Sets default application object and checks permission for controller views.
+    # Sets current application object and checks if student is owner of application
     def set_application
       @application = (Application.find(params[:id]) or not_found)
       @application.owned_by? current_student or user_not_authorized

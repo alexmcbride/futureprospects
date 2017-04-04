@@ -1,6 +1,6 @@
 class Student < ApplicationRecord
   # Include devise modules.
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable,
+  devise :database_authenticatable, :registerable, :recoverable, :trackable, :validatable, :confirmable,
          :lockable, :timeoutable, :authentication_keys => [:login]
 
   # Validators

@@ -63,10 +63,10 @@ module ApplicationHelper
     (URI.split url).compact.slice(1, 1).join
   end
 
-  # Generates HTML for list-items on the stages sidebar.
+  # Generates HTML for a list-item on the stages sidebar.
   def stage_item(name, path, completed=false)
     if path == request.path
-      content_tag(:a, href: url_for(path), class: 'list-group-item active') do
+      content_tag(:a, href: url_for(path), class: "list-group-item #{active}") do
         concat(content_tag(:div, class: 'row') do
           concat(content_tag(:div, name, class: 'col-xs-10'))
           concat(content_tag(:div, class: 'col-xs-1') do

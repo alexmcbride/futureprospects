@@ -36,7 +36,7 @@
 
           <div class="list-group">
             <% app = current_student.current_application %>
-            <%= link_to app_status_text(app), applications_index_path(app), class: 'list-group-item' %>
+            <%= link_to app_status_text(app), applications_continue_path(app), class: 'list-group-item' %>
           </div>
         <% else %>
           <h2>Students</h2>

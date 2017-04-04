@@ -1,6 +1,6 @@
 class ApplicationsController < ApplicationController
   before_action :authenticate_student!
-  before_action :set_application, only: [:index, :index_next, :profile, :profile_next, :education, :education_next]
+  before_action :set_application
 
   # GET: /applications/:id
   def index
@@ -70,6 +70,30 @@ class ApplicationsController < ApplicationController
   end
 
   def submit_next
+  end
+
+  # GET /applications/:id/continue
+  def continue
+    # Redirects user to the first incomplete part of application.
+    respond_to do |format|
+      if not @application.completed_intro
+        format.html {redirect_to applications_index_path}
+      elsif not @application.completed_profile
+        format.html {redirect_to applications_profile_path}
+      elsif not @application.completed_education
+        format.html {redirect_to applications_education_path}
+      elsif not @application.completed_employment
+        format.html {redirect_to applications_employment_path}
+      elsif not @application.completed_references
+        format.html {redirect_to applications_references_path}
+      elsif not @application.completed_statement
+        format.html {redirect_to applications_statement_path}
+      elsif not @application.completed_courses
+        format.html {redirect_to applications_courses_path}
+      else
+        format.html {redirect_to applications_submit_path}
+      end
+    end
   end
 
   private

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   post 'applications/:id/courses', to: 'applications#courses_next', as: 'applications_courses_next'
   get 'applications/:id/submit', to: 'applications#submit', as: 'applications_submit'
   post 'applications/:id/submit', to: 'applications#submit_next', as: 'applications_submit_next'
+  get 'applications/:id/continue', to: 'applications#continue', as: 'applications_continue'
 
   devise_for :students
   resources :courses

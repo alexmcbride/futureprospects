@@ -73,4 +73,8 @@ module ApplicationHelper
     end
     'Create Application'
   end
+
+  def stage_link(name, path, completed)
+    
+  end
 end

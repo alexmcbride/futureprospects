@@ -1,18 +1,3 @@
-<%
-  # Outputs stages list with correctly activated one and links
-
-  stages = {
-      :intro => ['Introduction', applications_index_path],
-      :profile => ['Profile', applications_profile_path],
-      :education => ['Education', applications_education_url],
-      :employment => ['Employment', applications_employment_path],
-      :references => ['References', applications_references_path],
-      :statement => ['Personal Statement', applications_statement_path],
-      :courses => ['Add Courses', applications_courses_path],
-      :submit => ['Submit', applications_submit_path],
-  }
-%>
-
 <div class="panel panel-default">
   <div class="panel-body">
     <p><em>This section will guide you through the process of creating your college application.</em></p>
@@ -20,22 +5,14 @@
     <h3>Application Stages</h3>
 
     <div class="list-group">
-      <% stages.each do |key, value| name, path = value %>
-          <% if stage == key %>
-            <a href="<%= url_for path %>" class="list-group-item active">
-              <div class="row">
-                <div class="col-xs-10">
-                  <%= name %>
-                </div>
-                <div class="col-xs-1">
-                  <%= icon('arrow-circle-right', style: 'font-size: 14pt') %>
-                </div>
-              </div>
-            </a>
-          <% else %>
-            <%= link_to name, path, class: 'list-group-item' %>
-          <% end %>
-      <% end %>
+      <%= render partial: 'stage', locals: {name: 'Introduction', path: applications_index_path, completed: application.completed_intro} %>
+      <%= render partial: 'stage', locals: {name: 'Profile', path: applications_profile_path, completed: application.completed_profile} %>
+      <%= render partial: 'stage', locals: {name: 'Education', path: applications_education_path, completed: application.completed_education} %>
+      <%= render partial: 'stage', locals: {name: 'Employment', path: applications_employment_path, completed: application.completed_employment} %>
+      <%= render partial: 'stage', locals: {name: 'References', path: applications_references_path, completed: application.completed_references} %>
+      <%= render partial: 'stage', locals: {name: 'Personal Statement', path: applications_statement_path, completed: application.completed_statement} %>
+      <%= render partial: 'stage', locals: {name: 'Add Courses', path: applications_courses_path, completed: application.completed_courses} %>
+      <%= render partial: 'stage', locals: {name: 'Submit', path: applications_submit_path, completed: false} %>
     </div>
   </div>
 </div>

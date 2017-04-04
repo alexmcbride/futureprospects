@@ -1,9 +1,18 @@
 class ApplicationsController < ApplicationController
   before_action :authenticate_student!
-  before_action :set_application, only: [:index, :profile, :profile_next, :education, :education_next]
+  before_action :set_application, only: [:index, :index_next, :profile, :profile_next, :education, :education_next]
 
   # GET: /applications/:id
   def index
+  end
+
+  # POST: /applications/:id
+  def index_next
+    @application.completed_intro = true
+    @application.save validate: false
+    respond_to do |format|
+      format.html { redirect_to applications_profile_path }
+    end
   end
 
   # GET: /applications/:id/profile
@@ -16,6 +25,7 @@ class ApplicationsController < ApplicationController
     @application.state = :active
     respond_to do |format|
       if @application.valid?
+        @application.completed_profile = true
         @application.save!
         format.html { redirect_to applications_education_path }
       else

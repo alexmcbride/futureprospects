@@ -1,1 +1,1 @@
-Pundit and rolify for student application.
+test devise lock and other devise things

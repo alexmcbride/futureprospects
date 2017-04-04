@@ -65,6 +65,7 @@ class Student < ApplicationRecord
     app.national_insurance_number = self.national_insurance_number
     app.first_name = self.first_name
     app.family_name = self.family_name
+    app.email = self.email
     app.student = self
     app.save(validate: false) # don't validate on save
   end
@@ -82,20 +83,27 @@ class Student < ApplicationRecord
       Student.find_by_username(username).nil?
   end
 
-  # Checks if a scottish candidate number is correct: https://www.hesa.ac.uk/collection/c15051/a/scn
+  # Called by validators to check if SCN is correct.
   def validate_scn
-    nums = scottish_candidate_number.chars.map { |c| c.to_i }
-    check_digit = Student.generate_check_digit nums
-    # As check is single digit a ten is invalid
-    if check_digit == 10 or check_digit != nums.last
-      errors.add(:scottish_candidate_number, 'did not pass checksum')
+    unless self.scottish_candidate_number.empty?
+      unless Student.validate_scn self.scottish_candidate_number
+        self.errors.add(:scottish_candidate_number, 'did not pass checksum')
+      end
     end
   end
 
+  # Checks if a scottish candidate number is correct: https://www.hesa.ac.uk/collection/c15051/a/scn
+  def self.validate_scn(scn)
+    nums = scn.chars.map { |c| c.to_i }
+    check_digit = Student.generate_check_digit nums
+    # As check is single digit a ten is invalid
+    not (check_digit == 10 or check_digit != nums.last)
+  end
+
   # Generates a valid scottish candidate number for testing
-  # First 2 digits are year
-  # Next 6 are randomly generated
-  # Last digit is check digit
+  # * First 2 digits are year
+  # * Next 6 are randomly generated
+  # * Last digit is check digit
   def self.generate_scn
     year = DateTime.now.year
     tens = year % 1000 / 10
@@ -112,10 +120,10 @@ class Student < ApplicationRecord
   end
 
   # Generates a valid check digit for a SCN.
-  # Multiply each char by weight and sum result
-  # Divide sum by 11 and store remainder
-  # If remainder is 0 then check is 0
-  # Otherwise subtract remainder from 11 to get check digit
+  # * Multiply each char by weight and sum result
+  # * Divide sum by 11 and store remainder
+  # * If remainder is 0 then check is 0
+  # * Otherwise subtract remainder from 11 to get check digit
   def self.generate_check_digit(nums)
     sum = 0
     [3, 2, 7, 6, 5, 4, 3, 2].each.with_index do |v, i|

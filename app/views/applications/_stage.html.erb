@@ -1,0 +1,25 @@
+<% if path == request.path %>
+  <a href="<%= url_for path %>" class="list-group-item active">
+    <div class="row">
+      <div class="col-xs-10">
+        <%= name %>
+      </div>
+      <div class="col-xs-1">
+        <%= icon('arrow-circle-right', style: 'font-size: 15pt') %>
+      </div>
+    </div>
+  </a>
+<% else %>
+  <a href="<%= url_for path %>" class="list-group-item">
+    <div class="row ">
+      <div class="col-xs-10">
+        <%= name %>
+      </div>
+      <% if completed %>
+        <div class="col-xs-1">
+          <i class="fa fa-check-circle" aria-hidden="true" style="color: green; font-size: 15pt;"></i>
+        </div>
+      <% end %>
+    </div>
+  </a>
+<% end %>

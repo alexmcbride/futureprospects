@@ -3,7 +3,7 @@
 
 <div class="row">
   <div class="col-sm-3">
-    <%= render partial: 'stages', locals: {stage: :intro} %>
+    <%= render partial: 'stages', locals: {application: @application} %>
   </div>
 
   <div class="col-sm-9">
@@ -35,7 +35,9 @@
 
     <div class="text-right">
       <p class="text-darkish small">When ready continue to the next section.</p>
-      <%= link_to 'Next', applications_profile_path, class: 'next-button', role: 'button' %>
+      <%= form_for @application, url: applications_index_next_path, method: :post do |f| %>
+        <%= f.submit 'Next', class: 'next-button' %>
+      <% end %>
     </div>
   </div>
 </div>

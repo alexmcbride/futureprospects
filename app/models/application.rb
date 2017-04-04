@@ -41,4 +41,15 @@ class Application < ApplicationRecord
   def owned_by?(student)
     student.id == self.student_id
   end
+
+  # Checks if the application is complete.
+  def complete?
+    self.completed_intro and self.completed_profile and self.completed_education and self.completed_employment and
+        self.completed_references and self.completed_statement and self.completed_courses
+  end
+
+  # Checks if the application is incomplete.
+  def incomplete?
+    not complete?
+  end
 end

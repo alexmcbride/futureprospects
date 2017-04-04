@@ -62,19 +62,4 @@ module ApplicationHelper
   def clean_url(url)
     (URI.split url).compact.slice(1, 1).join
   end
-
-  # Gets text for the current application status.
-  def app_status_text(app)
-    if app.submitted?
-      return 'Make Payment'
-    end
-    if app.active?
-      return 'Continue Application'
-    end
-    'Create Application'
-  end
-
-  def stage_link(name, path, completed)
-    
-  end
 end

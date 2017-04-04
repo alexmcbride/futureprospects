@@ -19,7 +19,7 @@ class Student < ApplicationRecord
 
   # ActiveRecord callbacks
   before_create :before_create
-  after_create :after_create
+  # after_create :after_create
 
   # Sets the login value.
   def login=(login)
@@ -31,9 +31,10 @@ class Student < ApplicationRecord
     @login || self.username || self.email
   end
 
-  # Gets the current application, or creates a new one if it doesn't exist
+  # Gets the current application, which is an application made in the last year.
   def current_application
-    self.applications.order(:updated_at).first
+    # Get from last year for Postgresql
+    self.applications.where("created_at > CURRENT_DATE - INTERVAL '1 year'").first
   end
 
   # Overrides Devise sign in to allow both username and email address to be used.

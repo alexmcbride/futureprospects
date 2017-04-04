@@ -1,6 +1,22 @@
 class ApplicationsController < ApplicationController
   before_action :authenticate_student!
-  before_action :set_application
+  before_action :set_application, except: [:create]
+
+  # POST: /applications
+  def create
+    # Create new application and supply some starting info we already know
+    @application = Application.new
+    @application.email = current_student.email
+    @application.first_name = current_student.first_name
+    @application.family_name = current_student.family_name
+    @application.scottish_candidate_number = current_student.scottish_candidate_number
+    @application.national_insurance_number = current_student.scottish_candidate_number
+    @application.student = current_student
+    @application.save validate: false
+    respond_to do |format|
+      format.html { redirect_to applications_index_path(@application) }
+    end
+  end
 
   # GET: /applications/:id
   def index
@@ -74,7 +90,7 @@ class ApplicationsController < ApplicationController
 
   # GET /applications/:id/continue
   def continue
-    # Redirects user to the first incomplete part of application.
+    # Redirects student to the first incomplete part of their application.
     respond_to do |format|
       if not @application.completed_intro
         format.html {redirect_to applications_index_path}

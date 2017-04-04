@@ -32,12 +32,14 @@
 
           <p>Here you can see your current application and its current status.</p>
 
-          <!-- if has other (old) apps, show them in list here... -->
+          <% if @application.nil? %>
+            <%= form_tag applications_create_path, method: :post do %>
+              <%= submit_tag 'Create application', class: 'btn btn-success btn-block' %>
+            <% end %>
+          <% elsif @application.incomplete? %>
+              <%= link_to 'Continue Application', applications_continue_path(@application), class: 'btn btn-success btn-block', role: 'button' %>
+          <% end %>
 
-          <div class="list-group">
-            <% app = current_student.current_application %>
-            <%= link_to app_status_text(app), applications_continue_path(app), class: 'list-group-item' %>
-          </div>
         <% else %>
           <h2>Students</h2>
           <p>Register now to apply for your dream course.</p>

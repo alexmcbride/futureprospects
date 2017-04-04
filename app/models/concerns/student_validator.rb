@@ -13,7 +13,7 @@ module StudentValidator
   # Called by validators to check if SCN is correct.
   def validate_scn
     unless self.scottish_candidate_number.empty?
-      unless Student.validate_scn self.scottish_candidate_number
+      unless StudentValidator.validate_scn self.scottish_candidate_number
         self.errors.add(:scottish_candidate_number, 'did not pass checksum')
       end
     end
@@ -22,7 +22,7 @@ module StudentValidator
   # Checks if a scottish candidate number is correct: https://www.hesa.ac.uk/collection/c15051/a/scn
   def self.validate_scn(scn)
     nums = scn.chars.map { |c| c.to_i }
-    check_digit = Student.generate_check_digit nums
+    check_digit = StudentValidator.generate_check_digit nums
     # As check is single digit a ten is invalid
     not (check_digit == 10 or check_digit != nums.last)
   end
@@ -40,7 +40,7 @@ module StudentValidator
     begin
       randoms = (0...6).each.map {|i| rand(0..9) }
       number = [tens, ones] + randoms
-      check_digit = Student.generate_check_digit(number)
+      check_digit = StudentValidator.generate_check_digit(number)
       scn = number.join + check_digit.to_s
     end until check_digit != 10
     scn

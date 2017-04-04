@@ -10,7 +10,7 @@ class ApplicationsController < ApplicationController
     @application.first_name = current_student.first_name
     @application.family_name = current_student.family_name
     @application.scottish_candidate_number = current_student.scottish_candidate_number
-    @application.national_insurance_number = current_student.scottish_candidate_number
+    @application.national_insurance_number = current_student.national_insurance_number
     @application.student = current_student
     @application.save validate: false # Can't validate at this point
     respond_to do |format|

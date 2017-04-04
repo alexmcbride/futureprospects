@@ -5,14 +5,14 @@
     <h3>Application Stages</h3>
 
     <div class="list-group">
-      <%= render partial: 'stage_item', locals: {name: 'Introduction', path: applications_index_path, completed: application.completed_intro} %>
-      <%= render partial: 'stage_item', locals: {name: 'Profile', path: applications_profile_path, completed: application.completed_profile} %>
-      <%= render partial: 'stage_item', locals: {name: 'Education', path: applications_education_path, completed: application.completed_education} %>
-      <%= render partial: 'stage_item', locals: {name: 'Employment', path: applications_employment_path, completed: application.completed_employment} %>
-      <%= render partial: 'stage_item', locals: {name: 'References', path: applications_references_path, completed: application.completed_references} %>
-      <%= render partial: 'stage_item', locals: {name: 'Personal Statement', path: applications_statement_path, completed: application.completed_statement} %>
-      <%= render partial: 'stage_item', locals: {name: 'Add Courses', path: applications_courses_path, completed: application.completed_courses} %>
-      <%= render partial: 'stage_item', locals: {name: 'Submit', path: applications_submit_path, completed: false} %>
+      <%= stage_item 'Introduction', applications_index_path, application.completed_intro %>
+      <%= stage_item 'Profile', applications_profile_path, application.completed_profile %>
+      <%= stage_item 'Education', applications_education_path, application.completed_education %>
+      <%= stage_item 'Employment', applications_employment_path, application.completed_employment %>
+      <%= stage_item 'References', applications_references_path, application.completed_references %>
+      <%= stage_item 'Personal Statement', applications_statement_path, application.completed_statement %>
+      <%= stage_item 'Add Courses', applications_courses_path, application.completed_courses %>
+      <%= stage_item 'Submit', applications_submit_path %>
     </div>
   </div>
 </div>

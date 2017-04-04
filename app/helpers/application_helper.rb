@@ -62,4 +62,29 @@ module ApplicationHelper
   def clean_url(url)
     (URI.split url).compact.slice(1, 1).join
   end
+
+  # Generates HTML for list-items on the stages sidebar.
+  def stage_item(name, path, completed=false)
+    if path == request.path
+      content_tag(:a, href: url_for(path), class: 'list-group-item active') do
+        concat(content_tag(:div, class: 'row') do
+          concat(content_tag(:div, name, class: 'col-xs-10'))
+          concat(content_tag(:div, class: 'col-xs-1') do
+            concat(content_tag(:i, '', class: 'fa fa-arrow-circle-right app-arrow'))
+          end)
+        end)
+      end
+    else
+      content_tag(:a, href: url_for(path), class: 'list-group-item') do
+        concat(content_tag(:div, class: 'row') do
+          concat(content_tag(:div, name, class: 'col-xs-10'))
+          if completed
+            concat(content_tag(:div, class: 'col-xs-1') do
+              concat(content_tag(:i, '', class: 'fa fa-check-circle app-tick'))
+            end)
+          end
+        end)
+      end
+    end
+  end
 end

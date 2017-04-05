@@ -5,18 +5,9 @@ module StudentValidator
 
   included do
     validates :scottish_candidate_number, presence: true, uniqueness: true, length: {minimum: 9, maximum: 9}, numericality: {only_integer: true}
-    validate :validate_scn
+    validate :internal_validate_scn
     validates :national_insurance_number, presence: true, uniqueness: true, length: {maximum: 9}
     validates_format_of :national_insurance_number, with: NIN_REGEX, multiline: true
-  end
-
-  # Called by validators to check if SCN is correct.
-  def validate_scn
-    unless self.scottish_candidate_number.empty?
-      unless self.class.validate_scn self.scottish_candidate_number
-        self.errors.add(:scottish_candidate_number, 'is not valid')
-      end
-    end
   end
 
   # Checks if a scottish candidate number is correct: https://www.hesa.ac.uk/collection/c15051/a/scn
@@ -60,4 +51,14 @@ module StudentValidator
     remainder = sum % 11
     remainder == 0 ? 0 : 11 - remainder
   end
+
+  private
+    # Called by validators to check if SCN is correct.
+    def internal_validate_scn
+      unless self.scottish_candidate_number.empty?
+        unless StudentValidator.validate_scn self.scottish_candidate_number
+          self.errors.add(:scottish_candidate_number, 'is not valid')
+        end
+      end
+    end
 end

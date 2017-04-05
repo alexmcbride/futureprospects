@@ -74,12 +74,27 @@ crumb :resend_confirmation do
   link 'Resend Confirmation Instructions', new_student_confirmation_path
 end
 
-crumb :application do
+crumb :application do |application|
   parent :root
-  link 'Application', applications_index_path
+  link 'Application', applications_index_path(application)
 end
 
-crumb :application_profile do
-  parent :application
-  link 'Profile', applications_profile_path
+crumb :application_profile do |application|
+  parent :application, application
+  link 'Profile', applications_profile_path(application)
+end
+
+crumb :application_education do |application|
+  parent :application, application
+  link 'Education', applications_education_path(application)
+end
+
+crumb :application_qualifications do |institution|
+  parent :application_education, institution.application
+  link institution.name, applications_qualifications_path(institution)
+end
+
+crumb :application_employment do |application|
+  parent :application, application
+  link 'Employment', applications_employment_path(application)
 end

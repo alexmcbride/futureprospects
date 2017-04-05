@@ -1,6 +1,7 @@
 class ApplicationsController < ApplicationController
   before_action :authenticate_student!
-  before_action :set_application, except: [:create]
+  before_action :set_application, except: [:create, :education_remove, :qualifications,
+                                           :qualifications_add, :qualifications_remove]
 
   # POST: /applications
   def create
@@ -30,12 +31,12 @@ class ApplicationsController < ApplicationController
 
   # POST: /applications/:id/profile
   def profile_next
-    @application.attributes = post_params
+    @application.attributes = application_params
     @application.state = :active
     respond_to do |format|
       if @application.valid?
         @application.completed_profile = true
-        @application.save!
+        @application.save
         format.html { redirect_to applications_education_path }
       else
         format.html { render :profile }
@@ -45,10 +46,80 @@ class ApplicationsController < ApplicationController
 
   # GET: /applications/:id/education
   def education
+    @institution = Institution.new
   end
 
-  # POST: /applications/:id/education
+  # POST: /applications/:id/education/add
+  def education_add
+    @institution = Institution.new institution_params
+    @institution.application = @application
+    respond_to do |format|
+      if @institution.save
+        format.html { redirect_to applications_education_path(@application), notice: 'Added educational institution' }
+      else
+        format.html { render :education }
+      end
+    end
+  end
+
+  # DELETE: /applications/:id/education
+  def education_remove
+    institution = Institution.find params[:id]
+    id = institution.application_id
+    institution.qualifications.destroy_all # Delete all qualifications at this institution
+    institution.destroy
+    respond_to do |format|
+      format.html { redirect_to applications_education_path(id), notice: 'Removed educational institution' }
+    end
+  end
+
+  # POST: /applications/:id/education_next
   def education_next
+    respond_to do |format|
+      @application.validate_institutions = true
+      valid = @application.valid?
+      @application.completed_education = valid
+      @application.save validate: false
+
+      if valid
+        format.html { redirect_to applications_employment_path(@application) }
+      else
+        @institution = Institution.new
+        format.html { render :education }
+      end
+    end
+  end
+
+  # GET: /applications/qualifications/:id
+  def qualifications
+    @institution = Institution.find params[:id]
+    @application = @institution.application
+    @qualification = Qualification.new
+  end
+
+  # POST: /applications/qualifications/:id
+  def qualifications_add
+    @institution = Institution.find params[:id]
+    @application = @institution.application
+    @qualification = Qualification.new qualification_params
+    @qualification.institution = @institution
+    respond_to do |format|
+      if @qualification.save
+        format.html { redirect_to applications_qualifications_path, notice: 'Added qualification' }
+      else
+        format.html { render :qualifications }
+      end
+    end
+  end
+
+  # DELETE: /applications/qualifications/:id
+  def qualifications_remove
+    qualification = Qualification.find params[:id]
+    id = qualification.institution_id
+    qualification.destroy
+    respond_to do |format|
+      format.html { redirect_to applications_qualifications_path(id), notice: 'Removed qualification' }
+    end
   end
 
   def employment
@@ -113,7 +184,17 @@ class ApplicationsController < ApplicationController
     end
 
     # Sanitises submitted form parameters
-    def post_params
+    def qualification_params
+      params.require(:qualification).permit(:subject, :award, :grade, :start_date, :end_date)
+    end
+
+    # Sanitises submitted form parameters
+    def institution_params
+      params.require(:institution).permit(:name, :address_1, :address_2, :postcode, :country)
+    end
+
+    # Sanitises submitted form parameters
+    def application_params
       params.require(:application).permit(:title, :first_name, :middle_name, :family_name, :previous_name, :gender,
                      :telephone, :mobile, :email, :disability, :personal_statement, :scottish_candidate_number,
                      :national_insurance_number, :permanent_house_number, :permanent_address_1, :permanent_address_2,

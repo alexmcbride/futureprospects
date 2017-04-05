@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  award_type: MyString
+  subject_string: MyString
+  award_date: MyString
+  name: MyString
+  address: MyString
+  postcode: MyString
+
+two:
+  award_type: MyString
+  subject_string: MyString
+  award_date: MyString
+  name: MyString
+  address: MyString
+  postcode: MyString

@@ -68,8 +68,8 @@ module ApplicationHelper
   end
 
   # Generates HTML for a list-item on the stages sidebar.
-  def stage_item(name, path, completed=false)
-    if path == request.path
+  def stage_item(name, path, selected=false, completed=false)
+    if selected
       content_tag(:a, href: url_for(path), class: 'list-group-item active') do
         concat(content_tag(:div, class: 'row') do
           concat(content_tag(:div, name, class: 'col-xs-10'))

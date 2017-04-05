@@ -1,0 +1,101 @@
+<% breadcrumb :application_qualifications, @institution %>
+<% @title = 'Qualifications' %>
+
+<div class="row">
+  <div class="col-sm-3">
+    <%= render partial: 'stages_sidebar', locals: {application: @application, stage: :education} %>
+  </div>
+
+  <div class="col-sm-9">
+    <div class="row">
+      <div class="col-xs-12">
+        <p><%= link_to 'Back to education...', applications_education_path(@application) %></p>
+
+        <%= form_for @qualification, url: applications_qualifications_add_path(@institution), method: :post do |f| %>
+          <h3 class="no-top-margin">Add Qualifications</h3>
+            <p>Add the qualifications you gained at this educational institution.</p>
+          <%= form_errors @qualification %>
+          <div class="col-sm-6 col-xs-12">
+            <table class="table">
+              <tr>
+                <td><%= f.label :subject %></td>
+                <td><%= f.text_field :subject, class: 'full-width' %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :award %></td>
+                <td><%= f.text_field :award, class: 'full-width' %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :grade %> *</td>
+                <td><%= f.text_field :grade, class: 'full-width' %></td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-sm-6 col-xs-12">
+            <table class="table">
+              <tr>
+                <td><%= f.label :start_date %></td>
+                <td><%= f.date_select :start_date, class: 'full-width' %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :end_date %> *</td>
+                <td><%= f.date_select :end_date, class: 'full-width' %></td>
+              </tr>
+              <tr>
+                <td class="text-darkish small">
+                  <em>* Optional</em>
+                </td>
+                <td class="text-right">
+                  <%= f.submit 'Add Qualification', class: 'btn btn-default btn-sm' %>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <h3 class="no-top-margin">
+          Qualifications
+          <% count = @institution.qualifications.count%>
+          <% if count > 0 %>
+            (<%= count %>)
+          <% end %>
+        </h3>
+        <% if count == 0 %>
+          <br><br>
+          <p class="text-darkish small text-center"><em>Any qualifications you add will appear here.</em></p>
+        <% else %>
+          <div class="list-group">
+            <% @institution.qualifications.each do |qualification| %>
+              <div class="list-group-item list-group-item-heading no-bottom-padding">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <h4 class="no-top-margin"><%= qualification.subject %></h4>
+                    <ul class="list-unstyled small">
+                      <li>Award: <%= qualification.award %></li>
+                      <li>Grade: <%= qualification.grade %></li>
+                      <li>Start: <%= qualification.start_date %> &mdash; <%= qualification.end_date %></li>
+                    </ul>
+                  </div>
+                  <div class="col-sm-6 text-right">
+                    <a href="<%= url_for applications_qualifications_remove_path(qualification) %>"
+                       class="btn btn-default btn-sm"
+                       role="button"
+                       data-method="delete"
+                       data-confirm="Delete this qualification?">
+                      <%= icon 'trash', style: 'font-size: 13pt;' %>
+                      &nbsp;
+                      Remove
+                    </a>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

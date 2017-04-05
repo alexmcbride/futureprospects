@@ -12,9 +12,9 @@
         <h2>Browse Courses</h2>
         <p>Browse the categories list to view all of the opportunities we offer.</p>
         <ul>
-          <li><%=link_to 'All Courses', courses_path %></li>
+          <li><%= link_to 'All Courses', courses_path %></li>
           <% @categories.each do |category| %>
-              <li><%=link_to category.name, courses_category_path(category) %></li>
+              <li><%= link_to category.name, courses_category_path(category) %></li>
           <% end %>
         </ul>
       </div>
@@ -37,20 +37,22 @@
               <%= submit_tag 'Create application', class: 'btn btn-success btn-block' %>
             <% end %>
           <% elsif @application.incomplete? %>
-              <%= link_to 'Continue Application', applications_continue_path(@application), class: 'btn btn-success btn-block', role: 'button' %>
+            <%= link_to 'Continue Application', applications_continue_path(@application), class: 'btn btn-success btn-block', role: 'button' %>
+          <% else %>
+            Track Application
           <% end %>
 
         <% else %>
           <h2>Students</h2>
           <p>Register now to apply for your dream course.</p>
-          <%= link_to 'Register', new_student_registration_path, class: 'btn btn-default btn-block' %>
+          <%= link_to 'Register', new_student_registration_path, class: 'btn btn-default btn-block', role: 'button' %>
           <br>
           <p>Sign in to track your application.</p>
-          <%= link_to 'Sign In', new_student_session_path, class: 'btn btn-default btn-block' %>
+          <%= link_to 'Sign In', new_student_session_path, class: 'btn btn-default btn-block', role: 'button' %>
 
           <h2>Colleges</h2>
           <p>Sign in to manage your student intake.</p>
-          <a href="#" class="btn btn-default btn-block" role="button">Sign In</a>
+            <%= link_to 'Sign In', nil, class: 'btn btn-default btn-block', role: 'button' %>
         <% end %>
       </div>
     </div>

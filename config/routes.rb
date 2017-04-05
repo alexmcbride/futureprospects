@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   post 'applications', to: 'applications#create', as: 'applications_create'
   get 'applications/:id', to: 'applications#index', as: 'applications_index'
-  post 'applications/:id', to: 'applications#index_next', as: 'applications_index_next'
   get 'applications/:id/profile', to: 'applications#profile', as: 'applications_profile'
   post 'applications/:id/profile', to: 'applications#profile_next', as: 'applications_profile_next'
   get 'applications/:id/education', to: 'applications#education', as: 'applications_education'

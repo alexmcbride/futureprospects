@@ -20,15 +20,8 @@ class ApplicationsController < ApplicationController
 
   # GET: /applications/:id
   def index
-  end
-
-  # POST: /applications/:id
-  def index_next
     @application.completed_intro = true
     @application.save validate: false
-    respond_to do |format|
-      format.html { redirect_to applications_profile_path }
-    end
   end
 
   # GET: /applications/:id/profile

@@ -18,7 +18,6 @@ class Student < ApplicationRecord
 
   # ActiveRecord callbacks
   before_create :before_create
-  # after_create :after_create
 
   # Sets the login value.
   def login=(login)
@@ -56,18 +55,6 @@ class Student < ApplicationRecord
         break
       end
     end
-  end
-
-  # Called after student is created, adds a default application.
-  def after_create
-    app = Application.new
-    app.scottish_candidate_number = self.scottish_candidate_number
-    app.national_insurance_number = self.national_insurance_number
-    app.first_name = self.first_name
-    app.family_name = self.family_name
-    app.email = self.email
-    app.student = self
-    app.save(validate: false) # don't validate on save
   end
 
   # Generate username with initial, family name, then three digit random number

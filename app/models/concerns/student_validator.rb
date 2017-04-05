@@ -13,8 +13,8 @@ module StudentValidator
   # Called by validators to check if SCN is correct.
   def validate_scn
     unless self.scottish_candidate_number.empty?
-      unless StudentValidator.validate_scn self.scottish_candidate_number
-        self.errors.add(:scottish_candidate_number, 'did not pass checksum')
+      unless self.class.validate_scn self.scottish_candidate_number
+        self.errors.add(:scottish_candidate_number, 'is not valid')
       end
     end
   end
@@ -22,17 +22,17 @@ module StudentValidator
   # Checks if a scottish candidate number is correct: https://www.hesa.ac.uk/collection/c15051/a/scn
   def self.validate_scn(scn)
     nums = scn.chars.map { |c| c.to_i }
-    check_digit = StudentValidator.generate_check_digit nums
+    check_digit = generate_check_digit nums
     # As check is single digit a ten is invalid
     not (check_digit == 10 or check_digit != nums.last)
   end
 
-  # Generates a valid scottish candidate number for testing
+  # Generates a valid scottish candidate number for testing. Optionally specify the year (e.g. 2012).
   # * First 2 digits are year
   # * Next 6 are randomly generated
   # * Last digit is check digit
-  def self.generate_scn
-    year = DateTime.now.year
+  def self.generate_scn(year=nil)
+    year = DateTime.now.year if year.nil?
     tens = year % 1000 / 10
     ones = year % 1000 % 10
     # Keep generating until we get a check digit that doesn't end in 10
@@ -40,7 +40,7 @@ module StudentValidator
     begin
       randoms = (0...6).each.map {|i| rand(0..9) }
       number = [tens, ones] + randoms
-      check_digit = StudentValidator.generate_check_digit(number)
+      check_digit = generate_check_digit(number)
       scn = number.join + check_digit.to_s
     end until check_digit != 10
     scn
@@ -52,9 +52,10 @@ module StudentValidator
   # * If remainder is 0 then check is 0
   # * Otherwise subtract remainder from 11 to get check digit
   def self.generate_check_digit(nums)
+    weights = [3, 2, 7, 6, 5, 4, 3, 2]
     sum = 0
-    [3, 2, 7, 6, 5, 4, 3, 2].each.with_index do |v, i|
-      sum += nums[i] * v
+    weights.each.with_index do |weight, index|
+      sum += nums[index] * weight
     end
     remainder = sum % 11
     remainder == 0 ? 0 : 11 - remainder

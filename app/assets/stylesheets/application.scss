@@ -113,6 +113,11 @@ footer {
   color: limegreen;
 }
 
+.education-item {
+  padding-top: 14px;
+  padding-bottom: 0px;
+}
+
 /* Styles for extra small mobile screens */
 @media (max-width: 767px) {
   .course-item {
@@ -123,5 +128,9 @@ footer {
       margin-left: auto;
       margin-right: auto;
     }
+  }
+
+  .education-item {
+    padding-bottom: 12px;
   }
 }

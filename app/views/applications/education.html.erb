@@ -7,102 +7,109 @@
   </div>
 
   <div class="col-sm-9">
-    <!-- Add school form -->
-    <%= form_for @institution, url: applications_education_add_path(@application), method: :post do |f|%>
-      <h3 class="no-top-margin">Add School or Institution</h3>
-      <%= form_errors @institution %>
-      <div class="row">
-        <div class="col-sm-6">
-          <table class="table">
-            <tr>
-              <td><%= f.label 'Institution Name' %></td>
-              <td><%= f.text_field :name, class: 'full-width' %></td>
-            </tr>
-            <tr>
-              <td><%= f.label :address_1 %></td>
-              <td><%= f.text_field :address_1, class: 'full-width' %></td>
-            </tr>
-            <tr>
-              <td><%= f.label :address_2 %> *</td>
-              <td><%= f.text_field :address_2, class: 'full-width' %></td>
-            </tr>
-          </table>
-        </div>
-        <div class="col-sm-6">
-          <table class="table">
-            <tr>
-              <td><%= f.label 'Post Code', class: 'text-capitalize' %></td>
-              <td><%= f.text_field :postcode, class: 'full-width' %></td>
-            </tr>
-            <tr>
-              <td><%= f.label :country %></td>
-              <td><%= f.text_field :country, class: 'full-width' %></td>
-            </tr>
-            <tr>
-              <td class="text-darkish small">
-                  <em>* Optional</em>
-              </td>
-              <td class="text-right">
-                <%= f.submit 'Add Institution', class: 'btn btn-default btn-sm' %>
-              </td>
-            </tr>
-          </table>
-        </div>
-      </div>
-    <% end %>
+    <div class="row">
+      <div class="col-xs-12">
 
-    <!-- Form used to validate that schools/courses have been added -->
-    <%= form_for @application, url: applications_education_next_path(@application), method: :post do |f| %>
-      <!-- Display schools list -->
-      <h3 class="no-top-margin">Education History</h3>
-      <%= form_errors @application %>
-      <% if @application.institutions.empty? %>
-        <p class="text-darkish text-center small"><em>Add an educational institution using the form above.</em></p>
-        <br><br>
-      <% else %>
-        <div class="list-group">
-          <% @application.institutions.each do |institution| %>
-            <div class="list-group-item list-group-item-heading no-bottom-padding">
-              <div class="row">
-                <div class="col-sm-6">
-                  <h4 class="no-top-margin"><%= institution.name %></h4>
-                  <address class="small text-darkish">
-                    <%= institution.address_1 %>,
-                    <%= institution.address_2 %> <%= ',' unless institution.address_2.empty? %>
-                    <%= institution.postcode %>,
-                    <%= institution.country %>
-                  </address>
-                </div>
-                <div class="col-sm-6 text-right">
-                  <a href="<%= url_for applications_qualifications_path(institution) %>" class="btn btn-default btn-sm" role="button">
-                    <%= icon 'plus-circle', style: 'font-size: 13pt;' %>
-                    &nbsp;
-                    Add Qualifications
-                    <% count = institution.qualifications.count %>
-                    <% if count > 0 %>
-                        (<%= count %>)
-                    <% end %>
-                  </a>
-                  &nbsp;
-                  <a href="<%= url_for applications_education_remove_path(institution) %>" class="btn btn-default btn-sm" role="button" data-method="delete" data-confirm="Delete this institution?">
-                    <%= icon 'trash', style: 'font-size: 13pt;' %>
-                    &nbsp;
-                    Remove
-                  </a>
-                </div>
-              </div>
-            </div>
+        <!-- Add school form -->
+        <%= form_for @institution, url: applications_education_add_path(@application), method: :post do |f|%>
+          <h3 class="no-top-margin">Add Institution</h3>
+          <p>Add any school, college, university, or other institution where you have gained an educational qualification.</p>
+          <%= form_errors @institution %>
+          <div class="row">
+            <div class="col-sm-6">
+              <table class="table">
+                <tr>
+                  <td><%= f.label 'Institution Name' %></td>
+                  <td><%= f.text_field :name, class: 'full-width' %></td>
+                </tr>
+                <tr>
+                  <td><%= f.label :address_1 %></td>
+                  <td><%= f.text_field :address_1, class: 'full-width' %></td>
+                </tr>
+                <tr>
+                  <td><%= f.label :address_2 %> *</td>
+                  <td><%= f.text_field :address_2, class: 'full-width' %></td>
+                </tr>
+              </table>
+            </div> <!-- End col -->
+            <div class="col-sm-6">
+              <table class="table">
+                <tr>
+                  <td><%= f.label 'Post Code', class: 'text-capitalize' %></td>
+                  <td><%= f.text_field :postcode, class: 'full-width' %></td>
+                </tr>
+                <tr>
+                  <td><%= f.label :country %></td>
+                  <td><%= f.text_field :country, class: 'full-width' %></td>
+                </tr>
+                <tr>
+                  <td class="text-darkish small">
+                      <em>* Optional</em>
+                  </td>
+                  <td class="text-right">
+                    <%= f.submit 'Add Institution', class: 'btn btn-default btn-sm' %>
+                  </td>
+                </tr>
+              </table>
+            </div> <!-- End col -->
+          </div> <!-- End row -->
+        <% end %>
+
+        <!-- Form used to validate that schools/courses have been added -->
+        <%= form_for @application, url: applications_education_next_path(@application), method: :post do |f| %>
+          <!-- Display schools list -->
+          <h3 class="no-top-margin">Education History</h3>
+          <%= form_errors @application %>
+          <% if @application.institutions.empty? %>
+            <br>
+            <p class="text-darkish text-center small"><em>Any educational institution you add will appear here.</em></p>
+            <br>
+          <% else %>
+            <div class="list-group">
+              <% @application.institutions.each do |institution| %>
+                <div class="education-item list-group-item list-group-item-heading">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <h4 class="no-top-margin"><%= institution.name %></h4>
+                      <address class="small text-darkish">
+                        <%= institution.address_1 %>,
+                        <%= institution.address_2 %> <%= ',' unless institution.address_2.empty? %>
+                        <%= institution.postcode %>,
+                        <%= institution.country %>
+                      </address>
+                    </div> <!-- End col -->
+                    <div class="col-sm-6 text-right">
+                      <a href="<%= url_for applications_qualifications_path(institution) %>" class="btn btn-default btn-sm" role="button">
+                        <%= icon 'plus-circle', style: 'font-size: 13pt;' %>
+                        &nbsp;
+                        Add Qualifications
+                        <% count = institution.qualifications.count %>
+                        <% if count > 0 %>
+                            (<%= count %>)
+                        <% end %>
+                      </a>
+                      &nbsp;
+                      <a href="<%= url_for applications_education_remove_path(institution) %>" class="btn btn-default btn-sm" role="button" data-method="delete" data-confirm="Delete this institution?">
+                        <%= icon 'trash', style: 'font-size: 13pt;' %>
+                        &nbsp;
+                        Remove
+                      </a>
+                    </div> <!-- End col -->
+                  </div> <!-- End row -->
+                </div> <!-- End list item -->
+              <% end %>
+            </div> <!-- End group -->
           <% end %>
-        </div>
-      <% end %>
 
-      <div class="row">
-        <div class="col-sm-12 text-right">
-          <br>
-          <p class="text-darkish small">When ready continue to the next section.</p>
-            <%= f.submit 'Next', class: 'next-button' %>
-        </div>
+          <div class="row">
+            <div class="col-sm-12 text-right">
+              <br>
+              <p class="text-darkish small">When ready continue to the next section.</p>
+                <%= f.submit 'Next', class: 'next-button' %>
+            </div>
+          </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
   </div>
 </div>

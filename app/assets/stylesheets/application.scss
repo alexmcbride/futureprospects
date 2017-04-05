@@ -38,11 +38,11 @@ footer {
 }
 
 .no-top-margin {
-  margin-top: 0px;
+  margin-top: 0;
 }
 
 .no-bottom-padding {
-  padding-bottom: 0px;
+  padding-bottom: 0;
 }
 
 .breadcrumbs {
@@ -75,7 +75,7 @@ footer {
 
 .college-title {
   @extend .h3;
-  margin-top: 0px;
+  margin-top: 0;
   font-weight: bold;
 }
 
@@ -93,6 +93,15 @@ footer {
   @extend .btn-success;
   width: 12em;
   border: 1px solid #2C3E50;
+}
+
+.add-button {
+  @extend .btn;
+  @extend .btn-info;
+  @extend .btn-sm;
+  border: 1px solid #333333;
+  padding-left: 12px;
+  padding-right: 12px;
 }
 
 .text-darkish {
@@ -114,8 +123,11 @@ footer {
 }
 
 .education-item {
+  @extend .list-group-item;
+  border: 1px solid #888;
+  background-color: #F7F7F7;
   padding-top: 14px;
-  padding-bottom: 0px;
+  padding-bottom: 3px;
 }
 
 /* Styles for extra small mobile screens */

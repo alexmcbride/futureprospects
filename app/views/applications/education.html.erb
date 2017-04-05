@@ -13,7 +13,7 @@
         <!-- Add school form -->
         <%= form_for @institution, url: applications_education_add_path(@application), method: :post do |f|%>
           <h3 class="no-top-margin">Add Institution</h3>
-          <p>Add any school, college, university, or other institution where you have gained an educational qualification.</p>
+          <p class="text-darkish small">Add any school, college, university, or other institution where you have gained an educational qualification.</p>
           <%= form_errors @institution %>
           <div class="row">
             <div class="col-sm-6">
@@ -47,7 +47,7 @@
                       <em>* Optional</em>
                   </td>
                   <td class="text-right">
-                    <%= f.submit 'Add Institution', class: 'btn btn-default btn-sm' %>
+                    <%= f.submit 'Add Institution', class: 'add-button' %>
                   </td>
                 </tr>
               </table>
@@ -65,21 +65,23 @@
             <p class="text-darkish text-center small"><em>Any educational institution you add will appear here.</em></p>
             <br>
           <% else %>
+                <p class="text-darkish small">You can add the qualifications gain at each institution by selecting the add qualifications option.</p>
             <div class="list-group">
               <% @application.institutions.each do |institution| %>
-                <div class="education-item list-group-item list-group-item-heading">
+                <div class="education-item list-group-item-heading">
                   <div class="row">
                     <div class="col-sm-6">
-                      <h4 class="no-top-margin"><%= institution.name %></h4>
-                      <address class="small text-darkish">
-                        <%= institution.address_1 %>,
+                      <h4 class="no-top-margin no-bottom-padding"><%= institution.name %></h4>
+                      <address class="small">
+                        <%= institution.address_1 %><br>
                         <%= institution.address_2 %> <%= ',' unless institution.address_2.empty? %>
-                        <%= institution.postcode %>,
+                        <%= institution.postcode %><br>
                         <%= institution.country %>
                       </address>
                     </div> <!-- End col -->
                     <div class="col-sm-6 text-right">
-                      <a href="<%= url_for applications_qualifications_path(institution) %>" class="btn btn-default btn-sm" role="button">
+                      <div>
+                      <a href="<%= url_for applications_qualifications_path(institution) %>" class="add-button" role="button" >
                         <%= icon 'plus-circle', style: 'font-size: 13pt;' %>
                         &nbsp;
                         Add Qualifications
@@ -89,11 +91,17 @@
                         <% end %>
                       </a>
                       &nbsp;
-                      <a href="<%= url_for applications_education_remove_path(institution) %>" class="btn btn-default btn-sm" role="button" data-method="delete" data-confirm="Delete this institution?">
+                      <a href="<%= url_for applications_education_remove_path(institution) %>"
+                         class="add-button"
+                         role="button"
+                         data-method="delete"
+                         data-confirm="Remove this Institution?"
+                         title="Remove">
                         <%= icon 'trash', style: 'font-size: 13pt;' %>
                         &nbsp;
                         Remove
                       </a>
+                      </div>
                     </div> <!-- End col -->
                   </div> <!-- End row -->
                 </div> <!-- End list item -->

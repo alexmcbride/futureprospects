@@ -74,7 +74,7 @@
                       <h4 class="no-top-margin no-bottom-padding"><%= institution.name %></h4>
                       <address class="small">
                         <%= institution.address_1 %><br>
-                        <%= institution.address_2 %> <%= ',' unless institution.address_2.empty? %>
+                        <%= institution.address_2 %> <%= '<br>'.html_safe unless institution.address_2.empty? %>
                         <%= institution.postcode %><br>
                         <%= institution.country %>
                       </address>

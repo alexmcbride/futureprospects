@@ -19,6 +19,30 @@ class ApplicationsController < ApplicationController
     end
   end
 
+  # GET /applications/:id/continue
+  def continue
+    # Redirects student to the first incomplete part of their application.
+    respond_to do |format|
+      if not @application.completed_intro
+        format.html { redirect_to applications_index_path(@application) }
+      elsif not @application.completed_profile
+        format.html { redirect_to applications_profile_path(@application) }
+      elsif not @application.completed_education
+        format.html { redirect_to applications_education_path(@application) }
+      elsif not @application.completed_employment
+        format.html { redirect_to applications_employment_path(@application) }
+      elsif not @application.completed_references
+        format.html { redirect_to applications_references_path(@application) }
+      elsif not @application.completed_statement
+        format.html { redirect_to applications_statement_path(@application) }
+      elsif not @application.completed_courses
+        format.html { redirect_to applications_courses_path(@application) }
+      else
+        format.html { redirect_to applications_submit_path(@application) }
+      end
+    end
+  end
+
   # GET: /applications/:id
   def index
     @application.completed_intro = true
@@ -105,7 +129,7 @@ class ApplicationsController < ApplicationController
     @qualification.institution = @institution
     respond_to do |format|
       if @qualification.save
-        format.html { redirect_to applications_qualifications_path, notice: 'Added qualification' }
+        format.html { redirect_to applications_qualifications_path(@institution), notice: 'Added qualification' }
       else
         format.html { render :qualifications }
       end
@@ -115,10 +139,9 @@ class ApplicationsController < ApplicationController
   # DELETE: /applications/qualifications/:id
   def qualifications_remove
     qualification = Qualification.find params[:id]
-    id = qualification.institution_id
     qualification.destroy
     respond_to do |format|
-      format.html { redirect_to applications_qualifications_path(id), notice: 'Removed qualification' }
+      format.html { redirect_to applications_qualifications_path(qualification.institution), notice: 'Removed qualification' }
     end
   end
 
@@ -150,30 +173,6 @@ class ApplicationsController < ApplicationController
   end
 
   def submit_next
-  end
-
-  # GET /applications/:id/continue
-  def continue
-    # Redirects student to the first incomplete part of their application.
-    respond_to do |format|
-      if not @application.completed_intro
-        format.html {redirect_to applications_index_path}
-      elsif not @application.completed_profile
-        format.html {redirect_to applications_profile_path}
-      elsif not @application.completed_education
-        format.html {redirect_to applications_education_path}
-      elsif not @application.completed_employment
-        format.html {redirect_to applications_employment_path}
-      elsif not @application.completed_references
-        format.html {redirect_to applications_references_path}
-      elsif not @application.completed_statement
-        format.html {redirect_to applications_statement_path}
-      elsif not @application.completed_courses
-        format.html {redirect_to applications_courses_path}
-      else
-        format.html {redirect_to applications_submit_path}
-      end
-    end
   end
 
   private

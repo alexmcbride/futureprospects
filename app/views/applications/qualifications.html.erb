@@ -1,11 +1,10 @@
 <% breadcrumb :application_qualifications, @institution %>
 <% @title = 'Qualifications' %>
 
-<%= render partial: 'modal_dialog',
+<%= render partial: 'remove_modal',
            locals: {title: 'Remove Qualification',
                     message: 'Are you sure you want to remove the following qualification?',
-                    button: 'Remove Qualification',
-                    fa_icon: 'trash'} %>
+                    button: 'Remove Qualification' } %>
 
 <div class="row">
   <div class="col-sm-3">

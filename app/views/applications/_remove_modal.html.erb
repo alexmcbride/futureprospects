@@ -15,9 +15,7 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
         <a id="modalLink" href="#"
            data-method="delete" class="btn btn-primary" role="button">
-          <% unless fa_icon.nil? %>
-            <%= icon fa_icon, style: 'font-size: 13pt;' %>
-          <% end %>
+          <%= icon 'trash', style: 'font-size: 13pt;' %>
           &nbsp;
           <%= button %>
         </a>

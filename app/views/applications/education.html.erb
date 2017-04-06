@@ -1,7 +1,10 @@
 <% breadcrumb :application_education, @application %>
 <% @title = 'Education' %>
 
-<%= render partial: 'modal_dialog', locals: {title: 'Remove Institution', message: 'Are you sure you want to remove the following institution?', button: 'Remove Institution', fa_icon: 'trash'} %>
+<%= render partial: 'remove_modal',
+           locals: {title: 'Remove Institution',
+                    message: 'Are you sure you want to remove the following institution?',
+                    button: 'Remove Institution'} %>
 
 <div class="row">
   <div class="col-sm-3">
@@ -93,7 +96,10 @@
                         <% end %>
                       </a>
                       &nbsp;
-                      <a data-modal-name="<%= institution.name %>" data-modal-path="<%= applications_education_remove_path(institution) %>" class="add-button custom-modal-button" role="button">
+                      <a data-modal-name="<%= institution.name %>"
+                         data-modal-path="<%= applications_education_remove_path(institution) %>"
+                         class="add-button custom-modal-button"
+                         role="button">
                         <%= icon 'trash', style: 'font-size: 13pt;' %>
                         &nbsp;
                         Remove

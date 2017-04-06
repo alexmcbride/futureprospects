@@ -1,0 +1,41 @@
+<!-- Remove Institution Modal Dialog -->
+<div class="modal fade" tabindex="-1" role="dialog" id="customModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title text-left"><%= title %></h4>
+      </div>
+      <div class="modal-body text-left">
+        <p><%= message %></p>
+        <p><strong id="modalName"></strong></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <a id="modalLink" href="#"
+           data-method="delete" class="btn btn-primary" role="button">
+          <% unless fa_icon.nil? %>
+            <%= icon fa_icon, style: 'font-size: 13pt;' %>
+          <% end %>
+          &nbsp;
+          <%= button %>
+        </a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".custom-modal-button").click(function(e){
+            // Get data from btn and then show the modal dialog.
+            var btn = $(e.target);
+            var name = btn.attr('data-modal-name');
+            var path = btn.attr('data-modal-path');
+            $('#modalName').html(name);
+            $('#modalLink').attr('href', path);
+            $('#customModal').modal();
+        });
+    });
+</script>

@@ -1,6 +1,8 @@
 <% breadcrumb :application_education, @application %>
 <% @title = 'Education' %>
 
+<%= render partial: 'modal_dialog', locals: {title: 'Remove Institution', message: 'Are you sure you want to remove the following institution?', button: 'Remove Institution', fa_icon: 'trash'} %>
+
 <div class="row">
   <div class="col-sm-3">
     <%= render partial: 'stages_sidebar', locals: {application: @application, stage: :education} %>
@@ -65,7 +67,7 @@
             <p class="text-darkish text-center small"><em>Any educational institution you add will appear here.</em></p>
             <br>
           <% else %>
-                <p class="text-darkish small">You can add the qualifications gain at each institution by selecting the add qualifications option.</p>
+            <p class="text-darkish small">You can add the qualifications gain at each institution by selecting the add qualifications option.</p>
             <div class="list-group">
               <% @application.institutions.each do |institution| %>
                 <div class="education-item list-group-item-heading">
@@ -91,12 +93,7 @@
                         <% end %>
                       </a>
                       &nbsp;
-                      <a href="<%= url_for applications_education_remove_path(institution) %>"
-                         class="add-button"
-                         role="button"
-                         data-method="delete"
-                         data-confirm="Remove this Institution?"
-                         title="Remove">
+                      <a data-modal-name="<%= institution.name %>" data-modal-path="<%= applications_education_remove_path(institution) %>" class="add-button custom-modal-button" role="button">
                         <%= icon 'trash', style: 'font-size: 13pt;' %>
                         &nbsp;
                         Remove
@@ -121,3 +118,4 @@
     </div>
   </div>
 </div>
+

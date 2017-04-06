@@ -1,6 +1,12 @@
 <% breadcrumb :application_qualifications, @institution %>
 <% @title = 'Qualifications' %>
 
+<%= render partial: 'modal_dialog',
+           locals: {title: 'Remove Qualification',
+                    message: 'Are you sure you want to remove the following qualification?',
+                    button: 'Remove Qualification',
+                    fa_icon: 'trash'} %>
+
 <div class="row">
   <div class="col-sm-3">
     <%= render partial: 'stages_sidebar', locals: {application: @application, stage: :education} %>
@@ -90,12 +96,10 @@
                   </div>
 
                   <div class="col-sm-6 text-right">
-                    <a href="<%= url_for applications_qualifications_remove_path(qualification) %>"
-                       class="add-button"
+                    <a class="add-button custom-modal-button"
                        role="button"
-                       data-method="delete"
-                       data-confirm="Remove this qualification?"
-                       title="Remove">
+                       data-modal-name="<%= qualification.subject %> (<%= qualification.award %>)"
+                       data-modal-path="<%= applications_qualifications_remove_path(qualification) %>">
                       <%= icon 'trash', style: 'font-size: 13pt;' %>
                       &nbsp;
                       Remove

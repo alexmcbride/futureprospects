@@ -70,16 +70,16 @@ class ApplicationsController < ApplicationController
 
   # GET: /applications/:id/education
   def education
-    @institution = Institution.new
+    @school = School.new
   end
 
   # POST: /applications/:id/education/add
   def education_add
-    @institution = Institution.new institution_params
-    @institution.application = @application
+    @school = School.new school_params
+    @school.application = @application
     respond_to do |format|
-      if @institution.save
-        format.html { redirect_to applications_education_path(@application), notice: 'Added educational institution' }
+      if @school.save
+        format.html { redirect_to applications_education_path(@application), notice: 'Added school' }
       else
         format.html { render :education }
       end
@@ -88,27 +88,25 @@ class ApplicationsController < ApplicationController
 
   # DELETE: /applications/:id/education
   def education_remove
-    institution = Institution.find params[:id]
-    id = institution.application_id
-    institution.qualifications.destroy_all # Delete all qualifications at this institution
-    institution.destroy
+    school = School.find params[:id]
+    id = school.application_id
+    school.qualifications.destroy_all # Delete all qualifications at this institution
+    school.destroy
     respond_to do |format|
-      format.html { redirect_to applications_education_path(id), notice: 'Removed educational institution' }
+      format.html { redirect_to applications_education_path(id), notice: 'Removed school' }
     end
   end
 
   # POST: /applications/:id/education_next
   def education_next
+    valid = @application.check_schools?
+    @application.completed_education = valid
+    @application.save validate: false
     respond_to do |format|
-      @application.validate_institutions = true
-      valid = @application.valid?
-      @application.completed_education = valid
-      @application.save validate: false
-
       if valid
         format.html { redirect_to applications_employment_path(@application) }
       else
-        @institution = Institution.new
+        @school = School.new
         format.html { render :education }
       end
     end
@@ -116,20 +114,20 @@ class ApplicationsController < ApplicationController
 
   # GET: /applications/qualifications/:id
   def qualifications
-    @institution = Institution.find params[:id]
-    @application = @institution.application
+    @school = School.find params[:id]
+    @application = @school.application
     @qualification = Qualification.new
   end
 
   # POST: /applications/qualifications/:id
   def qualifications_add
-    @institution = Institution.find params[:id]
-    @application = @institution.application
+    @school = School.find params[:id]
+    @application = @school.application
     @qualification = Qualification.new qualification_params
-    @qualification.institution = @institution
+    @qualification.school = @school
     respond_to do |format|
       if @qualification.save
-        format.html { redirect_to applications_qualifications_path(@institution), notice: 'Added qualification' }
+        format.html { redirect_to applications_qualifications_path(@school), notice: 'Added qualification' }
       else
         format.html { render :qualifications }
       end
@@ -141,7 +139,7 @@ class ApplicationsController < ApplicationController
     qualification = Qualification.find params[:id]
     qualification.destroy
     respond_to do |format|
-      format.html { redirect_to applications_qualifications_path(qualification.institution), notice: 'Removed qualification' }
+      format.html { redirect_to applications_qualifications_path(qualification.school), notice: 'Removed qualification' }
     end
   end
 
@@ -188,8 +186,8 @@ class ApplicationsController < ApplicationController
     end
 
     # Sanitises submitted form parameters
-    def institution_params
-      params.require(:institution).permit(:name, :address_1, :address_2, :postcode, :country)
+    def school_params
+      params.require(:school).permit(:name, :address_1, :address_2, :postcode, :country)
     end
 
     # Sanitises submitted form parameters

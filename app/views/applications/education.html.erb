@@ -2,8 +2,8 @@
 <% @title = 'Education' %>
 
 <%= render partial: 'remove_modal',
-           locals: {title: 'Remove Institution',
-                    message: 'Are you sure you want to remove the following institution?'} %>
+           locals: {title: 'Remove School',
+                    message: 'Are you sure you want to remove the following school?'} %>
 
 <div class="row">
   <div class="col-sm-3">
@@ -15,15 +15,15 @@
       <div class="col-xs-12">
 
         <!-- Add school form -->
-        <%= form_for @institution, url: applications_education_add_path(@application), method: :post do |f|%>
-          <h3 class="no-top-margin">Add Institution</h3>
+        <%= form_for @school, url: applications_education_add_path(@application), method: :post do |f|%>
+          <h3 class="no-top-margin">Add School or Institution</h3>
           <p class="text-darkish small">Add any school, college, university, or other institution where you have gained an educational qualification.</p>
-          <%= form_errors @institution %>
+          <%= form_errors @school %>
           <div class="row">
             <div class="col-sm-6">
               <table class="table">
                 <tr>
-                  <td><%= f.label 'Institution Name' %></td>
+                  <td><%= f.label 'School Name' %></td>
                   <td><%= f.text_field :name, class: 'full-width' %></td>
                 </tr>
                 <tr>
@@ -51,7 +51,7 @@
                       <em>* Optional</em>
                   </td>
                   <td class="text-right">
-                    <%= f.submit 'Add Institution', class: 'add-button' %>
+                    <%= f.submit 'Add School', class: 'add-button' %>
                   </td>
                 </tr>
               </table>
@@ -64,39 +64,39 @@
           <!-- Display schools list -->
           <h3 class="no-top-margin">Education History</h3>
           <%= form_errors @application %>
-          <% if @application.institutions.empty? %>
+          <% if @application.schools.empty? %>
             <br>
-            <p class="text-darkish text-center small"><em>Any educational institution you add will appear here.</em></p>
+            <p class="text-darkish text-center small"><em>Any school you add will appear here.</em></p>
             <br>
           <% else %>
-            <p class="text-darkish small">You can add the qualifications gain at each institution by selecting the add qualifications option.</p>
+            <p class="text-darkish small">You can add the qualifications gain at each school by selecting the add qualifications option.</p>
             <div class="list-group">
-              <% @application.institutions.each do |institution| %>
+              <% @application.schools.each do |school| %>
                 <div class="education-item list-group-item-heading">
                   <div class="row">
                     <div class="col-sm-6">
-                      <h4 class="no-top-margin no-bottom-padding"><%= institution.name %></h4>
+                      <h4 class="no-top-margin no-bottom-padding"><%= school.name %></h4>
                       <address class="small">
-                        <%= institution.address_1 %><br>
-                        <%= institution.address_2 %> <%= '<br>'.html_safe unless institution.address_2.empty? %>
-                        <%= institution.postcode %><br>
-                        <%= institution.country %>
+                        <%= school.address_1 %><br>
+                        <%= school.address_2 %> <%= '<br>'.html_safe unless school.address_2.empty? %>
+                        <%= school.country %><br>
+                        <%= school.postcode %>
                       </address>
                     </div> <!-- End col -->
                     <div class="col-sm-6 text-right">
                       <div>
-                      <a href="<%= url_for applications_qualifications_path(institution) %>" class="add-button" role="button" >
+                      <a href="<%= url_for applications_qualifications_path(school) %>" class="add-button" role="button" >
                         <%= icon 'plus-circle', style: 'font-size: 13pt;' %>
                         &nbsp;
                         Add Qualifications
-                        <% count = institution.qualifications.count %>
+                        <% count = school.qualifications.count %>
                         <% if count > 0 %>
                             (<%= count %>)
                         <% end %>
                       </a>
                       &nbsp;
-                      <a data-modal-name="<%= institution.name %>"
-                         data-modal-path="<%= applications_education_remove_path(institution) %>"
+                      <a data-modal-name="<%= school.name %>"
+                         data-modal-path="<%= applications_education_remove_path(school) %>"
                          class="add-button custom-modal-button"
                          role="button">
                         <%= icon 'trash', style: 'font-size: 13pt;' %>

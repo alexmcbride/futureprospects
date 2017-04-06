@@ -1,2 +1,3 @@
 put ? next to first uncompleted stage?
 fix includes for applications controller, lots of noisy joins there
+validations for education start end date? can't start in future, can't overlap?

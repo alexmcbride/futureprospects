@@ -1,6 +1,6 @@
-class CreateInstitutions < ActiveRecord::Migration[5.0]
+class CreateSchools < ActiveRecord::Migration[5.0]
   def change
-    create_table :institutions do |t|
+    create_table :schools do |t|
       t.integer :application_id
       t.string :name
       t.string :address_1

@@ -31,16 +31,13 @@ class Application < ApplicationRecord
   validates :payment_amount, presence: false
   validates :payment_type, presence: false
   validates :payment_date, presence: false
-  validate :check_institutions
 
   # Validations shared between application and student.
   include StudentValidator
 
-  attr_accessor :validate_institutions
-
   # Foreign Keys
   belongs_to :student
-  has_many :institutions
+  has_many :schools
 
   # Checks if the application is owned by this student
   def owned_by?(student)
@@ -58,13 +55,14 @@ class Application < ApplicationRecord
     not complete?
   end
 
-  def check_institutions
-    if self.validate_institutions
-      self.institutions.each do |school|
-        if school.qualifications.empty?
-          self.errors.add(:institution, "'#{school.name}' does not contain any qualifications")
-        end
+  def check_schools?
+    valid = true
+    self.schools.each do |school|
+      if school.qualifications.empty?
+        self.errors.add(:school, "'#{school.name}' does not have any qualifications")
+        valid = false
       end
     end
+    valid
   end
 end

@@ -1,4 +1,4 @@
-class Institution < ApplicationRecord
+class School < ApplicationRecord
   validates :name, presence: true
   validates :address_1, presence: true
   validates :address_2, presence: false

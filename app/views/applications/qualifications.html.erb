@@ -1,4 +1,4 @@
-<% breadcrumb :application_qualifications, @institution %>
+<% breadcrumb :application_qualifications, @school %>
 <% @title = 'Qualifications' %>
 
 <%= render partial: 'remove_modal',
@@ -15,11 +15,11 @@
       <div class="col-xs-12">
         <p><%= link_to 'Back to education...', applications_education_path(@application) %></p>
 
-        <%= form_for @qualification, url: applications_qualifications_add_path(@institution), method: :post do |f| %>
+        <%= form_for @qualification, url: applications_qualifications_add_path(@school), method: :post do |f| %>
           <h3 class="no-top-margin">Add Qualifications</h3>
 
-          <p class="text-darkish small">Add the qualifications you gained at this educational institution.</p>
-
+          <p class="text-darkish small">Add the qualifications you gained at this institution. If you have not
+            completed your studies, enter the future end date and predicated grade.</p>
           <%= form_errors @qualification %>
 
           <div class="row">
@@ -34,7 +34,7 @@
                   <td><%= f.text_field :award, class: 'full-width' %></td>
                 </tr>
                 <tr>
-                  <td><%= f.label :grade %> *</td>
+                  <td><%= f.label :grade %></td>
                   <td><%= f.text_field :grade, class: 'full-width' %></td>
                 </tr>
               </table>
@@ -47,14 +47,11 @@
                   <td><%= f.date_select :start_date, class: 'full-width' %></td>
                 </tr>
                 <tr>
-                  <td><%= f.label :end_date %> *</td>
+                  <td><%= f.label :end_date %></td>
                   <td><%= f.date_select :end_date, class: 'full-width' %></td>
                 </tr>
                 <tr>
-                  <td class="text-darkish small">
-                    <em>* Optional</em>
-                  </td>
-                  <td class="text-right">
+                  <td colspan="2" class="text-right">
                     <%= f.submit 'Add Qualification', class: 'add-button' %>
                   </td>
                 </tr>
@@ -69,7 +66,7 @@
       <div class="col-xs-12">
         <h3 class="no-top-margin">
           Qualifications
-          <% count = @institution.qualifications.count%>
+          <% count = @school.qualifications.count%>
           <% if count > 0 %>
             (<%= count %>)
           <% end %>
@@ -81,7 +78,7 @@
         <% else %>
           <p class="text-darkish small">You can remove a qualification by clicking the remove button.</p>
           <div class="list-group">
-            <% @institution.qualifications.each do |qualification| %>
+            <% @school.qualifications.each do |qualification| %>
               <div class="education-item list-group-item-heading">
                 <div class="row">
                   <div class="col-sm-6">

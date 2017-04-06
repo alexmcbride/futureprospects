@@ -6,9 +6,10 @@ Rails.application.routes.draw do
   post 'applications/:id/profile', to: 'applications#profile_next', as: 'applications_profile_next'
 
   get 'applications/:id/education', to: 'applications#education', as: 'applications_education'
-  post 'applications/:id/education/add', to: 'applications#education_add', as: 'applications_education_add'
-  post 'applications/:id/education', to: 'applications#education_next', as: 'applications_education_next'
+  post 'applications/:id/education', to: 'applications#education_add', as: 'applications_education_add'
   delete 'applications/:id/education', to: 'applications#education_remove', as: 'applications_education_remove'
+  post 'applications/:id/education/next', to: 'applications#education_next', as: 'applications_education_next'
+
 
   get 'applications/qualifications/:id', to: 'applications#qualifications', as: 'applications_qualifications'
   post 'applications/qualifications/:id', to: 'applications#qualifications_add', as: 'applications_qualifications_add'

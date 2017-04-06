@@ -1,7 +1,7 @@
 class CreateQualifications < ActiveRecord::Migration[5.0]
   def change
     create_table :qualifications do |t|
-      t.integer :institution_id
+      t.integer :school_id
       t.string :subject
       t.string :award
       t.string :grade

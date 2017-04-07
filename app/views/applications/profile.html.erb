@@ -80,19 +80,19 @@
             <p class="text-darkish small">This is the address that you live at.</p>
             <table class="table">
               <tr>
-                <td class="full-width"><%= f.label 'House Number' %></td>
+                <td class="full-width"><%= f.label :permanent_house_number, 'House Number' %></td>
                 <td><%= f.text_field :permanent_house_number %></td>
               </tr>
               <tr>
-                <td><%= f.label 'Address 1' %></td>
+                <td><%= f.label :permanent_address_1, 'Address 1' %></td>
                 <td><%= f.text_field :permanent_address_1 %></td>
               </tr>
               <tr>
-                <td><%= f.label 'Address 2' %> *</td>
+                <td><%= f.label :permanent_address_2, 'Address 2' %> *</td>
                 <td><%= f.text_field :permanent_address_2 %></td>
               </tr>
               <tr>
-                <td><%= f.label 'Post Code', class: 'text-capitalize' %></td>
+                <td><%= f.label :permanent_postcode, 'Post Code', class: 'text-capitalize' %></td>
                 <td><%= f.text_field :permanent_postcode %></td>
               </tr>
               <tr>
@@ -107,23 +107,23 @@
             <p class="text-darkish small">This is the address where you want your letters sent (optional).</p>
             <table class="table">
               <tr>
-                <td class="full-width"><%= f.label 'House Number' %> *</td>
+                <td class="full-width"><%= f.label :correspondence_house_number, 'House Number' %> *</td>
                 <td><%= f.text_field :correspondence_house_number %></td>
               </tr>
               <tr>
-                <td><%= f.label 'Address 1' %> *</td>
+                <td><%= f.label :correspondence_house_number, 'Address 1' %> *</td>
                 <td><%= f.text_field :correspondence_address_1 %></td>
               </tr>
               <tr>
-                <td><%= f.label 'Address 2' %> *</td>
+                <td><%= f.label :correspondence_address_2, 'Address 2' %> *</td>
                 <td><%= f.text_field :correspondence_address_2 %></td>
               </tr>
               <tr>
-                <td><%= f.label 'Post Code', class: 'text-capitalize' %> *</td>
+                <td><%= f.label :correspondence_postcode, 'Post Code', class: 'text-capitalize' %> *</td>
                 <td><%= f.text_field :correspondence_postcode %></td>
               </tr>
               <tr>
-                <td><%= f.label 'Country' %> *</td>
+                <td><%= f.label :correspondence_country, 'Country' %> *</td>
                 <td><%= f.text_field :correspondence_country %></td>
               </tr>
             </table>

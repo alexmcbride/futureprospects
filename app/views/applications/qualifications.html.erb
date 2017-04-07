@@ -7,11 +7,11 @@
 
 <div class="row">
   <div class="col-sm-3">
-    <%= render partial: 'stages_sidebar', locals: {application: @application, stage: :education} %>
+    <%= render partial: 'stages_sidebar', locals: {application: @school.application, stage: :education} %>
   </div>
 
   <div class="col-sm-9">
-    <p><%= link_to 'Back to education...', applications_education_path(@application) %></p>
+    <p><%= link_to 'Back to education...', applications_education_path(@school.application) %></p>
 
     <%= form_for @qualification, url: applications_qualifications_add_path(@school), method: :post do |f| %>
       <h3 class="no-top-margin">Add Qualifications</h3>

@@ -13,6 +13,7 @@ class School < ApplicationRecord
     not self.qualifications.empty?
   end
 
+  # Adds a qualification to the school
   def add_qualification?(qualification)
     if self.dates_valid? qualification
       if self.valid?
@@ -37,5 +38,11 @@ class School < ApplicationRecord
       end
     end
     true
+  end
+
+  # Destroys school and any associated qualifications
+  def destroy_with_qualifications
+    self.qualifications.destroy_all
+    self.destroy
   end
 end

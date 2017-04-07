@@ -38,8 +38,7 @@ class ApplicationsController < ApplicationController
 
   # GET: /applications/:id
   def index
-    @application.completed_intro = true
-    @application.save validate: false
+    @application.save_intro?
   end
 
   # GET: /applications/:id/profile
@@ -48,13 +47,9 @@ class ApplicationsController < ApplicationController
 
   # POST: /applications/:id/profile
   def profile_next
-    @application.attributes = application_params
-    @application.state = :active
     respond_to do |format|
-      if @application.valid?
-        @application.completed_profile = true
-        @application.save
-        format.html { redirect_to applications_education_path }
+      if @application.save_profile? application_params
+        format.html { redirect_to applications_education_path(@application) }
       else
         format.html { render :profile }
       end
@@ -83,8 +78,7 @@ class ApplicationsController < ApplicationController
   def education_remove
     school = School.find params[:id]
     id = school.application_id
-    school.qualifications.destroy_all # Delete all qualifications at this institution
-    school.destroy
+    school.destroy_with_qualifications
     respond_to do |format|
       format.html { redirect_to applications_education_path(id), notice: 'Removed school' }
     end
@@ -92,11 +86,8 @@ class ApplicationsController < ApplicationController
 
   # POST: /applications/:id/education_next
   def education_next
-    valid = @application.schools_valid?
-    @application.completed_education = valid
-    @application.save validate: false
     respond_to do |format|
-      if valid
+      if @application.save_education?
         format.html { redirect_to applications_employment_path(@application) }
       else
         @school = School.new
@@ -108,7 +99,6 @@ class ApplicationsController < ApplicationController
   # GET: /applications/qualifications/:id
   def qualifications
     @school = School.find params[:id]
-    @application = @school.application
     @qualification = Qualification.new
   end
 
@@ -136,10 +126,12 @@ class ApplicationsController < ApplicationController
     end
   end
 
+  # GET: /applications/:id/employment
   def employment
     @job = Job.new
   end
 
+  # POST: /applications/:id/employment
   def employment_add
     @job = Job.new job_params
     @job.application = @application
@@ -152,6 +144,7 @@ class ApplicationsController < ApplicationController
     end
   end
 
+  # DELETE: /applications/:id/employment
   def employment_remove
     @job = (Job.find params[:id] or not_found)
     @job.destroy
@@ -160,10 +153,10 @@ class ApplicationsController < ApplicationController
     end
   end
 
+  # POST: /applications/:id/employment/next
   def employment_next
-    @application.completed_employment = true
-    @application.save!
     respond_to do |format|
+      @application.save_employment?
       format.html { redirect_to applications_references_path(@application) }
     end
   end

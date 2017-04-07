@@ -68,6 +68,7 @@ class Application < ApplicationRecord
     valid
   end
 
+  # Gets a symbol indicating the first uncompleted stage of the application
   def next_stage
     if self.completed_courses
       :submit
@@ -88,5 +89,43 @@ class Application < ApplicationRecord
     else
       :intro
     end
+  end
+
+  # Attempts to save the education stage
+  def save_education?
+    if self.schools_valid?
+      self.completed_education = true
+      self.save validate: false
+      true
+    else
+      false
+    end
+  end
+
+  # Attempts to save the intro stage
+  def save_intro?
+    self.completed_intro = true
+    self.save validate: false
+    true
+  end
+
+  # Attempts to save the profile stage
+  def save_profile?(params)
+    self.attributes = params
+    self.state = :active
+    if self.valid?
+      self.completed_profile = true
+      self.save
+      true
+    else
+      false
+    end
+  end
+
+  # Attempts to save the employment stage
+  def save_employment?
+    self.completed_employment = true
+    self.save
+    true
   end
 end

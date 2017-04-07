@@ -1,2 +1,20 @@
-<h1>Application#statement</h1>
-<p>Find me in app/views/application/statement.html.erb</p>
+<% breadcrumb :application_statement, @application %>
+<% @title = 'Statement' %>
+
+<div class="row">
+  <div class="col-sm-3">
+    <%= render partial: 'stages_sidebar', locals: {application: @application, stage: :statement} %>
+  </div>
+
+  <div class="col-sm-9">
+    <h3 class="no-top-margin">Personal Statement</h3>
+
+    <div class="row">
+      <div class="col-sm-12 text-right">
+        <br>
+        <p class="text-darkish small">When ready continue to the next section.</p>
+        <%= button_to 'Next', applications_statement_next_path(@application), method: :post, class: 'next-button' %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -98,3 +98,13 @@ crumb :application_employment do |application|
   parent :application, application
   link 'Employment', applications_employment_path(application)
 end
+
+crumb :application_references do |application|
+  parent :application, application
+  link 'References', applications_references_path(application)
+end
+
+crumb :application_statement do |application|
+  parent :application, application
+  link 'Statement', applications_statement_path(application)
+end

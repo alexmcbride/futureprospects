@@ -1,13 +1,23 @@
 class Reference < ApplicationRecord
-  validates :full_name, presence: true, length: {maximum: 70}
-  validates :occupation, presence: true, length: {maximum: 35}
-  validates :relationship, presence: true, length: {maximum: 35}
-  validates :address_1, presence: true, length: {maximum: 35}
-  validates :address_2, presence: false, length: {maximum: 35}
-  validates :country, presence: true, length: {maximum: 35}
-  validates :post_code, presence: true, length: {maximum: 8}
-  validates :telephone, presence: true, length: {maximum: 12}
-  validates :email, presence: true, length: {maximum: 254}
+  validates :reference_1_full_name, presence: true, length: {maximum: 70}
+  validates :reference_1_occupation, presence: true, length: {maximum: 35}
+  validates :reference_1_relationship, presence: true, length: {maximum: 35}
+  validates :reference_1_address_1, presence: true, length: {maximum: 35}
+  validates :reference_1_address_2, presence: false, length: {maximum: 35}
+  validates :reference_1_country, presence: true, length: {maximum: 35}
+  validates :reference_1_post_code, presence: true, length: {maximum: 8}
+  validates :reference_1_telephone, presence: true, length: {maximum: 12}
+  validates :reference_1_email, presence: true, length: {maximum: 254}
+
+  validates :reference_2_full_name, presence: true, length: {maximum: 70}
+  validates :reference_2_occupation, presence: true, length: {maximum: 35}
+  validates :reference_2_relationship, presence: true, length: {maximum: 35}
+  validates :reference_2_address_1, presence: true, length: {maximum: 35}
+  validates :reference_2_address_2, presence: false, length: {maximum: 35}
+  validates :reference_2_country, presence: true, length: {maximum: 35}
+  validates :reference_2_post_code, presence: true, length: {maximum: 8}
+  validates :reference_2_telephone, presence: true, length: {maximum: 12}
+  validates :reference_2_email, presence: true, length: {maximum: 254}
 
   belongs_to :application
 end

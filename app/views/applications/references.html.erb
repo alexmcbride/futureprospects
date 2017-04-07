@@ -1,4 +1,4 @@
-<% breadcrumb :application_employment, @application %>
+<% breadcrumb :application_references, @application %>
 <% @title = 'References' %>
 
 <div class="row">
@@ -9,12 +9,200 @@
   <div class="col-sm-9">
     <h3 class="no-top-margin">Personal References</h3>
 
-    <div class="row">
-      <div class="col-sm-12 text-right">
-        <br>
-        <p class="text-darkish small">When ready continue to the next section.</p>
-        <%= button_to 'Next', applications_statement_next_path(@application), method: :post, class: 'next-button' %>
+    <p class="text-darkish small"><em>Enter your two personal references, these can be a teacher, boss, lecturer, doctor, family friend or any other responsible figure.</em></p>
+
+    <%= form_for @reference, url: applications_references_next_path, method: :post do |f| %>
+      <%= form_errors @reference %>
+
+      <div class="row">
+        <div class="col-sm-6 col-xs-12">
+          <h4>Reference 1</h4>
+
+          <p class="text-darkish small"><em>Enter details about your first reference.</em></p>
+
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :reference_1_full_name, 'Full Name' %>
+            </div>
+            <div class="col-xs-8">
+              <%= f.text_field :reference_1_full_name, class: 'full-width' %>
+            </div>
+          </div>
+
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :reference_1_occupation, 'Occupation' %>
+            </div>
+            <div class="col-xs-8">
+              <%= f.text_field :reference_1_occupation, class: 'full-width' %>
+            </div>
+          </div>
+
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :reference_1_relationship, 'Relationship' %>
+            </div>
+            <div class="col-xs-8">
+              <%= f.text_field :reference_1_relationship, class: 'full-width' %>
+            </div>
+          </div>
+
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :reference_1_address_1, 'Address 1' %>
+            </div>
+            <div class="col-xs-8">
+              <%= f.text_field :reference_1_address_1, class: 'full-width' %>
+            </div>
+          </div>
+
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :reference_1_address_2, 'Address 2' %> *
+            </div>
+            <div class="col-xs-8">
+              <%= f.text_field :reference_1_address_2, class: 'full-width' %>
+            </div>
+          </div>
+
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :reference_1_country, 'Country' %>
+            </div>
+            <div class="col-xs-8">
+              <%= f.text_field :reference_1_country, class: 'full-width' %>
+            </div>
+          </div>
+
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :reference_1_post_code, 'Post Code' %>
+            </div>
+            <div class="col-xs-8">
+              <%= f.text_field :reference_1_post_code, class: 'full-width' %>
+            </div>
+          </div>
+
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :reference_1_telephone, 'Telephone' %>
+            </div>
+            <div class="col-xs-8">
+              <%= f.text_field :reference_1_telephone, class: 'full-width' %>
+            </div>
+          </div>
+
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :reference_1_email, 'Email' %>
+            </div>
+            <div class="col-xs-8">
+              <%= f.text_field :reference_1_email, class: 'full-width' %>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-xs-12">
+          <h4>Reference 2</h4>
+
+          <p class="text-darkish small"><em>Enter details about your first reference.</em></p>
+
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :reference_2_full_name, 'Full Name' %>
+            </div>
+            <div class="col-xs-8">
+              <%= f.text_field :reference_2_full_name, class: 'full-width' %>
+            </div>
+          </div>
+
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :reference_2_occupation, 'Occupation' %>
+            </div>
+            <div class="col-xs-8">
+              <%= f.text_field :reference_2_occupation, class: 'full-width' %>
+            </div>
+          </div>
+
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :reference_2_relationship, 'Relationship' %>
+            </div>
+            <div class="col-xs-8">
+              <%= f.text_field :reference_2_relationship, class: 'full-width' %>
+            </div>
+          </div>
+
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :reference_2_address_1, 'Address 1' %>
+            </div>
+            <div class="col-xs-8">
+              <%= f.text_field :reference_2_address_1, class: 'full-width' %>
+            </div>
+          </div>
+
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :reference_2_address_2, 'Address 2' %> *
+            </div>
+            <div class="col-xs-8">
+              <%= f.text_field :reference_2_address_2, class: 'full-width' %>
+            </div>
+          </div>
+
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :reference_2_country, 'Country' %>
+            </div>
+            <div class="col-xs-8">
+              <%= f.text_field :reference_2_country, class: 'full-width' %>
+            </div>
+          </div>
+
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :reference_2_post_code, 'Post Code' %>
+            </div>
+            <div class="col-xs-8">
+              <%= f.text_field :reference_2_post_code, class: 'full-width' %>
+            </div>
+          </div>
+
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :reference_2_telephone, 'Telephone' %>
+            </div>
+            <div class="col-xs-8">
+              <%= f.text_field :reference_2_telephone, class: 'full-width' %>
+            </div>
+          </div>
+
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :reference_2_email, 'Email' %>
+            </div>
+            <div class="col-xs-8">
+              <%= f.text_field :reference_2_email, class: 'full-width' %>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <p class="text-darkish small"><em>* Optional</em></p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 text-right">
+          <br>
+          <p class="text-darkish small">When ready continue to the next section.</p>
+          <%= button_to 'Next', applications_statement_next_path(@application), method: :post, class: 'next-button' %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>

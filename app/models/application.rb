@@ -39,6 +39,7 @@ class Application < ApplicationRecord
   belongs_to :student
   has_many :schools
   has_many :jobs
+  has_one :reference
 
   # Checks if the application is owned by this student
   def owned_by?(student)
@@ -127,5 +128,22 @@ class Application < ApplicationRecord
     self.completed_employment = true
     self.save
     true
+  end
+
+  # Retrieve reference or create new one as needed
+  def create_reference
+    self.reference or Reference.new
+  end
+
+  # Attempts to save updated references stage
+  def save_references?(reference, params)
+    reference.attributes = params
+    if reference.valid?
+      self.completed_references = true
+      self.reference = reference
+      self.save
+      return true
+    end
+    false
   end
 end

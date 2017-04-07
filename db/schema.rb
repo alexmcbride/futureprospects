@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170407075612) do
+ActiveRecord::Schema.define(version: 20170407150303) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,6 +117,30 @@ ActiveRecord::Schema.define(version: 20170407075612) do
     t.date     "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "references", force: :cascade do |t|
+    t.integer  "application_id"
+    t.string   "reference_1_full_name"
+    t.string   "reference_1_occupation"
+    t.string   "reference_1_relationship"
+    t.string   "reference_1_address_1"
+    t.string   "reference_1_address_2"
+    t.string   "reference_1_country"
+    t.string   "reference_1_post_code"
+    t.string   "reference_1_telephone"
+    t.string   "reference_1_email"
+    t.string   "reference_2_full_name"
+    t.string   "reference_2_occupation"
+    t.string   "reference_2_relationship"
+    t.string   "reference_2_address_1"
+    t.string   "reference_2_address_2"
+    t.string   "reference_2_country"
+    t.string   "reference_2_post_code"
+    t.string   "reference_2_telephone"
+    t.string   "reference_2_email"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "schools", force: :cascade do |t|

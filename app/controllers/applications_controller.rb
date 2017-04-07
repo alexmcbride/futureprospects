@@ -161,10 +161,21 @@ class ApplicationsController < ApplicationController
     end
   end
 
+  # GET: /applications/:id/references
   def references
+    @reference = (@application.reference or Reference.new)
   end
 
+  # POST: /applications/:id/references
   def references_next
+    @reference = @application.create_reference
+    respond_to do |format|
+      if @application.save_references? @reference, reference_params
+        format.html { redirect_to applications_statement_path(@application) }
+      else
+        format.html { render :references }
+      end
+    end
   end
 
   def statement
@@ -205,6 +216,16 @@ class ApplicationsController < ApplicationController
     # Sanitises submitted form parameters
     def job_params
       params.require(:job).permit(:employer, :address_1, :address_2, :postcode, :country, :job_title, :duties, :start_date, :end_date)
+    end
+
+    # Sanitises submitted form parameters
+    def reference_params
+      params.require(:reference).permit(:reference_1_full_name, :reference_1_occupation, :reference_1_relationship,
+                                        :reference_1_address_1, :reference_1_address_2, :reference_1_country,
+                                        :reference_1_post_code, :reference_1_telephone, :reference_1_email,
+                                        :reference_2_full_name, :reference_2_occupation, :reference_2_relationship,
+                                        :reference_2_address_1, :reference_2_address_2, :reference_2_country,
+                                        :reference_2_post_code, :reference_2_telephone, :reference_2_email)
     end
 
     # Sanitises submitted form parameters

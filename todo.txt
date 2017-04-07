@@ -1,6 +1,5 @@
 put ? next to first uncompleted stage?
 fix includes for applications controller, lots of noisy joins there
-validations for education start end date? can't start in future, can't overlap?
 
 search terms should be:
 *Course Id
@@ -11,4 +10,6 @@ search terms should be:
 
 Devise recaptcha: https://github.com/plataformatec/devise/wiki/How-To:-Use-Recaptcha-with-Devise
 
-have checkmark to complete only on optional stages, like education and employment?
+have checkbox to complete only on optional stages, like education and employment?
+
+check next button on application stages to make sure it's consistent.

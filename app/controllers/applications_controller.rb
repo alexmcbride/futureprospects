@@ -5,15 +5,7 @@ class ApplicationsController < ApplicationController
 
   # POST: /applications
   def create
-    # Create new application and supply some starting info we already know
-    @application = Application.new
-    @application.email = current_student.email
-    @application.first_name = current_student.first_name
-    @application.family_name = current_student.family_name
-    @application.scottish_candidate_number = current_student.scottish_candidate_number
-    @application.national_insurance_number = current_student.national_insurance_number
-    @application.student = current_student
-    @application.save validate: false # Can't validate at this point
+    @application = current_student.create_application
     respond_to do |format|
       format.html { redirect_to applications_index_path(@application) }
     end
@@ -163,7 +155,7 @@ class ApplicationsController < ApplicationController
 
   # GET: /applications/:id/references
   def references
-    @reference = (@application.reference or Reference.new)
+    @reference = @application.create_reference
   end
 
   # POST: /applications/:id/references

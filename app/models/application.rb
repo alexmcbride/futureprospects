@@ -67,4 +67,26 @@ class Application < ApplicationRecord
     end
     valid
   end
+
+  def next_stage
+    if self.completed_courses
+      :submit
+    elsif self.completed_statement
+      :courses
+    elsif self.completed_references
+      :statement
+    elsif self.completed_employment
+      :references
+    elsif self.completed_references
+      :employment
+    elsif self.completed_employment
+      :employment
+    elsif self.completed_profile
+      :education
+    elsif self.completed_intro
+      :profile
+    else
+      :intro
+    end
+  end
 end

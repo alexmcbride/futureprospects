@@ -22,24 +22,17 @@ class ApplicationsController < ApplicationController
   # GET /applications/:id/continue
   def continue
     # Redirects student to the first incomplete part of their application.
+    paths = { intro: applications_index_path(@application),
+              profile: applications_profile_path(@application),
+              education: applications_education_path(@application),
+              employment: applications_employment_path(@application),
+              references: applications_references_path(@application),
+              statement: applications_statement_path(@application),
+              courses: applications_courses_path(@application),
+              submit: applications_submit_path(@application) }
+
     respond_to do |format|
-      if not @application.completed_intro
-        format.html { redirect_to applications_index_path(@application) }
-      elsif not @application.completed_profile
-        format.html { redirect_to applications_profile_path(@application) }
-      elsif not @application.completed_education
-        format.html { redirect_to applications_education_path(@application) }
-      elsif not @application.completed_employment
-        format.html { redirect_to applications_employment_path(@application) }
-      elsif not @application.completed_references
-        format.html { redirect_to applications_references_path(@application) }
-      elsif not @application.completed_statement
-        format.html { redirect_to applications_statement_path(@application) }
-      elsif not @application.completed_courses
-        format.html { redirect_to applications_courses_path(@application) }
-      else
-        format.html { redirect_to applications_submit_path(@application) }
-      end
+      format.html { redirect_to paths[@application.next_stage] }
     end
   end
 
@@ -125,16 +118,8 @@ class ApplicationsController < ApplicationController
     @application = @school.application
     @qualification = Qualification.new qualification_params
 
-    # Check for overlapping dates
-    valid = @school.dates_valid? @qualification
-    unless valid
-      @qualification.errors.add(:qualification, 'cannot be added as dates overlap with an existing one')
-    end
-
     respond_to do |format|
-      if valid and @qualification.valid?
-        @qualification.school = @school
-        @qualification.save
+      if @school.add_qualification? @qualification
         format.html { redirect_to applications_qualifications_path(@school), notice: 'Added qualification' }
       else
         format.html { render :qualifications }
@@ -168,7 +153,7 @@ class ApplicationsController < ApplicationController
   end
 
   def employment_remove
-    @job = Job.find params[:id]
+    @job = (Job.find params[:id] or not_found)
     @job.destroy
     respond_to do |format|
       format.html { redirect_to applications_employment_path(@job.application_id), notice: 'Employment removed' }

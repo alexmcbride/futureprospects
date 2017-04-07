@@ -13,6 +13,19 @@ class School < ApplicationRecord
     not self.qualifications.empty?
   end
 
+  def add_qualification?(qualification)
+    if self.dates_valid? qualification
+      if self.valid?
+        qualification.school = self
+        qualification.save
+        return true
+      end
+    else
+      qualification.errors.add(:qualification, 'cannot be added as its dates overlap with an existing qualification')
+    end
+    false
+  end
+
   # Checks if any of the qualification dates overlap
   def dates_valid?(qualification)
     if self.qualifications.count > 0

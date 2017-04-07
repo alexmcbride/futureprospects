@@ -7,28 +7,29 @@
       <%= devise_error_messages! %>
 
       <div class="panel panel-default panel-bg">
-        <div class="panel-body no-bottom-padding">
+        <div class="panel-body">
           <h3 class="no-top-margin">Personal Information</h3>
 
-          <table class="table">
-            <tr>
-              <td>Username:</td>
-              <td><strong><%= current_student.username %></strong></td>
-            </tr>
-            <tr>
-              <td>Scottish Candidate Number:</td>
-              <td><strong><%= current_student.scottish_candidate_number %></strong></td>
-            </tr>
-            <tr>
-              <td>National Insurance Number:</td>
-              <td><strong><%= current_student.national_insurance_number %></strong></td>
-            </tr>
-          </table>
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="row slight-margin-bottom">
+                <div class="col-xs-6">Username</div>
+                <div class="col-xs-6"><strong><%= current_student.username %></strong></div>
+              </div>
+              <div class="row slight-margin-bottom">
+                <div class="col-xs-6">Scottish Candidate Number</div>
+                <div class="col-xs-6"><strong><%= current_student.scottish_candidate_number %></strong></div>
+              </div>
+              <div class="row slight-margin-bottom">
+                <div class="col-xs-6">National Insurance Number</div>
+                <div class="col-xs-6"><strong><%= current_student.national_insurance_number %></strong></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <p>Keep your login details up to date. Make sure you don't lose them!</p>
-
+      <p class="text-darkish small">Keep your login details up to date. Make sure you don't lose them!</p>
 
       <div class="form-group">
         <%= f.label :email, class: 'text-capitalize' %><br>

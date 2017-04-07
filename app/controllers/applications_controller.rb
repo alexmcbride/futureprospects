@@ -126,16 +126,15 @@ class ApplicationsController < ApplicationController
     @qualification = Qualification.new qualification_params
 
     # Check for overlapping dates
-    save = true
-    if @school.dates_valid? @qualification
-      @school.qualifications << @qualification
-    else
-      @qualification.errors.add(:qualification, 'cannot be added as its dates overlap with an existing one')
-      save = false
+    valid = @school.dates_valid? @qualification
+    unless valid
+      @qualification.errors.add(:qualification, 'cannot be added as dates overlap with an existing one')
     end
 
     respond_to do |format|
-      if save and @qualification.save
+      if valid and @qualification.valid?
+        @qualification.school = @school
+        @qualification.save
         format.html { redirect_to applications_qualifications_path(@school), notice: 'Added qualification' }
       else
         format.html { render :qualifications }

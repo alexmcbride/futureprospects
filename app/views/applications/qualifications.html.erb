@@ -11,101 +11,111 @@
   </div>
 
   <div class="col-sm-9">
-    <div class="row">
-      <div class="col-xs-12">
-        <p><%= link_to 'Back to education...', applications_education_path(@application) %></p>
+    <p><%= link_to 'Back to education...', applications_education_path(@application) %></p>
 
-        <%= form_for @qualification, url: applications_qualifications_add_path(@school), method: :post do |f| %>
-          <h3 class="no-top-margin">Add Qualifications</h3>
+    <%= form_for @qualification, url: applications_qualifications_add_path(@school), method: :post do |f| %>
+      <h3 class="no-top-margin">Add Qualifications</h3>
 
-          <p class="text-darkish small">Add the qualifications you gained at this institution. If you have not
-            completed your studies, enter the future end date and predicated grade.</p>
-          <%= form_errors @qualification %>
+      <p class="text-darkish small">Add the qualifications you gained at this institution. If you have not completed
+        your studies, enter the future end date and predicated grade.</p>
+      <%= form_errors @qualification %>
 
-          <div class="row">
-            <div class="col-sm-6">
-              <table class="table">
-                <tr>
-                  <td><%= f.label :subject %></td>
-                  <td><%= f.text_field :subject, class: 'full-width' %></td>
-                </tr>
-                <tr>
-                  <td><%= f.label :award %></td>
-                  <td><%= f.text_field :award, class: 'full-width' %></td>
-                </tr>
-                <tr>
-                  <td><%= f.label :grade %></td>
-                  <td><%= f.text_field :grade, class: 'full-width' %></td>
-                </tr>
-              </table>
+      <div class="row">
+        <div class="col-sm-6 col-xs-12">
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :subject %>
             </div>
-
-            <div class="col-sm-6">
-              <table class="table">
-                <tr>
-                  <td><%= f.label :start_date %></td>
-                  <td><%= f.date_select :start_date, class: 'full-width' %></td>
-                </tr>
-                <tr>
-                  <td><%= f.label :end_date %></td>
-                  <td><%= f.date_select :end_date, class: 'full-width' %></td>
-                </tr>
-                <tr>
-                  <td colspan="2" class="text-right">
-                    <%= f.submit 'Add Qualification', class: 'add-button' %>
-                  </td>
-                </tr>
-              </table>
+            <div class="col-xs-8">
+              <%= f.text_field :subject, class: 'full-width' %>
+            </div>
+          </div>
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :award %>
+            </div>
+            <div class="col-xs-8">
+              <%= f.text_field :award, class: 'full-width' %>
+            </div>
+          </div>
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :grade %>
+            </div>
+            <div class="col-xs-8">
+              <%= f.text_field :grade, class: 'full-width' %>
             </div>
           </div>
         </div>
-      <% end %>
-    </div>
-
-    <div class="row">
-      <div class="col-xs-12">
-        <h3 class="no-top-margin">
-          Qualifications
-          <% count = @school.qualifications.count%>
-          <% if count > 0 %>
-            (<%= count %>)
-          <% end %>
-        </h3>
-
-        <% if count == 0 %>
-          <br>
-          <p class="text-darkish small text-center"><em>Any qualifications you add will appear here.</em></p>
-        <% else %>
-          <p class="text-darkish small">You can remove a qualification by clicking the remove button.</p>
-          <div class="list-group">
-            <% @school.qualifications.each do |qualification| %>
-              <div class="education-item list-group-item-heading">
-                <div class="row">
-                  <div class="col-sm-6">
-                    <h4 class="no-top-margin"><%= qualification.subject %></h4>
-                    <ul class="list-unstyled small">
-                      <li>Award: <%= qualification.award %></li>
-                      <li>Grade: <%= qualification.grade %></li>
-                      <li>Start: <%= qualification.start_date %> &mdash; <%= qualification.end_date %></li>
-                    </ul>
-                  </div>
-
-                  <div class="col-sm-6 text-right">
-                    <a class="add-button custom-modal-button"
-                       role="button"
-                       data-modal-name="<%= qualification.subject %> (<%= qualification.award %>)"
-                       data-modal-path="<%= applications_qualifications_remove_path(qualification) %>">
-                      <%= icon 'trash', style: 'font-size: 13pt;' %>
-                      &nbsp;
-                      Remove
-                    </a>
-                  </div>
-                </div>
-              </div>
-            <% end %> <!-- loop -->
+        <div class="col-sm-6 col-xs-12">
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :start_date %>
+            </div>
+            <div class="col-xs-8">
+              <%= f.date_select :start_date, class: 'full-width' %>
+            </div>
           </div>
-        <% end %> <!-- if -->
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :end_date %>
+            </div>
+            <div class="col-xs-8">
+              <%= f.date_select :end_date, class: 'full-width' %>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+        <div class="row">
+          <div class="col-xs-6">
+            <p class="text-darkish small"><em>* Optional</em></p>
+          </div>
+          <div class="col-xs-6 text-right">
+            <%= f.submit 'Add Qualification', class: 'add-button' %>
+          </div>
+        </div>
+    <% end %>
+
+    <h3 class="no-top-margin">
+      Qualifications
+      <% count = @school.qualifications.count%>
+      <% if count > 0 %>
+        (<%= count %>)
+      <% end %>
+    </h3>
+
+    <% if count == 0 %>
+      <br>
+      <p class="text-darkish small text-center"><em>Any qualifications you add will appear here.</em></p>
+    <% else %>
+      <p class="text-darkish small">You can remove a qualification by clicking the remove button.</p>
+      <div class="list-group">
+        <% @school.qualifications.each do |qualification| %>
+          <div class="education-item list-group-item-heading">
+            <div class="row">
+              <div class="col-sm-6">
+                <h4 class="no-top-margin"><%= qualification.subject %></h4>
+                <ul class="list-unstyled small">
+                  <li>Award: <%= qualification.award %></li>
+                  <li>Grade: <%= qualification.grade %></li>
+                  <li>Start: <%= qualification.start_date %> &mdash; <%= qualification.end_date %></li>
+                </ul>
+              </div>
+
+              <div class="col-sm-6 text-right">
+                <a class="add-button custom-modal-button"
+                   role="button"
+                   data-modal-name="<%= qualification.subject %> - <%= qualification.award %>"
+                   data-modal-path="<%= applications_qualifications_remove_path(qualification) %>">
+                  <%= icon 'trash', style: 'font-size: 13pt;' %>
+                  &nbsp;
+                  Remove
+                </a>
+              </div>
+            </div>
+          </div>
+        <% end %> <!-- loop -->
+      </div>
+    <% end %> <!-- if -->
   </div>
 </div>

@@ -17,7 +17,7 @@
         <!-- Add school form -->
         <%= form_for @school, url: applications_education_add_path(@application), method: :post do |f|%>
           <h3 class="no-top-margin">Add School or Institution</h3>
-          <p class="text-darkish small">Add any school, college, university, or other institution where you have gained an educational qualification.</p>
+          <p class="text-darkish small">Add any school, college, university, or other institution where you have gained a qualification.</p>
           <%= form_errors @school %>
           <div class="row">
             <div class="col-sm-6">
@@ -78,7 +78,7 @@
                       <h4 class="no-top-margin no-bottom-padding"><%= school.name %></h4>
                       <address class="small">
                         <%= school.address_1 %><br>
-                        <%= school.address_2 %> <%= '<br>'.html_safe unless school.address_2.empty? %>
+                        <%= school.address_2 %> <%= '<br>'.html_safe unless school.address_2.nil? or school.address_2.empty? %>
                         <%= school.country %><br>
                         <%= school.postcode %>
                       </address>

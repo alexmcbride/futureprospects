@@ -99,7 +99,7 @@ class ApplicationsController < ApplicationController
 
   # POST: /applications/:id/education_next
   def education_next
-    valid = @application.check_schools?
+    valid = @application.schools_valid?
     @application.completed_education = valid
     @application.save validate: false
     respond_to do |format|
@@ -124,9 +124,18 @@ class ApplicationsController < ApplicationController
     @school = School.find params[:id]
     @application = @school.application
     @qualification = Qualification.new qualification_params
-    @qualification.school = @school
+
+    # Check for overlapping dates
+    save = true
+    if @school.dates_valid? @qualification
+      @school.qualifications << @qualification
+    else
+      @qualification.errors.add(:qualification, 'cannot be added as its dates overlap with an existing one')
+      save = false
+    end
+
     respond_to do |format|
-      if @qualification.save
+      if save and @qualification.save
         format.html { redirect_to applications_qualifications_path(@school), notice: 'Added qualification' }
       else
         format.html { render :qualifications }

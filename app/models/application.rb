@@ -55,10 +55,11 @@ class Application < ApplicationRecord
     not complete?
   end
 
-  def check_schools?
+  # Checks that a school hasn't been added without a qualification.
+  def schools_valid?
     valid = true
     self.schools.each do |school|
-      if school.qualifications.empty?
+      unless school.qualifications_valid?
         self.errors.add(:school, "'#{school.name}' does not have any qualifications")
         valid = false
       end

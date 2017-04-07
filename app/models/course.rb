@@ -28,6 +28,10 @@ class Course < ApplicationRecord
     ((end_date - start_date).to_i / 365.0).ceil
   end
 
+  def duration
+    start_date..end_date
+  end
+
   # Gets if the course is full time or part time
   def course_type
     'Full Time'

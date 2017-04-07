@@ -1,3 +1,12 @@
 put ? next to first uncompleted stage?
 fix includes for applications controller, lots of noisy joins there
 validations for education start end date? can't start in future, can't overlap?
+
+search terms should be:
+•	Course Id
+•	Course Title
+•	Course Description
+•	Entry qualifications
+•	Career Prospects
+
+Devise recaptch: https://github.com/plataformatec/devise/wiki/How-To:-Use-Recaptcha-with-Devise

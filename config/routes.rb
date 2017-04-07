@@ -19,11 +19,11 @@ Rails.application.routes.draw do
   delete 'applications/:id/employment', to: 'applications#employment_remove', as: 'applications_employment_remove'
   post 'applications/:id/employment/next', to: 'applications#employment_next', as: 'applications_employment_next'
 
-  get 'applications/:id/statement', to: 'applications#statement', as: 'applications_statement'
-  post 'applications/:id/statement', to: 'applications#statement_next', as: 'applications_statement_next'
-
   get 'applications/:id/references', to: 'applications#references', as: 'applications_references'
   post 'applications/:id/references', to: 'applications#references_next', as: 'applications_references_next'
+
+  get 'applications/:id/statement', to: 'applications#statement', as: 'applications_statement'
+  post 'applications/:id/statement', to: 'applications#statement_next', as: 'applications_statement_next'
 
   get 'applications/:id/courses', to: 'applications#courses', as: 'applications_courses'
   post 'applications/:id/courses', to: 'applications#courses_next', as: 'applications_courses_next'

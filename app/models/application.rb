@@ -38,6 +38,7 @@ class Application < ApplicationRecord
   # Foreign Keys
   belongs_to :student
   has_many :schools
+  has_many :jobs
 
   # Checks if the application is owned by this student
   def owned_by?(student)

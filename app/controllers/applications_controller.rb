@@ -1,7 +1,7 @@
 class ApplicationsController < ApplicationController
   before_action :authenticate_student!
   before_action :set_application, except: [:create, :education_remove, :qualifications,
-                                           :qualifications_add, :qualifications_remove]
+                                           :qualifications_add, :qualifications_remove, :employment_remove]
 
   # POST: /applications
   def create
@@ -153,9 +153,35 @@ class ApplicationsController < ApplicationController
   end
 
   def employment
+    @job = Job.new
+  end
+
+  def employment_add
+    @job = Job.new job_params
+    @job.application = @application
+    respond_to do |format|
+      if @job.save
+        format.html { redirect_to applications_employment_path(@application), notice: 'Employment added' }
+      else
+        format.html { render :employment }
+      end
+    end
+  end
+
+  def employment_remove
+    @job = Job.find params[:id]
+    @job.destroy
+    respond_to do |format|
+      format.html { redirect_to applications_employment_path(@job.application_id), notice: 'Employment removed' }
+    end
   end
 
   def employment_next
+    @application.completed_employment = true
+    @application.save!
+    respond_to do |format|
+      format.html { redirect_to applications_references_path(@application) }
+    end
   end
 
   def references
@@ -197,6 +223,11 @@ class ApplicationsController < ApplicationController
     # Sanitises submitted form parameters
     def school_params
       params.require(:school).permit(:name, :address_1, :address_2, :postcode, :country)
+    end
+
+    # Sanitises submitted form parameters
+    def job_params
+      params.require(:job).permit(:employer, :address_1, :address_2, :postcode, :country, :job_title, :duties, :start_date, :end_date)
     end
 
     # Sanitises submitted form parameters

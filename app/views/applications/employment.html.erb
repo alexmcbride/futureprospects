@@ -1,12 +1,187 @@
 <% breadcrumb :application_employment, @application %>
 <% @title = 'Employment' %>
 
+<%= render partial: 'remove_modal',
+           locals: {title: 'Remove Job',
+                    message: 'Are you sure you want to remove the following job?'} %>
+
 <div class="row">
   <div class="col-sm-3">
     <%= render partial: 'stages_sidebar', locals: {application: @application, stage: :employment} %>
   </div>
 
   <div class="col-sm-9">
+    <h3 class="no-top-margin">Add Employment</h3>
+    <p class="text-darkish small"><em>Add your employment history, any experience you may have help you earn a place. If you will still be
+    working when your course starts leave the end date blank.</em></p>
 
+    <%= form_for @job, url: applications_employment_add_path(@application), method: :post do |f| %>
+      <%= form_errors @job %>
+
+      <div class="row">
+        <div class="col-sm-6 col-xs-12">
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :employer %>
+            </div>
+            <div class="col-xs-8">
+              <%= f.text_field :employer, class: 'full-width' %>
+            </div>
+          </div>
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :address_1 %>
+            </div>
+            <div class="col-xs-8">
+              <%= f.text_field :address_1, class: 'full-width' %>
+            </div>
+          </div>
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :address_2 %> *
+            </div>
+            <div class="col-xs-8">
+              <%= f.text_field :address_2, class: 'full-width' %>
+            </div>
+          </div>
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :postcode %>
+            </div>
+            <div class="col-xs-8">
+              <%= f.text_field :postcode, class: 'full-width' %>
+            </div>
+          </div>
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :country %>
+            </div>
+            <div class="col-xs-8">
+              <%= f.text_field :country, class: 'full-width' %>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-xs-12">
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :job_title %>
+            </div>
+            <div class="col-xs-8">
+              <%= f.text_field :job_title, class: 'full-width' %>
+            </div>
+          </div>
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :duties %>
+            </div>
+            <div class="col-xs-8">
+              <%= f.text_field :duties, class: 'full-width' %>
+            </div>
+          </div>
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :start_date %>
+            </div>
+            <div class="col-xs-8">
+              <%= f.date_select :start_date, class: 'full-width' %>
+            </div>
+          </div>
+          <div class="row slight-margin-bottom">
+            <div class="col-xs-4">
+              <%= f.label :end_date %>
+            </div>
+            <div class="col-xs-8">
+              <%= f.date_select :end_date, class: 'full-width' %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6">
+          <p class="text-darkish small"><em>* Optional</em></p>
+        </div>
+        <div class="col-xs-6 text-right">
+          <%= f.submit 'Add Employment', class: 'btn btn-primary btn-sm' %>
+        </div>
+      </div>
+
+    <% end %>
+
+    <h3>Employment History</h3>
+    <% if @application.jobs.empty? %>
+      <p class="text-darkish small text-center"><em>Any jobs you add will appear here.</em></p>
+    <% else %>
+        <p class="text-darkish small"><em>You can remove a job by clicking the remove button.</em></p>
+      <div class="list-group">
+        <% @application.jobs.each do |job| %>
+          <div class="list-group-item-heading education-item">
+            <div class="row">
+              <div class="col-xs-6">
+                <h4 class="no-top-margin"><strong><%= job.employer %></strong></h4>
+              </div>
+              <div class="col-xs-6 text-right">
+                <a data-modal-name="<%= job.employer %> - <%= job.job_title %>"
+                   data-modal-path="<%= applications_employment_remove_path(job) %>"
+                   class="add-button custom-modal-button"
+                   role="button">
+                  <%= icon 'trash', style: 'font-size: 13pt;' %>
+                  &nbsp;
+                  Remove
+                </a>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-4 col-xs-12">
+                <address class="small">
+                  <%= job.address_1 %><br>
+                  <%= job.address_2 %> <%= '<br>'.html_safe unless job.address_2.empty? %>
+                  <%= job.country %><br>
+                  <%= job.postcode %>
+                </address>
+              </div>
+
+              <div class="col-sm-8 col-xs-12">
+                <div class="row small">
+                  <div class="col-xs-2">
+                    Job Title:
+                  </div>
+                  <div class="col-xs-10">
+                    <%= job.job_title %>
+                  </div>
+                </div>
+                <div class="row small">
+                  <div class="col-xs-2">
+                    Duties:
+                  </div>
+                  <div class="col-xs-10">
+                    <%= job.duties %>
+                  </div>
+                </div>
+                <div class="row small">
+                  <div class="col-xs-2">
+                    Start Date:
+                  </div>
+                  <div class="col-xs-10">
+                    <%= job.start_date %>
+                    &mdash;
+                    <%= job.end_date %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="row">
+      <div class="col-sm-12 text-right">
+        <br>
+        <p class="text-darkish small">When ready continue to the next section.</p>
+        <%= button_to 'Next', applications_employment_next_path(@application), method: :post, class: 'next-button' %>
+      </div>
+    </div>
   </div>
 </div>

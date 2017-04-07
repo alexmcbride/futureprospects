@@ -12,7 +12,7 @@
 
   <div class="col-sm-9">
     <h3 class="no-top-margin">Add Employment</h3>
-    <p class="text-darkish small"><em>Add your employment history, any experience you have  in the workplace may help you earn a space on your chosen course.</em></p>
+    <p class="text-darkish small">Add your employment history, any experience you have  in the workplace may help you earn a space on your chosen course.</p>
 
     <%= form_for @job, url: applications_employment_add_path(@application), method: :post do |f| %>
       <%= form_errors @job %>
@@ -108,9 +108,9 @@
 
     <h3>Employment History</h3>
     <% if @application.jobs.empty? %>
-      <p class="text-darkish small text-center"><em>Any jobs you add will appear here.</em></p>
+      <p class="text-darkish small text-center">Any jobs you add will appear here.</p>
     <% else %>
-        <p class="text-darkish small"><em>You can remove a job by clicking the remove button.</em></p>
+        <p class="text-darkish small">You can remove a job by clicking the remove button.</p>
       <div class="list-group">
         <% @application.jobs.each do |job| %>
           <div class="list-group-item-heading education-item">

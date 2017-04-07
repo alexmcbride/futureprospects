@@ -222,10 +222,10 @@ class ApplicationsController < ApplicationController
     def reference_params
       params.require(:reference).permit(:reference_1_full_name, :reference_1_occupation, :reference_1_relationship,
                                         :reference_1_address_1, :reference_1_address_2, :reference_1_country,
-                                        :reference_1_post_code, :reference_1_telephone, :reference_1_email,
+                                        :reference_1_postcode, :reference_1_telephone, :reference_1_email,
                                         :reference_2_full_name, :reference_2_occupation, :reference_2_relationship,
                                         :reference_2_address_1, :reference_2_address_2, :reference_2_country,
-                                        :reference_2_post_code, :reference_2_telephone, :reference_2_email)
+                                        :reference_2_postcode, :reference_2_telephone, :reference_2_email)
     end
 
     # Sanitises submitted form parameters

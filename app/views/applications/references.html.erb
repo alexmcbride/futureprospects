@@ -9,7 +9,7 @@
   <div class="col-sm-9">
     <h3 class="no-top-margin">Personal References</h3>
 
-    <p class="text-darkish small"><em>Enter your two personal references, these can be a teacher, boss, lecturer, doctor, family friend or any other responsible figure.</em></p>
+    <p class="text-darkish small">Enter your two personal references, these can be a teacher, boss, lecturer, doctor, family friend or any other responsible figure.</p>
 
     <%= form_for @reference, url: applications_references_next_path, method: :post do |f| %>
       <%= form_errors @reference %>
@@ -18,7 +18,7 @@
         <div class="col-sm-6 col-xs-12">
           <h4>Reference 1</h4>
 
-          <p class="text-darkish small"><em>Enter details about your first reference.</em></p>
+          <p class="text-darkish small">Enter details about your first reference.</p>
 
           <div class="row slight-margin-bottom">
             <div class="col-xs-4">
@@ -76,10 +76,10 @@
 
           <div class="row slight-margin-bottom">
             <div class="col-xs-4">
-              <%= f.label :reference_1_post_code, 'Post Code' %>
+              <%= f.label :reference_1_postcode, 'Post Code' %>
             </div>
             <div class="col-xs-8">
-              <%= f.text_field :reference_1_post_code, class: 'full-width' %>
+              <%= f.text_field :reference_1_postcode, class: 'full-width' %>
             </div>
           </div>
 
@@ -105,7 +105,7 @@
         <div class="col-sm-6 col-xs-12">
           <h4>Reference 2</h4>
 
-          <p class="text-darkish small"><em>Enter details about your first reference.</em></p>
+          <p class="text-darkish small">Enter details about your second reference.</p>
 
           <div class="row slight-margin-bottom">
             <div class="col-xs-4">
@@ -163,10 +163,10 @@
 
           <div class="row slight-margin-bottom">
             <div class="col-xs-4">
-              <%= f.label :reference_2_post_code, 'Post Code' %>
+              <%= f.label :reference_2_postcode, 'Post Code' %>
             </div>
             <div class="col-xs-8">
-              <%= f.text_field :reference_2_post_code, class: 'full-width' %>
+              <%= f.text_field :reference_2_postcode, class: 'full-width' %>
             </div>
           </div>
 

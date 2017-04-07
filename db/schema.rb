@@ -127,7 +127,7 @@ ActiveRecord::Schema.define(version: 20170407150303) do
     t.string   "reference_1_address_1"
     t.string   "reference_1_address_2"
     t.string   "reference_1_country"
-    t.string   "reference_1_post_code"
+    t.string   "reference_1_postcode"
     t.string   "reference_1_telephone"
     t.string   "reference_1_email"
     t.string   "reference_2_full_name"
@@ -136,7 +136,7 @@ ActiveRecord::Schema.define(version: 20170407150303) do
     t.string   "reference_2_address_1"
     t.string   "reference_2_address_2"
     t.string   "reference_2_country"
-    t.string   "reference_2_post_code"
+    t.string   "reference_2_postcode"
     t.string   "reference_2_telephone"
     t.string   "reference_2_email"
     t.datetime "created_at",               null: false

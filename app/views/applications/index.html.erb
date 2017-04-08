@@ -17,13 +17,23 @@
     <p>You can <strong>apply for</strong> a maximum of <strong>five college courses</strong>, the pricing is as
     follows:</p>
     <div class="panel panel-bg">
-      <div class="panel-body no-bottom-padding">
-        <dl class="dl-horizontal">
-          <dt>Single Course:</dt>
-          <dd>£10</dd>
-          <dt>Multiple Courses:</dt>
-          <dd>£20</dd>
-        </dl>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-3">
+            Single course:
+          </div>
+          <div class="col-xs-9">
+            <strong>£10</strong>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3">
+            Two or more courses:
+          </div>
+          <div class="col-xs-9">
+            <strong>£20</strong>
+          </div>
+        </div>
       </div>
     </div>
     <p>You will be required to pay the amount before your application can be processed.</p>
@@ -35,7 +45,7 @@
 
     <div class="text-right">
       <p class="text-darkish small">Continue to the next section when ready.</p>
-      <%= link_to 'Continue', applications_profile_path, class: 'next-button', role: 'button' %>
+      <%= link_to 'Continue...', applications_profile_path, class: 'next-button', role: 'button' %>
     </div>
   </div>
 </div>

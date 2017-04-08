@@ -26,7 +26,7 @@
   <% else %>
     <div class="list-group">
       <% @courses.each do |course| %>
-        <a href="<%= url_for(course) %>" class="course-item list-group-item">
+        <a href="<%= url_for(course) %>" class="course-item list-group-item list-group-item-heading">
           <div class="row">
             <div class="col-sm-2 col-xs-12">
               <%= image_tag course.image, class: 'img-responsive course-image' %>

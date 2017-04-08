@@ -176,7 +176,7 @@ class ApplicationsController < ApplicationController
   def statement_next
     respond_to do |format|
       if @application.save_statement? statement_params
-        format.html { redirect_to applications_submit_path(@application) }
+        format.html { redirect_to applications_courses_path(@application) }
       else
         format.html { render :statement }
       end

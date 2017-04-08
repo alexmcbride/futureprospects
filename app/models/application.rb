@@ -100,10 +100,9 @@ class Application < ApplicationRecord
     if self.schools_valid?
       self.completed_education = true
       self.save validate: false
-      true
-    else
-      false
+      return true
     end
+    false
   end
 
   # Attempts to save the intro stage
@@ -120,10 +119,9 @@ class Application < ApplicationRecord
     if self.valid?
       self.completed_profile = true
       self.save
-      true
-    else
-      false
+      return true
     end
+    false
   end
 
   # Attempts to save the employment stage
@@ -154,9 +152,13 @@ class Application < ApplicationRecord
     self.attributes = params
     if self.personal_statement.empty? or self.personal_statement.length == 0
       self.errors.add(:personal_statement, "can't be blank")
-      false
     else
-      self.save
+      if self.valid?
+        self.completed_statement = true
+        self.save
+        return true
+      end
     end
+    false
   end
 end

@@ -3,15 +3,17 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-    var txt_element = $('#application_personal_statement');
+    var statement_text = $('#application_personal_statement');
     var count_element = $('#character-count');
 
     // Update character count.
     function update_character_count() {
-      var total_length = txt_element.val().length;
-      var characters_left = <%= Application::STATEMENT_LENGTH %> - total_length;
-      count_element.html(characters_left);
-      if (characters_left < 0) {
+      var total = statement_text.val().length;
+      var left = <%= Application::STATEMENT_LENGTH %> - total;
+      count_element.html(left);
+
+      // Switch text colour.
+      if (left < 0) {
           count_element.attr('class', 'text-danger');
       }
       else {
@@ -19,11 +21,8 @@
       }
     }
 
-    // Update when first loaded.
     update_character_count();
-
-    // Update on text changed.
-    txt_element.on('change keyup paste', update_character_count);
+    statement_text.on('change keyup paste', update_character_count);
   });
 </script>
 

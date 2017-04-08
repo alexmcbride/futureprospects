@@ -108,3 +108,13 @@ crumb :application_statement do |application|
   parent :application, application
   link 'Personal Statement', applications_statement_path(application)
 end
+
+crumb :application_courses do |application|
+  parent :application, application
+  link 'Add Courses', applications_courses_path(application)
+end
+
+crumb :application_submit do |application|
+  parent :application, application
+  link 'Submit', applications_submit_path(application)
+end

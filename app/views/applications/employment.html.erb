@@ -106,6 +106,7 @@
       </div>
     <% end %>
 
+    <hr>
     <h3>Employment History</h3>
     <% if @application.jobs.empty? %>
       <p class="text-darkish small text-center">Any jobs you add will appear here.</p>
@@ -119,7 +120,7 @@
                 <h4 class="no-top-margin"><strong><%= job.employer %></strong></h4>
               </div>
               <div class="col-xs-6 text-right">
-                <a data-modal-name="<%= job.employer %> - <%= job.job_title %>"
+                <a data-modal-name="<%= job.employer %> &mdash; <%= job.job_title %>"
                    data-modal-path="<%= applications_employment_remove_path(job) %>"
                    class="add-button custom-modal-button"
                    role="button">

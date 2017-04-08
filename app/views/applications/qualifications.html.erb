@@ -12,6 +12,7 @@
 
   <div class="col-sm-9">
     <p><%= link_to 'Back to education...', applications_education_path(@school.application) %></p>
+    <hr>
 
     <%= form_for @qualification, url: applications_qualifications_add_path(@school), method: :post do |f| %>
       <h3 class="no-top-margin">Add Qualifications</h3>
@@ -76,6 +77,7 @@
         </div>
     <% end %>
 
+    <hr>
     <h3 class="no-top-margin">
       Qualifications
       <% count = @school.qualifications.count%>
@@ -85,8 +87,7 @@
     </h3>
 
     <% if count == 0 %>
-      <br>
-      <p class="text-darkish small text-center"><em>Any qualifications you add will appear here.</em></p>
+      <p class="text-darkish small"><em>Any qualifications you add will appear here.</em></p>
     <% else %>
       <p class="text-darkish small">You can remove a qualification by clicking the remove button.</p>
       <div class="list-group">

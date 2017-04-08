@@ -76,6 +76,7 @@
     <!-- Form used to validate that schools/courses have been added -->
     <%= form_for @application, url: applications_education_next_path(@application), method: :post do |f| %>
       <!-- Display schools list -->
+      <hr>
       <h3 class="no-top-margin">Education History</h3>
       <%= form_errors @application %>
       <% if @application.schools.empty? %>

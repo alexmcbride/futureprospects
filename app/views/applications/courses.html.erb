@@ -51,6 +51,7 @@
 
     <%= form_for @application, url: applications_courses_next_path, method: :post do |f| %>
 
+      <hr>
       <h3>Course List (<%= @application.available_courses %> left)</h3>
 
       <%= form_errors @application %>
@@ -83,7 +84,7 @@
                         </a>
                         <a class="add-button custom-modal-button"
                            role="button"
-                           data-modal-name="<%= selection.course.title %> <br> <%= selection.course.college.name %>"
+                           data-modal-name="<%= selection.course.college.name %> &mdash; <%= selection.course.title %>"
                            data-modal-path="<%= applications_courses_remove_path(selection) %>">
                           <%= icon 'trash', style: 'font-size: 13pt;' %>
                           &nbsp;

@@ -27,6 +27,8 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+/* Needs the .css or it won't work! */
+@import "jquery-ui.css";
 
 footer {
   clear: both;
@@ -132,6 +134,12 @@ footer {
   background-color: #F7F7F7;
   padding-top: 14px;
   padding-bottom: 3px;
+}
+
+.vertical-center {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
 }
 
 /* Styles for extra small mobile screens */

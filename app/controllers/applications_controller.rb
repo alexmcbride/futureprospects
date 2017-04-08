@@ -1,7 +1,7 @@
 class ApplicationsController < ApplicationController
   before_action :authenticate_student!
-  before_action :set_application, except: [:create, :education_remove, :qualifications,
-                                           :qualifications_add, :qualifications_remove, :employment_remove]
+  before_action :set_application, except: [:create, :education_remove, :qualifications, :qualifications_add,
+                                           :qualifications_remove, :employment_remove, :courses_remove]
 
   # POST: /applications
   def create
@@ -184,9 +184,38 @@ class ApplicationsController < ApplicationController
   end
 
   def courses
+    @course_selection = CourseSelection.new
+  end
+
+  def courses_add
+    @course_selection = CourseSelection.new course_selection_params
+    respond_to do |format|
+      if @application.add_course? @course_selection
+        format.html { redirect_to applications_courses_path(@application), notice: 'Course added to application' }
+      else
+        format.html { render :courses }
+      end
+    end
+  end
+
+  def courses_remove
+    @selection = (CourseSelection.find params[:id] or not_found)
+    id = @selection.application_id
+    @selection.destroy
+    respond_to do |format|
+      format.html { redirect_to applications_courses_path(id), notice: 'Course removed from application' }
+    end
   end
 
   def courses_next
+    respond_to do |format|
+      if @application.save_courses?
+        format.html { redirect_to applications_submit_path(@application) }
+      else
+        @course_selection = CourseSelection.new
+        format.html { render :courses }
+      end
+    end
   end
 
   def submit
@@ -200,6 +229,11 @@ class ApplicationsController < ApplicationController
     def set_application
       @application = (Application.find(params[:id]) or not_found)
       @application.owned_by? current_student or user_not_authorized
+    end
+
+    # Sanitises submitted form parameters
+    def course_selection_params
+      params.require(:course_selection).permit(:course_id, :college_offer, :student_choice)
     end
 
     # Sanitises submitted form parameters

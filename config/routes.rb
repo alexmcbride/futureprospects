@@ -26,12 +26,16 @@ Rails.application.routes.draw do
   post 'applications/:id/statement', to: 'applications#statement_next', as: 'applications_statement_next'
 
   get 'applications/:id/courses', to: 'applications#courses', as: 'applications_courses'
-  post 'applications/:id/courses', to: 'applications#courses_next', as: 'applications_courses_next'
+  post 'applications/:id/courses', to: 'applications#courses_add', as: 'applications_courses_add'
+  delete 'applications/:id/courses', to: 'applications#courses_remove', as: 'applications_courses_remove'
+  post 'applications/:id/courses/next', to: 'applications#courses_next', as: 'applications_courses_next'
 
   get 'applications/:id/submit', to: 'applications#submit', as: 'applications_submit'
   post 'applications/:id/submit', to: 'applications#submit_next', as: 'applications_submit_next'
 
   get 'applications/:id/continue', to: 'applications#continue', as: 'applications_continue'
+
+  get 'courses/search', to: 'courses#search', as: 'courses_search'
 
   devise_for :students
   resources :courses

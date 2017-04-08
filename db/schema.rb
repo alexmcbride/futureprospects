@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170407150303) do
+ActiveRecord::Schema.define(version: 20170408130159) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,16 @@ ActiveRecord::Schema.define(version: 20170407150303) do
     t.index ["name"], name: "index_colleges_on_name", using: :btree
   end
 
+  create_table "course_selections", force: :cascade do |t|
+    t.integer  "application_id"
+    t.integer  "course_id"
+    t.integer  "college_offer"
+    t.integer  "student_choice"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["application_id", "course_id"], name: "index_course_selections_on_application_id_and_course_id", unique: true, using: :btree
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
@@ -90,6 +100,7 @@ ActiveRecord::Schema.define(version: 20170407150303) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.string   "image"
+    t.integer  "spaces"
     t.index ["title"], name: "index_courses_on_title", using: :btree
   end
 

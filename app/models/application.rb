@@ -43,6 +43,7 @@ class Application < ApplicationRecord
   has_many :schools
   has_many :jobs
   has_one :reference
+  has_many :course_selections
 
   # Checks if the application is owned by this student
   def owned_by?(student)
@@ -70,6 +71,10 @@ class Application < ApplicationRecord
       end
     end
     valid
+  end
+
+  def available_courses
+    CourseSelection.available_courses self
   end
 
   # Gets a symbol indicating the first uncompleted stage of the application
@@ -148,6 +153,7 @@ class Application < ApplicationRecord
     false
   end
 
+  # Attempt to save the personal statement stage
   def save_statement?(params)
     self.attributes = params
     if self.personal_statement.empty? or self.personal_statement.length == 0
@@ -160,5 +166,24 @@ class Application < ApplicationRecord
       end
     end
     false
+  end
+
+  # Adds the course selection
+  def add_course?(selection)
+    selection.application = self
+    if CourseSelection.validate_selection? selection
+      return selection.save
+    end
+    false
+  end
+
+  # Attempts to save the course selection
+  def save_courses?
+    if self.course_selections.empty?
+      self.errors.add(:saving, 'requires that you must apply for at least one course')
+      return false
+    end
+    self.completed_courses = true
+    self.save
   end
 end

@@ -2,8 +2,8 @@
 <% @title = 'Browse Available Courses' %>
 
 <!-- Find Courses Sidebar -->
-<div class="col-md-3">
-  <div class="row">
+<div class="row">
+  <div class="col-md-3">
     <%= render partial: 'shared/course_search' %>
 
     <h4>Course Categories</h4>
@@ -17,40 +17,40 @@
       <% end %>
     </div>
   </div>
-</div>
 
-<!-- Main Content -->
-<div class="col-md-9">
-  <% if @courses.empty? %>
-      <p class="text-center text-warning"><em>There are no courses to display.</em></p>
-  <% else %>
-    <div class="list-group">
-      <% @courses.each do |course| %>
-        <a href="<%= url_for(course) %>" class="course-item list-group-item list-group-item-heading">
-          <div class="row">
-            <div class="col-sm-2 col-xs-12">
-              <%= image_tag course.image, class: 'img-responsive course-image' %>
-            </div>
-
-            <div class="col-sm-10 col-xs-12">
-              <div class="row">
-                <div class="h3 course-title"><%= course.title %></div>
+  <!-- Main Content -->
+  <div class="col-md-9">
+    <% if @courses.empty? %>
+        <p class="text-center text-warning"><em>There are no courses to display.</em></p>
+    <% else %>
+      <div class="list-group">
+        <% @courses.each do |course| %>
+          <a href="<%= url_for(course) %>" class="course-item list-group-item list-group-item-heading">
+            <div class="row">
+              <div class="col-sm-2 col-xs-12">
+                <%= image_tag course.image, class: 'img-responsive course-image' %>
               </div>
 
-              <div class="row">
-                <%= course.category.name %>
-                &mdash;
-                <%= course.college.name %>
+              <div class="col-sm-10 col-xs-12">
+                <div class="row">
+                  <div class="h3 course-title"><%= course.title %></div>
+                </div>
+
+                <div class="row">
+                  <%= course.category.name %>
+                  &mdash;
+                  <%= course.college.name %>
+                </div>
               </div>
             </div>
-          </div>
-        </a>
-      <% end %>
+          </a>
+        <% end %>
+      </div>
+    <% end %>
+
+    <!-- Various pagination options in _pagination.scss -->
+    <div class="digg_pagination text-center">
+      <%= will_paginate @courses %>
     </div>
-  <% end %>
-
-  <!-- Various pagination options in _pagination.scss -->
-  <div class="digg_pagination text-center">
-    <%= will_paginate @courses %>
   </div>
 </div>

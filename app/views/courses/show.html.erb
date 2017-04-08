@@ -1,9 +1,9 @@
 <% breadcrumb :course, @course %>
 
 <% @title = 'View Course Details' %>
+<div class="row">
+  <div class="col-md-3">
 
-<div class="col-md-3">
-  <div class="row">
     <%= render partial: 'shared/course_search' %>
 
     <h4>Course Categories</h4>
@@ -17,37 +17,38 @@
       <% end %>
     </div>
   </div>
-</div>
 
-<div class="col-md-6">
-  <h3 class="no-top-margin"><%= @course.title %></h3>
-  <%= markdown(@course.description) %>
 
-  <h4>Entry Requirements</h4>
-  <%= markdown(@course.entry_requirements) %>
+  <div class="col-md-6">
+    <h3 class="no-top-margin"><%= @course.title %></h3>
+    <%= markdown(@course.description) %>
 
-  <h4>Career Prospects</h4>
-  <%= markdown(@course.career_prospects) %>
-</div>
+    <h4>Entry Requirements</h4>
+    <%= markdown(@course.entry_requirements) %>
 
-<div class="col-md-3">
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <%= image_tag @course.image, class: 'img-responsive full-width course-image no-top-margin' %>
+    <h4>Career Prospects</h4>
+    <%= markdown(@course.career_prospects) %>
+  </div>
 
-      <h4><strong><%= @course.college.name %></strong></h4>
+  <div class="col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= image_tag @course.image, class: 'img-responsive full-width course-image no-top-margin' %>
 
-      <ul class="list-group">
-        <li class="list-group-item list-group-item-heading"><%= format_date @course.start_date %></li>
-        <li class="list-group-item list-group-item-heading"><%= pluralize(@course.years, 'Year') %></li>
-        <li class="list-group-item list-group-item-heading"><%= @course.course_type %></li>
-        <li class="list-group-item list-group-item-heading"><%= @course.level %></li>
-        <li class="list-group-item list-group-item-heading"><%= pluralize @course.spaces, 'Space' %></li>
-      </ul>
+        <h4><strong><%= @course.college.name %></strong></h4>
 
-      <%= link_to 'Apply for Course', nil, class: 'btn btn-success btn-block', role: 'button' %>
-      <%= link_to 'View College Details', @course.college, class: 'btn btn-success btn-block', role: 'button' %>
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-heading"><%= format_date @course.start_date %></li>
+          <li class="list-group-item list-group-item-heading"><%= pluralize(@course.years, 'Year') %></li>
+          <li class="list-group-item list-group-item-heading"><%= @course.course_type %></li>
+          <li class="list-group-item list-group-item-heading"><%= @course.level %></li>
+          <li class="list-group-item list-group-item-heading"><%= pluralize @course.spaces, 'Space' %></li>
+        </ul>
 
+        <%= link_to 'Apply for Course', nil, class: 'btn btn-success btn-block', role: 'button' %>
+        <%= link_to 'View College Details', @course.college, class: 'btn btn-success btn-block', role: 'button' %>
+
+      </div>
     </div>
   </div>
 </div>

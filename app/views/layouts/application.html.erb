@@ -68,9 +68,13 @@
     <div class="container">
       <%# Displays title and breadcrumb if required %>
       <% unless @title.nil? %>
-          <h2 class="no-top-margin"><%= @title %></h2>
-          <%= breadcrumbs separator: ' &rsaquo; ' %>
-          <hr class="small">
+          <div class="row">
+            <div class="col-xs-12">
+              <h2 class="no-top-margin"><%= @title %></h2>
+              <%= breadcrumbs separator: ' &rsaquo; ' %>
+            </div>
+          </div>
+          <hr class="title-hr">
       <% end %>
 
       <%# Displays any flash messages that are available. %>

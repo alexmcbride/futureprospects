@@ -6,6 +6,7 @@
                     message: 'Are you sure you want to remove the following course?'} %>
 
 <script type="text/javascript">
+  /* jquery auto-complete for courses text field */
   $(function() {
      $('#selected-course').autocomplete({
          minLength: 0,
@@ -34,7 +35,7 @@
 
   <div class="col-sm-9">
     <%= form_for @course_selection, url: applications_courses_add_path(@application), method: :post do |f| %>
-      <h3 class="no-top-margin">Add Courses to Application</h3>
+      <h3 class="no-top-margin">Add Courses</h3>
       <p class="text-darkish small">Use the auto-complete search box below to select the course and then click add.</p>
       <%= form_errors @course_selection %>
       <%= f.hidden_field :course_id %>
@@ -50,14 +51,14 @@
 
     <%= form_for @application, url: applications_courses_next_path, method: :post do |f| %>
 
-      <h3>Courses &mdash; <%= @application.available_courses %> left</h3>
+      <h3>Course List (<%= @application.available_courses %> left)</h3>
 
       <%= form_errors @application %>
 
       <div class="row">
         <div class="col-xs-12">
           <% if @application.course_selections.empty? %>
-            <p class="text-darkish small text-center">Any courses you add will appear here.</p>
+            <p class="text-darkish small text-center"><em>Any courses you add will appear here.</em></p>
           <% else %>
             <p class="text-darkish small">These are the courses you are applying for. You can remove them by clicking the remove button</p>
             <div class="list-group">

@@ -111,7 +111,7 @@ end
 
 crumb :application_courses do |application|
   parent :application, application
-  link 'Add Courses', applications_courses_path(application)
+  link 'Courses', applications_courses_path(application)
 end
 
 crumb :application_submit do |application|

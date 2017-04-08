@@ -182,6 +182,10 @@ category_names.split(/\n/).each do |line|
   categories[line] = category.id
 end
 
+def course_spaces
+  [15, 30, 45, 60].sample
+end
+
 # Seed courses
 course = Course.new
 course.category_id = categories['Accounting']
@@ -227,6 +231,7 @@ course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 7'
 course.image = Rails.root.join('app/assets/images/seed_images/accounting-hnc.jpg').open
+course.spaces = course_spaces
 course.save!
 
 
@@ -265,6 +270,7 @@ course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 5'
 course.image = Rails.root.join('app/assets/images/seed_images/accounting-nc.jpg').open
+course.spaces = course_spaces
 course.save!
 
 
@@ -324,6 +330,7 @@ course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2019, 6, 15
 course.level = 'SCQF level 8'
 course.image = Rails.root.join('app/assets/images/seed_images/accounting-hnd.jpg').open
+course.spaces = course_spaces
 course.save!
 
 
@@ -359,6 +366,7 @@ course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 8'
 course.image = Rails.root.join('app/assets/images/seed_images/admin-hnc.jpg').open
+course.spaces = course_spaces
 course.save!
 
 
@@ -390,6 +398,7 @@ course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 8'
 course.image = Rails.root.join('app/assets/images/seed_images/legal-hnd.jpg').open
+course.spaces = course_spaces
 course.save!
 
 
@@ -415,6 +424,7 @@ course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 5'
 course.image = Rails.root.join('app/assets/images/seed_images/admin-digital-hnc.jpg').open
+course.spaces = course_spaces
 course.save!
 
 
@@ -442,6 +452,7 @@ course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 7'
 course.image = Rails.root.join('app/assets/images/seed_images/info-tech-hnc.jpg').open
+course.spaces = course_spaces
 course.save!
 
 
@@ -472,6 +483,7 @@ course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2019, 6, 15
 course.level = 'SCQF level 8'
 course.image = Rails.root.join('app/assets/images/seed_images/info-tech-hnd.jpg').open
+course.spaces = course_spaces
 course.save!
 
 
@@ -510,6 +522,7 @@ course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2019, 6, 15
 course.level = 'SCQF level 8'
 course.image = Rails.root.join('app/assets/images/seed_images/web-dev-hnd.jpg').open
+course.spaces = course_spaces
 course.save!
 
 
@@ -557,6 +570,7 @@ course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2019, 6, 15
 course.level = 'SCQF level 8'
 course.image = Rails.root.join('app/assets/images/seed_images/archi-tech-hnd.jpg').open
+course.spaces = course_spaces
 course.save!
 
 
@@ -594,6 +608,7 @@ course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 6'
 course.image = Rails.root.join('app/assets/images/seed_images/built-env-nc.jpg').open
+course.spaces = course_spaces
 course.save!
 
 
@@ -619,6 +634,7 @@ course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2019, 6, 15
 course.level = 'SCQF level 8'
 course.image = Rails.root.join('app/assets/images/seed_images/build-surv-hnd.jpg').open
+course.spaces = course_spaces
 course.save!
 
 
@@ -647,6 +663,7 @@ course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 7'
 course.image = Rails.root.join('app/assets/images/seed_images/business-hnc.jpg').open
+course.spaces = course_spaces
 course.save!
 
 
@@ -673,6 +690,7 @@ course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2019, 6, 15
 course.level = 'SCQF level 8'
 course.image = Rails.root.join('app/assets/images/seed_images/supply-chain-hnd.jpg').open
+course.spaces = course_spaces
 course.save!
 
 
@@ -697,6 +715,7 @@ course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 8'
 course.image = Rails.root.join('app/assets/images/seed_images/buisness-diplo.jpg').open
+course.spaces = course_spaces
 course.save!
 
 
@@ -719,6 +738,7 @@ course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 6'
 course.image = Rails.root.join('app/assets/images/seed_images/con-craft-nq.jpg').open
+course.spaces = course_spaces
 course.save!
 
 
@@ -744,6 +764,7 @@ course.start_date = Date.new 2018, 1, 8
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 5'
 course.image = Rails.root.join('app/assets/images/seed_images/car-join-cag.jpg').open
+course.spaces = course_spaces
 course.save!
 
 
@@ -768,6 +789,7 @@ course.start_date = Date.new 2018, 1, 8
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 5'
 course.image = Rails.root.join('app/assets/images/seed_images/paint-dec-cag.jpg').open
+course.spaces = course_spaces
 course.save!
 
 
@@ -797,6 +819,7 @@ course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2019, 6, 15
 course.level = 'SCQF level 8'
 course.image = Rails.root.join('app/assets/images/seed_images/art-and-design-nc.jpg').open
+course.spaces = course_spaces
 course.save!
 
 
@@ -823,6 +846,7 @@ course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 6'
 course.image = Rails.root.join('app/assets/images/seed_images/ed-interior-hnd.jpg').open
+course.spaces = course_spaces
 course.save!
 
 
@@ -847,6 +871,7 @@ course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 8'
 course.image = Rails.root.join('app/assets/images/seed_images/3d-model-hnd-y2.jpg').open
+course.spaces = course_spaces
 course.save!
 
 
@@ -875,6 +900,7 @@ course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 7'
 course.image = Rails.root.join('app/assets/images/seed_images/creative-writing-hnc.jpg').open
+course.spaces = course_spaces
 course.save!
 
 
@@ -896,6 +922,7 @@ course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 8'
 course.image = Rails.root.join('app/assets/images/seed_images/radio-hnd.jpg').open
+course.spaces = course_spaces
 course.save!
 
 
@@ -924,4 +951,5 @@ course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 7'
 course.image = Rails.root.join('app/assets/images/seed_images/performance-hnc.jpg').open
+course.spaces = course_spaces
 course.save!

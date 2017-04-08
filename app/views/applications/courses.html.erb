@@ -34,7 +34,7 @@
 
   <div class="col-sm-9">
     <%= form_for @course_selection, url: applications_courses_add_path(@application), method: :post do |f| %>
-      <h3 class="no-top-margin">Add Application Courses</h3>
+      <h3 class="no-top-margin">Add Courses to Application</h3>
       <p class="text-darkish small">Use the auto-complete search box below to select the course and then click add.</p>
       <%= form_errors @course_selection %>
       <%= f.hidden_field :course_id %>
@@ -82,7 +82,7 @@
                         </a>
                         <a class="add-button custom-modal-button"
                            role="button"
-                           data-modal-name="<%= selection.course.title %> &mdash; <%= selection.course.college.name %>"
+                           data-modal-name="<%= selection.course.title %> <br> <%= selection.course.college.name %>"
                            data-modal-path="<%= applications_courses_remove_path(selection) %>">
                           <%= icon 'trash', style: 'font-size: 13pt;' %>
                           &nbsp;

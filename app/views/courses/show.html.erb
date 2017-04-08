@@ -42,6 +42,7 @@
         <li class="list-group-item list-group-item-heading"><%= pluralize(@course.years, 'Year') %></li>
         <li class="list-group-item list-group-item-heading"><%= @course.course_type %></li>
         <li class="list-group-item list-group-item-heading"><%= @course.level %></li>
+        <li class="list-group-item list-group-item-heading"><%= pluralize @course.spaces, 'Space' %></li>
       </ul>
 
       <%= link_to 'Apply for Course', nil, class: 'btn btn-success btn-block', role: 'button' %>

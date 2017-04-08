@@ -44,4 +44,9 @@ class Course < ApplicationRecord
   def self.search(search_term)
     Course.search_for(search_term).includes(:category, :college)
   end
+
+  # Checks if the course has spaces
+  def has_spaces
+    self.spaces > self.course_selections.count
+  end
 end

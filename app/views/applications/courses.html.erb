@@ -38,11 +38,11 @@
       <%= form_errors @course_selection %>
       <%= f.hidden_field :course_id %>
       <div class="row">
-        <div class="col-xs-9">
+        <div class="col-xs-10">
           <input class="full-width" id="selected-course" placeholder="Search course title, category, or college">
         </div>
-        <div class="col-xs-3">
-          <button class="btn btn-primary btn-sm btn-block">Add Course</button>
+        <div class="col-xs-2">
+          <%= f.submit 'Add Course', class: 'add-button btn-block' %>
         </div>
       </div>
     <% end %>
@@ -64,7 +64,7 @@
                   <div class="list-group-item list-group-item-heading panel-bg">
                     <div class="row">
                       <div class="col-xs-9">
-                        <h4><%= selection.course.title %></h4>
+                        <h4><strong><%= selection.course.title %></strong></h4>
                         <ul class="list-inline small">
                           <li><%= selection.course.college.name %></li>
                           <li><%= selection.course.level %></li>

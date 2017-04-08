@@ -1,6 +1,7 @@
 class Application < ApplicationRecord
   # Constants
   STATEMENT_LENGTH = 2000
+  MAX_COURSES = 5
 
   # Enums
   enum gender: [:male, :female, :other]
@@ -53,7 +54,30 @@ class Application < ApplicationRecord
   # Checks if the application is complete.
   def complete?
     self.completed_intro and self.completed_profile and self.completed_education and self.completed_employment and
-        self.completed_references and self.completed_statement and self.completed_courses
+        self.completed_references and self.completed_statement and self.completed_courses and self.completed_submit
+  end
+
+  # Gets a symbol indicating the first uncompleted stage of the application
+  def next_stage
+    if self.completed_courses or self.completed_submit
+      :submit
+    elsif self.completed_statement
+      :courses
+    elsif self.completed_references
+      :statement
+    elsif self.completed_employment
+      :references
+    elsif self.completed_references
+      :employment
+    elsif self.completed_employment
+      :employment
+    elsif self.completed_profile
+      :education
+    elsif self.completed_intro
+      :profile
+    else
+      :intro
+    end
   end
 
   # Checks if the application is incomplete.
@@ -73,31 +97,14 @@ class Application < ApplicationRecord
     valid
   end
 
+  # Gets the number of courses the student can still add
   def available_courses
-    CourseSelection.available_courses self
+    MAX_COURSES - self.course_selections.count
   end
 
-  # Gets a symbol indicating the first uncompleted stage of the application
-  def next_stage
-    if self.completed_courses
-      :submit
-    elsif self.completed_statement
-      :courses
-    elsif self.completed_references
-      :statement
-    elsif self.completed_employment
-      :references
-    elsif self.completed_references
-      :employment
-    elsif self.completed_employment
-      :employment
-    elsif self.completed_profile
-      :education
-    elsif self.completed_intro
-      :profile
-    else
-      :intro
-    end
+  # Checks if a student can still add courses to their application
+  def can_add_course?
+    self.available_courses > 0
   end
 
   # Attempts to save the education stage
@@ -171,7 +178,7 @@ class Application < ApplicationRecord
   # Adds the course selection
   def add_course?(selection)
     selection.application = self
-    if CourseSelection.validate_selection? selection
+    if selection.valid? and CourseSelection.validate_selection? selection
       return selection.save
     end
     false
@@ -185,5 +192,18 @@ class Application < ApplicationRecord
     end
     self.completed_courses = true
     self.save
+  end
+
+  # Attempts to submit the application.
+  def save_submit?
+    # TODO: this can never be true at this point can it?
+    if self.complete?
+      self.completed_submit = true
+      self.state = :submitted
+      self.save
+      return true
+    end
+    self.errors.add(:incomplete, 'stages of the application are preventing it from being submitted')
+    false
   end
 end

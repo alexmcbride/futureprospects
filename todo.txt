@@ -15,3 +15,5 @@ have checkbox to complete only on optional stages, like education and employment
 check next button on application stages to make sure it's consistent.
 
 guard against loading application methods (remove course etc.) after application has been submitted.
+
+when json searching how much data is being sent? is whole description etc... being sent?

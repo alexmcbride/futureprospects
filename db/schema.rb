@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170408130159) do
+ActiveRecord::Schema.define(version: 20170408164848) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20170408130159) do
     t.boolean  "completed_references"
     t.boolean  "completed_statement"
     t.boolean  "completed_courses"
+    t.boolean  "completed_submit"
   end
 
   create_table "categories", force: :cascade do |t|

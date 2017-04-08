@@ -21,10 +21,14 @@ class CoursesController < ApplicationController
     @categories = Category.all
   end
 
+  # GET /courses/search.json?term=<some term>
   def search
-    @courses = Course.search params[:term]
+    @courses = Course.search(params[:term]).take 10
     respond_to do |format|
-      format.json { render json: @courses.to_json }
+      # Respond with course title, college name, and category name
+      format.json { render :json => @courses, :only => [:id, :title],
+                           :include => {:category => {:only => :name},
+                                        :college => {:only => :name}} }
     end
   end
 end

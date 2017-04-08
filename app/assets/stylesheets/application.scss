@@ -28,7 +28,9 @@
 @import "font-awesome";
 
 /* Needs the .css or it won't work! */
-@import "jquery-ui.css";
+@import "jquery-ui/core.css";
+@import "jquery-ui/menu.css";
+@import "jquery-ui/autocomplete.css";
 
 footer {
   clear: both;

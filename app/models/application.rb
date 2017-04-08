@@ -1,4 +1,7 @@
 class Application < ApplicationRecord
+  # Constants
+  STATEMENT_LENGTH = 2000
+
   # Enums
   enum gender: [:male, :female, :other]
   enum state: [:active, :submitted, :paid, :completed]
@@ -15,7 +18,7 @@ class Application < ApplicationRecord
   validates :mobile, presence: false, length: { maximum: 12 }
   validates :email, presence: true, length: { maximum: 254 }
   validates :disability, presence: false, length: { maximum: 100 }
-  validates :personal_statement, presence: false, length: { maximum: 500 }
+  validates :personal_statement, presence: false, length: { maximum: STATEMENT_LENGTH }
   validates :permanent_house_number, presence: true, length: { maximum: 12 }
   validates :permanent_address_1, presence: true, length: { maximum: 35 }
   validates :permanent_address_2, presence: false, length: { maximum: 35 }
@@ -145,5 +148,15 @@ class Application < ApplicationRecord
       return true
     end
     false
+  end
+
+  def save_statement?(params)
+    self.attributes = params
+    if self.personal_statement.empty? or self.personal_statement.length == 0
+      self.errors.add(:personal_statement, "can't be blank")
+      false
+    else
+      self.save
+    end
   end
 end

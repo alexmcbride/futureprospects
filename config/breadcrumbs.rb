@@ -106,5 +106,5 @@ end
 
 crumb :application_statement do |application|
   parent :application, application
-  link 'Statement', applications_statement_path(application)
+  link 'Personal Statement', applications_statement_path(application)
 end

@@ -1,5 +1,31 @@
 <% breadcrumb :application_statement, @application %>
-<% @title = 'Statement' %>
+<% @title = 'Personal Statement' %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    var txt_element = $('#application_personal_statement');
+    var count_element = $('#character-count');
+
+    // Update character count.
+    function update_character_count() {
+      var total_length = txt_element.val().length;
+      var characters_left = <%= Application::STATEMENT_LENGTH %> - total_length;
+      count_element.html(characters_left);
+      if (characters_left < 0) {
+          count_element.attr('class', 'text-danger');
+      }
+      else {
+          count_element.removeAttr('class');
+      }
+    }
+
+    // Update when first loaded.
+    update_character_count();
+
+    // Update on text changed.
+    txt_element.on('change keyup paste', update_character_count);
+  });
+</script>
 
 <div class="row">
   <div class="col-sm-3">
@@ -7,14 +33,28 @@
   </div>
 
   <div class="col-sm-9">
-    <h3 class="no-top-margin">Personal Statement</h3>
+    <h3 class="no-top-margin">Add Your Statement</h3>
+    <%= form_for @application, url: applications_statement_next_path, method: :post do |f| %>
+        <div class="row">
+          <div class="col-xs-8">
+            <p class="text-darkish small">Enter your personal statement </p>
+          </div>
+          <div class="col-xs-4 text-right" style="font-size: medium;">
+            <strong><span id="character-count"></span></strong> characters left
+          </div>
+        </div>
 
-    <div class="row">
-      <div class="col-sm-12 text-right">
-        <br>
-        <p class="text-darkish small">When ready continue to the next section.</p>
-        <%= button_to 'Next', applications_statement_next_path(@application), method: :post, class: 'next-button' %>
+      <%= form_errors @application %>
+
+      <%= f.text_area :personal_statement, class: 'full-width', rows: '24' %>
+
+      <div class="row">
+        <div class="col-sm-12 text-right">
+          <br>
+          <p class="text-darkish small">When ready continue to the next section.</p>
+          <%= button_to 'Next', applications_statement_next_path(@application), method: :post, class: 'next-button' %>
+        </div>
       </div>
-    </div>
+    <% end %>
   </div>
 </div>

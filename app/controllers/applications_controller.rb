@@ -174,6 +174,13 @@ class ApplicationsController < ApplicationController
   end
 
   def statement_next
+    respond_to do |format|
+      if @application.save_statement? statement_params
+        format.html { redirect_to applications_submit_path(@application) }
+      else
+        format.html { render :statement }
+      end
+    end
   end
 
   def courses
@@ -193,6 +200,11 @@ class ApplicationsController < ApplicationController
     def set_application
       @application = (Application.find(params[:id]) or not_found)
       @application.owned_by? current_student or user_not_authorized
+    end
+
+    # Sanitises submitted form parameters
+    def statement_params
+      params.require(:application).permit(:personal_statement)
     end
 
     # Sanitises submitted form parameters
@@ -223,7 +235,7 @@ class ApplicationsController < ApplicationController
     # Sanitises submitted form parameters
     def application_params
       params.require(:application).permit(:title, :first_name, :middle_name, :family_name, :previous_name, :gender,
-                     :telephone, :mobile, :email, :disability, :personal_statement, :scottish_candidate_number,
+                     :telephone, :mobile, :email, :disability, :scottish_candidate_number,
                      :national_insurance_number, :permanent_house_number, :permanent_address_1, :permanent_address_2,
                      :permanent_postcode, :permanent_country, :correspondence_house_number, :correspondence_address_1,
                      :correspondence_address_2, :correspondence_postcode, :correspondence_country)

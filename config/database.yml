@@ -1,5 +1,14 @@
 # Postgresql Database Config
 
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: futureprospects
+  pool: 5
+  username: alexm
+  password: admin
+  host: localhost
+
 development:
   adapter: postgresql
   encoding: unicode

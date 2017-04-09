@@ -186,13 +186,6 @@ def course_spaces
   [15, 30, 45, 60].sample
 end
 
-# Get random images
-$images = %w(3d-model-hnd-y2.jpg accounting-hnc.jpg accounting-hnd.jpg accounting-nc.jpg admin-digital-hnc.jpg admin-hnc.jpg admin-hnd.jpg archi-tech-hnd.jpg art-and-design-nc.jpg build-surv-hnd.jpg built-env-nc.jpg buisness-diplo.jpg business-hnc.jpg car-join-cag.jpg con-craft-nq.jpg creative-writing-hnc.jpg ed-interior-hnd.jpg info-tech-hnc.jpg info-tech-hnd.jpg legal-hnd.jpg paint-dec-cag.jpg performance-hnc.jpg radio-hnd.jpg supply-chain-hnd.jpg web-dev-hnd.jpg)
-def random_image
-  image = $images.sample
-  Rails.root.join("app/assets/images/seed_images/#{image}").open
-end
-
 # Seed courses
 course = Course.new
 course.category_id = categories['Accounting']
@@ -237,7 +230,7 @@ course.career_prospects = 'This course prepares you for a career in:
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 7'
-course.image = random_image
+course.image = Rails.root.join('app/assets/images/seed_images/accounting-hnc.jpg').open
 course.spaces = course_spaces
 course.save!
 
@@ -276,7 +269,7 @@ course.career_prospects = 'You can apply for administrative, or technical level 
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 5'
-course.image = random_image
+course.image = Rails.root.join('app/assets/images/seed_images/accounting-nc.jpg').open
 course.spaces = course_spaces
 course.save!
 
@@ -336,7 +329,7 @@ course.career_prospects = 'This course prepares you for a career in:
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2019, 6, 15
 course.level = 'SCQF level 8'
-course.image = random_image
+course.image = Rails.root.join('app/assets/images/seed_images/accounting-hnd.jpg').open
 course.spaces = course_spaces
 course.save!
 
@@ -372,7 +365,7 @@ The qualification will allow you to develop:
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 8'
-course.image = random_image
+course.image = Rails.root.join('app/assets/images/seed_images/admin-hnc.jpg').open
 course.spaces = course_spaces
 course.save!
 
@@ -404,7 +397,7 @@ There are also opportunities for you in the Banking and Insurance Sectors, and a
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 8'
-course.image = random_image
+course.image = Rails.root.join('app/assets/images/seed_images/legal-hnd.jpg').open
 course.spaces = course_spaces
 course.save!
 
@@ -430,7 +423,7 @@ course.career_prospects = 'This course prepares you for a career in administrati
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 5'
-course.image = random_image
+course.image = Rails.root.join('app/assets/images/seed_images/admin-digital-hnc.jpg').open
 course.spaces = course_spaces
 course.save!
 
@@ -458,7 +451,7 @@ course.career_prospects = 'The course will develop your core and employability s
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 7'
-course.image = random_image
+course.image = Rails.root.join('app/assets/images/seed_images/info-tech-hnc.jpg').open
 course.spaces = course_spaces
 course.save!
 
@@ -489,7 +482,7 @@ course.career_prospects = 'After completing the HND you may pursue a career in b
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2019, 6, 15
 course.level = 'SCQF level 8'
-course.image = random_image
+course.image = Rails.root.join('app/assets/images/seed_images/info-tech-hnd.jpg').open
 course.spaces = course_spaces
 course.save!
 
@@ -528,7 +521,7 @@ course.career_prospects = 'Apply for various job vacancies, such as a junior web
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2019, 6, 15
 course.level = 'SCQF level 8'
-course.image = random_image
+course.image = Rails.root.join('app/assets/images/seed_images/web-dev-hnd.jpg').open
 course.spaces = course_spaces
 course.save!
 
@@ -576,7 +569,7 @@ course.career_prospects = 'This course prepares you for a career as an Architect
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2019, 6, 15
 course.level = 'SCQF level 8'
-course.image = random_image
+course.image = Rails.root.join('app/assets/images/seed_images/archi-tech-hnd.jpg').open
 course.spaces = course_spaces
 course.save!
 
@@ -614,7 +607,7 @@ course.career_prospects = 'This course prepares you for a career as a:
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 6'
-course.image = random_image
+course.image = Rails.root.join('app/assets/images/seed_images/built-env-nc.jpg').open
 course.spaces = course_spaces
 course.save!
 
@@ -640,7 +633,7 @@ course.career_prospects = 'This course prepares you for a career in private prac
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2019, 6, 15
 course.level = 'SCQF level 8'
-course.image = random_image
+course.image = Rails.root.join('app/assets/images/seed_images/build-surv-hnd.jpg').open
 course.spaces = course_spaces
 course.save!
 
@@ -669,7 +662,7 @@ course.career_prospects = 'You could expect to apply for a trainee management po
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 7'
-course.image = random_image
+course.image = Rails.root.join('app/assets/images/seed_images/business-hnc.jpg').open
 course.spaces = course_spaces
 course.save!
 
@@ -696,7 +689,7 @@ course.career_prospects = 'This course prepares you for a career in supply chain
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2019, 6, 15
 course.level = 'SCQF level 8'
-course.image = random_image
+course.image = Rails.root.join('app/assets/images/seed_images/supply-chain-hnd.jpg').open
 course.spaces = course_spaces
 course.save!
 
@@ -721,7 +714,7 @@ course.career_prospects = 'This course prepares you for a career in marketing, l
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 8'
-course.image = random_image
+course.image = Rails.root.join('app/assets/images/seed_images/buisness-diplo.jpg').open
 course.spaces = course_spaces
 course.save!
 
@@ -744,7 +737,7 @@ course.career_prospects = 'This course prepares you for a career within the Cons
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 6'
-course.image = random_image
+course.image = Rails.root.join('app/assets/images/seed_images/con-craft-nq.jpg').open
 course.spaces = course_spaces
 course.save!
 
@@ -770,7 +763,7 @@ course.career_prospects = 'On successful completion of the course learners will 
 course.start_date = Date.new 2018, 1, 8
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 5'
-course.image = random_image
+course.image = Rails.root.join('app/assets/images/seed_images/car-join-cag.jpg').open
 course.spaces = course_spaces
 course.save!
 
@@ -795,7 +788,7 @@ course.career_prospects = 'On successful completion of the course learners will 
 course.start_date = Date.new 2018, 1, 8
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 5'
-course.image = random_image
+course.image = Rails.root.join('app/assets/images/seed_images/paint-dec-cag.jpg').open
 course.spaces = course_spaces
 course.save!
 
@@ -825,7 +818,7 @@ After successfully completing the HND course, you can apply for direct entry to 
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2019, 6, 15
 course.level = 'SCQF level 8'
-course.image = random_image
+course.image = Rails.root.join('app/assets/images/seed_images/art-and-design-nc.jpg').open
 course.spaces = course_spaces
 course.save!
 
@@ -852,7 +845,7 @@ course.career_prospects = 'You could work in interior design in retail outlets, 
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 6'
-course.image = random_image
+course.image = Rails.root.join('app/assets/images/seed_images/ed-interior-hnd.jpg').open
 course.spaces = course_spaces
 course.save!
 
@@ -877,7 +870,7 @@ Previous students have gone directly into second year at university to study Mod
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 8'
-course.image = random_image
+course.image = Rails.root.join('app/assets/images/seed_images/3d-model-hnd-y2.jpg').open
 course.spaces = course_spaces
 course.save!
 
@@ -906,7 +899,7 @@ course.career_prospects = 'This course prepares you for a career in creative wri
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 7'
-course.image = random_image
+course.image = Rails.root.join('app/assets/images/seed_images/creative-writing-hnc.jpg').open
 course.spaces = course_spaces
 course.save!
 
@@ -928,7 +921,7 @@ course.career_prospects = 'There are opportunities in radio for those with a var
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 8'
-course.image = random_image
+course.image = Rails.root.join('app/assets/images/seed_images/radio-hnd.jpg').open
 course.spaces = course_spaces
 course.save!
 
@@ -957,6 +950,6 @@ course.career_prospects = 'There are a wide range of career opportunities which 
 course.start_date = Date.new 2017, 8, 28
 course.end_date = Date.new 2018, 6, 15
 course.level = 'SCQF level 7'
-course.image = random_image
+course.image = Rails.root.join('app/assets/images/seed_images/performance-hnc.jpg').open
 course.spaces = course_spaces
 course.save!

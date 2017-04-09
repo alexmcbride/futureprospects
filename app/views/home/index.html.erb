@@ -39,7 +39,7 @@
           <% elsif @application.incomplete? %>
             <%= link_to 'Continue Application', applications_continue_path(@application), class: 'btn btn-success btn-block', role: 'button' %>
           <% else %>
-            Track Application
+            <%= link_to 'Track Application', applications_continue_path(@application), class: 'btn btn-success btn-block', role: 'button' %>
           <% end %>
 
         <% else %>

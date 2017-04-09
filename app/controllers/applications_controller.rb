@@ -227,8 +227,7 @@ class ApplicationsController < ApplicationController
     respond_to do |format|
       confirmed = !params[:confirm].nil?
       if @application.save_submit? confirmed
-        flash[:notice] = 'Submitted'
-        format.html { render :submit }
+        format.html { redirect_to root_path, notice: 'Submitted application' }
       else
         format.html { render :submit }
       end

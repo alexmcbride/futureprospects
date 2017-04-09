@@ -16,7 +16,7 @@ class School < ApplicationRecord
   # Adds a qualification to the school
   def add_qualification?(qualification)
     if self.dates_valid? qualification
-      if self.valid?
+      if qualification.valid?
         qualification.school = self
         qualification.save
         return true

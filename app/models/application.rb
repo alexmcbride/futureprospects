@@ -15,8 +15,8 @@ class Application < ApplicationRecord
   validates :family_name, presence: true, length: { maximum: 35 }
   validates :previous_name, presence: false, length: { maximum: 70 }
   validates :gender, presence: true
-  validates :telephone, presence: true, length: { maximum: 12 }
-  validates :mobile, presence: false, length: { maximum: 12 }
+  validates :telephone, presence: true, length: { maximum: 20 }
+  validates :mobile, presence: false, length: { maximum: 20 }
   validates :email, presence: true, length: { maximum: 254 }
   validates :disability, presence: false, length: { maximum: 100 }
   validates :personal_statement, presence: false, length: { maximum: STATEMENT_LENGTH }
@@ -105,6 +105,15 @@ class Application < ApplicationRecord
   # Checks if a student can still add courses to their application
   def can_add_course?
     self.available_courses > 0
+  end
+
+  # Calculate the student's application fee
+  def calculate_fee
+    if self.course_selections.count > 1
+      BigDecimal.new 20
+    else
+      BigDecimal.new 10
+    end
   end
 
   # Attempts to save the education stage

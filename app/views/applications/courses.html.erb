@@ -52,7 +52,7 @@
     <%= form_for @application, url: applications_courses_next_path, method: :post do |f| %>
 
       <hr>
-      <h3>Course List (<%= @application.available_courses %> left)</h3>
+      <h3>Course List</h3>
 
       <%= form_errors @application %>
 
@@ -61,7 +61,17 @@
           <% if @application.course_selections.empty? %>
             <p class="text-darkish small text-center"><em>Any courses you add will appear here.</em></p>
           <% else %>
-            <p class="text-darkish small">These are the courses you are applying for. You can remove them by clicking the remove button</p>
+            <div class="row">
+              <div class="col-xs-8">
+                <p class="text-darkish small">These are the courses you are applying for. You can remove them by clicking the remove button</p>
+              </div>
+              <div class="col-xs-4 text-right">
+                <strong>
+                  <%= pluralize @application.available_courses, 'course' %> left &mdash;
+                  <%= number_to_currency@application.calculate_fee, unit: '£' %> fee
+                </strong>
+              </div>
+            </div>
             <div class="list-group">
               <% @application.course_selections.each do |selection| %>
                   <div class="list-group-item list-group-item-heading panel-bg course-item">

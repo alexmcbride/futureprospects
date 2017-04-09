@@ -54,7 +54,8 @@
               <%= f.label :start_date %>
             </div>
             <div class="col-xs-8">
-              <%= f.date_select :start_date, class: 'full-width' %>
+              <% year = DateTime.now.year %>
+              <%= f.date_select :start_date, class: 'full-width', start_year: year - 100, end_year: year %>
             </div>
           </div>
           <div class="row slight-margin-bottom">
@@ -62,7 +63,7 @@
               <%= f.label :end_date %>
             </div>
             <div class="col-xs-8">
-              <%= f.date_select :end_date, class: 'full-width' %>
+              <%= f.date_select :end_date, class: 'full-width', start_year: year - 100, end_year: year + 4 %>
             </div>
           </div>
         </div>

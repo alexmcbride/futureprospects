@@ -46,3 +46,6 @@ Thumbs.db
 
 # Ignore application configuration
 /config/application.yml
+
+*.py
+/public/uploads

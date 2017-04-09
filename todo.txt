@@ -1,4 +1,3 @@
-put ? next to first uncompleted stage?
 fix includes for applications controller, lots of noisy joins there
 
 search terms should be:
@@ -19,3 +18,5 @@ guard against loading application methods (remove course etc.) after application
 redo profile to remove table stuff
 
 when make change to sub-model page (e.g. education) then automatically mark stage as incomplete?
+
+add application seed data

@@ -23,8 +23,10 @@ class ApplicationsController < ApplicationController
               courses: applications_courses_path(@application),
               submit: applications_submit_path(@application) }
 
+    stage = @application.first_incomplete_stage
+
     respond_to do |format|
-      format.html { redirect_to paths[@application.next_stage] }
+      format.html { redirect_to paths[stage] }
     end
   end
 
@@ -222,6 +224,15 @@ class ApplicationsController < ApplicationController
   end
 
   def submit_next
+    respond_to do |format|
+      confirmed = !params[:confirm].nil?
+      if @application.save_submit? confirmed
+        flash[:notice] = 'Submitted'
+        format.html { render :submit }
+      else
+        format.html { render :submit }
+      end
+    end
   end
 
   private

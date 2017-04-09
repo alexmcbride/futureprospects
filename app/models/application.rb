@@ -2,6 +2,8 @@ class Application < ApplicationRecord
   # Constants
   STATEMENT_LENGTH = 2000
   MAX_COURSES = 5
+  SINGLE_COURSE_FEE = 10
+  MULTIPLE_COURSE_FEE = 20
 
   # Enums
   enum gender: [:male, :female, :other]
@@ -54,30 +56,24 @@ class Application < ApplicationRecord
   # Checks if the application is complete.
   def complete?
     self.completed_intro and self.completed_profile and self.completed_education and self.completed_employment and
-        self.completed_references and self.completed_statement and self.completed_courses and self.completed_submit
+        self.completed_references and self.completed_statement and self.completed_courses
   end
 
   # Gets a symbol indicating the first uncompleted stage of the application
-  def next_stage
-    if self.completed_courses or self.completed_submit
-      :submit
-    elsif self.completed_statement
-      :courses
-    elsif self.completed_references
-      :statement
-    elsif self.completed_employment
-      :references
-    elsif self.completed_references
-      :employment
-    elsif self.completed_employment
-      :employment
-    elsif self.completed_profile
-      :education
-    elsif self.completed_intro
-      :profile
-    else
-      :intro
-    end
+  def first_incomplete_stage
+    stage = self.incomplete_stages.first
+    stage.nil? ? :submit : stage
+  end
+
+  def incomplete_stages
+    stages = {intro: self.completed_intro,
+              profile: self.completed_profile,
+              education: self.completed_education,
+              employment: self.completed_employment,
+              referneces: self.completed_references,
+              statement: self.completed_statement,
+              courses: self.completed_courses}
+    (stages.map { |k, v| k unless v }).compact
   end
 
   # Checks if the application is incomplete.
@@ -107,12 +103,12 @@ class Application < ApplicationRecord
     self.available_courses > 0
   end
 
-  # Calculate the student's application fee
+  # Calculates the student's application fee. £10 for a single course, £20 for multiple.
   def calculate_fee
     if self.course_selections.count > 1
-      BigDecimal.new 20
+      BigDecimal.new MULTIPLE_COURSE_FEE
     else
-      BigDecimal.new 10
+      BigDecimal.new SINGLE_COURSE_FEE
     end
   end
 
@@ -204,15 +200,21 @@ class Application < ApplicationRecord
   end
 
   # Attempts to submit the application.
-  def save_submit?
-    # TODO: this can never be true at this point can it?
-    if self.complete?
-      self.completed_submit = true
-      self.state = :submitted
-      self.save
-      return true
+  def save_submit?(confirmed)
+    unless confirmed
+      self.errors.add(:confirm, 'box must be checked in order to submit.')
+      return false
     end
-    self.errors.add(:incomplete, 'stages of the application are preventing it from being submitted')
-    false
+
+    stages = self.incomplete_stages
+    if stages.empty?
+      self.state = :submitted
+      self.submitted_date = DateTime.now
+      self.save
+      true
+    else
+      stages.each {|s| self.errors.add(s, 'section has not been completed')}
+      false
+    end
   end
 end

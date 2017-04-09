@@ -9,10 +9,38 @@
   <div class="col-sm-9">
     <h3 class="no-top-margin">Submit Application</h3>
 
-    <div class="col-sm-12 text-right">
+    <p>You can submit your completed application. Make sure that all the information is correct and up-to-date. After
+      submission you will be taken to the payment section, where you will need to payment the <strong>application fee of
+      <%= number_to_currency @application.calculate_fee, unit: '£' %></strong>. Your application cannot be processed until the
+    payment is received.</p>
+
+    <br>
+
+    <% if @application.incomplete? %>
+      <div class="alert alert-warning">
+        <h4 class="no-top-margin"><strong>Incomplete Stages</strong></h4>
+        <p>The application cannot be submitted as the following <%= pluralize @application.incomplete_stages.count, 'stage' %> must be completed:</p>
+        <ul>
+          <% @application.incomplete_stages.each do |stage| %>
+              <li><strong><%= stage %></strong></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= form_for @application, url: applications_submit_next_path, method: :post do |f| %>
+      <%= form_errors @application %>
       <br>
-      <p class="text-darkish small">When ready complete the application.</p>
-      <%= button_to 'Submit', nil, method: :post, class: 'next-button' %>
-    </div>
+      <div class="col-sm-12 text-center">
+        <div class="checkbox checkbox-primary">
+          <%= check_box_tag :confirm %>
+          <%= label_tag :confirm, 'I confirm that all information provided is correct', style: 'font-style: italic;' %>
+        </div>
+
+        <br><br>
+
+        <%= f.submit 'Submit', class: 'next-button', style: 'width:50%;' %>
+      </div>
+    <% end %>
   </div>
 </div>

@@ -1,16 +1,19 @@
-<div class="jumbotron">
-  <h2>Welcome to Future Prospects.</h2>
-  <p>Thank you for creating an account! Now, in order to apply for college you'll need <%= link_to 'create an application', applications_create_path, method: :post %> by
-    following the instructions below!</p>
-</div>
-
 <div class="row">
-  <!-- Search Courses Column -->
-  <div class="col-md-6">
+  <div class="col-sm-4">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h2>Welcome to Future Prospects.</h2>
+        <p>Thank you for creating an account! Now, in order to apply for college you'll need <%= link_to 'create an application', applications_create_path, method: :post %> by
+          following the instructions below!</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-4">
     <div class="panel panel-default">
       <div class="panel-body">
         <h2>Application Stages</h2>
-        <p class="text-darkish small">To apply to for a course you must complete the following stages.</p>
+        <p class="text-darkish">To apply to for a course you must complete the following stages.</p>
         <ul class="list-group">
           <li class="list-group-item active">
             Create Application
@@ -29,13 +32,13 @@
   </div>
 
   <!-- Login Column -->
-  <div class="col-md-6">
+  <div class="col-sm-4">
     <div class="panel panel-default">
       <div class="panel-body">
         <% if student_signed_in? %>
             <h2>Current Stage</h2>
 
-            <p class="text-darkish small">Select the option below to continue the application process.</p>
+            <p class="text-darkish">Select the option below to continue the application process.</p>
 
             <% if @application.nil? %>
                 <%= form_tag applications_create_path, method: :post do %>

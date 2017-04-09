@@ -29,23 +29,35 @@ class Student < ApplicationRecord
     @login || self.username || self.email
   end
 
+  def full_name
+    "#{self.first_name} #{self.family_name}"
+  end
+
   # Creates a new application, filled with some info we already know.
   def create_application
-    application = Application.new
-    application.email = self.email
-    application.first_name = self.first_name
-    application.family_name = self.family_name
-    application.scottish_candidate_number = self.scottish_candidate_number
-    application.national_insurance_number = self.national_insurance_number
-    application.student = self
-    application.save validate: false # Can't validate at this point
-    application
+    if self.has_current_application?
+      nil
+    else
+      application = Application.new
+      application.email = self.email
+      application.first_name = self.first_name
+      application.family_name = self.family_name
+      application.scottish_candidate_number = self.scottish_candidate_number
+      application.national_insurance_number = self.national_insurance_number
+      application.student = self
+      application.save validate: false # Can't validate at this point
+      application
+    end
   end
 
   # Gets the current application, which is an application made in the last year.
   def current_application
     # Get from last year for Postgresql
     self.applications.where("created_at > CURRENT_DATE - INTERVAL '1 year'").first
+  end
+
+  def has_current_application?
+    not self.current_application.nil?
   end
 
   # Overrides Devise sign in to allow both username and email address to be used.

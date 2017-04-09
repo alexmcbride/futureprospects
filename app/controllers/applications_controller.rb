@@ -5,9 +5,13 @@ class ApplicationsController < ApplicationController
 
   # POST: /applications
   def create
-    @application = current_student.create_application
     respond_to do |format|
-      format.html { redirect_to applications_index_path(@application) }
+      @application = current_student.create_application
+      if @application.nil?
+        format.html { redirect_to root_path, notice: 'Application has already been created' }
+      else
+        format.html { redirect_to applications_index_path(@application) }
+      end
     end
   end
 

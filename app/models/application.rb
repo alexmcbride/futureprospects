@@ -55,8 +55,12 @@ class Application < ApplicationRecord
 
   # Checks if the application is complete.
   def complete?
-    self.completed_intro and self.completed_profile and self.completed_education and self.completed_employment and
-        self.completed_references and self.completed_statement and self.completed_courses
+    self.incomplete_stages.empty?
+  end
+
+  # Checks if the application is incomplete.
+  def incomplete?
+    not complete?
   end
 
   # Gets a symbol indicating the first uncompleted stage of the application
@@ -74,11 +78,6 @@ class Application < ApplicationRecord
               statement: self.completed_statement,
               courses: self.completed_courses}
     (stages.map { |k, v| k unless v }).compact
-  end
-
-  # Checks if the application is incomplete.
-  def incomplete?
-    not complete?
   end
 
   # Checks that a school hasn't been added without a qualification.

@@ -29,6 +29,7 @@ class Student < ApplicationRecord
     @login || self.username || self.email
   end
 
+  # Gets the student's full name
   def full_name
     "#{self.first_name} #{self.family_name}"
   end
@@ -56,6 +57,7 @@ class Student < ApplicationRecord
     self.applications.where("created_at > CURRENT_DATE - INTERVAL '1 year'").first
   end
 
+  # Checks if the student has a current application
   def has_current_application?
     not self.current_application.nil?
   end

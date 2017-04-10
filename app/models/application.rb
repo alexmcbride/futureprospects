@@ -69,6 +69,7 @@ class Application < ApplicationRecord
     stage.nil? ? :submit : stage
   end
 
+  # Determines which stages of the application are incomplete
   def incomplete_stages
     stages = {intro: self.completed_intro,
               profile: self.completed_profile,
@@ -102,7 +103,7 @@ class Application < ApplicationRecord
     self.available_courses > 0
   end
 
-  # Calculates the student's application fee. £10 for a single course, £20 for multiple.
+  # Calculates the student's application fee.
   def calculate_fee
     if self.course_selections.count > 1
       BigDecimal.new MULTIPLE_COURSE_FEE

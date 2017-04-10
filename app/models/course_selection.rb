@@ -9,7 +9,7 @@ class CourseSelection < ApplicationRecord
   belongs_to :application
   belongs_to :course
 
-  # Checks if a course selection exists
+  # Checks if a course selection already exists
   def self.exists?(application_id, course_id)
     not where('application_id=? AND course_id=?', application_id, course_id).empty?
   end

@@ -58,7 +58,7 @@
 
       <div class="row">
         <div class="col-xs-12">
-          <% if @application.course_selections.empty? %>
+          <% if @course_selections.empty? %>
             <p class="text-darkish small text-center"><em>Any courses you add will appear here.</em></p>
           <% else %>
             <div class="row">
@@ -73,7 +73,7 @@
               </div>
             </div>
             <div class="list-group">
-              <% @application.course_selections.each do |selection| %>
+              <% @course_selections.each do |selection| %>
                   <div class="list-group-item well">
                     <div class="row">
                       <div class="col-sm-8">

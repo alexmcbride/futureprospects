@@ -92,10 +92,12 @@ module ApplicationHelper
     end
   end
 
+  # Formats a date as dd/mm/yyyy
   def format_date(date)
     date.strftime '%d/%m/%Y'
   end
 
+  # Outputs a text field with bootstrap style
   def form_text_field(form, item, args={})
     label = args[:label]
     label_col = (args[:label_col] or 4)
@@ -108,6 +110,7 @@ module ApplicationHelper
     end
   end
 
+  # Outputs an email field with bootstrap style
   def form_email_field(form, item, args={})
     label = args[:label]
     label_col = (args[:label_col] or 4)
@@ -120,6 +123,7 @@ module ApplicationHelper
     end
   end
 
+  # Outputs a select control with bootstrap style
   def form_select(form, item, choices, args={})
     label = args[:label]
     label_col = (args[:label_col] or 4)
@@ -132,6 +136,7 @@ module ApplicationHelper
     end
   end
 
+  # Outputs a date field with bootstrap style
   def form_date(form, item, args={})
     label = args[:label]
     label_col = (args[:label_col] or 4)

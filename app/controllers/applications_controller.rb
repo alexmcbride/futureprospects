@@ -191,6 +191,7 @@ class ApplicationsController < ApplicationController
 
   def courses
     @course_selection = CourseSelection.new
+    @course_selections = CourseSelection.includes(:course).where(application_id: @application.id)
   end
 
   def courses_add
@@ -241,7 +242,7 @@ class ApplicationsController < ApplicationController
   private
     # Sets current application object and checks if student is owner of application
     def set_application
-      @application = (Application.find(params[:id]) or not_found)
+      @application = (Application.all.find(params[:id]) or not_found)
       @application.owned_by? current_student or user_not_authorized
     end
 

@@ -136,11 +136,10 @@ module ApplicationHelper
     label = args[:label]
     label_col = (args[:label_col] or 4)
     input_col = (args[:input_col] or 8)
-    year = DateTime.now.year
     content_tag(:div, class: 'form-group') do
       concat(form.label(item, label, class: "control-label col-xs-#{label_col}"))
       concat(content_tag(:div, class: "col-xs-#{input_col}") do
-        concat(form.date_select item, {:start_year => year - 100}, {:class => "date-form-control"})
+        concat(form.text_field(item, class: 'form-control', 'data-provide' => 'datepicker', placeholder: 'dd/mm/yyyy' ))
       end)
     end
   end

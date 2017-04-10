@@ -14,7 +14,7 @@
     <p><%= link_to 'Back to education...', applications_education_path(@school.application) %></p>
     <hr>
 
-    <%= form_for @qualification, url: applications_qualifications_add_path(@school), method: :post do |f| %>
+    <%= form_for @qualification, :html => {:class => 'form-horizontal', :role => 'form' }, url: applications_qualifications_add_path(@school), method: :post do |f| %>
       <h3 class="no-top-margin">Add Qualifications</h3>
 
       <p class="text-darkish small">Add the qualifications you gained at this institution. If you have not completed
@@ -23,59 +23,25 @@
 
       <div class="row">
         <div class="col-sm-6 col-xs-12">
-          <div class="row slight-margin-bottom">
-            <div class="col-xs-4">
-              <%= f.label :subject %>
-            </div>
-            <div class="col-xs-8">
-              <%= f.text_field :subject, class: 'full-width' %>
-            </div>
-          </div>
-          <div class="row slight-margin-bottom">
-            <div class="col-xs-4">
-              <%= f.label :award %>
-            </div>
-            <div class="col-xs-8">
-              <%= f.text_field :award, class: 'full-width' %>
-            </div>
-          </div>
-          <div class="row slight-margin-bottom">
-            <div class="col-xs-4">
-              <%= f.label :grade %>
-            </div>
-            <div class="col-xs-8">
-              <%= f.text_field :grade, class: 'full-width' %>
-            </div>
-          </div>
+          <%= form_text_field f, :subject %>
+          <%= form_text_field f, :award %>
+          <%= form_text_field f, :grade %>
         </div>
+
         <div class="col-sm-6 col-xs-12">
-          <div class="row slight-margin-bottom">
-            <div class="col-xs-4">
-              <%= f.label :start_date %>
-            </div>
-            <div class="col-xs-8">
-              <% year = DateTime.now.year %>
-              <%= f.date_select :start_date, class: 'full-width', start_year: year - 100, end_year: year %>
-            </div>
-          </div>
-          <div class="row slight-margin-bottom">
-            <div class="col-xs-4">
-              <%= f.label :end_date %>
-            </div>
-            <div class="col-xs-8">
-              <%= f.date_select :end_date, class: 'full-width', start_year: year - 100, end_year: year + 4 %>
-            </div>
-          </div>
+          <%= form_date f, :start_date %>
+          <%= form_date f, :end_date %>
         </div>
       </div>
-        <div class="row">
-          <div class="col-xs-6">
-            <p class="text-darkish small"><em>* Optional</em></p>
-          </div>
-          <div class="col-xs-6 text-right">
-            <%= f.submit 'Add Qualification', class: 'add-button' %>
-          </div>
+
+      <div class="row">
+        <div class="col-xs-6">
+          <p class="text-darkish small"><em>* Optional</em></p>
         </div>
+        <div class="col-xs-6 text-right">
+          <%= f.submit 'Add Qualification', class: 'add-button' %>
+        </div>
+      </div>
     <% end %>
 
     <hr>
@@ -93,7 +59,7 @@
       <p class="text-darkish small">You can remove a qualification by clicking the remove button.</p>
       <div class="list-group">
         <% @school.qualifications.each do |qualification| %>
-          <div class="education-item list-group-item-heading">
+          <div class="list-group-item well">
             <div class="row">
               <div class="col-sm-6">
                 <h4 class="no-top-margin"><%= qualification.subject %></h4>

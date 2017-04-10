@@ -24,12 +24,12 @@
 
     <script>
       /* Swap brand images on hover */
-      $(function(){
+      $(document).ready(function(){
          $('#brand-link').hover(function(){
              $('#brand-image').attr('src', '<%= image_path 'future-prospects-logo-hover.png' %>');
          }, function() {
              $('#brand-image').attr('src', '<%= image_path 'future-prospects-logo.png' %>');
-         })
+         });
       });
     </script>
   </head>
@@ -47,7 +47,8 @@
             <span class="icon-bar"></span>
           </button>
             <a id="brand-link" href="<%= url_for root_path %>" class="navbar-brand">
-              <%= image_tag 'future-prospects-logo.png', width: '178px', height: '24px', alt: 'Future Prospects', id: 'brand-image' %>
+              <%#<%= image_tag 'future-prospects-logo.png', width: '178px', height: '24px', alt: 'Future Prospects', id: 'brand-image' %>
+              Future Prospects
             </a>
         </div>
 

@@ -11,62 +11,27 @@
 
     <p class="text-darkish small">Enter your personal information, so you can tell the college about you.</p>
 
-    <%= form_for @application, url: applications_profile_next_path, method: :post do |f| %>
+    <%= form_for @application, :html => {:class => 'form-horizontal', :role => 'form' }, url: applications_profile_next_path, method: :post do |f| %>
         <%= form_errors @application %>
 
         <div class="row">
           <div class="col-sm-6 col-xs-12">
-            <div class="row slight-margin-bottom">
-              <div class="col-xs-4"><%= f.label :title %></div>
-              <div class="col-xs-8"><%= f.text_field :title, class: 'full-width' %></div>
-            </div>
-            <div class="row slight-margin-bottom">
-              <div class="col-xs-4 text-capitalize"><%= f.label :first_name %></div>
-              <div class="col-xs-8"><%= f.text_field :first_name, class: 'full-width' %></div>
-            </div>
-            <div class="row slight-margin-bottom">
-              <div class="col-xs-4 text-capitalize"><%= f.label :middle_name %> *</div>
-              <div class="col-xs-8"><%= f.text_field :middle_name, class: 'full-width' %></div>
-            </div>
-            <div class="row slight-margin-bottom">
-              <div class="col-xs-4 text-capitalize"><%= f.label :family_name %></div>
-              <div class="col-xs-8"><%= f.text_field :family_name, class: 'full-width' %></div>
-            </div>
-            <div class="row slight-margin-bottom">
-              <div class="col-xs-4 text-capitalize"><%= f.label :previous_name %> *</div>
-              <div class="col-xs-8"><%= f.text_field :previous_name, class: 'full-width' %></div>
-            </div>
-            <div class="row slight-margin-bottom">
-              <div class="col-xs-4"><%= f.label :gender %></div>
-              <div class="col-xs-8"><%= f.select :gender, options_for_select(Application.genders.keys.map { |w| [w.humanize, w] }), {}, {:class => 'full-width'} %></div>
-            </div>
+            <%= form_text_field f, :title %>
+            <%= form_text_field f, :first_name %>
+            <%= form_text_field f, :middle_name, {label: 'Middle name*'} %>
+            <%= form_text_field f, :family_name %>
+            <%= form_text_field f, :previous_name, {label: 'Previous name*'} %>
+            <%= form_select f, :gender, options_for_select(Application.genders.keys.map { |w| [w.humanize, w] }) %>
           </div>
 
           <div class="col-sm-6 col-xs-12">
-            <div class="row slight-margin-bottom">
-              <div class="col-xs-4"><%= f.label :email %></div>
-              <div class="col-xs-8"><%= f.text_field :email, class: 'full-width' %></div>
-            </div>
-            <div class="row slight-margin-bottom">
-              <div class="col-xs-4"><%= f.label :telephone %></div>
-              <div class="col-xs-8"><%= f.text_field :telephone, class: 'full-width' %></div>
-            </div>
-            <div class="row slight-margin-bottom">
-              <div class="col-xs-4"><%= f.label :mobile %> *</div>
-              <div class="col-xs-8"><%= f.text_field :mobile, class: 'full-width' %></div>
-            </div>
-            <div class="row slight-margin-bottom">
-              <div class="col-xs-4"><%= f.label :disability %> *</div>
-              <div class="col-xs-8"><%= f.text_field :disability, class: 'full-width' %></div>
-            </div>
-            <div class="row slight-margin-bottom">
-              <div class="col-xs-4 text-capitalize"><%= f.label :scottish_candidate_number, 'SC Number' %> <a class="help-cursor" title="Scottish Candidate Number">(?)</a></div>
-              <div class="col-xs-8"><%= f.text_field :scottish_candidate_number, class: 'full-width' %></div>
-            </div>
-            <div class="row slight-margin-bottom">
-              <div class="col-xs-4 text-capitalize"><%= f.label :national_insurance_number, 'NI Number' %> <a class="help-cursor" title="National Insurance Number">(?)</a></div>
-              <div class="col-xs-8"><%= f.text_field :national_insurance_number, class: 'full-width' %></div>
-            </div>
+
+            <%= form_email_field f, :email %>
+            <%= form_text_field f, :telephone %>
+            <%= form_text_field f, :mobile, {label: 'Mobile*'} %>
+            <%= form_text_field f, :disability %>
+            <%= form_text_field f, :scottish_candidate_number, {label: 'SC Number'} %>
+            <%= form_text_field f, :national_insurance_number, {label: 'NI Number'} %>
           </div>
         </div>
 
@@ -74,51 +39,21 @@
           <div class="col-sm-6 col-xs-12">
             <h4>Permanent Address</h4>
             <p class="text-darkish small">This is the address that you live at.</p>
-            <div class="row slight-margin-bottom">
-              <div class="col-xs-4"><%= f.label :permanent_house_number, 'House Number' %></div>
-              <div class="col-xs-8"><%= f.text_field :permanent_house_number, class: 'full-width' %></div>
-            </div>
-            <div class="row slight-margin-bottom">
-              <div class="col-xs-4"><%= f.label :permanent_address_1, 'Address 1' %></div>
-              <div class="col-xs-8"><%= f.text_field :permanent_address_1, class: 'full-width' %></div>
-            </div>
-            <div class="row slight-margin-bottom">
-              <div class="col-xs-4"><%= f.label :permanent_address_2, 'Address 2' %> *</div>
-              <div class="col-xs-8"><%= f.text_field :permanent_address_2, class: 'full-width' %></div>
-            </div>
-            <div class="row slight-margin-bottom">
-              <div class="col-xs-4"><%= f.label :permanent_postcode, 'Post Code' %></div>
-              <div class="col-xs-8"><%= f.text_field :permanent_postcode, class: 'full-width' %></div>
-            </div>
-            <div class="row slight-margin-bottom">
-              <div class="col-xs-4"><%= f.label :permanent_countr, 'Country' %></div>
-              <div class="col-xs-8"><%= f.text_field :permanent_country, class: 'full-width' %></div>
-            </div>
+            <%= form_text_field f, :permanent_house_number, {label: 'House Number'} %>
+            <%= form_text_field f, :permanent_address_1,{label: 'Address 1'} %>
+            <%= form_text_field f, :permanent_address_2, {label: 'Address 2'} %>
+            <%= form_text_field f, :permanent_postcode, {label: 'Post Code'} %>
+            <%= form_text_field f, :permanent_country, {label: 'Country'} %>
           </div>
 
           <div class="col-sm-6">
             <h4>Correspondence Address</h4>
             <p class="text-darkish small">This is the address where you want your letters sent (optional).</p>
-            <div class="row slight-margin-bottom">
-              <div class="col-xs-4"><%= f.label :correspondence_house_number, 'House Number' %> *</div>
-              <div class="col-xs-8"><%= f.text_field :correspondence_house_number, class: 'full-width' %></div>
-            </div>
-            <div class="row slight-margin-bottom">
-              <div class="col-xs-4"><%= f.label :correspondence_address_1, 'Address 1' %> *</div>
-              <div class="col-xs-8"><%= f.text_field :correspondence_address_1, class: 'full-width' %></div>
-            </div>
-            <div class="row slight-margin-bottom">
-              <div class="col-xs-4"><%= f.label :correspondence_address_2, 'Address 2' %> *</div>
-              <div class="col-xs-8"><%= f.text_field :correspondence_address_2, class: 'full-width' %></div>
-            </div>
-            <div class="row slight-margin-bottom">
-              <div class="col-xs-4"><%= f.label :correspondence_postcode, 'Post Code' %> *</div>
-              <div class="col-xs-8"><%= f.text_field :correspondence_postcode, class: 'full-width' %></div>
-            </div>
-            <div class="row slight-margin-bottom">
-              <div class="col-xs-4"><%= f.label :correspondence_country, 'Country' %> *</div>
-              <div class="col-xs-8"><%= f.text_field :correspondence_country, class: 'full-width' %></div>
-            </div>
+            <%= form_text_field f, :correspondence_house_number, {label: 'House Number'} %>
+            <%= form_text_field f, :correspondence_address_1,{label: 'Address 1'} %>
+            <%= form_text_field f, :correspondence_address_2, {label: 'Address 2'} %>
+            <%= form_text_field f, :correspondence_postcode, {label: 'Post Code'} %>
+            <%= form_text_field f, :correspondence_country, {label: 'Country'} %>
           </div>
         </div>
 

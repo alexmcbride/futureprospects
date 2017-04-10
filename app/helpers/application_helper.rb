@@ -73,7 +73,7 @@ module ApplicationHelper
       content_tag(:a, href: url_for(path), class: 'list-group-item active') do
         concat(content_tag(:div, class: 'row') do
           concat(content_tag(:div, name, class: 'col-xs-10'))
-          concat(content_tag(:div, class: 'col-xs-1') do
+          concat(content_tag(:div, class: 'col-xs-2') do
             concat(content_tag(:i, '', class: 'fa fa-arrow-circle-right app-arrow'))
           end)
         end)
@@ -83,7 +83,7 @@ module ApplicationHelper
         concat(content_tag(:div, class: 'row') do
           concat(content_tag(:div, name, class: 'col-xs-10'))
           if completed
-            concat(content_tag(:div, class: 'col-xs-1') do
+            concat(content_tag(:div, class: 'col-xs-2') do
               concat(content_tag(:i, '', class: 'fa fa-check-circle app-tick'))
             end)
           end
@@ -94,5 +94,54 @@ module ApplicationHelper
 
   def format_date(date)
     date.strftime '%d/%m/%Y'
+  end
+
+  def form_text_field(form, item, args={})
+    label = args[:label]
+    label_col = (args[:label_col] or 4)
+    input_col = (args[:input_col] or 8)
+    content_tag(:div, class: 'form-group') do
+      concat(form.label(item, label, class: "control-label col-xs-#{label_col}"))
+      concat(content_tag(:div, class: "col-xs-#{input_col}") do
+        concat(form.text_field(item, class: 'form-control'))
+      end)
+    end
+  end
+
+  def form_email_field(form, item, args={})
+    label = args[:label]
+    label_col = (args[:label_col] or 4)
+    input_col = (args[:input_col] or 8)
+    content_tag(:div, class: 'form-group') do
+      concat(form.label(item, label, class: "control-label col-xs-#{label_col}"))
+      concat(content_tag(:div, class: "col-xs-#{input_col}") do
+        concat(form.email_field(item, class: 'form-control'))
+      end)
+    end
+  end
+
+  def form_select(form, item, choices, args={})
+    label = args[:label]
+    label_col = (args[:label_col] or 4)
+    input_col = (args[:input_col] or 8)
+    content_tag(:div, class: 'form-group') do
+      concat(form.label(item, label, class: "control-label col-xs-#{label_col}"))
+      concat(content_tag(:div, class: "col-xs-#{input_col}") do
+        concat(form.select item, choices, {}, {:class => 'form-control full-width'})
+      end)
+    end
+  end
+
+  def form_date(form, item, args={})
+    label = args[:label]
+    label_col = (args[:label_col] or 4)
+    input_col = (args[:input_col] or 8)
+    year = DateTime.now.year
+    content_tag(:div, class: 'form-group') do
+      concat(form.label(item, label, class: "control-label col-xs-#{label_col}"))
+      concat(content_tag(:div, class: "col-xs-#{input_col}") do
+        concat(form.date_select item, {:start_year => year - 100}, {:class => "date-form-control"})
+      end)
+    end
   end
 end

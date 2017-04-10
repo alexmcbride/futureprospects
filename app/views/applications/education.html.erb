@@ -12,55 +12,21 @@
 
   <div class="col-sm-9">
     <!-- Add school form -->
-    <%= form_for @school, url: applications_education_add_path(@application), method: :post do |f|%>
+    <%= form_for @school, :html => {:class => 'form-horizontal', :role => 'form' }, url: applications_education_add_path(@application), method: :post do |f|%>
       <h3 class="no-top-margin">Add Education</h3>
       <p class="text-darkish small">Add any school, college, university, or other institution where you have gained a qualification.</p>
       <%= form_errors @school %>
+
       <div class="row">
         <div class="col-sm-6 col-xs-12">
-          <div class="row slight-margin-bottom">
-            <div class="col-xs-4">
-              <%= f.label :name, 'School Name' %>
-            </div>
-            <div class="col-xs-8">
-              <%= f.text_field :name, class: 'full-width' %>
-            </div>
-          </div>
-          <div class="row slight-margin-bottom">
-            <div class="col-xs-4">
-              <%= f.label :address_1 %>
-            </div>
-            <div class="col-xs-8">
-              <%= f.text_field :address_1, class: 'full-width' %>
-            </div>
-          </div>
-          <div class="row slight-margin-bottom">
-            <div class="col-xs-4">
-              <%= f.label :address_2 %> *
-            </div>
-            <div class="col-xs-8">
-              <%= f.text_field :address_2, class: 'full-width' %>
-            </div>
-          </div>
+          <%= form_text_field f, :name, {label: 'School name'} %>
+          <%= form_text_field f, :address_1 %>
+          <%= form_text_field f, :address_2 %>
         </div>
 
         <div class="col-sm-6 col-xs-12">
-          <div class="row slight-margin-bottom">
-            <div class="col-xs-4">
-              <%= f.label :postcode, 'Post Code', class: 'text-capitalize' %>
-            </div>
-            <div class="col-xs-8">
-              <%= f.text_field :postcode, class: 'full-width' %>
-            </div>
-          </div>
-          <div class="row slight-margin-bottom">
-            <div class="col-xs-4">
-              <%= f.label :country %>
-            </div>
-            <div class="col-xs-8">
-              <td><%= f.text_field :country, class: 'full-width' %></td>
-            </div>
-          </div>
+          <%= form_text_field f, :postcode, {label: 'Post code'} %>
+          <%= form_text_field f, :country %>
         </div>
       </div>
       <div class="row">
@@ -87,7 +53,7 @@
         <p class="text-darkish small">You can add the qualifications gain at each school by selecting the add qualifications option.</p>
         <div class="list-group">
           <% @application.schools.each do |school| %>
-            <div class="education-item list-group-item-heading">
+            <div class="list-group-item well">
               <div class="row">
                 <div class="col-sm-6">
                   <h4 class="no-top-margin no-bottom-padding"><%= school.name %></h4>

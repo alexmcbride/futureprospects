@@ -16,23 +16,21 @@
     <h3>Pricing</h3>
     <p>You can <strong>apply for</strong> a maximum of <strong>five college courses</strong>, the pricing is as
     follows:</p>
-    <div class="panel panel-bg">
-      <div class="panel-body">
-        <div class="row">
-          <div class="col-xs-3">
-            Single course:
-          </div>
-          <div class="col-xs-9">
-            <strong><%= number_to_currency Application::SINGLE_COURSE_FEE, unit: '£' %></strong>
-          </div>
+    <div class="well">
+      <div class="row">
+        <div class="col-xs-3">
+          Single course:
         </div>
-        <div class="row">
-          <div class="col-xs-3">
-            Two or more courses:
-          </div>
-          <div class="col-xs-9">
-            <strong><%= number_to_currency Application::MULTIPLE_COURSE_FEE, unit: '£' %></strong>
-          </div>
+        <div class="col-xs-9">
+          <strong><%= number_to_currency Application::SINGLE_COURSE_FEE, unit: '£' %></strong>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3">
+          Two or more courses:
+        </div>
+        <div class="col-xs-9">
+          <strong><%= number_to_currency Application::MULTIPLE_COURSE_FEE, unit: '£' %></strong>
         </div>
       </div>
     </div>

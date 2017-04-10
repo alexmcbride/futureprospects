@@ -15,8 +15,10 @@ check next button on application stages to make sure it's consistent.
 
 guard against loading application methods (remove course etc.) after application has been submitted.
 
-redo profile to remove table stuff
-
 when make change to sub-model page (e.g. education) then automatically mark stage as incomplete?
 
 add application seed data
+
+image hover jquery stops working on heroku?
+
+improve layout of add course autocomplete

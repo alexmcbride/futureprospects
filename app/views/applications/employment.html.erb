@@ -14,89 +14,26 @@
     <h3 class="no-top-margin">Add Employment</h3>
     <p class="text-darkish small">Add your employment history, any experience you have  in the workplace may help you earn a space on your chosen course.</p>
 
-    <%= form_for @job, url: applications_employment_add_path(@application), method: :post do |f| %>
+    <%= form_for @job, :html => {:class => 'form-horizontal', :role => 'form' }, url: applications_employment_add_path(@application), method: :post do |f| %>
       <%= form_errors @job %>
 
       <div class="row">
         <div class="col-sm-6 col-xs-12">
-          <div class="row slight-margin-bottom">
-            <div class="col-xs-4">
-              <%= f.label :employer %>
-            </div>
-            <div class="col-xs-8">
-              <%= f.text_field :employer, class: 'full-width' %>
-            </div>
-          </div>
-          <div class="row slight-margin-bottom">
-            <div class="col-xs-4">
-              <%= f.label :address_1 %>
-            </div>
-            <div class="col-xs-8">
-              <%= f.text_field :address_1, class: 'full-width' %>
-            </div>
-          </div>
-          <div class="row slight-margin-bottom">
-            <div class="col-xs-4">
-              <%= f.label :address_2 %> *
-            </div>
-            <div class="col-xs-8">
-              <%= f.text_field :address_2, class: 'full-width' %>
-            </div>
-          </div>
-          <div class="row slight-margin-bottom">
-            <div class="col-xs-4">
-              <%= f.label :postcode %>
-            </div>
-            <div class="col-xs-8">
-              <%= f.text_field :postcode, class: 'full-width' %>
-            </div>
-          </div>
-          <div class="row slight-margin-bottom">
-            <div class="col-xs-4">
-              <%= f.label :country %>
-            </div>
-            <div class="col-xs-8">
-              <%= f.text_field :country, class: 'full-width' %>
-            </div>
-          </div>
+          <%= form_text_field f, :employer %>
+          <%= form_text_field f, :address_1 %>
+          <%= form_text_field f, :address_2, {label: 'Address 2*'} %>
+          <%= form_text_field f, :postcode, {label: 'Post code'} %>
+          <%= form_text_field f, :country %>
         </div>
 
         <div class="col-sm-6 col-xs-12">
-          <div class="row slight-margin-bottom">
-            <div class="col-xs-4">
-              <%= f.label :job_title %>
-            </div>
-            <div class="col-xs-8">
-              <%= f.text_field :job_title, class: 'full-width' %>
-            </div>
-          </div>
-          <div class="row slight-margin-bottom">
-            <div class="col-xs-4">
-              <%= f.label :duties %>
-            </div>
-            <div class="col-xs-8">
-              <%= f.text_field :duties, class: 'full-width' %>
-            </div>
-          </div>
-          <div class="row slight-margin-bottom">
-            <div class="col-xs-4">
-              <%= f.label :start_date %>
-            </div>
-            <div class="col-xs-8">
-              <% year = DateTime.now.year %>
-              <%= f.date_select :start_date, class: 'full-width', start_year: year - 100, end_year: year %>
-            </div>
-          </div>
-          <div class="row slight-margin-bottom">
-            <div class="col-xs-4">
-              <%= f.label :end_date %>
-            </div>
-            <div class="col-xs-8">
-              <%= f.date_select :end_date, class: 'full-width', start_year: year - 100, end_year: year %>
-            </div>
-          </div>
+          <%= form_text_field f, :job_title %>
+          <%= form_text_field f, :duties %>
+          <%= form_date f, :start_date %>
+          <%= form_date f, :end_date %>
         </div>
       </div>
+
       <div class="row">
         <div class="col-xs-6">
           <p class="text-darkish small"><em>* Optional</em></p>
@@ -115,7 +52,7 @@
         <p class="text-darkish small">You can remove a job by clicking the remove button.</p>
       <div class="list-group">
         <% @application.jobs.each do |job| %>
-          <div class="list-group-item-heading education-item">
+          <div class="list-group-item well">
             <div class="row">
               <div class="col-xs-6">
                 <h4 class="no-top-margin"><strong><%= job.employer %></strong></h4>

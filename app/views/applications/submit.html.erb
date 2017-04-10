@@ -18,7 +18,7 @@
 
     <% if @application.incomplete? %>
       <div class="alert alert-warning">
-        <h4 class="no-top-margin"><strong>Incomplete Stages</strong></h4>
+        <h4 class="no-top-margin"><strong>Warning.</strong></h4>
         <p>The application cannot be submitted as the following <%= pluralize @application.incomplete_stages.count, 'stage' %> must be completed:</p>
         <ul>
           <% @application.incomplete_stages.each do |stage| %>

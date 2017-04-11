@@ -1,5 +1,3 @@
-fix includes for applications controller, lots of noisy joins there
-
 search terms should be:
 *Course Id
 *Course Title

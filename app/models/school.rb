@@ -1,5 +1,5 @@
 class School < ApplicationRecord
-  validates :name, presence: true, length: {maximum: 35}
+  validates :name, presence: true, length: {maximum: 70}
   validates :address_1, presence: true, length: {maximum: 35}
   validates :address_2, presence: false, length: {maximum: 35}
   validates :postcode, presence: true, length: { maximum: 8 }

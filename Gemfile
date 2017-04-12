@@ -64,5 +64,3 @@ gem 'rolify' # roles
 gem 'font-awesome-sass', '~> 4.7.0' # glyphs and icons
 gem 'jquery-ui-rails' # jquery-ui
 gem 'bootstrap-datepicker-rails' # bootstrap datepicker control
-gem 'datagrid'
-

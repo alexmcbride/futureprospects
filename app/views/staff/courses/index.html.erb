@@ -1,7 +1,5 @@
 <h2>Staff Courses</h2>
 
-<%= datagrid_table @courses %>
-
-<div class="digg_pagination text-center">
-  <%= will_paginate @courses.assets %>
-</div>
+<% @courses.each do |course| %>
+  <p><%= course.title %></p>
+<% end %>

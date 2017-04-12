@@ -1,6 +1,4 @@
 class Course < ApplicationRecord
-  enum status: [:open, :cancelled, :closed, :full, :clearance]
-
   # Pagination
   self.per_page = 10
 

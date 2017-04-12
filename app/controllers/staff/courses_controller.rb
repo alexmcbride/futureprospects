@@ -5,7 +5,7 @@ class Staff::CoursesController < ApplicationController
   # GET /staff/courses
   # GET /staff/courses.json
   def index
-    @courses = Course.filter(params[:title], params[:category], params[:status])
+    @courses = Course.filter(params[:title], params[:category], params[:status], params[:sort])
     @courses = @courses.includes(:category).where(college_id: current_staff.college_id)
     @courses = @courses.paginate(page: params[:page])
     @categories = Category.all

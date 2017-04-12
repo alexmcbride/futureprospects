@@ -53,7 +53,7 @@ class Course < ApplicationRecord
   end
 
   # Apply a simple filter to the courses
-  def self.filter(title, category_id, status)
+  def self.filter(title, category_id, status, sort)
     courses = Course.all
 
     unless title.nil? or title.empty?
@@ -64,8 +64,18 @@ class Course < ApplicationRecord
       courses = courses.where(category_id: category_id)
     end
 
-    unless status.nil? or status.empty?
+    unless status.nil? or status.to_i == -1
       courses = courses.where(status: status)
+    end
+
+    unless sort.nil?
+      if sort == 'title'
+        courses = courses.order(:title)
+      elsif sort == 'category'
+        courses = courses.order(:category_id)
+      elsif sort == 'status'
+        courses = courses.order(:status)
+      end
     end
 
     courses

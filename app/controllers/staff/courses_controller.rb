@@ -5,9 +5,10 @@ class Staff::CoursesController < ApplicationController
   # GET /staff/courses
   # GET /staff/courses.json
   def index
-    @courses = CoursesGrid.new(college_id: current_staff.college_id) do |scope|
-      scope.page(params[:page]).per_page(10)
-    end
+    @courses = Course.filter(params[:title], params[:category], params[:status])
+    @courses = @courses.includes(:category).where(college_id: current_staff.college_id)
+    @courses = @courses.paginate(page: params[:page])
+    @categories = Category.all
   end
 
   # GET /staff/courses/1

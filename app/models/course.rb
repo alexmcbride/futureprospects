@@ -51,4 +51,23 @@ class Course < ApplicationRecord
   def has_spaces
     self.spaces > self.course_selections.count
   end
+
+  # Apply a simple filter to the courses
+  def self.filter(title, category_id, status)
+    courses = Course.all
+
+    unless title.nil? or title.empty?
+      courses = courses.where('LOWER(title) LIKE ?', "%#{title.downcase}%")
+    end
+
+    unless category_id.to_i == 0
+      courses = courses.where(category_id: category_id)
+    end
+
+    unless status.nil? or status.empty?
+      courses = courses.where(status: status)
+    end
+
+    courses
+  end
 end

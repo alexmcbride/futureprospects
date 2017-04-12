@@ -62,9 +62,9 @@
             <td><%= course.category.name %></td>
             <td><%= course.status.humanize %></td>
             <td>
-              <%= link_to icon('pencil-square'), nil, title: 'Edit' %>
+              <%= link_to icon('pencil-square'), edit_staff_course_path(course), title: 'Edit' %>
               |
-              <%= link_to icon('trash'), nil, title: 'Delete' %></td>
+              <%= link_to icon('trash'), staff_course_path(course), title: 'Delete', method: :delete, data: {confirm: 'Are you sure you want to delete?'} %></td>
           </tr>
       <% end %>
       </tbody>

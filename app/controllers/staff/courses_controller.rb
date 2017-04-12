@@ -7,7 +7,7 @@ class Staff::CoursesController < ApplicationController
   def index
     @courses = Course.filter(params[:title], params[:category], params[:status], params[:sort])
     @courses = @courses.includes(:category).where(college_id: current_staff.college_id)
-    @courses = @courses.paginate(page: params[:page])
+    @courses = @courses.paginate(page: params[:page], per_page: 15)
     @categories = Category.all
   end
 

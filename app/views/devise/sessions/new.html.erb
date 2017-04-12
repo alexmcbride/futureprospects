@@ -1,10 +1,15 @@
 <% breadcrumb :sign_in %>
-<% @title = 'Sign In' %>
 
 <div class="row">
   <div class="col-sm-6 col-sm-offset-3">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <p>Sign in to the site in order to track your application.</p>
+      <% if resource.staff? %>
+        <p>Sign in to the site in order to manage your student intake.</p>
+        <% @title = 'Sign In (College)' %>
+      <% else %>
+        <p>Sign in to the site in order to track your application.</p>
+        <% @title = 'Sign In' %>
+      <% end %>
 
       <div class="form-group">
         <%= f.text_field :login, autofocus: true, placeholder: 'Username or Email Address', class: 'form-control' %>

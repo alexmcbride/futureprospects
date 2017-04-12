@@ -11,5 +11,4 @@ class Staff < User
   def before_staff_create
     self.confirmed_at = DateTime.now
   end
-
 end

@@ -60,4 +60,13 @@ class User < ApplicationRecord
   def full_name
     "#{self.first_name} #{self.family_name}"
   end
+
+  def student?
+    self.type == 'Student'
+  end
+
+
+  def staff?
+    self.type == 'Staff'
+  end
 end

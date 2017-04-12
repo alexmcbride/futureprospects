@@ -148,4 +148,14 @@ module ApplicationHelper
       end)
     end
   end
+
+  # Gets any current user
+  def current_user
+    current_student or current_staff
+  end
+
+  # Gets if any user is signed in
+  def user_signed_in?
+    student_signed_in? or staff_signed_in?
+  end
 end

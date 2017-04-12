@@ -1,7 +1,15 @@
+# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
 Rails.application.routes.draw do
   devise_for :staff, :skip => [:registrations, :confirmations] # Skip staff sign-up
+  devise_scope :staff do
+    # We skip registrations to stop staff sign up, but we still need to enable staff profile editing
+    get 'staff/edit', to: 'devise/registrations#edit', as: 'edit_staff_registration'
+    put 'staff', to: 'devise/registrations#update', as: 'staff_registration'
+  end
   devise_for :students
 
+  # Application routes
   get 'applications/:id', to: 'applications#index', as: 'applications_index'
   post 'applications', to: 'applications#create', as: 'applications_create'
   get 'applications/:id/continue', to: 'applications#continue', as: 'applications_continue'
@@ -39,13 +47,14 @@ Rails.application.routes.draw do
 
   get 'courses/search', to: 'courses#search', as: 'courses_search'
 
+  # Courses
   resources :courses
-  resources :colleges
-
-  get 'home/index'
   get 'courses/category/:id', to: 'courses#category', as: 'courses_category'
 
-  root to: 'home#index'
+  # Colleges
+  resources :colleges
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  # Root
+  get 'home/index'
+  root to: 'home#index'
 end

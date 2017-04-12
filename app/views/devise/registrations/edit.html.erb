@@ -14,16 +14,30 @@
             <div class="col-xs-12">
               <div class="row slight-margin-bottom">
                 <div class="col-xs-6">Username</div>
-                <div class="col-xs-6"><strong><%= current_student.username %></strong></div>
+                <div class="col-xs-6"><strong><%= resource.username %></strong></div>
               </div>
-              <div class="row slight-margin-bottom">
-                <div class="col-xs-6">Scottish Candidate Number</div>
-                <div class="col-xs-6"><strong><%= current_student.scottish_candidate_number %></strong></div>
-              </div>
-              <div class="row slight-margin-bottom">
-                <div class="col-xs-6">National Insurance Number</div>
-                <div class="col-xs-6"><strong><%= current_student.national_insurance_number %></strong></div>
-              </div>
+
+              <% if resource.staff? %>
+                <div class="row slight-margin-bottom">
+                  <div class="col-xs-6">Job Title</div>
+                  <div class="col-xs-6"><strong><%= resource.job_title %></strong></div>
+                </div>
+                <div class="row slight-margin-bottom">
+                  <div class="col-xs-6">College</div>
+                  <div class="col-xs-6"><strong><%= resource.college.name %></strong></div>
+                </div>
+              <% end %>
+
+              <% if resource.student? %>
+                <div class="row slight-margin-bottom">
+                  <div class="col-xs-6">Scottish Candidate Number</div>
+                  <div class="col-xs-6"><strong><%= resource.scottish_candidate_number %></strong></div>
+                </div>
+                <div class="row slight-margin-bottom">
+                  <div class="col-xs-6">National Insurance Number</div>
+                  <div class="col-xs-6"><strong><%= resource.national_insurance_number %></strong></div>
+                </div>
+              <% end %>
             </div>
           </div>
         </div>

@@ -34,7 +34,7 @@ class CourseSelection < ApplicationRecord
 
     # Check application has free courses
     unless application.can_add_course?
-      selection.errors.add(:limit, "of maximum #{Application::MAX_COURSES} courses has been reached")
+      selection.errors.add(:maximum, "of #{Application::MAX_COURSES} courses has been reached")
       return false
     end
 

@@ -11,13 +11,13 @@ class Course < ApplicationRecord
   mount_uploader :image, CourseImageUploader
 
   # Validators
-  validates :title, presence: true, length: { maximum: 100 }, uniqueness: true
+  validates :title, presence: true, length: { maximum: 120 }, uniqueness: true
   validates :description, presence: true
   validates :entry_requirements, presence: true
   validates :career_prospects, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true
-  validates :level, presence: true
+  validates :level, presence: false
   validates :spaces, presence: true
 
   # Foreign Keys

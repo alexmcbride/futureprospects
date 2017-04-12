@@ -29,14 +29,14 @@ class School < ApplicationRecord
 
   # Checks if any of the qualification dates overlap
   def dates_valid?(qualification)
-    if self.qualifications.count > 0
-      durations = self.qualifications.map {|q| q.duration}
-      durations.each do |duration|
-        if qualification.duration.overlaps?(duration)
-          return false
-        end
-      end
-    end
+    # if self.qualifications.count > 0
+    #   durations = self.qualifications.map {|q| q.duration}
+    #   durations.each do |duration|
+    #     if qualification.duration.overlaps?(duration)
+    #       return false
+    #     end
+    #   end
+    # end
     true
   end
 

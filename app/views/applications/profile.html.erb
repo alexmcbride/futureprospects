@@ -9,7 +9,15 @@
   <div class="col-sm-9">
     <h3 class="no-top-margin">Personal Profile</h3>
 
-    <p class="text-darkish small">Enter your personal information, so you can tell the college about you.</p>
+
+    <div class="row small text-darkish">
+      <div class="col-sm-6">
+        <p>Enter your personal information, so you can tell the college about you.</p>
+      </div>
+      <div class="col-sm-6 text-right">
+        <p><em>* Optional</em></p>
+      </div>
+    </div>
 
     <%= form_for @application, :html => {:class => 'form-horizontal', :role => 'form' }, url: applications_profile_next_path, method: :post do |f| %>
         <%= form_errors @application %>
@@ -29,7 +37,7 @@
             <%= form_email_field f, :email %>
             <%= form_text_field f, :telephone %>
             <%= form_text_field f, :mobile, {label: '* Mobile'} %>
-            <%= form_text_field f, :disability %>
+            <%= form_text_field f, :disability, {label: '* Disability'} %>
             <%= form_text_field f, :scottish_candidate_number, {label: 'SC Number'} %>
             <%= form_text_field f, :national_insurance_number, {label: 'NI Number'} %>
           </div>
@@ -62,10 +70,7 @@
         <hr>
 
         <div class="row">
-          <div class="col-sm-6 small text-darkish">
-            <p><em>* Optional</em></p>
-          </div>
-          <div class="col-sm-6 text-right">
+          <div class="col-sm-12 text-right">
             <p class="text-darkish small">Continue to the next section when ready.</p>
             <%= f.submit 'Save and continue...', class: 'next-button' %>
         </div>

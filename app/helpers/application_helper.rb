@@ -144,7 +144,7 @@ module ApplicationHelper
     content_tag(:div, class: 'form-group') do
       concat(form.label(item, label, class: "control-label col-xs-#{label_col}"))
       concat(content_tag(:div, class: "col-xs-#{input_col}") do
-        concat(form.text_field(item, class: 'form-control', 'data-provide' => 'datepicker', placeholder: 'dd/mm/yyyy' ))
+        concat(form.text_field(item, class: 'form-control datepicker-field', 'data-provide' => 'datepicker', placeholder: 'dd/mm/yyyy' ))
       end)
     end
   end

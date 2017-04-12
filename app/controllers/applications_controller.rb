@@ -196,6 +196,7 @@ class ApplicationsController < ApplicationController
 
   def courses_add
     @course_selection = CourseSelection.new course_selection_params
+    @course_selections = CourseSelection.includes(:course).where(application_id: @application.id)
     respond_to do |format|
       if @application.add_course? @course_selection
         format.html { redirect_to applications_courses_path(@application), notice: 'Course added to application' }

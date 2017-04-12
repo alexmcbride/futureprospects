@@ -83,15 +83,14 @@ class Application < ApplicationRecord
 
   # Checks that a school hasn't been added without a qualification.
   def schools_valid?
-    true
-    # valid = true
-    # self.schools.each do |school|
-    #   unless school.qualifications_valid?
-    #     self.errors.add(:school, "'#{school.name}' does not have any qualifications")
-    #     valid = false
-    #   end
-    # end
-    # valid
+    valid = true
+    self.schools.each do |school|
+      unless school.qualifications_valid?
+        self.errors.add(:school, "'#{school.name}' does not have any qualifications")
+        valid = false
+      end
+    end
+    valid
   end
 
   # Gets the number of courses the student can still add

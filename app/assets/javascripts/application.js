@@ -17,3 +17,10 @@
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.en-GB.js
 //= require jquery-ui/widgets/autocomplete
 //= require_tree .
+
+/* Make sure Bootstrap datepicker uses correct date format */
+$(function () {
+    $('.datepicker-field').datepicker({
+        format: 'dd/mm/yyyy'
+    });
+});

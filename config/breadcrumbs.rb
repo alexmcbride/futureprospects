@@ -55,22 +55,22 @@ crumb :profile do
 end
 
 crumb :forgot_password do
-  parent :root
+  parent :sign_in
   link 'Recover Password', new_student_password_path
 end
 
 crumb :change_password do
-  parent :root
+  parent :sign_in
   link 'Change Password', edit_student_password_path
 end
 
 crumb :resend_unlock do
-  parent :root
+  parent :sign_in
   link 'Resend Unlock Instructions', new_student_unlock_path
 end
 
 crumb :resend_confirmation do
-  parent :root
+  parent :register
   link 'Resend Confirmation Instructions', new_student_confirmation_path
 end
 

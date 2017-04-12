@@ -1,8 +1,8 @@
 class Student < User
-  # Validations shared between student and application
+  # Some validations are shared between student and application
   include StudentValidator
 
-  # Foreign Key
+  # Foreign Keys
   has_many :applications
 
   # Creates a new application, filled with some info we already know.

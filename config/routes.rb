@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :staff, :skip => :registrations # Skip staff sign-up
+  devise_for :staff, :skip => [:registrations, :confirmations] # Skip staff sign-up
   devise_for :students
 
   get 'applications/:id', to: 'applications#index', as: 'applications_index'

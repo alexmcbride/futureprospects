@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-  rolify
   # Include devise modules.
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable,
          :lockable, :timeoutable, :authentication_keys => [:login]

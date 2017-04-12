@@ -20,3 +20,5 @@ add application seed data
 image hover jquery stops working on heroku?
 
 improve layout of add course autocomplete
+
+single table inheritance for staff/students?

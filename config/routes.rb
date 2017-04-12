@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  devise_for :staff, :skip => :registrations # Skip staff sign-up
+  devise_for :students
+
   get 'applications/:id', to: 'applications#index', as: 'applications_index'
   post 'applications', to: 'applications#create', as: 'applications_create'
   get 'applications/:id/continue', to: 'applications#continue', as: 'applications_continue'
@@ -36,7 +39,6 @@ Rails.application.routes.draw do
 
   get 'courses/search', to: 'courses#search', as: 'courses_search'
 
-  devise_for :students
   resources :courses
   resources :colleges
 

@@ -13,4 +13,5 @@ class College < ApplicationRecord
 
   # Foreign Key
   has_many :courses
+  has_many :staff
 end

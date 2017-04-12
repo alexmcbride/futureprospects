@@ -1,49 +1,58 @@
-class DeviseCreateStudents < ActiveRecord::Migration[5.0]
+class DeviseCreateUsers < ActiveRecord::Migration[5.0]
   def change
-    create_table :students do |t|
-      ## Database authenticatable
+    create_table :users do |t|
+      # Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
 
-      ## Recoverable
+      # Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at
 
-      ## Rememberable
+      # Rememberable
       t.datetime :remember_created_at
 
-      ## Trackable
+      # Trackable
       t.integer  :sign_in_count, default: 0, null: false
       t.datetime :current_sign_in_at
       t.datetime :last_sign_in_at
       t.inet     :current_sign_in_ip
       t.inet     :last_sign_in_ip
 
-      ## Confirmable
+      # Confirmable
       t.string   :confirmation_token
       t.datetime :confirmed_at
       t.datetime :confirmation_sent_at
       t.string   :unconfirmed_email # Only if using reconfirmable
 
-      ## Lockable
+      # Lockable
       t.integer  :failed_attempts, default: 0, null: false # Only if lock strategy is :failed_attempts
       t.string   :unlock_token # Only if unlock strategy is :email or :both
       t.datetime :locked_at
 
-      ## Custom
-      t.string :username
+      # STI
+      t.string :type
+
+      # Common
       t.string :first_name
       t.string :family_name
+      t.string :username
+
+      # Student
       t.string :scottish_candidate_number
       t.string :national_insurance_number
 
-      ## Rails
+      # Staff
+      t.integer :college_id
+      t.string :job_title
+
+      # ActiveRecord
       t.timestamps null: false
     end
 
-    add_index :students, :email,                unique: true
-    add_index :students, :reset_password_token, unique: true
-    add_index :students, :confirmation_token,   unique: true
-    add_index :students, :unlock_token,         unique: true
+    add_index :users, :email,                unique: true
+    add_index :users, :reset_password_token, unique: true
+    add_index :users, :confirmation_token,   unique: true
+    add_index :users, :unlock_token,         unique: true
   end
 end

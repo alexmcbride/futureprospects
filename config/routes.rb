@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   end
   devise_for :students
 
+  namespace :staff do
+    resources :courses
+  end
+
   # Application routes
   get 'applications/:id', to: 'applications#index', as: 'applications_index'
   post 'applications', to: 'applications#create', as: 'applications_create'

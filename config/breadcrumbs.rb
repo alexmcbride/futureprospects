@@ -44,34 +44,34 @@ crumb :sign_in do
   link 'Sign In', new_student_session_path
 end
 
-crumb :sign_in do
+crumb :sign_in do |resource|
   parent :root
-  link 'Sign In', new_student_session_path
+  link 'Sign In', new_session_path(resource)
 end
 
-crumb :profile do
+crumb :profile do |resource|
   parent :root
-  link 'Profile', edit_student_registration_path
+  link 'Profile', edit_registration_path(resource)
 end
 
-crumb :forgot_password do
-  parent :sign_in
-  link 'Recover Password', new_student_password_path
+crumb :forgot_password do |resource|
+  parent :sign_in, resource
+  link 'Recover Password', new_password_path(resource)
 end
 
-crumb :change_password do
-  parent :sign_in
-  link 'Change Password', edit_student_password_path
+crumb :change_password do |resource|
+  parent :sign_in, resource
+  link 'Change Password', edit_password_path(resource)
 end
 
-crumb :resend_unlock do
-  parent :sign_in
-  link 'Resend Unlock Instructions', new_student_unlock_path
+crumb :resend_unlock do |resource|
+  parent :sign_in, resource
+  link 'Resend Unlock Instructions', new_unlock_path(resource)
 end
 
-crumb :resend_confirmation do
-  parent :register
-  link 'Resend Confirmation Instructions', new_student_confirmation_path
+crumb :resend_confirmation do|resource|
+  parent :register, resource
+  link 'Resend Confirmation Instructions', new_confirmation_path(resource)
 end
 
 crumb :application do |application|

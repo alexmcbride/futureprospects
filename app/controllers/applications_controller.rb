@@ -191,12 +191,12 @@ class ApplicationsController < ApplicationController
 
   def courses
     @course_selection = CourseSelection.new
-    @course_selections = CourseSelection.includes(:course).where(application_id: @application.id)
+    @course_selections = @application.find_course_selections
   end
 
   def courses_add
     @course_selection = CourseSelection.new course_selection_params
-    @course_selections = CourseSelection.includes(:course).where(application_id: @application.id)
+    @course_selections = @application.find_course_selections
     respond_to do |format|
       if @application.add_course? @course_selection
         format.html { redirect_to applications_courses_path(@application), notice: 'Course added to application' }
@@ -221,6 +221,7 @@ class ApplicationsController < ApplicationController
         format.html { redirect_to applications_submit_path(@application) }
       else
         @course_selection = CourseSelection.new
+        @course_selections = @application.find_course_selections
         format.html { render :courses }
       end
     end

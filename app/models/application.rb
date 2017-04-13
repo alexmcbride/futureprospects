@@ -112,6 +112,11 @@ class Application < ApplicationRecord
     end
   end
 
+  # Gets all of this applications course selections.
+  def find_course_selections
+    CourseSelection.includes(:course).where application_id: self.id
+  end
+
   # Attempts to save the education stage
   def save_education?
     if self.schools_valid?
@@ -183,7 +188,7 @@ class Application < ApplicationRecord
   # Adds the course selection
   def add_course?(selection)
     selection.application = self
-    if selection.valid? and CourseSelection.validate_selection? selection
+    if selection.valid?
       return selection.save
     end
     false

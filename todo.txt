@@ -32,3 +32,9 @@ apply for course
 when change status, do the right thing... e.g. if cancelled, email students.
 
 staff members need their own nav menu, it's too confusing otherwise.
+
+use bullet to optimize database queries: https://github.com/flyerhzm/bullet
+
+check if validate can be overidden in activerecord, for instance move CourseSelection.validate_selection into generate validation stuff
+
+look to reducing amount of stuff selected from DB, for instance display all colleges list, only need college name and id, not everything...

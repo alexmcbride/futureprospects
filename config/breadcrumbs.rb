@@ -133,3 +133,23 @@ crumb :staff_edit_course do |course|
   parent :staff_courses
   link 'Edit', edit_staff_course_path(course)
 end
+
+crumb :staff_categories do
+  parent :staff_courses
+  link 'Categories', staff_categories_path
+end
+
+crumb :staff_new_category do
+  parent :staff_categories
+  link 'New', new_staff_category_path
+end
+
+crumb :staff_edit_category do |category|
+  parent :staff_categories
+  link 'Edit', edit_staff_category_path(category)
+end
+
+crumb :staff_remove_category do |category|
+  parent :staff_categories
+  link 'Remove', staff_category_remove_path(category)
+end

@@ -1,0 +1,19 @@
+<%= form_for(category, url: path) do |f| %>
+  <%= form_errors category %>
+
+  <div class="form-group">
+    <%= f.label :name, 'Category Name' %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <div class="row">
+      <div class="col-xs-6">
+        <%= link_to 'Go back', staff_categories_path %>
+      </div>
+      <div class="col-xs-6 text-right">
+        <%= f.submit class: 'btn btn-default' %>
+      </div>
+    </div>
+  </div>
+<% end %>

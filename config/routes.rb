@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   namespace :staff do
     resources :courses
+    resources :categories
+    get 'categories/:id/remove', to: 'categories#remove', as: 'category_remove'
   end
 
   # Application routes

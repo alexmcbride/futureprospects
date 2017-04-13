@@ -4,5 +4,5 @@
 <div class="list-group">
   <%= link_to 'Browse Courses', staff_courses_path, class: "list-group-item #{'active' if page == :index}" %>
   <%= link_to 'Add Course', new_staff_course_path, class: "list-group-item #{'active' if page == :add}" %>
-  <%= link_to 'Manage Categories', nil, class: "list-group-item #{'active' if page == :categories}" %>
+  <%= link_to 'Manage Categories', staff_categories_path, class: "list-group-item #{'active' if page == :categories}" %>
 </div>

@@ -1,0 +1,12 @@
+<% breadcrumb :staff_new_category %>
+<% @title = 'Manage Categories' %>
+
+<div class="row">
+  <div class="col-sm-3">
+    <%= render 'staff/shared/courses_sidenav', page: :categories %>
+  </div>
+  <div class="col-sm-9">
+    <p class="text-darkish small">Enter the name of the new category to create.</p>
+    <%= render 'form', category: @category, path: staff_categories_path %>
+  </div>
+</div>

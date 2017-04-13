@@ -1,6 +1,6 @@
 class Staff::CoursesController < ApplicationController
   before_action :authenticate_staff!
-  before_action :set_staff_course, only: [:show, :edit, :update, :destroy]
+  before_action :set_staff_course, only: [:show, :edit, :update, :remove, :destroy]
   before_action :set_categories, only: [:index, :new, :edit, :create, :update]
 
   # GET /staff/courses
@@ -57,13 +57,19 @@ class Staff::CoursesController < ApplicationController
     end
   end
 
+  def remove
+
+  end
+
   # DELETE /staff/courses/1
   # DELETE /staff/courses/1.json
   def destroy
-    @staff_course.destroy
     respond_to do |format|
-      format.html { redirect_to staff_courses_url, notice: 'Course was successfully destroyed.' }
-      format.json { head :no_content }
+      if @staff_course.remove? params[:course_title]
+        format.html { redirect_to staff_courses_url, notice: 'Course was successfully destroyed.' }
+      else
+        format.html { render :remove }
+      end
     end
   end
 

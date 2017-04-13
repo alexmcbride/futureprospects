@@ -9,7 +9,7 @@
     <p>Are you sure you want to delete the following category?</p>
     <p><strong><%= @category.name %></strong></p>
     <p>You can only delete a category if it has no courses in it. For security purposes you must type the full name of
-      the category exactly as it appears before it will be deleted.</p>
+      the category exactly as it appears, before it will be deleted.</p>
 
     <%= form_for @category, url: staff_category_path(@category), method: :delete do |f| %>
       <%= hidden_field_tag :_method, 'delete' %>
@@ -17,7 +17,7 @@
       <%= form_errors @category %>
 
       <div class="form-group">
-        <%= text_field_tag :category_name, nil, class: 'form-control' %>
+        <%= text_field_tag :category_name, nil, class: 'form-control text-danger' %>
       </div>
 
       <div class="row">
@@ -25,7 +25,10 @@
           <%= link_to 'Go back', staff_categories_path %>
         </div>
         <div class="col-xs-6 text-right">
-          <%= f.submit 'Remove Category', class: 'btn btn-danger' %>
+          <%= button_tag(:class => "btn btn-danger") do |s| %>
+              <%= icon('trash') %>
+              Delete Category
+          <% end %>
         </div>
       </div>
     <% end %>

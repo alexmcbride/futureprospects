@@ -1,0 +1,35 @@
+<% breadcrumb :staff_remove_category, @staff_course %>
+<% @title = 'Remove Course' %>
+
+<div class="row">
+  <div class="col-sm-3">
+    <%= render 'staff/shared/courses_sidenav', page: :index %>
+  </div>
+  <div class="col-sm-9">
+    <p>Are you sure you want to delete the following course?</p>
+    <p><strong><%= @staff_course.title %></strong></p>
+    <p>For security purposes you must type the full name of the course exactly as it appears, before it will be deleted.</p>
+
+    <%= form_for @staff_course, url: staff_course_path(@staff_course), method: :delete do |f| %>
+        <%= hidden_field_tag :_method, 'delete' %>
+
+        <%= form_errors @staff_course %>
+
+        <div class="form-group">
+          <%= text_field_tag :course_title, nil, class: 'form-control text-danger' %>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-6">
+            <%= link_to 'Go back', staff_courses_path %>
+          </div>
+          <div class="col-xs-6 text-right">
+            <%= button_tag(:class => "btn btn-danger") do |s| %>
+                <%= icon('trash') %>
+                Delete Course
+            <% end %>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>

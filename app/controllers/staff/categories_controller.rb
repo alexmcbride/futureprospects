@@ -4,7 +4,7 @@ class Staff::CategoriesController < ApplicationController
   # GET /staff/categories
   # GET /staff/categories.json
   def index
-    @categories = Staff::Category.order(:name)
+    @categories = Category.includes(:courses).order(:name)
   end
 
   # GET /staff/categories/1
@@ -14,7 +14,7 @@ class Staff::CategoriesController < ApplicationController
 
   # GET /staff/categories/new
   def new
-    @category = Staff::Category.new
+    @category = Category.new
   end
 
   # GET /staff/categories/1/edit
@@ -24,7 +24,7 @@ class Staff::CategoriesController < ApplicationController
   # POST /staff/categories
   # POST /staff/categories.json
   def create
-    @category = Staff::Category.new(staff_category_params)
+    @category = Category.new(staff_category_params)
 
     respond_to do |format|
       if @category.save
@@ -66,7 +66,7 @@ class Staff::CategoriesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_staff_category
-      @category = Staff::Category.find(params[:id])
+      @category = Category.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

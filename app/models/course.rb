@@ -94,4 +94,22 @@ class Course < ApplicationRecord
 
     courses
   end
+
+  def remove?(title)
+    if title != self.title
+      self.errors.add(:title, "does not match '#{self.title}'")
+    end
+
+    unless self.course_selections.empty?
+      self.errors.add(:course, 'has one or more students who have applied for the course and so cannot be removed')
+    end
+
+    if self.errors.empty?
+      self.courses.destroy_all
+      self.destroy
+      return true
+    end
+
+    false
+  end
 end

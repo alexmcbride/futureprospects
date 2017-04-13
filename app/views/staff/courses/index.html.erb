@@ -51,23 +51,19 @@
           <th><%= link_to "Course #{icon('arrows-v', class: 'sort-arrow')}".html_safe, staff_courses_path(sort: 'title', page: params[:page], title: params[:title], category: params[:category], status: params[:status]) %></th>
           <th><%= link_to "Category #{icon('arrows-v', class: 'sort-arrow')}".html_safe, staff_courses_path(sort: 'category', page: params[:page], title: params[:title], category: params[:category], status: params[:status]) %></th>
           <th><%= link_to "Status #{icon('arrows-v', class: 'sort-arrow')}".html_safe, staff_courses_path(sort: 'status', page: params[:page], title: params[:title], category: params[:category], status: params[:status]) %></th>
-          <th></th>
+          <th colspan="3"></th>
         </tr>
         </thead>
         <tbody>
         <% @courses.each do |course| %>
-            <tr>
-              <td><%= truncate course.title, length: 50 %></td>
-              <td><%= course.category.name %></td>
-              <td><%= course.status.humanize %></td>
-              <td>
-                <%= link_to icon('pencil-square'), edit_staff_course_path(course), title: 'Edit' %>
-                |
-                <%= link_to icon('trash'), staff_course_path(course), title: 'Delete', method: :delete, data: {confirm: 'Are you sure you want to delete?'} %>
-                |
-                <%= link_to icon('eye'), course_path(course), title: 'View Course' %>
-              </td>
-            </tr>
+          <tr>
+            <td><%= truncate course.title, length: 50 %></td>
+            <td><%= course.category.name %></td>
+            <td><%= course.status.humanize %></td>
+            <td><%= link_to icon('pencil-square'), edit_staff_course_path(course), title: 'Edit' %></td>
+            <td><%= link_to icon('trash'), staff_course_remove_path(course), title: 'Delete' %></td>
+            <td><%= link_to icon('eye'), course_path(course), title: 'View Course' %></td>
+          </tr>
         <% end %>
         </tbody>
       </table>

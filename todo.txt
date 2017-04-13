@@ -22,3 +22,7 @@ image hover jquery stops working on heroku?
 improve layout of add course autocomplete
 
 switch navbar bg colour for staff members?
+
+apply to course check status?
+
+markdown preview?

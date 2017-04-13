@@ -31,6 +31,13 @@ cogc.image = Rails.root.join('app/assets/images/seed_images/college-cogc.jpg').o
 cogc.save
 
 
+
+# Staff
+Staff.create college: cogc, first_name: 'Alex', family_name: 'McBride', email: 'xandermcbride@gmail.com', password: 'secret', password_confirmation: 'secret', job_title: 'College Admin'
+
+
+
+
 kelvin = College.new
 kelvin.name = 'Glasgow Kelvin College'
 kelvin.description = 'Glasgow Kelvin College is the newest of Glasgow’s three regional further education colleges.  Formed by the merger of John Wheatley, North Glasgow and Stow colleges in November 2013, Glasgow Kelvin has all the expertise, facilities and resources to ensure that students receive a high quality learning experience that will provide them with the skills and knowledge to enable them to compete in today’s challenging jobs market, or to move on to further, more advanced learning.
@@ -79,54 +86,6 @@ clyde.save
 
 
 
-lanark = College.new
-lanark.name = 'South Lanarkshire College'
-lanark.description = 'SLC is a bright, modern and forward thinking college where we put our students and partners at the heart of everything we do. At our state-of-the-art campus in East Kilbride we offer excellent programmes in outstanding facilities, delivered by well qualified, highly trained staff. We collaborate with employers and local businesses to make sure that we provide relevant, up-to-date courses that are really of benefit to our students when they go out into the world of work.
-
-We have a fantastic portfolio of courses across a variety of different areas which can be studied on a full time, part time, day release and evening basis so there’s something to suit everyone. Of course, if there’s anything we can advise you on please get in touch and we’ll be happy to help.
-
-We really believe that now is your time to be successful and we’re looking forward to working with you to help you achieve your goals. For many of our students, success in their chosen course of study means an assured future in employment or higher education. We hope that you’ll join us and open the door to a brighter future for you.'
-lanark.address = 'Scottish Enterprise Technology Park
-College Way
-East Kilbride'
-lanark.postcode = 'G75 0NE'
-lanark.telephone = '01355 807780'
-lanark.email = 'info@glasgowclyde.ac.uk'
-lanark.website = 'http://www.south-lanarkshire-college.ac.uk'
-lanark.image = Rails.root.join('app/assets/images/seed_images/college-lanark.jpg').open
-lanark.save
-
-
-
-
-
-west = College.new
-west.name = 'West College Scotland'
-west.description = 'West College Scotland is modern, ambitious and innovative.
-
-Created on 1 August 2013 by the merger of Clydebank College, Reid Kerr College in Paisley and James Watt College in Greenock, the College has 30,000 students and 1,200 staff, making it one of the biggest educational institutions in the country.
-
-This large scale allows us to provide greater choice to students, better facilities and enhanced services.
-
-We play a key role in supporting our local communities, providing courses to more than 3,000 senior-phase school pupils in College, in school and online.
-
-We also provide training for a huge range of business partners, from small- and medium-sized local companies to some of the biggest companies in the world.
-
-And we are also an enterprising college, with partners from across the globe, including China, Vietnam, Finland and Brazil.
-
-We offer a huge range of courses – full-time, part-time, evening and distance learning -- all designed to help our students get a job, keep a job or get a better job and to help businesses with their training needs.
-
-So, please have a look at what’s on offer.'
-west.address = 'Clydebank Campus
-Queens\' Quay'
-west.postcode = 'G81 1BF'
-west.telephone = '0300 600 60 60'
-west.email = 'info@wcs.ac.uk'
-west.website = 'http://www.westcollegescotland.ac.uk'
-west.image = Rails.root.join('app/assets/images/seed_images/college-west.jpg').open
-west.save
-
-
 # Seed categories
 category_names = 'Accounting
 Administration, Human Resources & Law
@@ -137,13 +96,21 @@ Construction Crafts
 Design Crafts & Graphic Arts
 Drama & Creative Writing
 Engineering, Energy & Gas
+English as a Second Language (ESOL)
 Fine Arts & Photography
+First Aid, Hygiene & Safety
 Food, Events, Hospitality & Tourism
 Hair & Beauty
+Health, Social Care & Early Education
+Languages
+Licensing & Security
 Marketing & Retail
 Media
 Nautical Studies & Marine Engineering
-Sport & Fitness'
+Social Sciences
+Sport & Fitness
+Teacher and Training Development
+Trade Union Education'
 
 # Save categories to DB and store ids in map
 categories = {}
@@ -170,7 +137,7 @@ course1.career_prospects = "On successful completion of the SPD programme, cadet
 course1.spaces = course_spaces
 course1.save!
 
-course2 = Course.new college: lanark
+course2 = Course.new college: cogc
 course2.title = 'Business HNC'
 course2.category = Category.find_by_name 'Business & Procurement'
 course2.level = 'SCQF level 7'
@@ -183,7 +150,7 @@ course2.career_prospects = "You could expect to apply for a trainee management p
 course2.spaces = course_spaces
 course2.save!
 
-course3 = Course.new college: west
+course3 = Course.new college:kelvin
 course3.title = 'Administration and Information Technology  HND'
 course3.category = Category.find_by_name 'Administration, Human Resources & Law'
 course3.level = 'SCQF level 8'
@@ -196,7 +163,7 @@ course3.career_prospects = "This course prepares you for a career as a Personal 
 course3.spaces = course_spaces
 course3.save!
 
-course4 = Course.new college: lanark
+course4 = Course.new college: cogc
 course4.title = 'Information Technology HNC'
 course4.category = Category.find_by_name 'Applied Computing & Digital Technologies'
 course4.level = 'SCQF level 7'
@@ -209,7 +176,7 @@ course4.career_prospects = "The course will develop your core and employability 
 course4.spaces = course_spaces
 course4.save!
 
-course5 = Course.new college: west
+course5 = Course.new college:kelvin
 course5.title = 'Information Technology HND'
 course5.category = Category.find_by_name 'Applied Computing & Digital Technologies'
 course5.level = 'SCQF level 8'
@@ -261,7 +228,7 @@ course8.career_prospects = "You may go on to a career in marketing, public relat
 course8.spaces = course_spaces
 course8.save!
 
-course9 = Course.new college: lanark
+course9 = Course.new college: cogc
 course9.title = '3D Design: Interior Design HND'
 course9.category = Category.find_by_name 'Design Crafts & Graphic Arts'
 course9.level = 'SCQF level 8'
@@ -313,7 +280,7 @@ course12.career_prospects = "This course prepares you for a career in:\n\n* Book
 course12.spaces = course_spaces
 course12.save!
 
-course13 = Course.new college: lanark
+course13 = Course.new college: cogc
 course13.title = 'Architectural Technology HND'
 course13.category = Category.find_by_name 'Built Environment'
 course13.level = 'SCQF level 8'
@@ -339,7 +306,7 @@ course14.career_prospects = "This course prepares you for a career in:\n\n* Priv
 course14.spaces = course_spaces
 course14.save!
 
-course15 = Course.new college: lanark
+course15 = Course.new college: cogc
 course15.title = 'Built Environment HNC'
 course15.category = Category.find_by_name 'Built Environment'
 course15.level = 'SCQF level 7'
@@ -417,7 +384,7 @@ course20.career_prospects = "This course prepares you for a career as an Enginee
 course20.spaces = course_spaces
 course20.save!
 
-course21 = Course.new college: lanark
+course21 = Course.new college: cogc
 course21.title = 'Electronic Engineering HND'
 course21.category = Category.find_by_name 'Engineering, Energy & Gas'
 course21.level = 'SCQF level 8'
@@ -508,7 +475,7 @@ course27.career_prospects = "This course prepares you for a career in software d
 course27.spaces = course_spaces
 course27.save!
 
-course28 = Course.new college: lanark
+course28 = Course.new college: cogc
 course28.title = 'Computing: Software Development HNC'
 course28.category = Category.find_by_name 'Applied Computing & Digital Technologies'
 course28.level = 'SCQF level 7'
@@ -521,7 +488,7 @@ course28.career_prospects = "You have an opportunity to continue studying with u
 course28.spaces = course_spaces
 course28.save!
 
-course29 = Course.new college: west
+course29 = Course.new college:kelvin
 course29.title = 'Computing: Technical Support HNC'
 course29.category = Category.find_by_name 'Applied Computing & Digital Technologies'
 course29.level = 'SCQF level 7'
@@ -560,7 +527,7 @@ course31.career_prospects = "This course would help you to gain various administ
 course31.spaces = course_spaces
 course31.save!
 
-course32 = Course.new college: lanark
+course32 = Course.new college: cogc
 course32.title = 'Business Diploma of Higher Education'
 course32.category = Category.find_by_name 'Business & Procurement'
 course32.level = 'SCQF level 8'
@@ -573,7 +540,7 @@ course32.career_prospects = "This course prepares you for a career in marketing,
 course32.spaces = course_spaces
 course32.save!
 
-course33 = Course.new college: lanark
+course33 = Course.new college: cogc
 course33.title = '3D Computer Animation HND'
 course33.category = Category.find_by_name 'Applied Computing & Digital Technologies'
 course33.level = 'SCQF level 8'
@@ -599,7 +566,7 @@ course34.career_prospects = "The HND course may lead to a job in the art glass i
 course34.spaces = course_spaces
 course34.save!
 
-course35 = Course.new college: west
+course35 = Course.new college:kelvin
 course35.title = 'Creative Printmaking HND'
 course35.category = Category.find_by_name 'Fine Arts & Photography'
 course35.level = 'SCQF level 8'
@@ -638,7 +605,7 @@ course37.career_prospects = "Students who complete their HND can progress to a c
 course37.spaces = course_spaces
 course37.save!
 
-course38 = Course.new college: lanark
+course38 = Course.new college: cogc
 course38.title = 'Digital Art and Culture HND'
 course38.category = Category.find_by_name 'Design Crafts & Graphic Arts'
 course38.level = 'SCQF level 8'
@@ -664,7 +631,7 @@ course39.career_prospects = "After the HND you can apply for jobs in the Communi
 course39.spaces = course_spaces
 course39.save!
 
-course40 = Course.new college: west
+course40 = Course.new college:kelvin
 course40.title = 'Graphic Design HND'
 course40.category = Category.find_by_name 'Design Crafts & Graphic Arts'
 course40.level = 'SCQF level 8'
@@ -677,7 +644,7 @@ course40.career_prospects = "After completing the HND you can apply for jobs in 
 course40.spaces = course_spaces
 course40.save!
 
-course41 = Course.new college: west
+course41 = Course.new college:kelvin
 course41.title = 'Creative Industries: Professional Writing Skills HNC'
 course41.category = Category.find_by_name 'Drama & Creative Writing'
 course41.level = 'SCQF level 7'
@@ -690,7 +657,7 @@ course41.career_prospects = "This course prepares you for a career in creative w
 course41.spaces = course_spaces
 course41.save!
 
-course42 = Course.new college: lanark
+course42 = Course.new college: cogc
 course42.title = 'Creative Industries: Radio HNC'
 course42.category = Category.find_by_name 'Media'
 course42.level = 'SCQF level 7'
@@ -703,7 +670,7 @@ course42.career_prospects = "There are opportunities in radio for those with a v
 course42.spaces = course_spaces
 course42.save!
 
-course43 = Course.new college: lanark
+course43 = Course.new college: cogc
 course43.title = 'Practical Journalism HND'
 course43.category = Category.find_by_name 'Media'
 course43.level = 'SCQF level 8'
@@ -716,7 +683,7 @@ course43.career_prospects = "Following this course, you can either apply for job
 course43.spaces = course_spaces
 course43.save!
 
-course44 = Course.new college: west
+course44 = Course.new college:kelvin
 course44.title = 'Photography HND'
 course44.category = Category.find_by_name 'Fine Arts & Photography'
 course44.level = 'SCQF level 8'
@@ -755,7 +722,7 @@ course46.career_prospects = "This course prepares you for a career in the field 
 course46.spaces = course_spaces
 course46.save!
 
-course47 = Course.new college: lanark
+course47 = Course.new college: cogc
 course47.title = 'Fitness, Health and Exercise HND'
 course47.category = Category.find_by_name 'Sport & Fitness'
 course47.level = 'SCQF level 8'
@@ -832,7 +799,7 @@ course52.career_prospects = "This course prepares you for a career at sea in the
 course52.spaces = course_spaces
 course52.save!
 
-course53 = Course.new college: lanark
+course53 = Course.new college: cogc
 course53.title = 'UK Maritime and Coastguard Agency Officer of the Watch (Reg11/ 1) (including HNC Nautical Science)  HNC'
 course53.category = Category.find_by_name 'Nautical Studies & Marine Engineering'
 course53.start_date = Date.new 2017, 8, 28
@@ -870,7 +837,7 @@ course55.career_prospects = "The course prepares you for employment at junior ma
 course55.spaces = course_spaces
 course55.save!
 
-course56 = Course.new college: lanark
+course56 = Course.new college: cogc
 course56.title = 'Hospitality Operations HNC'
 course56.category = Category.find_by_name 'Food, Events, Hospitality & Tourism'
 course56.level = 'SCQF level 7'
@@ -896,7 +863,7 @@ course57.career_prospects = "This course prepares you for a career as an Enginee
 course57.spaces = course_spaces
 course57.save!
 
-course58 = Course.new college: west
+course58 = Course.new college:kelvin
 course58.title = 'Women into Engineering HNC'
 course58.category = Category.find_by_name 'Engineering, Energy & Gas'
 course58.level = 'SCQF level 7'
@@ -960,7 +927,7 @@ course62.career_prospects = "This course prepares you for a career in the organi
 course62.spaces = course_spaces
 course62.save!
 
-course63 = Course.new college: west
+course63 = Course.new college:kelvin
 course63.title = 'Building Surveying (Year 2 Direct Entry) HND'
 course63.category = Category.find_by_name 'Built Environment'
 course63.level = 'SCQF level 8'
@@ -1012,7 +979,7 @@ course66.career_prospects = "Apply for various job vacancies, such as a junior w
 course66.spaces = course_spaces
 course66.save!
 
-course67 = Course.new college: west
+course67 = Course.new college:kelvin
 course67.title = 'Television BA (Hons)'
 course67.category = Category.find_by_name 'Fine Arts & Photography'
 course67.level = 'SCQF level 9'
@@ -1025,7 +992,7 @@ course67.career_prospects = "After the course, you'll be prepared for an entry-
 course67.spaces = course_spaces
 course67.save!
 
-course68 = Course.new college: lanark
+course68 = Course.new college: cogc
 course68.title = 'Travel and Tourism (with option to study languages) HND'
 course68.category = Category.find_by_name 'Food, Events, Hospitality & Tourism'
 course68.level = 'SCQF level 8'
@@ -1038,7 +1005,7 @@ course68.career_prospects = "This course prepares you for a career in travel and
 course68.spaces = course_spaces
 course68.save!
 
-course69 = Course.new college: west
+course69 = Course.new college:kelvin
 course69.title = 'Contemporary Art Practice BA (Hons)'
 course69.category = Category.find_by_name 'Fine Arts & Photography'
 course69.level = 'SCQF level 9'
@@ -1051,7 +1018,7 @@ course69.career_prospects = "This course prepares you for a career as a practisi
 course69.spaces = course_spaces
 course69.save!
 
-course70 = Course.new college: lanark
+course70 = Course.new college: cogc
 course70.title = 'Photography BA (Hons)'
 course70.category = Category.find_by_name 'Fine Arts & Photography'
 course70.level = 'SCQF level 9'
@@ -1064,7 +1031,7 @@ course70.career_prospects = "The Creative Industries sector covers a range of cr
 course70.spaces = course_spaces
 course70.save!
 
-course71 = Course.new college: lanark
+course71 = Course.new college: cogc
 course71.title = 'Hairdressing HNC'
 course71.category = Category.find_by_name 'Hair & Beauty'
 course71.level = 'SCQF level 7'
@@ -1103,7 +1070,7 @@ course73.career_prospects = "This course prepares you for a career as an Archite
 course73.spaces = course_spaces
 course73.save!
 
-course74 = Course.new college: lanark
+course74 = Course.new college: cogc
 course74.title = 'Computer Aided Architectrual Design & Technology (Year 2 Direct Entry) HND'
 course74.category = Category.find_by_name 'Construction Crafts'
 course74.level = 'SCQF level 8'
@@ -1116,7 +1083,7 @@ course74.career_prospects = "* Architectural CAD Technician or Building/Civil En
 course74.spaces = course_spaces
 course74.save!
 
-course75 = Course.new college: lanark
+course75 = Course.new college: cogc
 course75.title = 'Construction Management (Year 2 Direct Entry)  HND'
 course75.category = Category.find_by_name 'Built Environment'
 course75.level = 'SCQF level 8'
@@ -1194,7 +1161,7 @@ course80.career_prospects = "This course prepares you for a career in:\n\n* Book
 course80.spaces = course_spaces
 course80.save!
 
-course81 = Course.new college: west
+course81 = Course.new college:kelvin
 course81.title = 'Legal Services (Year 2 Direct Entry) HND'
 course81.category = Category.find_by_name 'Administration, Human Resources & Law'
 course81.level = 'SCQF level 8'
@@ -1207,7 +1174,7 @@ course81.career_prospects = "On successful completion of your HND you may enter 
 course81.spaces = course_spaces
 course81.save!
 
-course82 = Course.new college: west
+course82 = Course.new college:kelvin
 course82.title = 'Computer Science (Year 2 Direct Entrants) HND'
 course82.category = Category.find_by_name 'Applied Computing & Digital Technologies'
 course82.level = 'SCQF level 8'
@@ -1220,7 +1187,7 @@ course82.career_prospects = "After successful completion of this course, you can
 course82.spaces = course_spaces
 course82.save!
 
-course83 = Course.new college: lanark
+course83 = Course.new college: cogc
 course83.title = 'Computing: Software Development  (Year 2 Direct Entry) HND'
 course83.category = Category.find_by_name 'Applied Computing & Digital Technologies'
 course83.level = 'SCQF level 8'
@@ -1259,7 +1226,7 @@ course85.career_prospects = "This course prepares you for a career as a Personal
 course85.spaces = course_spaces
 course85.save!
 
-course86 = Course.new college: lanark
+course86 = Course.new college: cogc
 course86.title = 'Business (Year 2 Direct Entry) HND'
 course86.category = Category.find_by_name 'Business & Procurement'
 course86.level = 'SCQF level 8'
@@ -1285,7 +1252,7 @@ course87.career_prospects = "* BSc (Hons) Computer Animation (with options) at t
 course87.spaces = course_spaces
 course87.save!
 
-course88 = Course.new college: west
+course88 = Course.new college:kelvin
 course88.title = 'Digital Design and Web Development (Year 2 Direct Entry) HND'
 course88.category = Category.find_by_name 'Applied Computing & Digital Technologies'
 course88.level = 'SCQF level 8'
@@ -1311,7 +1278,7 @@ course89.career_prospects = "After completing the HND you may pursue a career in
 course89.spaces = course_spaces
 course89.save!
 
-course90 = Course.new college: west
+course90 = Course.new college:kelvin
 course90.title = 'Advertising and Public Relations (Year 2 Direct Entry) HND'
 course90.category = Category.find_by_name 'Marketing & Retail'
 course90.level = 'SCQF level 8'
@@ -1337,7 +1304,7 @@ course91.career_prospects = "You may go on to a career in marketing, public rela
 course91.spaces = course_spaces
 course91.save!
 
-course92 = Course.new college: lanark
+course92 = Course.new college: cogc
 course92.title = 'Retail Management (Year 2 Direct Entry) HND'
 course92.category = Category.find_by_name 'Marketing & Retail'
 course92.level = 'SCQF level 8'
@@ -1350,7 +1317,7 @@ course92.career_prospects = "This course prepares you for a career in retail at 
 course92.spaces = course_spaces
 course92.save!
 
-course93 = Course.new college: west
+course93 = Course.new college:kelvin
 course93.title = '3D Design: Interior Design (Year 2 Direct Entry)  HND'
 course93.category = Category.find_by_name 'Design Crafts & Graphic Arts'
 course93.level = 'SCQF level 8'
@@ -1376,7 +1343,7 @@ course94.career_prospects = "There are a wide range of career opportunities for 
 course94.spaces = course_spaces
 course94.save!
 
-course95 = Course.new college: west
+course95 = Course.new college:kelvin
 course95.title = 'Art Glass Design (Year 2 Direct Entry)  HND'
 course95.category = Category.find_by_name 'Design Crafts & Graphic Arts'
 course95.level = 'SCQF level 8'
@@ -1415,7 +1382,7 @@ course97.career_prospects = "Career opportunities are many and varied. A high nu
 course97.spaces = course_spaces
 course97.save!
 
-course98 = Course.new college: west
+course98 = Course.new college:kelvin
 course98.title = 'Jewellery (Year 2 Direct Entry) HND'
 course98.category = Category.find_by_name 'Design Crafts & Graphic Arts'
 course98.level = 'SCQF level 8'
@@ -1429,6 +1396,634 @@ course97.spaces = course_spaces
 course97.save!
 
 
+course1 = Course.new college: kelvin
+course1.title = 'Graphic Design (Year 2 Direct Entry) HND'
+course1.category = Category.find_by_name 'Design Crafts & Graphic Arts'
+course1.level = 'SCQF level 8'
+course1.start_date = Date.new 2017, 8, 28
+course1.end_date = Date.new 2019, 6, 13
+course1.image = Rails.root.join('app/assets/images/seed_images2/Graphic_Design_HND_0.jpg').open
+course1.description = "This Graphic Design course prepares you for a career in the exciting and constantly developing area of graphic design. The course develops your creative ability and technical graphics skills, mainly through practical projects in the studio.\nThe course also encourages you to take responsibility for your own development. You'll build on your own creative concepts through research and development in the sketchbook, before producing finished work digitally.\n\nThe emphasis of the course is on layout of type and image, for both print and screen and the development of creative concepts.\n\nThis course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course1.entry_requirements = "* HNC Graphic Design OR\n* First year of HND in Graphic Design\nYou'll be invited for a group and/or individual interview, where you can find out more about the course and tell us why you're interested in this subject. At the interview you'll be asked to provide examples of your art and design work."
+course1.career_prospects = "After completing the HND you can apply for jobs in areas of the Communication Industry, including design consultancies, advertising agencies, newspaper and magazine publishing, web design and motion graphics for screen, or in-house design studios.\n\nYou may eventually become self-employed as a Graphic Designer."
+course1.spaces = course_spaces
+course1.save!
+
+course2 = Course.new college: kelvin
+course2.title = 'Creative Industries: Media and Communication (Year 2 Direct Entry) HND'
+course2.category = Category.find_by_name 'Drama & Creative Writing'
+course2.level = 'SCQF level 8'
+course2.start_date = Date.new 2017, 8, 28
+course2.end_date = Date.new 2019, 6, 13
+course2.image = Rails.root.join('app/assets/images/seed_images2/Graphics_boy_at_table.jpg').open
+course2.description = "This highly practical course prepares you for higher education and media industry employment. On this course, the teaching staff have a wide variety of media experience and you can expect media guest speakers, visits and professional workshops. You’re continually assessed and you’ll also need to complete a graded project.\nThis course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course2.entry_requirements = "* HNC Media &amp; Communication with minimum B at Graded Unit "
+course2.career_prospects = "Career paths include journalism, television and radio production, video production, public relations and advertising."
+course2.spaces = course_spaces
+course2.save!
+
+course3 = Course.new college: cogc
+course3.title = 'Creative Industries: Radio (Year 2 Direct Entry) HND'
+course3.category = Category.find_by_name 'Drama & Creative Writing'
+course3.level = 'SCQF level 8'
+course3.start_date = Date.new 2017, 8, 28
+course3.end_date = Date.new 2019, 6, 13
+course3.image = Rails.root.join('app/assets/images/seed_images2/Radio_group2.jpg').open
+course3.description = "This course builds on the skills you developed in the HNC. The focus is still on programme making, but goes beyond radio and develops a more sophisticated skillset – technical, production and creative. This course is an excellent opportunity for you to study and train for a career in radio production, with excellent career opportunities and progression routes.\n\nThe course is delivered by highly qualified lecturers who have a wealth of experience within the radio industry and have well established industry contacts.\n\nAfter successful completion of the course, you'll be awarded with an HND Creative Industries: Radio.\n\nThis course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course3.entry_requirements = "* HNC Creative Industries: Radio, including A or B in graded unit on"
+course3.career_prospects = "There are opportunities in radio for those with a variety of up to date skills, broadcasting knowledge and experience."
+course3.spaces = course_spaces
+course3.save!
+
+course4 = Course.new college:kelvin
+course4.title = 'Practical Journalism (Year 2 Direct Entry) HND'
+course4.category = Category.find_by_name 'Media'
+course4.level = 'SCQF level 8'
+course4.start_date = Date.new 2017, 8, 28
+course4.end_date = Date.new 2019, 6, 13
+course4.image = Rails.root.join('app/assets/images/seed_images2/Television_camera_1.jpg').open
+course4.description = "Journalists must have the essential skills of writing and research, but they are now expected to also record sound, shoot video and edit on digital systems. Increasingly, they are expected to produce their own web content. The skills you'll acquire on the course will enable you to position yourself for the world of work, or university.\n\nThere will be an opportunity to specialise in the area of journalism you are most interested in.\n\nThis course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course4.entry_requirements = "* HNC Practical Journalism OR\n* First year of HND Practical Journalism\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject. At your interview you'll have to:\n\n* Write a 200 word article.\n* Use correct spelling, grammar and punctuation in a 300 word article.\n* Discuss the importance of journalis"
+course4.career_prospects = "You can get a job on the paper."
+course4.spaces = course_spaces
+course4.save!
+
+course5 = Course.new college: cogc
+course5.title = 'Photography (Year 2 Direct Entry) HND'
+course5.category = Category.find_by_name 'Fine Arts & Photography'
+course5.level = 'SCQF level 8'
+course5.start_date = Date.new 2017, 8, 28
+course5.end_date = Date.new 2019, 6, 13
+course5.image = Rails.root.join('app/assets/images/seed_images2/HND%20Photography%202nd%20Year%201600x1078.jpg').open
+course5.description = "This highly competitive course provides you with the skills you need to start a career in photography, or a related area within the creative industries. This is a practice-based course with projects both in the studio and on location. Alongside technical skills, you're encouraged to work on self-reflection and evaluation through class feedback sessions.\n\nYou'll have an opportunity to work independently on self-initiated projects and to develop your own photographic ideas and briefs.\n\nWith a broad range of experienced staff on hand and industry standard facilities, this course is an excellent opportunity for those with a keen interest in photography, who want to develop that interest through full time study.\n\nYou'll continually update your photographic portfolio showcasing your most recent work.\n\nThis course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course5.entry_requirements = "* HNC in Photography OR\n* First year of HND Photography\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you are interested in this subject. At the interview you'll be asked to provide a strong photographic portfolio of work."
+course5.career_prospects = "With an HND in photography, you'll be prepared for a position in the highly competitive creative and media sector including: advertising, commercial, press and photojournalism, fashion, sports, social, medical, scientific, throughout the UK and worldwide."
+course5.spaces = course_spaces
+course5.save!
+
+course6 = Course.new college: kelvin
+course6.title = 'Beauty Therapy (Year 2 Direct Entry) HND'
+course6.category = Category.find_by_name 'Hair & Beauty'
+course6.level = 'SCQF level 8'
+course6.start_date = Date.new 2017, 8, 28
+course6.end_date = Date.new 2019, 6, 13
+course6.image = Rails.root.join('app/assets/images/seed_images2/HND%20Beauty%20Therapy%202nd%20Year%201600x1078.jpg').open
+course6.description = "The course offers a high level beauty qualification which will provide you with knowledge of current beauty treatments and techniques. You'll also gain experience in using a wide range of products and will gain the skills necessary to secure employment in a variety of settings within the Beauty Industry such as salons, spas and cruise liners.\n\nThis year focuses on more advanced treatments, techniques and product ranges as well as business planning, retailing, and gaining employment. \n\nYou'll be taught be a highly motivated and versitile team with an excellent range of industrial expertise who deliver world class student focussed learning.\n\nThis course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework visit: www.scqf.org.uk/the-framework/. "
+course6.entry_requirements = "* A pass in HNC Beauty Therapy with 15 credits, OR\n* Units achieved to be compatible with the college's existing HNC course plan.\n* A positive report from your HNC course team.\n* You'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject.\n* Excellent communication skills and an enthusiasm for the beauty industry is essentia"
+course6.career_prospects = "This course prepares you for a career in the Beauty Industry including roles in salons, health spas, cruise ships, or self-employment.\n\nA number of senior, or managerial posts may also be available to HND qualified therapists."
+course6.spaces = course_spaces
+course6.save!
+
+course7 = Course.new college: kelvin
+course7.title = 'Fitness, Health and Exercise (Year 2 Direct Entry) HND'
+course7.category = Category.find_by_name 'Sport & Fitness'
+course7.level = 'SCQF level 8'
+course7.start_date = Date.new 2017, 8, 28
+course7.end_date = Date.new 2019, 6, 13
+course7.image = Rails.root.join('app/assets/images/seed_images2/HND%20Fitness%20Health%20and%20Exercise%202nd%20Year%201600x1078.jpg').open
+course7.description = "This course is most suited to those with an interest in the fields of fitness, health and exercise. The new framework has been developed to include industry recognition in the form of the endorsement by the Register of Exercise Professionals (REPS).\n\nOn successful completion of Year two, you'll be awarded the Level 3 Personal Trainer accreditation.\n\nThis course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course7.entry_requirements = "* HNC Fitness, Health and Exercise OR\n* First year of HND in Fitness, Health and Exercise\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject. An element of the interview process will involve paired exercise where you demonstrate an exercise of your choice to a partner, highlighting safe and effective practice. Please bring suitable indoor gym wear."
+course7.career_prospects = "This course will suit individuals wishing to pursue careers in sports clubs, private fitness facilities, local authorities and government sport initiatives; ranging from personal training and exercise instruction, to teaching physical education, or working within sports science.\nYou may also look at self-employment in fitness, exercise prescription and athletic conditioning."
+course7.spaces = course_spaces
+course7.save!
+
+course8 = Course.new college: kelvin
+course8.title = 'Professional Cookery (Year 2 Direct Entry) HND'
+course8.category = Category.find_by_name 'Food, Events, Hospitality & Tourism'
+course8.level = 'SCQF level 8'
+course8.start_date = Date.new 2017, 8, 28
+course8.end_date = Date.new 2019, 6, 13
+course8.image = Rails.root.join('app/assets/images/seed_images2/HND%20Professional%20Cookery%202nd%20Year%201600x1078.jpg').open
+course8.description = "Professional cookery has never been as popular as it is today. This course is an excellent opportunity for you to study and train for a career in catering with excellent career opportunities and progression routes.\n\nIn the first year, you'll develop your culinary skills to an advanced level and learn the knowledge you’ll need for a supervisory role in the Catering Industry. In the second year you'll combine culinary expertise and managerial skills. The course contains practical and theory units, which are assessed throughout (please see further information in the 'what you study' section below).\n\nExperience in the Hospitality Industry is an integral part of the course, and you’ll work towards the Industrial Experience unit.\n\nOn successful completion of this course, you'll be awarded with a HND in Professional Cookery.\n\nThis course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course8.entry_requirements = "* HNC Professional Cookery OR\n* First year of HND in Professional Cookery\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject."
+course8.career_prospects = "On completing your HND, you might progress to a career in catering, restaurants, and hospitality at a supervisory, or junior management level."
+course8.spaces = course_spaces
+course8.save!
+
+course9 = Course.new college: clyde
+course9.title = 'Event Management (Year 2 Direct Entry) HND'
+course9.category = Category.find_by_name 'Food, Events, Hospitality & Tourism'
+course9.level = 'SCQF level 8'
+course9.start_date = Date.new 2017, 8, 28
+course9.end_date = Date.new 2019, 6, 13
+course9.image = Rails.root.join('app/assets/images/seed_images2/HND%20Events%20Management%202nd%20Year%201600x1078.jpg').open
+course9.description = "This course is for those who want a career in the management of events like conferences, exhibitions and special events. On this course you'll cover a wide range of subjects to ensure a good knowledge base, as well as relevant skills.\n\nThis course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course9.entry_requirements = "* HNC in Events OR\n* First year of HND in Events\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject."
+course9.career_prospects = "This course prepares you for a career in the organisation and management of conferences, exhibitions, festivals and special events."
+course9.spaces = course_spaces
+course9.save!
+
+course10 = Course.new college: cogc
+course10.title = 'Hospitality (Year 2 Direct Entry) HND'
+course10.category = Category.find_by_name 'Food, Events, Hospitality & Tourism'
+course10.level = 'SCQF level 8'
+course10.start_date = Date.new 2017, 8, 28
+course10.end_date = Date.new 2019, 6, 13
+course10.image = Rails.root.join('app/assets/images/seed_images2/Hospitality_girl_serving_drinks_1.jpg').open
+course10.description = "This course helps you develop the knowledge and skills required to operate effectively at supervisory level in the hospitality industry. The first year covers a range of subjects both practical and theoretical. The second year focuses on providing you with the necessary managerial knowledge and skills for a junior management position.\n\nThis HND Hospitality Management is a valuable qualification for employment in an exciting and ever changing industry, as well as a good preparation for further studies.\n\nThis course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework visit: www.scqf.org.uk/the-framework/"
+course10.entry_requirements = "* Successful completion of the HNC Hospitality Operations or similar award, including a pass in Graded Unit 1; OR\n* Relevant industrial experience at supervisory level.\nOffers are subject to attending an interview with a member of the Hospitality / Events team where you should describe your interest and/or experience in hospitality, and your hopes for after completing the course."
+course10.career_prospects = "The course prepares you for employment at junior management/supervisory level in a hospitality department, and graduate training schemes with many large organisations.\n\nWe work with key representatives from industry to offer graduate training positions following the successful completion of the HND."
+course10.spaces = course_spaces
+course10.save!
+
+course11 = Course.new college:kelvin
+course11.title = 'Coaching and Developing Sport (Year 2 Direct Entry) HND'
+course11.category = Category.find_by_name 'Sport & Fitness'
+course11.level = 'SCQF level 8'
+course11.start_date = Date.new 2017, 8, 28
+course11.end_date = Date.new 2019, 6, 13
+course11.image = Rails.root.join('app/assets/images/seed_images2/Sport_group_playing_basketball.jpg').open
+course11.description = "This course introduces and develops the skills and knowledge you’ll need for a career in sports coaching. The principles of good coaching practice are examined and a wide practical and theoretical knowledge of games and sports is developed (please see further information in the 'what you study' section below).\n\nYou'll be taught by experienced sports coaching staff with a proven track record of bringing out the best in their students.\n\nOn successful completion of this course, you'll be awarded with the HND in Coaching and Deveolping Sport.\n\nThe course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course11.entry_requirements = "* An HNC Sport Coaching qualification with 15 credits\nThis ensures you don't need to study additional units to complete the 30 credits in second year.\n\nYou'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject.\n\nThe interview will consist of a group discussion and a practical assessment. You'll need to submit a reference form, normally from a PE teacher or coach."
+course11.career_prospects = "You get can a job doing P.E."
+course11.spaces = course_spaces
+course11.save!
+
+course12 = Course.new college: clyde
+course12.title = 'Sports Therapy (Year 2 Direct Entry) HND'
+course12.category = Category.find_by_name 'Sport & Fitness'
+course12.level = 'SCQF level 8'
+course12.start_date = Date.new 2017, 8, 28
+course12.end_date = Date.new 2019, 6, 13
+course12.image = Rails.root.join('app/assets/images/seed_images2/HND%20Sports%20Therapy%202nd%20Year%201600x1078.jpg').open
+course12.description = "The sports therapy course will equip you with the skills required to help prevent injury and rehabilitate clients back to full fitness. The second year of the course focuses on the assessment and treatment of musculoskeletal conditions arising from sporting activity.\n\nYou'll also get the opportunity to work in our sports injury clinic, developing skills in clinical assessment, devising treatment plans and providing physical therapies. You may also be involved in pre and post match and touchline support for sporting events.\n\nThis course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course12.entry_requirements = "* HNC Sports Therapy OR\n* First year HND Sports Therapy\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject."
+course12.career_prospects = "This course prepares you for a career as a sports therapist working freelance, in sports clubs, or as part of a government health initiative."
+course12.spaces = course_spaces
+course12.save!
+
+course13 = Course.new college: cogc
+course13.title = 'Travel and Tourism (Year 2 Direct Entry) HND'
+course13.category = Category.find_by_name 'Food, Events, Hospitality & Tourism'
+course13.level = 'SCQF level 8'
+course13.start_date = Date.new 2017, 8, 28
+course13.end_date = Date.new 2019, 6, 13
+course13.image = Rails.root.join('app/assets/images/seed_images2/HND%20Travel%20and%20Tourism%202nd%20Year%201600x1078.jpg').open
+course13.description = "The course develops your knowledge of the Travel and Tourism Industry giving you a solid preparation for a career in the sector. You'll gain the skills and knowledge required to provide high quality customer service and enhance your own employability.\n\nThis course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course13.entry_requirements = "* HNC in Travel and Tourism OR\n* First year of HND in Travel and Tourism\nYou'll be invited to attend a course presentation where you will get the opportunity to find out more about the course and tell us why you're interested in this subject area."
+course13.career_prospects = "This course prepares you for a career in travel and tourism with:\n\n* National Tourist Organisations.\n* Travel Management Companies.\n* Visitor Centres/Attractions.\n* Tour Operators.\n* Travel Agents.\n* Airlines.\n* Airport Ground Handling.\n* Foreign Exchange Service."
+course13.spaces = course_spaces
+course13.save!
+
+course14 = Course.new college: cogc
+course14.title = 'Financial Services (Year 2 Direct Entry) HND'
+course14.category = Category.find_by_name 'Accounting'
+course14.level = 'SCQF level 8'
+course14.start_date = Date.new 2017, 8, 28
+course14.end_date = Date.new 2018, 6, 13
+course14.image = Rails.root.join('app/assets/images/seed_images2/HND%20Financial%20Services%202nd%20year%20app%201600x1078.jpg').open
+course14.description = "This HND year 2 is a continuation from the HNC course and is designed to provide you with the key competencies required by anyone entering the Financial Services Industry as a trainee, or at a technical level, or for anyone already working in such a position but wishing to lay the foundation of a professional career. \n\nIt develops your understanding in areas such as Pensions, Insurance and Investments. \n\nFurther details of the topics covered is provided in the section “what you study” below. "
+course14.entry_requirements = "Successful completion of a full time HNC Financial Services course with 15 credits, with a Grade A in the graded unit and all mandatory units.\n\nYou'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject."
+course14.career_prospects = "The course is for those wishing to work in an administrative, sales, customer support or technical support role within the Finance Industry.\nThere are various employment opportunities, including working in: banking, building societies, pension funds, investment companies, insurance, unit trusts, stock market operations, life and pensions, asset management and intermediation."
+course14.spaces = course_spaces
+course14.save!
+
+course15 = Course.new college: cogc
+course15.title = 'Fine Art (Year 2 Direct Entry) HND'
+course15.category = Category.find_by_name 'Fine Arts & Photography'
+course15.level = 'SCQF level 8'
+course15.start_date = Date.new 2017, 8, 28
+course15.end_date = Date.new 2019, 6, 13
+course15.image = Rails.root.join('app/assets/images/seed_images2/HND%20Fine%20Art%20Year%202%20Direct%20Entry%201600x1078%20.jpg').open
+course15.description = "This stimulating, and creative course will be delivered to you by our highly professional teaching staff with significant fine art experience and a proven track record of bringing out the best in their students.\n\nThe course includes both traditional and innovative practices. It will give you a broad visual education in contemporary art practice. You'll develop your skills in a range of specialist disciplines and increase your awareness and knowledge of conceptual thinking. It also offers an opportunity to develop individual practice in relation to your own interests.\n\nStudents who successfully complete this course will achieve the HND Contemporary Art Practice.\n\nVisit Visual Grammar, City of Glasgow College Fine Art Facebook page.\n\nThe course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course15.entry_requirements = "* HNC Fine Art (Contemporary Art Practice), or equivalent.\nYou'll be invited to a portfolio event where you will get the opportunity to find out more about the course and tell us why you are interested in this subject area. You'll be required to bring a portfolio of your work for assessment."
+course15.career_prospects = "Work as an independent exhibiting artist, depending on the quality of your work, motivation and self-promotion skills. The experience of the HND can also help to prepare you for working in other roles within the creative industries such as curation or community arts.\n\nStudents who complete their HND can progress to:\n\n* BA (Hons) Contemporary Art Practice at City of Glasgow College.\n* Other art school or university degree courses (2nd or 3rd year entry."
+course15.spaces = course_spaces
+course15.save!
+
+course16 = Course.new college: cogc
+course16.title = 'Financial Services HNC'
+course16.category = Category.find_by_name 'Accounting'
+course16.level = 'SCQF level 7'
+course16.start_date = Date.new 2017, 8, 28
+course16.end_date = Date.new 2018, 6, 13
+course16.image = Rails.root.join('app/assets/images/seed_images2/FinancialServices_HNC.jpg').open
+course16.description = "This HNC is designed to provide you with the key competencies required by anyone entering the Financial Services Industry as a trainee, or at a technical level, or for anyone already working in such a position but wishing to lay the foundation of a professional career.  Further details of the topics covered is provided in the section “what you study” below. \n\nThe aims of the HNC are to:\n\nYou'll be assessed throughout this course with the assessments taking the form of practical assessments, assignment and case studies.  You'll also undertake a Graded Unit project, which is designed to assess your ability to integrate the knowledge and skills gained through the mandatory units. \n\nCity of Glasgow College has strong links with Financial Services organisations, which provide industry visits and guest speakers to add value to the academic content of the course. \n\nThroughout the course you'll undertake a programme of guidance activities designed to help you make the most of your qualification and college experience. \n\nThe course is placed on the Scottish Credit Qualifications Framework at Level 7. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course16.entry_requirements = "* One relevant* Higher at grade C or above; OR\n* Three relevant* National 5 courses at grade A; OR\n* Successful completion of an NC/NQ; OR\n* Successful completion of a Foundation Apprenticeship in Financial Services; OR\n* Successful completion of an NPA in Financial Services.\n* Equivalent qualifications will be considered. \n* Relevant work experience will be considered where employer referee details have been supplied.\n*Qualifications cannot include any from the following list: Art and Design, Design and Manufacture, Drama, Graphic Communications, Health and Food Technology, Languages, Music, Media, Photography, Physical Education, ESOL.\n\nYou'll be invited to attend a compulsory interview. The interview dates are:\n\n* Thursday 20 April 2017 at 4.15pm\n* Thursday 1 June 2017 at 4.15pm\nThe interview will begin with a 30 minute presentation from the faculty about the course and the college. This will be followed by a 10 minute one to one discussion on your application form and your suitability for the course. You will be given the opportunity to ask questions. You must bring a copy of qualification certificates."
+course16.career_prospects = "The course is for those wishing to work in an administrative, sales, customer support or technical support role within the Finance Industry.\n\nThere are various employment opportunities, including working in: banking, building societies, pension funds, investment companies, insurance, unit trusts, stock market operations, life and pensions, asset management and intermediation."
+course16.spaces = course_spaces
+course16.save!
+
+course17 = Course.new college:kelvin
+course17.title = 'Computing: Networking HND'
+course17.category = Category.find_by_name 'Applied Computing & Digital Technologies'
+course17.level = 'SCQF level 8'
+course17.start_date = Date.new 2017, 8, 28
+course17.end_date = Date.new 2019, 6, 13
+course17.image = Rails.root.join('app/assets/images/seed_images2/Computing_digitalmedia_3.jpg').open
+course17.description = "This course aims to teach you the skills required to install, configure and maintain computer network infrastructures.  Students gain practical skills and knowledge of current and emerging principles and network technologies with an emphasis on active and participative learning.\n\nYear One builds a solid foundation in networking and routing concepts, ethical hacking and client operating systems, incorporating both Microsoft and Linux platforms.  You will have access in our specialist computing classrooms and networking labs.\n\nYear Two progresses your skills in administering networks, configuring server operating systems and developing security concepts.\n\nThe programme integrates learning materials from industry standard vendors, which help prepare you for a variety of optional certification exams such as Cisco Certified Network Associate (CCNA) and Microsoft Certifications.  These qualifications are highly sought after by employers. \nAfter successfully completing this course you will have the skills needed to get an entry level role in IT infrastructure support.   \n\nA large number of HND Networking students progress on to University programmes including 2nd or 3rd year entry in Cyber Security, Ethical Hacking and Networking. \n\nThis course also accepts year two direct entrants.\n\nThis course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course17.entry_requirements = "* Two appropriate Highers and three Intermediate 2 courses (including at least one from Computing or Information Systems), OR\n* Two Highers and three Standard Grades at Credit Level, OR\n* Two Highers and three National 5 qualifications, OR\n* A national qualification at SCQF Level 6 in a related subject (such as Digital Media Computing, Computing: Technical Support or Software Development), OR\n* Other equivalent qualifications or experience.\n* An HNC with relevant options.\nYou'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject."
+course17.career_prospects = "This course prepares you for a career in IT infrastructure support."
+course17.spaces = course_spaces
+course17.save!
+
+course18 = Course.new college: cogc
+course18.title = 'Computing: Networking HNC'
+course18.category = Category.find_by_name 'Applied Computing & Digital Technologies'
+course18.level = 'SCQF level 7'
+course18.start_date = Date.new 2017, 8, 28
+course18.end_date = Date.new 2018, 6, 13
+course18.image = Rails.root.join('app/assets/images/seed_images2/Computing_girl_wires.jpg').open
+course18.description = "This course will allow you to study towards an up-to-date qualification in many of the skills that are in demand for different types of computing careers. The course will follow the units of the first year of the HND Networking course, including network technology and routing technology.\n\nYou will receive a HNC Computing / HNC Computing: Networking award qualification on successful completion of the course. This course integrates learning materials from industry standard vendors such as Microsoft and Cisco which can help you to prepare for a variety of vendor certification exams.\n\nThis course is placed on the Scottish Credit Qualifications Framework at Level 7. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course18.entry_requirements = "* One Higher and three Intermediate 2 courses (including at least one from Computing or Information Systems); OR\n* One Higher and three Standard Grades at credit level; OR\n* One Higher and three National 5 qualifications; OR\n* A national qualification at SCQF Level 6 in a related subject (such as Digital Media Computing, Computing: Technical Support or Software Development); OR\n* Other equivalent qualifications or experience.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject."
+course18.career_prospects = "You can progress on to second year of HND Computing: Network Technology or apply for entry into the first year of related BSc Computing degree programmes at most universities on successful completion of this course."
+course18.spaces = course_spaces
+course18.save!
+
+course19 = Course.new college: kelvin
+course19.title = 'Computer Games Development HNC'
+course19.category = Category.find_by_name 'Applied Computing & Digital Technologies'
+course19.level = 'SCQF level 7'
+course19.start_date = Date.new 2017, 8, 28
+course19.end_date = Date.new 2018, 6, 13
+course19.image = Rails.root.join('app/assets/images/seed_images2/Computing_GamesDevHNC.jpg').open
+course19.description = "This creative, hands-on course enables you to develop skills in all aspects of computer games development. You'll learn how to create logic games, 2D games and 3D first person game by staff with significant Computer Games industry experience and a proven track record of bringing out the best in their students.\n\nThis course prepares you for employment in a junior developer role within the Computer Games Industry, or a junior software developer role within the IT Industry. The HNC Computer Games Development qualification has progression routes to 2nd year BSc Games and Software Development degree programmes.\n\nThis course is placed on the Scottish Credit Qualifications Framework at Level 7. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course19.entry_requirements = "* 2 Highers at grade  A to C, one of which must be Mathematics AND\n* 2 Standard Grades at band 1 to 3 OR Intermediate 2 at  band A to C\n* English or Communication Standard Grade at band 1 to 3 OR Intermediate 2 at  band A to C\n* Candidates possessing a National Qualification in Computer Games at Level 5 or 6 may also be eligible for entry to this cours"
+course19.career_prospects = "Employment as a junior Games Programmer/Modeller or Software Developer."
+course19.spaces = course_spaces
+course19.save!
+
+course20 = Course.new college: clyde
+course20.title = 'SPD Marine Engineering (Cadet Programme) HND'
+course20.category = Category.find_by_name 'Nautical Studies & Marine Engineering'
+course20.level = 'SCQF level 8'
+course20.start_date = Date.new 2017, 8, 28
+course20.end_date = Date.new 2019, 6, 13
+course20.image = Rails.root.join('app/assets/images/seed_images2/marine_engineering_1.jpg').open
+course20.description = "This is a three year training programme aimed at providing the necessary training and qualifications for employment as an Engineering Officer of the Watch.  The HND in marine engineering will also give academic exemptions for management level exams further in your career path. There are a number of elements to the programme and also a compulsory sea time requirement.\n\nThe programme is structured into 5 phases:\n\nThere are two main entries into this programme: September and January. "
+course20.entry_requirements = "To gain entry to the course you should have any of the following combinations of qualifications:\n\n* National 5/GCSE or equivalent which must include: English, Maths, Physical Science (e.g. Physics/Chemistry/Technological Studies/Engineering Science) and one other subject\n* NC Shipping and Maritime Operations (SCQF level 6) without optional Engineering Units.\n* Alternative qualifications will be considered on an individual basis in conjunction with the sponsoring company or training provider\nStudents must have a sponsoring company in order to fulfil the sea time requirement of this programme.  \n\nInitial applications for this course should be submitted to a training provider or company, please follow the link below for more information:\n\nwww.careersatsea.org/sponsoring-companies/"
+course20.career_prospects = "On successful completion of the HND programme, Cadets can gain employment as a fully qualified officer of the watch or choose to progress onto university to study at a higher level."
+course20.spaces = course_spaces
+course20.save!
+
+course21 = Course.new college: kelvin
+course21.title = 'Acting and Performance HNC'
+course21.category = Category.find_by_name 'Drama & Creative Writing'
+course21.level = 'SCQF level 7'
+course21.start_date = Date.new 2017, 8, 28
+course21.end_date = Date.new 2018, 6, 13
+course21.image = Rails.root.join('app/assets/images/seed_images2/Drama_group3.jpg').open
+course21.description = "This course develops the skills you require for acting and performance. It is designed to focus on the practical skills required by the actor, while also supporting the practical experiences with knowledge of theatre and performance.\n\nThis creative, learner-focused course is delivered by highly professional teaching staff, with significant acting and performance experience and a proven track record of bringing out the best in their students.\n\nOn completion of the course, you'll be awared a HNC Acting and Performance and you may be eligible for direct entry into the second year of HND Acting and Performance.\n\nThis course is placed on the Scottish Credit Qualifications Framework at Level 7. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course21.entry_requirements = "* Two Higher Grades, including English; OR\n* NQ Drama; OR\n* Equivalent qualification.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject.\n\nIf your application is successful, you'll also be asked to audition where you will perform a monologue."
+course21.career_prospects = "There are a wide range of career opportunities which include working in theatre, television, community drama, and theatre production."
+course21.spaces = course_spaces
+course21.save!
+
+course22 = Course.new college: cogc
+course22.title = 'Furniture Restoration HND'
+course22.category = Category.find_by_name 'Design Crafts & Graphic Arts'
+course22.level = 'SCQF level 8'
+course22.start_date = Date.new 2017, 8, 28
+course22.end_date = Date.new 2019, 6, 13
+course22.image = Rails.root.join('app/assets/images/seed_images2/Furniture_group_discussing.jpg').open
+course22.description = "This course will allow you to develop your skills in furniture analysis and practical solutions, through workshop activities. You’ll study the history of furniture design and materials as well as the construction, upholstery and finishing of period furniture. You’ll also restore items of furniture throughout this course.\n\nThis course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course22.entry_requirements = "* NQ in Furniture Making; OR\n* One Higher – Craft and Design, and English at minimum Intermediate 2 or National 5.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject. At the interview you'll be asked to provide examples of any design and/or making of furniture or 3D work."
+course22.career_prospects = "Career opportunities are many and varied. A high number of craftspeople are self-employed or in a partnership, which can be rewarding. There are also jobs in furniture trades and shop-fitting."
+course22.spaces = course_spaces
+course22.save!
+
+course23 = Course.new college:kelvin
+course23.title = 'Jewellery Design HND'
+course23.category = Category.find_by_name 'Design Crafts & Graphic Arts'
+course23.level = 'SCQF level 8'
+course23.start_date = Date.new 2017, 8, 28
+course23.end_date = Date.new 2019, 6, 13
+course23.image = Rails.root.join('app/assets/images/seed_images2/jewellery_clamp_lady.jpg').open
+course23.description = "This HND course will teach you a comprehensive range of skills in jewellery design and manufacture, with a design-led focus. You'll be able to choose specialisms according to your own interests, as well as the current business environment.\n\nYour course will be delivered by qualified lecturers, all with a degree in Jewellery/Silversmithing, TQFE Certified and have related industry experience and various specialised skill sets.\n\nYou'll learn designing and manufacturing with various precious and non precious metals (please see the 'Materials' section, below, to find out more). \n\nThe course is project based with units usually being integrated. You'll study specialist practical techniques which can be found in the 'What you Study' section, below. We focus on marrying new technology with traditional techniques – pushing boundaries of material exploration, and developing skills in emerging technologies including: 3D Printing, Scanning, Laser Cutting, Smart Materials.\n\nTo reflect the constant changes within the industry, we work closely with a range of industry partners, and update course content to ensure you receive relevant skills and qualifications.\n\nThis course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course23.entry_requirements = "* One Higher in Art and Design and English at minimum Intermediate 2; OR\n* NC/NQ in an Art and Design subject.\nYou'll be invited for a group and/or individual interview where you'll find out more about the course and tell us why you're interested in this subject area.\n\nAt the interview you'll be asked to provide examples of your art and design work."
+course23.career_prospects = "You can set up business as a jeweller or gain employment in the creative industries, by utilising the range of skills you'll learn throughout the course."
+course23.spaces = course_spaces
+course23.save!
+
+course24 = Course.new college: clyde
+course24.title = 'Travel and Tourism (with option to study languages) HNC'
+course24.category = Category.find_by_name 'Food, Events, Hospitality & Tourism'
+course24.level = 'SCQF level 7'
+course24.start_date = Date.new 2017, 8, 28
+course24.end_date = Date.new 2018, 6, 13
+course24.image = Rails.root.join('app/assets/images/seed_images2/Tourism_Barcelona_1.jpg').open
+course24.description = "This course will give you the skills, knowledge and understanding to develop your career in the Travel and Tourism Industry. You'll gain the skills and knowledge required to provide high quality customer service and enhance your own employability."
+course24.entry_requirements = "* One Higher at Grade C or above in appropriate academic subjects (such as English, Modern Studies, Languages, Business Management, History) and three National 5 qualifications including English; OR\n* One Higher at Grade C or above (such as English, Modern Studies, Languages Business Management, History) with three Intermediate 2 courses including English; OR\n* One Higher at Grade C or above (such as English, Modern Studies, Languages Business Management, History,) and three Standard Grades at credit level including English; OR\n* Other equivalent qualifications or experience.\nYou'll be invited to attend a course presentation where you'll get the opportunity to find out more about the course and tell us why you're interested in this subject area."
+course24.career_prospects = "* National Tourist Organisations.\n* Travel Management Companies.\n* Visitor Centres/Attractions.\n* Tour Operators.\n* Travel Agents.\n* Airlines.\n* Airport Ground Handling.\n* Foreign Exchange Service."
+course24.spaces = course_spaces
+course24.save!
+
+course25 = Course.new college:kelvin
+course25.title = 'Computer Science HNC'
+course25.category = Category.find_by_name 'Applied Computing & Digital Technologies'
+course25.level = 'SCQF level 7'
+course25.start_date = Date.new 2017, 8, 28
+course25.end_date = Date.new 2018, 6, 13
+course25.image = Rails.root.join('app/assets/images/seed_images2/Computer_Science.jpg').open
+course25.description = "The HNC Computing (Science) course is an SQA qualification which aims to meet the challenges of employers seeking qualified learners who can demonstrate knowledge and skills in a range of technology areas.\nThe course places particular emphasis on software development, data science, project management and soft skills such as team-working.\n\nAccording to research from Tech Partnership (a network of employers working with the Scottish Government and Skills Development Scotland to create skills for the UK's digital economy) the number of UK Digital Businesses has increased 30% in the last 5 years.\n\nTheir forecast shows the number of people working in the UK as technology specialists between 2014 and 2024 will grow by 28%, significantly outstripping that predicted for workers more generally.\n\nThe course is delivered by experienced lecturing staff many of whom have industry experience in IT areas such as software engineering, programming, project management and technical support.\n\nAfter successfully completing the award, you can apply for a range of entry level posts within the IT industry, you may progress to year 2 of the HND Computer Science course or enter a relevant degree course at a range of universities\n\nThis course is placed on the Scottish Credit Qualifications Framework at Level 7. For more information on the framework visit: www.scqf.org.uk/the-framework/"
+course25.entry_requirements = "* One Higher* and three National 5 qualifications; OR\n* One Higher* and three Intermediate 2 courses (including at least one from Computing or Information Systems); OR\n* One Higher* and three Standard Grades at credit level; OR\n* A national qualification  at SCQF Level 6 in a related subject (such as Digital Media Computing, Computing: Technical Support or Software Development); OR\n* Other equivalent qualifications or experience\n*in one of these subjects: Computing, Information Systems, Mathematics, Physics or any other relevant subject\n\nYou’ll be invited for a group and/or individual interview where you can find out more about the course and tell us why you’re interested in this subject."
+course25.career_prospects = "The HNC/D in Computing: Computer Science will prepare you for a career in programming, website development or as a support technician or database administrator."
+course25.spaces = course_spaces
+course25.save!
+
+course26 = Course.new college:kelvin
+course26.title = 'Marine Engineering - Year 2 Direct Entry HND'
+course26.category = Category.find_by_name 'Nautical Studies & Marine Engineering'
+course26.level = 'SCQF level 8'
+course26.start_date = Date.new 2017, 8, 28
+course26.end_date = Date.new 2018, 6, 13
+course26.image = Rails.root.join('app/assets/images/seed_images2/marine_engineering_2.jpg').open
+course26.description = "This one-year program is suitable for those cadets who have completed MNTB/MCA approved HNC in Marine Engineering.\n\nSuccessful completion of HND in Marine Engineering will entitle you to MCA’s Management Level Academic subjects such Mathematics, Engineering Drawing, Electro-technology, Naval Architecture, Applied Heat and Applied Mechanics.\n\nFor further information see http://www.careersatsea.org/."
+course26.entry_requirements = "* MNTB/MCA Approved HNC in Marine Engineerin"
+course26.career_prospects = "Successful completion of the course may offer you entry to second year of a four years honours course at university.\n\nThis course prepares you for a career as a Senior Marine Engineering Officer, Ship Manager, or Ship Superintendent."
+course26.spaces = course_spaces
+course26.save!
+
+course27 = Course.new college: cogc
+course27.title = 'Complementary Therapies (Year 2 Direct Entry) HND'
+course27.category = Category.find_by_name 'Hair & Beauty'
+course27.level = 'SCQF level 8'
+course27.start_date = Date.new 2017, 8, 28
+course27.end_date = Date.new 2019, 6, 13
+course27.image = Rails.root.join('app/assets/images/seed_images2/Beauty_complementary_therapy_massage_1.jpg').open
+course27.description = "We are a sector leading provider of training in complementary therapies and our second year HND programme aims to provide everything you need to become a confident practitioner, qualified to an advanced level.\n\nAfter successfully completing the course, you'll be eligible for professional membership and insurance within the field of complementary therapies.\n\nThis course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course27.entry_requirements = "* HNC Complementary Therapies (15 credits), must include Reflexology.\nYou'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject. We'll also want to hear why you are interested in undertaking progression of your qualification."
+course27.career_prospects = "This course prepares you for a career in the field of complementary therapies, for example in healthcare services, cruise ships, spas, hotels or self-employment."
+course27.spaces = course_spaces
+course27.save!
+
+course28 = Course.new college: kelvin
+course28.title = '3D Design/ HNC 3D Design: Product Design HNC'
+course28.category = Category.find_by_name 'Design Crafts & Graphic Arts'
+course28.start_date = Date.new 2017, 8, 28
+course28.end_date = Date.new 2018, 6, 13
+course28.image = Rails.root.join('app/assets/images/seed_images2/Product_design_boyfix_wheel_0.jpg').open
+course28.description = "Looking to become a qualified Product Designer? This is a challenging course, where you take part in an exciting and comprehensive programme of product design. You’ll learn about new materials, CAD and how to use manufacturing processes, as well as developing 3D prototypes.\n\nYou'll work through all the stages of the design process through a number of projects, producing presentation boards for clients to review.\n\nThe course gives you the skills required for employment in this high demand industry sector (please see further information in the 'after the course' section) and will be delivered by our professional teaching staff with significant product design experience.\n\nThe course is placed on the Scottish Credit Qualifications Framework at Level 7. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course28.entry_requirements = "* NC Product Design or related discipline (eg Furniture Design), OR\n* One Higher from Design and Manufacture, Product Design, Graphic Communication or Art and Design, and English at minimum Intermediate 2, OR\n* One Higher from Product Design, Graphic Communication or Art and Design, and English at National 5 level, OR\n* Other equivalent qualifications, or experience.\nYou'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject. At the interview you'll be asked to provide examples of your art and design work."
+course28.career_prospects = "Upon graduating, you'll be able to seek employment as a qualified Product Designer, Solidworks 3D Modeller, or Digital Media Designer."
+course28.spaces = course_spaces
+course28.save!
+
+course29 = Course.new college: clyde
+course29.title = '3D Design: Model Making for the Creative Industries HND'
+course29.category = Category.find_by_name 'Design Crafts & Graphic Arts'
+course29.level = 'SCQF level 8'
+course29.start_date = Date.new 2017, 8, 28
+course29.end_date = Date.new 2019, 6, 13
+course29.image = Rails.root.join('app/assets/images/seed_images2/Modelmaking_02.jpg').open
+course29.description = "This Model Making course is aimed at students who have some practical skills in crafts, art and design and who have an interest in working in the fields of model or prop making for TV, film and theatre, architecture, product design, prototypes, museums, cosplay etc.\n\nYou'll develop skills in the design and construction of a wide variety of types of model through project-based units designed to be relevant to future employment and study routes. Projects are varied to cater for a broad range of interests and to allow as much individual creative input as possible. In addition, by the end of the course you will be encouraged to have a strong online presence to facilitate networking within the industry.\n\nThe dedicated course lecturers bring many years of wide ranging commercial model making experience to the college and have been continually updating and developing the course over the last 10 years. You'll work on projects independently or in groups. Teaching will be through class discussion and demonstrations and one-to-one tutorials in practical and design tasks, with individual feedback, guidance and support.\n\nLinks to relevant companies and practitioners are encouraged and industry guest speakers and visits are frequently arranged. At the end of the course, selected students have the opportunity to show their work at the annual model making trade show in London.\n\nStudents from this course have gone on to study at degree level, gone directly into employment with some of the country’s most prestigious companies e.g. Sir Norman Foster Architects or found success as freelance model makers in various niche markets.\n\nThis course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course29.entry_requirements = "* NC Model Making, or a NC in a related discipline, OR\n* One Higher from Art, Design &amp; Manufacture, Product Design or Graphic Communication and English at National 5 level, OR\n* Related work experience.\nYou'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject. At the interview you're asked to bring your best examples of both 2D and 3D art and design work, in original, photographic or portfolio form."
+course29.career_prospects = "Many graduates work as model makers all over the world, including New Zealand, Dubai and Australia."
+course29.spaces = course_spaces
+course29.save!
+
+course31 = Course.new college: cogc
+course31.title = 'Legal Services (With Criminology and Police Studies) HNC'
+course31.category = Category.find_by_name 'Administration, Human Resources & Law'
+course31.level = 'SCQF level 7'
+course31.start_date = Date.new 2017, 8, 28
+course31.end_date = Date.new 2018, 6, 13
+course31.image = Rails.root.join('app/assets/images/seed_images2/LegalSerivcesHNC.jpg').open
+course31.description = "This course is based around Scottish criminal law and Scottish criminal procedures, criminology, contemporary policing and the criminal justice system in Scotland. In addition to these core subjects, you'll study commercial law, private law and property law, sheriff civil and a communications unit.\n\nDuring the year, you'll look at the role of the citizen within society, the rights and obligations of the private citizen across commercial, property and private matters, the principle of equality, fairness and the role of government and other agencies in maintaining and regulating the rights of the individual.\n\nThis course is placed on the Scottish Credit Qualifications Framework at Level 7. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course31.entry_requirements = "* One Higher at grade C or above, preferably English, History, Modern Studies or a related subject; PLUS\n* Three Intermediate 2 at grade C or above, preferably including English, History, Modern Studies or a related subject; OR\n* An NC Qualification at Level 6.\nIf you don't have the standard entry qualifications but have an employment history and are looking for a career change, you can be considered subject to review of that work experience.\n\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you are interested in this subject."
+course31.career_prospects = "This course prepares you for a career in the police service, prison service, and other related agencies."
+course31.spaces = course_spaces
+course31.save!
+
+course33 = Course.new college: cogc
+course33.title = 'Business HND'
+course33.category = Category.find_by_name 'Business & Procurement'
+course33.level = 'SCQF level 8'
+course33.start_date = Date.new 2017, 8, 28
+course33.end_date = Date.new 2019, 6, 13
+course33.image = Rails.root.join('app/assets/images/seed_images2/Business_Boy_ipad.jpg').open
+course33.description = "The course provides you with the skills and knowledge necessary for careers in banking, insurance, civil service, local government and distribution. Today, the internet is an important part of business, so we've updated the course to include analysing and using information for strategic purposes.\n\nYour course will be delivered by our highly professional teaching staff with relevant industry experience and track record of bringing out the best in their students.\n\nThis course accepts year two direct entrants (you must have a completed HNC Business, please see further information in direct entry section).\n\nThis course is placed on the Scottish Credit Qualifications Framework at Level 7 (year 1) and Level 8 (year 2).  For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course33.entry_requirements = "Year 1 Entry\n\n* Two Highers in a relevant* academic subject OR\n* Relevant Work experience may be considered.\n* relevant academic subjects include English, Administration, Business Management, Economics, Geography, History, Mathematics, Modern Studies or a Science subject.\n\nYou'll be invited to attend a group presentation and interview session.  The presentation will give you all of the information you need about the course, this will be followed on the same day by an individual interview where you can tell us why you are interested in this course and ask any specific questions related to your own application."
+course33.career_prospects = "This course will prepare you for trainee positions in management and administration in industry, financial services and the public sector."
+course33.spaces = course_spaces
+course33.save!
+
+course37 = Course.new college:kelvin
+course37.title = 'Fine Art HNC'
+course37.category = Category.find_by_name 'Fine Arts & Photography'
+course37.level = 'SCQF level 7'
+course37.start_date = Date.new 2017, 8, 28
+course37.end_date = Date.new 2018, 6, 13
+course37.image = Rails.root.join('app/assets/images/seed_images2/HNC_Fine_Art.jpg').open
+course37.description = "This contemporary course includes both traditional and innovative art practices. It gives you a broad visual education in contemporary art practice.\n\nYou'll develop your skills in a range of specialist disciplines and increase your awareness and knowledge of conceptual thinking. It's also a great opportunity to improve and strengthen your existing portfolio of artwork.\n\nYou'll be awarded an HNC Contemporary Art Practice on successful completion of this course.\n\nFor more information visit Visual Grammar, the department of Fine Art's Facebook page, and other courses on this website with Fine Art i.e. NC Fine Art Portfolio / HND Fine Art / BA (Hons) Contemporary Art Practice.\n\nThis course is placed on the Scottish Credit Qualifications Framework at Level 7. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course37.entry_requirements = "* Two Higher Grade passes at grade C or above, in Art and English and two other passes at Standard Grade (or equivalent) at band 3 or above; OR\n* Two Higher Grade passes at grade C or above, in Art and English and two National 4 qualifications; OR\n* NQ Art and Design (or equivalent).\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject. On the day you'll also be asked to submit a portfolio of your art and design work for assessment and may be given a short interview."
+course37.career_prospects = "This course prepares you for work as an independent exhibiting artist, depending on the calibre of your work, your motivation and self-promotion skills."
+course37.spaces = course_spaces
+course37.save!
+
+course38 = Course.new college: cogc
+course38.title = 'Illustration HND'
+course38.category = Category.find_by_name 'Design Crafts & Graphic Arts'
+course38.level = 'SCQF level 8'
+course38.start_date = Date.new 2017, 8, 28
+course38.end_date = Date.new 2019, 6, 13
+course38.image = Rails.root.join('app/assets/images/seed_images2/Illustration.jpg').open
+course38.description = "This course will help you develop your creative and technical skills to become a commercial illustrator. You'll build projects from initial ideas and sketchbook drawings, through to illustration artwork ready for presentation to a client. You're encouraged to explore individual responses to project briefs.  On completion of the course you'll have produced a broad and exciting portfolio of illustrations and other relevant art and design work.  \n\nDuring your time on the course you'll have the opportunity for study trips at both home and abroad.  \nRecent trips have included Berlin, Amsterdam, the Outer Hebrides, Edinburgh and the art galleries of Glasgow.   \n\nIn addition, the course prides itself in providing relevant industrial experience and you would be expected to complete a range of live and client led projects.\n\nThis course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course38.entry_requirements = "* NC in Art and Design or related subject; OR\n* Higher Art and Design and English at minimum Intermediate 2/National 5 level; OR\n* Relevant experience.\n* HNC Illustration OR\n* First year of HND Illustration.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject."
+course38.career_prospects = "The HNC/D course can lead to self-employment as a freelance Illustrator working with advertising agencies, design consultants, and book, magazine and newspaper publishers, or in your own private practice."
+course38.spaces = course_spaces
+course38.save!
+
+course41 = Course.new college:kelvin
+course41.title = 'Creative Industries: Television  (Year 2 Direct Entry) HND'
+course41.category = Category.find_by_name 'Media'
+course41.level = 'SCQF level 8'
+course41.start_date = Date.new 2017, 8, 28
+course41.end_date = Date.new 2019, 6, 13
+course41.image = Rails.root.join('app/assets/images/seed_images2/TV_Sound_edit_0.jpg').open
+course41.description = "This course will help you to develop skills in all areas of television production, including camera, sound, editing, sound dubbing and lighting. An ideal course if you're interested in TV, film, video, broadcast and working in a studio environment.\n\nCareer prospects and employment opportunities are excellent with many of our students progressing to degree level study or to careers both in broadcasting and with independent production companies (please see \"After the Course\" section below for more information). \n\nOn successful completion of the course, you'll be awarded with an HND Creative Industries: Television.\n\nThis course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course41.entry_requirements = "​HNC Television with 15 credits\n\nOR\n\nRelevant television experience.\n\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you are interested in this subject. You'll also be asked to bring examples of their work."
+course41.career_prospects = "The Television Industry is expanding and there are opportunities for skilled graduates, both in broadcasting and with independent production companies."
+course41.spaces = course_spaces
+course41.save!
+
+course42 = Course.new college: clyde
+course42.title = 'Media and Communication HNC'
+course42.category = Category.find_by_name 'Media'
+course42.level = 'SCQF level 7'
+course42.start_date = Date.new 2017, 8, 28
+course42.end_date = Date.new 2018, 6, 13
+course42.image = Rails.root.join('app/assets/images/seed_images2/Desktop_Publishing_girl.jpg').open
+course42.description = "This wide-ranging and multi-faceted Media and Communication course will help you to develop a broad base of multi-platform media skills suitable for higher education and employment in the modern, convergent media and communications industries.\n\nEach tutor has a wide variety of media experience, and you'll gain even more knowledge from expert media guest speakers, visits, field trips and professional workshops.\n\nYou’ll be continually assessed and will be working on industry relevant projects, in some cases for real clients.\n\nThe course is placed on the Scottish Credit Qualifications Framework at Level 7. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course42.entry_requirements = "* Higher English or Higher Media Studies at Grade C or above, OR\n* NC Media or a similar NC programme, OR\n* Relevant work experience.\nYou'll be invited for a group pre-entry guidance session and individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject.\n\nAt this interview you'll be given a short written exercise (around 200 words) so we can review your writing style, syntax, spelling and grammar.\n\n It may also strengthen your application to provide evidence of relevant experience or activity in the subject area, e.g. blogging, podcasting, published work, involvement in school newspapers, magazines or radio stations, relevant work experience or volunteering etc. "
+course42.career_prospects = "This course prepares you for a career in journalism, television and radio production, video production, public relations and advertising."
+course42.spaces = course_spaces
+course42.save!
+
+course43 = Course.new college: clyde
+course43.title = 'Media with Journalism HNC'
+course43.category = Category.find_by_name 'Design Crafts & Graphic Arts'
+course43.level = 'SCQF level 7'
+course43.start_date = Date.new 2017, 8, 28
+course43.end_date = Date.new 2018, 6, 13
+course43.image = Rails.root.join('app/assets/images/seed_images2/HNC%20Creative%20Industries%20Media%20and%20Communication%201600x1078_IMAGE1_0.jpg').open
+course43.description = "This course has a focus on Journalism for learners who are interested in that discipline and might wish to apply for first year entry at University. \n\nIt will help you develop a broad base of multi-platform media and Journalism skills suitable for higher education and employment in the modern, convergent media and communications industries. \n\nEach tutor has a wide variety of media experience, and you'll gain even more knowledge from expert media guest speakers, visits, field trips and professional workshops.\n\nThe course is placed on the Scottish Credit Qualifications Framework at Level 7. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course43.entry_requirements = "* One Higher at Grade C or above preferably English or Media Studies, OR\n* NC Media or a similar NC programme, OR\n* Relevant work experience.\nYou'll be invited for a group pre-entry guidance session and individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject.\n\nAt this interview you'll be given a short written exercise (around 200 words) so we can review your writing style, syntax, spelling and grammar.\n\n It may also strengthen your application to provide evidence of relevant experience or activity in the subject area, e.g. blogging, podcasting, published work, involvement in school newspapers, magazines or radio stations, relevant work experience or volunteering."
+course43.career_prospects = "This course prepares you for a career in journalism, television and radio production, video production, public relations and advertising."
+course43.spaces = course_spaces
+course43.save!
+
+course45 = Course.new college: cogc
+course45.title = 'Childhood Practice HNC'
+course45.category = Category.find_by_name 'Health, Social Care & Early Education'
+course45.level = 'SCQF level 7'
+course45.start_date = Date.new 2017, 8, 28
+course45.end_date = Date.new 2018, 6, 13
+course45.image = Rails.root.join('app/assets/images/seed_images2/HNC%20Childhood%20Practice%201600x1078.jpg').open
+course45.description = "This course is for individuals interested in a career in the early education and childcare field or for those wishing to pursue further study for example, within Primary Education or Childhood Practice.\n\nApproved by the Scottish Social Services Council, this course is a suitable qualification for registration as a Child Development Officer.\n\nThe main aim of the HNC is to provide an integrated course of values, skills and knowledge to equip candidates to work effectively within an early education and childcare settings.\n\nMore specifically, the course will enable you to:\n\n\nThe structure of the course includes lectures, research tasks, presentations and group discussions.  This is an interactive course which includes blended learning and encourages your active participation. During your course, industry experts will be invited to speak with student groups. The staff group consists of lecturers from a variety of early education, health and social care backgrounds.  \n\nHNC Childhood Practice full-time students will complete two days per week on placement throughout the duration of the course to allow development of experience and completion of three SVQ3 units.\n\nThis course is placed on the Scottish Credit Qualifications Framework at Level 7. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course45.entry_requirements = "* Two or more Highers at C or above including English; OR\n* NC Early Education and Childcare Level 6.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject.\n\nYou'll also need to provide two suitable references, one from your most recent educational provider (if in education) or your employer. \n\nExperience witihn an early education - voluntary or employed - would be extreamly beneficial."
+course45.career_prospects = "This course prepares you for a career as a practitioner in the Childcare and Early Education sectors."
+course45.spaces = course_spaces
+course45.save!
+
+course46 = Course.new college: cogc
+course46.title = 'Social Services HNC'
+course46.category = Category.find_by_name 'Health, Social Care & Early Education'
+course46.level = 'SCQF level 7'
+course46.start_date = Date.new 2017, 8, 28
+course46.end_date = Date.new 2018, 6, 13
+course46.image = Rails.root.join('app/assets/images/seed_images2/social_services.jpg').open
+course46.description = "This course is for individuals interested in a career in the social care field or those wishing to pursue further study, for example, to the Degree in Social Work.\n\nIt is also suitable for individuals who are employed in the care field and require qualifications for registration with the Scottish Social Services Council and/or continual professional development.\n\nThe main aim of the HNC is to provide an integrated course of values, skills and knowledge to equip candidates to work effectively in a range of care settings.\n\nThe specific aims of the course are to enable you to:\n\nYou'll be taught by qualified lecturing staff from a variety of health and social care backgrounds. The structure of the course includes lectures, research tasks, presentations and group discussions.\n\nThis is an interactive course which includes blended learning and encourages your active participation. Industry experts will also be invited to speak with student groups and there is a yearly Graduate Panel for previous students to share their experiences with those currently studying.  \n\nAs a HNC Social Services student you'll complete two days per week on placement from October/November to June within a social care setting allowing for the opportunity to gain experience working directly with service users, put theory into practice in a care setting and complete the SVQ3 units.\n\nThis course is placed on the Scottish Credit Qualifications Framework at Level 7. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course46.entry_requirements = "* Two Higher Grades at C or above preferably including English; OR\n* An appropriate Level 6 Group Award and/or an appropriate group of SQA units at level 6.\n* Candidates with SVQ3 in a related area will also be considered.\n* Applicants without these qualifications who have relevant experience may also be considered.\nTwo suitable references will be required, including one from your most recent educational provider and/or employed as appropriate.\n\nYou'll be invited for an interview where there will be the opportunity to find out more about the course and tell us why you're interested in this subject area.\n\nPlease note, for a number of the articulation options, Level 5 Maths is required.  This is offered within City of Glasgow College as Lifeskills Maths."
+course46.career_prospects = "This course prepares you for a career in:\n\n* Social work.\n* Social care worker.\nSupport worker with various groups such as older adults, people with learning difficulties, adult care, community care, offenders, residential child care, or the addiction field.\n\nVarious careers in Care both within the private and public sector."
+course46.spaces = course_spaces
+course46.save!
+
+course47 = Course.new college: clyde
+course47.title = 'Social Sciences Diploma of Higher Education'
+course47.category = Category.find_by_name 'Social Sciences'
+course47.level = 'SCQF level 8'
+course47.start_date = Date.new 2017, 8, 28
+course47.end_date = Date.new 2018, 6, 13
+course47.image = Rails.root.join('app/assets/images/seed_images2/SocialSciencesDipofHE.jpg').open
+course47.description = "The Diploma of Higher Education in Social Sciences is offered by City of Glasgow College, in association with the University of Strathclyde, Glasgow.\n\nIt is equivalent to the first two years of an Honours Degree at the University of Strathclyde and therefore allows you to apply to there for direct entry to the third year of the BA Politics and/or History Degree.\n\nIn the first year you'll study History, Politics, Economics and Sociology and in the second year Politics and History only. Please note that there is no psychology in this degree.\n\nIf you leave after one year – or don’t meet the requirements for the Diploma after two years – you may be awarded a Certificate of Higher Education in Social Sciences.\n\nThis course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course47.entry_requirements = "* Four or more Higher Grade pass at grade C or above, one of which must be in English or ESOL and at least two others in social science subjects such as Sociology, Modern Studies, History, Politics, Psychology, Philosophy, Geography, R.M.P.S or Economics.\n* Two other passes at National 5 or equivalent.\nYou'll be invited for a group and/or individual interview where you will get the opportunity to find out more about the course and tell us why you're interested in this subject area."
+course47.career_prospects = "This course prepares you for a career in public and private sectors including:\n\n* Health service.\n* Community work.\n* Welfare rights.\n* Social research.\n* Teaching.\n* Aid agencies.\n* Social work.\n* Housing.\n* Local, national and European Governmen."
+course47.spaces = course_spaces
+course47.save!
+
+course48 = Course.new college: kelvin
+course48.title = 'Social Sciences HNC'
+course48.category = Category.find_by_name 'Social Sciences'
+course48.level = 'SCQF level 7'
+course48.start_date = Date.new 2017, 8, 28
+course48.end_date = Date.new 2018, 6, 13
+course48.image = Rails.root.join('app/assets/images/seed_images2/HNC%20Social%20Sciences%201600x1078.jpg').open
+course48.description = "This course provides you with sound education and training in key areas of social science theory, research and investigation.\n\nKey course objectives are to develop knowledge in the social sciences; to develop analytical, evaluative and problem solving skills; to develop communication skills; and to develop personal effectiveness and critical thinking about social and cultural issues.\n\nThis course is placed on the Scottish Credit Qualifications Framework at Level 7. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course48.entry_requirements = "* Two SQA Higher Grade passes or equivalent at first sitting. At least one of the Highers must be in English (or ESOL equivalent) or in a social science subject such as Modern Studies, Sociology, Politics, Psychology, History, Economics or Philosophy.\n* Mature students may be considered based on work and life experience.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you are interested in this subject. Some applicants may be required to take a short written exercise. Applicants are advised to ensure that their personal statement is written to a very high standard."
+course48.career_prospects = "The vast majority of our successful HNC students apply for the second year of study – HND Social Sciences but others:\n\n* Enter employment.\n* Apply to university for entry at level 1 or ."
+course48.spaces = course_spaces
+course48.save!
+
+course49 = Course.new college: cogc
+course49.title = 'Social Sciences (Year 2 Direct Entry) HND'
+course49.category = Category.find_by_name 'Social Sciences'
+course49.level = 'SCQF level 8'
+course49.start_date = Date.new 2017, 8, 28
+course49.end_date = Date.new 2018, 6, 13
+course49.image = Rails.root.join('app/assets/images/seed_images2/HND%20Social%20Sciences%202nd%20Year%20entry%201600x1078.jpg').open
+course49.description = "This course provides you with sound education and training in key areas of social science theory, research and investigation.\n\nThe course is delivered by highly qualified lecturers who have a wealth of experience within the industry. Key course objectives are to develop knowledge in the social sciences; to develop analytical, evaluative and problem solving skills; to develop communication skills; and to develop personal effectiveness and critical thinking about social and cultural issues.\n\nCareer prospects and employment opportunities are excellent with many of our students progressing to 3rd year at university (please see the \"After the Course\" section, below, to find out more).\n\nAfter successful completion of the course, you'll be awarded with an HND Social Sciences.\n\nThis course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course49.entry_requirements = "* HNC Social Sciences with 15 credits at SCQF level 7; OR\n* First year of HND Social Sciences with 15 credits as SCQF level 7.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you are interested in this subject. Some applicants may be required to take a short written exercise. You are advised to ensure that you personal statement is written to a very high standard."
+course49.career_prospects = "You can science all the social you like."
+course49.spaces = course_spaces
+course49.save!
+
+course52 = Course.new college: cogc
+course52.title = 'Coaching and Developing Sport HND'
+course52.category = Category.find_by_name 'Sport & Fitness'
+course52.level = 'SCQF level 8'
+course52.start_date = Date.new 2017, 8, 28
+course52.end_date = Date.new 2019, 6, 13
+course52.image = Rails.root.join('app/assets/images/seed_images2/Sport_fitness.jpg').open
+course52.description = "This course introduces and develops the skills and knowledge you’ll need for a career in sports coaching. The principles of good coaching practice are examined and a wide practical and theoretical knowledge of games and sports is developed (please see further information in the 'what you study' section below).\n\nYou'll be taught by sports coaching staff with significant industry experience and a proven track record of bringing out the best in their students.\n\nThis course accepts direct entrants to year two. On successful completion of this course, you'll be awarded with the HND in Coaching and Deveolping Sport.\n\nThe course is placed on the Scottish Credit Qualifications Framework at Level 8. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course52.entry_requirements = "* Two Highers at grade C or above including English or equivalent.\n* An HNC Sport Coaching qualification with 15 credits.\nThis ensures you do not need to study additional units to complete the 30 credits in second year.\n\nYou'll be invited for a group interview."
+course52.career_prospects = "You can get a job doing P.E."
+course52.spaces = course_spaces
+course52.save!
+
+course53 = Course.new college: cogc
+course53.title = 'Coaching and Developing Sport HNC'
+course53.category = Category.find_by_name 'Sport & Fitness'
+course53.level = 'SCQF level 7'
+course53.start_date = Date.new 2017, 8, 28
+course53.end_date = Date.new 2018, 6, 13
+course53.image = Rails.root.join('app/assets/images/seed_images2/Gym_2boys_workout.jpg').open
+course53.description = "This course introduces and develops the skills and knowledge you’ll need for a career in sports coaching. Together we'll examine the principles of good coaching practice, as well as developing a wide range of practical and theoretical knowledge of games and sports. Work experience is included on HN programmes and you will also have the opportunity to qualify for Sports Coaching awards from national governing bodies.\n\nYou'll lead practical coaching sessions, in college and in schools. An Enhanced Disclosure Scotland check must be successfully completed before you coach young people in schools.\n\nThis course is placed on the Scottish Credit Qualifications Framework at Level 7. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course53.entry_requirements = "* At least one Higher at Grade C in English or equivalent.\n* NQ/NC qualification at Level 6.\nYou'll be invited for a group interview."
+course53.career_prospects = "This course prepares you for a career in sports as a Sports Development Officer, or a Sports Co-ordinator."
+course53.spaces = course_spaces
+course53.save!
+
+course56 = Course.new college: cogc
+course56.title = 'Marine Engineering (Cadet Training) HNC'
+course56.category = Category.find_by_name 'Nautical Studies & Marine Engineering'
+course56.level = 'SCQF level 7'
+course56.start_date = Date.new 2017, 8, 28
+course56.end_date = Date.new 2018, 6, 13
+course56.image = Rails.root.join('app/assets/images/seed_images2/marine_engineering_0.jpg').open
+course56.description = "This is a three year training programme aimed at providing the necessary training and qualifications for employment as an Engineering Officer of the Watch.  There are a number of elements to the programme and also a compulsory sea time requirement.\n\nThe programme is structured into 5 phases:\n\nThere are two main entry dates into this programme: September and January. \n\nFor course contact details, please email maritime@cityofglasgowcollege.ac.uk."
+course56.entry_requirements = "To gain entry to the course you should have any of the following combinations of qualifications:\n\n* National 5/GCSE or equivalent which must include: English, Maths, Physical Science (e.g. Physics/Chemistry/Technological Studies/Engineering Science) and one other subject\n* NC Shipping and Maritime Operations (SCQF level 6) without optional Engineering Units.\n* Alternative qualifications will be considered on an individual basis in conjunction with the sponsoring company or training provider.\nStudents must have a sponsoring company in order to fulfil the sea time requirement of this programme.  \n\nInitial applications for this course should be submitted to a training provider or company, please follow the link below for more information: \n\nhttp://www.careersatsea.org/sponsoring-companies/"
+course56.career_prospects = "On successful completion of the HNC programme, Cadets can gain employment as a fully qualified officer of the watch or choose to progress onto the HND Marine Engineering top up course, which will provide academic exemptions up to management level."
+course56.spaces = course_spaces
+course56.save!
+
+course57 = Course.new college: cogc
+course57.title = 'Retail Management - January Start HNC'
+course57.category = Category.find_by_name 'Marketing & Retail'
+course57.level = 'SCQF level 7'
+course57.start_date = Date.new 2017, 8, 28
+course57.end_date = Date.new 2018, 6, 13
+course57.image = Rails.root.join('app/assets/images/seed_images2/Retail_marketing.jpg').open
+course57.description = "This course prepares you for a career in the retail industry, where there's a growing need for people qualified to fill trainee management positions.\n\nDuring the course you'll carry out case studies, projects and assignments, and we'll assess your progress continuously. We also organise industrial visits and study tours.\n\nThis course runs for 6 months from January - June 2017.\n\nThe course is placed on the Scottish Credit Qualifications Framework at Level 7. For more information on the framework visit: www.scqf.org.uk/the-framework/."
+course57.entry_requirements = "* Higher English at grade C or above (or another relevant Higher).\n* Two other passes at Standard Grade, or equivalent at band 3 or above, OR\n* A National Qualification in a relevant area or an appropriate SVQ\nYou'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject."
+course57.career_prospects = "Apply for second year of HND Retail Management. You can also apply for first or second year entry to relevant degree programmes at Glasgow Caledonian University, Stirling University, Queen Margaret University or Robert Gordon University."
+course57.spaces = course_spaces
+course57.save!
+
+course58 = Course.new college: cogc
+course58.title = 'Nautical Science/ Chief Mate/ Master (Jan) HND'
+course58.category = Category.find_by_name 'Nautical Studies & Marine Engineering'
+course58.start_date = Date.new 2017, 8, 28
+course58.end_date = Date.new 2018, 6, 13
+course58.image = Rails.root.join('app/assets/images/seed_images2/marine_D3_0.jpg').open
+course58.description = "This course is designed for you to progress from OOW level (deck) to chief mates level. You will also complete the following short courses HELM Management, NAEST Management and a medical care certificate. The course overall will equip you to become a competent and efficient chief mate.\n\nThere are assessments for the HND units and also preparation for the MCA Mates/Masters written exams and also for the MCA Mates oral exam. Students enrol on each of the courses separately."
+course58.entry_requirements = "* A recognised complete sea time of 12 months at OOW level\n* A MCA approved OOW certificate\n* A NAEST (M) certificate (to be valid when finally applying for your COC). The NAEST(M) course is scheduled within course program."
+course58.career_prospects = "You can get a job on a boat."
+course58.spaces = course_spaces
+course58.save!
+
+course59 = Course.new college: kelvin
+course59.title = 'SPD Marine Engineering Cadet Programme - January Start HND'
+course59.category = Category.find_by_name 'Nautical Studies & Marine Engineering'
+course59.level = 'SCQF level 8'
+course59.start_date = Date.new 2017, 8, 28
+course59.end_date = Date.new 2019, 6, 13
+course59.image = Rails.root.join('app/assets/images/seed_images2/Marine_Engineering_girl_0.jpg').open
+course59.description = "This is a three year training programme aimed at providing the necessary training and qualifications for employment as an Engineering Officer of the Watch.  The HND in marine engineering will also give academic exemptions for management level exams further in your career path, while the SPD Marine Management element will give exemptions from the IAMI Engineering Knowledge examination.\n\nThere are a number of elements to the programme and also a compulsory sea time requirement of seven months.\n\nThe programme is structured into 5 phases:\n\nPhase 1 – College phase where you will complete year 1 of HND in Marine Engineering, compulsory STCW short courses, MCA workshop skills and industrial experience.\n\nPhase 2 – Sea Phase where you will start your MNTB training record book in addition to a work based learning course and a distance learning maths course.\n\nPhase 3 - College phase where you will complete year 2 of the HND in Marine Engineering (excluding the graded unit project), STCW short courses, MCA workshop skills and industrial experience.\n\nPhase 4 – Sea Phase where you will complete your MNTB training record book.\n\nPhase 5 - College phase where you will complete an SPD in Marine Management and HND Marine Engineering graded unit 2 projects in addition to preparing for your MCA Oral Examination and completing your final STCW short courses.  Additional Maths tuition in order to aide transition to university will also be provided.\n\nThere are two main entries into this programme: A September entry and also a January entry. "
+course59.entry_requirements = "To gain entry to the course you should have any of the following combinations of qualifications:\n\n·       English\n\n·       Maths\n\n·       Physical Science (e.g. Physics/Chemistry/Technological Studies/Engineering Science)\n\n·       One other subject\n\nStudents must have a sponsoring company in order to fulfil the sea time requirement of this programme. \n\nInitial applications for this course should be submitted to a training provider or company, please follow the link below for more information.\n\nhttp://www.careersatsea.org/sponsoring-companies/"
+course59.career_prospects = "On successful completion of the SPD programme, Cadets can gain employment as a fully qualified officer of the watch or choose to progress onto university to study at a higher level."
+course59.spaces = course_spaces
+course59.save!
+
+course60 = Course.new college: cogc
+course60.title = 'Marine Engineering (Cadet Programme) (Jan) HNC'
+course60.category = Category.find_by_name 'Nautical Studies & Marine Engineering'
+course60.level = 'SCQF level 7'
+course60.start_date = Date.new 2017, 8, 28
+course60.end_date = Date.new 2018, 6, 13
+course60.image = Rails.root.join('app/assets/images/seed_images2/Marine_Engineering_girl.jpg').open
+course60.description = "This is a three year training programme aimed at providing the necessary training and qualifications for employment as an Engineering Officer of the Watch.  There are a number of elements to the programme and also a compulsory sea time requirement.\n\nPhase 1 – College phase where you will complete an NC in shipping and Maritime Operations, compulsory STCW short courses, MCA workshop skills and industrial experience.\n\nPhase 2 – Sea Phase where you will start your MNTB training record book in addition to a work based learning course and a distance learning maths course.\n\nPhase 3 - College phase where you will complete an HNC in Marine Engineering, STCW short courses, MCA workshop skills and industrial experience.\n\nPhase 4 – Sea Phase where you will complete your MNTB training record book.\n\nPhase 5 - College phase where you will prepare for your IAMI engineering knowledge examination, MCA Oral Examination and complete your final STCW short courses.\n\nThere are two main entries into this programme: September and January."
+course60.entry_requirements = "To gain entry to the course you should have any of the following combinations of qualifications:\n\n* English.\n* Maths.\n* Physical Science (e.g. Physics/Chemistry/Technological Studies/Engineering Science).\n* One other subject.\nAlternative qualifications will be considered on an individual basis in conjunction with the sponsoring company or training provider.\n\nStudents must have a sponsoring company in order to fulfil the sea time requirement of this programme. \n\nInitial applications for this course should be submitted to a training provider or company, please follow the link for more information."
+course60.career_prospects = "On successful completion of the HNC programme, Cadets can gain employment as a fully qualified officer of the watch or choose to progress onto the HND Marine Engineering top up course, which will provide academic exemptions up to management level."
+
+
+statuses = ['open', 'open', 'open', 'open', 'cancelled', 'closed']
+
+# Add status
+Course.all.each do |course|
+  course.status = statuses.sample.to_sym
+  course.save!
+end
 
 
 # TEST STUDENTS

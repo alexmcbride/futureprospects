@@ -85,7 +85,7 @@ end
 
 def scrape_courses(file)
   index = 0
-  (2..9).each do |page|
+  (10..19).each do |page|
     host = 'http://www.cityofglasgowcollege.ac.uk'
     path = "http://www.cityofglasgowcollege.ac.uk/course-search?search_api_views_fulltext=&field_template_reference_field_lookup_coursesubject=All&sort_by=field_runs_from_value&sort_order=ASC&page=#{page}&f[0]=field_template_reference%253Afield_mode_of_study%3A139&f[1]=field_price_band%3A17"
     list = Nokogiri::HTML(open(path))
@@ -104,13 +104,22 @@ def save_image(uri)
 end
 
 def scrape_images(file)
+  count = 0
   while line = file.gets
+    begin
     if line.starts_with? 'Image: '
-      tokens = line.split(': ')
-      tokens = tokens[1].split('?')
-      save_image tokens[0]
-      puts "done #{tokens[0]}..."
-      sleep 1
+      if count >= 0
+        tokens = line.split(': ')
+        tokens = tokens[1].split('?')
+        save_image tokens[0]
+        puts "done #{tokens[0]}..."
+        sleep 1
+      end
+
+      count += 1
+    end
+    rescue
+      puts 'error...'
     end
   end
 end
@@ -178,16 +187,22 @@ def generate_seed file
       tokens = line.split(': ', 2)
       filename = File.basename tokens[1]
       filename = filename.split('?')[0]
-      puts "#{course}.image = Rails.root.join('app/assets/images/seed_images2/#{filename}').open"
+      full_path = "app/assets/images/seed_images2/#{filename}"
+
+      if File.exist? full_path
+        puts "#{course}.image = Rails.root.join('#{full_path}').open"
+      else
+        puts "#{course}.image = '########'"
+      end
     elsif line.starts_with? 'Description: '
       tokens = line.split(': ', 2)
-      puts "#{course}.description = \"#{tokens[1]}\""
+      puts "#{course}.description = \"#{tokens[1].tr('"', '\"')}\""
     elsif line.starts_with? 'Entry Requirements: '
       tokens = line.split(': ', 2)
-      puts "#{course}.entry_requirements = \"#{tokens[1]}\""
+      puts "#{course}.entry_requirements = \"#{tokens[1].tr('"', '\"')}\""
     elsif line.starts_with? 'Career Prospects: '
       tokens = line.split(': ', 2)
-      puts "#{course}.career_prospects = \"#{tokens[1]}\""
+      puts "#{course}.career_prospects = \"#{tokens[1].tr('"', '\"')}\""
     elsif line == ''
       index += 1
       puts "#{course}.spaces = course_spaces"
@@ -197,7 +212,7 @@ def generate_seed file
       puts "#{course} = Course.new college: #{colleges.sample}"
     end
 
-    puts 'length: ' + title.to_s
+    # puts 'length: ' + title.to_s
   end
 end
 

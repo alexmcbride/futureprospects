@@ -94,7 +94,7 @@ module ApplicationHelper
 
   # Formats a date as dd/mm/yyyy
   def format_date(date)
-    date.strftime '%d/%m/%Y'
+    date.strftime '%d/%m/%Y' if date
   end
 
   # Outputs a text field with bootstrap style

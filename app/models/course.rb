@@ -25,7 +25,7 @@ class Course < ApplicationRecord
   validates :college_id, presence: true
   validates :spaces, presence: true, numericality: {only_integer: true, greater_than: 0, less_than: 120}
   validates :status, presence: true
-  validates :image, presence: false
+  validates :image, presence: true
 
   # Foreign Keys
   belongs_to :college

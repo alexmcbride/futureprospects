@@ -54,6 +54,25 @@
     <%= f.select :status, options_for_select(Course.statuses.keys.map {|k| [k.humanize, k]}, staff_course.status), {}, class:'form-control' %>
   </div>
 
+  <div class="form-group">
+    <% if staff_course.image.file.nil? %>
+      <%= f.label :image, 'Image' %>
+      <%= f.file_field :image, class: 'form-control' %>
+    <% else %>
+      <div class="row">
+        <div class="col-xs-10">
+          <%= f.label :image, 'Image' %>
+          <%= f.file_field :image, class: 'form-control' %>
+        </div>
+        <div class="col-xs-2 text-right">
+          <%= image_tag staff_course.image, class: 'img-responsive image-border' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <br>
+
   <div class="actions text-right">
     <p class="text-darkish small">Save changes when completed.</p>
     <%= f.submit class: 'btn btn-default' %>

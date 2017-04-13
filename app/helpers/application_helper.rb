@@ -158,4 +158,18 @@ module ApplicationHelper
   def user_signed_in?
     student_signed_in? or staff_signed_in?
   end
+
+  # Switches the dir sort param back and forward
+  def toggle_sort(dir)
+    if not dir or dir == 'asc'
+      'desc'
+    else
+      'asc'
+    end
+  end
+
+  # The path for filtering the staff course table.
+  def course_table_filter_path(sort, params)
+    staff_courses_path(sort: sort, dir: toggle_sort(params[:dir]), page: params[:page], title: params[:title], category: params[:category], status: params[:status])
+  end
 end

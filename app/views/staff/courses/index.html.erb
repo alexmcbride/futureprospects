@@ -48,9 +48,24 @@
       <table class="table table-striped table-staff">
         <thead>
         <tr>
-          <th><%= link_to "Course #{icon('arrows-v', class: 'sort-arrow')}".html_safe, staff_courses_path(sort: 'title', page: params[:page], title: params[:title], category: params[:category], status: params[:status]) %></th>
-          <th><%= link_to "Category #{icon('arrows-v', class: 'sort-arrow')}".html_safe, staff_courses_path(sort: 'category', page: params[:page], title: params[:title], category: params[:category], status: params[:status]) %></th>
-          <th><%= link_to "Status #{icon('arrows-v', class: 'sort-arrow')}".html_safe, staff_courses_path(sort: 'status', page: params[:page], title: params[:title], category: params[:category], status: params[:status]) %></th>
+          <th>
+            <%= link_to course_table_filter_path('title', params) do %>
+                Course
+                <%= icon('arrows-v', class: 'sort-arrow') %>
+            <% end %>
+          </th>
+          <th>
+            <%= link_to course_table_filter_path('category_id', params) do %>
+                Category
+                <%= icon('arrows-v', class: 'sort-arrow') %>
+            <% end %>
+          </th>
+          <th>
+            <%= link_to course_table_filter_path('status', params) do %>
+                Status
+                <%= icon('arrows-v', class: 'sort-arrow') %>
+            <% end %>
+          </th>
           <th colspan="3"></th>
         </tr>
         </thead>

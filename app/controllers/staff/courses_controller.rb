@@ -6,7 +6,7 @@ class Staff::CoursesController < ApplicationController
   # GET /staff/courses
   def index
     @courses = Course.includes(:category)
-                   .filter_and_sort(params[:title], params[:category], params[:status], params[:sort])
+                   .filter_and_sort(params)
                    .where(college_id: current_staff.college_id)
                    .paginate(page: params[:page], per_page: 15)
     @categories = Category.all

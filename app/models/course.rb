@@ -66,39 +66,62 @@ class Course < ApplicationRecord
     end
   end
 
-  # Filter and sort the courses
-  def self.filter_and_sort(title, category_id, status, sort)
+  # Filters courses by title
+  def self.filter_by_title(title)
     courses = Course.all
-
     unless title.nil? or title.empty?
       courses = courses.where('LOWER(title) LIKE LOWER(?)', "%#{title}%")
     end
-
-    unless category_id.nil? or category_id.to_i == 0
-      courses = courses.where(category_id: category_id)
-    end
-
-    unless status.nil? or status.to_i == -1
-      courses = courses.where(status: status)
-    end
-
-    if sort.nil?
-      courses = courses.order(:title)
-    else
-      if sort == 'title'
-        courses = courses.order(:title)
-      elsif sort == 'category'
-        courses = courses.order(:category_id)
-      elsif sort == 'status'
-        courses = courses.order(:status)
-      end
-    end
-
     courses
   end
 
-  # Removes this course, only if the title matches and no student's have applied for it.
-  def remove?(title)
+  # Filters courses by category
+  def self.filter_by_category(category_id)
+    courses = Course.all
+    unless category_id.nil? or category_id.to_i == 0
+      courses = courses.where(category_id: category_id)
+    end
+    courses
+  end
+
+  # Filters courses by status
+  def self.filter_by_status(status)
+    courses = Course.all
+    unless status.nil? or status.to_i == -1
+      courses = courses.where(status: status)
+    end
+    courses
+  end
+
+  # Sort courses
+  def self.sort_courses(sort, dir)
+    if sort.nil?
+      return Course.order :title
+    end
+
+    sort = sort.to_sym
+    if [:title, :category_id, :status].include? sort
+      dir.downcase! if dir
+      if not dir or dir == 'asc'
+        return Course.order sort
+      else
+        return Course.order("#{sort} DESC")
+      end
+    end
+
+    Course.all
+  end
+
+  # Filter and sort the courses
+  def self.filter_and_sort(params)
+    filter_by_title params[:title]
+    filter_by_category params[:category_id]
+    filter_by_status params[:status]
+    sort_courses params[:sort], params[:dir]
+  end
+
+  # Gets a boolean indicating if the course can be deleted.
+  def can_remove?(title)
     if title != self.title
       self.errors.add(:title, "does not match '#{self.title}'")
     end
@@ -107,12 +130,16 @@ class Course < ApplicationRecord
       self.errors.add(:course, 'has one or more students who have applied for the course and so cannot be removed')
     end
 
-    if self.errors.empty?
+    self.title.empty?
+  end
+
+  # Removes this course, only if the title matches and no student's have applied for it.
+  def remove?(title)
+    if self.can_remove? title
       self.courses.destroy_all
       self.destroy
       return true
     end
-
     false
   end
 end

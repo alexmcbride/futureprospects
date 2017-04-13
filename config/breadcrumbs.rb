@@ -119,8 +119,17 @@ crumb :application_submit do |application|
   link 'Submit', applications_submit_path(application)
 end
 
-
 crumb :staff_courses do
   parent :root
   link 'Courses', staff_courses_path
+end
+
+crumb :staff_add_course do
+  parent :staff_courses
+  link 'Add', new_staff_course_path
+end
+
+crumb :staff_edit_course do |course|
+  parent :staff_courses
+  link 'Edit', edit_staff_course_path(course)
 end

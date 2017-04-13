@@ -1,6 +1,13 @@
-<h1>Editing Staff Course</h1>
+<% breadcrumb :staff_edit_course, @staff_course %>
+<% @title = 'Edit College Course' %>
 
-<%= render 'form', staff_course: @staff_course %>
+<div class="row">
+  <div class="col-sm-3">
+    <%= render 'sidenav' %>
+  </div>
 
-<%= link_to 'Show', @staff_course %> |
-<%= link_to 'Back', staff_courses_path %>
+  <div class="col-sm-9">
+    <%= render 'form', staff_course: @staff_course, path: staff_course_path(@staff_course) %>
+  </div>
+</div>
+

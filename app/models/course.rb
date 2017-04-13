@@ -21,6 +21,11 @@ class Course < ApplicationRecord
   validates :end_date, presence: true
   validates :level, presence: false
   validates :spaces, presence: true
+  validates :category_id, presence: true
+  validates :college_id, presence: true
+  validates :spaces, presence: true, numericality: {only_integer: true, greater_than: 0, less_than: 120}
+  validates :status, presence: true
+  validates :image, presence: false
 
   # Foreign Keys
   belongs_to :college
@@ -52,15 +57,15 @@ class Course < ApplicationRecord
     self.spaces > self.course_selections.count
   end
 
-  # Apply a simple filter to the courses
-  def self.filter(title, category_id, status, sort)
+  # Filter and sort the courses
+  def self.filter_and_sort(title, category_id, status, sort)
     courses = Course.all
 
     unless title.nil? or title.empty?
-      courses = courses.where('LOWER(title) LIKE ?', "%#{title.downcase}%")
+      courses = courses.where('LOWER(title) LIKE LOWER(?)', "%#{title}%")
     end
 
-    unless category_id.to_i == 0
+    unless category_id.nil? or category_id.to_i == 0
       courses = courses.where(category_id: category_id)
     end
 

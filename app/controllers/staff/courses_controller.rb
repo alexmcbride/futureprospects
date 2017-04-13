@@ -1,13 +1,15 @@
 class Staff::CoursesController < ApplicationController
   before_action :authenticate_staff!
   before_action :set_staff_course, only: [:show, :edit, :update, :destroy]
+  before_action :set_categories, only: [:index, :new, :edit, :create, :update]
 
   # GET /staff/courses
   # GET /staff/courses.json
   def index
-    @courses = Course.filter(params[:title], params[:category], params[:status], params[:sort])
-    @courses = @courses.includes(:category).where(college_id: current_staff.college_id)
-    @courses = @courses.paginate(page: params[:page], per_page: 15)
+    @courses = Course.includes(:category)
+                   .filter_and_sort(params[:title], params[:category], params[:status], params[:sort])
+                   .where(college_id: current_staff.college_id)
+                   .paginate(page: params[:page], per_page: 15)
     @categories = Category.all
   end
 
@@ -19,24 +21,26 @@ class Staff::CoursesController < ApplicationController
   # GET /staff/courses/new
   def new
     @staff_course = Staff::Course.new
+    @categories = Category.all
   end
 
   # GET /staff/courses/1/edit
   def edit
+    @categories = Category.all
   end
 
   # POST /staff/courses
   # POST /staff/courses.json
   def create
     @staff_course = Staff::Course.new(staff_course_params)
+    @staff_course.college = current_staff.college
 
     respond_to do |format|
       if @staff_course.save
-        format.html { redirect_to @staff_course, notice: 'Course was successfully created.' }
-        format.json { render :show, status: :created, location: @staff_course }
+        format.html { redirect_to staff_courses_path, notice: "Course '#{@staff_course.title}' was successfully created." }
       else
+        @categories = Category.all
         format.html { render :new }
-        format.json { render json: @staff_course.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -46,7 +50,7 @@ class Staff::CoursesController < ApplicationController
   def update
     respond_to do |format|
       if @staff_course.update(staff_course_params)
-        format.html { redirect_to @staff_course, notice: 'Course was successfully updated.' }
+        format.html { redirect_to staff_courses_path, notice: "Course '#{@staff_course.title}' was successfully updated." }
         format.json { render :show, status: :ok, location: @staff_course }
       else
         format.html { render :edit }
@@ -71,8 +75,12 @@ class Staff::CoursesController < ApplicationController
       @staff_course = Staff::Course.find(params[:id])
     end
 
+    def set_categories
+      @categories = Category.all
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def staff_course_params
-      params.fetch(:staff_course, {})
+      params.require(:course).permit(:title, :description, :entry_requirements, :career_prospects, :start_date, :end_date, :spaces, :level, :image, :category_id)
     end
 end

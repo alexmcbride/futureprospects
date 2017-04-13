@@ -48,6 +48,15 @@ footer {
   padding-bottom: 0;
 }
 
+.table-striped > tbody > tr:nth-child(odd) > td,
+.table-striped > tbody > tr:nth-child(odd) > th {
+  background-color: #ecf0f1;
+}
+
+.table-staff > thead > tr > th {
+  padding-top: 0;
+}
+
 .slight-margin-bottom {
   margin-bottom: 8px;
 }
@@ -150,6 +159,10 @@ footer {
   display: inline;
   padding: 0;
   width: auto;
+}
+
+.sort-arrow {
+  font-size: 10pt;
 }
 
 /* Checkbox Bootstrap colors */

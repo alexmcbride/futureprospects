@@ -1,5 +1,13 @@
-<h1>New Staff Course</h1>
+<% breadcrumb :staff_add_course %>
+<% @title = 'Add College Course' %>
 
-<%= render 'form', staff_course: @staff_course %>
+<div class="row">
+  <div class="col-sm-3">
+    <%= render 'sidenav', page: :add %>
+  </div>
 
-<%= link_to 'Back', staff_courses_path %>
+  <div class="col-sm-9">
+    <%= render 'form', staff_course: @staff_course, path: staff_courses_path %>
+  </div>
+</div>
+

@@ -27,6 +27,8 @@ class Course < ApplicationRecord
   validates :status, presence: true
   validates :image, presence: true
 
+  before_validation :before_validation
+
   # Foreign Keys
   belongs_to :college
   belongs_to :category
@@ -55,6 +57,13 @@ class Course < ApplicationRecord
   # Checks if the course has spaces
   def has_spaces
     self.spaces > self.course_selections.count
+  end
+
+  def before_validation
+    # Add default status if not set
+    unless self.status
+      self.status = :open
+    end
   end
 
   # Filter and sort the courses

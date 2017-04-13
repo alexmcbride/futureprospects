@@ -50,11 +50,9 @@ class Staff::CoursesController < ApplicationController
   def update
     respond_to do |format|
       if @staff_course.update(staff_course_params)
-        format.html { redirect_to staff_courses_path, notice: "Course '#{@staff_course.title}' was successfully updated." }
-        format.json { render :show, status: :ok, location: @staff_course }
+        format.html { redirect_to edit_staff_course_path(@staff_course), notice: "Course '#{@staff_course.title}' was successfully updated." }
       else
         format.html { render :edit }
-        format.json { render json: @staff_course.errors, status: :unprocessable_entity }
       end
     end
   end

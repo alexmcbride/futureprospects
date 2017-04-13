@@ -48,4 +48,3 @@ Thumbs.db
 /config/application.yml
 
 *.py
-/public/uploads

@@ -26,3 +26,7 @@ switch navbar bg colour for staff members?
 apply to course check status?
 
 markdown preview?
+
+apply for course
+
+when change status, do the right thing... e.g. if cancelled, email students.

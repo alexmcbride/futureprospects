@@ -5,7 +5,7 @@
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <% if resource.staff? %>
         <p>Sign in to the site in order to manage your student intake.</p>
-        <% @title = 'Sign In (College)' %>
+        <% @title = 'Sign In (Staff)' %>
       <% else %>
         <p>Sign in to the site in order to track your application.</p>
         <% @title = 'Sign In' %>

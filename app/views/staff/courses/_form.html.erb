@@ -55,22 +55,20 @@
   </div>
 
   <div class="form-group">
-    <% if staff_course.image.file.nil? %>
-      <%= f.label :image, 'Image' %>
-      <%= f.file_field :image, class: 'form-control' %>
-    <% else %>
-      <div class="row">
-        <div class="col-xs-10">
-          <%= f.label :image, 'Image' %>
-          <%= f.file_field :image, class: 'form-control' %>
-        </div>
+    <div class="row">
+      <div class="col-xs-10">
+        <%= f.label :image %>
+        <%= f.file_field :image, class: 'form-control' %>
+        <%= f.hidden_field :image_cache, value: staff_course.image_cache %>
+      </div>
+      <% unless staff_course.image.file.nil? %>
         <div class="col-xs-2 text-right">
-          <%= link_to image_path staff_course.image do %>
-            <%= image_tag staff_course.image, class: 'img-responsive img-thumbnail image-border' %>
+          <%= link_to staff_course.image.url do %>
+            <%= image_tag staff_course.image.url(:thumb), class: 'img-responsive img-thumbnail image-border' %>
           <% end %>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 
   <br>

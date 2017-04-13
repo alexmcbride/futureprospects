@@ -85,6 +85,6 @@ class Staff::CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def staff_course_params
-      params.require(:course).permit(:title, :description, :entry_requirements, :career_prospects, :start_date, :end_date, :spaces, :level, :image, :category_id, :status)
+      params.require(:course).permit(:title, :description, :entry_requirements, :career_prospects, :start_date, :end_date, :spaces, :level, :image, :image_cache, :category_id, :status)
     end
 end

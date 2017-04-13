@@ -95,7 +95,7 @@ class Application < ApplicationRecord
 
   # Gets the number of courses the student can still add
   def available_courses
-    MAX_COURSES - self.course_selections.count
+    MAX_COURSES - self.course_selections.size
   end
 
   # Checks if a student can still add courses to their application
@@ -105,7 +105,7 @@ class Application < ApplicationRecord
 
   # Calculates the student's application fee.
   def calculate_fee
-    if self.course_selections.count > 1
+    if self.course_selections.size > 1
       BigDecimal.new MULTIPLE_COURSE_FEE
     else
       BigDecimal.new SINGLE_COURSE_FEE

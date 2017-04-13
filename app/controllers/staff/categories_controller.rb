@@ -2,13 +2,11 @@ class Staff::CategoriesController < ApplicationController
   before_action :set_staff_category, only: [:show, :edit, :update, :remove, :destroy]
 
   # GET /staff/categories
-  # GET /staff/categories.json
   def index
     @categories = Category.includes(:courses).order(:name)
   end
 
   # GET /staff/categories/1
-  # GET /staff/categories/1.json
   def show
   end
 
@@ -22,7 +20,6 @@ class Staff::CategoriesController < ApplicationController
   end
 
   # POST /staff/categories
-  # POST /staff/categories.json
   def create
     @category = Category.new(staff_category_params)
 
@@ -36,7 +33,6 @@ class Staff::CategoriesController < ApplicationController
   end
 
   # PATCH/PUT /staff/categories/1
-  # PATCH/PUT /staff/categories/1.json
   def update
     respond_to do |format|
       if @category.update(staff_category_params)
@@ -47,12 +43,11 @@ class Staff::CategoriesController < ApplicationController
     end
   end
 
+  # GET /staff/categories/1/remove
   def remove
-
   end
 
   # DELETE /staff/categories/1
-  # DELETE /staff/categories/1.json
   def destroy
     respond_to do |format|
       if @category.remove? params[:category_name]

@@ -1,10 +1,9 @@
 class Staff::CoursesController < ApplicationController
   before_action :authenticate_staff!
-  before_action :set_staff_course, only: [:show, :edit, :update, :remove, :destroy]
+  before_action :set_course, only: [:show, :edit, :update, :remove, :destroy]
   before_action :set_categories, only: [:index, :new, :edit, :create, :update]
 
   # GET /staff/courses
-  # GET /staff/courses.json
   def index
     @courses = Course.includes(:category)
                    .filter_and_sort(params[:title], params[:category], params[:status], params[:sort])
@@ -14,13 +13,12 @@ class Staff::CoursesController < ApplicationController
   end
 
   # GET /staff/courses/1
-  # GET /staff/courses/1.json
   def show
   end
 
   # GET /staff/courses/new
   def new
-    @staff_course = Staff::Course.new
+    @course = Staff::Course.new
     @categories = Category.all
   end
 
@@ -30,14 +28,13 @@ class Staff::CoursesController < ApplicationController
   end
 
   # POST /staff/courses
-  # POST /staff/courses.json
   def create
-    @staff_course = Staff::Course.new(staff_course_params)
-    @staff_course.college = current_staff.college
+    @course = Staff::Course.new(staff_course_params)
+    @course.college = current_staff.college
 
     respond_to do |format|
-      if @staff_course.save
-        format.html { redirect_to staff_courses_path, notice: "Course '#{@staff_course.title}' was successfully created." }
+      if @course.save
+        format.html { redirect_to staff_courses_path, notice: "Course '#{@course.title}' was successfully created." }
       else
         @categories = Category.all
         format.html { render :new }
@@ -46,26 +43,25 @@ class Staff::CoursesController < ApplicationController
   end
 
   # PATCH/PUT /staff/courses/1
-  # PATCH/PUT /staff/courses/1.json
   def update
     respond_to do |format|
-      if @staff_course.update(staff_course_params)
-        format.html { redirect_to edit_staff_course_path(@staff_course), notice: "Course '#{@staff_course.title}' was successfully updated." }
+      if @course.update(staff_course_params)
+        format.html { redirect_to edit_staff_course_path(@course), notice: "Course '#{@course.title}' was successfully updated." }
       else
         format.html { render :edit }
       end
     end
   end
 
+  # GET /staff/courses/1/remove
   def remove
 
   end
 
   # DELETE /staff/courses/1
-  # DELETE /staff/courses/1.json
   def destroy
     respond_to do |format|
-      if @staff_course.remove? params[:course_title]
+      if @course.remove? params[:course_title]
         format.html { redirect_to staff_courses_url, notice: 'Course was successfully destroyed.' }
       else
         format.html { render :remove }
@@ -75,8 +71,8 @@ class Staff::CoursesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_staff_course
-      @staff_course = Staff::Course.find(params[:id])
+    def set_course
+      @course = Staff::Course.find(params[:id])
     end
 
     def set_categories

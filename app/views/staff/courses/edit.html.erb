@@ -1,15 +1,15 @@
-<% breadcrumb :staff_edit_course, @staff_course %>
+<% breadcrumb :staff_edit_course, @course %>
 <% @title = 'Edit College Course' %>
 
 <div class="row">
   <div class="col-sm-3">
     <%= render 'staff/shared/courses_sidenav', page: :index %>
 
-      <%= link_to 'View Course', course_path(@staff_course), class: 'btn btn-default btn-block', role: 'button' %>
+      <%= link_to 'View Course', course_path(@course), class: 'btn btn-default btn-block', role: 'button' %>
   </div>
 
   <div class="col-sm-9">
-    <%= render 'form', staff_course: @staff_course, path: staff_course_path(@staff_course) %>
+    <%= render 'form', course: @course, path: staff_course_path(@course) %>
   </div>
 </div>
 

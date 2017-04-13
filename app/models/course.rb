@@ -56,11 +56,11 @@ class Course < ApplicationRecord
 
   # Checks if the course has spaces
   def has_spaces
-    self.spaces > self.course_selections.count
+    self.spaces > self.course_selections.size
   end
 
+  # Called before validation, adds a status if one does not exist
   def before_validation
-    # Add default status if not set
     unless self.status
       self.status = :open
     end
@@ -97,6 +97,7 @@ class Course < ApplicationRecord
     courses
   end
 
+  # Removes this course, only if the title matches and no student's have applied for it.
   def remove?(title)
     if title != self.title
       self.errors.add(:title, "does not match '#{self.title}'")

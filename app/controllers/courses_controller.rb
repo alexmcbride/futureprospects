@@ -3,7 +3,7 @@ class CoursesController < ApplicationController
   def index
     @search_term = params[:search]
     # Do search using scoped_search. If search term is empty then all records are returned.
-    @courses = Course.search(@search_term).paginate(:page => params[:page])
+    @courses = Course.search(@search_term).order(:title).paginate(:page => params[:page])
     @categories = Category.order(:name).all
   end
 

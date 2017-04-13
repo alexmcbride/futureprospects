@@ -82,7 +82,9 @@ class Course < ApplicationRecord
       courses = courses.where(status: status)
     end
 
-    unless sort.nil?
+    if sort.nil?
+      courses = courses.order(:title)
+    else
       if sort == 'title'
         courses = courses.order(:title)
       elsif sort == 'category'

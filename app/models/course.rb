@@ -10,7 +10,7 @@ class Course < ApplicationRecord
   scoped_search relation: :college, on: :name
 
   # Image Upload
-  #mount_uploader :image, CourseImageUploader
+  mount_uploader :image, CourseImageUploader
 
   # Validators
   validates :title, presence: true, length: { maximum: 120 }, uniqueness: true

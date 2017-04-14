@@ -23,10 +23,10 @@
 
   <div class="col-sm-9">
     <div class="row">
-      <div class="col-xs-6">
+      <div class="col-sm-9">
         <h3 class="no-top-margin"><%= @course.title %></h3>
       </div>
-      <div class="col-xs-6">
+      <div class="col-sm-3">
         <p class="text-right">
           <%= link_to 'Edit Course', edit_staff_course_path(@course) %>
           |
@@ -36,86 +36,88 @@
     </div>
 
     <div class="well">
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="row">
-          <div class="col-xs-3">
-            Spaces:
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="row">
+            <div class="col-xs-3">
+              Spaces:
+            </div>
+            <div class="col-xs-9">
+              <%= @course.spaces %>
+            </div>
           </div>
-          <div class="col-xs-9">
-            <%= @course.spaces %>
+
+          <div class="row">
+            <div class="col-xs-3">
+              Status:
+            </div>
+            <div class="col-xs-9">
+              <%= @course.status.humanize %>
+            </div>
           </div>
+
+          <div class="row">
+            <div class="col-xs-3">
+              Level:
+            </div>
+            <div class="col-xs-9">
+              <%= @course.level %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-3">
+              Category:
+            </div>
+            <div class="col-xs-9">
+              <%= @course.category.name %>
+            </div>
+          </div>
+
         </div>
 
-        <div class="row">
-          <div class="col-xs-3">
-            Status:
+        <div class="col-sm-6">
+          <div class="row">
+            <div class="col-xs-3">
+              Start Date:
+            </div>
+            <div class="col-xs-9">
+              <%= format_date @course.start_date %>
+            </div>
           </div>
-          <div class="col-xs-9">
-            <%= @course.status.humanize %>
+          <div class="row">
+            <div class="col-xs-3">
+              End Date:
+            </div>
+            <div class="col-xs-9">
+              <%= format_date @course.end_date %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-3">
+              Created:
+            </div>
+            <div class="col-xs-9">
+              <%= format_datetime @course.created_at %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-3">
+              Updated:
+            </div>
+            <div class="col-xs-9">
+              <%= format_datetime @course.updated_at %>
+            </div>
           </div>
         </div>
-
-        <div class="row">
-          <div class="col-xs-3">
-            Level:
-          </div>
-          <div class="col-xs-9">
-            <%= @course.level %>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-xs-3">
-            Category:
-          </div>
-          <div class="col-xs-9">
-            <%= @course.category.name %>
-          </div>
-        </div>
-
       </div>
-
-      <div class="col-sm-6">
-        <div class="row">
-          <div class="col-xs-3">
-            Start Date:
-          </div>
-          <div class="col-xs-9">
-            <%= format_date @course.start_date %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-3">
-            End Date:
-          </div>
-          <div class="col-xs-9">
-            <%= format_date @course.end_date %>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-xs-3">
-            Created:
-          </div>
-          <div class="col-xs-9">
-            <%= format_datetime @course.created_at %>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-xs-3">
-            Updated:
-          </div>
-          <div class="col-xs-9">
-            <%= format_datetime @course.updated_at %>
-          </div>
-        </div>
-      </div>
-    </div>
     </div>
 
     <h4>Description</h4>
+
+    <%= image_tag @course.image, class: 'img-responsive img-thumbnail pull-right', style: 'margin-left: 8px;' %>
 
     <%= render 'shared/course_info', course: @course %>
 

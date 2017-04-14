@@ -9,7 +9,6 @@ class Staff::CoursesController < ApplicationController
                    .filter_and_sort(params)
                    .where(college_id: current_staff.college_id)
                    .paginate(page: params[:page], per_page: 15)
-    @categories = Category.order(:name)
   end
 
   # GET /staff/courses/1
@@ -19,12 +18,10 @@ class Staff::CoursesController < ApplicationController
   # GET /staff/courses/new
   def new
     @course = Course.new
-    @categories = Category.all
   end
 
   # GET /staff/courses/1/edit
   def edit
-    @categories = Category.all
   end
 
   # POST /staff/courses
@@ -36,7 +33,6 @@ class Staff::CoursesController < ApplicationController
       if @course.save
         format.html { redirect_to staff_course_path(@course), notice: "Course '#{@course.title}' was successfully created." }
       else
-        @categories = Category.all
         format.html { render :new }
       end
     end
@@ -76,7 +72,7 @@ class Staff::CoursesController < ApplicationController
     end
 
     def set_categories
-      @categories = Category.all
+      @categories = Category.order(:name)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

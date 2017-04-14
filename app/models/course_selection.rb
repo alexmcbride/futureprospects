@@ -40,4 +40,10 @@ class CourseSelection < ApplicationRecord
       self.errors.add(:maximum, "of #{Application::MAX_COURSES} courses has been reached")
     end
   end
+
+  def self.from_course_id(params)
+    selection = CourseSelection.new
+    selection.course_id = params[:course_id]
+    selection
+  end
 end

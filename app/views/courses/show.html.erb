@@ -40,10 +40,9 @@
         </ul>
 
         <% if student_signed_in? %>
-            <%= form_tag applications_courses_add_path(current_student.current_application) do %>
-              <%= hidden_field_tag :course_id, @course.id %>
-
-              <%= submit_tag 'Apply for Course', class: 'btn btn-success btn-block', style: 'margin-bottom: 5px;' %>
+            <%= form_for @course_selection, url: applications_courses_add_path(current_student.current_application), method: :post do |f| %>
+              <%= f.hidden_field :course_id %>
+              <%= f.submit 'Apply for Course', class: 'btn btn-success btn-block', style: 'margin-bottom: 5px;' %>
             <% end %>
         <% else %>
             <%= link_to 'Register for Course', new_registration_path(:student), class: 'btn btn-success btn-block', role: 'button' %>

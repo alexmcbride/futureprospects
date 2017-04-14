@@ -195,7 +195,7 @@ class ApplicationsController < ApplicationController
   end
 
   def courses_add
-    @course_selection = CourseSelection.new course_selection_params
+    @course_selection = CourseSelection.new course_params
     @course_selections = @application.find_course_selections
     respond_to do |format|
       if @application.add_course? @course_selection
@@ -249,8 +249,8 @@ class ApplicationsController < ApplicationController
     end
 
     # Sanitises submitted form parameters
-    def course_selection_params
-      params.permit(:course_id, :college_offer, :student_choice)
+    def course_params
+      params.require(:course_selection).permit(:course_id, :college_offer, :student_choice)
     end
 
     # Sanitises submitted form parameters

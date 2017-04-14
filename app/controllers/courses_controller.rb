@@ -19,6 +19,7 @@ class CoursesController < ApplicationController
   def show
     @course = Course.find(params[:id])
     @categories = Category.order(:name).all
+    @course_selection = CourseSelection.new course_id: @course.id
   end
 
   # GET /courses/search.json

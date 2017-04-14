@@ -32,3 +32,9 @@ use bullet to optimize database queries: https://github.com/flyerhzm/bullet
 look to reducing amount of stuff selected from DB, for instance display all colleges list, only need college name and id, not everything...
 
 Images from AWS have weird alt text?
+
+application stages not links until stage marked as complete
+
+add city field to addresses...
+
+applications, move optional label to top on all pages (currently just profile)

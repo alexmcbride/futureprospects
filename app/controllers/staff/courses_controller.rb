@@ -18,7 +18,7 @@ class Staff::CoursesController < ApplicationController
 
   # GET /staff/courses/new
   def new
-    @course = Staff::Course.new
+    @course = Course.new
     @categories = Category.all
   end
 
@@ -29,12 +29,12 @@ class Staff::CoursesController < ApplicationController
 
   # POST /staff/courses
   def create
-    @course = Staff::Course.new(staff_course_params)
+    @course = Course.new(staff_course_params)
     @course.college = current_staff.college
 
     respond_to do |format|
       if @course.save
-        format.html { redirect_to staff_courses_path, notice: "Course '#{@course.title}' was successfully created." }
+        format.html { redirect_to staff_course_path(@course), notice: "Course '#{@course.title}' was successfully created." }
       else
         @categories = Category.all
         format.html { render :new }
@@ -45,8 +45,8 @@ class Staff::CoursesController < ApplicationController
   # PATCH/PUT /staff/courses/1
   def update
     respond_to do |format|
-      if @course.update(staff_course_params)
-        format.html { redirect_to edit_staff_course_path(@course), notice: "Course '#{@course.title}' was successfully updated." }
+      if @course.update_with_status(staff_course_params)
+        format.html { redirect_to staff_course_path(@course), notice: "Course '#{@course.title}' was successfully updated." }
       else
         format.html { render :edit }
       end
@@ -55,14 +55,13 @@ class Staff::CoursesController < ApplicationController
 
   # GET /staff/courses/1/remove
   def remove
-
   end
 
   # DELETE /staff/courses/1
   def destroy
     respond_to do |format|
-      if @course.remove? params[:course_title]
-        format.html { redirect_to staff_courses_url, notice: 'Course was successfully destroyed.' }
+      if @course.remove params[:course_title]
+        format.html { redirect_to staff_courses_path, notice: 'Course was successfully destroyed.' }
       else
         format.html { render :remove }
       end
@@ -72,7 +71,7 @@ class Staff::CoursesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_course
-      @course = Staff::Course.find(params[:id])
+      @course = Course.find(params[:id])
     end
 
     def set_categories

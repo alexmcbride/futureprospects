@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <h1>Future Prospects - Course Cancelled</h1>
+
+  <p><%= @student.full_name %>,</p>
+
+  <p>This email is to inform you that the following course at <strong><%= @course.college.name %></strong> has been
+    cancelled:</p>
+
+  <p><strong><%= link_to @course.title, course_path(@course) %></strong></p>
+
+  <p>No reason has been given for the cancellation, but it might be due to insufficient demand, or
+    administrative problems. To discus the matter further, please contact the college directly.</p>
+
+  <p><%= mail_to @course.college.email %></p>
+
+  <p>Unfortunately no refunds can be given for any application fees in relation to the cancellation. Future Prospects
+  reserves the right to cancel a course at any time without notice.</p>
+
+  <p>Sincerely,
+    <br><br>
+    Future Prospects</p>
+</body>
+</html>

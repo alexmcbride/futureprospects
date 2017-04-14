@@ -124,14 +124,24 @@ crumb :staff_courses do
   link 'Courses', staff_courses_path
 end
 
+crumb :staff_show_course do |course|
+  parent :staff_courses
+  link course.title, staff_course_path(course)
+end
+
 crumb :staff_add_course do
   parent :staff_courses
   link 'Add', new_staff_course_path
 end
 
 crumb :staff_edit_course do |course|
-  parent :staff_courses
+  parent :staff_show_course, course
   link 'Edit', edit_staff_course_path(course)
+end
+
+crumb :staff_remove_course do |course|
+  parent :staff_show_course, course
+  link 'Remove', staff_course_remove_path(course)
 end
 
 crumb :staff_categories do

@@ -1,5 +1,5 @@
 class Course < ApplicationRecord
-  enum status: [:open, :cancelled, :closed, :full, :clearance]
+  enum status: [:open, :cancelled, :closed, :clearance]
 
   # Pagination
   self.per_page = 10
@@ -27,7 +27,8 @@ class Course < ApplicationRecord
   validates :status, presence: true
   validates :image, presence: true
 
-  before_validation :before_validation
+  # Callbacks
+  before_validation :default_to_open_status
 
   # Foreign Keys
   belongs_to :college
@@ -60,64 +61,63 @@ class Course < ApplicationRecord
   end
 
   # Called before validation, adds a status if one does not exist
-  def before_validation
+  def default_to_open_status
     unless self.status
       self.status = :open
     end
   end
 
   # Filters courses by title
-  def self.filter_by_title(title)
-    courses = Course.all
+  def self.filter_by_title(courses, title)
     unless title.nil? or title.empty?
-      courses = courses.where('LOWER(title) LIKE LOWER(?)', "%#{title}%")
+      return courses.where('LOWER(title) LIKE LOWER(?)', "%#{title}%")
     end
     courses
   end
 
   # Filters courses by category
-  def self.filter_by_category(category_id)
-    courses = Course.all
+  def self.filter_by_category(courses, category_id)
     unless category_id.nil? or category_id.to_i == 0
-      courses = courses.where(category_id: category_id)
+      return courses.where(category_id: category_id)
     end
     courses
   end
 
   # Filters courses by status
-  def self.filter_by_status(status)
-    courses = Course.all
+  def self.filter_by_status(courses, status)
     unless status.nil? or status.to_i == -1
-      courses = courses.where(status: status)
+      return courses.where(status: status)
     end
     courses
   end
 
   # Sort courses
-  def self.sort_courses(sort, dir)
+  def self.sort_courses(courses, sort, dir)
     if sort.nil?
-      return Course.order :title
+      return courses.order :title
     end
 
     sort = sort.to_sym
     if [:title, :category_id, :status].include? sort
       dir.downcase! if dir
       if not dir or dir == 'asc'
-        return Course.order sort
+        return courses.order sort
       else
-        return Course.order("#{sort} DESC")
+        return courses.order("#{sort} DESC")
       end
     end
 
-    Course.all
+    courses
   end
 
   # Filter and sort the courses
   def self.filter_and_sort(params)
-    filter_by_title params[:title]
-    filter_by_category params[:category_id]
-    filter_by_status params[:status]
-    sort_courses params[:sort], params[:dir]
+    courses = Course.all
+    courses = filter_by_title courses, params[:title]
+    courses =  filter_by_category courses, params[:category_id]
+    courses = filter_by_status courses, params[:status]
+    courses = sort_courses courses, params[:sort], params[:dir]
+    courses
   end
 
   # Gets a boolean indicating if the course can be deleted.
@@ -134,10 +134,26 @@ class Course < ApplicationRecord
   end
 
   # Removes this course, only if the title matches and no student's have applied for it.
-  def remove?(title)
+  def remove(title)
     if self.can_remove? title
       self.courses.destroy_all
       self.destroy
+      return true
+    end
+    false
+  end
+
+  # Updates attributes and sends mass cancellation email if status changed to cancelled
+  def update_with_status(params)
+    previous_status = self.status
+    if self.update params
+      # If status changed to cancelled, send notification email to students.
+      if self.status != previous_status && self.cancelled?
+        self.course_selections.each do |selection|
+          student = selection.application.student
+          StudentMailer.course_cancelled(student, self).deliver_later
+        end
+      end
       return true
     end
     false

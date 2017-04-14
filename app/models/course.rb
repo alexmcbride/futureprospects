@@ -98,17 +98,15 @@ class Course < ApplicationRecord
     end
 
     sort = sort.to_sym
-    if [:title, :category_id, :status].include? sort
+    if [:title, :category_id, :status, :students].include? sort
+      sort = :course_selections_count if sort == :students
+
       dir.downcase! if dir
       if not dir or dir == 'asc'
         return courses.order sort
       else
         return courses.order("#{sort} DESC")
       end
-    end
-
-    if sort == :students
-      courses.order()
     end
 
     courses

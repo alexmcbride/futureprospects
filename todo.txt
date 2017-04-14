@@ -30,3 +30,5 @@ staff members need their own nav menu, it's too confusing otherwise.
 use bullet to optimize database queries: https://github.com/flyerhzm/bullet
 
 look to reducing amount of stuff selected from DB, for instance display all colleges list, only need college name and id, not everything...
+
+Images from AWS have weird alt text?

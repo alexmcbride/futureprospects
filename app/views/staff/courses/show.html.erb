@@ -4,6 +4,21 @@
 <div class="row">
   <div class="col-sm-3">
     <%= render 'staff/shared/courses_sidenav', page: :index %>
+
+    <h4>Current Applicants</h4>
+
+    <% if @course.course_selections.empty? %>
+        <p class="text-darkish small"><em>There are no applicants to this course.</em></p>
+    <% else %>
+        <div class="list-group">
+          <% @course.course_selections.each do |selection| %>
+            <%= link_to nil, class: 'list-group-item' do %>
+                <%= selection.application.student.full_name %>
+                <span class="badge"><%= selection.application.state.humanize %></span>
+            <% end %>
+          <% end %>
+        </div>
+    <% end %>
   </div>
 
   <div class="col-sm-9">
@@ -16,12 +31,13 @@
           <%= link_to 'Edit Course', edit_staff_course_path(@course) %>
           |
           <%= link_to 'Delete Course', staff_course_remove_path(@course) %>
-        </p></div>
+        </p>
+      </div>
     </div>
 
+    <div class="well">
     <div class="row">
       <div class="col-sm-6">
-
         <div class="row">
           <div class="col-xs-3">
             Spaces:
@@ -97,27 +113,11 @@
         </div>
       </div>
     </div>
-
-    <hr>
-
-    <h4>Current Applicants</h4>
-
-    <% if @course.course_selections.empty? %>
-      <p class="text-darkish small"><em>There are no applicants to this course.</em></p>
-    <% else %>
-      <div class="list-group">
-        <% @course.course_selections.each do |selection| %>
-          <%= link_to nil, class: 'list-group-item' do %>
-            <%= selection.application.student.full_name %>
-          <% end %>
-        <% end %>
-      </div>
-    <% end %>
-
-    <hr>
+    </div>
 
     <h4>Description</h4>
 
     <%= render 'shared/course_info', course: @course %>
+
   </div>
 </div>

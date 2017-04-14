@@ -39,7 +39,16 @@
           <li class="list-group-item list-group-item-heading">Status: <%= @course.status.humanize %></li>
         </ul>
 
-        <%= link_to 'Apply for Course', nil, class: 'btn btn-success btn-block', role: 'button' %>
+        <% if student_signed_in? %>
+            <%= form_tag applications_courses_add_path(current_student.current_application) do %>
+              <%= hidden_field_tag :course_id, @course.id %>
+
+              <%= submit_tag 'Apply for Course', class: 'btn btn-success btn-block', style: 'margin-bottom: 5px;' %>
+            <% end %>
+        <% else %>
+            <%= link_to 'Register for Course', new_registration_path(:student), class: 'btn btn-success btn-block', role: 'button' %>
+        <% end %>
+
         <%= link_to 'View College Details', @course.college, class: 'btn btn-success btn-block', role: 'button' %>
 
         <% if staff_signed_in? %>

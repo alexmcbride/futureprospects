@@ -15,8 +15,6 @@ when student makes change to associative-model page (e.g. education) then automa
 
 add staff seed data
 
-image hover jquery stops working on heroku?
-
 improve layout of add course autocomplete
 
 switch navbar bg colour for staff members?

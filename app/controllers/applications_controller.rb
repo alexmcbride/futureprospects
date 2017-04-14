@@ -250,7 +250,7 @@ class ApplicationsController < ApplicationController
 
     # Sanitises submitted form parameters
     def course_selection_params
-      params.require(:course_selection).permit(:course_id, :college_offer, :student_choice)
+      params.permit(:course_id, :college_offer, :student_choice)
     end
 
     # Sanitises submitted form parameters

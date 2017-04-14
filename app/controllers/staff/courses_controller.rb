@@ -9,7 +9,7 @@ class Staff::CoursesController < ApplicationController
                    .filter_and_sort(params)
                    .where(college_id: current_staff.college_id)
                    .paginate(page: params[:page], per_page: 15)
-    @categories = Category.all
+    @categories = Category.order(:name)
   end
 
   # GET /staff/courses/1

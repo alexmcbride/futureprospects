@@ -18,7 +18,7 @@ $awards = ['Higher', 'Standard', 'NQ', 'HNC', 'HND']
 $starts = ['Date.new(2015, 8, 23)', 'Date.new(2014, 8, 23)', 'Date.new(2013, 8, 23)', 'Date.new(2012, 8, 23)']
 $ends = ['Date.new(2016, 6, 8)', 'Date.new(2015, 6, 8)', 'Date.new(2014, 6, 8)', 'Date.new(2013, 6, 8)']
 
-$course_ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+$course_ids = Course.order(:id).map {|c| c.id}
 
 def student(tokens, schools, jobs, refs)
   @first_name = tokens[1]
@@ -27,7 +27,7 @@ def student(tokens, schools, jobs, refs)
   @nin = 'NJ' + rand(111111..999999).to_s + (%w(A B C D).sample)
 
   # Student
-  student = "student#{$counter}"
+  student = 'student'
   puts student + ' = Student.new'
   puts student + ".first_name = '#{tokens[1]}'"
   puts student + ".family_name = '#{tokens[2]}'"
@@ -37,11 +37,11 @@ def student(tokens, schools, jobs, refs)
   puts student + ".password = 'secret'"
   puts student + ".password_confirmation = 'secret'"
   puts student + ".confirmed_at = DateTime.now"
-  puts student + '.save!'
+  puts student + '.save! validate: false'
   puts ''
 
   # App
-  app = "app#{$counter}"
+  app = 'app'
   puts app + " = #{student}.create_application"
   puts app + ".title = '#{tokens[10]}'"
   puts app + ".middle_name = '#{tokens[9]}'"
@@ -73,30 +73,30 @@ def student(tokens, schools, jobs, refs)
     puts app + ".correspondence_country = '#{tokens[21]}'"
   end
   puts app + ".state = :completed"
-  puts app + '.save!'
+  puts app + '.save! validate: false'
   puts ''
 
   # Education
   2.times do
-    education = "school#{$schools}"
+    education = 'school'
     puts education + " = School.new application: #{app}"
     puts education + ".name = '#{schools[$schools][0]}'"
     puts education + ".address_1 = '#{schools[$schools][1]} #{schools[$schools][2]} #{schools[$schools][3]}'"
     puts education + ".address_2 = '#{schools[$schools][4]}'"
     puts education + ".country = '#{schools[$schools][5]}'"
     puts education + ".postcode = '#{schools[$schools][6]} 3FB'"
-    puts education + '.save!'
+    puts education + '.save! validate: false'
     puts ''
 
     3.times do
-      qual = "qualification#{$qualification}"
+      qual = 'qualification'#{$qualification}"'
       puts qual + " = Qualification.new school: #{education}"
       puts qual + ".subject = '#{$quals.sample}'"
       puts qual + ".award = '#{$awards.sample}'"
       puts qual + ".grade = '#{$grades.sample}'"
       puts qual + ".start_date = #{$starts.sample}"
       puts qual + ".end_date = #{$ends.sample}"
-      puts qual + ".save!"
+      puts qual + ".save! validate: false"
       puts ''
 
       $qualification += 1
@@ -107,7 +107,7 @@ def student(tokens, schools, jobs, refs)
 
   # Employment
   2.times do
-    job = "job#{$jobs}"
+    job = 'job'#{$jobs}"'
     puts job + " = Job.new application: #{app}"
     puts job + ".employer = '#{jobs[$jobs][0]}'"
     puts job + ".address_1 = '#{jobs[$jobs][1]} #{jobs[$jobs][2]} #{jobs[$jobs][3]}'"
@@ -118,13 +118,13 @@ def student(tokens, schools, jobs, refs)
     puts job + ".duties = '#{jobs[$jobs][8]}'"
     puts job + ".start_date = Date.parse('#{jobs[$jobs][9]}')"
     puts job + ".end_date = Date.parse('#{jobs[$jobs][10]}')"
-    puts job + '.save!'
+    puts job + '.save! validate: false'
     puts ''
     $jobs += 1
   end
 
   # References
-  ref = "ref#{$refs}"
+  ref = 'ref'#{$refs}"
   puts ref + " = Reference.new application: #{app}"
   puts ref + ".reference_1_full_name = '#{refs[$refs][0]}'"
   puts ref + ".reference_1_email = '#{refs[$refs][1]}'"
@@ -145,7 +145,7 @@ def student(tokens, schools, jobs, refs)
   puts ref + ".reference_2_country = '#{refs[$refs][8]}'"
   puts ref + ".reference_2_relationship = '#{refs[$refs][9]}'"
   puts ref + ".reference_2_telephone = '#{refs[$refs][10]}'"
-  puts ref + '.save!'
+  puts ref + '.save! validate: false'
   puts ''
   $refs += 1
 
@@ -153,9 +153,9 @@ def student(tokens, schools, jobs, refs)
   num = rand(1..5)
   ids = $course_ids.sample(num)
   ids.each do |id|
-    course = "course#{$courses}"
+    course = 'course'#{$courses}"'
     puts course + " = CourseSelection.new application_id: #{app}.id, course_id: #{id}"
-    puts course + '.save!'
+    puts course + '.save! validate: false'
     puts ''
     $courses += 1
   end
@@ -163,8 +163,10 @@ def student(tokens, schools, jobs, refs)
   $counter += 1
 end
 
+root = 'C:\\Users\\alexm\\Google Drive\\College\\HND Software Development\\Graded Unit\\Stuff\\'
 
-path2 = 'C:\\Users\\alexm\\Downloads\\mock schools.csv'
+
+path2 = root + 'mock schools.csv'
 file2 = File.new(path2)
 schools = []
 while line2 = file2.gets
@@ -172,7 +174,7 @@ while line2 = file2.gets
 end
 
 
-path3 = 'C:\\Users\\alexm\\Downloads\\mock jobs.csv'
+path3 = root + 'mock jobs.csv'
 file3 = File.new(path3)
 jobs = []
 while line3 = file3.gets
@@ -180,7 +182,7 @@ while line3 = file3.gets
 end
 
 
-path4 = 'C:\\Users\\alexm\\Downloads\\mock references.csv'
+path4 = root + 'mock references.csv'
 file4 = File.new(path4)
 refs = []
 while line4 = file4.gets
@@ -188,13 +190,13 @@ while line4 = file4.gets
 end
 
 
-path = 'C:\\Users\\alexm\\Downloads\\mock students application.csv'
+path = root + 'mock students application.csv'
 file = File.new(path, 'r')
 header = file.gets
-persons = []
+# persons = []
 while line = file.gets
   tokens = line.chomp.split(',')
   student(tokens, schools, jobs, refs)
 end
 
-persons.each {|p| puts p.inspect}
+# persons.each {|p| puts p.inspect}

@@ -151,7 +151,7 @@ end
 
 crumb :staff_new_category do
   parent :staff_categories
-  link 'New', new_staff_category_path
+  link 'Add', new_staff_category_path
 end
 
 crumb :staff_edit_category do |category|

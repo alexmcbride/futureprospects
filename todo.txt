@@ -9,21 +9,17 @@ Devise recaptcha: https://github.com/plataformatec/devise/wiki/How-To:-Use-Recap
 
 have checkbox to complete only on optional stages, like education and employment?
 
-check next button on application stages to make sure it's consistent.
-
 guard against loading application methods (remove course etc.) after application has been submitted.
 
-when make change to sub-model page (e.g. education) then automatically mark stage as incomplete?
+when student makes change to associative-model page (e.g. education) then automatically mark stage as incomplete?
 
-add application seed data
+add staff seed data
 
 image hover jquery stops working on heroku?
 
 improve layout of add course autocomplete
 
 switch navbar bg colour for staff members?
-
-apply to course check status?
 
 markdown preview?
 
@@ -34,7 +30,5 @@ when change status, do the right thing... e.g. if cancelled, email students.
 staff members need their own nav menu, it's too confusing otherwise.
 
 use bullet to optimize database queries: https://github.com/flyerhzm/bullet
-
-check if validate can be overidden in activerecord, for instance move CourseSelection.validate_selection into generate validation stuff
 
 look to reducing amount of stuff selected from DB, for instance display all colleges list, only need college name and id, not everything...

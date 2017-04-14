@@ -135,7 +135,7 @@ course1.description = "This is a three year training programme aimed at providin
 course1.entry_requirements = "To gain entry to the course you should have any of the following combinations of qualifications:\n\n1. Higher maths and/or physical science at grade C or above, and national 5/GCSE or equivalent which must include:\n..* English.\n..* Maths.\n..* Physical Science (e.g. Physics, Chemistry, Technological Studies or Engineering Science).\n..* One other subject.\n\n2. NC Shipping and Maritime Operations (SCQF Level 6) with optional Engineering units.\n\n3. Alternative qualifications will be considered on an individual basis in conjunction with the sponsoring company or training provider.\n\nStudents must have a sponsoring company in order to fulfil the sea time requirement of this programme.\n\nInitial applications for this course should be submitted to a training provider or company, please follow the link for more information."
 course1.career_prospects = "On successful completion of the SPD programme, cadets can gain employment as a fully qualified officer of the watch or choose to progress into university to study at a higher level."
 course1.spaces = course_spaces
-course1.save!
+course1.save! validate: false
 
 course2 = Course.new college: cogc
 course2.title = 'Business HNC'
@@ -148,7 +148,7 @@ course2.description = "Are you looking for a career in banking, insurance, civil
 course2.entry_requirements = "* One Higher pass in a relevant* academic subject OR\n* National Certificate in Business (with at least 3 units at level 6) OR\n* Other appropriate and relevant National Certificate courses (with at least 3 units at level 6) may be considered.\n* Relevant Work experience may be considered.\n* relevant academic subjects include English, Administration, Business Management, Economics, Geography, History, Mathematics, Modern Studies or a Science subject.\n\nYou'll be invited to attend a group presentation and interview session.  The presentation will give you all of the information you need about the course, this will be followed on the same day by an individual interview where you can tell us why you're interested in this course and ask any specific questions related to your own application."
 course2.career_prospects = "You could expect to apply for a trainee management position and/or a team leader in industry or commerce."
 course2.spaces = course_spaces
-course2.save!
+course2.save! validate: false
 
 course3 = Course.new college:kelvin
 course3.title = 'Administration and Information Technology  HND'
@@ -161,7 +161,7 @@ course3.description = "This course will provide you with a broad range of office
 course3.entry_requirements = "* Two Highers in a relevant* academic subject OR\n* Relevant Work experience may be considered.\n* relevant academic subjects include English, Administration, Business Management, Economics, Geography, History, Mathematics, Modern Studies or a Science subject.\n\nYou'll be invited to attend a group presentation and interview session.  The presentation will give you all of the information you need about the course, this will be followed on the same day by an individual interview where you can tell us why you are interested in this course and ask any specific questions related to your own application."
 course3.career_prospects = "This course prepares you for a career as a Personal Assistant or Administrator in both the public and private sector. The HND can provide progression into employment in a general administrative role within small to medium enterprises. It'll also provide opportunities to develop the skills and knowledge required for more specialist posts demanded by larger organisations.\n\nThe qualification will allow you to develop:\n\n* Technical and administrative knowledge relevant to current practice.\n* Interpersonal skills relevant to an administrative role.\n* Personal effectiveness.\n* Communication.\n* Presentation technique."
 course3.spaces = course_spaces
-course3.save!
+course3.save! validate: false
 
 course4 = Course.new college: cogc
 course4.title = 'Information Technology HNC'
@@ -174,7 +174,7 @@ course4.description = "This computing course provides the entry level knowledge 
 course4.entry_requirements = "* One appropriate Higher and three Intermediate 2 courses (including at least one from Computing or Information Systems); OR\n* One Higher and three Standard Grades at Credit level; OR\n* One Higher and three National 5 qualifications; OR\n* A national qualification at SCQF Level 5/6 in a related subject (such as Digital Media Computing, Computing: Technical Support or Software Development); OR\n* Other equivalent qualifications or experience.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you are interested in this subject."
 course4.career_prospects = "The course will develop your core and employability skills and make you more attractive to prospective employers."
 course4.spaces = course_spaces
-course4.save!
+course4.save! validate: false
 
 course5 = Course.new college:kelvin
 course5.title = 'Information Technology HND'
@@ -187,7 +187,7 @@ course5.description = "The HND Information Technology computing qualification is
 course5.entry_requirements = "* Two Highers and three Intermediate 2 courses (including Computing or Information Systems); OR\n* Two Higher and three Standard Grades at Credit level (including Computing or Information Systems); OR\n* Two Higher and three National 5 level qualifications (including Computing or Information Systems); OR\n* A national qualification at SCQF Level 6 in a related subject such as Digital Media Computing, NQ Computing.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject."
 course5.career_prospects = "After completing the HND you may pursue a career in business intelligence analysis, information management, database administration, trainer/teacher, hardware and software support, or web development."
 course5.spaces = course_spaces
-course5.save!
+course5.save! validate: false
 
 course6 = Course.new college: kelvin
 course6.title = 'Web Development HND'
@@ -200,7 +200,7 @@ course6.description = "On this two year course, you'll gain skills to start or 
 course6.entry_requirements = "* Two Higher and three Intermediate 2 courses (including Computing, Graphic Design or Information Systems); OR\n* Two Higher and three Standard Grades at Credit level or above (including Computing, Graphic Design or Information Systems); OR\n* Two Higher and three National 5 qualifications or above (including Computing, Graphic Design or Information Systems); OR\n* A national qualification at SCQF Level 5 or 6 in a related subject such as Digital Media Computing, NQ Computing,  Computing: Technical Support or Software Development.\nYou'll be invited for a group and/or individual interview where you will get the opportunity to find out more about the course and tell us why you're interested in this subject area. It is important that you prepare a personal statement which reflects your desire to study on this course."
 course6.career_prospects = "Apply for various job vacancies, such as a junior web developer/designer.\n\nContinuining Study\n\nYou'll have the opportunity to progress to the following degree courses at university:\n\n* BSc (Hons) Web and Mobile Development at the University of the West of Scotland.\n* BSc/BSc (Hons) Interactive Media Design at Napier University.\n* BSc/BSc (Hons) Digital Media at Napier University.\n* BSc/BSc (Hons) Creative Computing at Napier University.\n* BEng (Hons) Web Technologies at Napier University."
 course6.spaces = course_spaces
-course6.save!
+course6.save! validate: false
 
 course7 = Course.new college: cogc
 course7.title = 'Advertising and Public Relations HND'
@@ -213,7 +213,7 @@ course7.description = "This course trains you for a career in the communication 
 course7.entry_requirements = "* Two Higher Grade passes at Grade C or above, including English, OR\n* A relevant NC or NQ qualification with appropriate subject modules), OR\n* Evidence of relevant industry experience.\n* Successful completion of a full time HNC Advertising and PR course with 15 credits.\n* A genuine interest in the advertising and PR industries is needed and should be demonstrated in the applicatio"
 course7.career_prospects = "This course prepares you for a career in:\n\n* Advertising agencies.\n* PR consultancies.\n* Social media companies.\n* Advertising departments.\n* Commercial, or media-based companies.\nThere are a number of work experience and placement opportunities throughout the course."
 course7.spaces = course_spaces
-course7.save!
+course7.save! validate: false
 
 course8 = Course.new college: clyde
 course8.title = 'Marketing HND'
@@ -226,7 +226,7 @@ course8.description = "The course helps you develop the skills you’ll need to 
 course8.entry_requirements = "* Two Higher Grade passes at Grade C or above including English (or an equivalent such as Modern Studies, Economics, History or Business); OR\n* Adult learners with some relevant experience in, or who hope to move into the marketing area, may be accepted subject to interview.\n* A genuine interest in marketing is needed and should be demonstrated in the applicatio"
 course8.career_prospects = "You may go on to a career in marketing, public relations, or internal or external communications in any number of business sectors."
 course8.spaces = course_spaces
-course8.save!
+course8.save! validate: false
 
 course9 = Course.new college: cogc
 course9.title = '3D Design: Interior Design HND'
@@ -239,7 +239,7 @@ course9.description = "This course will enable you to develop the creative, anal
 course9.entry_requirements = "* NC Interior Design or related subject, OR\n* Higher Art and Design, and English at minimum Intermediate 2, OR\n* Higher Art and Design, and English at National 5 level.\nYou'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject. At the interview you'll be asked to provide examples of your art and design work."
 course9.career_prospects = "This course may lead to a variety of careers in interior design and architectural practices, such as space planning, property development – shop and office fitting, and museum and exhibition design.\n\nContinuing Study\n\nAfter successfully completing the HND course, you can apply for direct entry to 3rd year BA (Hons) Interior Design program at a choice of universities such as: Glasgow School of Art, Edinburgh College of Art, Duncan of Jordonstone College of Art or Heriot Watt University."
 course9.spaces = course_spaces
-course9.save!
+course9.save! validate: false
 
 course10 = Course.new college: clyde
 course10.title = '3D Design: Model Making for the Creative Industries (Year 2 Direct Entry) HND'
@@ -252,7 +252,7 @@ course10.description = "This course will help you develop multiple skills and kn
 course10.entry_requirements = "* HNC 3D Design: Model Making for the Creative Industries; OR\n* First year HND 3D Design: Model Making for the Creative Industries.\nYou'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject. At the interview you're asked to bring your best examples of both 2D and 3D art and design work, in original, photographic or portfolio form."
 course10.career_prospects = "Many graduates work as model makers all over the world, including New Zealand, Dubai and Australia.."
 course10.spaces = course_spaces
-course10.save!
+course10.save! validate: false
 
 course11 = Course.new college: kelvin
 course11.title = 'Creative Printmaking (Year 2 Direct Entry) HND'
@@ -265,7 +265,7 @@ course11.description = "This course offers you an opportunity to develop your cr
 course11.entry_requirements = "* HNC Creative Printmaking; OR\n* First year HND Creative Printmaking.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you are interested in this subject. At the interview you'll be asked to provide examples of your art, photography, or design work."
 course11.career_prospects = "On completion of the course, you can pursue a career as a practicing Artist, Printmaker, Designer, Print Technician, or as a Printmaking Educator.."
 course11.spaces = course_spaces
-course11.save!
+course11.save! validate: false
 
 course12 = Course.new college: cogc
 course12.title = 'Accounting HNC'
@@ -278,7 +278,7 @@ course12.description = "The HNC Accounting Award has been designed to meet the d
 course12.entry_requirements = "* One relevant* Higher at grade C or above; OR\n* Three relevant National 5 courses at grade A; OR\n* Successful completion of an NC/NQ** containing more than one unit at SCQF level 6; OR\n* Relevant work experience will be considered where employer referee details have been supplied.\n* Equivalent qualifications will be considered.  \n*Qualifications cannot include any from the following list: Art and Design, Design and Manufacture, Drama, Graphic Communications, Health and Food Technology, Languages, Music, Media, Photography, Physical Education, ESOL.\n\n**Internal applicants must complete all 16 credits undertaken in the NC qualification. \n\nYou'll be invited to attend a compulsory interview. The interview dates are:\n\n* Thursday 30 March 2017 at 9.30 am\n* Thursday 27 April 2017 at 1.30 pm\nThe interview will begin with a 30 minute presentation from the faculty about the course and the college. This will be followed by a 10 minute one to one discussion on your application form and your suitability for the course. You'll be given the opportunity to ask questions. You must bring a copy of qualification certificates."
 course12.career_prospects = "This course prepares you for a career in:\n\n* Bookkeeping.\n* Financial and/or Management Accounting.\n* Accounts Technician.\n* Assistant Accountant.\n* Accounts Supervisor.\n* Financial Reporting.\n* Taxation.\nContinuing Study\n\nYou can progress to HND Accounting, or AAT Level 8 (Advanced Diploma) on successful completion of this course."
 course12.spaces = course_spaces
-course12.save!
+course12.save! validate: false
 
 course13 = Course.new college: cogc
 course13.title = 'Architectural Technology HND'
@@ -291,7 +291,7 @@ course13.description = "This course gives you a technician level qualification, 
 course13.entry_requirements = "* Two Higher Grade passes, preferably including Mathematics or a science, OR\n* A National Certificate in Built Environment or equivalent qualification at SCQF level 6, OR\n* Relevant experience and the ability to show the commitment and capacity required to cope with the academic content of the course.\n* HNC in Construction.\n* It may also be possible to gain entry with an HNC in Architectural Technology. This will depend on the units that have been covered in the HNC. Students who gain entry with this qualification will require a bespoke infill programme, so each application will be considered on an individual basis.\nYou'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject."
 course13.career_prospects = "This course prepares you for a career as an Architectural Technician, or Architectural Technologist in a variety of sectors including:\n\n* Built Environment.\n* Construction.\n* Property.\n* Private consultant practices (architects and surveyors).\n* Design and build services divisions of construction contractors.\n* Local authorities.\n* Health trusts.\n* Housing associations.\n* Building component manufacturers.\n* Government organisation."
 course13.spaces = course_spaces
-course13.save!
+course13.save! validate: false
 
 course14 = Course.new college: cogc
 course14.title = 'Building Surveying HND'
@@ -304,7 +304,7 @@ course14.description = "This stimulating, learner-focused course is delivered by
 course14.entry_requirements = "* Two Higher passes, preferably including Mathematics or a science, OR\n* A National Certificate in Built Environment or equivalent qualification at SCQF level 6, OR\n* Relevant construction industry experience and the ability to show the commitment and capacity needed to cope with the academic content of the course.\nHNC in Construction. It may also be possible to gain entry with an HNC in Building Surveying. Students who gain entry with this qualification will require a bespoke infill programme, so each application will be considered on an individual basis.\n\nYou'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject."
 course14.career_prospects = "This course prepares you for a career in:\n\n* Private practice surveying firms.\n* Government and public authorities.\n* Building control departments.\n* Construction companies.\n* Facilities management.\n* Property companie."
 course14.spaces = course_spaces
-course14.save!
+course14.save! validate: false
 
 course15 = Course.new college: cogc
 course15.title = 'Built Environment HNC'
@@ -317,7 +317,7 @@ course15.description = "This course is a technician level qualification that wil
 course15.entry_requirements = "* One Higher Grade pass, preferably Maths or a Science; OR\n* National Certificate in Built Environment, or equivalent qualification at SCQF level 6; OR\n* Relevant Construction Industry experience.\nYou also need to show you'll be able to cope with the academic content of the course.\n\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject."
 course15.career_prospects = "You might work as a Technician, or Junior Manager in the built environment and construction sector – architectural technology, quantity surveying, estimating, building surveying and construction management."
 course15.spaces = course_spaces
-course15.save!
+course15.save! validate: false
 
 course16 = Course.new college: kelvin
 course16.title = 'Computer Aided Architectural Design & Technology HND'
@@ -330,7 +330,7 @@ course16.description = "This is a technician level qualification that provides a
 course16.entry_requirements = "You'll be invited for a group and/or individual interview where you'll get the opportunity to find out more about the course and tell us why you're interested in this subject area."
 course16.career_prospects = "* Architectural CAD Technician or Building/Civil Engineering Technicia."
 course16.spaces = course_spaces
-course16.save!
+course16.save! validate: false
 
 course17 = Course.new college: cogc
 course17.title = 'Construction Management HND'
@@ -343,7 +343,7 @@ course17.description = "This stimulating, learner-focused programme is delivered
 course17.entry_requirements = "* Two Higher Grade passes, preferably including Mathematics or a Science; OR\n* A National Certificate in Built Environment or equivalent qualification at SCQF level 6; OR\n* Relevant construction industry experience and the ability to evidence the commitment and capacity required to cope with the academic content of the course.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you are interested in this subject."
 course17.career_prospects = "This course prepares you for a career as a Higher Technician, or Junior Manager in both the public and private sector, in areas including: built environment, the construction sector, construction management, site engineering, estimating, and construction project planning."
 course17.spaces = course_spaces
-course17.save!
+course17.save! validate: false
 
 course18 = Course.new college: kelvin
 course18.title = 'Quantity Surveying HND'
@@ -356,7 +356,7 @@ course18.description = "Quantity Surveyors (also known as a Construction Cost Co
 course18.entry_requirements = "* Two Higher Grade passes, preferably including Mathematics or a Science; OR\n* A National Certificate in Built Environment or equivalent qualification at SCQF level 6; OR\n* Relevant construction industry experience and the ability to evidence the commitment and capacity required to cope with the academic content of the course.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject."
 course18.career_prospects = "This course prepares you for a career in private practice QS consultancies, contracting organisations, property companies, financial institutions, local and central government, commercial clients, and housing associations."
 course18.spaces = course_spaces
-course18.save!
+course18.save! validate: false
 
 course19 = Course.new college: kelvin
 course19.title = 'Engineering Systems HNC'
@@ -369,7 +369,7 @@ course19.description = "Are you interested in gaining an excellent all round kno
 course19.entry_requirements = "* One Higher from Physics, Technological Studies, Mechatronics or Mathematics and at least three Standard Grades 1-2/Intermediate passes including Mathematics, Physics/Technological Studies and English.\n* A National Certificate Group Award in Engineering Systems\n* You'll be invited for a group and/or individual interview where you will get the opportunity to find out more about the course and tell us why you are interested in this subject are"
 course19.career_prospects = "Career\n\nYou have the opportunity to further their careers in the Manufacturing, Mechanical and Maintenance service sectors.\n\nContinuing Study\n\nConsider studying to HND level in Engineering Systems with the potential to progress to University degree level."
 course19.spaces = course_spaces
-course19.save!
+course19.save! validate: false
 
 course20 = Course.new college: cogc
 course20.title = 'Engineering: Mechanical HNC'
@@ -382,7 +382,7 @@ course20.description = "Looking to become an engineering technician? This cours
 course20.entry_requirements = "* NC in an appropriate Mechanical Engineering subject; OR\n* Two Higher Grades – Maths and one other (preferably Physics).\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you are interested in this subject."
 course20.career_prospects = "This course prepares you for a career as an Engineering Technician."
 course20.spaces = course_spaces
-course20.save!
+course20.save! validate: false
 
 course21 = Course.new college: cogc
 course21.title = 'Electronic Engineering HND'
@@ -395,7 +395,7 @@ course21.description = "Electronic engineers solve 21st century problems for ind
 course21.entry_requirements = "* Two Higher passes, one in Maths and preferably Physics; OR\n* Other qualifications and experience.\nYou'll need a good grounding in maths for entry to the course.\n\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject."
 course21.career_prospects = "This course prepares you for a career as an Electronics Technician Engineer."
 course21.spaces = course_spaces
-course21.save!
+course21.save! validate: false
 
 course22 = Course.new college: kelvin
 course22.title = 'Electronic Engineering HNC'
@@ -408,7 +408,7 @@ course22.description = "This course teaches the basics you'll need to pursue a c
 course22.entry_requirements = "* Two Higher grades (grade C or better). Maths and a science subject, preferably Physics; OR\n* An NC in an appropriate engineering subject.\nMature students who don’t meet these requirements will be considered on the basis of their experience.\n\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you are interested in this subject."
 course22.career_prospects = "This course prepares you for a career as an Electronics Technician in electronic manufacturing and service industries, including construction, installation and repair of electronic equipment and systems."
 course22.spaces = course_spaces
-course22.save!
+course22.save! validate: false
 
 course23 = Course.new college: cogc
 course23.title = 'Engineering: Electrical HND'
@@ -421,7 +421,7 @@ course23.description = "On this Electrical Engineering course, you'll expand on 
 course23.entry_requirements = "* NC in an appropriate Engineering subject; OR\n* Two higher Grades - Maths and one other (preferably Physics).\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you are interested in this subject."
 course23.career_prospects = "This course prepares you for a career as a Technician Engineer.\n\nContinuing study -\n\nSuccessful students can progress to degree courses in related areas. Successful students may progress to studying an HND at the College, or enter year two of B Eng Electrical Power Systems at Glasgow Caledonian University."
 course23.spaces = course_spaces
-course23.save!
+course23.save! validate: false
 
 course24 = Course.new college: kelvin
 course24.title = 'Engineering: Electrical HNC'
@@ -434,7 +434,7 @@ course24.description = "This course prepares you to become a Technician, or Tec
 course24.entry_requirements = "* NC in an appropriate Engineering subject; OR\n* Two Higher Grades – Maths and one other (preferably Physics).\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you are interested in this subject."
 course24.career_prospects = "This course prepares you for a career as a Technician Engineer."
 course24.spaces = course_spaces
-course24.save!
+course24.save! validate: false
 
 course25 = Course.new college: cogc
 course25.title = 'Accounting HND'
@@ -447,7 +447,7 @@ course25.description = "The HND Accounting Award has been designed to meet the d
 course25.entry_requirements = "* Two relevant* Highers at grade C or above; OR\n* Successful completion of an NC/NQ** with a minimum of 2 units at SCQF level 6; OR\n* Relevant work experience will be considered where employer referee details have been supplied.\n* Equivalent qualifications will be considered. \n*Qualifications cannot include any from the following list: Art and Design, Design and Manufacture, Drama, Graphic Communications, Health and Food Technology, Languages, Music, Media, Photography, Physical Education, ESOL.\n\n**Internal applicants must complete all 16 credits undertaken in the NC qualification. \n\nYear 2\n\n* Successful completion of a full time HNC Accounting course with 15 credits, with a Grade A in the graded unit and all mandatory units, OR\n* Successful completion of a part time HNC Accounting course with 12 credits, with a Grade A in the graded unit and all mandatory units.\nApplications for HND Accounting year 2 will not be processed until June 2017.\n\nYou'll be invited to attend a compulsory interview. The interview dates are:\n\n* Thursday 30 March 2017 at 1.30pm\n* Thursday 27 April 2017 at 9.30am\nThe interview will begin with a 30 minute presentation from the faculty about the course and the college. This will be followed by a 10 minute one to one discussion on your application form and your suitability for the course. You will be given the opportunity to ask questions. You must bring a copy of qualification certificates."
 course25.career_prospects = "This course prepares you for a career in:\n\n* Bookkeeping.\n* Financial and/or Management Accounting.\n* Accounts Technician.\n* Assistant Accountant.\n* Accounts Supervisor.\n* Financial Reporting.\n* Management Accounting.\n* Taxation."
 course25.spaces = course_spaces
-course25.save!
+course25.save! validate: false
 
 course26 = Course.new college: clyde
 course26.title = 'Supply Chain Management HND'
@@ -460,7 +460,7 @@ course26.description = "This course will provide you with the knowledge and skil
 course26.entry_requirements = "* Two Higher Grade passes at grade C or above including English (Modern Studies, Economics, History or Business); OR\n* Adult learners with some relevant experience, or who hope to move into this area, may be accepted subject to interview.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject."
 course26.career_prospects = "This course prepares you for a career in supply chain management, procurement, and international Logistics across all  major industry sectors."
 course26.spaces = course_spaces
-course26.save!
+course26.save! validate: false
 
 course27 = Course.new college: clyde
 course27.title = 'Computing: Software Development HND'
@@ -473,7 +473,7 @@ course27.description = "This is a challenging course, where you'll study towards
 course27.entry_requirements = "* Two appropriate Highers and three Intermediate 2 courses (including at least one from Computing or Information Systems); OR\n* Two Highers and three Standard Grades at Credit Level; OR\n* Two Highers and three National 5 qualifications.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you are interested in this subject."
 course27.career_prospects = "This course prepares you for a career in software development, web design/development, and information systems development."
 course27.spaces = course_spaces
-course27.save!
+course27.save! validate: false
 
 course28 = Course.new college: cogc
 course28.title = 'Computing: Software Development HNC'
@@ -486,7 +486,7 @@ course28.description = "According to Technology Insights Report from e-skills UK
 course28.entry_requirements = "* One Higher* and three National 5 qualifications; OR\n* One appropriate Higher* and three Intermediate 2 courses (including at least one from Computing or Information Systems); OR\n* One Higher* and three Standard Grades at credit level; OR\n* A national qualification at SCQF Level 6 in a related subject (such as Digital Media Computing, Computing: Technical Support or Software Development); OR\n* Other equivalent qualifications or experience.\n*in one of these subjects:  Computing, Information Systems, Maths, Physics, Chemistry or any relevant subject.\n\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject."
 course28.career_prospects = "You have an opportunity to continue studying with us, progressing on to HND Software Development 2nd year as long as you meet the entry requirements: 15 credits, very good attendance in HNC and a very good reference from your lecturers."
 course28.spaces = course_spaces
-course28.save!
+course28.save! validate: false
 
 course29 = Course.new college:kelvin
 course29.title = 'Computing: Technical Support HNC'
@@ -499,7 +499,7 @@ course29.description = "There is a shortage of people who are qualified to carry
 course29.entry_requirements = "* One appropriate Higher and three Intermediate 2 or National  5 qualifications (at least one of these should include a computing related qualification and/or English/Maths OR\n* One Higher and three Standard Grades (including English/Maths, all at credit level OR\n* A National Qualification at level 6 in a closely related subject (such as Digital Media Computing, Computing: Technical Support or Software Development OR\n* Other equivalent qualifications or experience.\nDepending on your qualifications, you may be invited for an individual interview or group information session where you can find out more about the course and decide if it’s the right one for you."
 course29.career_prospects = "This course prepares you for a career in IT infrastructure support."
 course29.spaces = course_spaces
-course29.save!
+course29.save! validate: false
 
 course30 = Course.new college: kelvin
 course30.title = 'Administration and Information Technology HNC'
@@ -512,7 +512,7 @@ course30.description = "This course provides you with a broad range of office-b
 course30.entry_requirements = "* One Higher pass in a relevant* academic subject OR\n* National Certificate in Administration (with at least 3 units at level 6) OR\n* Other appropriate and relevant National Certificate courses (with at least 3 units at level 6) may be considered.\n* Relevant office work experience may be considered.\n* relevant academic subjects include English, Administration, Business Management, Economics, Geography, History, Mathematics, Modern Studies or a Science subject.\n\nYou'll be invited to attend a group presentation and interview session.  The presentation will give you all of the information you need about the course, this will be followed on the same day by an individual interview where you can tell us why you're interested in this course and ask any specific questions related to your own application."
 course30.career_prospects = "This course prepares you for a career as a Personal Assistant or Administrator in the public and private sectors."
 course30.spaces = course_spaces
-course30.save!
+course30.save! validate: false
 
 course31 = Course.new college: kelvin
 course31.title = 'Administration and Information Technology with Digital Communication HNC'
@@ -525,7 +525,7 @@ course31.description = "The increased digitisation of the workplace has meant th
 course31.entry_requirements = "* One Higher pass in a relevant* academic subject OR\n* National Certificate in Administration (with at least 3 units at level 6) OR\n* Other appropriate and relevant National Certificate courses (with at least 3 units at level 6) may be considered.\n* Relevant Work experience may be considered.\n* relevant academic subjects include English, Administration, Business Management, Economics, Geography, History, Mathematics, Modern Studies or a Science subject.\n\nYou'll be invited to attend a group presentation and interview session.  The presentation will give you all of the information you need about the course, this will be followed on the same day by an individual interview where you can tell us why you're interested in this course and ask any specific questions related to your own application."
 course31.career_prospects = "This course would help you to gain various administration positions in both the public and private sectors."
 course31.spaces = course_spaces
-course31.save!
+course31.save! validate: false
 
 course32 = Course.new college: cogc
 course32.title = 'Business Diploma of Higher Education'
@@ -538,7 +538,7 @@ course32.description = "This course is designed to give you direct entry into th
 course32.entry_requirements = "* A minimum of three Higher Grade passes, 2 at Grade B and 1 at grade C in suitable academic subjects *, one of which must be English (or equivalent).  AND\n* Two other passes at National 5 (or equivalent) including Mathematics.\n* relevant academic subjects include Administration, Business Management, Economics, Geography, History, Mathematics, Modern Studies or Natural Sciences.\n\nYou'll be invited to attend a group presentation and interview session. The presentation will give you all of the information you need about the course, this will be followed on the same day by an individual interview where you can tell us why you are interested in this course and ask any specific questions related to your own application."
 course32.career_prospects = "This course prepares you for a career in marketing, legal services, management, human resources, administration in industrial and commercial sectors, teaching, public sector employment or research."
 course32.spaces = course_spaces
-course32.save!
+course32.save! validate: false
 
 course33 = Course.new college: cogc
 course33.title = '3D Computer Animation HND'
@@ -551,7 +551,7 @@ course33.description = "This hands-on course helps you develop the skills needed
 course33.entry_requirements = "* Two appropriate Highers and three Intermediate 2 courses (including at least one from Computing, Information Systems, Graphic Communications or equivalent), OR\n* Two Higher passes and three Standard Grades at credit level or above, OR\n* A national qualification at SCQF Level 5 or 6 in a related subject such as Digital Media Computing, Computer Arts and Animation.\nYou'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject."
 course33.career_prospects = "After completing the HND you can apply for jobs in areas of the Communication Industry, including design consultancies, advertising agencies, newspaper and magazine publishing, web design and motion graphics for screen, or in-house design studios.\n\nYou may eventually become self-employed as a Graphic Designer."
 course33.spaces = course_spaces
-course33.save!
+course33.save! validate: false
 
 course34 = Course.new college: cogc
 course34.title = 'Art Glass Design HND'
@@ -564,7 +564,7 @@ course34.description = "The HND Art Glass Design course is for you, if you want 
 course34.entry_requirements = "* One Higher in Art and Design and two National 5 Qualifications (or equivalent), OR\n* NC/NQ in an Art and Design subject.\nYou'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject. At the interview you'll be asked to show examples of your art and design work."
 course34.career_prospects = "The HND course may lead to a job in the art glass industry or self-employment."
 course34.spaces = course_spaces
-course34.save!
+course34.save! validate: false
 
 course35 = Course.new college:kelvin
 course35.title = 'Creative Printmaking HND'
@@ -577,7 +577,7 @@ course35.description = "This course offers you an opportunity to develop your cr
 course35.entry_requirements = "* An NC/NQ qualification in Print, Art and Design, Graphic Design, illustration or equivalent SVQ, OR\n* Higher Art and Design and English at minimum Intermediate level 2 or National 5; OR\n* Relevant experience.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you are interested in this subject. At the interview you'll be asked to provide examples of your art, photography, or design work."
 course35.career_prospects = "On completion of the course, you can pursue a career as a practicing Artist, Printmaker, Designer, Print Technician, or as a Printmaking Educator."
 course35.spaces = course_spaces
-course35.save!
+course35.save! validate: false
 
 course36 = Course.new college: cogc
 course36.title = 'Display Design for Retail HND'
@@ -590,7 +590,7 @@ course36.description = "The role of the Display Designer is to create a three-di
 course36.entry_requirements = "* Higher Art &amp; Design and English at minimum Intermediate 2; OR\n* NC in Art &amp; Design or Illustration; OR \n* Related experience.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you are interested in this subject. At the interview you'll be asked to provide examples of your art and design work."
 course36.career_prospects = "Demand for retail display designers is continuous within the retail sector. Previous students are employed by national and international companies such as Levi's, French Connection, Ikea, Frasers, BHS, Marks and Spencer and John Lewis."
 course36.spaces = course_spaces
-course36.save!
+course36.save! validate: false
 
 course37 = Course.new college: cogc
 course37.title = 'Art and Animation HND'
@@ -603,7 +603,7 @@ course37.description = "This is a broad based course that develops your creative
 course37.entry_requirements = "* NC in Art and Design, Graphic Arts portfolio, Illustration or Graphic Design, OR\n* Art and Design at Higher and English at minimum Intermediate 2, OR\n* Art and Design at Higher and English at National 5 level.\nYou'll also be expected to submit examples of your art and design work, including figure drawings to support your application. If you don’t have the required qualifications, we’ll consider you for a place based on your experience and examples of your work.\n\n* An HNC in Computer Arts and Design or an equivalent level qualification.\nYou'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject.\n\nYou'll be expected to show examples of your art &amp; design work at the interview."
 course37.career_prospects = "Students who complete their HND can progress to a career in motion graphics as an: animator, storyboard artist, layout artist, character developer, compositor, vfx designer and other related specialist.\n\nThere are opportunities for employment in-house or as a self-employed freelancer working for animation studios, VFX companies, BBC, STV, TV production companies, wed design studios, advertising agencies, and other clients requiring animation or motion graphics sequences."
 course37.spaces = course_spaces
-course37.save!
+course37.save! validate: false
 
 course38 = Course.new college: cogc
 course38.title = 'Digital Art and Culture HND'
@@ -616,7 +616,7 @@ course38.description = "The Digital Art and Culture course provides a foundation
 course38.entry_requirements = "* National Certificate in Art and Design or related subject; OR\n* One Higher in Art and Design and English at minimum Intermediate 2; OR\n* One Higher in Art and Design and English at National 5 level; OR\n* Relevant experience.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you are interested in this subject. At the interview you'll be asked to provide examples of your art and design work."
 course38.career_prospects = "This course will create career opportunities in: cross-media art, interactive digital media, film and moving image, time-based art, education and community arts."
 course38.spaces = course_spaces
-course38.save!
+course38.save! validate: false
 
 course39 = Course.new college: kelvin
 course39.title = 'Digital Media HND'
@@ -629,7 +629,7 @@ course39.description = "This new Digital Media course will develop your creative
 course39.entry_requirements = "* National Certificate in Art and Design or related area; OR\n* Higher Art and Design or Graphic Communication and English at minimum Intermediate 2; OR\n* Higher Art and Design or Graphic Communication and English at National 5 Level; OR\n* Relevant experience.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject. At the interview you'll be asked to provide examples of your art and design work."
 course39.career_prospects = "After the HND you can apply for jobs in the Communication Industry, such as with design consultancies, advertising agencies, on line publishing, web design, television and film production, motion graphics for screen, or in-house design studios.\n\nYou may eventually become employed as an Interactive, Multimedia, Web or Graphic Designer."
 course39.spaces = course_spaces
-course39.save!
+course39.save! validate: false
 
 course40 = Course.new college:kelvin
 course40.title = 'Graphic Design HND'
@@ -642,7 +642,7 @@ course40.description = "This Graphic Design course prepares you for a career in 
 course40.entry_requirements = "* Higher Art and Design and English at minimum Intermediate 2; OR\n* Higher Art and Design and English at National 5 Level; OR\n* NC in Art and Design, or related subject.\nYou'll be invited for a group and/or individual interview, where you can find out more about the course and tell us why you're interested in this subject. At the interview you'll be asked to provide examples of your art and design work."
 course40.career_prospects = "After completing the HND you can apply for jobs in areas of the Communication Industry, including design consultancies, advertising agencies, newspaper and magazine publishing, web design and motion graphics for screen, or in-house design studios.\n\nYou may eventually become self-employed as a Graphic Designer."
 course40.spaces = course_spaces
-course40.save!
+course40.save! validate: false
 
 course41 = Course.new college:kelvin
 course41.title = 'Creative Industries: Professional Writing Skills HNC'
@@ -655,7 +655,7 @@ course41.description = "This course is for you, if you are looking for a career 
 course41.entry_requirements = "* A Higher in English at minimum B or above or relevant group of units (e.g. Literature 1, Communication 4); OR\n* Relevant experience.\nYou'll be invited for a group pre-entry guidance session and individual interview where you can find out more about the course and tell us why you are interested in this subject.\n\nAt interview you'll be asked to write a short factual piece and provide a folio of three or four typed pieces of work. This may include poetry collections, short stories or prose extracts, script extracts, or journalism articles.\n\nPlease note that school essays are not suitable. "
 course41.career_prospects = "This course prepares you for a career in creative writing, freelance writing, journalism, script editing, scriptwriting or broadcasting. Previous students have gone on to work in publishing, script tutoring, ghost writing, and speech writing."
 course41.spaces = course_spaces
-course41.save!
+course41.save! validate: false
 
 course42 = Course.new college: cogc
 course42.title = 'Creative Industries: Radio HNC'
@@ -668,7 +668,7 @@ course42.description = "This course helps you to develop a range of radio produc
 course42.entry_requirements = "* ​NC Media or equivalent SVQ; OR\n* Higher English plus two National 5 Qualifications (or equivalent).\nYou'll be invited for a group pre-entry guidance session and individual interview where you can find out more about the course and tell us why you are interested in this subject.\n\nIt may strengthen your application to provide evidence of relevant experience or activity in the subject area, e.g. podcasting; involvement in community, hospital, online or school radio stations; music blogging; sound production or editing; relevant work experience or volunteering etc."
 course42.career_prospects = "There are opportunities in radio for those with a variety of up-to-date skills, broadcasting knowledge and experience. Alternatively, students can progress to further study either at City of Glasgow College or elsewhere subject to entry conditions."
 course42.spaces = course_spaces
-course42.save!
+course42.save! validate: false
 
 course43 = Course.new college: cogc
 course43.title = 'Practical Journalism HND'
@@ -681,7 +681,7 @@ course43.description = "This is a vocational and skills specific course suitable
 course43.entry_requirements = "Two Highers in relevant subjects, at grade C or above, which must include Higher English and/or Higher Modern Studies OR NC Media or equivalent; AND\n\nSome practical skills in IT, including word processing, email and internet.\n\nYou'll be invited for a group pre-entry guidance session and individual interview where you can find out more about the course and tell us why you're interested in this subject. At your interview you will have to:\n\n* Write a 200 word article according to brief given on the day.\n* Correct the spelling, grammar and punctuation in a 300 word article.\n* Discuss the importance of journalism.\nIt would also strengthen your application to provide evidence of relevant experience in the area, e.g. blogging, podcasting, published articles, involvement in school newspapers, magazines or radio stations, relevant volunteering or work experience."
 course43.career_prospects = "Following this course, you can either apply for jobs in the industry or for a place at university."
 course43.spaces = course_spaces
-course43.save!
+course43.save! validate: false
 
 course44 = Course.new college:kelvin
 course44.title = 'Photography HND'
@@ -694,7 +694,7 @@ course44.description = "This highly competitive course provides you with the ski
 course44.entry_requirements = "* An NC/NQ in photography is preferred; OR\n* One Higher at minimum grade C or above in Photography plus 2 National 5 Qualifications (one in English preferred).\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject. At the interview you'll be asked to provide a strong photographic portfolio of work."
 course44.career_prospects = "With an HND in photography, you'll be prepared for a position in the highly competitive creative and media sector including: advertising, commercial, press and photojournalism, fashion, sports, social, medical, scientific, throughout the UK and worldwide."
 course44.spaces = course_spaces
-course44.save!
+course44.save! validate: false
 
 course45 = Course.new college: clyde
 course45.title = 'Beauty Therapy HND'
@@ -707,7 +707,7 @@ course45.description = "The course offers a high level beauty qualification whic
 course45.entry_requirements = "Direct Entry - No prior beauty qualification pathway\n\n* Two Higher grade passes. \nOR\n\n* NC Level 6 or HNC/D in any subject area.\nNCGA Beauty Care Level 6 pathway\n\n* NCGA Beauty Care Level 6.\nOR\n\n* NVQ/SVQ Level 3 Beauty.\n* You'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course.\n* Excellent communication skills and an enthusiasm for the beauty industry is essentia"
 course45.career_prospects = "This course prepares you for a career in the Beauty Industry including roles in salons, health spas, cruise ships, or self-employment. A number of senior, or managerial posts may also be available to HND qualified therapists."
 course45.spaces = course_spaces
-course45.save!
+course45.save! validate: false
 
 course46 = Course.new college: clyde
 course46.title = 'Complementary Therapies HNC'
@@ -720,7 +720,7 @@ course46.description = "Do you have a keen interest in therapy treatments, combi
 course46.entry_requirements = "* Two Highers at C or above (English and Science subject preferred); OR\n* NC Wellness Therapies; OR\n* NC Level 6 in Beauty Care; OR\n* Relevant experience.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject.\n\nThis is a popular course, and you'll be expected to strongly communicate your enthusiasm for all aspects of its content."
 course46.career_prospects = "This course prepares you for a career in the field of complementary therapies, working in healthcare services, eg palliative care, therapy clinics, or within the spa industry. There are also opportunities for self-employment, eg providing a mobile therapy service."
 course46.spaces = course_spaces
-course46.save!
+course46.save! validate: false
 
 course47 = Course.new college: cogc
 course47.title = 'Fitness, Health and Exercise HND'
@@ -733,7 +733,7 @@ course47.description = "This course is most suited to those with an interest in 
 course47.entry_requirements = "* A minimum of 2 Highers one of which must be English; OR\n* A NQ/NC qualification at Level 6 in Sport and Fitness related subjects.\n* Relevant experience is advantageous.\n* Applications are welcome from those without formal qualifications who can demonstrate an active interest in sport or fitness.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject. An element of the interview process will involve paired exercise where you demonstrate an exercise of your choice to a partner, highlighting safe and effective practice. Please bring suitable indoor gym wear."
 course47.career_prospects = "This course will suit individuals wishing to pursue careers in sports clubs, private fitness facilities, local authorities and government sport initiatives; ranging from personal training and exercise instruction, to teaching physical education, or working within sports science.\n\nYou may also look at self-employment in fitness, exercise prescription and athletic conditioning."
 course47.spaces = course_spaces
-course47.save!
+course47.save! validate: false
 
 course48 = Course.new college: cogc
 course48.title = 'Professional Cookery HND'
@@ -746,7 +746,7 @@ course48.description = "Professional cookery has never been as popular as it is 
 course48.entry_requirements = "* Professional Cookery Year 2 / NC Professional Cookery (Level 6) or an appropriate group of National Units; OR\n* Other equivalent qualifications or experience.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject."
 course48.career_prospects = "On completing your HND, you might progress to a career in catering, restaurants, and hospitality at a supervisory, or junior management level."
 course48.spaces = course_spaces
-course48.save!
+course48.save! validate: false
 
 course49 = Course.new college: clyde
 course49.title = 'Events HNC'
@@ -759,7 +759,7 @@ course49.description = "This course will give you the skills, knowledge and unde
 course49.entry_requirements = "* One Higher pass with a minimum of C, in an appropriate subject such as Business Management, English, Modern Studies, Economics, History; OR\n* NQ in Events or another relevant subject; OR\n* Other qualifications and relevant experience.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you are interested in this subject."
 course49.career_prospects = "You could expect to go on to work in events across a range of industries."
 course49.spaces = course_spaces
-course49.save!
+course49.save! validate: false
 
 course50 = Course.new college: cogc
 course50.title = 'Nautical Science/ Chief Mate Full / Master  HND'
@@ -771,7 +771,7 @@ course50.description = "This course is designed for you to progress from OOW lev
 course50.entry_requirements = "* Recognised sea time of 12 months at OOW level\n* NAEST (M) certificate (to be valid when finally applying for your COC). The NAEST(M) course is scheduled within course progr"
 course50.career_prospects = "The course overall will equip you to become a competent and efficient Chief Mate."
 course50.spaces = course_spaces
-course50.save!
+course50.save! validate: false
 
 course51 = Course.new college: clyde
 course51.title = 'Marine Operations Scottish Professional Diploma'
@@ -784,7 +784,7 @@ course51.description = "If you're a school leaver with at least 120 UCAS points,
 course51.entry_requirements = "* Standard Grade passes at grade 3 or above (maths to Grade 2); OR\n* GCSE passes at grade C or above; OR\n* A pass at Intermediate 2 in maths, English or a subject involving the use of English. A science subject with a significant content of a physical science; OR\n* National Certificate passes at National 5 in maths, English and a science subject\n* Plus Higher Level/A Level: One or more passes at Higher Level/A Level subjects, amounting to at least 120 points on the UCAS tariff system, one of which should preferably be maths or a physical science subject\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject."
 course51.career_prospects = "This course prepares you for a career at sea in the Merchant Navy and in a number of different sectors such as offshore, cruise ships, oil tankers, LNG and chemical tankers."
 course51.spaces = course_spaces
-course51.save!
+course51.save! validate: false
 
 course52 = Course.new college: kelvin
 course52.title = 'Nautical Science (Top up) HND'
@@ -797,7 +797,7 @@ course52.description = "This one-year program is suitable for those cadets who h
 course52.entry_requirements = "* MNTB/MCA Approved HNC in Nautical Scienc"
 course52.career_prospects = "This course prepares you for a career at sea in the Merchant Navy and in a number of different sectors such as offshore, cruise ships, oil tankers, LNG and chemical tankers."
 course52.spaces = course_spaces
-course52.save!
+course52.save! validate: false
 
 course53 = Course.new college: cogc
 course53.title = 'UK Maritime and Coastguard Agency Officer of the Watch (Reg11/ 1) (including HNC Nautical Science)  HNC'
@@ -809,7 +809,7 @@ course53.description = "This is an exciting and challenging full-time course des
 course53.entry_requirements = "* Three years of acceptable sea service in a deck capacity; AND\n* An acceptable level of maths; AND\n* Completion of the City of Glasgow College Distance Learning Mathematics course (SCQF Level 6/"
 course53.career_prospects = "This course prepares you for a career as a Merchant Navy Deck Officer or shore-based employment in the shipping industry. You could apply for our higher level Deck Officer or Master Mariner qualifications, or a degree in maritime studies with various institutions. You could also look at progression to the second year of a Marine Operation degree course at Southampton Solent University."
 course53.spaces = course_spaces
-course53.save!
+course53.save! validate: false
 
 course54 = Course.new college: cogc
 course54.title = 'Marine Engineering for Cadets from International Partner Colleges HND'
@@ -822,7 +822,7 @@ course54.description = "This 2 year course, approved by the MCA, is for applican
 course54.entry_requirements = "* It is expected that those recruited onto the Marine Engineering Cadetship programme will have entry qualifications equivalent to Scottish Qualification Authority (SQA) Highers that include Maths, Physics, Technological Studies, or another science based subject all at level B or above\n* IELTS at 5.5\n* The International Department of the City of Glasgow College can offer qualification matching services if required."
 course54.career_prospects = "This course prepares you for a career as a Senior Marine Engineering Officer, Ship Manager, or Ship Superintendent."
 course54.spaces = course_spaces
-course54.save!
+course54.save! validate: false
 
 course55 = Course.new college: cogc
 course55.title = 'Hospitality Management HND'
@@ -835,7 +835,7 @@ course55.description = "This two year Hospitality Management course helps you to
 course55.entry_requirements = "* Two Higher passes with a minimum of C passes; OR\n* NQ in Hospitality or other appropriate NQ; OR\n* Other relevant industry experience or equivalent qualification.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you are interested in this subject."
 course55.career_prospects = "The course prepares you for employment at junior management/supervisory level in a hospitality department, and graduate training schemes with many large organisations.\n\nWe work with key representatives from industry to offer graduate training positions following the successful completion of the HND."
 course55.spaces = course_spaces
-course55.save!
+course55.save! validate: false
 
 course56 = Course.new college: cogc
 course56.title = 'Hospitality Operations HNC'
@@ -848,7 +848,7 @@ course56.description = "This course covers a range of subjects in Hospitality, 
 course56.entry_requirements = "* One Higher with a minimum of a C pass; OR\n* NQ in Hospitality or other appropriate NQ; OR\n* Offers are subject to attending an interview with a member of the Hospitality / Events Team where you should articulate your interest and/or experience in hospitality and your goals after completing the course.\nYou’ll be invited for a group and/or individual interview where you can find out more about the course and tell us why you are interested in this subject."
 course56.career_prospects = "This course prepares you for a career at a supervisory level in a hospitality department of a hotel, or directly into a graduate training scheme with many large organisations, or a junior management position. We work with key representatives from industry to offer Graduate training positions following the successful completion of the HNC."
 course56.spaces = course_spaces
-course56.save!
+course56.save! validate: false
 
 course57 = Course.new college: clyde
 course57.title = 'Mechanical Engineering HND'
@@ -861,7 +861,7 @@ course57.description = "This two year course allows you to study mechanical engi
 course57.entry_requirements = "* NC in an appropriate Mechanical Engineering subject; OR\n* Two Higher Grades – Maths and one other (we’d prefer Physics).\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject."
 course57.career_prospects = "This course prepares you for a career as an Engineering Technician, Supervisor or Manager."
 course57.spaces = course_spaces
-course57.save!
+course57.save! validate: false
 
 course58 = Course.new college:kelvin
 course58.title = 'Women into Engineering HNC'
@@ -874,7 +874,7 @@ course58.description = "This HNC Mechanical Engineering course is open only to w
 course58.entry_requirements = "* NC in an appropriate Mechanical Engineering subject, OR\n* Two Highers – Maths and one other subject, preferably Physics.\nThis course is for women only. You'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject."
 course58.career_prospects = "This course prepares you for a career as an Engineering Technician."
 course58.spaces = course_spaces
-course58.save!
+course58.save! validate: false
 
 course59 = Course.new college: cogc
 course59.title = 'Chief Mate/ Master Post HND'
@@ -886,7 +886,7 @@ course59.description = "This course will allow you to progress to the Chief Mat
 course59.entry_requirements = "* Recognised sea time of at least 12 months at an OOW level.\n* STCW Certificate in Medical Care On Board (Medical Care is required before the candidates take their MCA Oral examination. The course can be booked in advance through marine@cityofglasgowcollege.ac.uk).\n* NAEST (Operational) Certificate (If you completed the NARAST (O) course prior to 1st January 2005 you are required to undertake an ECDIS course conforming with an IMO Model 1.27 prior to undertaking the NAEST Management course).\n* Applications from International Students who meet the above requirements are welcom"
 course59.career_prospects = "The course will equip you with the skills to become a competent and efficient Chief Mate. You will require a total of 36 months ‘watch-keeping service’ while holding an OOW Unlimited II/I COC to undertake your next examination for Master (Unlimited) COC. This period may be reduced to 24 months if at least 12 months of such seagoing service has been served as Chief Mate while holding a Chief Mate unlimited, II/2, Certificate of Competency (Reference MSN 1856)."
 course59.spaces = course_spaces
-course59.save!
+course59.save! validate: false
 
 course60 = Course.new college: cogc
 course60.title = 'MCA Class 1 Orals Only'
@@ -899,7 +899,7 @@ course60.description = "This four-week course prepares you for the Master Orals 
 course60.entry_requirements = "You should have completed 36 months watch keeping service while holding OOW unlimited II/1, Certificate of Competency.\n\nThis period may be reduced to 24 months if at least 12 months of such seagoing service has been served as Chief Mate while holding a Chief Mate unlimited, II/2, Certificate of Competency and MCA approved medical Certificate.\n\nFor more detail see MSN 1856."
 course60.career_prospects = "Progression to ships master or shore employment within the marine sector."
 course60.spaces = course_spaces
-course60.save!
+course60.save! validate: false
 
 course61 = Course.new college: cogc
 course61.title = 'MCA Class 2 Writtens'
@@ -912,7 +912,7 @@ course61.description = "On this course you will cover topics within the MCA clas
 course61.entry_requirements = "Completion of a full Chief Mate course including HND Nautical Science or a Chief Mate Post HND course."
 course61.career_prospects = "Progression to ships master or shore employment within the marine sector."
 course61.spaces = course_spaces
-course61.save!
+course61.save! validate: false
 
 course62 = Course.new college: kelvin
 course62.title = 'Events Management HND'
@@ -925,7 +925,7 @@ course62.description = "This course is for those who want a career in the manage
 course62.entry_requirements = "* Two Higher passes with a minimum of C, including at least one from the following Business Management, English, Modern Studies, Economics, History; OR\n* NQ in Events or other appropriate NQ; OR\n* Other qualification and relevant experience.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject."
 course62.career_prospects = "This course prepares you for a career in the organisation and management of conferences, exhibitions, festivals and special events."
 course62.spaces = course_spaces
-course62.save!
+course62.save! validate: false
 
 course63 = Course.new college:kelvin
 course63.title = 'Building Surveying (Year 2 Direct Entry) HND'
@@ -938,7 +938,7 @@ course63.description = "This stimulating, learner-focused course is delivered by
 course63.entry_requirements = "* HNC in Construction\n* It may also be possible to gain entry with an HNC in Building Surveying\nStudents who gain entry with this qualification will require a bespoke infill programme, so each application will be considered on an individual basis.\n\nYou'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject."
 course63.career_prospects = "This course prepares you for a career in:\n\n* Private practice surveying firms\n* Government and public authorities\n* Building control departments\n* Construction companies\n* Facilities management\n* Property compani."
 course63.spaces = course_spaces
-course63.save!
+course63.save! validate: false
 
 course64 = Course.new college: kelvin
 course64.title = 'Computing: Technical Support HND'
@@ -951,7 +951,7 @@ course64.description = "This new HND course teaches you skills that are in deman
 course64.entry_requirements = "* Two appropriate Highers and three Intermediate 2 or National  5 qualifications (at least one of these should include a computing related qualification and/or English/Maths OR\n* Two Highers and three Standard Grades (including  English/Maths, all at credit level OR\n* Other equivalent qualifications or experience\nDepending on your qualifications, you may be invited for an individual interview or group information session where you can find out more about the course and decide if it’s the right one for you.\n\nApplicants with a level 6 qualification will be considered for the HNC course."
 course64.career_prospects = "This course prepares you for a career in IT infrastructure."
 course64.spaces = course_spaces
-course64.save!
+course64.save! validate: false
 
 course65 = Course.new college: clyde
 course65.title = 'Retail Management HND'
@@ -964,7 +964,7 @@ course65.description = "This exciting and challenging course provides you with t
 course65.entry_requirements = "* Two Higher Grade passes at grade C or above including English, (or a relevant Higher); OR\n* A National Qualification including Core Skills Communication Higher or an appropriate SVQ; OR\n* Relevant experience.\n* A genuine interest in retail management is needed and should be demonstrated in the applicatio"
 course65.career_prospects = "This course prepares you for a career in retail at a supervisory, or junior management level."
 course65.spaces = course_spaces
-course65.save!
+course65.save! validate: false
 
 course66 = Course.new college: clyde
 course66.title = 'Web Development (Year 2 Direct Entry) HND'
@@ -977,7 +977,7 @@ course66.description = "On this course, you'll gain skills to start or advance a
 course66.entry_requirements = "* HNC Web Development OR\n* First year of HND Web Development\nYou'll be invited for a group and/or individual interview where you will get the opportunity to find out more about the course and tell us why you're interested in this subject area. It is important that you prepare a personal statement which reflects your desire to study on this course."
 course66.career_prospects = "Apply for various job vacancies, such as a junior web developer/designer."
 course66.spaces = course_spaces
-course66.save!
+course66.save! validate: false
 
 course67 = Course.new college:kelvin
 course67.title = 'Television BA (Hons)'
@@ -990,7 +990,7 @@ course67.description = "This course covers broadcast television, studio and loca
 course67.entry_requirements = "* HND Creative Industries TV; OR\n* Relevant television experience.\nPlease apply to Edinburgh Napier University through UCAS, making your preference to study at City of Glasgow College clear in your personal statement."
 course67.career_prospects = "After the course, you'll be prepared for an entry-level position in the highly competitive creative and media sector including production, directing, editing, presenting, researching and independent projects.  You may also consider applying for further studies at Masters level."
 course67.spaces = course_spaces
-course67.save!
+course67.save! validate: false
 
 course68 = Course.new college: cogc
 course68.title = 'Travel and Tourism (with option to study languages) HND'
@@ -1003,7 +1003,7 @@ course68.description = "The course develops your knowledge of the Travel and Tou
 course68.entry_requirements = "* Two Highers at Grade C or above in appropriate academic subjects (such as English, Modern Studies, Languages, Business Management, History) and three National 5 qualifications including English; OR\n* Two Highers at Grade C or above (such as English, Modern Studies, Languages Business Management, History) with three Intermediate 2 courses including English; OR\n* Two Highers at Grade C or above (such as English, Modern Studies, Languages Business Management, History,) and three Standard Grades at credit level including English; OR\n* Other equivalent qualifications or experience.\nYou'll be invited to attend a course presentation where you'll get the opportunity to find out more about the course and tell us why you're interested in this subject area."
 course68.career_prospects = "This course prepares you for a career in travel and tourism with:\n\n* National Tourist Organisations.\n* Travel Management Companies.\n* Visitor Centres/Attractions.\n* Tour Operators.\n* Travel Agents.\n* Airlines.\n* Airport Ground Handling.\n* Foreign Exchange Service."
 course68.spaces = course_spaces
-course68.save!
+course68.save! validate: false
 
 course69 = Course.new college:kelvin
 course69.title = 'Contemporary Art Practice BA (Hons)'
@@ -1016,7 +1016,7 @@ course69.description = "This is a practice-based degree, where you'll have oppor
 course69.entry_requirements = "* HND in Contemporary Art Practice (or equivalent) with a good pass in the graded unit; OR\n* Relevant professional experience.\nYou must also meet the general admission requirements of the University and apply via UCAS.\n\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject. At the interview you'll be asked to present a portfolio which should demonstrate developed and focused studio practice, and a sophisticated theoretical approach."
 course69.career_prospects = "This course prepares you for a career as a practising artist, roles in museums, galleries, studios, arts centres, public art and public sector agencies, education bodies, festivals and art fairs."
 course69.spaces = course_spaces
-course69.save!
+course69.save! validate: false
 
 course70 = Course.new college: cogc
 course70.title = 'Photography BA (Hons)'
@@ -1029,7 +1029,7 @@ course70.description = "In this course you'll develop the practical and critical
 course70.entry_requirements = "* HND in Photography; OR\n* Relevant professional experience.\n* You'll  be interviewed and assessed on their portfolio.\nYou must also meet the general admission requirements of the University and apply via UCAS."
 course70.career_prospects = "The Creative Industries sector covers a range of creative practice and activities. As a graduate of this course, you will be well placed to work within this sector as a practicing photographer, or in a related role."
 course70.spaces = course_spaces
-course70.save!
+course70.save! validate: false
 
 course71 = Course.new college: cogc
 course71.title = 'Hairdressing HNC'
@@ -1042,7 +1042,7 @@ course71.description = "The HNC Hairdressing course is designed for hairdressers
 course71.entry_requirements = "* A qualification in either SCQF Level 6 or SVQ Level 3 Hairdressing; OR\n* A minimum of 5 years' experience within the hairdressing profession.\nYou should be working within the hairdressing profession.\n\nEntry will be based on a successful interview.  Depending on experience you might be asked to participate in a skills test.\n\nYou'll also be required to supply relevant items of professional equipment essential to the course, information will be given at interview."
 course71.career_prospects = "On successful completion of the course you could operate your own business, apply for employment on-board cruise liners, lecturing posts in Further Education or as a Company Technician / Trainer."
 course71.spaces = course_spaces
-course71.save!
+course71.save! validate: false
 
 course72 = Course.new college: kelvin
 course72.title = 'Digital Design and Web Development HNC'
@@ -1055,7 +1055,7 @@ course72.description = "On this one year web based computing course, you will ga
 course72.entry_requirements = "* One Higher and three Intermediate 2 courses (including Computing, Graphic Design or Information Systems); OR\n* One Higher and three Standard Grades at Credit level or above (including Computing, Graphic Design or Information Systems); OR\n* One Higher and three National 5 qualifications or above (including Computing, Graphic Design or Information Systems); OR\n* A national qualification at SCQF Level 5 or 6 in a related subject such as Digital Media Computing, NQ Computing, Computing: Technical Support or Software Development.\nYou'll be invited for a group and/or individual interview where you'll get the opportunity to find out more about the course and tell us why you are interested in this subject area. It is important that you prepare a personal statement which reflects your desire to study on this course."
 course72.career_prospects = "Apply for various positions including junior web designer or developer.\n\nContinuing Study\n\nYou can apply for the HND Web development course at the college."
 course72.spaces = course_spaces
-course72.save!
+course72.save! validate: false
 
 course73 = Course.new college: cogc
 course73.title = 'Architectural Technology (Year 2 Direct Entry) HND'
@@ -1068,7 +1068,7 @@ course73.description = "This course gives you a technician level qualification, 
 course73.entry_requirements = "* HNC in Construction.\n* It may also be possible to gain entry with an HNC in Architectural Technology. This will depend on the units that have been covered in the HNC. Students who gain entry with this qualification will require a bespoke infill programme, so each application will be considered on an individual basis.\nYou'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject."
 course73.career_prospects = "This course prepares you for a career as an Architectural Technician or Architectural Technologist in a variety of sectors including:\n\n* Built environment.\n* Construction.\n* Property.\n* Private consultant practices (architects and surveyors).\n* Design and build services divisions of construction contractors.\n* Local authorities.\n* Health trusts.\n* Housing associations.\n* Building component manufacturers.\n* Government organisation."
 course73.spaces = course_spaces
-course73.save!
+course73.save! validate: false
 
 course74 = Course.new college: cogc
 course74.title = 'Computer Aided Architectrual Design & Technology (Year 2 Direct Entry) HND'
@@ -1081,7 +1081,7 @@ course74.description = "This is a technician level qualification that provides a
 course74.entry_requirements = "* HNC Computer Aided Design OR\n* First year of HND Computer Aided Design\nYou should also have a sound knowledge of and be competent users of ICT.\n\nYou'll be invited for a group and/or individual interview where you will get the opportunity to find out more about the course and tell us why you are interested in this subject area."
 course74.career_prospects = "* Architectural CAD Technician or Building/Civil Engineering Technicia."
 course74.spaces = course_spaces
-course74.save!
+course74.save! validate: false
 
 course75 = Course.new college: cogc
 course75.title = 'Construction Management (Year 2 Direct Entry)  HND'
@@ -1094,7 +1094,7 @@ course75.description = "This stimulating, learner-focused programme is delivered
 course75.entry_requirements = "* HNC Construction Management OR\n* First year of HND in Construction Management\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you are interested in this subject."
 course75.career_prospects = "This course prepares you for a career as a Higher Technician or Junior Manager in both the public and private sector in areas including: built environment, the construction sector, construction management, site engineering, estimating, and construction project planning."
 course75.spaces = course_spaces
-course75.save!
+course75.save! validate: false
 
 course76 = Course.new college: cogc
 course76.title = 'Quantity Surveying (Year 2 Direct Entry) HND'
@@ -1107,7 +1107,7 @@ course76.description = "Quantity Surveyors (also known as a Construction Cost Co
 course76.entry_requirements = "* HNC Quantity Surveying OR\n* First year of HND Quantity Surveying\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject."
 course76.career_prospects = "This course prepares you for a career in private practice QS consultancies, contracting organisations, property companies, financial institutions, local and central government, commercial clients, and housing associations."
 course76.spaces = course_spaces
-course76.save!
+course76.save! validate: false
 
 course77 = Course.new college: clyde
 course77.title = 'Mechanical Engineering (Year 2 Direct Entry) HND'
@@ -1120,7 +1120,7 @@ course77.description = "This course allows you to study mechanical engineering 
 course77.entry_requirements = "* HNC in Mechanical Engineering OR\n* First yea rof HND Mechanical Engineering\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject."
 course77.career_prospects = "This course prepares you for a career as an Engineering Technician, Supervisor or Manager."
 course77.spaces = course_spaces
-course77.save!
+course77.save! validate: false
 
 course78 = Course.new college: cogc
 course78.title = 'Electronic Engineering (Year 2 Direct Entry) HND'
@@ -1133,7 +1133,7 @@ course78.description = "Electronic engineers solve 21st century problems for ind
 course78.entry_requirements = "* HNC Electronics OR\n* First year of HND Electronics\nApplicants need a good grounding in maths for entry to the course.\n\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject."
 course78.career_prospects = "This course prepares you for a career as an Electronics Technician Engineer."
 course78.spaces = course_spaces
-course78.save!
+course78.save! validate: false
 
 course79 = Course.new college: kelvin
 course79.title = 'Engineering: Electrical (Year 2 Direct Entry) HND'
@@ -1146,7 +1146,7 @@ course79.description = "On this Electrical Engineering course, you'll expand on 
 course79.entry_requirements = "* HNC in an appropriate Engineering subject; OR\n* Successful completion of HNC or HND first year at City of Glasgow College.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you are interested in this subject."
 course79.career_prospects = "This course prepares you for a career as trainees within the oil and gas industries which recognise the value of the course. Many students have been recruited by blue chip organisations as well as a wide range of industrial and commercial organisations."
 course79.spaces = course_spaces
-course79.save!
+course79.save! validate: false
 
 course80 = Course.new college: cogc
 course80.title = 'Accounting (Year 2 Direct Entry) HND'
@@ -1159,7 +1159,7 @@ course80.description = "This course assumes no prior knowledge of accounting, bu
 course80.entry_requirements = "Year two:\n\n* Successful completion of a full time HNC Accounting course with 15 credits, with a Grade A in the graded unit and all mandatory units, OR\n* Successful completion of a part time HNC Accounting course with 12 credits, with a Grade A in the graded unit and all mandatory units\nYou'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject."
 course80.career_prospects = "This course prepares you for a career in:\n\n* Bookkeeping\n* Financial and management accounting using manual and computerside techniques\n* Accounts technician\n* Assistant accountant\n* Accounts supervisor\n* Financial reporting\n* Management accounting\n* Taxati."
 course80.spaces = course_spaces
-course80.save!
+course80.save! validate: false
 
 course81 = Course.new college:kelvin
 course81.title = 'Legal Services (Year 2 Direct Entry) HND'
@@ -1172,7 +1172,7 @@ course81.description = "The course is recommended for you if you're planning a p
 course81.entry_requirements = "* HNC Legal Services; OR\n* First year HND Legal Services.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject."
 course81.career_prospects = "On successful completion of your HND you may enter a related field, working as a trainee paralegal or as part of an in-house legal team. You can find employment with local authorities, the Sheriff Court, or Procurator Fiscal office.\n\nThere are also opportunities for you in the Banking and Insurance Sectors, and a number of graduates have joined Police Scotland."
 course81.spaces = course_spaces
-course81.save!
+course81.save! validate: false
 
 course82 = Course.new college:kelvin
 course82.title = 'Computer Science (Year 2 Direct Entrants) HND'
@@ -1185,7 +1185,7 @@ course82.description = "The HND Computing (Science) course is an SQA qualificati
 course82.entry_requirements = "* Successful completion of the HNC Computer (Science) or year 1 of the HND Computer Science course.\n* Successful completion of the first year of the HND Computing: Software Development (dependent upon units taken"
 course82.career_prospects = "After successful completion of this course, you can apply for a range of entry level roles within the IT industry."
 course82.spaces = course_spaces
-course82.save!
+course82.save! validate: false
 
 course83 = Course.new college: cogc
 course83.title = 'Computing: Software Development  (Year 2 Direct Entry) HND'
@@ -1198,7 +1198,7 @@ course83.description = "You'll study towards an up-to-date qualification coverin
 course83.entry_requirements = "* HNC Computing: Software Development, OR\n* First Year HND Computing: Software Development.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you are interested in this subject."
 course83.career_prospects = "This course prepares you for a career in software development, web design/development, and information systems development."
 course83.spaces = course_spaces
-course83.save!
+course83.save! validate: false
 
 course84 = Course.new college: clyde
 course84.title = 'Computing: Technical Support (Year 2 Direct Entry) HND'
@@ -1211,7 +1211,7 @@ course84.description = "This new HND course teaches you skills that are in deman
 course84.entry_requirements = "* HNC Computing: Technical Support, OR\n* First year HND Computing: Technical Support.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you are interested in this subject."
 course84.career_prospects = "This course prepares you for a career in IT infrastructure."
 course84.spaces = course_spaces
-course84.save!
+course84.save! validate: false
 
 course85 = Course.new college: cogc
 course85.title = 'Administration and Information Technology (Year 2 Direct Entry) HND'
@@ -1224,7 +1224,7 @@ course85.description = "This course will provide you with a broad range of offic
 course85.entry_requirements = "* HNC Administration and Information Technology OR\n* Year 1 of HND Administration and Information Technology.\nYou'll be invited to attend a group presentation and interview session. The presentation will give you all of the information you need about the course, this will be followed on the same day by an individual interview where you can tell us why you are interested in this course and ask any specific questions related to your own application."
 course85.career_prospects = "This course prepares you for a career as a Personal Assistant or Administrator in both the public and private sector. The HND can provide progression into employment in a general administrative role within small to medium enterprises. It'll also provide opportunities to develop the skills and knowledge required for more specialist posts demanded by larger organisations.\n\nThe qualification will allow you to develop:\n\n* Technical and administrative knowledge relevant to current practice.\n* Interpersonal skills relevant to an administrative role.\n* Personal effectiveness.\n* Communication.\n* Presentation technique."
 course85.spaces = course_spaces
-course85.save!
+course85.save! validate: false
 
 course86 = Course.new college: cogc
 course86.title = 'Business (Year 2 Direct Entry) HND'
@@ -1237,7 +1237,7 @@ course86.description = "The course provides you with the skills and knowledge ne
 course86.entry_requirements = "* HNC Business; OR\n* First year of HND Business.\nYou'll be invited to attend a group presentation and interview session. The presentation will give you all of the information you need about the course, this will be followed on the same day by an individual interview where you can tell us why you are interested in this course and ask any specific questions related to your own application."
 course86.career_prospects = "This course will prepare you for trainee positions in management and administration in industry, financial services and the public sector."
 course86.spaces = course_spaces
-course86.save!
+course86.save! validate: false
 
 course87 = Course.new college: kelvin
 course87.title = '3D Computer Animation (Year 2 Direct Entry) HND'
@@ -1250,7 +1250,7 @@ course87.description = "This hands-on course helps you develop the skills needed
 course87.entry_requirements = "* HNC 3D Computer Animation, OR\n* First year HND 3D Computer Animation.\nYou'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject."
 course87.career_prospects = "* BSc (Hons) Computer Animation (with options) at the University of the West of Scotland.\n* BA (Hons) 3D Computing Animation at Glasgow Caledonian University.\n* BDes (Hons) Animation at University of Abertay.\n* There's also the option to study Visual FX at Napier Universit."
 course87.spaces = course_spaces
-course87.save!
+course87.save! validate: false
 
 course88 = Course.new college:kelvin
 course88.title = 'Digital Design and Web Development (Year 2 Direct Entry) HND'
@@ -1263,7 +1263,7 @@ course88.description = "This year of the course further explores coding skills, 
 course88.entry_requirements = "* 12- 15 Credit HNC Digital Design and Web Development;OR\n* 12 - 15 Credit HNC Web Development.\nWe prefer a 15 credit HNC."
 course88.career_prospects = "Apply for various job vacancies, such as a junior web developer/designer."
 course88.spaces = course_spaces
-course88.save!
+course88.save! validate: false
 
 course89 = Course.new college: clyde
 course89.title = 'Information Technology (Year 2 Direct Entry)  HND'
@@ -1276,7 +1276,7 @@ course89.description = "The HND Information Technology computing qualification i
 course89.entry_requirements = "* HNC Information Technology, OR\n* First year HND Information Technology.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject."
 course89.career_prospects = "After completing the HND you may pursue a career in business intelligence analysis, information management, database administration, trainer/teacher, hardware and software support, or web development."
 course89.spaces = course_spaces
-course89.save!
+course89.save! validate: false
 
 course90 = Course.new college:kelvin
 course90.title = 'Advertising and Public Relations (Year 2 Direct Entry) HND'
@@ -1289,7 +1289,7 @@ course90.description = "This course trains you for a career in the communication
 course90.entry_requirements = "* Successful completion of a full time HNC Advertising and PR course with 15 credits\nYou'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject."
 course90.career_prospects = "This course prepares you for a career in:\n\n* Advertising agencies\n* PR consultancies\n* Social media companies\n* Advertising departments\n* Commercial or media-based companies\nThere are a number of work experience and placement opportunities throughout the course."
 course90.spaces = course_spaces
-course90.save!
+course90.save! validate: false
 
 course91 = Course.new college: clyde
 course91.title = 'Marketing (Year 2 Direct Entry) HND'
@@ -1302,7 +1302,7 @@ course91.description = "The course helps you develop the skills you’ll need to
 course91.entry_requirements = "* HNC Marketing; OR\n* First year HND Marketing.\n* A genuine interest in marketing is needed and should be demonstrated in the application."
 course91.career_prospects = "You may go on to a career in marketing, public relations, or internal or external communications in any number of business sectors."
 course91.spaces = course_spaces
-course91.save!
+course91.save! validate: false
 
 course92 = Course.new college: cogc
 course92.title = 'Retail Management (Year 2 Direct Entry) HND'
@@ -1315,7 +1315,7 @@ course92.description = "This course prepares you for a career in the Retail Indu
 course92.entry_requirements = "* HNC Retail Management; OR\n* First year HND Retail Management.\n* A genuine interest in retail management is needed and should be demonstrated in the applicatio"
 course92.career_prospects = "This course prepares you for a career in retail at a supervisory, or junior management level."
 course92.spaces = course_spaces
-course92.save!
+course92.save! validate: false
 
 course93 = Course.new college:kelvin
 course93.title = '3D Design: Interior Design (Year 2 Direct Entry)  HND'
@@ -1328,7 +1328,7 @@ course93.description = "This course will enable you to develop the creative, ana
 course93.entry_requirements = "* An HNC in 3D Design: Interior Design\nYou'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject. At the interview you'll be asked to provide examples of your art and design work."
 course93.career_prospects = "This course may lead to a variety of careers in interior design and architectural practices, such as space planning, property development – shop and office fitting, and museum and exhibition design."
 course93.spaces = course_spaces
-course93.save!
+course93.save! validate: false
 
 course94 = Course.new college: kelvin
 course94.title = 'Acting and Performance (Year 2 Direct Entry) HND'
@@ -1341,7 +1341,7 @@ course94.description = "This course allows direct entry to year two of the HND A
 course94.entry_requirements = "Direct entry to year two may be possible if you complete the HNC Acting and Performance with 15 credits, including all mandatory credits.\n\nYou'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject."
 course94.career_prospects = "There are a wide range of career opportunities for graduates, including work in theatre, television, community drama, and theatre production."
 course94.spaces = course_spaces
-course94.save!
+course94.save! validate: false
 
 course95 = Course.new college:kelvin
 course95.title = 'Art Glass Design (Year 2 Direct Entry)  HND'
@@ -1354,7 +1354,7 @@ course95.description = "The HND Art Glass Design course is for you, if you wan
 course95.entry_requirements = "* HNC Art Glass Design; OR\n* First year HND Art Glass Design.\nYou'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject. At the interview you'll be asked to show examples of your art and design work."
 course95.career_prospects = "The HND course may lead to a job in the art glass industry or self-employment."
 course95.spaces = course_spaces
-course95.save!
+course95.save! validate: false
 
 course96 = Course.new college: cogc
 course96.title = 'Furniture Craftmanship with Design (Year 2 Direct Entry) HND'
@@ -1367,7 +1367,7 @@ course96.description = "This course encourages you to develop practical skills t
 course96.entry_requirements = "* HNC Furniture Craftmanship with Design; OR\n* First year HND Furniture Craftmanship with Design.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject. At the interview you'll be asked to provide examples of any design and/or making of furniture or 3D work."
 course96.career_prospects = "After completing the course you may go on to become self-employed Designers/Makers of furniture, as well as pursuing jobs in the furniture trades and shop-fitting."
 course96.spaces = course_spaces
-course96.save!
+course96.save! validate: false
 
 course97 = Course.new college: kelvin
 course97.title = 'Furniture Restoration (Year 2 Direct Entry) HND'
@@ -1380,7 +1380,7 @@ course97.description = "This course will allow you to develop your skills in fur
 course97.entry_requirements = "* HNC Furniture Restoration; OR\n* First year HND Furniture Restoration.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you are interested in this subject."
 course97.career_prospects = "Career opportunities are many and varied. A high number of craftspeople are self-employed or in a partnership, which can be rewarding. There are also jobs in furniture trades and shop-fitting."
 course97.spaces = course_spaces
-course97.save!
+course97.save! validate: false
 
 course98 = Course.new college:kelvin
 course98.title = 'Jewellery (Year 2 Direct Entry) HND'
@@ -1393,7 +1393,7 @@ course98.description = "This HND course will teach you a comprehensive range of 
 course98.entry_requirements = "* HNC in Jewellery OR\n* First year of HND Jewellery\nYou'll be invited for a group and/or individual interview where you will find out more about the course and tell us why you are interested in this subject area. At the interview you'll be asked to provide examples of your art and design work."
 course98.career_prospects = "You'll be able to join year one or two of some courses, including:\n\n* Jewellery Design at Birmingham University.\n* Three Dimensional Design (ceramics, glass, jewellery) at Robert Gordon University.\n* Jewellery and Silversmithing at the Edinburgh School of Art.\n* Silversmithing and Jewellery Design at the Glasgow School of Art.\n* Year 3 of BA (Hons) Top-up Degree Jewellery at North Glasgow College."
 course97.spaces = course_spaces
-course97.save!
+course97.save! validate: false
 
 
 course1 = Course.new college: kelvin
@@ -1407,7 +1407,7 @@ course1.description = "This Graphic Design course prepares you for a career in t
 course1.entry_requirements = "* HNC Graphic Design OR\n* First year of HND in Graphic Design\nYou'll be invited for a group and/or individual interview, where you can find out more about the course and tell us why you're interested in this subject. At the interview you'll be asked to provide examples of your art and design work."
 course1.career_prospects = "After completing the HND you can apply for jobs in areas of the Communication Industry, including design consultancies, advertising agencies, newspaper and magazine publishing, web design and motion graphics for screen, or in-house design studios.\n\nYou may eventually become self-employed as a Graphic Designer."
 course1.spaces = course_spaces
-course1.save!
+course1.save! validate: false
 
 course2 = Course.new college: kelvin
 course2.title = 'Creative Industries: Media and Communication (Year 2 Direct Entry) HND'
@@ -1420,7 +1420,7 @@ course2.description = "This highly practical course prepares you for higher educ
 course2.entry_requirements = "* HNC Media &amp; Communication with minimum B at Graded Unit "
 course2.career_prospects = "Career paths include journalism, television and radio production, video production, public relations and advertising."
 course2.spaces = course_spaces
-course2.save!
+course2.save! validate: false
 
 course3 = Course.new college: cogc
 course3.title = 'Creative Industries: Radio (Year 2 Direct Entry) HND'
@@ -1433,7 +1433,7 @@ course3.description = "This course builds on the skills you developed in the HNC
 course3.entry_requirements = "* HNC Creative Industries: Radio, including A or B in graded unit on"
 course3.career_prospects = "There are opportunities in radio for those with a variety of up to date skills, broadcasting knowledge and experience."
 course3.spaces = course_spaces
-course3.save!
+course3.save! validate: false
 
 course4 = Course.new college:kelvin
 course4.title = 'Practical Journalism (Year 2 Direct Entry) HND'
@@ -1446,7 +1446,7 @@ course4.description = "Journalists must have the essential skills of writing and
 course4.entry_requirements = "* HNC Practical Journalism OR\n* First year of HND Practical Journalism\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject. At your interview you'll have to:\n\n* Write a 200 word article.\n* Use correct spelling, grammar and punctuation in a 300 word article.\n* Discuss the importance of journalis"
 course4.career_prospects = "You can get a job on the paper."
 course4.spaces = course_spaces
-course4.save!
+course4.save! validate: false
 
 course5 = Course.new college: cogc
 course5.title = 'Photography (Year 2 Direct Entry) HND'
@@ -1459,7 +1459,7 @@ course5.description = "This highly competitive course provides you with the skil
 course5.entry_requirements = "* HNC in Photography OR\n* First year of HND Photography\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you are interested in this subject. At the interview you'll be asked to provide a strong photographic portfolio of work."
 course5.career_prospects = "With an HND in photography, you'll be prepared for a position in the highly competitive creative and media sector including: advertising, commercial, press and photojournalism, fashion, sports, social, medical, scientific, throughout the UK and worldwide."
 course5.spaces = course_spaces
-course5.save!
+course5.save! validate: false
 
 course6 = Course.new college: kelvin
 course6.title = 'Beauty Therapy (Year 2 Direct Entry) HND'
@@ -1472,7 +1472,7 @@ course6.description = "The course offers a high level beauty qualification whic
 course6.entry_requirements = "* A pass in HNC Beauty Therapy with 15 credits, OR\n* Units achieved to be compatible with the college's existing HNC course plan.\n* A positive report from your HNC course team.\n* You'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject.\n* Excellent communication skills and an enthusiasm for the beauty industry is essentia"
 course6.career_prospects = "This course prepares you for a career in the Beauty Industry including roles in salons, health spas, cruise ships, or self-employment.\n\nA number of senior, or managerial posts may also be available to HND qualified therapists."
 course6.spaces = course_spaces
-course6.save!
+course6.save! validate: false
 
 course7 = Course.new college: kelvin
 course7.title = 'Fitness, Health and Exercise (Year 2 Direct Entry) HND'
@@ -1485,7 +1485,7 @@ course7.description = "This course is most suited to those with an interest in t
 course7.entry_requirements = "* HNC Fitness, Health and Exercise OR\n* First year of HND in Fitness, Health and Exercise\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject. An element of the interview process will involve paired exercise where you demonstrate an exercise of your choice to a partner, highlighting safe and effective practice. Please bring suitable indoor gym wear."
 course7.career_prospects = "This course will suit individuals wishing to pursue careers in sports clubs, private fitness facilities, local authorities and government sport initiatives; ranging from personal training and exercise instruction, to teaching physical education, or working within sports science.\nYou may also look at self-employment in fitness, exercise prescription and athletic conditioning."
 course7.spaces = course_spaces
-course7.save!
+course7.save! validate: false
 
 course8 = Course.new college: kelvin
 course8.title = 'Professional Cookery (Year 2 Direct Entry) HND'
@@ -1498,7 +1498,7 @@ course8.description = "Professional cookery has never been as popular as it is t
 course8.entry_requirements = "* HNC Professional Cookery OR\n* First year of HND in Professional Cookery\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject."
 course8.career_prospects = "On completing your HND, you might progress to a career in catering, restaurants, and hospitality at a supervisory, or junior management level."
 course8.spaces = course_spaces
-course8.save!
+course8.save! validate: false
 
 course9 = Course.new college: clyde
 course9.title = 'Event Management (Year 2 Direct Entry) HND'
@@ -1511,7 +1511,7 @@ course9.description = "This course is for those who want a career in the managem
 course9.entry_requirements = "* HNC in Events OR\n* First year of HND in Events\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject."
 course9.career_prospects = "This course prepares you for a career in the organisation and management of conferences, exhibitions, festivals and special events."
 course9.spaces = course_spaces
-course9.save!
+course9.save! validate: false
 
 course10 = Course.new college: cogc
 course10.title = 'Hospitality (Year 2 Direct Entry) HND'
@@ -1524,7 +1524,7 @@ course10.description = "This course helps you develop the knowledge and skills r
 course10.entry_requirements = "* Successful completion of the HNC Hospitality Operations or similar award, including a pass in Graded Unit 1; OR\n* Relevant industrial experience at supervisory level.\nOffers are subject to attending an interview with a member of the Hospitality / Events team where you should describe your interest and/or experience in hospitality, and your hopes for after completing the course."
 course10.career_prospects = "The course prepares you for employment at junior management/supervisory level in a hospitality department, and graduate training schemes with many large organisations.\n\nWe work with key representatives from industry to offer graduate training positions following the successful completion of the HND."
 course10.spaces = course_spaces
-course10.save!
+course10.save! validate: false
 
 course11 = Course.new college:kelvin
 course11.title = 'Coaching and Developing Sport (Year 2 Direct Entry) HND'
@@ -1537,7 +1537,7 @@ course11.description = "This course introduces and develops the skills and knowl
 course11.entry_requirements = "* An HNC Sport Coaching qualification with 15 credits\nThis ensures you don't need to study additional units to complete the 30 credits in second year.\n\nYou'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject.\n\nThe interview will consist of a group discussion and a practical assessment. You'll need to submit a reference form, normally from a PE teacher or coach."
 course11.career_prospects = "You get can a job doing P.E."
 course11.spaces = course_spaces
-course11.save!
+course11.save! validate: false
 
 course12 = Course.new college: clyde
 course12.title = 'Sports Therapy (Year 2 Direct Entry) HND'
@@ -1550,7 +1550,7 @@ course12.description = "The sports therapy course will equip you with the skills
 course12.entry_requirements = "* HNC Sports Therapy OR\n* First year HND Sports Therapy\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject."
 course12.career_prospects = "This course prepares you for a career as a sports therapist working freelance, in sports clubs, or as part of a government health initiative."
 course12.spaces = course_spaces
-course12.save!
+course12.save! validate: false
 
 course13 = Course.new college: cogc
 course13.title = 'Travel and Tourism (Year 2 Direct Entry) HND'
@@ -1563,7 +1563,7 @@ course13.description = "The course develops your knowledge of the Travel and Tou
 course13.entry_requirements = "* HNC in Travel and Tourism OR\n* First year of HND in Travel and Tourism\nYou'll be invited to attend a course presentation where you will get the opportunity to find out more about the course and tell us why you're interested in this subject area."
 course13.career_prospects = "This course prepares you for a career in travel and tourism with:\n\n* National Tourist Organisations.\n* Travel Management Companies.\n* Visitor Centres/Attractions.\n* Tour Operators.\n* Travel Agents.\n* Airlines.\n* Airport Ground Handling.\n* Foreign Exchange Service."
 course13.spaces = course_spaces
-course13.save!
+course13.save! validate: false
 
 course14 = Course.new college: cogc
 course14.title = 'Financial Services (Year 2 Direct Entry) HND'
@@ -1576,7 +1576,7 @@ course14.description = "This HND year 2 is a continuation from the HNC course an
 course14.entry_requirements = "Successful completion of a full time HNC Financial Services course with 15 credits, with a Grade A in the graded unit and all mandatory units.\n\nYou'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject."
 course14.career_prospects = "The course is for those wishing to work in an administrative, sales, customer support or technical support role within the Finance Industry.\nThere are various employment opportunities, including working in: banking, building societies, pension funds, investment companies, insurance, unit trusts, stock market operations, life and pensions, asset management and intermediation."
 course14.spaces = course_spaces
-course14.save!
+course14.save! validate: false
 
 course15 = Course.new college: cogc
 course15.title = 'Fine Art (Year 2 Direct Entry) HND'
@@ -1589,7 +1589,7 @@ course15.description = "This stimulating, and creative course will be delivered 
 course15.entry_requirements = "* HNC Fine Art (Contemporary Art Practice), or equivalent.\nYou'll be invited to a portfolio event where you will get the opportunity to find out more about the course and tell us why you are interested in this subject area. You'll be required to bring a portfolio of your work for assessment."
 course15.career_prospects = "Work as an independent exhibiting artist, depending on the quality of your work, motivation and self-promotion skills. The experience of the HND can also help to prepare you for working in other roles within the creative industries such as curation or community arts.\n\nStudents who complete their HND can progress to:\n\n* BA (Hons) Contemporary Art Practice at City of Glasgow College.\n* Other art school or university degree courses (2nd or 3rd year entry."
 course15.spaces = course_spaces
-course15.save!
+course15.save! validate: false
 
 course16 = Course.new college: cogc
 course16.title = 'Financial Services HNC'
@@ -1602,7 +1602,7 @@ course16.description = "This HNC is designed to provide you with the key compete
 course16.entry_requirements = "* One relevant* Higher at grade C or above; OR\n* Three relevant* National 5 courses at grade A; OR\n* Successful completion of an NC/NQ; OR\n* Successful completion of a Foundation Apprenticeship in Financial Services; OR\n* Successful completion of an NPA in Financial Services.\n* Equivalent qualifications will be considered. \n* Relevant work experience will be considered where employer referee details have been supplied.\n*Qualifications cannot include any from the following list: Art and Design, Design and Manufacture, Drama, Graphic Communications, Health and Food Technology, Languages, Music, Media, Photography, Physical Education, ESOL.\n\nYou'll be invited to attend a compulsory interview. The interview dates are:\n\n* Thursday 20 April 2017 at 4.15pm\n* Thursday 1 June 2017 at 4.15pm\nThe interview will begin with a 30 minute presentation from the faculty about the course and the college. This will be followed by a 10 minute one to one discussion on your application form and your suitability for the course. You will be given the opportunity to ask questions. You must bring a copy of qualification certificates."
 course16.career_prospects = "The course is for those wishing to work in an administrative, sales, customer support or technical support role within the Finance Industry.\n\nThere are various employment opportunities, including working in: banking, building societies, pension funds, investment companies, insurance, unit trusts, stock market operations, life and pensions, asset management and intermediation."
 course16.spaces = course_spaces
-course16.save!
+course16.save! validate: false
 
 course17 = Course.new college:kelvin
 course17.title = 'Computing: Networking HND'
@@ -1615,7 +1615,7 @@ course17.description = "This course aims to teach you the skills required to ins
 course17.entry_requirements = "* Two appropriate Highers and three Intermediate 2 courses (including at least one from Computing or Information Systems), OR\n* Two Highers and three Standard Grades at Credit Level, OR\n* Two Highers and three National 5 qualifications, OR\n* A national qualification at SCQF Level 6 in a related subject (such as Digital Media Computing, Computing: Technical Support or Software Development), OR\n* Other equivalent qualifications or experience.\n* An HNC with relevant options.\nYou'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject."
 course17.career_prospects = "This course prepares you for a career in IT infrastructure support."
 course17.spaces = course_spaces
-course17.save!
+course17.save! validate: false
 
 course18 = Course.new college: cogc
 course18.title = 'Computing: Networking HNC'
@@ -1628,7 +1628,7 @@ course18.description = "This course will allow you to study towards an up-to-dat
 course18.entry_requirements = "* One Higher and three Intermediate 2 courses (including at least one from Computing or Information Systems); OR\n* One Higher and three Standard Grades at credit level; OR\n* One Higher and three National 5 qualifications; OR\n* A national qualification at SCQF Level 6 in a related subject (such as Digital Media Computing, Computing: Technical Support or Software Development); OR\n* Other equivalent qualifications or experience.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject."
 course18.career_prospects = "You can progress on to second year of HND Computing: Network Technology or apply for entry into the first year of related BSc Computing degree programmes at most universities on successful completion of this course."
 course18.spaces = course_spaces
-course18.save!
+course18.save! validate: false
 
 course19 = Course.new college: kelvin
 course19.title = 'Computer Games Development HNC'
@@ -1641,7 +1641,7 @@ course19.description = "This creative, hands-on course enables you to develop sk
 course19.entry_requirements = "* 2 Highers at grade  A to C, one of which must be Mathematics AND\n* 2 Standard Grades at band 1 to 3 OR Intermediate 2 at  band A to C\n* English or Communication Standard Grade at band 1 to 3 OR Intermediate 2 at  band A to C\n* Candidates possessing a National Qualification in Computer Games at Level 5 or 6 may also be eligible for entry to this cours"
 course19.career_prospects = "Employment as a junior Games Programmer/Modeller or Software Developer."
 course19.spaces = course_spaces
-course19.save!
+course19.save! validate: false
 
 course20 = Course.new college: clyde
 course20.title = 'SPD Marine Engineering (Cadet Programme) HND'
@@ -1654,7 +1654,7 @@ course20.description = "This is a three year training programme aimed at providi
 course20.entry_requirements = "To gain entry to the course you should have any of the following combinations of qualifications:\n\n* National 5/GCSE or equivalent which must include: English, Maths, Physical Science (e.g. Physics/Chemistry/Technological Studies/Engineering Science) and one other subject\n* NC Shipping and Maritime Operations (SCQF level 6) without optional Engineering Units.\n* Alternative qualifications will be considered on an individual basis in conjunction with the sponsoring company or training provider\nStudents must have a sponsoring company in order to fulfil the sea time requirement of this programme.  \n\nInitial applications for this course should be submitted to a training provider or company, please follow the link below for more information:\n\nwww.careersatsea.org/sponsoring-companies/"
 course20.career_prospects = "On successful completion of the HND programme, Cadets can gain employment as a fully qualified officer of the watch or choose to progress onto university to study at a higher level."
 course20.spaces = course_spaces
-course20.save!
+course20.save! validate: false
 
 course21 = Course.new college: kelvin
 course21.title = 'Acting and Performance HNC'
@@ -1667,7 +1667,7 @@ course21.description = "This course develops the skills you require for acting 
 course21.entry_requirements = "* Two Higher Grades, including English; OR\n* NQ Drama; OR\n* Equivalent qualification.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject.\n\nIf your application is successful, you'll also be asked to audition where you will perform a monologue."
 course21.career_prospects = "There are a wide range of career opportunities which include working in theatre, television, community drama, and theatre production."
 course21.spaces = course_spaces
-course21.save!
+course21.save! validate: false
 
 course22 = Course.new college: cogc
 course22.title = 'Furniture Restoration HND'
@@ -1680,7 +1680,7 @@ course22.description = "This course will allow you to develop your skills in fur
 course22.entry_requirements = "* NQ in Furniture Making; OR\n* One Higher – Craft and Design, and English at minimum Intermediate 2 or National 5.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject. At the interview you'll be asked to provide examples of any design and/or making of furniture or 3D work."
 course22.career_prospects = "Career opportunities are many and varied. A high number of craftspeople are self-employed or in a partnership, which can be rewarding. There are also jobs in furniture trades and shop-fitting."
 course22.spaces = course_spaces
-course22.save!
+course22.save! validate: false
 
 course23 = Course.new college:kelvin
 course23.title = 'Jewellery Design HND'
@@ -1693,7 +1693,7 @@ course23.description = "This HND course will teach you a comprehensive range of 
 course23.entry_requirements = "* One Higher in Art and Design and English at minimum Intermediate 2; OR\n* NC/NQ in an Art and Design subject.\nYou'll be invited for a group and/or individual interview where you'll find out more about the course and tell us why you're interested in this subject area.\n\nAt the interview you'll be asked to provide examples of your art and design work."
 course23.career_prospects = "You can set up business as a jeweller or gain employment in the creative industries, by utilising the range of skills you'll learn throughout the course."
 course23.spaces = course_spaces
-course23.save!
+course23.save! validate: false
 
 course24 = Course.new college: clyde
 course24.title = 'Travel and Tourism (with option to study languages) HNC'
@@ -1706,7 +1706,7 @@ course24.description = "This course will give you the skills, knowledge and unde
 course24.entry_requirements = "* One Higher at Grade C or above in appropriate academic subjects (such as English, Modern Studies, Languages, Business Management, History) and three National 5 qualifications including English; OR\n* One Higher at Grade C or above (such as English, Modern Studies, Languages Business Management, History) with three Intermediate 2 courses including English; OR\n* One Higher at Grade C or above (such as English, Modern Studies, Languages Business Management, History,) and three Standard Grades at credit level including English; OR\n* Other equivalent qualifications or experience.\nYou'll be invited to attend a course presentation where you'll get the opportunity to find out more about the course and tell us why you're interested in this subject area."
 course24.career_prospects = "* National Tourist Organisations.\n* Travel Management Companies.\n* Visitor Centres/Attractions.\n* Tour Operators.\n* Travel Agents.\n* Airlines.\n* Airport Ground Handling.\n* Foreign Exchange Service."
 course24.spaces = course_spaces
-course24.save!
+course24.save! validate: false
 
 course25 = Course.new college:kelvin
 course25.title = 'Computer Science HNC'
@@ -1719,7 +1719,7 @@ course25.description = "The HNC Computing (Science) course is an SQA qualificati
 course25.entry_requirements = "* One Higher* and three National 5 qualifications; OR\n* One Higher* and three Intermediate 2 courses (including at least one from Computing or Information Systems); OR\n* One Higher* and three Standard Grades at credit level; OR\n* A national qualification  at SCQF Level 6 in a related subject (such as Digital Media Computing, Computing: Technical Support or Software Development); OR\n* Other equivalent qualifications or experience\n*in one of these subjects: Computing, Information Systems, Mathematics, Physics or any other relevant subject\n\nYou’ll be invited for a group and/or individual interview where you can find out more about the course and tell us why you’re interested in this subject."
 course25.career_prospects = "The HNC/D in Computing: Computer Science will prepare you for a career in programming, website development or as a support technician or database administrator."
 course25.spaces = course_spaces
-course25.save!
+course25.save! validate: false
 
 course26 = Course.new college:kelvin
 course26.title = 'Marine Engineering - Year 2 Direct Entry HND'
@@ -1732,7 +1732,7 @@ course26.description = "This one-year program is suitable for those cadets who h
 course26.entry_requirements = "* MNTB/MCA Approved HNC in Marine Engineerin"
 course26.career_prospects = "Successful completion of the course may offer you entry to second year of a four years honours course at university.\n\nThis course prepares you for a career as a Senior Marine Engineering Officer, Ship Manager, or Ship Superintendent."
 course26.spaces = course_spaces
-course26.save!
+course26.save! validate: false
 
 course27 = Course.new college: cogc
 course27.title = 'Complementary Therapies (Year 2 Direct Entry) HND'
@@ -1745,7 +1745,7 @@ course27.description = "We are a sector leading provider of training in compleme
 course27.entry_requirements = "* HNC Complementary Therapies (15 credits), must include Reflexology.\nYou'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject. We'll also want to hear why you are interested in undertaking progression of your qualification."
 course27.career_prospects = "This course prepares you for a career in the field of complementary therapies, for example in healthcare services, cruise ships, spas, hotels or self-employment."
 course27.spaces = course_spaces
-course27.save!
+course27.save! validate: false
 
 course28 = Course.new college: kelvin
 course28.title = '3D Design/ HNC 3D Design: Product Design HNC'
@@ -1757,7 +1757,7 @@ course28.description = "Looking to become a qualified Product Designer? This is 
 course28.entry_requirements = "* NC Product Design or related discipline (eg Furniture Design), OR\n* One Higher from Design and Manufacture, Product Design, Graphic Communication or Art and Design, and English at minimum Intermediate 2, OR\n* One Higher from Product Design, Graphic Communication or Art and Design, and English at National 5 level, OR\n* Other equivalent qualifications, or experience.\nYou'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject. At the interview you'll be asked to provide examples of your art and design work."
 course28.career_prospects = "Upon graduating, you'll be able to seek employment as a qualified Product Designer, Solidworks 3D Modeller, or Digital Media Designer."
 course28.spaces = course_spaces
-course28.save!
+course28.save! validate: false
 
 course29 = Course.new college: clyde
 course29.title = '3D Design: Model Making for the Creative Industries HND'
@@ -1770,7 +1770,7 @@ course29.description = "This Model Making course is aimed at students who have 
 course29.entry_requirements = "* NC Model Making, or a NC in a related discipline, OR\n* One Higher from Art, Design &amp; Manufacture, Product Design or Graphic Communication and English at National 5 level, OR\n* Related work experience.\nYou'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject. At the interview you're asked to bring your best examples of both 2D and 3D art and design work, in original, photographic or portfolio form."
 course29.career_prospects = "Many graduates work as model makers all over the world, including New Zealand, Dubai and Australia."
 course29.spaces = course_spaces
-course29.save!
+course29.save! validate: false
 
 course31 = Course.new college: cogc
 course31.title = 'Legal Services (With Criminology and Police Studies) HNC'
@@ -1783,7 +1783,7 @@ course31.description = "This course is based around Scottish criminal law and Sc
 course31.entry_requirements = "* One Higher at grade C or above, preferably English, History, Modern Studies or a related subject; PLUS\n* Three Intermediate 2 at grade C or above, preferably including English, History, Modern Studies or a related subject; OR\n* An NC Qualification at Level 6.\nIf you don't have the standard entry qualifications but have an employment history and are looking for a career change, you can be considered subject to review of that work experience.\n\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you are interested in this subject."
 course31.career_prospects = "This course prepares you for a career in the police service, prison service, and other related agencies."
 course31.spaces = course_spaces
-course31.save!
+course31.save! validate: false
 
 course33 = Course.new college: cogc
 course33.title = 'Business HND'
@@ -1796,7 +1796,7 @@ course33.description = "The course provides you with the skills and knowledge ne
 course33.entry_requirements = "Year 1 Entry\n\n* Two Highers in a relevant* academic subject OR\n* Relevant Work experience may be considered.\n* relevant academic subjects include English, Administration, Business Management, Economics, Geography, History, Mathematics, Modern Studies or a Science subject.\n\nYou'll be invited to attend a group presentation and interview session.  The presentation will give you all of the information you need about the course, this will be followed on the same day by an individual interview where you can tell us why you are interested in this course and ask any specific questions related to your own application."
 course33.career_prospects = "This course will prepare you for trainee positions in management and administration in industry, financial services and the public sector."
 course33.spaces = course_spaces
-course33.save!
+course33.save! validate: false
 
 course37 = Course.new college:kelvin
 course37.title = 'Fine Art HNC'
@@ -1809,7 +1809,7 @@ course37.description = "This contemporary course includes both traditional and i
 course37.entry_requirements = "* Two Higher Grade passes at grade C or above, in Art and English and two other passes at Standard Grade (or equivalent) at band 3 or above; OR\n* Two Higher Grade passes at grade C or above, in Art and English and two National 4 qualifications; OR\n* NQ Art and Design (or equivalent).\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject. On the day you'll also be asked to submit a portfolio of your art and design work for assessment and may be given a short interview."
 course37.career_prospects = "This course prepares you for work as an independent exhibiting artist, depending on the calibre of your work, your motivation and self-promotion skills."
 course37.spaces = course_spaces
-course37.save!
+course37.save! validate: false
 
 course38 = Course.new college: cogc
 course38.title = 'Illustration HND'
@@ -1822,7 +1822,7 @@ course38.description = "This course will help you develop your creative and tech
 course38.entry_requirements = "* NC in Art and Design or related subject; OR\n* Higher Art and Design and English at minimum Intermediate 2/National 5 level; OR\n* Relevant experience.\n* HNC Illustration OR\n* First year of HND Illustration.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject."
 course38.career_prospects = "The HNC/D course can lead to self-employment as a freelance Illustrator working with advertising agencies, design consultants, and book, magazine and newspaper publishers, or in your own private practice."
 course38.spaces = course_spaces
-course38.save!
+course38.save! validate: false
 
 course41 = Course.new college:kelvin
 course41.title = 'Creative Industries: Television  (Year 2 Direct Entry) HND'
@@ -1835,7 +1835,7 @@ course41.description = "This course will help you to develop skills in all areas
 course41.entry_requirements = "​HNC Television with 15 credits\n\nOR\n\nRelevant television experience.\n\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you are interested in this subject. You'll also be asked to bring examples of their work."
 course41.career_prospects = "The Television Industry is expanding and there are opportunities for skilled graduates, both in broadcasting and with independent production companies."
 course41.spaces = course_spaces
-course41.save!
+course41.save! validate: false
 
 course42 = Course.new college: clyde
 course42.title = 'Media and Communication HNC'
@@ -1848,7 +1848,7 @@ course42.description = "This wide-ranging and multi-faceted Media and Communicat
 course42.entry_requirements = "* Higher English or Higher Media Studies at Grade C or above, OR\n* NC Media or a similar NC programme, OR\n* Relevant work experience.\nYou'll be invited for a group pre-entry guidance session and individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject.\n\nAt this interview you'll be given a short written exercise (around 200 words) so we can review your writing style, syntax, spelling and grammar.\n\n It may also strengthen your application to provide evidence of relevant experience or activity in the subject area, e.g. blogging, podcasting, published work, involvement in school newspapers, magazines or radio stations, relevant work experience or volunteering etc. "
 course42.career_prospects = "This course prepares you for a career in journalism, television and radio production, video production, public relations and advertising."
 course42.spaces = course_spaces
-course42.save!
+course42.save! validate: false
 
 course43 = Course.new college: clyde
 course43.title = 'Media with Journalism HNC'
@@ -1861,7 +1861,7 @@ course43.description = "This course has a focus on Journalism for learners who a
 course43.entry_requirements = "* One Higher at Grade C or above preferably English or Media Studies, OR\n* NC Media or a similar NC programme, OR\n* Relevant work experience.\nYou'll be invited for a group pre-entry guidance session and individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject.\n\nAt this interview you'll be given a short written exercise (around 200 words) so we can review your writing style, syntax, spelling and grammar.\n\n It may also strengthen your application to provide evidence of relevant experience or activity in the subject area, e.g. blogging, podcasting, published work, involvement in school newspapers, magazines or radio stations, relevant work experience or volunteering."
 course43.career_prospects = "This course prepares you for a career in journalism, television and radio production, video production, public relations and advertising."
 course43.spaces = course_spaces
-course43.save!
+course43.save! validate: false
 
 course45 = Course.new college: cogc
 course45.title = 'Childhood Practice HNC'
@@ -1874,7 +1874,7 @@ course45.description = "This course is for individuals interested in a career in
 course45.entry_requirements = "* Two or more Highers at C or above including English; OR\n* NC Early Education and Childcare Level 6.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you're interested in this subject.\n\nYou'll also need to provide two suitable references, one from your most recent educational provider (if in education) or your employer. \n\nExperience witihn an early education - voluntary or employed - would be extreamly beneficial."
 course45.career_prospects = "This course prepares you for a career as a practitioner in the Childcare and Early Education sectors."
 course45.spaces = course_spaces
-course45.save!
+course45.save! validate: false
 
 course46 = Course.new college: cogc
 course46.title = 'Social Services HNC'
@@ -1887,7 +1887,7 @@ course46.description = "This course is for individuals interested in a career in
 course46.entry_requirements = "* Two Higher Grades at C or above preferably including English; OR\n* An appropriate Level 6 Group Award and/or an appropriate group of SQA units at level 6.\n* Candidates with SVQ3 in a related area will also be considered.\n* Applicants without these qualifications who have relevant experience may also be considered.\nTwo suitable references will be required, including one from your most recent educational provider and/or employed as appropriate.\n\nYou'll be invited for an interview where there will be the opportunity to find out more about the course and tell us why you're interested in this subject area.\n\nPlease note, for a number of the articulation options, Level 5 Maths is required.  This is offered within City of Glasgow College as Lifeskills Maths."
 course46.career_prospects = "This course prepares you for a career in:\n\n* Social work.\n* Social care worker.\nSupport worker with various groups such as older adults, people with learning difficulties, adult care, community care, offenders, residential child care, or the addiction field.\n\nVarious careers in Care both within the private and public sector."
 course46.spaces = course_spaces
-course46.save!
+course46.save! validate: false
 
 course47 = Course.new college: clyde
 course47.title = 'Social Sciences Diploma of Higher Education'
@@ -1900,7 +1900,7 @@ course47.description = "The Diploma of Higher Education in Social Sciences is of
 course47.entry_requirements = "* Four or more Higher Grade pass at grade C or above, one of which must be in English or ESOL and at least two others in social science subjects such as Sociology, Modern Studies, History, Politics, Psychology, Philosophy, Geography, R.M.P.S or Economics.\n* Two other passes at National 5 or equivalent.\nYou'll be invited for a group and/or individual interview where you will get the opportunity to find out more about the course and tell us why you're interested in this subject area."
 course47.career_prospects = "This course prepares you for a career in public and private sectors including:\n\n* Health service.\n* Community work.\n* Welfare rights.\n* Social research.\n* Teaching.\n* Aid agencies.\n* Social work.\n* Housing.\n* Local, national and European Governmen."
 course47.spaces = course_spaces
-course47.save!
+course47.save! validate: false
 
 course48 = Course.new college: kelvin
 course48.title = 'Social Sciences HNC'
@@ -1913,7 +1913,7 @@ course48.description = "This course provides you with sound education and traini
 course48.entry_requirements = "* Two SQA Higher Grade passes or equivalent at first sitting. At least one of the Highers must be in English (or ESOL equivalent) or in a social science subject such as Modern Studies, Sociology, Politics, Psychology, History, Economics or Philosophy.\n* Mature students may be considered based on work and life experience.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you are interested in this subject. Some applicants may be required to take a short written exercise. Applicants are advised to ensure that their personal statement is written to a very high standard."
 course48.career_prospects = "The vast majority of our successful HNC students apply for the second year of study – HND Social Sciences but others:\n\n* Enter employment.\n* Apply to university for entry at level 1 or ."
 course48.spaces = course_spaces
-course48.save!
+course48.save! validate: false
 
 course49 = Course.new college: cogc
 course49.title = 'Social Sciences (Year 2 Direct Entry) HND'
@@ -1926,7 +1926,7 @@ course49.description = "This course provides you with sound education and traini
 course49.entry_requirements = "* HNC Social Sciences with 15 credits at SCQF level 7; OR\n* First year of HND Social Sciences with 15 credits as SCQF level 7.\nYou'll be invited for a group and/or individual interview where you can find out more about the course and tell us why you are interested in this subject. Some applicants may be required to take a short written exercise. You are advised to ensure that you personal statement is written to a very high standard."
 course49.career_prospects = "You can science all the social you like."
 course49.spaces = course_spaces
-course49.save!
+course49.save! validate: false
 
 course52 = Course.new college: cogc
 course52.title = 'Coaching and Developing Sport HND'
@@ -1939,7 +1939,7 @@ course52.description = "This course introduces and develops the skills and knowl
 course52.entry_requirements = "* Two Highers at grade C or above including English or equivalent.\n* An HNC Sport Coaching qualification with 15 credits.\nThis ensures you do not need to study additional units to complete the 30 credits in second year.\n\nYou'll be invited for a group interview."
 course52.career_prospects = "You can get a job doing P.E."
 course52.spaces = course_spaces
-course52.save!
+course52.save! validate: false
 
 course53 = Course.new college: cogc
 course53.title = 'Coaching and Developing Sport HNC'
@@ -1952,7 +1952,7 @@ course53.description = "This course introduces and develops the skills and knowl
 course53.entry_requirements = "* At least one Higher at Grade C in English or equivalent.\n* NQ/NC qualification at Level 6.\nYou'll be invited for a group interview."
 course53.career_prospects = "This course prepares you for a career in sports as a Sports Development Officer, or a Sports Co-ordinator."
 course53.spaces = course_spaces
-course53.save!
+course53.save! validate: false
 
 course56 = Course.new college: cogc
 course56.title = 'Marine Engineering (Cadet Training) HNC'
@@ -1965,7 +1965,7 @@ course56.description = "This is a three year training programme aimed at providi
 course56.entry_requirements = "To gain entry to the course you should have any of the following combinations of qualifications:\n\n* National 5/GCSE or equivalent which must include: English, Maths, Physical Science (e.g. Physics/Chemistry/Technological Studies/Engineering Science) and one other subject\n* NC Shipping and Maritime Operations (SCQF level 6) without optional Engineering Units.\n* Alternative qualifications will be considered on an individual basis in conjunction with the sponsoring company or training provider.\nStudents must have a sponsoring company in order to fulfil the sea time requirement of this programme.  \n\nInitial applications for this course should be submitted to a training provider or company, please follow the link below for more information: \n\nhttp://www.careersatsea.org/sponsoring-companies/"
 course56.career_prospects = "On successful completion of the HNC programme, Cadets can gain employment as a fully qualified officer of the watch or choose to progress onto the HND Marine Engineering top up course, which will provide academic exemptions up to management level."
 course56.spaces = course_spaces
-course56.save!
+course56.save! validate: false
 
 course57 = Course.new college: cogc
 course57.title = 'Retail Management - January Start HNC'
@@ -1978,7 +1978,7 @@ course57.description = "This course prepares you for a career in the retail indu
 course57.entry_requirements = "* Higher English at grade C or above (or another relevant Higher).\n* Two other passes at Standard Grade, or equivalent at band 3 or above, OR\n* A National Qualification in a relevant area or an appropriate SVQ\nYou'll be invited for a group and/or individual interview, where you'll get the opportunity to find out more about the course and tell us why you're interested in the subject."
 course57.career_prospects = "Apply for second year of HND Retail Management. You can also apply for first or second year entry to relevant degree programmes at Glasgow Caledonian University, Stirling University, Queen Margaret University or Robert Gordon University."
 course57.spaces = course_spaces
-course57.save!
+course57.save! validate: false
 
 course58 = Course.new college: cogc
 course58.title = 'Nautical Science/ Chief Mate/ Master (Jan) HND'
@@ -1990,7 +1990,7 @@ course58.description = "This course is designed for you to progress from OOW lev
 course58.entry_requirements = "* A recognised complete sea time of 12 months at OOW level\n* A MCA approved OOW certificate\n* A NAEST (M) certificate (to be valid when finally applying for your COC). The NAEST(M) course is scheduled within course program."
 course58.career_prospects = "You can get a job on a boat."
 course58.spaces = course_spaces
-course58.save!
+course58.save! validate: false
 
 course59 = Course.new college: kelvin
 course59.title = 'SPD Marine Engineering Cadet Programme - January Start HND'
@@ -2003,7 +2003,7 @@ course59.description = "This is a three year training programme aimed at providi
 course59.entry_requirements = "To gain entry to the course you should have any of the following combinations of qualifications:\n\n·       English\n\n·       Maths\n\n·       Physical Science (e.g. Physics/Chemistry/Technological Studies/Engineering Science)\n\n·       One other subject\n\nStudents must have a sponsoring company in order to fulfil the sea time requirement of this programme. \n\nInitial applications for this course should be submitted to a training provider or company, please follow the link below for more information.\n\nhttp://www.careersatsea.org/sponsoring-companies/"
 course59.career_prospects = "On successful completion of the SPD programme, Cadets can gain employment as a fully qualified officer of the watch or choose to progress onto university to study at a higher level."
 course59.spaces = course_spaces
-course59.save!
+course59.save! validate: false
 
 course60 = Course.new college: cogc
 course60.title = 'Marine Engineering (Cadet Programme) (Jan) HNC'
@@ -2022,7 +2022,7 @@ statuses = ['open', 'open', 'open', 'open', 'cancelled', 'closed']
 # Add status
 Course.all.each do |course|
   course.status = statuses.sample.to_sym
-  course.save!
+  course.save! validate: false
 end
 
 
@@ -2036,7 +2036,7 @@ student1.national_insurance_number = 'NJ170278A'
 student1.password = 'secret'
 student1.password_confirmation = 'secret'
 student1.confirmed_at = DateTime.now
-student1.save!
+student1.save! validate: false
 
 app1 = student1.create_application
 app1.title = 'Mrs'
@@ -2057,7 +2057,7 @@ app1.correspondence_address_2 = 'Mrs'
 app1.correspondence_postcode = 'OX7 2GR'
 app1.correspondence_country = 'United Kingdom'
 app1.state = :completed
-app1.save!
+app1.save! validate: false
 
 school1 = School.new application: app1
 school1.name = 'Falmouth University'
@@ -2065,7 +2065,7 @@ school1.address_1 = '6 Loftsgordon Plaza'
 school1.address_2 = 'Denton'
 school1.country = 'United Kingdom'
 school1.postcode = 'M34 3FB'
-school1.save!
+school1.save! validate: false
 
 qualification1 = Qualification.new school: school1
 qualification1.subject = 'Computing'
@@ -2073,7 +2073,7 @@ qualification1.award = 'Standard'
 qualification1.grade = 'B'
 qualification1.start_date = Date.new(2013, 8, 23)
 qualification1.end_date = Date.new(2014, 6, 8)
-qualification1.save!
+qualification1.save! validate: false
 
 qualification2 = Qualification.new school: school1
 qualification2.subject = 'Art'
@@ -2081,7 +2081,7 @@ qualification2.award = 'HNC'
 qualification2.grade = 'Pass'
 qualification2.start_date = Date.new(2014, 8, 23)
 qualification2.end_date = Date.new(2014, 6, 8)
-qualification2.save!
+qualification2.save! validate: false
 
 qualification3 = Qualification.new school: school1
 qualification3.subject = 'Geography'
@@ -2089,7 +2089,7 @@ qualification3.award = 'HNC'
 qualification3.grade = 'A'
 qualification3.start_date = Date.new(2015, 8, 23)
 qualification3.end_date = Date.new(2015, 6, 8)
-qualification3.save!
+qualification3.save! validate: false
 
 school2 = School.new application: app1
 school2.name = 'Oxford Brookes University'
@@ -2097,7 +2097,7 @@ school2.address_1 = '291 Northland Parkway'
 school2.address_2 = 'London'
 school2.country = 'United Kingdom'
 school2.postcode = 'SW1E 3FB'
-school2.save!
+school2.save! validate: false
 
 qualification4 = Qualification.new school: school2
 qualification4.subject = 'Chemistry'
@@ -2105,7 +2105,7 @@ qualification4.award = 'Higher'
 qualification4.grade = 'C'
 qualification4.start_date = Date.new(2015, 8, 23)
 qualification4.end_date = Date.new(2014, 6, 8)
-qualification4.save!
+qualification4.save! validate: false
 
 qualification5 = Qualification.new school: school2
 qualification5.subject = 'PE'
@@ -2113,7 +2113,7 @@ qualification5.award = 'Higher'
 qualification5.grade = 'B'
 qualification5.start_date = Date.new(2013, 8, 23)
 qualification5.end_date = Date.new(2014, 6, 8)
-qualification5.save!
+qualification5.save! validate: false
 
 qualification6 = Qualification.new school: school2
 qualification6.subject = 'Woodworking'
@@ -2121,7 +2121,7 @@ qualification6.award = 'HNC'
 qualification6.grade = 'B'
 qualification6.start_date = Date.new(2015, 8, 23)
 qualification6.end_date = Date.new(2016, 6, 8)
-qualification6.save!
+qualification6.save! validate: false
 
 job1 = Job.new application: app1
 job1.employer = 'Cogibox'
@@ -2133,7 +2133,7 @@ job1.job_title = 'Social Worker'
 job1.duties = 'De-engineered intermediate model'
 job1.start_date = Date.parse('2012-07-02')
 job1.end_date = Date.parse('2015-03-14')
-job1.save!
+job1.save! validate: false
 
 job2 = Job.new application: app1
 job2.employer = 'Meemm'
@@ -2145,7 +2145,7 @@ job2.job_title = 'Structural Engineer'
 job2.duties = 'Future-proofed tangible synergy'
 job2.start_date = Date.parse('2011-06-14')
 job2.end_date = Date.parse('2013-04-16')
-job2.save!
+job2.save! validate: false
 
 ref1 = Reference.new application: app1
 ref1.reference_1_full_name = 'Edward George'
@@ -2166,16 +2166,16 @@ ref1.reference_2_postcode = 'LS6 3TR'
 ref1.reference_2_country = 'United Kingdom'
 ref1.reference_2_relationship = 'Adaptive'
 ref1.reference_2_telephone = '44-(500)939-8365'
-ref1.save!
+ref1.save! validate: false
 
 course1 = CourseSelection.new application_id: app1.id, course_id: 20
-course1.save!
+course1.save! validate: false
 
 course2 = CourseSelection.new application_id: app1.id, course_id: 11
-course2.save!
+course2.save! validate: false
 
 course3 = CourseSelection.new application_id: app1.id, course_id: 19
-course3.save!
+course3.save! validate: false
 
 student2 = Student.new
 student2.first_name = 'Mary'
@@ -2186,7 +2186,7 @@ student2.national_insurance_number = 'NJ241976A'
 student2.password = 'secret'
 student2.password_confirmation = 'secret'
 student2.confirmed_at = DateTime.now
-student2.save!
+student2.save! validate: false
 
 app2 = student2.create_application
 app2.title = 'Dr'
@@ -2207,7 +2207,7 @@ app2.correspondence_address_2 = 'Dr'
 app2.correspondence_postcode = ' 2GR'
 app2.correspondence_country = 'SY4'
 app2.state = :completed
-app2.save!
+app2.save! validate: false
 
 school3 = School.new application: app2
 school3.name = 'Open University'
@@ -2215,7 +2215,7 @@ school3.address_1 = '3065 Mockingbird Trail'
 school3.address_2 = 'Upton'
 school3.country = 'United Kingdom'
 school3.postcode = 'DN21 3FB'
-school3.save!
+school3.save! validate: false
 
 qualification7 = Qualification.new school: school3
 qualification7.subject = 'English'
@@ -2223,7 +2223,7 @@ qualification7.award = 'Standard'
 qualification7.grade = 'C'
 qualification7.start_date = Date.new(2013, 8, 23)
 qualification7.end_date = Date.new(2013, 6, 8)
-qualification7.save!
+qualification7.save! validate: false
 
 qualification8 = Qualification.new school: school3
 qualification8.subject = 'Woodworking'
@@ -2231,7 +2231,7 @@ qualification8.award = 'Standard'
 qualification8.grade = 'C'
 qualification8.start_date = Date.new(2014, 8, 23)
 qualification8.end_date = Date.new(2015, 6, 8)
-qualification8.save!
+qualification8.save! validate: false
 
 qualification9 = Qualification.new school: school3
 qualification9.subject = 'Geography'
@@ -2239,7 +2239,7 @@ qualification9.award = 'NQ'
 qualification9.grade = 'B'
 qualification9.start_date = Date.new(2014, 8, 23)
 qualification9.end_date = Date.new(2013, 6, 8)
-qualification9.save!
+qualification9.save! validate: false
 
 school4 = School.new application: app2
 school4.name = 'United Medical and Dental Schools'
@@ -2247,7 +2247,7 @@ school4.address_1 = '7241 Tennyson Avenue'
 school4.address_2 = 'Walton'
 school4.country = 'United Kingdom'
 school4.postcode = 'CV35 3FB'
-school4.save!
+school4.save! validate: false
 
 qualification10 = Qualification.new school: school4
 qualification10.subject = 'Physics'
@@ -2255,7 +2255,7 @@ qualification10.award = 'Standard'
 qualification10.grade = 'Pass'
 qualification10.start_date = Date.new(2014, 8, 23)
 qualification10.end_date = Date.new(2013, 6, 8)
-qualification10.save!
+qualification10.save! validate: false
 
 qualification11 = Qualification.new school: school4
 qualification11.subject = 'Biology'
@@ -2263,7 +2263,7 @@ qualification11.award = 'HND'
 qualification11.grade = 'Pass'
 qualification11.start_date = Date.new(2014, 8, 23)
 qualification11.end_date = Date.new(2016, 6, 8)
-qualification11.save!
+qualification11.save! validate: false
 
 qualification12 = Qualification.new school: school4
 qualification12.subject = 'Physics'
@@ -2271,7 +2271,7 @@ qualification12.award = 'HNC'
 qualification12.grade = 'A'
 qualification12.start_date = Date.new(2015, 8, 23)
 qualification12.end_date = Date.new(2013, 6, 8)
-qualification12.save!
+qualification12.save! validate: false
 
 job3 = Job.new application: app2
 job3.employer = 'Jaxnation'
@@ -2283,7 +2283,7 @@ job3.job_title = 'Help Desk Technician'
 job3.duties = 'Distributed tertiary analyzer'
 job3.start_date = Date.parse('2012-03-18')
 job3.end_date = Date.parse('2016-05-09')
-job3.save!
+job3.save! validate: false
 
 job4 = Job.new application: app2
 job4.employer = 'Yakijo'
@@ -2295,7 +2295,7 @@ job4.job_title = 'Software Test Engineer II'
 job4.duties = 'Synchronised contextually-based framework'
 job4.start_date = Date.parse('2012-07-21')
 job4.end_date = Date.parse('2016-03-17')
-job4.save!
+job4.save! validate: false
 
 ref3 = Reference.new application: app2
 ref3.reference_1_full_name = 'David Edwards'
@@ -2316,16 +2316,16 @@ ref3.reference_2_postcode = 'BS14 3TR'
 ref3.reference_2_country = 'United Kingdom'
 ref3.reference_2_relationship = 'Compatible'
 ref3.reference_2_telephone = '44-(323)158-3111'
-ref3.save!
+ref3.save! validate: false
 
 course4 = CourseSelection.new application_id: app2.id, course_id: 15
-course4.save!
+course4.save! validate: false
 
 course5 = CourseSelection.new application_id: app2.id, course_id: 20
-course5.save!
+course5.save! validate: false
 
 course6 = CourseSelection.new application_id: app2.id, course_id: 1
-course6.save!
+course6.save! validate: false
 
 student3 = Student.new
 student3.first_name = 'Antonio'
@@ -2336,7 +2336,7 @@ student3.national_insurance_number = 'NJ859147D'
 student3.password = 'secret'
 student3.password_confirmation = 'secret'
 student3.confirmed_at = DateTime.now
-student3.save!
+student3.save! validate: false
 
 app3 = student3.create_application
 app3.title = 'Honorable'
@@ -2351,7 +2351,7 @@ app3.permanent_address_1 = 'Merchant Terrace'
 app3.permanent_postcode = 'GL54 2GR'
 app3.permanent_country = 'United Kingdom'
 app3.state = :completed
-app3.save!
+app3.save! validate: false
 
 school5 = School.new application: app3
 school5.name = 'The Robert Gordon University'
@@ -2359,7 +2359,7 @@ school5.address_1 = '9657 Chive Center'
 school5.address_2 = 'Sutton'
 school5.country = 'United Kingdom'
 school5.postcode = 'RH5 3FB'
-school5.save!
+school5.save! validate: false
 
 qualification13 = Qualification.new school: school5
 qualification13.subject = 'Art'
@@ -2367,7 +2367,7 @@ qualification13.award = 'Standard'
 qualification13.grade = 'B'
 qualification13.start_date = Date.new(2013, 8, 23)
 qualification13.end_date = Date.new(2014, 6, 8)
-qualification13.save!
+qualification13.save! validate: false
 
 qualification14 = Qualification.new school: school5
 qualification14.subject = 'Computing'
@@ -2375,7 +2375,7 @@ qualification14.award = 'HND'
 qualification14.grade = 'B'
 qualification14.start_date = Date.new(2015, 8, 23)
 qualification14.end_date = Date.new(2015, 6, 8)
-qualification14.save!
+qualification14.save! validate: false
 
 qualification15 = Qualification.new school: school5
 qualification15.subject = 'Maths'
@@ -2383,7 +2383,7 @@ qualification15.award = 'HND'
 qualification15.grade = 'A'
 qualification15.start_date = Date.new(2013, 8, 23)
 qualification15.end_date = Date.new(2014, 6, 8)
-qualification15.save!
+qualification15.save! validate: false
 
 school6 = School.new application: app3
 school6.name = 'Courtauld Institute of Art'
@@ -2391,7 +2391,7 @@ school6.address_1 = '5411 Badeau Center'
 school6.address_2 = 'Linton'
 school6.country = 'United Kingdom'
 school6.postcode = 'BD23 3FB'
-school6.save!
+school6.save! validate: false
 
 qualification16 = Qualification.new school: school6
 qualification16.subject = 'English'
@@ -2399,7 +2399,7 @@ qualification16.award = 'HNC'
 qualification16.grade = 'C'
 qualification16.start_date = Date.new(2013, 8, 23)
 qualification16.end_date = Date.new(2015, 6, 8)
-qualification16.save!
+qualification16.save! validate: false
 
 qualification17 = Qualification.new school: school6
 qualification17.subject = 'Art'
@@ -2407,7 +2407,7 @@ qualification17.award = 'NQ'
 qualification17.grade = 'B'
 qualification17.start_date = Date.new(2012, 8, 23)
 qualification17.end_date = Date.new(2013, 6, 8)
-qualification17.save!
+qualification17.save! validate: false
 
 qualification18 = Qualification.new school: school6
 qualification18.subject = 'English'
@@ -2415,7 +2415,7 @@ qualification18.award = 'Higher'
 qualification18.grade = 'A'
 qualification18.start_date = Date.new(2015, 8, 23)
 qualification18.end_date = Date.new(2016, 6, 8)
-qualification18.save!
+qualification18.save! validate: false
 
 job5 = Job.new application: app3
 job5.employer = 'Trilith'
@@ -2427,7 +2427,7 @@ job5.job_title = 'Geological Engineer'
 job5.duties = 'Vision-oriented secondary framework'
 job5.start_date = Date.parse('2011-04-12')
 job5.end_date = Date.parse('2015-06-26')
-job5.save!
+job5.save! validate: false
 
 job6 = Job.new application: app3
 job6.employer = 'Devpoint'
@@ -2439,7 +2439,7 @@ job6.job_title = 'Office Assistant I'
 job6.duties = 'Sharable even-keeled portal'
 job6.start_date = Date.parse('2012-09-08')
 job6.end_date = Date.parse('2017-02-22')
-job6.save!
+job6.save! validate: false
 
 
 
@@ -2465,22 +2465,22 @@ ref5.reference_2_postcode = 'NN4 3TR'
 ref5.reference_2_country = 'United Kingdom'
 ref5.reference_2_relationship = 'background'
 ref5.reference_2_telephone = '44-(605)194-9501'
-ref5.save!
+ref5.save! validate: false
 
 course7 = CourseSelection.new application_id: app3.id, course_id: 3
-course7.save!
+course7.save! validate: false
 
 course8 = CourseSelection.new application_id: app3.id, course_id: 8
-course8.save!
+course8.save! validate: false
 
 course9 = CourseSelection.new application_id: app3.id, course_id: 5
-course9.save!
+course9.save! validate: false
 
 course10 = CourseSelection.new application_id: app3.id, course_id: 7
-course10.save!
+course10.save! validate: false
 
 course11 = CourseSelection.new application_id: app3.id, course_id: 16
-course11.save!
+course11.save! validate: false
 
 student4 = Student.new
 student4.first_name = 'Beverly'
@@ -2491,7 +2491,7 @@ student4.national_insurance_number = 'NJ684151C'
 student4.password = 'secret'
 student4.password_confirmation = 'secret'
 student4.confirmed_at = DateTime.now
-student4.save!
+student4.save! validate: false
 
 app4 = student4.create_application
 app4.title = 'Honorable'
@@ -2511,7 +2511,7 @@ app4.correspondence_address_2 = 'Honorable'
 app4.correspondence_postcode = 'NN11 2GR'
 app4.correspondence_country = 'United Kingdom'
 app4.state = :completed
-app4.save!
+app4.save! validate: false
 
 school7 = School.new application: app4
 school7.name = 'Royal College of Music'
@@ -2519,7 +2519,7 @@ school7.address_1 = '1 Sunnyside Terrace'
 school7.address_2 = 'Manchester'
 school7.country = 'United Kingdom'
 school7.postcode = 'M14 3FB'
-school7.save!
+school7.save! validate: false
 
 qualification19 = Qualification.new school: school7
 qualification19.subject = 'Biology'
@@ -2527,7 +2527,7 @@ qualification19.award = 'NQ'
 qualification19.grade = 'B'
 qualification19.start_date = Date.new(2012, 8, 23)
 qualification19.end_date = Date.new(2013, 6, 8)
-qualification19.save!
+qualification19.save! validate: false
 
 qualification20 = Qualification.new school: school7
 qualification20.subject = 'Woodworking'
@@ -2535,7 +2535,7 @@ qualification20.award = 'HND'
 qualification20.grade = 'D'
 qualification20.start_date = Date.new(2013, 8, 23)
 qualification20.end_date = Date.new(2014, 6, 8)
-qualification20.save!
+qualification20.save! validate: false
 
 qualification21 = Qualification.new school: school7
 qualification21.subject = 'Art'
@@ -2543,7 +2543,7 @@ qualification21.award = 'Higher'
 qualification21.grade = 'B'
 qualification21.start_date = Date.new(2012, 8, 23)
 qualification21.end_date = Date.new(2014, 6, 8)
-qualification21.save!
+qualification21.save! validate: false
 
 school8 = School.new application: app4
 school8.name = 'Warnborough University'
@@ -2551,7 +2551,7 @@ school8.address_1 = '408 Manufacturers Circle'
 school8.address_2 = 'London'
 school8.country = 'United Kingdom'
 school8.postcode = 'WC1B 3FB'
-school8.save!
+school8.save! validate: false
 
 qualification22 = Qualification.new school: school8
 qualification22.subject = 'Art'
@@ -2559,7 +2559,7 @@ qualification22.award = 'HND'
 qualification22.grade = 'Pass'
 qualification22.start_date = Date.new(2012, 8, 23)
 qualification22.end_date = Date.new(2014, 6, 8)
-qualification22.save!
+qualification22.save! validate: false
 
 qualification23 = Qualification.new school: school8
 qualification23.subject = 'Woodworking'
@@ -2567,7 +2567,7 @@ qualification23.award = 'NQ'
 qualification23.grade = 'C'
 qualification23.start_date = Date.new(2013, 8, 23)
 qualification23.end_date = Date.new(2014, 6, 8)
-qualification23.save!
+qualification23.save! validate: false
 
 qualification24 = Qualification.new school: school8
 qualification24.subject = 'Physics'
@@ -2575,7 +2575,7 @@ qualification24.award = 'HND'
 qualification24.grade = 'D'
 qualification24.start_date = Date.new(2015, 8, 23)
 qualification24.end_date = Date.new(2014, 6, 8)
-qualification24.save!
+qualification24.save! validate: false
 
 job7 = Job.new application: app4
 job7.employer = 'LiveZ'
@@ -2587,7 +2587,7 @@ job7.job_title = 'Systems Administrator II'
 job7.duties = 'Programmable global model'
 job7.start_date = Date.parse('2010-06-25')
 job7.end_date = Date.parse('2016-02-01')
-job7.save!
+job7.save! validate: false
 
 job8 = Job.new application: app4
 job8.employer = 'Fiveclub'
@@ -2599,7 +2599,7 @@ job8.job_title = 'Systems Administrator III'
 job8.duties = 'Enhanced bi-directional knowledge base'
 job8.start_date = Date.parse('2011-12-25')
 job8.end_date = Date.parse('2014-09-02')
-job8.save!
+job8.save! validate: false
 
 ref7 = Reference.new application: app4
 ref7.reference_1_full_name = 'William Meyer'
@@ -2620,13 +2620,13 @@ ref7.reference_2_postcode = 'WC1B 3TR'
 ref7.reference_2_country = 'United Kingdom'
 ref7.reference_2_relationship = 'User-friendly'
 ref7.reference_2_telephone = '44-(178)717-3351'
-ref7.save!
+ref7.save! validate: false
 
 course12 = CourseSelection.new application_id: app4.id, course_id: 24
-course12.save!
+course12.save! validate: false
 
 course13 = CourseSelection.new application_id: app4.id, course_id: 5
-course13.save!
+course13.save! validate: false
 
 student5 = Student.new
 student5.first_name = 'Marilyn'
@@ -2637,7 +2637,7 @@ student5.national_insurance_number = 'NJ111239C'
 student5.password = 'secret'
 student5.password_confirmation = 'secret'
 student5.confirmed_at = DateTime.now
-student5.save!
+student5.save! validate: false
 
 app5 = student5.create_application
 app5.title = 'Mr'
@@ -2659,7 +2659,7 @@ app5.correspondence_address_2 = 'Mr'
 app5.correspondence_postcode = 'SY4 2GR'
 app5.correspondence_country = 'United Kingdom'
 app5.state = :completed
-app5.save!
+app5.save! validate: false
 
 school9 = School.new application: app5
 school9.name = 'University of Ulster'
@@ -2667,7 +2667,7 @@ school9.address_1 = '271 Garrison Junction'
 school9.address_2 = 'London'
 school9.country = 'United Kingdom'
 school9.postcode = 'EC1V 3FB'
-school9.save!
+school9.save! validate: false
 
 qualification25 = Qualification.new school: school9
 qualification25.subject = 'PE'
@@ -2675,7 +2675,7 @@ qualification25.award = 'Higher'
 qualification25.grade = 'D'
 qualification25.start_date = Date.new(2013, 8, 23)
 qualification25.end_date = Date.new(2013, 6, 8)
-qualification25.save!
+qualification25.save! validate: false
 
 qualification26 = Qualification.new school: school9
 qualification26.subject = 'Physics'
@@ -2683,7 +2683,7 @@ qualification26.award = 'HNC'
 qualification26.grade = 'C'
 qualification26.start_date = Date.new(2012, 8, 23)
 qualification26.end_date = Date.new(2014, 6, 8)
-qualification26.save!
+qualification26.save! validate: false
 
 qualification27 = Qualification.new school: school9
 qualification27.subject = 'Physics'
@@ -2691,7 +2691,7 @@ qualification27.award = 'Higher'
 qualification27.grade = 'Pass'
 qualification27.start_date = Date.new(2015, 8, 23)
 qualification27.end_date = Date.new(2016, 6, 8)
-qualification27.save!
+qualification27.save! validate: false
 
 school10 = School.new application: app5
 school10.name = 'Royal Free Hospital School of Medicine'
@@ -2699,7 +2699,7 @@ school10.address_1 = '116 Valley Edge Alley'
 school10.address_2 = 'Aston'
 school10.country = 'United Kingdom'
 school10.postcode = 'TF6 3FB'
-school10.save!
+school10.save! validate: false
 
 qualification28 = Qualification.new school: school10
 qualification28.subject = 'PE'
@@ -2707,7 +2707,7 @@ qualification28.award = 'Higher'
 qualification28.grade = 'B'
 qualification28.start_date = Date.new(2013, 8, 23)
 qualification28.end_date = Date.new(2013, 6, 8)
-qualification28.save!
+qualification28.save! validate: false
 
 qualification29 = Qualification.new school: school10
 qualification29.subject = 'Physics'
@@ -2715,7 +2715,7 @@ qualification29.award = 'HND'
 qualification29.grade = 'A'
 qualification29.start_date = Date.new(2013, 8, 23)
 qualification29.end_date = Date.new(2015, 6, 8)
-qualification29.save!
+qualification29.save! validate: false
 
 qualification30 = Qualification.new school: school10
 qualification30.subject = 'Geography'
@@ -2723,7 +2723,7 @@ qualification30.award = 'Higher'
 qualification30.grade = 'D'
 qualification30.start_date = Date.new(2012, 8, 23)
 qualification30.end_date = Date.new(2016, 6, 8)
-qualification30.save!
+qualification30.save! validate: false
 
 job9 = Job.new application: app5
 job9.employer = 'Quamba'
@@ -2735,7 +2735,7 @@ job9.job_title = 'Assistant Media Planner'
 job9.duties = 'Front-line analyzing pricing structure'
 job9.start_date = Date.parse('2010-07-20')
 job9.end_date = Date.parse('2016-09-24')
-job9.save!
+job9.save! validate: false
 
 job10 = Job.new application: app5
 job10.employer = 'Jaxworks'
@@ -2747,7 +2747,7 @@ job10.job_title = 'Administrative Officer'
 job10.duties = 'Open-architected even-keeled complexity'
 job10.start_date = Date.parse('2012-03-10')
 job10.end_date = Date.parse('2014-03-16')
-job10.save!
+job10.save! validate: false
 
 ref9 = Reference.new application: app5
 ref9.reference_1_full_name = 'George Berry'
@@ -2768,19 +2768,19 @@ ref9.reference_2_postcode = 'S1 3TR'
 ref9.reference_2_country = 'United Kingdom'
 ref9.reference_2_relationship = 'knowledge user'
 ref9.reference_2_telephone = '44-(235)596-1647'
-ref9.save!
+ref9.save! validate: false
 
 course14 = CourseSelection.new application_id: app5.id, course_id: 21
-course14.save!
+course14.save! validate: false
 
 course15 = CourseSelection.new application_id: app5.id, course_id: 13
-course15.save!
+course15.save! validate: false
 
 course16 = CourseSelection.new application_id: app5.id, course_id: 2
-course16.save!
+course16.save! validate: false
 
 course17 = CourseSelection.new application_id: app5.id, course_id: 1
-course17.save!
+course17.save! validate: false
 
 student6 = Student.new
 student6.first_name = 'Judith'
@@ -2791,7 +2791,7 @@ student6.national_insurance_number = 'NJ878282A'
 student6.password = 'secret'
 student6.password_confirmation = 'secret'
 student6.confirmed_at = DateTime.now
-student6.save!
+student6.save! validate: false
 
 app6 = student6.create_application
 app6.title = 'Ms'
@@ -2807,7 +2807,7 @@ app6.permanent_address_1 = 'Tennessee Point'
 app6.permanent_postcode = 'BS37 2GR'
 app6.permanent_country = 'United Kingdom'
 app6.state = :completed
-app6.save!
+app6.save! validate: false
 
 school11 = School.new application: app6
 school11.name = 'Chelsea College of Art and Design'
@@ -2815,7 +2815,7 @@ school11.address_1 = '37 Orin Avenue'
 school11.address_2 = 'Leeds'
 school11.country = 'United Kingdom'
 school11.postcode = 'LS6 3FB'
-school11.save!
+school11.save! validate: false
 
 qualification31 = Qualification.new school: school11
 qualification31.subject = 'Art'
@@ -2823,7 +2823,7 @@ qualification31.award = 'Higher'
 qualification31.grade = 'Pass'
 qualification31.start_date = Date.new(2014, 8, 23)
 qualification31.end_date = Date.new(2016, 6, 8)
-qualification31.save!
+qualification31.save! validate: false
 
 qualification32 = Qualification.new school: school11
 qualification32.subject = 'Geography'
@@ -2831,7 +2831,7 @@ qualification32.award = 'NQ'
 qualification32.grade = 'C'
 qualification32.start_date = Date.new(2015, 8, 23)
 qualification32.end_date = Date.new(2014, 6, 8)
-qualification32.save!
+qualification32.save! validate: false
 
 qualification33 = Qualification.new school: school11
 qualification33.subject = 'Chemistry'
@@ -2839,7 +2839,7 @@ qualification33.award = 'HND'
 qualification33.grade = 'C'
 qualification33.start_date = Date.new(2014, 8, 23)
 qualification33.end_date = Date.new(2016, 6, 8)
-qualification33.save!
+qualification33.save! validate: false
 
 school12 = School.new application: app6
 school12.name = 'University of Warwick'
@@ -2847,7 +2847,7 @@ school12.address_1 = '5 Hanover Lane'
 school12.address_2 = 'Langley'
 school12.country = 'United Kingdom'
 school12.postcode = 'SG4 3FB'
-school12.save!
+school12.save! validate: false
 
 qualification34 = Qualification.new school: school12
 qualification34.subject = 'Computing'
@@ -2855,7 +2855,7 @@ qualification34.award = 'HNC'
 qualification34.grade = 'B'
 qualification34.start_date = Date.new(2012, 8, 23)
 qualification34.end_date = Date.new(2013, 6, 8)
-qualification34.save!
+qualification34.save! validate: false
 
 qualification35 = Qualification.new school: school12
 qualification35.subject = 'Maths'
@@ -2863,7 +2863,7 @@ qualification35.award = 'Higher'
 qualification35.grade = 'C'
 qualification35.start_date = Date.new(2013, 8, 23)
 qualification35.end_date = Date.new(2016, 6, 8)
-qualification35.save!
+qualification35.save! validate: false
 
 qualification36 = Qualification.new school: school12
 qualification36.subject = 'Biology'
@@ -2871,7 +2871,7 @@ qualification36.award = 'HNC'
 qualification36.grade = 'C'
 qualification36.start_date = Date.new(2015, 8, 23)
 qualification36.end_date = Date.new(2016, 6, 8)
-qualification36.save!
+qualification36.save! validate: false
 
 job11 = Job.new application: app6
 job11.employer = 'Yodel'
@@ -2883,7 +2883,7 @@ job11.job_title = 'Health Coach III'
 job11.duties = 'Operative actuating strategy'
 job11.start_date = Date.parse('2012-11-29')
 job11.end_date = Date.parse('2015-04-19')
-job11.save!
+job11.save! validate: false
 
 job12 = Job.new application: app6
 job12.employer = 'Dazzlesphere'
@@ -2895,7 +2895,7 @@ job12.job_title = 'Mechanical Systems Engineer'
 job12.duties = 'Extended global forecast'
 job12.start_date = Date.parse('2011-03-06')
 job12.end_date = Date.parse('2017-02-02')
-job12.save!
+job12.save! validate: false
 
 ref11 = Reference.new application: app6
 ref11.reference_1_full_name = 'Jesse Reid'
@@ -2916,13 +2916,13 @@ ref11.reference_2_postcode = 'SG4 3TR'
 ref11.reference_2_country = 'United Kingdom'
 ref11.reference_2_relationship = 'Enterprise-wide'
 ref11.reference_2_telephone = '44-(855)623-4558'
-ref11.save!
+ref11.save! validate: false
 
 course18 = CourseSelection.new application_id: app6.id, course_id: 7
-course18.save!
+course18.save! validate: false
 
 course19 = CourseSelection.new application_id: app6.id, course_id: 9
-course19.save!
+course19.save! validate: false
 
 student7 = Student.new
 student7.first_name = 'Chris'
@@ -2933,7 +2933,7 @@ student7.national_insurance_number = 'NJ692968C'
 student7.password = 'secret'
 student7.password_confirmation = 'secret'
 student7.confirmed_at = DateTime.now
-student7.save!
+student7.save! validate: false
 
 app7 = student7.create_application
 app7.title = 'Honorable'
@@ -2949,7 +2949,7 @@ app7.permanent_address_2 = 'Craigavon'
 app7.permanent_postcode = 'BT66 2GR'
 app7.permanent_country = 'United Kingdom'
 app7.state = :completed
-app7.save!
+app7.save! validate: false
 
 school13 = School.new application: app7
 school13.name = 'Aston University'
@@ -2957,7 +2957,7 @@ school13.address_1 = '69171 Scoville Place'
 school13.address_2 = 'Buckland'
 school13.country = 'United Kingdom'
 school13.postcode = 'CT16 3FB'
-school13.save!
+school13.save! validate: false
 
 qualification37 = Qualification.new school: school13
 qualification37.subject = 'Maths'
@@ -2965,7 +2965,7 @@ qualification37.award = 'NQ'
 qualification37.grade = 'Pass'
 qualification37.start_date = Date.new(2015, 8, 23)
 qualification37.end_date = Date.new(2014, 6, 8)
-qualification37.save!
+qualification37.save! validate: false
 
 qualification38 = Qualification.new school: school13
 qualification38.subject = 'Maths'
@@ -2973,7 +2973,7 @@ qualification38.award = 'NQ'
 qualification38.grade = 'A'
 qualification38.start_date = Date.new(2013, 8, 23)
 qualification38.end_date = Date.new(2015, 6, 8)
-qualification38.save!
+qualification38.save! validate: false
 
 qualification39 = Qualification.new school: school13
 qualification39.subject = 'Biology'
@@ -2981,7 +2981,7 @@ qualification39.award = 'HND'
 qualification39.grade = 'B'
 qualification39.start_date = Date.new(2012, 8, 23)
 qualification39.end_date = Date.new(2013, 6, 8)
-qualification39.save!
+qualification39.save! validate: false
 
 school14 = School.new application: app7
 school14.name = 'Warnborough University'
@@ -2989,7 +2989,7 @@ school14.address_1 = '41942 Warrior Court'
 school14.address_2 = 'Walton'
 school14.country = 'United Kingdom'
 school14.postcode = 'CV35 3FB'
-school14.save!
+school14.save! validate: false
 
 qualification40 = Qualification.new school: school14
 qualification40.subject = 'PE'
@@ -2997,7 +2997,7 @@ qualification40.award = 'HNC'
 qualification40.grade = 'D'
 qualification40.start_date = Date.new(2012, 8, 23)
 qualification40.end_date = Date.new(2015, 6, 8)
-qualification40.save!
+qualification40.save! validate: false
 
 qualification41 = Qualification.new school: school14
 qualification41.subject = 'Computing'
@@ -3005,7 +3005,7 @@ qualification41.award = 'Standard'
 qualification41.grade = 'C'
 qualification41.start_date = Date.new(2014, 8, 23)
 qualification41.end_date = Date.new(2015, 6, 8)
-qualification41.save!
+qualification41.save! validate: false
 
 qualification42 = Qualification.new school: school14
 qualification42.subject = 'Technological Studies'
@@ -3013,7 +3013,7 @@ qualification42.award = 'HND'
 qualification42.grade = 'A'
 qualification42.start_date = Date.new(2013, 8, 23)
 qualification42.end_date = Date.new(2016, 6, 8)
-qualification42.save!
+qualification42.save! validate: false
 
 job13 = Job.new application: app7
 job13.employer = 'Roombo'
@@ -3025,7 +3025,7 @@ job13.job_title = 'Environmental Tech'
 job13.duties = 'Devolved 4th generation concept'
 job13.start_date = Date.parse('2011-10-11')
 job13.end_date = Date.parse('2016-06-03')
-job13.save!
+job13.save! validate: false
 
 job14 = Job.new application: app7
 job14.employer = 'Meetz'
@@ -3037,7 +3037,7 @@ job14.job_title = 'Help Desk Operator'
 job14.duties = 'Operative mobile throughput'
 job14.start_date = Date.parse('2010-09-14')
 job14.end_date = Date.parse('2014-07-26')
-job14.save!
+job14.save! validate: false
 
 ref13 = Reference.new application: app7
 ref13.reference_1_full_name = 'Betty Mills'
@@ -3058,16 +3058,16 @@ ref13.reference_2_postcode = 'CT16 3TR'
 ref13.reference_2_country = 'United Kingdom'
 ref13.reference_2_relationship = 'composite'
 ref13.reference_2_telephone = '44-(572)482-6969'
-ref13.save!
+ref13.save! validate: false
 
 course20 = CourseSelection.new application_id: app7.id, course_id: 9
-course20.save!
+course20.save! validate: false
 
 course21 = CourseSelection.new application_id: app7.id, course_id: 4
-course21.save!
+course21.save! validate: false
 
 course22 = CourseSelection.new application_id: app7.id, course_id: 24
-course22.save!
+course22.save! validate: false
 
 student8 = Student.new
 student8.first_name = 'Patrick'
@@ -3078,7 +3078,7 @@ student8.national_insurance_number = 'NJ431694A'
 student8.password = 'secret'
 student8.password_confirmation = 'secret'
 student8.confirmed_at = DateTime.now
-student8.save!
+student8.save! validate: false
 
 app8 = student8.create_application
 app8.title = 'Mr'
@@ -3095,7 +3095,7 @@ app8.permanent_address_2 = 'Ford'
 app8.permanent_postcode = 'GL54 2GR'
 app8.permanent_country = 'United Kingdom'
 app8.state = :completed
-app8.save!
+app8.save! validate: false
 
 school15 = School.new application: app8
 school15.name = 'University of East London'
@@ -3103,7 +3103,7 @@ school15.address_1 = '45 Florence Street'
 school15.address_2 = 'Belfast'
 school15.country = 'United Kingdom'
 school15.postcode = 'BT2 3FB'
-school15.save!
+school15.save! validate: false
 
 qualification43 = Qualification.new school: school15
 qualification43.subject = 'Technological Studies'
@@ -3111,7 +3111,7 @@ qualification43.award = 'Higher'
 qualification43.grade = 'Pass'
 qualification43.start_date = Date.new(2015, 8, 23)
 qualification43.end_date = Date.new(2015, 6, 8)
-qualification43.save!
+qualification43.save! validate: false
 
 qualification44 = Qualification.new school: school15
 qualification44.subject = 'English'
@@ -3119,7 +3119,7 @@ qualification44.award = 'NQ'
 qualification44.grade = 'D'
 qualification44.start_date = Date.new(2015, 8, 23)
 qualification44.end_date = Date.new(2016, 6, 8)
-qualification44.save!
+qualification44.save! validate: false
 
 qualification45 = Qualification.new school: school15
 qualification45.subject = 'English'
@@ -3127,7 +3127,7 @@ qualification45.award = 'HND'
 qualification45.grade = 'Pass'
 qualification45.start_date = Date.new(2013, 8, 23)
 qualification45.end_date = Date.new(2014, 6, 8)
-qualification45.save!
+qualification45.save! validate: false
 
 school16 = School.new application: app8
 school16.name = 'Institute of Germanic Studies'
@@ -3135,7 +3135,7 @@ school16.address_1 = '4467 Redwing Parkway'
 school16.address_2 = 'Swindon'
 school16.country = 'United Kingdom'
 school16.postcode = 'SN1 3FB'
-school16.save!
+school16.save! validate: false
 
 qualification46 = Qualification.new school: school16
 qualification46.subject = 'Maths'
@@ -3143,7 +3143,7 @@ qualification46.award = 'HND'
 qualification46.grade = 'Pass'
 qualification46.start_date = Date.new(2014, 8, 23)
 qualification46.end_date = Date.new(2014, 6, 8)
-qualification46.save!
+qualification46.save! validate: false
 
 qualification47 = Qualification.new school: school16
 qualification47.subject = 'Chemistry'
@@ -3151,7 +3151,7 @@ qualification47.award = 'Higher'
 qualification47.grade = 'Pass'
 qualification47.start_date = Date.new(2015, 8, 23)
 qualification47.end_date = Date.new(2013, 6, 8)
-qualification47.save!
+qualification47.save! validate: false
 
 qualification48 = Qualification.new school: school16
 qualification48.subject = 'Art'
@@ -3159,7 +3159,7 @@ qualification48.award = 'NQ'
 qualification48.grade = 'Pass'
 qualification48.start_date = Date.new(2015, 8, 23)
 qualification48.end_date = Date.new(2016, 6, 8)
-qualification48.save!
+qualification48.save! validate: false
 
 job15 = Job.new application: app8
 job15.employer = 'Babblestorm'
@@ -3171,7 +3171,7 @@ job15.job_title = 'Cost Accountant'
 job15.duties = 'Ameliorated bottom-line analyzer'
 job15.start_date = Date.parse('2010-11-09')
 job15.end_date = Date.parse('2013-08-03')
-job15.save!
+job15.save! validate: false
 
 job16 = Job.new application: app8
 job16.employer = 'Innojam'
@@ -3183,7 +3183,7 @@ job16.job_title = 'Actuary'
 job16.duties = 'Progressive multi-state strategy'
 job16.start_date = Date.parse('2012-10-11')
 job16.end_date = Date.parse('2016-03-18')
-job16.save!
+job16.save! validate: false
 
 ref15 = Reference.new application: app8
 ref15.reference_1_full_name = 'Billy Oliver'
@@ -3204,13 +3204,13 @@ ref15.reference_2_postcode = 'BD23 3TR'
 ref15.reference_2_country = 'United Kingdom'
 ref15.reference_2_relationship = 'Graphical User Interface'
 ref15.reference_2_telephone = '44-(404)908-1556'
-ref15.save!
+ref15.save! validate: false
 
 course23 = CourseSelection.new application_id: app8.id, course_id: 3
-course23.save!
+course23.save! validate: false
 
 course24 = CourseSelection.new application_id: app8.id, course_id: 6
-course24.save!
+course24.save! validate: false
 
 student9 = Student.new
 student9.first_name = 'Diane'
@@ -3221,7 +3221,7 @@ student9.national_insurance_number = 'NJ489158A'
 student9.password = 'secret'
 student9.password_confirmation = 'secret'
 student9.confirmed_at = DateTime.now
-student9.save!
+student9.save! validate: false
 
 app9 = student9.create_application
 app9.title = 'Honorable'
@@ -3242,7 +3242,7 @@ app9.correspondence_address_2 = 'Honorable'
 app9.correspondence_postcode = 'S8 2GR'
 app9.correspondence_country = 'United Kingdom'
 app9.state = :completed
-app9.save!
+app9.save! validate: false
 
 school17 = School.new application: app9
 school17.name = 'Camberwell College of Arts'
@@ -3250,7 +3250,7 @@ school17.address_1 = '7071 Forest Road'
 school17.address_2 = 'Leeds'
 school17.country = 'United Kingdom'
 school17.postcode = 'LS6 3FB'
-school17.save!
+school17.save! validate: false
 
 qualification49 = Qualification.new school: school17
 qualification49.subject = 'English'
@@ -3258,7 +3258,7 @@ qualification49.award = 'Higher'
 qualification49.grade = 'B'
 qualification49.start_date = Date.new(2014, 8, 23)
 qualification49.end_date = Date.new(2014, 6, 8)
-qualification49.save!
+qualification49.save! validate: false
 
 qualification50 = Qualification.new school: school17
 qualification50.subject = 'Geography'
@@ -3266,7 +3266,7 @@ qualification50.award = 'Standard'
 qualification50.grade = 'D'
 qualification50.start_date = Date.new(2014, 8, 23)
 qualification50.end_date = Date.new(2014, 6, 8)
-qualification50.save!
+qualification50.save! validate: false
 
 qualification51 = Qualification.new school: school17
 qualification51.subject = 'Maths'
@@ -3274,7 +3274,7 @@ qualification51.award = 'Standard'
 qualification51.grade = 'Pass'
 qualification51.start_date = Date.new(2012, 8, 23)
 qualification51.end_date = Date.new(2013, 6, 8)
-qualification51.save!
+qualification51.save! validate: false
 
 school18 = School.new application: app9
 school18.name = 'University of Wales Institute'
@@ -3282,7 +3282,7 @@ school18.address_1 = '97 Shoshone Lane'
 school18.address_2 = 'Buckland'
 school18.country = 'United Kingdom'
 school18.postcode = 'CT16 3FB'
-school18.save!
+school18.save! validate: false
 
 qualification52 = Qualification.new school: school18
 qualification52.subject = 'Computing'
@@ -3290,7 +3290,7 @@ qualification52.award = 'HNC'
 qualification52.grade = 'D'
 qualification52.start_date = Date.new(2012, 8, 23)
 qualification52.end_date = Date.new(2014, 6, 8)
-qualification52.save!
+qualification52.save! validate: false
 
 qualification53 = Qualification.new school: school18
 qualification53.subject = 'Biology'
@@ -3298,7 +3298,7 @@ qualification53.award = 'Standard'
 qualification53.grade = 'Pass'
 qualification53.start_date = Date.new(2014, 8, 23)
 qualification53.end_date = Date.new(2014, 6, 8)
-qualification53.save!
+qualification53.save! validate: false
 
 qualification54 = Qualification.new school: school18
 qualification54.subject = 'PE'
@@ -3306,7 +3306,7 @@ qualification54.award = 'NQ'
 qualification54.grade = 'Pass'
 qualification54.start_date = Date.new(2015, 8, 23)
 qualification54.end_date = Date.new(2013, 6, 8)
-qualification54.save!
+qualification54.save! validate: false
 
 job17 = Job.new application: app9
 job17.employer = 'Zoovu'
@@ -3318,7 +3318,7 @@ job17.job_title = 'Payment Adjustment Coordinator'
 job17.duties = 'Total 24 hour service-desk'
 job17.start_date = Date.parse('2011-07-26')
 job17.end_date = Date.parse('2016-10-14')
-job17.save!
+job17.save! validate: false
 
 job18 = Job.new application: app9
 job18.employer = 'Rhynoodle'
@@ -3330,7 +3330,7 @@ job18.job_title = 'Physical Therapy Assistant'
 job18.duties = 'Self-enabling 24 hour migration'
 job18.start_date = Date.parse('2011-01-25')
 job18.end_date = Date.parse('2015-02-10')
-job18.save!
+job18.save! validate: false
 
 ref17 = Reference.new application: app9
 ref17.reference_1_full_name = 'Deborah Myers'
@@ -3351,22 +3351,22 @@ ref17.reference_2_postcode = 'AB55 3TR'
 ref17.reference_2_country = 'United Kingdom'
 ref17.reference_2_relationship = 'Mandatory'
 ref17.reference_2_telephone = '44-(860)595-0211'
-ref17.save!
+ref17.save! validate: false
 
 course25 = CourseSelection.new application_id: app9.id, course_id: 24
-course25.save!
+course25.save! validate: false
 
 course26 = CourseSelection.new application_id: app9.id, course_id: 20
-course26.save!
+course26.save! validate: false
 
 course27 = CourseSelection.new application_id: app9.id, course_id: 23
-course27.save!
+course27.save! validate: false
 
 course28 = CourseSelection.new application_id: app9.id, course_id: 7
-course28.save!
+course28.save! validate: false
 
 course29 = CourseSelection.new application_id: app9.id, course_id: 4
-course29.save!
+course29.save! validate: false
 
 student10 = Student.new
 student10.first_name = 'Sharon'
@@ -3377,7 +3377,7 @@ student10.national_insurance_number = 'NJ628089A'
 student10.password = 'secret'
 student10.password_confirmation = 'secret'
 student10.confirmed_at = DateTime.now
-student10.save!
+student10.save! validate: false
 
 app10 = student10.create_application
 app10.title = 'Dr'
@@ -3394,7 +3394,7 @@ app10.permanent_address_2 = 'Denton'
 app10.permanent_postcode = 'M34 2GR'
 app10.permanent_country = 'United Kingdom'
 app10.state = :completed
-app10.save!
+app10.save! validate: false
 
 school19 = School.new application: app10
 school19.name = 'Canterbury Christ Church University'
@@ -3402,7 +3402,7 @@ school19.address_1 = '17182 Melvin Junction'
 school19.address_2 = 'London'
 school19.country = 'United Kingdom'
 school19.postcode = 'EC3M 3FB'
-school19.save!
+school19.save! validate: false
 
 qualification55 = Qualification.new school: school19
 qualification55.subject = 'English'
@@ -3410,7 +3410,7 @@ qualification55.award = 'HND'
 qualification55.grade = 'D'
 qualification55.start_date = Date.new(2012, 8, 23)
 qualification55.end_date = Date.new(2014, 6, 8)
-qualification55.save!
+qualification55.save! validate: false
 
 qualification56 = Qualification.new school: school19
 qualification56.subject = 'Physics'
@@ -3418,7 +3418,7 @@ qualification56.award = 'HNC'
 qualification56.grade = 'A'
 qualification56.start_date = Date.new(2012, 8, 23)
 qualification56.end_date = Date.new(2015, 6, 8)
-qualification56.save!
+qualification56.save! validate: false
 
 qualification57 = Qualification.new school: school19
 qualification57.subject = 'Technological Studies'
@@ -3426,7 +3426,7 @@ qualification57.award = 'HNC'
 qualification57.grade = 'A'
 qualification57.start_date = Date.new(2014, 8, 23)
 qualification57.end_date = Date.new(2015, 6, 8)
-qualification57.save!
+qualification57.save! validate: false
 
 school20 = School.new application: app10
 school20.name = 'Chelsea College of Art and Design'
@@ -3434,7 +3434,7 @@ school20.address_1 = '3 Dottie Trail'
 school20.address_2 = 'Newton'
 school20.country = 'United Kingdom'
 school20.postcode = 'NG34 3FB'
-school20.save!
+school20.save! validate: false
 
 qualification58 = Qualification.new school: school20
 qualification58.subject = 'Art'
@@ -3442,7 +3442,7 @@ qualification58.award = 'Higher'
 qualification58.grade = 'C'
 qualification58.start_date = Date.new(2013, 8, 23)
 qualification58.end_date = Date.new(2015, 6, 8)
-qualification58.save!
+qualification58.save! validate: false
 
 qualification59 = Qualification.new school: school20
 qualification59.subject = 'Physics'
@@ -3450,7 +3450,7 @@ qualification59.award = 'HND'
 qualification59.grade = 'B'
 qualification59.start_date = Date.new(2015, 8, 23)
 qualification59.end_date = Date.new(2015, 6, 8)
-qualification59.save!
+qualification59.save! validate: false
 
 qualification60 = Qualification.new school: school20
 qualification60.subject = 'Geography'
@@ -3458,7 +3458,7 @@ qualification60.award = 'Higher'
 qualification60.grade = 'A'
 qualification60.start_date = Date.new(2015, 8, 23)
 qualification60.end_date = Date.new(2013, 6, 8)
-qualification60.save!
+qualification60.save! validate: false
 
 job19 = Job.new application: app10
 job19.employer = 'Skipstorm'
@@ -3470,7 +3470,7 @@ job19.job_title = 'Community Outreach Specialist'
 job19.duties = 'Sharable client-server framework'
 job19.start_date = Date.parse('2010-04-22')
 job19.end_date = Date.parse('2014-04-27')
-job19.save!
+job19.save! validate: false
 
 job20 = Job.new application: app10
 job20.employer = 'Tavu'
@@ -3482,7 +3482,7 @@ job20.job_title = 'Developer II'
 job20.duties = 'Multi-channelled client-server benchmark'
 job20.start_date = Date.parse('2012-09-04')
 job20.end_date = Date.parse('2014-06-30')
-job20.save!
+job20.save! validate: false
 
 ref19 = Reference.new application: app10
 ref19.reference_1_full_name = 'Heather Payne'
@@ -3503,10 +3503,10 @@ ref19.reference_2_postcode = 'LS6 3TR'
 ref19.reference_2_country = 'United Kingdom'
 ref19.reference_2_relationship = 'Configurable'
 ref19.reference_2_telephone = '44-(114)854-5865'
-ref19.save!
+ref19.save! validate: false
 
 course30 = CourseSelection.new application_id: app10.id, course_id: 11
-course30.save!
+course30.save! validate: false
 
 student11 = Student.new
 student11.first_name = 'Terry'
@@ -3517,7 +3517,7 @@ student11.national_insurance_number = 'NJ802231D'
 student11.password = 'secret'
 student11.password_confirmation = 'secret'
 student11.confirmed_at = DateTime.now
-student11.save!
+student11.save! validate: false
 
 app11 = student11.create_application
 app11.title = 'Mr'
@@ -3538,7 +3538,7 @@ app11.correspondence_address_2 = 'Mr'
 app11.correspondence_postcode = 'B40 2GR'
 app11.correspondence_country = 'United Kingdom'
 app11.state = :completed
-app11.save!
+app11.save! validate: false
 
 school21 = School.new application: app11
 school21.name = 'University of Hertfordshire'
@@ -3546,7 +3546,7 @@ school21.address_1 = '39133 Forster Drive'
 school21.address_2 = 'Sheffield'
 school21.country = 'United Kingdom'
 school21.postcode = 'S1 3FB'
-school21.save!
+school21.save! validate: false
 
 qualification61 = Qualification.new school: school21
 qualification61.subject = 'English'
@@ -3554,7 +3554,7 @@ qualification61.award = 'Higher'
 qualification61.grade = 'C'
 qualification61.start_date = Date.new(2013, 8, 23)
 qualification61.end_date = Date.new(2014, 6, 8)
-qualification61.save!
+qualification61.save! validate: false
 
 qualification62 = Qualification.new school: school21
 qualification62.subject = 'Biology'
@@ -3562,7 +3562,7 @@ qualification62.award = 'HND'
 qualification62.grade = 'D'
 qualification62.start_date = Date.new(2015, 8, 23)
 qualification62.end_date = Date.new(2016, 6, 8)
-qualification62.save!
+qualification62.save! validate: false
 
 qualification63 = Qualification.new school: school21
 qualification63.subject = 'Computing'
@@ -3570,7 +3570,7 @@ qualification63.award = 'HND'
 qualification63.grade = 'C'
 qualification63.start_date = Date.new(2015, 8, 23)
 qualification63.end_date = Date.new(2016, 6, 8)
-qualification63.save!
+qualification63.save! validate: false
 
 school22 = School.new application: app11
 school22.name = 'Schiller International University'
@@ -3578,7 +3578,7 @@ school22.address_1 = '872 Dixon Road'
 school22.address_2 = 'Merton'
 school22.country = 'United Kingdom'
 school22.postcode = 'SW19 3FB'
-school22.save!
+school22.save! validate: false
 
 qualification64 = Qualification.new school: school22
 qualification64.subject = 'English'
@@ -3586,7 +3586,7 @@ qualification64.award = 'HND'
 qualification64.grade = 'C'
 qualification64.start_date = Date.new(2012, 8, 23)
 qualification64.end_date = Date.new(2016, 6, 8)
-qualification64.save!
+qualification64.save! validate: false
 
 qualification65 = Qualification.new school: school22
 qualification65.subject = 'Woodworking'
@@ -3594,7 +3594,7 @@ qualification65.award = 'Higher'
 qualification65.grade = 'D'
 qualification65.start_date = Date.new(2012, 8, 23)
 qualification65.end_date = Date.new(2013, 6, 8)
-qualification65.save!
+qualification65.save! validate: false
 
 qualification66 = Qualification.new school: school22
 qualification66.subject = 'PE'
@@ -3602,7 +3602,7 @@ qualification66.award = 'HND'
 qualification66.grade = 'Pass'
 qualification66.start_date = Date.new(2013, 8, 23)
 qualification66.end_date = Date.new(2015, 6, 8)
-qualification66.save!
+qualification66.save! validate: false
 
 job21 = Job.new application: app11
 job21.employer = 'Cogibox'
@@ -3614,7 +3614,7 @@ job21.job_title = 'Paralegal'
 job21.duties = 'Centralized disintermediate help-desk'
 job21.start_date = Date.parse('2010-11-04')
 job21.end_date = Date.parse('2013-12-22')
-job21.save!
+job21.save! validate: false
 
 job22 = Job.new application: app11
 job22.employer = 'Innotype'
@@ -3626,7 +3626,7 @@ job22.job_title = 'Occupational Therapist'
 job22.duties = 'Centralized clear-thinking policy'
 job22.start_date = Date.parse('2012-07-09')
 job22.end_date = Date.parse('2014-02-18')
-job22.save!
+job22.save! validate: false
 
 ref21 = Reference.new application: app11
 ref21.reference_1_full_name = 'Carol Garcia'
@@ -3647,13 +3647,13 @@ ref21.reference_2_postcode = 'LS6 3TR'
 ref21.reference_2_country = 'United Kingdom'
 ref21.reference_2_relationship = 'service-desk'
 ref21.reference_2_telephone = '44-(170)511-1742'
-ref21.save!
+ref21.save! validate: false
 
 course31 = CourseSelection.new application_id: app11.id, course_id: 5
-course31.save!
+course31.save! validate: false
 
 course32 = CourseSelection.new application_id: app11.id, course_id: 20
-course32.save!
+course32.save! validate: false
 
 student12 = Student.new
 student12.first_name = 'Bruce'
@@ -3664,7 +3664,7 @@ student12.national_insurance_number = 'NJ398142B'
 student12.password = 'secret'
 student12.password_confirmation = 'secret'
 student12.confirmed_at = DateTime.now
-student12.save!
+student12.save! validate: false
 
 app12 = student12.create_application
 app12.title = 'Honorable'
@@ -3680,7 +3680,7 @@ app12.permanent_address_1 = 'Autumn Leaf Avenue'
 app12.permanent_postcode = 'NN11 2GR'
 app12.permanent_country = 'United Kingdom'
 app12.state = :completed
-app12.save!
+app12.save! validate: false
 
 school23 = School.new application: app12
 school23.name = 'Trinity College Carmarthen'
@@ -3688,7 +3688,7 @@ school23.address_1 = '436 Lake View Plaza'
 school23.address_2 = 'Sutton'
 school23.country = 'United Kingdom'
 school23.postcode = 'RH5 3FB'
-school23.save!
+school23.save! validate: false
 
 qualification67 = Qualification.new school: school23
 qualification67.subject = 'Woodworking'
@@ -3696,7 +3696,7 @@ qualification67.award = 'HNC'
 qualification67.grade = 'D'
 qualification67.start_date = Date.new(2013, 8, 23)
 qualification67.end_date = Date.new(2013, 6, 8)
-qualification67.save!
+qualification67.save! validate: false
 
 qualification68 = Qualification.new school: school23
 qualification68.subject = 'English'
@@ -3704,7 +3704,7 @@ qualification68.award = 'HND'
 qualification68.grade = 'Pass'
 qualification68.start_date = Date.new(2015, 8, 23)
 qualification68.end_date = Date.new(2015, 6, 8)
-qualification68.save!
+qualification68.save! validate: false
 
 qualification69 = Qualification.new school: school23
 qualification69.subject = 'Maths'
@@ -3712,7 +3712,7 @@ qualification69.award = 'NQ'
 qualification69.grade = 'D'
 qualification69.start_date = Date.new(2013, 8, 23)
 qualification69.end_date = Date.new(2014, 6, 8)
-qualification69.save!
+qualification69.save! validate: false
 
 school24 = School.new application: app12
 school24.name = 'Chelsea College of Art and Design'
@@ -3720,7 +3720,7 @@ school24.address_1 = '62 Jay Crossing'
 school24.address_2 = 'London'
 school24.country = 'United Kingdom'
 school24.postcode = 'W1F 3FB'
-school24.save!
+school24.save! validate: false
 
 qualification70 = Qualification.new school: school24
 qualification70.subject = 'Technological Studies'
@@ -3728,7 +3728,7 @@ qualification70.award = 'HND'
 qualification70.grade = 'B'
 qualification70.start_date = Date.new(2014, 8, 23)
 qualification70.end_date = Date.new(2014, 6, 8)
-qualification70.save!
+qualification70.save! validate: false
 
 qualification71 = Qualification.new school: school24
 qualification71.subject = 'Geography'
@@ -3736,7 +3736,7 @@ qualification71.award = 'HNC'
 qualification71.grade = 'B'
 qualification71.start_date = Date.new(2013, 8, 23)
 qualification71.end_date = Date.new(2016, 6, 8)
-qualification71.save!
+qualification71.save! validate: false
 
 qualification72 = Qualification.new school: school24
 qualification72.subject = 'Technological Studies'
@@ -3744,7 +3744,7 @@ qualification72.award = 'Standard'
 qualification72.grade = 'D'
 qualification72.start_date = Date.new(2013, 8, 23)
 qualification72.end_date = Date.new(2016, 6, 8)
-qualification72.save!
+qualification72.save! validate: false
 
 job23 = Job.new application: app12
 job23.employer = 'Flashpoint'
@@ -3756,7 +3756,7 @@ job23.job_title = 'Compensation Analyst'
 job23.duties = 'Function-based multi-state interface'
 job23.start_date = Date.parse('2012-06-13')
 job23.end_date = Date.parse('2016-09-17')
-job23.save!
+job23.save! validate: false
 
 job24 = Job.new application: app12
 job24.employer = 'Edgeclub'
@@ -3768,7 +3768,7 @@ job24.job_title = 'Dental Hygienist'
 job24.duties = 'Compatible asynchronous paradigm'
 job24.start_date = Date.parse('2012-12-27')
 job24.end_date = Date.parse('2016-09-30')
-job24.save!
+job24.save! validate: false
 
 ref23 = Reference.new application: app12
 ref23.reference_1_full_name = 'Brandon Morrison'
@@ -3789,22 +3789,22 @@ ref23.reference_2_postcode = 'NG22 3TR'
 ref23.reference_2_country = 'United Kingdom'
 ref23.reference_2_relationship = 'Devolved'
 ref23.reference_2_telephone = '44-(120)704-2170'
-ref23.save!
+ref23.save! validate: false
 
 course33 = CourseSelection.new application_id: app12.id, course_id: 23
-course33.save!
+course33.save! validate: false
 
 course34 = CourseSelection.new application_id: app12.id, course_id: 6
-course34.save!
+course34.save! validate: false
 
 course35 = CourseSelection.new application_id: app12.id, course_id: 18
-course35.save!
+course35.save! validate: false
 
 course36 = CourseSelection.new application_id: app12.id, course_id: 4
-course36.save!
+course36.save! validate: false
 
 course37 = CourseSelection.new application_id: app12.id, course_id: 2
-course37.save!
+course37.save! validate: false
 
 student13 = Student.new
 student13.first_name = 'Douglas'
@@ -3815,7 +3815,7 @@ student13.national_insurance_number = 'NJ443296B'
 student13.password = 'secret'
 student13.password_confirmation = 'secret'
 student13.confirmed_at = DateTime.now
-student13.save!
+student13.save! validate: false
 
 app13 = student13.create_application
 app13.title = 'Honorable'
@@ -3831,7 +3831,7 @@ app13.permanent_address_1 = 'Canary Road'
 app13.permanent_postcode = 'CT15 2GR'
 app13.permanent_country = 'United Kingdom'
 app13.state = :completed
-app13.save!
+app13.save! validate: false
 
 school25 = School.new application: app13
 school25.name = 'Courtauld Institute of Art'
@@ -3839,7 +3839,7 @@ school25.address_1 = '13 Maple Place'
 school25.address_2 = 'Seaton'
 school25.country = 'United Kingdom'
 school25.postcode = 'LE15 3FB'
-school25.save!
+school25.save! validate: false
 
 qualification73 = Qualification.new school: school25
 qualification73.subject = 'Computing'
@@ -3847,7 +3847,7 @@ qualification73.award = 'NQ'
 qualification73.grade = 'Pass'
 qualification73.start_date = Date.new(2014, 8, 23)
 qualification73.end_date = Date.new(2013, 6, 8)
-qualification73.save!
+qualification73.save! validate: false
 
 qualification74 = Qualification.new school: school25
 qualification74.subject = 'Physics'
@@ -3855,7 +3855,7 @@ qualification74.award = 'NQ'
 qualification74.grade = 'A'
 qualification74.start_date = Date.new(2014, 8, 23)
 qualification74.end_date = Date.new(2015, 6, 8)
-qualification74.save!
+qualification74.save! validate: false
 
 qualification75 = Qualification.new school: school25
 qualification75.subject = 'Maths'
@@ -3863,7 +3863,7 @@ qualification75.award = 'HNC'
 qualification75.grade = 'C'
 qualification75.start_date = Date.new(2014, 8, 23)
 qualification75.end_date = Date.new(2013, 6, 8)
-qualification75.save!
+qualification75.save! validate: false
 
 school26 = School.new application: app13
 school26.name = 'United Medical and Dental Schools'
@@ -3871,7 +3871,7 @@ school26.address_1 = '2 Evergreen Trail'
 school26.address_2 = 'London'
 school26.country = 'United Kingdom'
 school26.postcode = 'EC3M 3FB'
-school26.save!
+school26.save! validate: false
 
 qualification76 = Qualification.new school: school26
 qualification76.subject = 'Maths'
@@ -3879,7 +3879,7 @@ qualification76.award = 'Higher'
 qualification76.grade = 'B'
 qualification76.start_date = Date.new(2015, 8, 23)
 qualification76.end_date = Date.new(2015, 6, 8)
-qualification76.save!
+qualification76.save! validate: false
 
 qualification77 = Qualification.new school: school26
 qualification77.subject = 'Maths'
@@ -3887,7 +3887,7 @@ qualification77.award = 'HND'
 qualification77.grade = 'A'
 qualification77.start_date = Date.new(2015, 8, 23)
 qualification77.end_date = Date.new(2015, 6, 8)
-qualification77.save!
+qualification77.save! validate: false
 
 qualification78 = Qualification.new school: school26
 qualification78.subject = 'PE'
@@ -3895,7 +3895,7 @@ qualification78.award = 'Higher'
 qualification78.grade = 'Pass'
 qualification78.start_date = Date.new(2015, 8, 23)
 qualification78.end_date = Date.new(2014, 6, 8)
-qualification78.save!
+qualification78.save! validate: false
 
 job25 = Job.new application: app13
 job25.employer = 'Jetpulse'
@@ -3907,7 +3907,7 @@ job25.job_title = 'VP Accounting'
 job25.duties = 'Persistent radical success'
 job25.start_date = Date.parse('2012-11-24')
 job25.end_date = Date.parse('2016-12-29')
-job25.save!
+job25.save! validate: false
 
 job26 = Job.new application: app13
 job26.employer = 'Dabjam'
@@ -3919,7 +3919,7 @@ job26.job_title = 'Associate Professor'
 job26.duties = 'Down-sized zero administration hardware'
 job26.start_date = Date.parse('2012-01-13')
 job26.end_date = Date.parse('2013-12-12')
-job26.save!
+job26.save! validate: false
 
 ref25 = Reference.new application: app13
 ref25.reference_1_full_name = 'Catherine Rogers'
@@ -3940,10 +3940,10 @@ ref25.reference_2_postcode = 'NR34 3TR'
 ref25.reference_2_country = 'United Kingdom'
 ref25.reference_2_relationship = 'Mandatory'
 ref25.reference_2_telephone = '44-(744)835-3534'
-ref25.save!
+ref25.save! validate: false
 
 course38 = CourseSelection.new application_id: app13.id, course_id: 8
-course38.save!
+course38.save! validate: false
 
 student14 = Student.new
 student14.first_name = 'Irene'
@@ -3954,7 +3954,7 @@ student14.national_insurance_number = 'NJ163726B'
 student14.password = 'secret'
 student14.password_confirmation = 'secret'
 student14.confirmed_at = DateTime.now
-student14.save!
+student14.save! validate: false
 
 app14 = student14.create_application
 app14.title = 'Honorable'
@@ -3969,7 +3969,7 @@ app14.permanent_address_2 = 'Milton'
 app14.permanent_postcode = 'NG22 2GR'
 app14.permanent_country = 'United Kingdom'
 app14.state = :completed
-app14.save!
+app14.save! validate: false
 
 school27 = School.new application: app14
 school27.name = 'Heriot-Watt University'
@@ -3977,7 +3977,7 @@ school27.address_1 = '75 Petterle Alley'
 school27.address_2 = 'Newtown'
 school27.country = 'United Kingdom'
 school27.postcode = 'RG20 3FB'
-school27.save!
+school27.save! validate: false
 
 qualification79 = Qualification.new school: school27
 qualification79.subject = 'English'
@@ -3985,7 +3985,7 @@ qualification79.award = 'HND'
 qualification79.grade = 'B'
 qualification79.start_date = Date.new(2013, 8, 23)
 qualification79.end_date = Date.new(2013, 6, 8)
-qualification79.save!
+qualification79.save! validate: false
 
 qualification80 = Qualification.new school: school27
 qualification80.subject = 'Chemistry'
@@ -3993,7 +3993,7 @@ qualification80.award = 'HNC'
 qualification80.grade = 'D'
 qualification80.start_date = Date.new(2012, 8, 23)
 qualification80.end_date = Date.new(2016, 6, 8)
-qualification80.save!
+qualification80.save! validate: false
 
 qualification81 = Qualification.new school: school27
 qualification81.subject = 'Art'
@@ -4001,7 +4001,7 @@ qualification81.award = 'Standard'
 qualification81.grade = 'C'
 qualification81.start_date = Date.new(2014, 8, 23)
 qualification81.end_date = Date.new(2014, 6, 8)
-qualification81.save!
+qualification81.save! validate: false
 
 school28 = School.new application: app14
 school28.name = 'South Bank University'
@@ -4009,7 +4009,7 @@ school28.address_1 = '69406 Badeau Hill'
 school28.address_2 = 'East End'
 school28.country = 'United Kingdom'
 school28.postcode = 'BH21 3FB'
-school28.save!
+school28.save! validate: false
 
 qualification82 = Qualification.new school: school28
 qualification82.subject = 'PE'
@@ -4017,7 +4017,7 @@ qualification82.award = 'HNC'
 qualification82.grade = 'B'
 qualification82.start_date = Date.new(2014, 8, 23)
 qualification82.end_date = Date.new(2016, 6, 8)
-qualification82.save!
+qualification82.save! validate: false
 
 qualification83 = Qualification.new school: school28
 qualification83.subject = 'Art'
@@ -4025,7 +4025,7 @@ qualification83.award = 'HND'
 qualification83.grade = 'A'
 qualification83.start_date = Date.new(2014, 8, 23)
 qualification83.end_date = Date.new(2014, 6, 8)
-qualification83.save!
+qualification83.save! validate: false
 
 qualification84 = Qualification.new school: school28
 qualification84.subject = 'Maths'
@@ -4033,7 +4033,7 @@ qualification84.award = 'HND'
 qualification84.grade = 'A'
 qualification84.start_date = Date.new(2012, 8, 23)
 qualification84.end_date = Date.new(2015, 6, 8)
-qualification84.save!
+qualification84.save! validate: false
 
 job27 = Job.new application: app14
 job27.employer = 'Gabtune'
@@ -4045,7 +4045,7 @@ job27.job_title = 'Safety Technician II'
 job27.duties = 'Upgradable fresh-thinking monitoring'
 job27.start_date = Date.parse('2013-02-11')
 job27.end_date = Date.parse('2016-10-28')
-job27.save!
+job27.save! validate: false
 
 job28 = Job.new application: app14
 job28.employer = 'Realcube'
@@ -4057,7 +4057,7 @@ job28.job_title = 'Systems Administrator IV'
 job28.duties = 'Robust didactic product'
 job28.start_date = Date.parse('2010-06-11')
 job28.end_date = Date.parse('2014-12-26')
-job28.save!
+job28.save! validate: false
 
 ref27 = Reference.new application: app14
 ref27.reference_1_full_name = 'Karen Phillips'
@@ -4078,13 +4078,13 @@ ref27.reference_2_postcode = 'M34 3TR'
 ref27.reference_2_country = 'United Kingdom'
 ref27.reference_2_relationship = 'actuating'
 ref27.reference_2_telephone = '44-(551)706-9879'
-ref27.save!
+ref27.save! validate: false
 
 course39 = CourseSelection.new application_id: app14.id, course_id: 22
-course39.save!
+course39.save! validate: false
 
 course40 = CourseSelection.new application_id: app14.id, course_id: 12
-course40.save!
+course40.save! validate: false
 
 student15 = Student.new
 student15.first_name = 'Phyllis'
@@ -4095,7 +4095,7 @@ student15.national_insurance_number = 'NJ164883C'
 student15.password = 'secret'
 student15.password_confirmation = 'secret'
 student15.confirmed_at = DateTime.now
-student15.save!
+student15.save! validate: false
 
 app15 = student15.create_application
 app15.title = 'Ms'
@@ -4112,7 +4112,7 @@ app15.permanent_address_2 = 'Edinburgh'
 app15.permanent_postcode = 'EH9 2GR'
 app15.permanent_country = 'United Kingdom'
 app15.state = :completed
-app15.save!
+app15.save! validate: false
 
 school29 = School.new application: app15
 school29.name = 'University of Portsmouth'
@@ -4120,7 +4120,7 @@ school29.address_1 = '23 Cody Park'
 school29.address_2 = 'Preston'
 school29.country = 'United Kingdom'
 school29.postcode = 'PR1 3FB'
-school29.save!
+school29.save! validate: false
 
 qualification85 = Qualification.new school: school29
 qualification85.subject = 'Physics'
@@ -4128,7 +4128,7 @@ qualification85.award = 'Higher'
 qualification85.grade = 'A'
 qualification85.start_date = Date.new(2014, 8, 23)
 qualification85.end_date = Date.new(2016, 6, 8)
-qualification85.save!
+qualification85.save! validate: false
 
 qualification86 = Qualification.new school: school29
 qualification86.subject = 'Art'
@@ -4136,7 +4136,7 @@ qualification86.award = 'Standard'
 qualification86.grade = 'A'
 qualification86.start_date = Date.new(2014, 8, 23)
 qualification86.end_date = Date.new(2013, 6, 8)
-qualification86.save!
+qualification86.save! validate: false
 
 qualification87 = Qualification.new school: school29
 qualification87.subject = 'Technological Studies'
@@ -4144,7 +4144,7 @@ qualification87.award = 'HNC'
 qualification87.grade = 'Pass'
 qualification87.start_date = Date.new(2013, 8, 23)
 qualification87.end_date = Date.new(2015, 6, 8)
-qualification87.save!
+qualification87.save! validate: false
 
 school30 = School.new application: app15
 school30.name = 'The Manchester Metropolitan University'
@@ -4152,7 +4152,7 @@ school30.address_1 = '049 Quincy Pass'
 school30.address_2 = 'Norton'
 school30.country = 'United Kingdom'
 school30.postcode = 'S8 3FB'
-school30.save!
+school30.save! validate: false
 
 qualification88 = Qualification.new school: school30
 qualification88.subject = 'English'
@@ -4160,7 +4160,7 @@ qualification88.award = 'HND'
 qualification88.grade = 'C'
 qualification88.start_date = Date.new(2014, 8, 23)
 qualification88.end_date = Date.new(2013, 6, 8)
-qualification88.save!
+qualification88.save! validate: false
 
 qualification89 = Qualification.new school: school30
 qualification89.subject = 'Computing'
@@ -4168,7 +4168,7 @@ qualification89.award = 'HND'
 qualification89.grade = 'D'
 qualification89.start_date = Date.new(2012, 8, 23)
 qualification89.end_date = Date.new(2013, 6, 8)
-qualification89.save!
+qualification89.save! validate: false
 
 qualification90 = Qualification.new school: school30
 qualification90.subject = 'Computing'
@@ -4176,7 +4176,7 @@ qualification90.award = 'Standard'
 qualification90.grade = 'C'
 qualification90.start_date = Date.new(2014, 8, 23)
 qualification90.end_date = Date.new(2015, 6, 8)
-qualification90.save!
+qualification90.save! validate: false
 
 job29 = Job.new application: app15
 job29.employer = 'Eamia'
@@ -4188,7 +4188,7 @@ job29.job_title = 'Editor'
 job29.duties = 'Fundamental leading edge help-desk'
 job29.start_date = Date.parse('2012-10-13')
 job29.end_date = Date.parse('2015-08-18')
-job29.save!
+job29.save! validate: false
 
 job30 = Job.new application: app15
 job30.employer = 'Jabberstorm'
@@ -4200,7 +4200,7 @@ job30.job_title = 'Actuary'
 job30.duties = 'Progressive tertiary structure'
 job30.start_date = Date.parse('2012-12-26')
 job30.end_date = Date.parse('2016-11-05')
-job30.save!
+job30.save! validate: false
 
 ref29 = Reference.new application: app15
 ref29.reference_1_full_name = 'Jacqueline Lewis'
@@ -4221,10 +4221,10 @@ ref29.reference_2_postcode = 'CT16 3TR'
 ref29.reference_2_country = 'United Kingdom'
 ref29.reference_2_relationship = 'Adaptive'
 ref29.reference_2_telephone = '44-(251)612-1118'
-ref29.save!
+ref29.save! validate: false
 
 course41 = CourseSelection.new application_id: app15.id, course_id: 2
-course41.save!
+course41.save! validate: false
 
 student16 = Student.new
 student16.first_name = 'Shirley'
@@ -4235,7 +4235,7 @@ student16.national_insurance_number = 'NJ992426C'
 student16.password = 'secret'
 student16.password_confirmation = 'secret'
 student16.confirmed_at = DateTime.now
-student16.save!
+student16.save! validate: false
 
 app16 = student16.create_application
 app16.title = 'Ms'
@@ -4251,7 +4251,7 @@ app16.permanent_address_1 = 'Cascade Crossing'
 app16.permanent_postcode = 'PR1 2GR'
 app16.permanent_country = 'United Kingdom'
 app16.state = :completed
-app16.save!
+app16.save! validate: false
 
 school31 = School.new application: app16
 school31.name = 'University of Wales'
@@ -4259,7 +4259,7 @@ school31.address_1 = '2 Anzinger Park'
 school31.address_2 = 'Edinburgh'
 school31.country = 'United Kingdom'
 school31.postcode = 'EH9 3FB'
-school31.save!
+school31.save! validate: false
 
 qualification91 = Qualification.new school: school31
 qualification91.subject = 'Geography'
@@ -4267,7 +4267,7 @@ qualification91.award = 'NQ'
 qualification91.grade = 'C'
 qualification91.start_date = Date.new(2014, 8, 23)
 qualification91.end_date = Date.new(2013, 6, 8)
-qualification91.save!
+qualification91.save! validate: false
 
 qualification92 = Qualification.new school: school31
 qualification92.subject = 'Biology'
@@ -4275,7 +4275,7 @@ qualification92.award = 'Higher'
 qualification92.grade = 'C'
 qualification92.start_date = Date.new(2015, 8, 23)
 qualification92.end_date = Date.new(2015, 6, 8)
-qualification92.save!
+qualification92.save! validate: false
 
 qualification93 = Qualification.new school: school31
 qualification93.subject = 'English'
@@ -4283,7 +4283,7 @@ qualification93.award = 'Standard'
 qualification93.grade = 'D'
 qualification93.start_date = Date.new(2015, 8, 23)
 qualification93.end_date = Date.new(2014, 6, 8)
-qualification93.save!
+qualification93.save! validate: false
 
 school32 = School.new application: app16
 school32.name = 'Staffordshire University'
@@ -4291,7 +4291,7 @@ school32.address_1 = '2 Express Drive'
 school32.address_2 = 'Norton'
 school32.country = 'United Kingdom'
 school32.postcode = 'NN11 3FB'
-school32.save!
+school32.save! validate: false
 
 qualification94 = Qualification.new school: school32
 qualification94.subject = 'Technological Studies'
@@ -4299,7 +4299,7 @@ qualification94.award = 'HNC'
 qualification94.grade = 'D'
 qualification94.start_date = Date.new(2015, 8, 23)
 qualification94.end_date = Date.new(2013, 6, 8)
-qualification94.save!
+qualification94.save! validate: false
 
 qualification95 = Qualification.new school: school32
 qualification95.subject = 'Geography'
@@ -4307,7 +4307,7 @@ qualification95.award = 'Standard'
 qualification95.grade = 'A'
 qualification95.start_date = Date.new(2012, 8, 23)
 qualification95.end_date = Date.new(2015, 6, 8)
-qualification95.save!
+qualification95.save! validate: false
 
 qualification96 = Qualification.new school: school32
 qualification96.subject = 'Geography'
@@ -4315,7 +4315,7 @@ qualification96.award = 'Higher'
 qualification96.grade = 'Pass'
 qualification96.start_date = Date.new(2015, 8, 23)
 qualification96.end_date = Date.new(2013, 6, 8)
-qualification96.save!
+qualification96.save! validate: false
 
 job31 = Job.new application: app16
 job31.employer = 'Mydeo'
@@ -4327,7 +4327,7 @@ job31.job_title = 'Compensation Analyst'
 job31.duties = 'Virtual national orchestration'
 job31.start_date = Date.parse('2012-09-06')
 job31.end_date = Date.parse('2016-09-08')
-job31.save!
+job31.save! validate: false
 
 job32 = Job.new application: app16
 job32.employer = 'Topdrive'
@@ -4339,7 +4339,7 @@ job32.job_title = 'Biostatistician II'
 job32.duties = 'Fully-configurable explicit data-warehouse'
 job32.start_date = Date.parse('2012-04-09')
 job32.end_date = Date.parse('2013-12-01')
-job32.save!
+job32.save! validate: false
 
 ref31 = Reference.new application: app16
 ref31.reference_1_full_name = 'Ruby Ramos'
@@ -4360,13 +4360,13 @@ ref31.reference_2_postcode = 'EH9 3TR'
 ref31.reference_2_country = 'United Kingdom'
 ref31.reference_2_relationship = 'parallelism'
 ref31.reference_2_telephone = '44-(351)167-5329'
-ref31.save!
+ref31.save! validate: false
 
 course42 = CourseSelection.new application_id: app16.id, course_id: 22
-course42.save!
+course42.save! validate: false
 
 course43 = CourseSelection.new application_id: app16.id, course_id: 16
-course43.save!
+course43.save! validate: false
 
 student17 = Student.new
 student17.first_name = 'Joshua'
@@ -4377,7 +4377,7 @@ student17.national_insurance_number = 'NJ791914B'
 student17.password = 'secret'
 student17.password_confirmation = 'secret'
 student17.confirmed_at = DateTime.now
-student17.save!
+student17.save! validate: false
 
 app17 = student17.create_application
 app17.title = 'Mr'
@@ -4397,7 +4397,7 @@ app17.correspondence_address_2 = 'Mr'
 app17.correspondence_postcode = 'CT16 2GR'
 app17.correspondence_country = 'United Kingdom'
 app17.state = :completed
-app17.save!
+app17.save! validate: false
 
 school33 = School.new application: app17
 school33.name = 'Wimbledon School of Art'
@@ -4405,7 +4405,7 @@ school33.address_1 = '476 Sunfield Point'
 school33.address_2 = 'East End'
 school33.country = 'United Kingdom'
 school33.postcode = 'BH21 3FB'
-school33.save!
+school33.save! validate: false
 
 qualification97 = Qualification.new school: school33
 qualification97.subject = 'Computing'
@@ -4413,7 +4413,7 @@ qualification97.award = 'NQ'
 qualification97.grade = 'Pass'
 qualification97.start_date = Date.new(2013, 8, 23)
 qualification97.end_date = Date.new(2016, 6, 8)
-qualification97.save!
+qualification97.save! validate: false
 
 qualification98 = Qualification.new school: school33
 qualification98.subject = 'Computing'
@@ -4421,7 +4421,7 @@ qualification98.award = 'Higher'
 qualification98.grade = 'D'
 qualification98.start_date = Date.new(2014, 8, 23)
 qualification98.end_date = Date.new(2014, 6, 8)
-qualification98.save!
+qualification98.save! validate: false
 
 qualification99 = Qualification.new school: school33
 qualification99.subject = 'Biology'
@@ -4429,7 +4429,7 @@ qualification99.award = 'Standard'
 qualification99.grade = 'Pass'
 qualification99.start_date = Date.new(2014, 8, 23)
 qualification99.end_date = Date.new(2015, 6, 8)
-qualification99.save!
+qualification99.save! validate: false
 
 school34 = School.new application: app17
 school34.name = 'University of St. Andrews'
@@ -4437,7 +4437,7 @@ school34.address_1 = '670 Corscot Terrace'
 school34.address_2 = 'Bristol'
 school34.country = 'United Kingdom'
 school34.postcode = 'BS41 3FB'
-school34.save!
+school34.save! validate: false
 
 qualification100 = Qualification.new school: school34
 qualification100.subject = 'English'
@@ -4445,7 +4445,7 @@ qualification100.award = 'HND'
 qualification100.grade = 'A'
 qualification100.start_date = Date.new(2015, 8, 23)
 qualification100.end_date = Date.new(2013, 6, 8)
-qualification100.save!
+qualification100.save! validate: false
 
 qualification101 = Qualification.new school: school34
 qualification101.subject = 'Geography'
@@ -4453,7 +4453,7 @@ qualification101.award = 'HND'
 qualification101.grade = 'A'
 qualification101.start_date = Date.new(2014, 8, 23)
 qualification101.end_date = Date.new(2016, 6, 8)
-qualification101.save!
+qualification101.save! validate: false
 
 qualification102 = Qualification.new school: school34
 qualification102.subject = 'English'
@@ -4461,7 +4461,7 @@ qualification102.award = 'Standard'
 qualification102.grade = 'B'
 qualification102.start_date = Date.new(2014, 8, 23)
 qualification102.end_date = Date.new(2016, 6, 8)
-qualification102.save!
+qualification102.save! validate: false
 
 job33 = Job.new application: app17
 job33.employer = 'Thoughtworks'
@@ -4473,7 +4473,7 @@ job33.job_title = 'Human Resources Assistant III'
 job33.duties = 'Profound bifurcated software'
 job33.start_date = Date.parse('2010-12-04')
 job33.end_date = Date.parse('2014-01-11')
-job33.save!
+job33.save! validate: false
 
 job34 = Job.new application: app17
 job34.employer = 'Flashpoint'
@@ -4485,7 +4485,7 @@ job34.job_title = 'Professor'
 job34.duties = 'Focused dedicated internet solution'
 job34.start_date = Date.parse('2010-10-21')
 job34.end_date = Date.parse('2016-12-06')
-job34.save!
+job34.save! validate: false
 
 ref33 = Reference.new application: app17
 ref33.reference_1_full_name = 'Wanda White'
@@ -4506,10 +4506,10 @@ ref33.reference_2_postcode = 'BT66 3TR'
 ref33.reference_2_country = 'United Kingdom'
 ref33.reference_2_relationship = '24/7'
 ref33.reference_2_telephone = '44-(240)678-3099'
-ref33.save!
+ref33.save! validate: false
 
 course44 = CourseSelection.new application_id: app17.id, course_id: 21
-course44.save!
+course44.save! validate: false
 
 student18 = Student.new
 student18.first_name = 'Jane'
@@ -4520,7 +4520,7 @@ student18.national_insurance_number = 'NJ426685D'
 student18.password = 'secret'
 student18.password_confirmation = 'secret'
 student18.confirmed_at = DateTime.now
-student18.save!
+student18.save! validate: false
 
 app18 = student18.create_application
 app18.title = 'Rev'
@@ -4536,7 +4536,7 @@ app18.permanent_address_2 = 'Newtown'
 app18.permanent_postcode = 'RG20 2GR'
 app18.permanent_country = 'United Kingdom'
 app18.state = :completed
-app18.save!
+app18.save! validate: false
 
 school35 = School.new application: app18
 school35.name = 'University of Aberdeen'
@@ -4544,7 +4544,7 @@ school35.address_1 = '4 Susan Place'
 school35.address_2 = 'Whitchurch'
 school35.country = 'United Kingdom'
 school35.postcode = 'BS14 3FB'
-school35.save!
+school35.save! validate: false
 
 qualification103 = Qualification.new school: school35
 qualification103.subject = 'Chemistry'
@@ -4552,7 +4552,7 @@ qualification103.award = 'Standard'
 qualification103.grade = 'A'
 qualification103.start_date = Date.new(2014, 8, 23)
 qualification103.end_date = Date.new(2014, 6, 8)
-qualification103.save!
+qualification103.save! validate: false
 
 qualification104 = Qualification.new school: school35
 qualification104.subject = 'English'
@@ -4560,7 +4560,7 @@ qualification104.award = 'Higher'
 qualification104.grade = 'C'
 qualification104.start_date = Date.new(2013, 8, 23)
 qualification104.end_date = Date.new(2014, 6, 8)
-qualification104.save!
+qualification104.save! validate: false
 
 qualification105 = Qualification.new school: school35
 qualification105.subject = 'Biology'
@@ -4568,7 +4568,7 @@ qualification105.award = 'HND'
 qualification105.grade = 'D'
 qualification105.start_date = Date.new(2012, 8, 23)
 qualification105.end_date = Date.new(2014, 6, 8)
-qualification105.save!
+qualification105.save! validate: false
 
 school36 = School.new application: app18
 school36.name = 'Middlesex University'
@@ -4576,7 +4576,7 @@ school36.address_1 = '3 Scott Avenue'
 school36.address_2 = 'Leeds'
 school36.country = 'United Kingdom'
 school36.postcode = 'LS6 3FB'
-school36.save!
+school36.save! validate: false
 
 qualification106 = Qualification.new school: school36
 qualification106.subject = 'Biology'
@@ -4584,7 +4584,7 @@ qualification106.award = 'Standard'
 qualification106.grade = 'C'
 qualification106.start_date = Date.new(2013, 8, 23)
 qualification106.end_date = Date.new(2014, 6, 8)
-qualification106.save!
+qualification106.save! validate: false
 
 qualification107 = Qualification.new school: school36
 qualification107.subject = 'Geography'
@@ -4592,7 +4592,7 @@ qualification107.award = 'Standard'
 qualification107.grade = 'D'
 qualification107.start_date = Date.new(2012, 8, 23)
 qualification107.end_date = Date.new(2013, 6, 8)
-qualification107.save!
+qualification107.save! validate: false
 
 qualification108 = Qualification.new school: school36
 qualification108.subject = 'Chemistry'
@@ -4600,7 +4600,7 @@ qualification108.award = 'NQ'
 qualification108.grade = 'Pass'
 qualification108.start_date = Date.new(2015, 8, 23)
 qualification108.end_date = Date.new(2016, 6, 8)
-qualification108.save!
+qualification108.save! validate: false
 
 job35 = Job.new application: app18
 job35.employer = 'Skajo'
@@ -4612,7 +4612,7 @@ job35.job_title = 'Senior Developer'
 job35.duties = 'Profit-focused modular parallelism'
 job35.start_date = Date.parse('2012-05-19')
 job35.end_date = Date.parse('2015-08-09')
-job35.save!
+job35.save! validate: false
 
 job36 = Job.new application: app18
 job36.employer = 'Zooveo'
@@ -4624,7 +4624,7 @@ job36.job_title = 'Desktop Support Technician'
 job36.duties = 'Implemented bandwidth-monitored conglomeration'
 job36.start_date = Date.parse('2012-06-03')
 job36.end_date = Date.parse('2014-04-11')
-job36.save!
+job36.save! validate: false
 
 ref35 = Reference.new application: app18
 ref35.reference_1_full_name = 'Terry Banks'
@@ -4645,13 +4645,13 @@ ref35.reference_2_postcode = 'BS14 3TR'
 ref35.reference_2_country = 'United Kingdom'
 ref35.reference_2_relationship = 'Exclusive'
 ref35.reference_2_telephone = '44-(995)797-4055'
-ref35.save!
+ref35.save! validate: false
 
 course45 = CourseSelection.new application_id: app18.id, course_id: 19
-course45.save!
+course45.save! validate: false
 
 course46 = CourseSelection.new application_id: app18.id, course_id: 11
-course46.save!
+course46.save! validate: false
 
 student19 = Student.new
 student19.first_name = 'Gregory'
@@ -4662,7 +4662,7 @@ student19.national_insurance_number = 'NJ648226C'
 student19.password = 'secret'
 student19.password_confirmation = 'secret'
 student19.confirmed_at = DateTime.now
-student19.save!
+student19.save! validate: false
 
 app19 = student19.create_application
 app19.title = 'Rev'
@@ -4682,7 +4682,7 @@ app19.correspondence_address_2 = 'Rev'
 app19.correspondence_postcode = 'NG34 2GR'
 app19.correspondence_country = 'United Kingdom'
 app19.state = :completed
-app19.save!
+app19.save! validate: false
 
 school37 = School.new application: app19
 school37.name = 'University of Aberdeen'
@@ -4690,7 +4690,7 @@ school37.address_1 = '725 Anderson Drive'
 school37.address_2 = 'Ashley'
 school37.country = 'United Kingdom'
 school37.postcode = 'SN13 3FB'
-school37.save!
+school37.save! validate: false
 
 qualification109 = Qualification.new school: school37
 qualification109.subject = 'Biology'
@@ -4698,7 +4698,7 @@ qualification109.award = 'HNC'
 qualification109.grade = 'D'
 qualification109.start_date = Date.new(2012, 8, 23)
 qualification109.end_date = Date.new(2013, 6, 8)
-qualification109.save!
+qualification109.save! validate: false
 
 qualification110 = Qualification.new school: school37
 qualification110.subject = 'Maths'
@@ -4706,7 +4706,7 @@ qualification110.award = 'HNC'
 qualification110.grade = 'D'
 qualification110.start_date = Date.new(2012, 8, 23)
 qualification110.end_date = Date.new(2015, 6, 8)
-qualification110.save!
+qualification110.save! validate: false
 
 qualification111 = Qualification.new school: school37
 qualification111.subject = 'Woodworking'
@@ -4714,7 +4714,7 @@ qualification111.award = 'NQ'
 qualification111.grade = 'A'
 qualification111.start_date = Date.new(2013, 8, 23)
 qualification111.end_date = Date.new(2013, 6, 8)
-qualification111.save!
+qualification111.save! validate: false
 
 school38 = School.new application: app19
 school38.name = 'University of Central Lancashire'
@@ -4722,7 +4722,7 @@ school38.address_1 = '9229 Transport Street'
 school38.address_2 = 'London'
 school38.country = 'United Kingdom'
 school38.postcode = 'EC3M 3FB'
-school38.save!
+school38.save! validate: false
 
 qualification112 = Qualification.new school: school38
 qualification112.subject = 'Technological Studies'
@@ -4730,7 +4730,7 @@ qualification112.award = 'HND'
 qualification112.grade = 'B'
 qualification112.start_date = Date.new(2013, 8, 23)
 qualification112.end_date = Date.new(2014, 6, 8)
-qualification112.save!
+qualification112.save! validate: false
 
 qualification113 = Qualification.new school: school38
 qualification113.subject = 'Woodworking'
@@ -4738,7 +4738,7 @@ qualification113.award = 'HND'
 qualification113.grade = 'Pass'
 qualification113.start_date = Date.new(2014, 8, 23)
 qualification113.end_date = Date.new(2016, 6, 8)
-qualification113.save!
+qualification113.save! validate: false
 
 qualification114 = Qualification.new school: school38
 qualification114.subject = 'Woodworking'
@@ -4746,7 +4746,7 @@ qualification114.award = 'NQ'
 qualification114.grade = 'A'
 qualification114.start_date = Date.new(2013, 8, 23)
 qualification114.end_date = Date.new(2014, 6, 8)
-qualification114.save!
+qualification114.save! validate: false
 
 job37 = Job.new application: app19
 job37.employer = 'Dabshots'
@@ -4758,7 +4758,7 @@ job37.job_title = 'Database Administrator I'
 job37.duties = 'Reverse-engineered zero defect focus group'
 job37.start_date = Date.parse('2010-05-02')
 job37.end_date = Date.parse('2016-03-17')
-job37.save!
+job37.save! validate: false
 
 job38 = Job.new application: app19
 job38.employer = 'Buzzbean'
@@ -4770,7 +4770,7 @@ job38.job_title = 'Accounting Assistant IV'
 job38.duties = 'Multi-channelled bi-directional focus group'
 job38.start_date = Date.parse('2010-09-16')
 job38.end_date = Date.parse('2016-05-01')
-job38.save!
+job38.save! validate: false
 
 ref37 = Reference.new application: app19
 ref37.reference_1_full_name = 'Willie Murray'
@@ -4791,10 +4791,10 @@ ref37.reference_2_postcode = 'M34 3TR'
 ref37.reference_2_country = 'United Kingdom'
 ref37.reference_2_relationship = 'encryption'
 ref37.reference_2_telephone = '44-(859)845-9504'
-ref37.save!
+ref37.save! validate: false
 
 course47 = CourseSelection.new application_id: app19.id, course_id: 24
-course47.save!
+course47.save! validate: false
 
 student20 = Student.new
 student20.first_name = 'Antonio'
@@ -4805,7 +4805,7 @@ student20.national_insurance_number = 'NJ494308B'
 student20.password = 'secret'
 student20.password_confirmation = 'secret'
 student20.confirmed_at = DateTime.now
-student20.save!
+student20.save! validate: false
 
 app20 = student20.create_application
 app20.title = 'Rev'
@@ -4821,7 +4821,7 @@ app20.permanent_address_1 = 'Bashford Lane'
 app20.permanent_postcode = 'BS14 2GR'
 app20.permanent_country = 'United Kingdom'
 app20.state = :completed
-app20.save!
+app20.save! validate: false
 
 school39 = School.new application: app20
 school39.name = 'Trinity College Carmarthen'
@@ -4829,7 +4829,7 @@ school39.address_1 = '2258 Gerald Pass'
 school39.address_2 = 'Upton'
 school39.country = 'United Kingdom'
 school39.postcode = 'WF9 3FB'
-school39.save!
+school39.save! validate: false
 
 qualification115 = Qualification.new school: school39
 qualification115.subject = 'Art'
@@ -4837,7 +4837,7 @@ qualification115.award = 'HNC'
 qualification115.grade = 'B'
 qualification115.start_date = Date.new(2014, 8, 23)
 qualification115.end_date = Date.new(2016, 6, 8)
-qualification115.save!
+qualification115.save! validate: false
 
 qualification116 = Qualification.new school: school39
 qualification116.subject = 'Chemistry'
@@ -4845,7 +4845,7 @@ qualification116.award = 'HNC'
 qualification116.grade = 'C'
 qualification116.start_date = Date.new(2015, 8, 23)
 qualification116.end_date = Date.new(2013, 6, 8)
-qualification116.save!
+qualification116.save! validate: false
 
 qualification117 = Qualification.new school: school39
 qualification117.subject = 'Biology'
@@ -4853,7 +4853,7 @@ qualification117.award = 'HNC'
 qualification117.grade = 'A'
 qualification117.start_date = Date.new(2014, 8, 23)
 qualification117.end_date = Date.new(2013, 6, 8)
-qualification117.save!
+qualification117.save! validate: false
 
 school40 = School.new application: app20
 school40.name = 'University of East Anglia'
@@ -4861,7 +4861,7 @@ school40.address_1 = '01016 Montana Alley'
 school40.address_2 = 'Whitwell'
 school40.country = 'United Kingdom'
 school40.postcode = 'DL10 3FB'
-school40.save!
+school40.save! validate: false
 
 qualification118 = Qualification.new school: school40
 qualification118.subject = 'Physics'
@@ -4869,7 +4869,7 @@ qualification118.award = 'HND'
 qualification118.grade = 'Pass'
 qualification118.start_date = Date.new(2014, 8, 23)
 qualification118.end_date = Date.new(2014, 6, 8)
-qualification118.save!
+qualification118.save! validate: false
 
 qualification119 = Qualification.new school: school40
 qualification119.subject = 'Art'
@@ -4877,7 +4877,7 @@ qualification119.award = 'Higher'
 qualification119.grade = 'B'
 qualification119.start_date = Date.new(2012, 8, 23)
 qualification119.end_date = Date.new(2014, 6, 8)
-qualification119.save!
+qualification119.save! validate: false
 
 qualification120 = Qualification.new school: school40
 qualification120.subject = 'English'
@@ -4885,7 +4885,7 @@ qualification120.award = 'HNC'
 qualification120.grade = 'C'
 qualification120.start_date = Date.new(2014, 8, 23)
 qualification120.end_date = Date.new(2014, 6, 8)
-qualification120.save!
+qualification120.save! validate: false
 
 job39 = Job.new application: app20
 job39.employer = 'Quimm'
@@ -4897,7 +4897,7 @@ job39.job_title = 'Research Nurse'
 job39.duties = 'Re-engineered encompassing solution'
 job39.start_date = Date.parse('2010-04-13')
 job39.end_date = Date.parse('2013-11-27')
-job39.save!
+job39.save! validate: false
 
 job40 = Job.new application: app20
 job40.employer = 'Jatri'
@@ -4909,7 +4909,7 @@ job40.job_title = 'Web Designer IV'
 job40.duties = 'Object-based value-added policy'
 job40.start_date = Date.parse('2010-05-17')
 job40.end_date = Date.parse('2014-01-10')
-job40.save!
+job40.save! validate: false
 
 ref39 = Reference.new application: app20
 ref39.reference_1_full_name = 'Karen Collins'
@@ -4930,10 +4930,10 @@ ref39.reference_2_postcode = 'EH52 3TR'
 ref39.reference_2_country = 'United Kingdom'
 ref39.reference_2_relationship = 'instruction set'
 ref39.reference_2_telephone = '44-(590)169-0449'
-ref39.save!
+ref39.save! validate: false
 
 course48 = CourseSelection.new application_id: app20.id, course_id: 24
-course48.save!
+course48.save! validate: false
 
 student21 = Student.new
 student21.first_name = 'Beverly'
@@ -4944,7 +4944,7 @@ student21.national_insurance_number = 'NJ529594C'
 student21.password = 'secret'
 student21.password_confirmation = 'secret'
 student21.confirmed_at = DateTime.now
-student21.save!
+student21.save! validate: false
 
 app21 = student21.create_application
 app21.title = 'Dr'
@@ -4960,7 +4960,7 @@ app21.permanent_address_2 = 'Eaton'
 app21.permanent_postcode = 'DN22 2GR'
 app21.permanent_country = 'United Kingdom'
 app21.state = :completed
-app21.save!
+app21.save! validate: false
 
 school41 = School.new application: app21
 school41.name = 'Courtauld Institute of Art'
@@ -4968,7 +4968,7 @@ school41.address_1 = '66836 Bayside Avenue'
 school41.address_2 = 'Newton'
 school41.country = 'United Kingdom'
 school41.postcode = 'IV1 3FB'
-school41.save!
+school41.save! validate: false
 
 qualification121 = Qualification.new school: school41
 qualification121.subject = 'Biology'
@@ -4976,7 +4976,7 @@ qualification121.award = 'HND'
 qualification121.grade = 'B'
 qualification121.start_date = Date.new(2015, 8, 23)
 qualification121.end_date = Date.new(2016, 6, 8)
-qualification121.save!
+qualification121.save! validate: false
 
 qualification122 = Qualification.new school: school41
 qualification122.subject = 'Chemistry'
@@ -4984,7 +4984,7 @@ qualification122.award = 'Standard'
 qualification122.grade = 'D'
 qualification122.start_date = Date.new(2012, 8, 23)
 qualification122.end_date = Date.new(2013, 6, 8)
-qualification122.save!
+qualification122.save! validate: false
 
 qualification123 = Qualification.new school: school41
 qualification123.subject = 'Physics'
@@ -4992,7 +4992,7 @@ qualification123.award = 'HND'
 qualification123.grade = 'A'
 qualification123.start_date = Date.new(2013, 8, 23)
 qualification123.end_date = Date.new(2015, 6, 8)
-qualification123.save!
+qualification123.save! validate: false
 
 school42 = School.new application: app21
 school42.name = 'University of Halifax'
@@ -5000,7 +5000,7 @@ school42.address_1 = '3 Del Mar Lane'
 school42.address_2 = 'Ford'
 school42.country = 'United Kingdom'
 school42.postcode = 'GL54 3FB'
-school42.save!
+school42.save! validate: false
 
 qualification124 = Qualification.new school: school42
 qualification124.subject = 'Technological Studies'
@@ -5008,7 +5008,7 @@ qualification124.award = 'NQ'
 qualification124.grade = 'Pass'
 qualification124.start_date = Date.new(2013, 8, 23)
 qualification124.end_date = Date.new(2016, 6, 8)
-qualification124.save!
+qualification124.save! validate: false
 
 qualification125 = Qualification.new school: school42
 qualification125.subject = 'Geography'
@@ -5016,7 +5016,7 @@ qualification125.award = 'HND'
 qualification125.grade = 'C'
 qualification125.start_date = Date.new(2013, 8, 23)
 qualification125.end_date = Date.new(2015, 6, 8)
-qualification125.save!
+qualification125.save! validate: false
 
 qualification126 = Qualification.new school: school42
 qualification126.subject = 'Computing'
@@ -5024,7 +5024,7 @@ qualification126.award = 'NQ'
 qualification126.grade = 'D'
 qualification126.start_date = Date.new(2012, 8, 23)
 qualification126.end_date = Date.new(2013, 6, 8)
-qualification126.save!
+qualification126.save! validate: false
 
 job41 = Job.new application: app21
 job41.employer = 'Vitz'
@@ -5036,7 +5036,7 @@ job41.job_title = 'Budget/Accounting Analyst III'
 job41.duties = 'Reactive stable process improvement'
 job41.start_date = Date.parse('2013-03-01')
 job41.end_date = Date.parse('2016-02-14')
-job41.save!
+job41.save! validate: false
 
 job42 = Job.new application: app21
 job42.employer = 'Oloo'
@@ -5048,7 +5048,7 @@ job42.job_title = 'Chief Design Engineer'
 job42.duties = 'Integrated scalable workforce'
 job42.start_date = Date.parse('2010-10-18')
 job42.end_date = Date.parse('2015-02-16')
-job42.save!
+job42.save! validate: false
 
 ref41 = Reference.new application: app21
 ref41.reference_1_full_name = 'Adam Smith'
@@ -5069,22 +5069,22 @@ ref41.reference_2_postcode = 'RG20 3TR'
 ref41.reference_2_country = 'United Kingdom'
 ref41.reference_2_relationship = 'Expanded'
 ref41.reference_2_telephone = '44-(953)973-0689'
-ref41.save!
+ref41.save! validate: false
 
 course49 = CourseSelection.new application_id: app21.id, course_id: 8
-course49.save!
+course49.save! validate: false
 
 course50 = CourseSelection.new application_id: app21.id, course_id: 2
-course50.save!
+course50.save! validate: false
 
 course51 = CourseSelection.new application_id: app21.id, course_id: 22
-course51.save!
+course51.save! validate: false
 
 course52 = CourseSelection.new application_id: app21.id, course_id: 12
-course52.save!
+course52.save! validate: false
 
 course53 = CourseSelection.new application_id: app21.id, course_id: 7
-course53.save!
+course53.save! validate: false
 
 student22 = Student.new
 student22.first_name = 'Jeremy'
@@ -5095,7 +5095,7 @@ student22.national_insurance_number = 'NJ354384B'
 student22.password = 'secret'
 student22.password_confirmation = 'secret'
 student22.confirmed_at = DateTime.now
-student22.save!
+student22.save! validate: false
 
 app22 = student22.create_application
 app22.title = 'Dr'
@@ -5110,7 +5110,7 @@ app22.permanent_address_1 = 'Gina Avenue'
 app22.permanent_postcode = 'NR34 2GR'
 app22.permanent_country = 'United Kingdom'
 app22.state = :completed
-app22.save!
+app22.save! validate: false
 
 school43 = School.new application: app22
 school43.name = 'University of Worcester'
@@ -5118,7 +5118,7 @@ school43.address_1 = '5172 Pierstorff Terrace'
 school43.address_2 = 'Birmingham'
 school43.country = 'United Kingdom'
 school43.postcode = 'B12 3FB'
-school43.save!
+school43.save! validate: false
 
 qualification127 = Qualification.new school: school43
 qualification127.subject = 'PE'
@@ -5126,7 +5126,7 @@ qualification127.award = 'HNC'
 qualification127.grade = 'A'
 qualification127.start_date = Date.new(2012, 8, 23)
 qualification127.end_date = Date.new(2014, 6, 8)
-qualification127.save!
+qualification127.save! validate: false
 
 qualification128 = Qualification.new school: school43
 qualification128.subject = 'Maths'
@@ -5134,7 +5134,7 @@ qualification128.award = 'Standard'
 qualification128.grade = 'A'
 qualification128.start_date = Date.new(2013, 8, 23)
 qualification128.end_date = Date.new(2016, 6, 8)
-qualification128.save!
+qualification128.save! validate: false
 
 qualification129 = Qualification.new school: school43
 qualification129.subject = 'Technological Studies'
@@ -5142,7 +5142,7 @@ qualification129.award = 'Higher'
 qualification129.grade = 'A'
 qualification129.start_date = Date.new(2015, 8, 23)
 qualification129.end_date = Date.new(2014, 6, 8)
-qualification129.save!
+qualification129.save! validate: false
 
 school44 = School.new application: app22
 school44.name = 'University of Sheffield'
@@ -5150,7 +5150,7 @@ school44.address_1 = '8089 Corben Circle'
 school44.address_2 = 'Liverpool'
 school44.country = 'United Kingdom'
 school44.postcode = 'L74 3FB'
-school44.save!
+school44.save! validate: false
 
 qualification130 = Qualification.new school: school44
 qualification130.subject = 'Woodworking'
@@ -5158,7 +5158,7 @@ qualification130.award = 'Standard'
 qualification130.grade = 'Pass'
 qualification130.start_date = Date.new(2012, 8, 23)
 qualification130.end_date = Date.new(2013, 6, 8)
-qualification130.save!
+qualification130.save! validate: false
 
 qualification131 = Qualification.new school: school44
 qualification131.subject = 'Geography'
@@ -5166,7 +5166,7 @@ qualification131.award = 'Standard'
 qualification131.grade = 'C'
 qualification131.start_date = Date.new(2012, 8, 23)
 qualification131.end_date = Date.new(2013, 6, 8)
-qualification131.save!
+qualification131.save! validate: false
 
 qualification132 = Qualification.new school: school44
 qualification132.subject = 'Maths'
@@ -5174,7 +5174,7 @@ qualification132.award = 'HND'
 qualification132.grade = 'D'
 qualification132.start_date = Date.new(2015, 8, 23)
 qualification132.end_date = Date.new(2016, 6, 8)
-qualification132.save!
+qualification132.save! validate: false
 
 job43 = Job.new application: app22
 job43.employer = 'Avaveo'
@@ -5186,7 +5186,7 @@ job43.job_title = 'VP Accounting'
 job43.duties = 'User-centric 5th generation circuit'
 job43.start_date = Date.parse('2010-10-08')
 job43.end_date = Date.parse('2014-04-06')
-job43.save!
+job43.save! validate: false
 
 job44 = Job.new application: app22
 job44.employer = 'Voonte'
@@ -5198,7 +5198,7 @@ job44.job_title = 'Web Developer I'
 job44.duties = 'Reactive heuristic superstructure'
 job44.start_date = Date.parse('2012-06-25')
 job44.end_date = Date.parse('2016-11-01')
-job44.save!
+job44.save! validate: false
 
 ref43 = Reference.new application: app22
 ref43.reference_1_full_name = 'Jesse Boyd'
@@ -5219,10 +5219,10 @@ ref43.reference_2_postcode = 'PR1 3TR'
 ref43.reference_2_country = 'United Kingdom'
 ref43.reference_2_relationship = 'leading edge'
 ref43.reference_2_telephone = '44-(451)545-3693'
-ref43.save!
+ref43.save! validate: false
 
 course54 = CourseSelection.new application_id: app22.id, course_id: 21
-course54.save!
+course54.save! validate: false
 
 student23 = Student.new
 student23.first_name = 'Aaron'
@@ -5233,7 +5233,7 @@ student23.national_insurance_number = 'NJ683896B'
 student23.password = 'secret'
 student23.password_confirmation = 'secret'
 student23.confirmed_at = DateTime.now
-student23.save!
+student23.save! validate: false
 
 app23 = student23.create_application
 app23.title = 'Rev'
@@ -5249,7 +5249,7 @@ app23.permanent_address_2 = 'Sheffield'
 app23.permanent_postcode = 'S1 2GR'
 app23.permanent_country = 'United Kingdom'
 app23.state = :completed
-app23.save!
+app23.save! validate: false
 
 school45 = School.new application: app23
 school45.name = 'The Robert Gordon University'
@@ -5257,7 +5257,7 @@ school45.address_1 = '937 Bunker Hill Point'
 school45.address_2 = 'Halton'
 school45.country = 'United Kingdom'
 school45.postcode = 'LS9 3FB'
-school45.save!
+school45.save! validate: false
 
 qualification133 = Qualification.new school: school45
 qualification133.subject = 'PE'
@@ -5265,7 +5265,7 @@ qualification133.award = 'HND'
 qualification133.grade = 'B'
 qualification133.start_date = Date.new(2015, 8, 23)
 qualification133.end_date = Date.new(2014, 6, 8)
-qualification133.save!
+qualification133.save! validate: false
 
 qualification134 = Qualification.new school: school45
 qualification134.subject = 'Chemistry'
@@ -5273,7 +5273,7 @@ qualification134.award = 'NQ'
 qualification134.grade = 'A'
 qualification134.start_date = Date.new(2012, 8, 23)
 qualification134.end_date = Date.new(2015, 6, 8)
-qualification134.save!
+qualification134.save! validate: false
 
 qualification135 = Qualification.new school: school45
 qualification135.subject = 'Chemistry'
@@ -5281,7 +5281,7 @@ qualification135.award = 'NQ'
 qualification135.grade = 'C'
 qualification135.start_date = Date.new(2015, 8, 23)
 qualification135.end_date = Date.new(2016, 6, 8)
-qualification135.save!
+qualification135.save! validate: false
 
 school46 = School.new application: app23
 school46.name = 'London School of Jewish Studies'
@@ -5289,7 +5289,7 @@ school46.address_1 = '99 Claremont Circle'
 school46.address_2 = 'Whitwell'
 school46.country = 'United Kingdom'
 school46.postcode = 'DL10 3FB'
-school46.save!
+school46.save! validate: false
 
 qualification136 = Qualification.new school: school46
 qualification136.subject = 'Maths'
@@ -5297,7 +5297,7 @@ qualification136.award = 'Higher'
 qualification136.grade = 'A'
 qualification136.start_date = Date.new(2013, 8, 23)
 qualification136.end_date = Date.new(2014, 6, 8)
-qualification136.save!
+qualification136.save! validate: false
 
 qualification137 = Qualification.new school: school46
 qualification137.subject = 'Maths'
@@ -5305,7 +5305,7 @@ qualification137.award = 'NQ'
 qualification137.grade = 'D'
 qualification137.start_date = Date.new(2014, 8, 23)
 qualification137.end_date = Date.new(2016, 6, 8)
-qualification137.save!
+qualification137.save! validate: false
 
 qualification138 = Qualification.new school: school46
 qualification138.subject = 'Chemistry'
@@ -5313,7 +5313,7 @@ qualification138.award = 'Higher'
 qualification138.grade = 'B'
 qualification138.start_date = Date.new(2012, 8, 23)
 qualification138.end_date = Date.new(2015, 6, 8)
-qualification138.save!
+qualification138.save! validate: false
 
 job45 = Job.new application: app23
 job45.employer = 'Photobean'
@@ -5325,7 +5325,7 @@ job45.job_title = 'Occupational Therapist'
 job45.duties = 'Implemented composite extranet'
 job45.start_date = Date.parse('2010-06-03')
 job45.end_date = Date.parse('2014-06-23')
-job45.save!
+job45.save! validate: false
 
 job46 = Job.new application: app23
 job46.employer = 'Meevee'
@@ -5337,7 +5337,7 @@ job46.job_title = 'Senior Quality Engineer'
 job46.duties = 'Synergistic systematic middleware'
 job46.start_date = Date.parse('2010-04-21')
 job46.end_date = Date.parse('2016-08-13')
-job46.save!
+job46.save! validate: false
 
 ref45 = Reference.new application: app23
 ref45.reference_1_full_name = 'Todd Ramirez'
@@ -5358,13 +5358,13 @@ ref45.reference_2_postcode = 'CB4 3TR'
 ref45.reference_2_country = 'United Kingdom'
 ref45.reference_2_relationship = 'Enhanced'
 ref45.reference_2_telephone = '44-(267)656-2487'
-ref45.save!
+ref45.save! validate: false
 
 course55 = CourseSelection.new application_id: app23.id, course_id: 1
-course55.save!
+course55.save! validate: false
 
 course56 = CourseSelection.new application_id: app23.id, course_id: 4
-course56.save!
+course56.save! validate: false
 
 course57 = CourseSelection.new application_id: app23.id, course_id: 2
-course57.save!
+course57.save! validate: false

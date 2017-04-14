@@ -125,26 +125,16 @@ class Course < ApplicationRecord
   end
 
   # Gets a boolean indicating if the course can be deleted.
-  def can_remove?(title)
+  def remove_valid?(title)
     if title != self.title
       self.errors.add(:title, "does not match '#{self.title}'")
     end
 
-    unless self.course_selections.empty?
+    unless self.course_selections.nil? or self.course_selections.empty?
       self.errors.add(:course, 'has one or more students who have applied for the course and so cannot be removed')
     end
 
-    self.title.empty?
-  end
-
-  # Removes this course, only if the title matches and no student's have applied for it.
-  def remove(title)
-    if self.can_remove? title
-      self.courses.destroy_all
-      self.destroy
-      return true
-    end
-    false
+    self.errors.empty?
   end
 
   # Updates attributes and sends mass cancellation email if status changed to cancelled

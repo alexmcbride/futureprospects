@@ -58,9 +58,9 @@ ActiveRecord::Schema.define(version: 20170414083149) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.integer  "courses_counter"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "courses_count", default: 0, null: false
     t.index ["name"], name: "index_categories_on_name", using: :btree
   end
 
@@ -98,12 +98,12 @@ ActiveRecord::Schema.define(version: 20170414083149) do
     t.string   "level"
     t.integer  "college_id"
     t.integer  "category_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.string   "image"
     t.integer  "spaces"
     t.integer  "status"
-    t.integer  "course_selections_count"
+    t.integer  "course_selections_count", default: 0, null: false
     t.index ["title"], name: "index_courses_on_title", using: :btree
   end
 

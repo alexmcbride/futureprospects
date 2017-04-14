@@ -60,7 +60,8 @@ class Staff::CoursesController < ApplicationController
   # DELETE /staff/courses/1
   def destroy
     respond_to do |format|
-      if @course.remove params[:course_title]
+      if @course.remove_valid? params[:course_title]
+        @course.destroy!
         format.html { redirect_to staff_courses_path, notice: 'Course was successfully destroyed.' }
       else
         format.html { render :remove }

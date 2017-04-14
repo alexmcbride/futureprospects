@@ -72,6 +72,10 @@
                   Welcome, <%= current_user.full_name %>! <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
+                  <% if student_signed_in? %>
+                    <li><%= link_to 'My Application', applications_continue_path(current_student.current_application) %></li>
+                  <% end %>
+                  <li role="separator" class="divider"></li>
                   <li><%= link_to 'Edit Profile', edit_registration_path(current_user) %></li>
                   <li role="separator" class="divider"></li>
                   <li><%= link_to 'Sign Out', destroy_session_path(current_user), method: :delete %></li>

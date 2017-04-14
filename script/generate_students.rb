@@ -73,6 +73,13 @@ def student(tokens, schools, jobs, refs)
     puts app + ".correspondence_country = '#{tokens[21]}'"
   end
   puts app + ".state = :completed"
+  puts app + '.completed_intro = true'
+  puts app + '.completed_profile = true'
+  puts app + '.completed_education = true'
+  puts app + '.completed_employment = true'
+  puts app + '.completed_references = true'
+  puts app + '.completed_statement = true'
+  puts app + '.completed_courses = true'
   puts app + '.save! validate: false'
   puts ''
 

@@ -32,7 +32,7 @@ class Course < ApplicationRecord
 
   # Foreign Keys
   belongs_to :college
-  belongs_to :category
+  belongs_to :category, counter_cache: true
   has_many :course_selections
 
   # Gets the number of years the course lasts for

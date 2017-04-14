@@ -26,7 +26,7 @@
         <% @categories.each do |category| %>
           <tr>
             <td><%= category.name %></td>
-            <td><%= category.courses.size %></td>
+            <td><%= category.courses_counter %></td>
             <td><%= link_to icon('pencil-square'), edit_staff_category_path(category), title: 'Edit Name' %></td>
             <td><%= link_to icon('trash'), staff_category_remove_path(category), title: 'Delete Category' %></td>
           </tr>

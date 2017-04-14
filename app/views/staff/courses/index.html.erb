@@ -45,50 +45,52 @@
     <% if @courses.empty? %>
       <p class="text-darkish small text-center"><em>There are no courses to display</em></p>
     <% else %>
-      <table class="table table-striped table-staff">
-        <thead>
-        <tr>
-          <th>
-            <%= link_to course_table_filter_path('title', params) do %>
-                Course
-                <%= icon('arrows-v', class: 'sort-arrow') %>
-            <% end %>
-          </th>
-          <th>
-            <%= link_to course_table_filter_path('category_id', params) do %>
-                Category
-                <%= icon('arrows-v', class: 'sort-arrow') %>
-            <% end %>
-          </th>
-          <th>
-            <%= link_to course_table_filter_path('status', params) do %>
-                Status
-                <%= icon('arrows-v', class: 'sort-arrow') %>
-            <% end %>
-          </th>
-          <th>
-            <%= link_to course_table_filter_path('students', params) do %>
-                Students
-                <%= icon('arrows-v', class: 'sort-arrow') %>
-            <% end %>
-          </th>
-          <th colspan="3"></th>
-        </tr>
-        </thead>
-        <tbody>
-        <% @courses.each do |course| %>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
           <tr>
-            <td title="<%= course.title %>"><%= truncate course.title, length: 50 %></td>
-            <td title="<%= course.category.name %>"><%= truncate course.category.name, length: 25 %></td>
-            <td><%= course.status.humanize %></td>
-            <td><%= course.course_selections_count %></td>
-            <td><%= link_to icon('eye'), staff_course_path(course), title: 'View Course' %></td>
-            <td><%= link_to icon('pencil-square'), edit_staff_course_path(course), title: 'Edit' %></td>
-            <td><%= link_to icon('trash'), staff_course_remove_path(course), title: 'Delete' %></td>
+            <th>
+              <%= link_to course_table_filter_path('title', params) do %>
+                  Course
+                  <%= icon('arrows-v', class: 'sort-arrow') %>
+              <% end %>
+            </th>
+            <th>
+              <%= link_to course_table_filter_path('category_id', params) do %>
+                  Category
+                  <%= icon('arrows-v', class: 'sort-arrow') %>
+              <% end %>
+            </th>
+            <th>
+              <%= link_to course_table_filter_path('status', params) do %>
+                  Status
+                  <%= icon('arrows-v', class: 'sort-arrow') %>
+              <% end %>
+            </th>
+            <th>
+              <%= link_to course_table_filter_path('students', params) do %>
+                  Students
+                  <%= icon('arrows-v', class: 'sort-arrow') %>
+              <% end %>
+            </th>
+            <th colspan="3"></th>
           </tr>
-        <% end %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+          <% @courses.each do |course| %>
+            <tr>
+              <td title="<%= course.title %>"><%= truncate course.title, length: 50 %></td>
+              <td title="<%= course.category.name %>"><%= truncate course.category.name, length: 25 %></td>
+              <td><%= course.status.humanize %></td>
+              <td><%= pluralize course.course_selections_count, 'student' %></td>
+              <td><%= link_to icon('eye'), staff_course_path(course), title: 'View Course' %></td>
+              <td><%= link_to icon('pencil-square'), edit_staff_course_path(course), title: 'Edit' %></td>
+              <td><%= link_to icon('trash'), staff_course_remove_path(course), title: 'Delete' %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
 
       <div class="digg_pagination text-center">
         <%= will_paginate @courses %>

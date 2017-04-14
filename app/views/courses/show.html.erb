@@ -20,13 +20,7 @@
 
   <div class="col-md-6">
     <h3 class="no-top-margin"><%= @course.title %></h3>
-    <%= markdown(@course.description) %>
-
-    <h4>Entry Requirements</h4>
-    <%= markdown(@course.entry_requirements) %>
-
-    <h4>Career Prospects</h4>
-    <%= markdown(@course.career_prospects) %>
+    <%= render 'shared/course_info', course: @course %>
   </div>
 
   <div class="col-md-3">

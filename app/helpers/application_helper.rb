@@ -1,4 +1,5 @@
 module ApplicationHelper
+  # Markdown variables
   @renderer = nil
   @markdown = nil
 
@@ -48,7 +49,6 @@ module ApplicationHelper
         space_after_headers: true,
         fenced_code_blocks: true
     }
-
     extensions = {
         autolink:           true,
         superscript:        true,
@@ -95,6 +95,10 @@ module ApplicationHelper
   # Formats a date as dd/mm/yyyy
   def format_date(date)
     date.strftime '%d/%m/%Y' if date
+  end
+
+  def format_datetime(dt)
+    dt.strftime '%d/%m/%Y, %H:%m' if dt
   end
 
   # Outputs a text field with bootstrap style
@@ -170,6 +174,11 @@ module ApplicationHelper
 
   # The path for filtering the staff course table.
   def course_table_filter_path(sort, params)
-    staff_courses_path(sort: sort, dir: toggle_sort(params[:dir]), page: params[:page], title: params[:title], category: params[:category], status: params[:status])
+    staff_courses_path(sort: sort,
+                       dir: toggle_sort(params[:dir]),
+                       page: params[:page],
+                       title: params[:title],
+                       category_id: params[:category_id],
+                       status: params[:status])
   end
 end

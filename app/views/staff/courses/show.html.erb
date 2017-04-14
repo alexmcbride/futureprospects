@@ -1,4 +1,123 @@
-<p id="notice"><%= notice %></p>
+<% breadcrumb :staff_show_course, @course %>
+<% @title = 'Show Course' %>
 
-<%= link_to 'Edit', edit_staff_course_path(@course) %> |
-<%= link_to 'Back', staff_courses_path %>
+<div class="row">
+  <div class="col-sm-3">
+    <%= render 'staff/shared/courses_sidenav', page: :index %>
+  </div>
+
+  <div class="col-sm-9">
+    <div class="row">
+      <div class="col-xs-6">
+        <h3 class="no-top-margin"><%= @course.title %></h3>
+      </div>
+      <div class="col-xs-6">
+        <p class="text-right">
+          <%= link_to 'Edit Course', edit_staff_course_path(@course) %>
+          |
+          <%= link_to 'Delete Course', staff_course_remove_path(@course) %>
+        </p></div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+
+        <div class="row">
+          <div class="col-xs-3">
+            Spaces:
+          </div>
+          <div class="col-xs-9">
+            <%= @course.spaces %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-3">
+            Status:
+          </div>
+          <div class="col-xs-9">
+            <%= @course.status.humanize %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-3">
+            Level:
+          </div>
+          <div class="col-xs-9">
+            <%= @course.level %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-3">
+            Category:
+          </div>
+          <div class="col-xs-9">
+            <%= @course.category.name %>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="col-xs-3">
+            Start Date:
+          </div>
+          <div class="col-xs-9">
+            <%= format_date @course.start_date %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3">
+            End Date:
+          </div>
+          <div class="col-xs-9">
+            <%= format_date @course.end_date %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-3">
+            Created:
+          </div>
+          <div class="col-xs-9">
+            <%= format_datetime @course.created_at %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-3">
+            Updated:
+          </div>
+          <div class="col-xs-9">
+            <%= format_datetime @course.updated_at %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <h4>Current Applicants</h4>
+
+    <% if @course.course_selections.empty? %>
+      <p class="text-darkish small"><em>There are no applicants to this course.</em></p>
+    <% else %>
+      <div class="list-group">
+        <% @course.course_selections.each do |selection| %>
+          <%= link_to nil, class: 'list-group-item' do %>
+            <%= selection.application.student.full_name %>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <hr>
+
+    <h4>Description</h4>
+
+    <%= render 'shared/course_info', course: @course %>
+  </div>
+</div>

@@ -10,7 +10,7 @@ class CourseSelection < ApplicationRecord
   validate :application_can_add
 
   belongs_to :application
-  belongs_to :course
+  belongs_to :course, counter_cache: true
 
   # Checks if a course selection already exists
   def exists?

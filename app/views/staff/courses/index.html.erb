@@ -67,7 +67,10 @@
             <% end %>
           </th>
           <th>
-            Students
+            <%= link_to course_table_filter_path('students', params) do %>
+                Students
+                <%= icon('arrows-v', class: 'sort-arrow') %>
+            <% end %>
           </th>
           <th colspan="3"></th>
         </tr>
@@ -78,7 +81,7 @@
             <td title="<%= course.title %>"><%= truncate course.title, length: 50 %></td>
             <td title="<%= course.category.name %>"><%= truncate course.category.name, length: 25 %></td>
             <td><%= course.status.humanize %></td>
-            <td><%= course.course_selections.count %></td>
+            <td><%= course.course_selections_count %></td>
             <td><%= link_to icon('eye'), staff_course_path(course), title: 'View Course' %></td>
             <td><%= link_to icon('pencil-square'), edit_staff_course_path(course), title: 'Edit' %></td>
             <td><%= link_to icon('trash'), staff_course_remove_path(course), title: 'Delete' %></td>

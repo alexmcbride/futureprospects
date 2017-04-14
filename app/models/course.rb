@@ -107,6 +107,10 @@ class Course < ApplicationRecord
       end
     end
 
+    if sort == :students
+      courses.order()
+    end
+
     courses
   end
 

@@ -48,3 +48,5 @@ Thumbs.db
 /config/application.yml
 
 *.py
+
+/app/assets/images/seed_images2

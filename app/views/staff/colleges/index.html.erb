@@ -15,7 +15,7 @@
     <tbody>
       <% @colleges.each do |staff_college| %>
         <tr>
-          <td><%= link_to staff_college.name, staff_college_path(staff_college) %></td>
+          <td><%= link_to staff_college.name, staff_college_path(staff_college), class: 'table-link' %></td>
           <td><%= link_to 'Edit', edit_staff_college_path(staff_college) %></td>
           <td><%= link_to 'Destroy', staff_college_path(staff_college), method: :delete, data: { confirm: "OK - I'm going to be honest. I don't know what will happen if you delete this. Are you sure?" } %></td>
         </tr>

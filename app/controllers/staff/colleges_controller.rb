@@ -5,14 +5,7 @@ class Staff::CollegesController < ApplicationController
   # GET /staff/colleges
   # GET /staff/colleges.json
   def index
-    if current_user.staff?
-      @college = current_staff.college
-      respond_to do |format|
-        format.html { render :show }
-      end
-    else
-      @colleges = College.all
-    end
+    @colleges = College.all
   end
 
   # GET /staff/colleges/1

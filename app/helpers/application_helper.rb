@@ -181,4 +181,12 @@ module ApplicationHelper
                        category_id: params[:category_id],
                        status: params[:status])
   end
+
+  def markdown_support_text
+    content_tag(:div, class: 'pull-right text-darkish small', style: 'margin-top: 5px;') do
+      concat(icon('arrow-circle-down'))
+      concat(' Markdown ')
+      concat(link_to '(?)', 'https://daringfireball.net/projects/markdown/basics', title: 'Markdown Guide')
+    end
+  end
 end

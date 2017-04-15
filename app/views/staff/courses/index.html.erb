@@ -39,6 +39,13 @@
         <% end %>
       </div>
     </div>
+
+    <p class="text-darkish small">Use the button below to create a new course.</p>
+    <%= link_to new_staff_course_path, class: 'btn btn-default btn-block', role: 'button' do |link| %>
+        <%= icon('plus-circle') %>
+        Add New Course
+    <% end %>
+    <br>
   </div>
 
   <div class="col-sm-9">
@@ -79,7 +86,7 @@
           <tbody>
           <% @courses.each do |course| %>
             <tr>
-              <td title="<%= course.title %>"><%= truncate course.title, length: 50 %></td>
+              <td title="<%= course.title %>"><%= truncate(course.title, length: 50) %></td>
               <td title="<%= course.category.name %>"><%= truncate course.category.name, length: 25 %></td>
               <td><%= course.status.humanize %></td>
               <td><%= pluralize course.course_selections_count, 'student' %></td>

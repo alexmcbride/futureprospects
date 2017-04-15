@@ -5,7 +5,10 @@
   <div class="col-sm-3">
     <%= render 'staff/shared/courses_sidenav', page: :index %>
 
-    <h4>Current Applicants</h4>
+    <h4>
+      Current Applicants
+      <%= "(#{@course.course_selections_count})" unless @course.course_selections.empty?  %>
+    </h4>
 
     <% if @course.course_selections.empty? %>
         <p class="text-darkish small"><em>There are no applicants to this course.</em></p>
@@ -27,10 +30,10 @@
         <h3 class="no-top-margin"><%= @course.title %></h3>
       </div>
       <div class="col-sm-3">
-        <p class="text-right">
-          <%= link_to 'Edit Course', edit_staff_course_path(@course) %>
+        <p class="text-right small">
+          <%= link_to 'Edit', edit_staff_course_path(@course) %>
           |
-          <%= link_to 'Delete Course', staff_course_remove_path(@course) %>
+          <%= link_to 'Delete', staff_course_remove_path(@course) %>
         </p>
       </div>
     </div>

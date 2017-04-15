@@ -174,18 +174,8 @@ crumb :staff_show_college do |college|
   link college.name, staff_college_path(college)
 end
 
-crumb :staff_my_college do |college|
-  parent :root
-  link college.name, staff_college_path(college)
-end
-
 crumb :staff_edit_college do |college|
   parent :staff_show_college, college
-  link 'Edit', edit_staff_college_path(college)
-end
-
-crumb :staff_edit_my_college do |college|
-  parent :staff_my_college, college
   link 'Edit', edit_staff_college_path(college)
 end
 

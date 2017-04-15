@@ -38,3 +38,5 @@ application stages not links until stage marked as complete
 add city field to addresses...
 
 applications, move optional label to top on all pages (currently just profile)
+
+add college new, destroy safeguards

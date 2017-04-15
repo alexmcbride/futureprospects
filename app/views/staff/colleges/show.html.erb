@@ -1,8 +1,4 @@
-<% if current_user.staff? %>
-  <% breadcrumb :staff_my_college, @college %>
-<% else %>
-  <% breadcrumb :staff_show_college, @college %>
-<% end %>
+<% breadcrumb :staff_show_college, @college %>
 <% @title = 'View College' %>
 
 <div class="row">

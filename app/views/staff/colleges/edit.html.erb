@@ -1,8 +1,4 @@
-<% if current_user.staff? %>
-  <% breadcrumb :staff_edit_my_college, @college %>
-<% else %>
-  <% breadcrumb :staff_edit_college, @college %>
-<% end %>
+<% breadcrumb :staff_edit_college, @college %>
 <% @title = 'Edit College' %>
 
 <h1>Edit College</h1>

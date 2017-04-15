@@ -1,11 +1,4 @@
 <% breadcrumb :staff_edit_college, @college %>
 <% @title = 'Edit College' %>
 
-<h1>Edit College</h1>
-
 <%= render 'form', college: @college, path: staff_college_path(@college) %>
-<br>
-<p>
-  <%= link_to 'Show', staff_college_path(@college) %> |
-  <%= link_to 'Back', staff_colleges_path %>
-</p>

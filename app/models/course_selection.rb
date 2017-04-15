@@ -1,14 +1,18 @@
 class CourseSelection < ApplicationRecord
+  include ActionView::Helpers::TextHelper
 
+  # Enums
   enum college_offer: [:rejected, :conditional, :definite]
   enum student_choice: [:firm, :insurance, :declined]
 
+  # Validators
   validates :application_id, presence: true
   validates :course_id, presence: true
   validate :course_is_unique
   validate :course_is_open
   validate :application_can_add
 
+  # Associations
   belongs_to :application
   belongs_to :course, counter_cache: true
 
@@ -29,7 +33,7 @@ class CourseSelection < ApplicationRecord
     # Check course has free spaces
     if self.course
       unless self.course.open?
-        self.errors.add(:course, "status is listed as #{self.course.status}")
+        self.errors.add(:course, "cannot be added as status is #{self.course.status}")
       end
     end
   end
@@ -37,7 +41,7 @@ class CourseSelection < ApplicationRecord
   # Validates that application can add course selection
   def application_can_add
     unless self.application.can_add_course?
-      self.errors.add(:maximum, "of #{Application::MAX_COURSES} courses has been reached")
+      self.errors.add(:maximum, "of #{pluralize Application::MAX_COURSES, 'course'} has been reached")
     end
   end
 
@@ -51,22 +55,22 @@ class CourseSelection < ApplicationRecord
   def self.count_applicants(college)
     # We don't use SQL parametrisation here, as rails makes it difficult,
     # but we don't get the college object from input, so it should be OK.
-    sql = "select COUNT(DISTINCT s.application_id)
-from course_selections s
-join courses c on s.course_id=c.id
-where c.college_id=#{college.id}"
+    sql = "SELECT COUNT(DISTINCT s.application_id)
+FROM course_selections s
+JOIN courses c on s.course_id=c.id
+WHERE c.college_id=#{college.id};"
     result = ActiveRecord::Base.connection.execute(sql)
-    result[0]['count']
+    result.first['count']
   end
 
   def self.count_courses(college)
     # We don't use SQL parametrisation here, as rails makes it difficult,
     # but we don't get the college object from input, so it should be OK.
-    sql = "select COUNT(*)
-from course_selections s
-join courses c on s.course_id=c.id
-where c.college_id=#{college.id}"
+    sql = "SELECT COUNT(*)
+FROM course_selections s
+JOIN courses c on s.course_id=c.id
+WHERE c.college_id=#{college.id};"
     result = ActiveRecord::Base.connection.execute(sql)
-    result[0]['count']
+    result.first['count']
   end
 end

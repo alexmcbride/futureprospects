@@ -11,49 +11,65 @@
     <%= f.text_area :description, class: 'form-control', rows: '10' %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :telephone %>
-    <%= f.text_field :telephone, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :email %>
-    <%= f.text_field :email, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :website %>
-    <%= f.text_field :website, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :address %>
-    <%= f.text_area :address, class: 'form-control', rows: '4' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :postcode %>
-    <%= f.text_field :postcode, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :image %>
-    <div class="row">
-      <div class="col-xs-10">
-        <%= f.file_field :image, class: 'form-control' %>
-        <%= f.hidden_field :image_cache, value: college.image_cache %>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.text_field :email, class: 'form-control' %>
       </div>
-      <% unless college.image.file.nil? %>
-          <div class="col-xs-2">
-            <%= link_to college.image.url do %>
-                <%= image_tag college.image.url(:thumb), class: 'img-responsive img-thumbnail image-border' %>
-            <% end %>
-          </div>
-      <% end %>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= f.label :website %>
+        <%= f.text_field :website, class: 'form-control' %>
+      </div>
     </div>
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= f.label :telephone %>
+        <%= f.text_field :telephone, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= f.label :image %>
+        <div class="row">
+          <div class="col-xs-7">
+            <%= f.file_field :image, class: 'form-control' %>
+            <%= f.hidden_field :image_cache, value: college.image_cache %>
+          </div>
+          <% unless college.image.file.nil? %>
+              <div class="col-xs-5">
+                <%= link_to college.image.url, title: 'Preview Image' do %>
+                    <%= image_tag college.image.url(:thumb), class: 'img-responsive img-thumbnail image-border' %>
+                <% end %>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= f.label :address %>
+        <%= f.text_area :address, class: 'form-control', rows: '4' %>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= f.label :postcode %>
+        <%= f.text_field :postcode, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions text-right">
+    <p class="text-darkish small">Save changes when completed.</p>
+    <%= f.submit class: 'btn btn-default' %>
   </div>
 <% end %>

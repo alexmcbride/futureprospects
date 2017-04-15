@@ -1,4 +1,6 @@
 class Category < ApplicationRecord
+  include ActionView::Helpers::TextHelper
+
   # Validators
   validates :name, presence: true, length: { maximum: 40}, uniqueness: true
 
@@ -11,10 +13,13 @@ class Category < ApplicationRecord
       self.errors.add(:name, "does not match '#{self.name}'")
     end
 
-    unless self.courses.empty?
-      self.errors.add(:category, 'has one or more courses and cannot be removed')
+    # check there are no courses
+    count = self.courses_count
+    if count > 0
+      self.errors.add(:category, "has #{pluralize count, 'course'} and cannot be removed")
     end
 
+    # delete with courses if no errors
     if self.errors.empty?
       self.courses.destroy_all
       self.destroy

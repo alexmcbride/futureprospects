@@ -183,3 +183,8 @@ crumb :staff_new_college do
   parent :staff_colleges
   link 'New', new_staff_college_path
 end
+
+crumb :staff_members do
+  parent :root
+  link 'Staff', staff_users_path
+end

@@ -11,6 +11,8 @@ class User < ApplicationRecord
   validates :first_name, presence: true, length: {maximum: 35, minimum: 1}
   validates :family_name, presence: true, length: {maximum: 35, minimum: 2}
 
+  self.per_page = 20
+
   # Sets the login
   def login=(login)
     @login = login

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :categories
     get 'categories/:id/remove', to: 'categories#remove', as: 'category_remove'
     resources :colleges
+    resources :users
   end
 
 

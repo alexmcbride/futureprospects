@@ -14,7 +14,9 @@ Rails.application.routes.draw do
     get 'courses/:id/remove', to: 'courses#remove', as: 'course_remove'
     resources :categories
     get 'categories/:id/remove', to: 'categories#remove', as: 'category_remove'
+    resources :colleges
   end
+
 
   # Application routes
   get 'applications/:id', to: 'applications#index', as: 'applications_index'

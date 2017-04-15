@@ -1,0 +1,9 @@
+<% breadcrumb :staff_new_college %>
+<% @title = 'Edit College' %>
+
+
+<h1>New College</h1>
+
+<%= render 'form', college: @college, path: staff_colleges_path %>
+
+<%= link_to 'Back', staff_colleges_path %>

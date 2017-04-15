@@ -1,0 +1,28 @@
+<% breadcrumb :staff_colleges %>
+<% @title = 'Browse Colleges' %>
+
+<h1 class="no-top-margin">Colleges</h1>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @colleges.each do |staff_college| %>
+        <tr>
+          <td><%= link_to staff_college.name, staff_college_path(staff_college) %></td>
+          <td><%= link_to 'Edit', edit_staff_college_path(staff_college) %></td>
+          <td><%= link_to 'Destroy', staff_college_path(staff_college), method: :delete, data: { confirm: "OK - I'm going to be honest. I don't know what will happen if you delete this. Are you sure?" } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<br>
+
+<%= link_to 'New Staff College', new_staff_college_path %>

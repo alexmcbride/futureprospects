@@ -1,0 +1,59 @@
+<%= form_for(college, url: path) do |f| %>
+  <%= form_errors college %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description %>
+    <%= f.text_area :description, class: 'form-control', rows: '10' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :telephone %>
+    <%= f.text_field :telephone, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email %>
+    <%= f.text_field :email, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :website %>
+    <%= f.text_field :website, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :address %>
+    <%= f.text_area :address, class: 'form-control', rows: '4' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :postcode %>
+    <%= f.text_field :postcode, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :image %>
+    <div class="row">
+      <div class="col-xs-10">
+        <%= f.file_field :image, class: 'form-control' %>
+        <%= f.hidden_field :image_cache, value: college.image_cache %>
+      </div>
+      <% unless college.image.file.nil? %>
+          <div class="col-xs-2">
+            <%= link_to college.image.url do %>
+                <%= image_tag college.image.url(:thumb), class: 'img-responsive img-thumbnail image-border' %>
+            <% end %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

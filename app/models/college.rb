@@ -14,4 +14,12 @@ class College < ApplicationRecord
   # Foreign Key
   has_many :courses
   has_many :staff
+
+  def count_applicants
+    CourseSelection.count_applicants self
+  end
+
+  def count_course_selections
+    CourseSelection.count_courses self
+  end
 end

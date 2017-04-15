@@ -163,3 +163,33 @@ crumb :staff_remove_category do |category|
   parent :staff_categories
   link 'Remove', staff_category_remove_path(category)
 end
+
+crumb :staff_colleges do
+  parent :root
+  link 'Colleges', staff_colleges_path
+end
+
+crumb :staff_show_college do |college|
+  parent :staff_colleges
+  link college.name, staff_college_path(college)
+end
+
+crumb :staff_my_college do |college|
+  parent :root
+  link college.name, staff_college_path(college)
+end
+
+crumb :staff_edit_college do |college|
+  parent :staff_show_college, college
+  link 'Edit', edit_staff_college_path(college)
+end
+
+crumb :staff_edit_my_college do |college|
+  parent :staff_my_college, college
+  link 'Edit', edit_staff_college_path(college)
+end
+
+crumb :staff_new_college do
+  parent :staff_colleges
+  link 'New', new_staff_college_path
+end

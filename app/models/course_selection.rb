@@ -46,4 +46,27 @@ class CourseSelection < ApplicationRecord
     selection.course_id = params[:course_id]
     selection
   end
+
+  # Calculates the number of applicants for the specified college
+  def self.count_applicants(college)
+    # We don't use SQL parametrisation here, as rails makes it difficult,
+    # but we don't get the college object from input, so it should be OK.
+    sql = "select COUNT(DISTINCT s.application_id)
+from course_selections s
+join courses c on s.course_id=c.id
+where c.college_id=#{college.id}"
+    result = ActiveRecord::Base.connection.execute(sql)
+    result[0]['count']
+  end
+
+  def self.count_courses(college)
+    # We don't use SQL parametrisation here, as rails makes it difficult,
+    # but we don't get the college object from input, so it should be OK.
+    sql = "select COUNT(*)
+from course_selections s
+join courses c on s.course_id=c.id
+where c.college_id=#{college.id}"
+    result = ActiveRecord::Base.connection.execute(sql)
+    result[0]['count']
+  end
 end

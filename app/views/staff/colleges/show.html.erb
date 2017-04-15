@@ -1,0 +1,39 @@
+<% if current_user.staff? %>
+  <% breadcrumb :staff_my_college, @college %>
+<% else %>
+  <% breadcrumb :staff_show_college, @college %>
+<% end %>
+<% @title = 'View College' %>
+
+<div class="row">
+  <div class="col-sm-3">
+    <div class="well">
+      <h4 class="no-top-margin"><strong>College Info</strong></h4>
+
+      <div class="row">
+        <div class="col-xs-8">Total Courses:</div>
+        <div class="col-xs-4"><%= @college.courses.count %></div>
+      </div>
+      <div class="row">
+        <div class="col-xs-8">Total Staff:</div>
+        <div class="col-xs-4"><%= @college.staff.count %></div>
+      </div>
+      <div class="row">
+        <div class="col-xs-8">Total Students:</div>
+        <div class="col-xs-4"><%= @college.count_applicants %></div>
+      </div>
+      <div class="row">
+        <div class="col-xs-8">Course Selections:</div>
+        <div class="col-xs-4"><%= @college.count_course_selections%></div>
+      </div>
+
+      <br>
+
+      <%= link_to 'Edit College Details', edit_staff_college_path(@college), class: 'btn btn-default btn-block' %>
+    </div>
+  </div>
+
+  <div class="col-sm-9">
+    <%= render 'shared/college_info', college: @college %>
+  </div>
+</div>

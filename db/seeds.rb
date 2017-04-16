@@ -2036,157 +2036,157 @@ student.password_confirmation = 'secret'
 student.confirmed_at = DateTime.now
 student.save! validate: false
 
-app = student.create_application
-app.title = 'Mrs'
-app.middle_name = 'Virginia'
-app.gender = :female
-app.telephone = '44-(435)280-3879'
-app.mobile = '44-(889)134-2200'
-app.email = 'vmorrison0@merriam-webster.com'
-app.personal_statement = 'Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.'
-app.permanent_house_number = '5'
-app.permanent_address_1 = 'Sachs Way'
-app.permanent_address_2 = 'Twyford'
-app.permanent_postcode = 'LE14 2GR'
-app.permanent_country = 'United Kingdom'
-app.correspondence_house_number = '6'
-app.correspondence_address_1 = 'Stang Park'
-app.correspondence_address_2 = 'Mrs'
-app.correspondence_postcode = 'OX7 2GR'
-app.correspondence_country = 'United Kingdom'
-app.state = :completed
-app.completed_intro = true
-app.completed_profile = true
-app.completed_education = true
-app.completed_employment = true
-app.completed_references = true
-app.completed_statement = true
-app.completed_courses = true
-app.save! validate: false
-
-school = School.new application: app
-school.name = 'Falmouth University'
-school.address_1 = '6 Loftsgordon Plaza'
-school.address_2 = 'Denton'
-school.country = 'United Kingdom'
-school.postcode = 'M34 3FB'
-school.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Geography'
-qualification.award = 'Higher'
-qualification.grade = 'B'
-qualification.start_date = Date.new(2012, 8, 23)
-qualification.end_date = Date.new(2014, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Physics'
-qualification.award = 'HNC'
-qualification.grade = 'A'
-qualification.start_date = Date.new(2015, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Computing'
-qualification.award = 'Standard'
-qualification.grade = 'C'
-qualification.start_date = Date.new(2013, 8, 23)
-qualification.end_date = Date.new(2015, 6, 8)
-qualification.save! validate: false
-
-school = School.new application: app
-school.name = 'Oxford Brookes University'
-school.address_1 = '291 Northland Parkway'
-school.address_2 = 'London'
-school.country = 'United Kingdom'
-school.postcode = 'SW1E 3FB'
-school.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Technological Studies'
-qualification.award = 'NQ'
-qualification.grade = 'C'
-qualification.start_date = Date.new(2012, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'English'
-qualification.award = 'NQ'
-qualification.grade = 'Pass'
-qualification.start_date = Date.new(2015, 8, 23)
-qualification.end_date = Date.new(2013, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Physics'
-qualification.award = 'Higher'
-qualification.grade = 'D'
-qualification.start_date = Date.new(2015, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
-qualification.save! validate: false
-
-job = Job.new application: app
-job.employer = 'Cogibox'
-job.address_1 = '0 Clyde Gallagher Place'
-job.address_2 = 'London'
-job.postcode = 'SW1E'
-job.country = 'United Kingdom'
-job.job_title = 'Social Worker'
-job.duties = 'De-engineered intermediate model'
-job.start_date = Date.parse('2012-07-02')
-job.end_date = Date.parse('2015-03-14')
-job.save! validate: false
-
-job = Job.new application: app
-job.employer = 'Meemm'
-job.address_1 = '0 Claremont Terrace'
-job.address_2 = 'Milton'
-job.postcode = 'AB56'
-job.country = 'United Kingdom'
-job.job_title = 'Structural Engineer'
-job.duties = 'Future-proofed tangible synergy'
-job.start_date = Date.parse('2011-06-14')
-job.end_date = Date.parse('2013-04-16')
-job.save! validate: false
-
-ref = Reference.new application: app
-ref.reference_1_full_name = 'Edward George'
-ref.reference_1_email = 'egeorge0@hao123.com'
-ref.reference_1_occupation = 'Executive Secretary'
-ref.reference_1_address_1 = '98 Lukken '
-ref.reference_1_address_2 = 'Belfast'
-ref.reference_1_postcode = 'BT2 7QW'
-ref.reference_1_country = 'United Kingdom'
-ref.reference_1_relationship = 'Face to face'
-ref.reference_1_telephone = '44-(487)436-7779'
-ref.reference_2_full_name = 'Stephen Lane'
-ref.reference_2_email = 'slane1@whitehouse.gov'
-ref.reference_2_occupation = 'Information Systems Manager'
-ref.reference_2_address_1 = '6 8th '
-ref.reference_2_address_2 = 'Leeds'
-ref.reference_2_postcode = 'LS6 3TR'
-ref.reference_2_country = 'United Kingdom'
-ref.reference_2_relationship = 'Adaptive'
-ref.reference_2_telephone = '44-(500)939-8365'
-ref.save! validate: false
-
-course = CourseSelection.new application_id: app.id, course_id: 135
-course.save! validate: false
-
-course = CourseSelection.new application_id: app.id, course_id: 19
-course.save! validate: false
-
-course = CourseSelection.new application_id: app.id, course_id: 114
-course.save! validate: false
-
-course = CourseSelection.new application_id: app.id, course_id: 111
-course.save! validate: false
-
-course = CourseSelection.new application_id: app.id, course_id: 32
-course.save! validate: false
+# app = student.create_application
+# app.title = 'Mrs'
+# app.middle_name = 'Virginia'
+# app.gender = :female
+# app.telephone = '44-(435)280-3879'
+# app.mobile = '44-(889)134-2200'
+# app.email = 'vmorrison0@merriam-webster.com'
+# app.personal_statement = 'Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.'
+# app.permanent_house_number = '5'
+# app.permanent_address_1 = 'Sachs Way'
+# app.permanent_address_2 = 'Twyford'
+# app.permanent_postcode = 'LE14 2GR'
+# app.permanent_country = 'United Kingdom'
+# app.correspondence_house_number = '6'
+# app.correspondence_address_1 = 'Stang Park'
+# app.correspondence_address_2 = 'Mrs'
+# app.correspondence_postcode = 'OX7 2GR'
+# app.correspondence_country = 'United Kingdom'
+# app.state = :completed
+# app.completed_intro = true
+# app.completed_profile = true
+# app.completed_education = true
+# app.completed_employment = true
+# app.completed_references = true
+# app.completed_statement = true
+# app.completed_courses = true
+# app.save! validate: false
+#
+# school = School.new application: app
+# school.name = 'Falmouth University'
+# school.address_1 = '6 Loftsgordon Plaza'
+# school.address_2 = 'Denton'
+# school.country = 'United Kingdom'
+# school.postcode = 'M34 3FB'
+# school.save! validate: false
+#
+# qualification = Qualification.new school: school
+# qualification.subject = 'Geography'
+# qualification.award = 'Higher'
+# qualification.grade = 'B'
+# qualification.start_date = Date.new(2012, 8, 23)
+# qualification.end_date = Date.new(2014, 6, 8)
+# qualification.save! validate: false
+#
+# qualification = Qualification.new school: school
+# qualification.subject = 'Physics'
+# qualification.award = 'HNC'
+# qualification.grade = 'A'
+# qualification.start_date = Date.new(2015, 8, 23)
+# qualification.end_date = Date.new(2016, 6, 8)
+# qualification.save! validate: false
+#
+# qualification = Qualification.new school: school
+# qualification.subject = 'Computing'
+# qualification.award = 'Standard'
+# qualification.grade = 'C'
+# qualification.start_date = Date.new(2013, 8, 23)
+# qualification.end_date = Date.new(2015, 6, 8)
+# qualification.save! validate: false
+#
+# school = School.new application: app
+# school.name = 'Oxford Brookes University'
+# school.address_1 = '291 Northland Parkway'
+# school.address_2 = 'London'
+# school.country = 'United Kingdom'
+# school.postcode = 'SW1E 3FB'
+# school.save! validate: false
+#
+# qualification = Qualification.new school: school
+# qualification.subject = 'Technological Studies'
+# qualification.award = 'NQ'
+# qualification.grade = 'C'
+# qualification.start_date = Date.new(2012, 8, 23)
+# qualification.end_date = Date.new(2016, 6, 8)
+# qualification.save! validate: false
+#
+# qualification = Qualification.new school: school
+# qualification.subject = 'English'
+# qualification.award = 'NQ'
+# qualification.grade = 'Pass'
+# qualification.start_date = Date.new(2015, 8, 23)
+# qualification.end_date = Date.new(2013, 6, 8)
+# qualification.save! validate: false
+#
+# qualification = Qualification.new school: school
+# qualification.subject = 'Physics'
+# qualification.award = 'Higher'
+# qualification.grade = 'D'
+# qualification.start_date = Date.new(2015, 8, 23)
+# qualification.end_date = Date.new(2016, 6, 8)
+# qualification.save! validate: false
+#
+# job = Job.new application: app
+# job.employer = 'Cogibox'
+# job.address_1 = '0 Clyde Gallagher Place'
+# job.address_2 = 'London'
+# job.postcode = 'SW1E'
+# job.country = 'United Kingdom'
+# job.job_title = 'Social Worker'
+# job.duties = 'De-engineered intermediate model'
+# job.start_date = Date.parse('2012-07-02')
+# job.end_date = Date.parse('2015-03-14')
+# job.save! validate: false
+#
+# job = Job.new application: app
+# job.employer = 'Meemm'
+# job.address_1 = '0 Claremont Terrace'
+# job.address_2 = 'Milton'
+# job.postcode = 'AB56'
+# job.country = 'United Kingdom'
+# job.job_title = 'Structural Engineer'
+# job.duties = 'Future-proofed tangible synergy'
+# job.start_date = Date.parse('2011-06-14')
+# job.end_date = Date.parse('2013-04-16')
+# job.save! validate: false
+#
+# ref = Reference.new application: app
+# ref.reference_1_full_name = 'Edward George'
+# ref.reference_1_email = 'egeorge0@hao123.com'
+# ref.reference_1_occupation = 'Executive Secretary'
+# ref.reference_1_address_1 = '98 Lukken '
+# ref.reference_1_address_2 = 'Belfast'
+# ref.reference_1_postcode = 'BT2 7QW'
+# ref.reference_1_country = 'United Kingdom'
+# ref.reference_1_relationship = 'Face to face'
+# ref.reference_1_telephone = '44-(487)436-7779'
+# ref.reference_2_full_name = 'Stephen Lane'
+# ref.reference_2_email = 'slane1@whitehouse.gov'
+# ref.reference_2_occupation = 'Information Systems Manager'
+# ref.reference_2_address_1 = '6 8th '
+# ref.reference_2_address_2 = 'Leeds'
+# ref.reference_2_postcode = 'LS6 3TR'
+# ref.reference_2_country = 'United Kingdom'
+# ref.reference_2_relationship = 'Adaptive'
+# ref.reference_2_telephone = '44-(500)939-8365'
+# ref.save! validate: false
+#
+# course = CourseSelection.new application_id: app.id, course_id: 135
+# course.save! validate: false
+#
+# course = CourseSelection.new application_id: app.id, course_id: 19
+# course.save! validate: false
+#
+# course = CourseSelection.new application_id: app.id, course_id: 114
+# course.save! validate: false
+#
+# course = CourseSelection.new application_id: app.id, course_id: 111
+# course.save! validate: false
+#
+# course = CourseSelection.new application_id: app.id, course_id: 32
+# course.save! validate: false
 
 student = Student.new
 student.first_name = 'Brian'

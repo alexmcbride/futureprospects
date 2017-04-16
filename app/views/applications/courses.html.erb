@@ -9,7 +9,8 @@
   /* jquery auto-complete for courses text field */
   $(function() {
      $('#selected-course').autocomplete({
-         minLength: 0,
+         minLength: 1,
+         delay: 500,
          source: '<%= url_for courses_search_path(:json) %>',
          focus: function( event, ui ) {
              $( "#selected-course" ).val( ui.item.title );
@@ -22,8 +23,16 @@
 
              return false;
          }
-     }).autocomplete("instance")._renderItem = function(ul, item) {
-        return $("<li>").append("<div>" + item.title + "  &mdash; " + item.college.name + "</div>").appendTo(ul);
+     }).autocomplete( "instance" )._renderItem = function( ul, item ) {
+         return $( "<li>" )
+             .append( '<div class="text-capitalize"><strong>' +
+                 item.title +
+                 '</strong><br>' +
+                 item.college.name +
+                 ' | Status: ' +
+                 item.status +
+                 '</div>')
+             .appendTo( ul );
      };
   });
 </script>

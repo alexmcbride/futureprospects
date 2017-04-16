@@ -24,12 +24,17 @@ class CoursesController < ApplicationController
 
   # GET /courses/search.json
   def search
-    @courses = Course.search(params[:term]).take 13
+    # with empty term scoped_search returns all results, which we don't want.
+    term = params[:term].strip unless params[:term].nil?
     respond_to do |format|
-      # Respond with course title, college name, and category name
-      format.json { render :json => @courses, :only => [:id, :title],
-                           :include => {:category => {:only => :name},
-                                        :college => {:only => :name}} }
+      if term.nil? or term.empty?
+        format.json { head :ok } # blank json response
+      else
+        # Perform search.
+        @courses = Course.search(params[:term]).take 10
+        format.json { render :json => @courses, :only => [:id, :title, :status],
+                             :include => {:college => {:only => :name}} }
+      end
     end
   end
 end

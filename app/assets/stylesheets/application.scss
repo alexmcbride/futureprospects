@@ -169,6 +169,13 @@ blockquote {
   font-size: 14px;
 }
 
+/* Autocomplete menu item style */
+.ui-menu-item {
+  border-bottom: 1px dotted #8aa4be;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
 /* Checkbox Bootstrap colors */
 .checkbox {
   padding-left: 20px; }

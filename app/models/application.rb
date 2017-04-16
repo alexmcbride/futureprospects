@@ -7,7 +7,7 @@ class Application < ApplicationRecord
 
   # Enums
   enum gender: [:male, :female, :other]
-  enum state: [:active, :submitted, :paid, :completed]
+  enum state: [:applying, :submitted, :paid, :completed]
   enum payment_type: [:credit_card, :paypal]
 
   # Validators
@@ -201,7 +201,7 @@ class Application < ApplicationRecord
       return false
     end
     self.completed_courses = true
-    self.save
+    self.save validate: false # don't want to worry about rest of application here.
   end
 
   # Attempts to submit the application.

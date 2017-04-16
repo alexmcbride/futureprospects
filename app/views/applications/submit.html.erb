@@ -16,18 +16,6 @@
 
     <br>
 
-    <% if @application.incomplete? %>
-      <div class="alert alert-warning">
-        <h4 class="no-top-margin"><strong>Warning.</strong></h4>
-        <p>The application cannot be submitted as the following <%= pluralize @application.incomplete_stages.size, 'stage' %> must be completed:</p>
-        <ul>
-          <% @application.incomplete_stages.each do |stage| %>
-              <li><strong><%= stage %></strong></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
     <%= form_for @application, url: applications_submit_next_path, method: :post do |f| %>
       <%= form_errors @application %>
       <br>

@@ -16,6 +16,7 @@ class Student < User
       application.family_name = self.family_name
       application.scottish_candidate_number = self.scottish_candidate_number
       application.national_insurance_number = self.national_insurance_number
+      application.state = :applying
       application.student = self
       application.save validate: false # Can't validate at this point
       application

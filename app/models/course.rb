@@ -135,19 +135,33 @@ class Course < ApplicationRecord
     self.errors.empty?
   end
 
-  # Updates attributes and sends mass cancellation email if status changed to cancelled
+  # Updates attributes and takes action depending on status change (e.g. cancelled etc.)
   def update_with_status(params)
-    previous_status = self.status
-    if self.update params
-      # If status changed to cancelled, send notification email to students.
-      if self.status != previous_status && self.cancelled?
-        self.course_selections.each do |selection|
-          student = selection.application.student
-          StudentMailer.course_cancelled(student, self).deliver_later
-        end
-      end
+    # Check if status has just been switched to cancelled
+    if !self.cancelled? && params[:status] == 'cancelled'
+      return cancel
+    end
+
+    self.update params
+  end
+
+  # Cancels course and emails all student who had applied for it.
+  def cancel
+    # Ignore if already cancelled.
+    unless self.cancelled?
+      self.status = :cancelled
+      self.save
+      send_mass_cancellation_email
       return true
     end
     false
+  end
+
+  # Sends a cancellation email to all student's who have applied for the course.
+  def send_mass_cancellation_email
+    self.course_selections.each do |selection|
+      student = selection.application.student
+      StudentMailer.course_cancelled(student, self).deliver_later
+    end
   end
 end

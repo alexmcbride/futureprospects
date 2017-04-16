@@ -7,13 +7,13 @@
 
 <p><%= link_to @course.title, course_url(@course) %></p>
 
-<p>No reason has been given for the cancellation, but it might be due to insufficient demand, or
-  administrative problems. To discus the matter further, please contact the college directly.</p>
+<p>No reason has been given for the cancellation, but it is typically due to insufficient demand. To discuss the matter
+  further, please contact the college directly.</p>
 
 <p><%= mail_to @course.college.email %></p>
 
 <p>Unfortunately no refunds can be given for any application fees in relation to the cancellation. Future Prospects
-reserves the right to cancel a course at any time without notice.</p>
+reserves the right to cancel a course without notice at any time.</p>
 
 <p>Sincerely,
   <br><br>

@@ -21,7 +21,8 @@ class ApplicationController < ActionController::Base
       redirect_to(request.referrer || root_path)
     end
 
-  def current_user
-    current_student or current_staff
-  end
+    # Gets the currently signed in user.
+    def current_user
+      current_student or current_staff
+    end
 end

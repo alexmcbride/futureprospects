@@ -41,6 +41,8 @@ applications, move optional label to top on all pages (currently just profile)
 
 add college new, destroy safeguards
 
-add cache to college stats? just for fun...
-
 do we need app intro? make this the home page? that way we have more info to put on home.
+
+test autocomplete on phone?
+
+caching?

@@ -45,6 +45,7 @@ class CourseSelection < ApplicationRecord
     end
   end
 
+  # Creates a new CourseSelection object based on the course_id
   def self.from_course_id(params)
     selection = CourseSelection.new
     selection.course_id = params[:course_id]
@@ -53,23 +54,22 @@ class CourseSelection < ApplicationRecord
 
   # Calculates the number of applicants for the specified college
   def self.count_applicants(college)
-    # We don't use SQL parametrisation here, as rails makes it difficult,
-    # but we don't get the college object from input, so it should be OK.
-    sql = "SELECT COUNT(DISTINCT s.application_id)
-FROM course_selections s
-JOIN courses c on s.course_id=c.id
-WHERE c.college_id=#{college.id};"
+    sql = 'SELECT COUNT(DISTINCT s.application_id)
+           FROM course_selections s
+           JOIN courses c ON s.course_id=c.id
+           WHERE c.college_id=%d'
+    sql = ActiveRecord::Base.send(:sanitize_sql, [sql, college.id]) # Sanitise SQL
     result = ActiveRecord::Base.connection.execute(sql)
     result.first['count']
   end
 
+  # Counts the number of courses applied to
   def self.count_courses(college)
-    # We don't use SQL parametrisation here, as rails makes it difficult,
-    # but we don't get the college object from input, so it should be OK.
     sql = "SELECT COUNT(*)
-FROM course_selections s
-JOIN courses c on s.course_id=c.id
-WHERE c.college_id=#{college.id};"
+           FROM course_selections s
+           JOIN courses c ON s.course_id=c.id
+           WHERE c.college_id=#{college.id};"
+    sql = ActiveRecord::Base.send(:sanitize_sql, [sql, college.id]) # Sanitise SQL
     result = ActiveRecord::Base.connection.execute(sql)
     result.first['count']
   end

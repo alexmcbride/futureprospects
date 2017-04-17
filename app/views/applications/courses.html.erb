@@ -10,7 +10,6 @@
   $(function() {
      $('#selected-course').autocomplete({
          minLength: 1,
-         delay: 500,
          source: '<%= url_for courses_search_path(:json) %>',
          focus: function( event, ui ) {
              $( "#selected-course" ).val( ui.item.title );
@@ -20,7 +19,6 @@
          select: function( event, ui ) {
              $( "#selected-course" ).val( ui.item.title );
              $( "#course_selection_course_id" ).val( ui.item.id );
-
              return false;
          }
      }).autocomplete( "instance" )._renderItem = function( ul, item ) {

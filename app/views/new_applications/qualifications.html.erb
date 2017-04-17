@@ -48,9 +48,7 @@
     <h3 class="no-top-margin">
       Qualifications
       <% count = @school.qualifications.size%>
-      <% if count > 0 %>
-        (<%= count %>)
-      <% end %>
+      <%= "#{count}" if count > 0 %>
     </h3>
 
     <% if count == 0 %>

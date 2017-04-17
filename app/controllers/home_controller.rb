@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   # GET /
   def index
-    @categories = Category.order(:name).all
+    @categories = Category.order(:name)
     respond_to do |format|
       # Show home page depending on whether the user is signed in or not
       if student_signed_in?

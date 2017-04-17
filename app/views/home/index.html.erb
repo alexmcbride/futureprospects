@@ -15,9 +15,9 @@
 
         <h2><%= icon('info-circle', class: 'index-icon') %> Browse Courses</h2>
         <p>Browse the categories list to view all of the opportunities we offer.</p>
-        <ul class="list-inline">
+        <ul>
           <% @categories.each do |category| %>
-              <li style="margin-right: 3px; line-height: 1.6em;"><%= link_to category.name, courses_category_path(category) %></li>
+            <li><%= link_to category.name, courses_category_path(category) %></li>
           <% end %>
         </ul>
       </div>

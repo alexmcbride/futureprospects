@@ -4,12 +4,12 @@ class CoursesController < ApplicationController
     @search_term = params[:search]
     # Do search using scoped_search. If search term is empty then all records are returned.
     @courses = Course.search(@search_term).order(:title).paginate(:page => params[:page])
-    @categories = Category.order(:name).all
+    @categories = Category.order(:name)
   end
 
   # GET /courses/category/1
   def category
-    @categories = Category.order(:name).all
+    @categories = Category.order(:name)
     @category = Category.left_outer_joins(:courses).find params[:id] # Left outer join as courses can be empty
     @courses = @category.courses.paginate(:page => params[:page]).includes(:college).order(:title)
     render :index
@@ -18,7 +18,7 @@ class CoursesController < ApplicationController
   # GET /courses/1
   def show
     @course = Course.find(params[:id])
-    @categories = Category.order(:name).all
+    @categories = Category.order(:name)
     @course_selection = CourseSelection.new course_id: @course.id
   end
 

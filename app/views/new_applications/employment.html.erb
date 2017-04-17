@@ -49,7 +49,7 @@
     <% if @application.jobs.empty? %>
       <p class="text-darkish small text-center">Any jobs you add will appear here.</p>
     <% else %>
-        <p class="text-darkish small">You can remove a job by clicking the remove button.</p>
+      <p class="text-darkish small">You can remove a job by clicking the remove button.</p>
       <div class="list-group">
         <% @application.jobs.each do |job| %>
           <div class="list-group-item well">

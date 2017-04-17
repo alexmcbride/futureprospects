@@ -1,4 +1,4 @@
-class ApplicationsController < ApplicationController
+class NewApplicationsController < ApplicationController
   before_action :authenticate_student!
   before_action :set_application, except: [:create, :education_remove, :qualifications, :qualifications_add,
                                            :qualifications_remove, :employment_remove, :courses_remove]

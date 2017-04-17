@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ApplicationsControllerTest < ActionDispatch::IntegrationTest
+class NewApplicationsControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
     get applications_index_url
     assert_response :success

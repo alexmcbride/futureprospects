@@ -13,7 +13,6 @@ class Staff::UsersController < ApplicationController
   # GET /staff/users/1
   # GET /staff/users/1.json
   def show
-
   end
 
   # GET /staff/users/new
@@ -43,11 +42,9 @@ class Staff::UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
+        format.html { redirect_to staff_user_path(@user), notice: "User '#{@user.username}' was successfully updated." }
       else
         format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -66,8 +63,10 @@ class Staff::UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = Staff.find(params[:id])
+      @user = @user.becomes(User) # To make Rolify work with STI.
     end
 
+    # Sets the colleges attribute for certain actions.
     def set_colleges
       @colleges = College.order(:name)
     end

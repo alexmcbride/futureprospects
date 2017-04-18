@@ -1,10 +1,10 @@
 class Staff < User
-  rolify
-
   validates :job_title, presence: true, length: {maximum: 35}
   validates :college_id, presence: true
 
   belongs_to :college
+
+  rolify
 
   def self.create_staff(params)
     staff = Staff.new params

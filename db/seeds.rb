@@ -32,12 +32,6 @@ cogc.save
 
 
 
-# Staff
-Staff.create college: cogc, first_name: 'Alex', family_name: 'McBride', email: 'xandermcbride@gmail.com', password: 'secret', password_confirmation: 'secret', job_title: 'College Admin'
-
-
-
-
 kelvin = College.new
 kelvin.name = 'Glasgow Kelvin College'
 kelvin.description = 'Glasgow Kelvin College is the newest of Glasgow’s three regional further education colleges.  Formed by the merger of John Wheatley, North Glasgow and Stow colleges in November 2013, Glasgow Kelvin has all the expertise, facilities and resources to ensure that students receive a high quality learning experience that will provide them with the skills and knowledge to enable them to compete in today’s challenging jobs market, or to move on to further, more advanced learning.

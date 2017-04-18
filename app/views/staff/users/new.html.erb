@@ -1,5 +1,9 @@
-<h1>New Staff User</h1>
+<% breadcrumb :staff_users_new %>
+<% @title = 'New Staff Member' %>
 
-<%= render 'form', user: @staff_user, path: new_staff_user_path %>
+<p class="text-darkish small">Enter details for a new staff member here. Once created a password will be generated and
+  emailed to the staff member. Then will need to confirm their email address before being able to log in.</p>
+
+<%= render 'form', user: @user, path: staff_users_path %>
 
 <%= link_to 'Back', staff_users_path %>

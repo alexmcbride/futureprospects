@@ -1,4 +1,4 @@
-<% breadcrumb :staff_members %>
+<% breadcrumb :staff_users %>
 <% @title = 'Staff Members' %>
 
 <div class="table-responsive">
@@ -13,14 +13,14 @@
     </thead>
 
     <tbody>
-      <% @staff_users.each do |staff_user| %>
+      <% @users.each do |user| %>
         <tr>
-          <td><%= staff_user.full_name %></td>
-          <td><%= staff_user.email %></td>
-          <td><%= format_date staff_user.created_at %></td>
-          <td><%= link_to 'Show', staff_user_path(staff_user) %></td>
-          <td><%= link_to 'Edit', edit_staff_user_path(staff_user) %></td>
-          <td><%= link_to 'Destroy', staff_user_path(staff_user), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= user.full_name %></td>
+          <td><%= user.email %></td>
+          <td><%= format_date user.created_at %></td>
+          <td><%= link_to 'Show', staff_user_path(user) %></td>
+          <td><%= link_to 'Edit', edit_staff_user_path(user) %></td>
+          <td><%= link_to 'Destroy', staff_user_path(user), method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
     </tbody>
@@ -28,7 +28,7 @@
 </div>
 
 <div class="digg_pagination text-center">
-  <%= will_paginate @staff_users %>
+  <%= will_paginate @users %>
 </div>
 
 <br>

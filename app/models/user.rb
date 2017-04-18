@@ -67,7 +67,6 @@ class User < ApplicationRecord
     self.type == 'Student'
   end
 
-
   def staff?
     self.type == 'Staff'
   end

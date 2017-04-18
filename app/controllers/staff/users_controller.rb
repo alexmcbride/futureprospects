@@ -1,13 +1,14 @@
 class Staff::UsersController < ApplicationController
   before_action :authenticate_staff!
   before_action :set_user, only: [:show, :edit, :update, :destroy, :remove]
-  before_action :set_colleges, only: [:new, :edit]
+  before_action :set_colleges, only: [:index, :new, :edit]
 
   # GET /staff/users
   # GET /staff/users.json
   def index
     college = current_staff.college
     @users = college.staff.order(:created_at).paginate(page: params[:page])
+    @job_titles = college.staff.select(:job_title).distinct
   end
 
   # GET /staff/users/1

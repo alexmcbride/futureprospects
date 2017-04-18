@@ -16,9 +16,4 @@ class Staff < User
     staff.password_confirmation = password
     staff
   end
-
-  # After account confirmed, staff member needs to change their password.
-  def after_confirmation
-      self.send_reset_password_instructions
-  end
 end

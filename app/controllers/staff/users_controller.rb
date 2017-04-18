@@ -1,7 +1,7 @@
 class Staff::UsersController < ApplicationController
   before_action :authenticate_staff!
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :set_colleges, only: [:new, :edit, :create, :update]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :remove]
+  before_action :set_colleges, only: [:new, :edit]
 
   # GET /staff/users
   # GET /staff/users.json
@@ -32,6 +32,7 @@ class Staff::UsersController < ApplicationController
       if @user.save
         format.html { redirect_to staff_user_path(@user), notice: "User '#{@user.username}' was successfully created." }
       else
+        set_colleges
         format.html { render :new }
       end
     end
@@ -44,19 +45,30 @@ class Staff::UsersController < ApplicationController
       if @user.update(user_params)
         format.html { redirect_to staff_user_path(@user), notice: "User '#{@user.username}' was successfully updated." }
       else
+        set_colleges
         format.html { render :edit }
       end
     end
   end
 
+  def remove
+  end
+
   # DELETE /staff/users/1
   # DELETE /staff/users/1.json
   def destroy
-    @user.destroy
     respond_to do |format|
-      format.html { redirect_to staff_users_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
+      if @user.remove_user params[:user_username]
+        format.html { redirect_to staff_users_url, notice: 'User was successfully destroyed.' }
+      else
+        format.html { render :remove }
+      end
     end
+  end
+
+  # GET /staff/users/1/permission
+  def permissions
+
   end
 
   private

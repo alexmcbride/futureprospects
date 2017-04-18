@@ -193,3 +193,18 @@ crumb :staff_users_new do
   parent :staff_users
   link 'New', new_staff_user_path
 end
+
+crumb :staff_users_show do |user|
+  parent :staff_users
+  link user.full_name, staff_user_path(user)
+end
+
+crumb :staff_users_edit do |user|
+  parent :staff_users_show, user
+  link 'Show', staff_user_path(user)
+end
+
+crumb :staff_users_remove do |user|
+  parent :staff_users_show, user
+  link 'Remove', staff_user_remove_path(user)
+end

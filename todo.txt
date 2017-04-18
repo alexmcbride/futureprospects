@@ -43,6 +43,6 @@ add college new, destroy safeguards
 
 do we need app intro? make this the home page? that way we have more info to put on home.
 
-test autocomplete on phone?
-
 caching?
+
+create staff

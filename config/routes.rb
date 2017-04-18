@@ -1,7 +1,7 @@
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 Rails.application.routes.draw do
-  devise_for :staff, :skip => [:registrations] # Skip staff sign-up
+  devise_for :staff, :skip => [:registrations, :confirmations] # Skip staff sign-up
   devise_scope :staff do
     # We skip registrations to stop staff sign up, but we still need to enable staff profile editing
     get 'staff/edit', to: 'devise/registrations#edit', as: 'edit_staff_registration'
@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     resources :categories
     get 'categories/:id/remove', to: 'categories#remove', as: 'category_remove'
     resources :colleges
+    get 'users/:id/permissions', to: 'users#permissions', as: 'user_permissions'
+    get 'users/:id/remove', to: 'users#remove', as: 'user_remove'
     resources :users
   end
 

@@ -1,0 +1,23 @@
+<% breadcrumb :staff_users_remove, @user %>
+<% @title = 'Remove User' %>
+
+<p>Are you sure you want to delete the following user?</p>
+<p><strong><%= @user.username %></strong></p>
+<p>For security purposes you must type the full username of the user exactly as it appears in order for it to be deleted.</p>
+
+<%= form_for @user, url: staff_user_path(@user), method: :delete do |f| %>
+    <%= hidden_field_tag :_method, 'delete' %>
+
+    <%= form_errors @user %>
+
+    <div class="form-group">
+      <%= text_field_tag :user_username, nil, class: 'form-control' %>
+    </div>
+
+    <div class="text-right">
+      <%= button_tag(:class => "btn btn-danger") do |s| %>
+          <%= icon('trash') %>
+          Delete User
+      <% end %>
+    </div>
+<% end %>

@@ -1,7 +1,7 @@
 class Staff::CoursesController < ApplicationController
   before_action :authenticate_staff!
   before_action :set_course, only: [:show, :edit, :update, :remove, :destroy]
-  before_action :set_categories, only: [:index, :new, :edit, :create, :update]
+  before_action :set_categories, only: [:index, :new, :edit]
 
   # GET /staff/courses
   def index
@@ -33,6 +33,7 @@ class Staff::CoursesController < ApplicationController
       if @course.save
         format.html { redirect_to staff_course_path(@course), notice: "Course '#{@course.title}' was successfully created." }
       else
+        set_categories
         format.html { render :new }
       end
     end
@@ -44,6 +45,7 @@ class Staff::CoursesController < ApplicationController
       if @course.update_with_status(staff_course_params)
         format.html { redirect_to staff_course_path(@course), notice: "Course '#{@course.title}' was successfully updated." }
       else
+        set_categories
         format.html { render :edit }
       end
     end

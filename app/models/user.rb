@@ -77,4 +77,15 @@ class User < ApplicationRecord
   def self.generate_password
     Devise.friendly_token.first 8
   end
+
+  # Removes the user if the username matches
+  def remove_user(username)
+    if username == self.username
+      self.destroy!
+      true
+    else
+      self.errors.add(:username, "does not match '#{self.username}'")
+      false
+    end
+  end
 end

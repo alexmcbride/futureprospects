@@ -27,7 +27,7 @@ cogc.postcode = 'G4 0RF'
 cogc.telephone = '0141 375 5555'
 cogc.email = 'enquiries@cityofglasgowcollege.ac.uk'
 cogc.website = 'https://www.cityofglasgowcollege.ac.uk'
-cogc.image = 'college-cogc.jpg'
+cogc.image.filename = 'college-cogc.jpg'
 cogc.save
 
 
@@ -45,7 +45,7 @@ kelvin.postcode = 'G21 4TD'
 kelvin.telephone = '0141 630 5000'
 kelvin.email = 'info@glasgowkelvin.ac.uk'
 kelvin.website = 'http://www.glasgowkelvin.ac.uk/'
-kelvin.image = 'college-kelvin.jpg'
+kelvin.image.filename = 'college-kelvin.jpg'
 kelvin.save
 
 
@@ -75,7 +75,7 @@ clyde.postcode = 'G12 0YE'
 clyde.telephone = '0141 272 9000'
 clyde.email = 'admissions@slc.ac.uk'
 clyde.website = 'http://www.glasgowclyde.ac.uk'
-clyde.image = 'college-clyde.jpg'
+clyde.image.filename = 'college-clyde.jpg'
 clyde.save
 
 

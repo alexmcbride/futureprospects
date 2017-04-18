@@ -63,11 +63,18 @@ class User < ApplicationRecord
     "#{self.first_name} #{self.family_name}"
   end
 
+  # Determines if this user is a student.
   def student?
     self.type == 'Student'
   end
 
+  # Determines if this user is staff.
   def staff?
     self.type == 'Staff'
+  end
+
+  # Generates a random eight character password
+  def self.generate_password
+    Devise.friendly_token.first 8
   end
 end

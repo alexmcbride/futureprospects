@@ -2,7 +2,7 @@ class Staff::CollegesController < ApplicationController
   before_action do
     authenticate_staff_role! :manage_colleges
   end
-  before_action :set_college, only: [:show, :edit, :update, :destroy]
+  before_action :set_college, only: [:show, :edit, :update, :remove, :destroy]
 
   # GET /staff/colleges
   # GET /staff/colleges.json
@@ -50,12 +50,18 @@ class Staff::CollegesController < ApplicationController
     end
   end
 
+  def remove
+  end
+
   # DELETE /staff/colleges/1
   # DELETE /staff/colleges/1.json
   def destroy
-    @college.destroy
     respond_to do |format|
-      format.html { redirect_to staff_colleges_url, notice: 'College was successfully destroyed.' }
+      if @college.remove_college params[:college_name]
+        format.html { redirect_to root_path, notice: 'College was successfully destroyed.' }
+      else
+        format.html { render :remove }
+      end
     end
   end
 

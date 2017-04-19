@@ -179,6 +179,11 @@ crumb :staff_edit_college do |college|
   link 'Edit', edit_staff_college_path(college)
 end
 
+crumb :staff_remove_college do |college|
+  parent :staff_show_college, college
+  link 'Delete', staff_college_remove_path(college)
+end
+
 crumb :staff_new_college do
   parent :staff_colleges
   link 'New', new_staff_college_path

@@ -72,9 +72,6 @@ class Staff::UsersController < ApplicationController
 
   # GET /staff/users/1/permission
   def permissions
-    if @user == current_staff
-      user_not_authorized
-    end
     @roles = Role.all
   end
 
@@ -94,7 +91,7 @@ class Staff::UsersController < ApplicationController
 
     # Sets the colleges attribute for certain actions.
     def set_colleges
-      @colleges = College.order(:name)
+      @colleges = College.select('id, name').order(:name) # only need id, name for select inputs
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -15,11 +15,32 @@ class College < ApplicationRecord
   has_many :courses
   has_many :staff
 
+  # Gets the number applicants to this college.
   def count_applicants
     CourseSelection.count_applicants self
   end
 
+  # Gets the number of courses that have been applied for.
   def count_course_selections
     CourseSelection.count_courses self
+  end
+
+  # Removes the college, plus all staff, courses, and course selections, if the names match.
+  def remove_college(college_name)
+    if self.name != college_name
+      errors.add(:college_name, "does not match '#{name}'")
+      false
+    else
+      # Remove any course selection for student's that have applied to this college.
+      courses.each do |course|
+        course.course_selections.destroy_all
+      end
+      # Remove any courses & staff members
+      staff.destroy_all
+      courses.destroy_all
+      # Remove college
+      destroy
+      true
+    end
   end
 end

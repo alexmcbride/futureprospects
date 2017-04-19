@@ -10,10 +10,11 @@ Rails.application.routes.draw do
   devise_for :students
 
   namespace :staff do
-    resources :courses
     get 'courses/:id/remove', to: 'courses#remove', as: 'course_remove'
-    resources :categories
+    resources :courses
     get 'categories/:id/remove', to: 'categories#remove', as: 'category_remove'
+    resources :categories
+    get 'colleges/:id/remove', to: 'colleges#remove', as: 'college_remove'
     resources :colleges
     get 'users/:id/permissions', to: 'users#permissions', as: 'user_permissions'
     post 'users/:id/permissions', to: 'users#permissions_update', as: 'user_permissions_update'

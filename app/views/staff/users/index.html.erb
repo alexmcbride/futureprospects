@@ -61,9 +61,13 @@
               <td><%= link_to user.full_name, staff_user_path(user) %></td>
               <td><%= user.email %></td>
               <td><%= format_date user.created_at %></td>
-              <td><%= link_to 'Permissions', staff_user_permissions_path(user) %></td>
-              <td><%= link_to 'Edit', edit_staff_user_path(user) %></td>
-              <td><%= link_to 'Delete', staff_user_remove_path(user) %></td>
+              <td>
+                <%= link_to staff_user_permissions_path(user), title: 'Permissions' do %>
+                  <%= icon('ban') %>
+                <% end %>
+              </td>
+              <td><%= link_to icon('pencil-square'), edit_staff_user_path(user), title: 'Edit' %></td>
+              <td><%= link_to icon('trash'), staff_user_remove_path(user), title: 'Delete' %></td>
             </tr>
         <% end %>
         </tbody>

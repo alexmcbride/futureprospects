@@ -151,24 +151,32 @@ def generate_seed file
 'Teacher and Training Development',
 'Trade Union Education']
 
-  colleges = %w(cogc kelvin clyde lanark west)
+  colleges = [1, 2, 3]
+  statuses = ['open', 'open', 'open', 'open', 'cancelled', 'closed']
 
   index = 1
-  course = "course#{index}"
-  puts "#{course} = Course.new college: #{colleges.sample}"
+  course = 'course'
+  puts "#{course} = Course.new college_id: #{colleges.sample}"
   title = 0
+  course_title = nil
   while line = file.gets
     line.chomp!
     if line.starts_with? 'Index: '
     elsif line.starts_with? 'Title: '
       tokens = line.split(': ', 2)
-      puts "#{course}.title = '#{tokens[1]}'"
-      if tokens[1].length > title
-        title = tokens[1].length
+      course_title = tokens[1]
+      puts "#{course}.title = '#{course_title}'"
+      if course_title.length > title
+        title = course_title.length
       end
     elsif line.starts_with? 'Category: '
       tokens = line.split(': ', 2)
-      puts "#{course}.category = Category.find_by_name '#{tokens[1]}'"
+      index2 = tokens[1].index(', Faculty')
+      if index2.nil?
+        puts "#{course}.category = Category.find_by_name '#{tokens[1]}'"
+      else
+        puts "#{course}.category = Category.find_by_name '#{tokens[1][0...index2]}'"
+      end
     elsif line.starts_with? 'Level: '
       tokens = line.split(': ', 2)
       unless tokens[1].empty?
@@ -182,21 +190,24 @@ def generate_seed file
         puts "#{course}.end_date = Date.new 2018, 6, 13"
       elsif tokens[1].starts_with? '2'
         puts "#{course}.end_date = Date.new 2019, 6, 13"
+      elsif tokens[1].starts_with? '3'
+        puts "#{course}.end_date = Date.new 2020, 6, 13"
       end
     elsif line.starts_with? 'Image: '
       tokens = line.split(': ', 2)
       filename = File.basename tokens[1]
       filename = filename.split('?')[0]
       full_path = "app/assets/images/seed_images2/#{filename}"
-
       if File.exist? full_path
-        puts "#{course}.image = Rails.root.join('#{full_path}').open"
-      else
-        puts "#{course}.image = '########'"
+        puts 'if upload_images'
+        puts "  #{course}.image = Rails.root.join('#{full_path}').open"
+        puts 'else'
+        puts "  #{course}.image.filename = '#{filename.tr('%', '_')}'"
+        puts 'end'
       end
     elsif line.starts_with? 'Description: '
       tokens = line.split(': ', 2)
-      puts "#{course}.description = \"#{tokens[1].tr('"', '\"')}\""
+      puts "#{course}.description = \"#{tokens[1].tr('"', '\"').tr('"', '\"')}\""
     elsif line.starts_with? 'Entry Requirements: '
       tokens = line.split(': ', 2)
       puts "#{course}.entry_requirements = \"#{tokens[1].tr('"', '\"')}\""
@@ -206,10 +217,12 @@ def generate_seed file
     elsif line == ''
       index += 1
       puts "#{course}.spaces = course_spaces"
-      puts "#{course}.save!"
+      puts "#{course}.status = :#{statuses.sample.to_sym}"
+      puts "puts '#{course_title} saving!'"
+      puts "#{course}.save! validate: false"
       puts ''
-      course = "course#{index}"
-      puts "#{course} = Course.new college: #{colleges.sample}"
+      course = "course"
+      puts "#{course} = Course.new college_id: #{colleges.sample}"
     end
 
     # puts 'length: ' + title.to_s

@@ -1,7 +1,7 @@
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 Rails.application.routes.draw do
-  devise_for :staff, :skip => [:registrations, :confirmations] # Skip staff sign-up
+  devise_for :staff, :skip => [:registrations] # Skip staff sign-up
   devise_scope :staff do
     # We skip registrations to stop staff sign up, but we still need to enable staff profile editing
     get 'staff/edit', to: 'devise/registrations#edit', as: 'edit_staff_registration'

@@ -4,25 +4,41 @@
 <div class="row">
   <div class="col-sm-3">
     <div class="well">
-      <%= form_tag do %>
+      <%= form_tag staff_users_path, method: :get do %>
+        <!-- TODO: filterrific -->
+
         <div class="form-group">
           <%= label_tag :fullname, 'Filter staff' %>
-          <%= text_field_tag :fullname, params[:fullname], class: 'form-control' %>
+          <div class="input-group">
+            <%= text_field_tag :fullname, params[:fullname], class: 'form-control', name: 'title' %>
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" onclick="$('#fullname').val('');" title="Clear">
+                  <%= icon('times') %>
+                </button>
+              </span>
+          </div>
         </div>
 
         <div class="form-group">
           <%= label_tag :college, 'Filter college' %>
-          <%= select_tag :college, options_from_collection_for_select(@colleges, :id, :name, params[:college]), class: 'form-control' %>
+          <% options = '<option value="0">All Colleges</option>'.html_safe + options_from_collection_for_select(@colleges, :id, :name, params[:college]) %>
+          <%= select_tag :college, options, class: 'form-control' %>
         </div>
 
         <div class="form-group">
           <%= label_tag :job_title, 'Filter job titles' %>
-          <%= select_tag :job_title, options_from_collection_for_select(@job_titles, :job_title, :job_title, params[:job_title]), class: 'form-control' %>
+          <% options = '<option value="all">All Job Titles</option>'.html_safe + options_from_collection_for_select(@job_titles, :job_title, :job_title, params[:job_title]) %>
+          <%= select_tag :job_title, options, class: 'form-control' %>
         </div>
 
         <%= submit_tag 'Apply Filter', class: 'btn btn-block' %>
      <% end %>
     </div>
+
+    <%= link_to new_staff_user_path, class: 'btn btn-default btn-block', role: 'button' do %>
+      <%= icon('plus-circle') %>
+      Add Staff Member
+    <% end %>
   </div>
 
   <div class="col-sm-9">

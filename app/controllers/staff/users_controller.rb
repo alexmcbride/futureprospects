@@ -28,7 +28,7 @@ class Staff::UsersController < ApplicationController
   # POST /staff/users
   # POST /staff/users.json
   def create
-    @user = Staff.create_staff user_params
+    @user = Staff.new user_params_with_password
     respond_to do |format|
       if @user.save
         format.html { redirect_to staff_user_path(@user), notice: "User '#{@user.username}' was successfully created." }
@@ -85,7 +85,11 @@ class Staff::UsersController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
+    def user_params_with_password
+      params.require(:user).permit(:first_name, :family_name, :email, :college, :college_id, :job_title, :password, :password_confirmation)
+    end
+
     def user_params
-      params.require(:staff).permit(:first_name, :family_name, :email, :college, :college_id, :job_title, :password, :password_confirmation)
+      params.require(:user).permit(:first_name, :family_name, :email, :college, :college_id, :job_title)
     end
 end

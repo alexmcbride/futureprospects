@@ -1,4 +1,7 @@
 <% breadcrumb :staff_users_edit, @user %>
 <% @title = 'Editing Staff User' %>
 
+<p class="text-darkish">You can edit the details of a staff member here. If the staff member has forgotten their password
+they can reset it using the reset password option on sign in.</p>
+
 <%= render 'form', user: @user, path: staff_user_path(@user) %>

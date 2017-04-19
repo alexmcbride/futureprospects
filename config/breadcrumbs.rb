@@ -208,3 +208,8 @@ crumb :staff_users_remove do |user|
   parent :staff_users_show, user
   link 'Remove', staff_user_remove_path(user)
 end
+
+crumb :staff_user_permissions do |user|
+  parent :staff_users_show, user
+  link 'Permissions', staff_user_permissions_path(user)
+end

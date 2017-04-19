@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     get 'categories/:id/remove', to: 'categories#remove', as: 'category_remove'
     resources :colleges
     get 'users/:id/permissions', to: 'users#permissions', as: 'user_permissions'
+    post 'users/:id/permissions', to: 'users#permissions_update', as: 'user_permissions_update'
     get 'users/:id/remove', to: 'users#remove', as: 'user_remove'
     resources :users
   end

@@ -48,7 +48,7 @@
         <tr>
           <th>Full Name</th>
           <th>Email</th>
-          <td>Joined</td>
+          <th>Joined</th>
           <th colspan="4"></th>
         </tr>
         </thead>
@@ -56,11 +56,10 @@
         <tbody>
         <% @users.each do |user| %>
             <tr>
-              <td><%= user.full_name %></td>
+              <td><%= link_to user.full_name, staff_user_path(user) %></td>
               <td><%= user.email %></td>
               <td><%= format_date user.created_at %></td>
               <td><%= link_to 'Permissions', staff_user_permissions_path(user) %></td>
-              <td><%= link_to 'Show', staff_user_path(user) %></td>
               <td><%= link_to 'Edit', edit_staff_user_path(user) %></td>
               <td><%= link_to 'Delete', staff_user_remove_path(user) %></td>
             </tr>

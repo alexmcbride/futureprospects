@@ -16,13 +16,21 @@ class ApplicationController < ActionController::Base
     end
 
     # Redirects unauthorized users back from whence they came.
-    def user_not_authorized
-      flash[:alert] = 'You are not authorized to perform this action.'
+    def user_not_authorized(message=nil)
+      message ||= 'You are not authorized to perform this action.'
+      flash[:alert] = message
       redirect_to(request.referrer || root_path)
     end
 
     # Gets the currently signed in user.
     def current_user
       current_student or current_staff
+    end
+
+    def authenticate_staff_role! role
+      authenticate_staff!
+      if staff_signed_in? and not current_staff.has_role? role
+        user_not_authorized
+      end
     end
 end

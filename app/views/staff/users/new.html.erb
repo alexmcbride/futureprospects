@@ -1,7 +1,8 @@
 <% breadcrumb :staff_users_new %>
 <% @title = 'New Staff Member' %>
 
-<p class="text-darkish small">Enter details for a new staff member here. Once created a password will be generated and
-  emailed to the staff member. Then will need to confirm their email address before being able to log in.</p>
+<p class="text-darkish">Enter details for a new staff member here. You will need to provide them with a password
+to use when first signing in, which can then be changed by them later. A confirmation email will be sent to the user
+inviting them to confirm their email account.</p>
 
 <%= render 'form', user: @user, path: staff_users_path, show_password: true %>

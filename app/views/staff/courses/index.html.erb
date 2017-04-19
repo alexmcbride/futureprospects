@@ -8,7 +8,6 @@
     <div class="panel panel-default">
       <div class="panel-body">
         <%= form_tag staff_courses_path, method: :get do%>
-          <%= hidden_field_tag :sort, params[:sort] %>
 
           <div class="form-group">
             <%= label_tag :title, 'Filter Courses' %>
@@ -35,7 +34,6 @@
           </div>
 
           <%= submit_tag 'Apply Filter', class: 'btn btn-block' %>
-
         <% end %>
       </div>
     </div>
@@ -57,25 +55,25 @@
           <thead>
           <tr>
             <th>
-              <%= link_to course_table_filter_path('title', params) do %>
+              <%= link_to course_table_filter_path :title, params do %>
                   Course
                   <%= icon('arrows-v', class: 'sort-arrow') %>
               <% end %>
             </th>
             <th>
-              <%= link_to course_table_filter_path('category_id', params) do %>
+              <%= link_to course_table_filter_path :category_id, params do %>
                   Category
                   <%= icon('arrows-v', class: 'sort-arrow') %>
               <% end %>
             </th>
             <th>
-              <%= link_to course_table_filter_path('status', params) do %>
+              <%= link_to course_table_filter_path :status, params do %>
                   Status
                   <%= icon('arrows-v', class: 'sort-arrow') %>
               <% end %>
             </th>
             <th>
-              <%= link_to course_table_filter_path('students', params) do %>
+              <%= link_to course_table_filter_path :course_selections_count, params do %>
                   Students
                   <%= icon('arrows-v', class: 'sort-arrow') %>
               <% end %>

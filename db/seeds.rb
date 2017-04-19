@@ -113,8 +113,14 @@ category_names.split(/\n/).each do |line|
   categories[line] = category.id
 end
 
+# Roles
+roles = %w(manage_applications manage_courses manage_categories manage_colleges manage_staff manage_reports)
+roles.each do |role|
+  Role.create! name: role
+end
 
 # File was getting too big, so split it into smaller sections.
 require 'seed_courses'
 require 'seed_students'
 require 'seed_staff'
+

@@ -1,7 +1,10 @@
 class Staff::UsersController < ApplicationController
-  before_action :authenticate_staff!
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :remove]
+  before_action do
+    authenticate_staff_role! :manage_staff
+  end
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :remove, :permissions, :permissions_update]
   before_action :set_colleges, only: [:index, :new, :edit]
+  before_action :forbid_self, only: [:edit, :update, :destroy, :remove, :permissions, :permissions_update]
 
   # GET /staff/users
   # GET /staff/users.json
@@ -69,14 +72,24 @@ class Staff::UsersController < ApplicationController
 
   # GET /staff/users/1/permission
   def permissions
+    if @user == current_staff
+      user_not_authorized
+    end
+    @roles = Role.all
+  end
 
+  def permissions_update
+    @user.change_roles params[:permission]
+    respond_to do |format|
+      format.html { redirect_to staff_user_permissions_path(@user), notice: 'The permissions were successfully updated.' }
+    end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = Staff.find(params[:id])
-      @user = @user.becomes(User) # To make Rolify work with STI.
+      @user = User.find params[:id]
+      @user = @user.becomes(User) # To make Rolify work with single-table inheritance.
     end
 
     # Sets the colleges attribute for certain actions.
@@ -89,7 +102,15 @@ class Staff::UsersController < ApplicationController
       params.require(:user).permit(:first_name, :family_name, :email, :college, :college_id, :job_title, :password, :password_confirmation)
     end
 
+    # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:first_name, :family_name, :email, :college, :college_id, :job_title)
+    end
+
+    # Checks if this is your own user account, then redirects you.
+    def forbid_self
+      if @user.id == current_staff.id
+        user_not_authorized 'You cannot change your own user account'
+      end
     end
 end

@@ -1,5 +1,7 @@
 class Staff::CollegesController < ApplicationController
-  before_action :authenticate_staff!
+  before_action do
+    authenticate_staff_role! :manage_colleges
+  end
   before_action :set_college, only: [:show, :edit, :update, :destroy]
 
   # GET /staff/colleges

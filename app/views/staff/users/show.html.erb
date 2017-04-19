@@ -91,7 +91,7 @@
         <strong>Updated:</strong>
       </div>
       <div class="col-xs-8">
-        <%= (distance_of_time_in_words_to_now @user.updated_at).capitalize %>
+        <%= (distance_of_time_in_words_to_now @user.updated_at).capitalize %> ago
       </div>
   </div>
   </div>
@@ -125,5 +125,6 @@
 
 <br>
 
+<%= link_to 'Permissions', staff_user_permissions_path(@user) %> |
 <%= link_to 'Edit', edit_staff_user_path(@user) %> |
 <%= link_to 'Delete', staff_user_remove_path(@user) %>

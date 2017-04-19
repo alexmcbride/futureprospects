@@ -3,6 +3,4 @@ class Staff < User
   validates :college_id, presence: true
 
   belongs_to :college
-
-  rolify
 end

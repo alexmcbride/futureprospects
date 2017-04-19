@@ -1,5 +1,7 @@
 class Staff::CategoriesController < ApplicationController
-  before_action :authenticate_staff!
+  before_action do
+    authenticate_staff_role! :manage_categories
+  end
   before_action :set_staff_category, only: [:show, :edit, :update, :remove, :destroy]
 
   # GET /staff/categories

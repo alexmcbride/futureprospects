@@ -92,24 +92,12 @@ class Course < ApplicationRecord
   end
 
   # Sort courses
-  def self.sort_courses(courses, sort, dir)
-    if sort.nil?
-      return courses.order :title
+  def self.sort_courses(courses, params)
+    if params[:sort].present?
+      courses.order("#{params[:sort]} #{'DESC' if params[:dir] == 'desc'}")
+    else
+      courses.order :title
     end
-
-    sort = sort.to_sym
-    if [:title, :category_id, :status, :students].include? sort
-      sort = :course_selections_count if sort == :students
-
-      dir.downcase! if dir
-      if not dir or dir == 'asc'
-        return courses.order sort
-      else
-        return courses.order("#{sort} DESC")
-      end
-    end
-
-    courses
   end
 
   # Filter and sort the courses
@@ -118,7 +106,7 @@ class Course < ApplicationRecord
     courses = filter_by_title courses, params[:title]
     courses =  filter_by_category courses, params[:category_id]
     courses = filter_by_status courses, params[:status]
-    courses = sort_courses courses, params[:sort], params[:dir]
+    courses = sort_courses courses, params
     courses
   end
 

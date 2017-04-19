@@ -11,6 +11,8 @@ class User < ApplicationRecord
   validates :first_name, presence: true, length: {maximum: 35, minimum: 1}
   validates :family_name, presence: true, length: {maximum: 35, minimum: 2}
 
+  rolify
+
   self.per_page = 20
 
   # Sets the login
@@ -87,5 +89,35 @@ class User < ApplicationRecord
       self.errors.add(:username, "does not match '#{self.username}'")
       false
     end
+  end
+
+  # Changed a user's roles. Permissions is a hash: {role_name: 'yes'}
+  def change_roles(permissions)
+    # If permissions empty, remove all roles.
+    if permissions.nil? or permissions.empty?
+      remove_all_roles
+    else
+      # Loop through each role, if it's in permission add or keep it, otherwise remove it.
+      Role.all.each do |role|
+        has_role = has_role? role.name
+        if permissions.key? role.name
+          unless has_role
+            add_role role.name
+          end
+        elsif has_role
+          remove_only_role_relation role.name
+        end
+      end
+    end
+  end
+
+  # Removes all roles for this user from users_roles
+  def remove_all_roles
+    Role.all.each {|r| remove_only_role_relation r.name}
+  end
+
+  # Removes role from users_roles and leaves the roles table alone.
+  def remove_only_role_relation(role_name)
+    roles.delete(roles.where(:name => role_name))
   end
 end

@@ -163,25 +163,21 @@ module ApplicationHelper
     student_signed_in? or staff_signed_in?
   end
 
-  # Switches the dir sort param back and forward
-  def toggle_sort(dir)
-    if not dir or dir == 'asc'
-      'desc'
+  # Switches the dir sort param back and forth
+  def toggle_sort(sort, params)
+    if params[:sort] == sort.to_s
+      :desc if params[:dir].nil?
     else
-      'asc'
+      :desc if params[:sort].nil? and sort == :title
     end
   end
 
   # The path for filtering the staff course table.
   def course_table_filter_path(sort, params)
-    staff_courses_path(sort: sort,
-                       dir: toggle_sort(params[:dir]),
-                       page: params[:page],
-                       title: params[:title],
-                       category_id: params[:category_id],
-                       status: params[:status])
+    staff_courses_path sort: sort, dir: toggle_sort(sort, params)
   end
 
+  # Adds the little markdown guide ? thing next to some text fields
   def markdown_support_text
     content_tag(:div, class: 'pull-right text-darkish small', style: 'margin-top: 5px;') do
       concat(icon('arrow-circle-down'))

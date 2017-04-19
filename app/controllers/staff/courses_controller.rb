@@ -1,5 +1,7 @@
 class Staff::CoursesController < ApplicationController
-  before_action :authenticate_staff!
+  before_action do
+    authenticate_staff_role! :manage_courses
+  end
   before_action :set_course, only: [:show, :edit, :update, :remove, :destroy]
   before_action :set_categories, only: [:index, :new, :edit]
 
@@ -73,6 +75,7 @@ class Staff::CoursesController < ApplicationController
       @course = Course.find(params[:id])
     end
 
+    # Sets categories for action what need them.
     def set_categories
       @categories = Category.order(:name)
     end

@@ -72,6 +72,7 @@ class Staff::UsersController < ApplicationController
 
   # GET /staff/users/1/permission
   def permissions
+    # TODO: pundit, headless policy?
     @roles = Role.all
   end
 

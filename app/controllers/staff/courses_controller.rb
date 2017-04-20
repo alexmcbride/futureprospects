@@ -1,35 +1,37 @@
 class Staff::CoursesController < ApplicationController
-  before_action do
-    authenticate_staff_role! :manage_courses
-  end
+  before_action :authenticate_staff!
   before_action :set_course, only: [:show, :edit, :update, :remove, :destroy]
   before_action :set_categories, only: [:index, :new, :edit]
 
   # GET /staff/courses
   def index
-    @courses = Course.includes(:category)
+    @courses = policy_scope(Course)
+                   .includes(:category)
                    .filter_and_sort(params)
-                   .where(college_id: current_staff.college_id)
                    .paginate(page: params[:page], per_page: 15)
   end
 
   # GET /staff/courses/1
   def show
+    authorize @course
   end
 
   # GET /staff/courses/new
   def new
+    authorize Course
     @course = Course.new
   end
 
   # GET /staff/courses/1/edit
   def edit
+    authorize @course
   end
 
   # POST /staff/courses
   def create
     @course = Course.new(staff_course_params)
     @course.college = current_staff.college
+    authorize @course
 
     respond_to do |format|
       if @course.save
@@ -43,6 +45,7 @@ class Staff::CoursesController < ApplicationController
 
   # PATCH/PUT /staff/courses/1
   def update
+    authorize @course
     respond_to do |format|
       if @course.update_with_status(staff_course_params)
         format.html { redirect_to staff_course_path(@course), notice: "Course '#{@course.title}' was successfully updated." }
@@ -55,10 +58,12 @@ class Staff::CoursesController < ApplicationController
 
   # GET /staff/courses/1/remove
   def remove
+    authorize @course
   end
 
   # DELETE /staff/courses/1
   def destroy
+    authorize @course
     respond_to do |format|
       if @course.remove_valid? params[:course_title]
         @course.destroy!

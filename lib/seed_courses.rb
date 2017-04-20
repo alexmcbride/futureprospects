@@ -20,7 +20,7 @@ course.entry_requirements = "To gain entry to the course you should have any of 
 course.career_prospects = "On successful completion of the SPD programme, cadets can gain employment as a fully qualified officer of the watch or choose to progress into university to study at a higher level."
 course.spaces = course_spaces
 course.status = :open
-puts 'SPD Marine Engineering (Cadet Training) PDA saving!'
+puts 'SPD Marine Engineering (Cadet Training) PDAsaving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -39,7 +39,7 @@ course.entry_requirements = "* One Higher pass in a relevant* academic subject 
 course.career_prospects = "You could expect to apply for a trainee management position and/or a team leader in industry or commerce."
 course.spaces = course_spaces
 course.status = :cancelled
-puts 'Business HNC saving!'
+puts 'Business HNCsaving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -58,7 +58,7 @@ course.entry_requirements = "* Two Highers in a relevant* academic subject OR\n
 course.career_prospects = "This course prepares you for a career as a Personal Assistant or Administrator in both the public and private sector. The HND can provide progression into employment in a general administrative role within small to medium enterprises. It'll also provide opportunities to develop the skills and knowledge required for more specialist posts demanded by larger organisations.\n\nThe qualification will allow you to develop:\n\n* Technical and administrative knowledge relevant to current practice.\n* Interpersonal skills relevant to an administrative role.\n* Personal effectiveness.\n* Communication.\n* Presentation technique."
 course.spaces = course_spaces
 course.status = :open
-puts 'Administration and Information Technology  HND saving!'
+puts 'Administration and Information Technology  HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -77,7 +77,7 @@ course.entry_requirements = "* One appropriate Higher and three Intermediate 2 c
 course.career_prospects = "The course will develop your core and employability skills and make you more attractive to prospective employers."
 course.spaces = course_spaces
 course.status = :open
-puts 'Information Technology HNC saving!'
+puts 'Information Technology HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -96,7 +96,7 @@ course.entry_requirements = "* Two Highers and three Intermediate 2 courses (inc
 course.career_prospects = "After completing the HND you may pursue a career in business intelligence analysis, information management, database administration, trainer/teacher, hardware and software support, or web development."
 course.spaces = course_spaces
 course.status = :open
-puts 'Information Technology HND saving!'
+puts 'Information Technology HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -115,7 +115,7 @@ course.entry_requirements = "* Two Higher and three Intermediate 2 courses (incl
 course.career_prospects = "Apply for various job vacancies, such as a junior web developer/designer.\n\nContinuining Study\n\nYou'll have the opportunity to progress to the following degree courses at university:\n\n* BSc (Hons) Web and Mobile Development at the University of the West of Scotland.\n* BSc/BSc (Hons) Interactive Media Design at Napier University.\n* BSc/BSc (Hons) Digital Media at Napier University.\n* BSc/BSc (Hons) Creative Computing at Napier University.\n* BEng (Hons) Web Technologies at Napier University."
 course.spaces = course_spaces
 course.status = :open
-puts 'Web Development HND saving!'
+puts 'Web Development HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -134,7 +134,7 @@ course.entry_requirements = "* Two Higher Grade passes at Grade C or above, inc
 course.career_prospects = "This course prepares you for a career in:\n\n* Advertising agencies.\n* PR consultancies.\n* Social media companies.\n* Advertising departments.\n* Commercial, or media-based companies.\nThere are a number of work experience and placement opportunities throughout the course."
 course.spaces = course_spaces
 course.status = :cancelled
-puts 'Advertising and Public Relations HND saving!'
+puts 'Advertising and Public Relations HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -153,7 +153,7 @@ course.entry_requirements = "* Two Higher Grade passes at Grade C or above inclu
 course.career_prospects = "You may go on to a career in marketing, public relations, or internal or external communications in any number of business sectors."
 course.spaces = course_spaces
 course.status = :open
-puts 'Marketing HND saving!'
+puts 'Marketing HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -172,7 +172,7 @@ course.entry_requirements = "* NC Interior Design or related subject, OR\n* Hig
 course.career_prospects = "This course may lead to a variety of careers in interior design and architectural practices, such as space planning, property development – shop and office fitting, and museum and exhibition design.\n\nContinuing Study\n\nAfter successfully completing the HND course, you can apply for direct entry to 3rd year BA (Hons) Interior Design program at a choice of universities such as: Glasgow School of Art, Edinburgh College of Art, Duncan of Jordonstone College of Art or Heriot Watt University."
 course.spaces = course_spaces
 course.status = :open
-puts '3D Design: Interior Design HND saving!'
+puts '3D Design: Interior Design HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -191,7 +191,7 @@ course.entry_requirements = "* HNC 3D Design: Model Making for the Creative Ind
 course.career_prospects = "Many graduates work as model makers all over the world, including New Zealand, Dubai and Australia.."
 course.spaces = course_spaces
 course.status = :open
-puts '3D Design: Model Making for the Creative Industries (Year 2 Direct Entry) HND saving!'
+puts '3D Design: Model Making for the Creative Industries (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -210,7 +210,7 @@ course.entry_requirements = "* HNC Creative Printmaking; OR\n* First year HND C
 course.career_prospects = "On completion of the course, you can pursue a career as a practicing Artist, Printmaker, Designer, Print Technician, or as a Printmaking Educator.."
 course.spaces = course_spaces
 course.status = :closed
-puts 'Creative Printmaking (Year 2 Direct Entry) HND saving!'
+puts 'Creative Printmaking (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -229,7 +229,7 @@ course.entry_requirements = "* One relevant* Higher at grade C or above; OR\n* T
 course.career_prospects = "This course prepares you for a career in:\n\n* Bookkeeping.\n* Financial and/or Management Accounting.\n* Accounts Technician.\n* Assistant Accountant.\n* Accounts Supervisor.\n* Financial Reporting.\n* Taxation.\nContinuing Study\n\nYou can progress to HND Accounting, or AAT Level 8 (Advanced Diploma) on successful completion of this course."
 course.spaces = course_spaces
 course.status = :cancelled
-puts 'Accounting HNC saving!'
+puts 'Accounting HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -248,7 +248,7 @@ course.entry_requirements = "* Two Higher Grade passes, preferably including Mat
 course.career_prospects = "This course prepares you for a career as an Architectural Technician, or Architectural Technologist in a variety of sectors including:\n\n* Built Environment.\n* Construction.\n* Property.\n* Private consultant practices (architects and surveyors).\n* Design and build services divisions of construction contractors.\n* Local authorities.\n* Health trusts.\n* Housing associations.\n* Building component manufacturers.\n* Government organisation."
 course.spaces = course_spaces
 course.status = :open
-puts 'Architectural Technology HND saving!'
+puts 'Architectural Technology HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -267,7 +267,7 @@ course.entry_requirements = "* Two Higher passes, preferably including Mathemati
 course.career_prospects = "This course prepares you for a career in:\n\n* Private practice surveying firms.\n* Government and public authorities.\n* Building control departments.\n* Construction companies.\n* Facilities management.\n* Property companie."
 course.spaces = course_spaces
 course.status = :open
-puts 'Building Surveying HND saving!'
+puts 'Building Surveying HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -286,7 +286,7 @@ course.entry_requirements = "* One Higher Grade pass, preferably Maths or a Scie
 course.career_prospects = "You might work as a Technician, or Junior Manager in the built environment and construction sector – architectural technology, quantity surveying, estimating, building surveying and construction management."
 course.spaces = course_spaces
 course.status = :open
-puts 'Built Environment HNC saving!'
+puts 'Built Environment HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -305,7 +305,7 @@ course.entry_requirements = "You'll be invited for a group and/or individual in
 course.career_prospects = "* Architectural CAD Technician or Building/Civil Engineering Technicia."
 course.spaces = course_spaces
 course.status = :closed
-puts 'Computer Aided Architectural Design & Technology HND saving!'
+puts 'Computer Aided Architectural Design & Technology HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -324,7 +324,7 @@ course.entry_requirements = "* Two Higher Grade passes, preferably including Mat
 course.career_prospects = "This course prepares you for a career as a Higher Technician, or Junior Manager in both the public and private sector, in areas including: built environment, the construction sector, construction management, site engineering, estimating, and construction project planning."
 course.spaces = course_spaces
 course.status = :open
-puts 'Construction Management HND saving!'
+puts 'Construction Management HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -343,7 +343,7 @@ course.entry_requirements = "* Two Higher Grade passes, preferably including Mat
 course.career_prospects = "This course prepares you for a career in private practice QS consultancies, contracting organisations, property companies, financial institutions, local and central government, commercial clients, and housing associations."
 course.spaces = course_spaces
 course.status = :open
-puts 'Quantity Surveying HND saving!'
+puts 'Quantity Surveying HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -362,7 +362,7 @@ course.entry_requirements = "* One Higher from Physics, Technological Studies, M
 course.career_prospects = "Career\n\nYou have the opportunity to further their careers in the Manufacturing, Mechanical and Maintenance service sectors.\n\nContinuing Study\n\nConsider studying to HND level in Engineering Systems with the potential to progress to University degree level."
 course.spaces = course_spaces
 course.status = :cancelled
-puts 'Engineering Systems HNC saving!'
+puts 'Engineering Systems HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -381,7 +381,7 @@ course.entry_requirements = "* NC in an appropriate Mechanical Engineering subje
 course.career_prospects = "This course prepares you for a career as an Engineering Technician."
 course.spaces = course_spaces
 course.status = :cancelled
-puts 'Engineering: Mechanical HNC saving!'
+puts 'Engineering: Mechanical HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -400,7 +400,7 @@ course.entry_requirements = "* Two Higher passes, one in Maths and preferably Ph
 course.career_prospects = "This course prepares you for a career as an Electronics Technician Engineer."
 course.spaces = course_spaces
 course.status = :cancelled
-puts 'Electronic Engineering HND saving!'
+puts 'Electronic Engineering HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -419,7 +419,7 @@ course.entry_requirements = "* Two Higher grades (grade C or better). Maths and 
 course.career_prospects = "This course prepares you for a career as an Electronics Technician in electronic manufacturing and service industries, including construction, installation and repair of electronic equipment and systems."
 course.spaces = course_spaces
 course.status = :open
-puts 'Electronic Engineering HNC saving!'
+puts 'Electronic Engineering HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -438,7 +438,7 @@ course.entry_requirements = "* NC in an appropriate Engineering subject; OR\n* 
 course.career_prospects = "This course prepares you for a career as a Technician Engineer.\n\nContinuing study -\n\nSuccessful students can progress to degree courses in related areas. Successful students may progress to studying an HND at the College, or enter year two of B Eng Electrical Power Systems at Glasgow Caledonian University."
 course.spaces = course_spaces
 course.status = :open
-puts 'Engineering: Electrical HND saving!'
+puts 'Engineering: Electrical HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -457,7 +457,7 @@ course.entry_requirements = "* NC in an appropriate Engineering subject; OR\n* 
 course.career_prospects = "This course prepares you for a career as a Technician Engineer."
 course.spaces = course_spaces
 course.status = :closed
-puts 'Engineering: Electrical HNC saving!'
+puts 'Engineering: Electrical HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -476,7 +476,7 @@ course.entry_requirements = "* Two relevant* Highers at grade C or above; OR\n* 
 course.career_prospects = "This course prepares you for a career in:\n\n* Bookkeeping.\n* Financial and/or Management Accounting.\n* Accounts Technician.\n* Assistant Accountant.\n* Accounts Supervisor.\n* Financial Reporting.\n* Management Accounting.\n* Taxation."
 course.spaces = course_spaces
 course.status = :closed
-puts 'Accounting HND saving!'
+puts 'Accounting HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -495,7 +495,7 @@ course.entry_requirements = "* Two Higher Grade passes at grade C or above inclu
 course.career_prospects = "This course prepares you for a career in supply chain management, procurement, and international Logistics across all  major industry sectors."
 course.spaces = course_spaces
 course.status = :closed
-puts 'Supply Chain Management HND saving!'
+puts 'Supply Chain Management HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -514,7 +514,7 @@ course.entry_requirements = "* Two appropriate Highers and three Intermediate 2 
 course.career_prospects = "This course prepares you for a career in software development, web design/development, and information systems development..="
 course.spaces = course_spaces
 course.status = :open
-puts 'Computing: Software Development HND saving!'
+puts 'Computing: Software Development HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -533,7 +533,7 @@ course.entry_requirements = "* One Higher* and three National 5 qualifications; 
 course.career_prospects = "You have an opportunity to continue studying with us, progressing on to HND Software Development 2nd year as long as you meet the entry requirements: 15 credits, very good attendance in HNC and a very good reference from your lecturers."
 course.spaces = course_spaces
 course.status = :cancelled
-puts 'Computing: Software Development HNC saving!'
+puts 'Computing: Software Development HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -552,7 +552,7 @@ course.entry_requirements = "* One appropriate Higher and three Intermediate 2 o
 course.career_prospects = "This course prepares you for a career in IT infrastructure support."
 course.spaces = course_spaces
 course.status = :closed
-puts 'Computing: Technical Support HNC saving!'
+puts 'Computing: Technical Support HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -571,7 +571,7 @@ course.entry_requirements = "* One Higher pass in a relevant* academic subject 
 course.career_prospects = "This course prepares you for a career as a Personal Assistant or Administrator in the public and private sectors."
 course.spaces = course_spaces
 course.status = :open
-puts 'Administration and Information Technology HNC saving!'
+puts 'Administration and Information Technology HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -590,7 +590,7 @@ course.entry_requirements = "* One Higher pass in a relevant* academic subject 
 course.career_prospects = "This course would help you to gain various administration positions in both the public and private sectors."
 course.spaces = course_spaces
 course.status = :open
-puts 'Administration and Information Technology with Digital Communication HNC saving!'
+puts 'Administration and Information Technology with Digital Communication HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -609,7 +609,7 @@ course.entry_requirements = "* A minimum of three Higher Grade passes, 2 at Grad
 course.career_prospects = "This course prepares you for a career in marketing, legal services, management, human resources, administration in industrial and commercial sectors, teaching, public sector employment or research."
 course.spaces = course_spaces
 course.status = :cancelled
-puts 'Business Diploma of Higher Education saving!'
+puts 'Business Diploma of Higher Education saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -628,7 +628,7 @@ course.entry_requirements = "* Two appropriate Highers and three Intermediate 2 
 course.career_prospects = "After completing the HND you can apply for jobs in areas of the Communication Industry, including design consultancies, advertising agencies, newspaper and magazine publishing, web design and motion graphics for screen, or in-house design studios.\n\nYou may eventually become self-employed as a Graphic Designer."
 course.spaces = course_spaces
 course.status = :cancelled
-puts '3D Computer Animation HND saving!'
+puts '3D Computer Animation HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -647,7 +647,7 @@ course.entry_requirements = "* One Higher in Art and Design and two National 5 Q
 course.career_prospects = "The HND course may lead to a job in the art glass industry or self-employment."
 course.spaces = course_spaces
 course.status = :open
-puts 'Art Glass Design HND saving!'
+puts 'Art Glass Design HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -666,7 +666,7 @@ course.entry_requirements = "* An NC/NQ qualification in Print, Art and Design, 
 course.career_prospects = "On completion of the course, you can pursue a career as a practicing Artist, Printmaker, Designer, Print Technician, or as a Printmaking Educator."
 course.spaces = course_spaces
 course.status = :closed
-puts 'Creative Printmaking HND saving!'
+puts 'Creative Printmaking HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -685,7 +685,7 @@ course.entry_requirements = "* Higher Art &amp; Design and English at minimum In
 course.career_prospects = "Demand for retail display designers is continuous within the retail sector. Previous students are employed by national and international companies such as Levi's, French Connection, Ikea, Frasers, BHS, Marks and Spencer and John Lewis."
 course.spaces = course_spaces
 course.status = :open
-puts 'Display Design for Retail HND saving!'
+puts 'Display Design for Retail HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -704,7 +704,7 @@ course.entry_requirements = "* NC in Art and Design, Graphic Arts portfolio, Ill
 course.career_prospects = "Students who complete their HND can progress to a career in motion graphics as an: animator, storyboard artist, layout artist, character developer, compositor, vfx designer and other related specialist.\n\nThere are opportunities for employment in-house or as a self-employed freelancer working for animation studios, VFX companies, BBC, STV, TV production companies, wed design studios, advertising agencies, and other clients requiring animation or motion graphics sequences."
 course.spaces = course_spaces
 course.status = :open
-puts 'Art and Animation HND saving!'
+puts 'Art and Animation HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -723,7 +723,7 @@ course.entry_requirements = "* National Certificate in Art and Design or related
 course.career_prospects = "This course will create career opportunities in: cross-media art, interactive digital media, film and moving image, time-based art, education and community arts."
 course.spaces = course_spaces
 course.status = :open
-puts 'Digital Art and Culture HND saving!'
+puts 'Digital Art and Culture HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -742,7 +742,7 @@ course.entry_requirements = "* National Certificate in Art and Design or related
 course.career_prospects = "After the HND you can apply for jobs in the Communication Industry, such as with design consultancies, advertising agencies, on line publishing, web design, television and film production, motion graphics for screen, or in-house design studios.\n\nYou may eventually become employed as an Interactive, Multimedia, Web or Graphic Designer."
 course.spaces = course_spaces
 course.status = :closed
-puts 'Digital Media HND saving!'
+puts 'Digital Media HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -761,7 +761,7 @@ course.entry_requirements = "* Higher Art and Design and English at minimum Inte
 course.career_prospects = "After completing the HND you can apply for jobs in areas of the Communication Industry, including design consultancies, advertising agencies, newspaper and magazine publishing, web design and motion graphics for screen, or in-house design studios.\n\nYou may eventually become self-employed as a Graphic Designer."
 course.spaces = course_spaces
 course.status = :open
-puts 'Graphic Design HND saving!'
+puts 'Graphic Design HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -780,7 +780,7 @@ course.entry_requirements = "* A Higher in English at minimum B or above or rel
 course.career_prospects = "This course prepares you for a career in creative writing, freelance writing, journalism, script editing, scriptwriting or broadcasting. Previous students have gone on to work in publishing, script tutoring, ghost writing, and speech writing."
 course.spaces = course_spaces
 course.status = :open
-puts 'Creative Industries: Professional Writing Skills HNC saving!'
+puts 'Creative Industries: Professional Writing Skills HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -799,7 +799,7 @@ course.entry_requirements = "* ​NC Media or equivalent SVQ; OR\n* Higher Engli
 course.career_prospects = "There are opportunities in radio for those with a variety of up-to-date skills, broadcasting knowledge and experience. Alternatively, students can progress to further study either at City of Glasgow College or elsewhere subject to entry conditions."
 course.spaces = course_spaces
 course.status = :open
-puts 'Creative Industries: Radio HNC saving!'
+puts 'Creative Industries: Radio HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -818,7 +818,7 @@ course.entry_requirements = "Two Highers in relevant subjects, at grade C or abo
 course.career_prospects = "Following this course, you can either apply for jobs in the industry or for a place at university."
 course.spaces = course_spaces
 course.status = :closed
-puts 'Practical Journalism HND saving!'
+puts 'Practical Journalism HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -837,7 +837,7 @@ course.entry_requirements = "* An NC/NQ in photography is preferred; OR\n* One 
 course.career_prospects = "With an HND in photography, you'll be prepared for a position in the highly competitive creative and media sector including: advertising, commercial, press and photojournalism, fashion, sports, social, medical, scientific, throughout the UK and worldwide."
 course.spaces = course_spaces
 course.status = :cancelled
-puts 'Photography HND saving!'
+puts 'Photography HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -856,7 +856,7 @@ course.entry_requirements = "Direct Entry - No prior beauty qualification path
 course.career_prospects = "This course prepares you for a career in the Beauty Industry including roles in salons, health spas, cruise ships, or self-employment. A number of senior, or managerial posts may also be available to HND qualified therapists."
 course.spaces = course_spaces
 course.status = :open
-puts 'Beauty Therapy HND saving!'
+puts 'Beauty Therapy HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -875,7 +875,7 @@ course.entry_requirements = "* Two Highers at C or above (English and Science su
 course.career_prospects = "This course prepares you for a career in the field of complementary therapies, working in healthcare services, eg palliative care, therapy clinics, or within the spa industry. There are also opportunities for self-employment, eg providing a mobile therapy service."
 course.spaces = course_spaces
 course.status = :open
-puts 'Complementary Therapies HNC saving!'
+puts 'Complementary Therapies HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -894,7 +894,7 @@ course.entry_requirements = "* A minimum of 2 Highers one of which must be Engli
 course.career_prospects = "This course will suit individuals wishing to pursue careers in sports clubs, private fitness facilities, local authorities and government sport initiatives; ranging from personal training and exercise instruction, to teaching physical education, or working within sports science.\n\nYou may also look at self-employment in fitness, exercise prescription and athletic conditioning."
 course.spaces = course_spaces
 course.status = :closed
-puts 'Fitness, Health and Exercise HND saving!'
+puts 'Fitness, Health and Exercise HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -913,7 +913,7 @@ course.entry_requirements = "* Professional Cookery Year 2 / NC Professional Coo
 course.career_prospects = "On completing your HND, you might progress to a career in catering, restaurants, and hospitality at a supervisory, or junior management level."
 course.spaces = course_spaces
 course.status = :open
-puts 'Professional Cookery HND saving!'
+puts 'Professional Cookery HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -932,7 +932,7 @@ course.entry_requirements = "* One Higher pass with a minimum of C, in an approp
 course.career_prospects = "You could expect to go on to work in events across a range of industries."
 course.spaces = course_spaces
 course.status = :cancelled
-puts 'Events HNC saving!'
+puts 'Events HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -950,7 +950,7 @@ course.entry_requirements = "* Recognised sea time of 12 months at OOW level\n* 
 course.career_prospects = "The course overall will equip you to become a competent and efficient Chief Mate."
 course.spaces = course_spaces
 course.status = :open
-puts 'Nautical Science/ Chief Mate Full / Master  HND saving!'
+puts 'Nautical Science/ Chief Mate Full / Master  HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -969,7 +969,7 @@ course.entry_requirements = "* Standard Grade passes at grade 3 or above (maths 
 course.career_prospects = "This course prepares you for a career at sea in the Merchant Navy and in a number of different sectors such as offshore, cruise ships, oil tankers, LNG and chemical tankers."
 course.spaces = course_spaces
 course.status = :open
-puts 'Marine Operations Scottish Professional Diploma saving!'
+puts 'Marine Operations Scottish Professional Diploma saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -988,7 +988,7 @@ course.entry_requirements = "* MNTB/MCA Approved HNC in Nautical Scienc"
 course.career_prospects = "This course prepares you for a career at sea in the Merchant Navy and in a number of different sectors such as offshore, cruise ships, oil tankers, LNG and chemical tankers."
 course.spaces = course_spaces
 course.status = :cancelled
-puts 'Nautical Science (Top up) HND saving!'
+puts 'Nautical Science (Top up) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -1006,7 +1006,7 @@ course.entry_requirements = "* Three years of acceptable sea service in a deck c
 course.career_prospects = "This course prepares you for a career as a Merchant Navy Deck Officer or shore-based employment in the shipping industry. You could apply for our higher level Deck Officer or Master Mariner qualifications, or a degree in maritime studies with various institutions. You could also look at progression to the second year of a Marine Operation degree course at Southampton Solent University."
 course.spaces = course_spaces
 course.status = :open
-puts 'UK Maritime and Coastguard Agency Officer of the Watch (Reg11/ 1) (including HNC Nautical Science)  HNC saving!'
+puts 'UK Maritime and Coastguard Agency Officer of the Watch (Reg11/ 1) (including HNC Nautical Science)  HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -1025,7 +1025,7 @@ course.entry_requirements = "* It is expected that those recruited onto the Mari
 course.career_prospects = "This course prepares you for a career as a Senior Marine Engineering Officer, Ship Manager, or Ship Superintendent."
 course.spaces = course_spaces
 course.status = :open
-puts 'Marine Engineering for Cadets from International Partner Colleges HND saving!'
+puts 'Marine Engineering for Cadets from International Partner Colleges HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -1044,7 +1044,7 @@ course.entry_requirements = "* Two Higher passes with a minimum of C passes; OR
 course.career_prospects = "The course prepares you for employment at junior management/supervisory level in a hospitality department, and graduate training schemes with many large organisations.\n\nWe work with key representatives from industry to offer graduate training positions following the successful completion of the HND."
 course.spaces = course_spaces
 course.status = :open
-puts 'Hospitality Management HND saving!'
+puts 'Hospitality Management HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -1063,7 +1063,7 @@ course.entry_requirements = "* One Higher with a minimum of a C pass; OR\n* NQ 
 course.career_prospects = "This course prepares you for a career at a supervisory level in a hospitality department of a hotel, or directly into a graduate training scheme with many large organisations, or a junior management position. We work with key representatives from industry to offer Graduate training positions following the successful completion of the HNC."
 course.spaces = course_spaces
 course.status = :cancelled
-puts 'Hospitality Operations HNC saving!'
+puts 'Hospitality Operations HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -1082,7 +1082,7 @@ course.entry_requirements = "* NC in an appropriate Mechanical Engineering subje
 course.career_prospects = "This course prepares you for a career as an Engineering Technician, Supervisor or Manager."
 course.spaces = course_spaces
 course.status = :open
-puts 'Mechanical Engineering HND saving!'
+puts 'Mechanical Engineering HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -1101,7 +1101,7 @@ course.entry_requirements = "* NC in an appropriate Mechanical Engineering subje
 course.career_prospects = "This course prepares you for a career as an Engineering Technician."
 course.spaces = course_spaces
 course.status = :cancelled
-puts 'Women into Engineering HNC saving!'
+puts 'Women into Engineering HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -1119,7 +1119,7 @@ course.entry_requirements = "* Recognised sea time of at least 12 months at an O
 course.career_prospects = "The course will equip you with the skills to become a competent and efficient Chief Mate. You will require a total of 36 months ‘watch-keeping service’ while holding an OOW Unlimited II/I COC to undertake your next examination for Master (Unlimited) COC. This period may be reduced to 24 months if at least 12 months of such seagoing service has been served as Chief Mate while holding a Chief Mate unlimited, II/2, Certificate of Competency (Reference MSN 1856)."
 course.spaces = course_spaces
 course.status = :cancelled
-puts 'Chief Mate/ Master Post HND saving!'
+puts 'Chief Mate/ Master Post HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -1138,7 +1138,7 @@ course.entry_requirements = "You should have completed 36 months watch keeping 
 course.career_prospects = "Progression to ships master or shore employment within the marine sector."
 course.spaces = course_spaces
 course.status = :cancelled
-puts 'MCA Class 1 Orals Only saving!'
+puts 'MCA Class 1 Orals Only saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -1157,7 +1157,7 @@ course.entry_requirements = "Completion of a full Chief Mate course including HN
 course.career_prospects = "Progression to ships master or shore employment within the marine sector."
 course.spaces = course_spaces
 course.status = :cancelled
-puts 'MCA Class 2 Writtens saving!'
+puts 'MCA Class 2 Writtens saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -1176,7 +1176,7 @@ course.entry_requirements = "* Two Higher passes with a minimum of C, including 
 course.career_prospects = "This course prepares you for a career in the organisation and management of conferences, exhibitions, festivals and special events."
 course.spaces = course_spaces
 course.status = :open
-puts 'Events Management HND saving!'
+puts 'Events Management HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -1195,7 +1195,7 @@ course.entry_requirements = "* HNC in Construction\n* It may also be possible to
 course.career_prospects = "This course prepares you for a career in:\n\n* Private practice surveying firms\n* Government and public authorities\n* Building control departments\n* Construction companies\n* Facilities management\n* Property compani."
 course.spaces = course_spaces
 course.status = :open
-puts 'Building Surveying (Year 2 Direct Entry) HND saving!'
+puts 'Building Surveying (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -1214,7 +1214,7 @@ course.entry_requirements = "* Two appropriate Highers and three Intermediate 2 
 course.career_prospects = "This course prepares you for a career in IT infrastructure."
 course.spaces = course_spaces
 course.status = :open
-puts 'Computing: Technical Support HND saving!'
+puts 'Computing: Technical Support HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -1233,7 +1233,7 @@ course.entry_requirements = "* Two Higher Grade passes at grade C or above inclu
 course.career_prospects = "This course prepares you for a career in retail at a supervisory, or junior management level."
 course.spaces = course_spaces
 course.status = :open
-puts 'Retail Management HND saving!'
+puts 'Retail Management HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -1252,7 +1252,7 @@ course.entry_requirements = "* HNC Web Development OR\n* First year of HND Web D
 course.career_prospects = "Apply for various job vacancies, such as a junior web developer/designer."
 course.spaces = course_spaces
 course.status = :cancelled
-puts 'Web Development (Year 2 Direct Entry) HND saving!'
+puts 'Web Development (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -1271,7 +1271,7 @@ course.entry_requirements = "* HND Creative Industries TV; OR\n* Relevant telev
 course.career_prospects = "After the course, you'll be prepared for an entry-level position in the highly competitive creative and media sector including production, directing, editing, presenting, researching and independent projects.  You may also consider applying for further studies at Masters level."
 course.spaces = course_spaces
 course.status = :closed
-puts 'Television BA (Hons) saving!'
+puts 'Television BA (Hons) saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -1290,7 +1290,7 @@ course.entry_requirements = "* Two Highers at Grade C or above in appropriate ac
 course.career_prospects = "This course prepares you for a career in travel and tourism with:\n\n* National Tourist Organisations.\n* Travel Management Companies.\n* Visitor Centres/Attractions.\n* Tour Operators.\n* Travel Agents.\n* Airlines.\n* Airport Ground Handling.\n* Foreign Exchange Service."
 course.spaces = course_spaces
 course.status = :cancelled
-puts 'Travel and Tourism (with option to study languages) HND saving!'
+puts 'Travel and Tourism (with option to study languages) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -1309,7 +1309,7 @@ course.entry_requirements = "* HND in Contemporary Art Practice (or equivalent) 
 course.career_prospects = "This course prepares you for a career as a practising artist, roles in museums, galleries, studios, arts centres, public art and public sector agencies, education bodies, festivals and art fairs."
 course.spaces = course_spaces
 course.status = :cancelled
-puts 'Contemporary Art Practice BA (Hons) saving!'
+puts 'Contemporary Art Practice BA (Hons) saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -1328,7 +1328,7 @@ course.entry_requirements = "* HND in Photography; OR\n* Relevant professional 
 course.career_prospects = "The Creative Industries sector covers a range of creative practice and activities. As a graduate of this course, you will be well placed to work within this sector as a practicing photographer, or in a related role."
 course.spaces = course_spaces
 course.status = :open
-puts 'Photography BA (Hons) saving!'
+puts 'Photography BA (Hons) saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -1347,7 +1347,7 @@ course.entry_requirements = "* A qualification in either SCQF Level 6 or SVQ Lev
 course.career_prospects = "On successful completion of the course you could operate your own business, apply for employment on-board cruise liners, lecturing posts in Further Education or as a Company Technician / Trainer."
 course.spaces = course_spaces
 course.status = :open
-puts 'Hairdressing HNC saving!'
+puts 'Hairdressing HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -1366,7 +1366,7 @@ course.entry_requirements = "* One Higher and three Intermediate 2 courses (incl
 course.career_prospects = "Apply for various positions including junior web designer or developer.\n\nContinuing Study\n\nYou can apply for the HND Web development course at the college."
 course.spaces = course_spaces
 course.status = :open
-puts 'Digital Design and Web Development HNC saving!'
+puts 'Digital Design and Web Development HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -1385,7 +1385,7 @@ course.entry_requirements = "* HNC in Construction.\n* It may also be possible t
 course.career_prospects = "This course prepares you for a career as an Architectural Technician or Architectural Technologist in a variety of sectors including:\n\n* Built environment.\n* Construction.\n* Property.\n* Private consultant practices (architects and surveyors).\n* Design and build services divisions of construction contractors.\n* Local authorities.\n* Health trusts.\n* Housing associations.\n* Building component manufacturers.\n* Government organisation."
 course.spaces = course_spaces
 course.status = :cancelled
-puts 'Architectural Technology (Year 2 Direct Entry) HND saving!'
+puts 'Architectural Technology (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -1404,7 +1404,7 @@ course.entry_requirements = "* HNC Computer Aided Design OR\n* First year of HND
 course.career_prospects = "* Architectural CAD Technician or Building/Civil Engineering Technicia."
 course.spaces = course_spaces
 course.status = :open
-puts 'Computer Aided Architectrual Design & Technology (Year 2 Direct Entry) HND saving!'
+puts 'Computer Aided Architectrual Design & Technology (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -1423,7 +1423,7 @@ course.entry_requirements = "* HNC Construction Management OR\n* First year of H
 course.career_prospects = "This course prepares you for a career as a Higher Technician or Junior Manager in both the public and private sector in areas including: built environment, the construction sector, construction management, site engineering, estimating, and construction project planning."
 course.spaces = course_spaces
 course.status = :open
-puts 'Construction Management (Year 2 Direct Entry)  HND saving!'
+puts 'Construction Management (Year 2 Direct Entry)  HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -1442,7 +1442,7 @@ course.entry_requirements = "* HNC Quantity Surveying OR\n* First year of HND Qu
 course.career_prospects = "This course prepares you for a career in private practice QS consultancies, contracting organisations, property companies, financial institutions, local and central government, commercial clients, and housing associations."
 course.spaces = course_spaces
 course.status = :open
-puts 'Quantity Surveying (Year 2 Direct Entry) HND saving!'
+puts 'Quantity Surveying (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -1461,7 +1461,7 @@ course.entry_requirements = "* HNC in Mechanical Engineering OR\n* First yea rof
 course.career_prospects = "This course prepares you for a career as an Engineering Technician, Supervisor or Manager."
 course.spaces = course_spaces
 course.status = :open
-puts 'Mechanical Engineering (Year 2 Direct Entry) HND saving!'
+puts 'Mechanical Engineering (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -1480,7 +1480,7 @@ course.entry_requirements = "* HNC Electronics OR\n* First year of HND Electroni
 course.career_prospects = "This course prepares you for a career as an Electronics Technician Engineer."
 course.spaces = course_spaces
 course.status = :cancelled
-puts 'Electronic Engineering (Year 2 Direct Entry) HND saving!'
+puts 'Electronic Engineering (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -1499,7 +1499,7 @@ course.entry_requirements = "* HNC in an appropriate Engineering subject; OR\n*
 course.career_prospects = "This course prepares you for a career as trainees within the oil and gas industries which recognise the value of the course. Many students have been recruited by blue chip organisations as well as a wide range of industrial and commercial organisations."
 course.spaces = course_spaces
 course.status = :open
-puts 'Engineering: Electrical (Year 2 Direct Entry) HND saving!'
+puts 'Engineering: Electrical (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -1518,7 +1518,7 @@ course.entry_requirements = "Year two:\n\n* Successful completion of a full time
 course.career_prospects = "This course prepares you for a career in:\n\n* Bookkeeping\n* Financial and management accounting using manual and computerside techniques\n* Accounts technician\n* Assistant accountant\n* Accounts supervisor\n* Financial reporting\n* Management accounting\n* Taxati."
 course.spaces = course_spaces
 course.status = :open
-puts 'Accounting (Year 2 Direct Entry) HND saving!'
+puts 'Accounting (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -1537,7 +1537,7 @@ course.entry_requirements = "* HNC Legal Services; OR\n* First year HND Legal 
 course.career_prospects = "On successful completion of your HND you may enter a related field, working as a trainee paralegal or as part of an in-house legal team. You can find employment with local authorities, the Sheriff Court, or Procurator Fiscal office.\n\nThere are also opportunities for you in the Banking and Insurance Sectors, and a number of graduates have joined Police Scotland."
 course.spaces = course_spaces
 course.status = :open
-puts 'Legal Services (Year 2 Direct Entry) HND saving!'
+puts 'Legal Services (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -1556,7 +1556,7 @@ course.entry_requirements = "* Successful completion of the HNC Computer (Scienc
 course.career_prospects = "After successful completion of this course, you can apply for a range of entry level roles within the IT industry."
 course.spaces = course_spaces
 course.status = :open
-puts 'Computer Science (Year 2 Direct Entrants) HND saving!'
+puts 'Computer Science (Year 2 Direct Entrants) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -1575,7 +1575,7 @@ course.entry_requirements = "* HNC Computing: Software Development, OR\n* First 
 course.career_prospects = "This course prepares you for a career in software development, web design/development, and information systems development."
 course.spaces = course_spaces
 course.status = :open
-puts 'Computing: Software Development  (Year 2 Direct Entry) HND saving!'
+puts 'Computing: Software Development  (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -1594,7 +1594,7 @@ course.entry_requirements = "* HNC Computing: Technical Support, OR\n* First ye
 course.career_prospects = "This course prepares you for a career in IT infrastructure."
 course.spaces = course_spaces
 course.status = :closed
-puts 'Computing: Technical Support (Year 2 Direct Entry) HND saving!'
+puts 'Computing: Technical Support (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -1613,7 +1613,7 @@ course.entry_requirements = "* HNC Administration and Information Technology OR\
 course.career_prospects = "This course prepares you for a career as a Personal Assistant or Administrator in both the public and private sector. The HND can provide progression into employment in a general administrative role within small to medium enterprises. It'll also provide opportunities to develop the skills and knowledge required for more specialist posts demanded by larger organisations.\n\nThe qualification will allow you to develop:\n\n* Technical and administrative knowledge relevant to current practice.\n* Interpersonal skills relevant to an administrative role.\n* Personal effectiveness.\n* Communication.\n* Presentation technique."
 course.spaces = course_spaces
 course.status = :open
-puts 'Administration and Information Technology (Year 2 Direct Entry) HND saving!'
+puts 'Administration and Information Technology (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -1632,7 +1632,7 @@ course.entry_requirements = "* HNC Business; OR\n* First year of HND Business.\
 course.career_prospects = "This course will prepare you for trainee positions in management and administration in industry, financial services and the public sector."
 course.spaces = course_spaces
 course.status = :open
-puts 'Business (Year 2 Direct Entry) HND saving!'
+puts 'Business (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -1651,7 +1651,7 @@ course.entry_requirements = "* HNC 3D Computer Animation, OR\n* First year HND�
 course.career_prospects = "* BSc (Hons) Computer Animation (with options) at the University of the West of Scotland.\n* BA (Hons) 3D Computing Animation at Glasgow Caledonian University.\n* BDes (Hons) Animation at University of Abertay.\n* There's also the option to study Visual FX at Napier Universit."
 course.spaces = course_spaces
 course.status = :open
-puts '3D Computer Animation (Year 2 Direct Entry) HND saving!'
+puts '3D Computer Animation (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -1670,7 +1670,7 @@ course.entry_requirements = "* 12- 15 Credit HNC Digital Design and Web Developm
 course.career_prospects = "Apply for various job vacancies, such as a junior web developer/designer."
 course.spaces = course_spaces
 course.status = :open
-puts 'Digital Design and Web Development (Year 2 Direct Entry) HND saving!'
+puts 'Digital Design and Web Development (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -1689,7 +1689,7 @@ course.entry_requirements = "* HNC Information Technology, OR\n* First year HND
 course.career_prospects = "After completing the HND you may pursue a career in business intelligence analysis, information management, database administration, trainer/teacher, hardware and software support, or web development."
 course.spaces = course_spaces
 course.status = :open
-puts 'Information Technology (Year 2 Direct Entry)  HND saving!'
+puts 'Information Technology (Year 2 Direct Entry)  HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -1708,7 +1708,7 @@ course.entry_requirements = "* Successful completion of a full time HNC Advertis
 course.career_prospects = "This course prepares you for a career in:\n\n* Advertising agencies\n* PR consultancies\n* Social media companies\n* Advertising departments\n* Commercial or media-based companies\nThere are a number of work experience and placement opportunities throughout the course."
 course.spaces = course_spaces
 course.status = :open
-puts 'Advertising and Public Relations (Year 2 Direct Entry) HND saving!'
+puts 'Advertising and Public Relations (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -1727,7 +1727,7 @@ course.entry_requirements = "* HNC Marketing; OR\n* First year HND Marketing.\
 course.career_prospects = "You may go on to a career in marketing, public relations, or internal or external communications in any number of business sectors."
 course.spaces = course_spaces
 course.status = :open
-puts 'Marketing (Year 2 Direct Entry) HND saving!'
+puts 'Marketing (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -1746,7 +1746,7 @@ course.entry_requirements = "* HNC Retail Management; OR\n* First year HND Ret
 course.career_prospects = "This course prepares you for a career in retail at a supervisory, or junior management level."
 course.spaces = course_spaces
 course.status = :open
-puts 'Retail Management (Year 2 Direct Entry) HND saving!'
+puts 'Retail Management (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -1765,7 +1765,7 @@ course.entry_requirements = "* An HNC in 3D Design: Interior Design\nYou'll be i
 course.career_prospects = "This course may lead to a variety of careers in interior design and architectural practices, such as space planning, property development – shop and office fitting, and museum and exhibition design."
 course.spaces = course_spaces
 course.status = :open
-puts '3D Design: Interior Design (Year 2 Direct Entry)  HND saving!'
+puts '3D Design: Interior Design (Year 2 Direct Entry)  HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -1784,7 +1784,7 @@ course.entry_requirements = "Direct entry to year two may be possible if you com
 course.career_prospects = "There are a wide range of career opportunities for graduates, including work in theatre, television, community drama, and theatre production."
 course.spaces = course_spaces
 course.status = :closed
-puts 'Acting and Performance (Year 2 Direct Entry) HND saving!'
+puts 'Acting and Performance (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -1803,7 +1803,7 @@ course.entry_requirements = "* HNC Art Glass Design; OR\n* First year HND Art Gl
 course.career_prospects = "The HND course may lead to a job in the art glass industry or self-employment."
 course.spaces = course_spaces
 course.status = :open
-puts 'Art Glass Design (Year 2 Direct Entry)  HND saving!'
+puts 'Art Glass Design (Year 2 Direct Entry)  HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -1822,7 +1822,7 @@ course.entry_requirements = "* HNC Furniture Craftmanship with Design; OR\n* Fi
 course.career_prospects = "After completing the course you may go on to become self-employed Designers/Makers of furniture, as well as pursuing jobs in the furniture trades and shop-fitting."
 course.spaces = course_spaces
 course.status = :open
-puts 'Furniture Craftmanship with Design (Year 2 Direct Entry) HND saving!'
+puts 'Furniture Craftmanship with Design (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -1841,7 +1841,7 @@ course.entry_requirements = "* HNC Furniture Restoration; OR\n* First year HND 
 course.career_prospects = "Career opportunities are many and varied. A high number of craftspeople are self-employed or in a partnership, which can be rewarding. There are also jobs in furniture trades and shop-fitting."
 course.spaces = course_spaces
 course.status = :open
-puts 'Furniture Restoration (Year 2 Direct Entry) HND saving!'
+puts 'Furniture Restoration (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -1860,7 +1860,7 @@ course.entry_requirements = "* HNC in Jewellery OR\n* First year of HND Jeweller
 course.career_prospects = "You'll be able to join year one or two of some courses, including:\n\n* Jewellery Design at Birmingham University.\n* Three Dimensional Design (ceramics, glass, jewellery) at Robert Gordon University.\n* Jewellery and Silversmithing at the Edinburgh School of Art.\n* Silversmithing and Jewellery Design at the Glasgow School of Art.\n* Year 3 of BA (Hons) Top-up Degree Jewellery at North Glasgow College."
 course.spaces = course_spaces
 course.status = :open
-puts 'Jewellery (Year 2 Direct Entry) HND saving!'
+puts 'Jewellery (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -1879,7 +1879,7 @@ course.entry_requirements = "* HNC Graphic Design OR\n* First year of HND in Gra
 course.career_prospects = "After completing the HND you can apply for jobs in areas of the Communication Industry, including design consultancies, advertising agencies, newspaper and magazine publishing, web design and motion graphics for screen, or in-house design studios.\n\nYou may eventually become self-employed as a Graphic Designer.."
 course.spaces = course_spaces
 course.status = :open
-puts 'Graphic Design (Year 2 Direct Entry) HND saving!'
+puts 'Graphic Design (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -1898,7 +1898,7 @@ course.entry_requirements = "* HNC Media &amp; Communication with minimum B at G
 course.career_prospects = "Career paths include journalism, television and radio production, video production, public relations and advertising.."
 course.spaces = course_spaces
 course.status = :closed
-puts 'Creative Industries: Media and Communication (Year 2 Direct Entry) HND saving!'
+puts 'Creative Industries: Media and Communication (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -1917,7 +1917,7 @@ course.entry_requirements = "* HNC Creative Industries: Radio, including A or B 
 course.career_prospects = "There are opportunities in radio for those with a variety of up to date skills, broadcasting knowledge and experience.."
 course.spaces = course_spaces
 course.status = :open
-puts 'Creative Industries: Radio (Year 2 Direct Entry) HND saving!'
+puts 'Creative Industries: Radio (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -1936,7 +1936,7 @@ course.entry_requirements = "* HNC Practical Journalism OR\n* First year of HND 
 course.career_prospects = "."
 course.spaces = course_spaces
 course.status = :open
-puts 'Practical Journalism (Year 2 Direct Entry) HND saving!'
+puts 'Practical Journalism (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -1955,7 +1955,7 @@ course.entry_requirements = "* HNC in Photography OR\n* First year of HND Photog
 course.career_prospects = "With an HND in photography, you'll be prepared for a position in the highly competitive creative and media sector including: advertising, commercial, press and photojournalism, fashion, sports, social, medical, scientific, throughout the UK and worldwide.."
 course.spaces = course_spaces
 course.status = :closed
-puts 'Photography (Year 2 Direct Entry) HND saving!'
+puts 'Photography (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -1974,7 +1974,7 @@ course.entry_requirements = "* A pass in HNC Beauty Therapy with 15 credits, OR
 course.career_prospects = "This course prepares you for a career in the Beauty Industry including roles in salons, health spas, cruise ships, or self-employment.\n\nA number of senior, or managerial posts may also be available to HND qualified therapists.."
 course.spaces = course_spaces
 course.status = :open
-puts 'Beauty Therapy (Year 2 Direct Entry) HND saving!'
+puts 'Beauty Therapy (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -1993,7 +1993,7 @@ course.entry_requirements = "* HNC Fitness, Health and Exercise OR\n* First year
 course.career_prospects = "This course will suit individuals wishing to pursue careers in sports clubs, private fitness facilities, local authorities and government sport initiatives; ranging from personal training and exercise instruction, to teaching physical education, or working within sports science.\nYou may also look at self-employment in fitness, exercise prescription and athletic conditioning.."
 course.spaces = course_spaces
 course.status = :open
-puts 'Fitness, Health and Exercise (Year 2 Direct Entry) HND saving!'
+puts 'Fitness, Health and Exercise (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -2012,7 +2012,7 @@ course.entry_requirements = "* HNC Professional Cookery OR\n* First year of HND 
 course.career_prospects = "On completing your HND, you might progress to a career in catering, restaurants, and hospitality at a supervisory, or junior management level.."
 course.spaces = course_spaces
 course.status = :cancelled
-puts 'Professional Cookery (Year 2 Direct Entry) HND saving!'
+puts 'Professional Cookery (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -2031,7 +2031,7 @@ course.entry_requirements = "* HNC in Events OR\n* First year of HND in Events\n
 course.career_prospects = "This course prepares you for a career in the organisation and management of conferences, exhibitions, festivals and special events.."
 course.spaces = course_spaces
 course.status = :closed
-puts 'Event Management (Year 2 Direct Entry) HND saving!'
+puts 'Event Management (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -2050,7 +2050,7 @@ course.entry_requirements = "* Successful completion of the HNC Hospitality Oper
 course.career_prospects = "The course prepares you for employment at junior management/supervisory level in a hospitality department, and graduate training schemes with many large organisations.\n\nWe work with key representatives from industry to offer graduate training positions following the successful completion of the HND.."
 course.spaces = course_spaces
 course.status = :closed
-puts 'Hospitality (Year 2 Direct Entry) HND saving!'
+puts 'Hospitality (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -2069,7 +2069,7 @@ course.entry_requirements = "* An HNC Sport Coaching qualification with 15 credi
 course.career_prospects = "."
 course.spaces = course_spaces
 course.status = :open
-puts 'Coaching and Developing Sport (Year 2 Direct Entry) HND saving!'
+puts 'Coaching and Developing Sport (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -2088,7 +2088,7 @@ course.entry_requirements = "* HNC Sports Therapy OR\n* First year HND Sports Th
 course.career_prospects = "This course prepares you for a career as a sports therapist working freelance, in sports clubs, or as part of a government health initiative.."
 course.spaces = course_spaces
 course.status = :open
-puts 'Sports Therapy (Year 2 Direct Entry) HND saving!'
+puts 'Sports Therapy (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -2107,7 +2107,7 @@ course.entry_requirements = "* HNC in Travel and Tourism OR\n* First year of HND
 course.career_prospects = "This course prepares you for a career in travel and tourism with:\n\n* National Tourist Organisations.\n* Travel Management Companies.\n* Visitor Centres/Attractions.\n* Tour Operators.\n* Travel Agents.\n* Airlines.\n* Airport Ground Handling.\n* Foreign Exchange Service."
 course.spaces = course_spaces
 course.status = :closed
-puts 'Travel and Tourism (Year 2 Direct Entry) HND saving!'
+puts 'Travel and Tourism (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -2126,7 +2126,7 @@ course.entry_requirements = "Successful completion of a full time HNC Financial 
 course.career_prospects = "The course is for those wishing to work in an administrative, sales, customer support or technical support role within the Finance Industry.\nThere are various employment opportunities, including working in: banking, building societies, pension funds, investment companies, insurance, unit trusts, stock market operations, life and pensions, asset management and intermediation.."
 course.spaces = course_spaces
 course.status = :open
-puts 'Financial Services (Year 2 Direct Entry) HND saving!'
+puts 'Financial Services (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -2145,7 +2145,7 @@ course.entry_requirements = "* HNC Fine Art (Contemporary Art Practice), or equi
 course.career_prospects = "Work as an independent exhibiting artist, depending on the quality of your work, motivation and self-promotion skills. The experience of the HND can also help to prepare you for working in other roles within the creative industries such as curation or community arts.\n\nStudents who complete their HND can progress to:\n\n* BA (Hons) Contemporary Art Practice at City of Glasgow College.\n* Other art school or university degree courses (2nd or 3rd year entry."
 course.spaces = course_spaces
 course.status = :open
-puts 'Fine Art (Year 2 Direct Entry) HND saving!'
+puts 'Fine Art (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -2164,7 +2164,7 @@ course.entry_requirements = "* One relevant* Higher at grade C or above; OR\n* T
 course.career_prospects = "The course is for those wishing to work in an administrative, sales, customer support or technical support role within the Finance Industry.\n\nThere are various employment opportunities, including working in: banking, building societies, pension funds, investment companies, insurance, unit trusts, stock market operations, life and pensions, asset management and intermediation.."
 course.spaces = course_spaces
 course.status = :closed
-puts 'Financial Services HNC saving!'
+puts 'Financial Services HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -2183,7 +2183,7 @@ course.entry_requirements = "* Two appropriate Highers and three Intermediate 2 
 course.career_prospects = "This course prepares you for a career in IT infrastructure support.."
 course.spaces = course_spaces
 course.status = :open
-puts 'Computing: Networking HND saving!'
+puts 'Computing: Networking HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -2202,7 +2202,7 @@ course.entry_requirements = "* One Higher and three Intermediate 2 courses (incl
 course.career_prospects = "You can progress on to second year of HND Computing: Network Technology or apply for entry into the first year of related BSc Computing degree programmes at most universities on successful completion of this course.."
 course.spaces = course_spaces
 course.status = :open
-puts 'Computing: Networking HNC saving!'
+puts 'Computing: Networking HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -2221,7 +2221,7 @@ course.entry_requirements = "* 2 Highers at grade  A to C, one of which must 
 course.career_prospects = "Employment as a junior Games Programmer/Modeller or Software Developer.."
 course.spaces = course_spaces
 course.status = :cancelled
-puts 'Computer Games Development HNC saving!'
+puts 'Computer Games Development HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -2240,7 +2240,7 @@ course.entry_requirements = "To gain entry to the course you should have any of 
 course.career_prospects = "On successful completion of the HND programme, Cadets can gain employment as a fully qualified officer of the watch or choose to progress onto university to study at a higher level.."
 course.spaces = course_spaces
 course.status = :open
-puts 'SPD Marine Engineering (Cadet Programme) HND saving!'
+puts 'SPD Marine Engineering (Cadet Programme) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -2259,7 +2259,7 @@ course.entry_requirements = "* Two Higher Grades, including English; OR\n* NQ D
 course.career_prospects = "There are a wide range of career opportunities which include working in theatre, television, community drama, and theatre production.."
 course.spaces = course_spaces
 course.status = :closed
-puts 'Acting and Performance HNC saving!'
+puts 'Acting and Performance HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -2278,7 +2278,7 @@ course.entry_requirements = "* NQ in Furniture Making; OR\n* One Higher – Cra
 course.career_prospects = "Career opportunities are many and varied. A high number of craftspeople are self-employed or in a partnership, which can be rewarding. There are also jobs in furniture trades and shop-fitting.."
 course.spaces = course_spaces
 course.status = :open
-puts 'Furniture Restoration HND saving!'
+puts 'Furniture Restoration HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -2297,7 +2297,7 @@ course.entry_requirements = "* One Higher in Art and Design and English at minim
 course.career_prospects = "You can set up business as a jeweller or gain employment in the creative industries, by utilising the range of skills you'll learn throughout the course.."
 course.spaces = course_spaces
 course.status = :open
-puts 'Jewellery Design HND saving!'
+puts 'Jewellery Design HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -2316,7 +2316,7 @@ course.entry_requirements = "* One Higher at Grade C or above in appropriate aca
 course.career_prospects = "* National Tourist Organisations.\n* Travel Management Companies.\n* Visitor Centres/Attractions.\n* Tour Operators.\n* Travel Agents.\n* Airlines.\n* Airport Ground Handling.\n* Foreign Exchange Service."
 course.spaces = course_spaces
 course.status = :closed
-puts 'Travel and Tourism (with option to study languages) HNC saving!'
+puts 'Travel and Tourism (with option to study languages) HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -2335,7 +2335,7 @@ course.entry_requirements = "* One Higher* and three National 5 qualifications; 
 course.career_prospects = "The HNC/D in Computing: Computer Science will prepare you for a career in programming, website development or as a support technician or database administrator.."
 course.spaces = course_spaces
 course.status = :open
-puts 'Computer Science HNC saving!'
+puts 'Computer Science HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -2354,7 +2354,7 @@ course.entry_requirements = "* MNTB/MCA Approved HNC in Marine Engineerin"
 course.career_prospects = "Successful completion of the course may offer you entry to second year of a four years honours course at university.\n\nThis course prepares you for a career as a Senior Marine Engineering Officer, Ship Manager, or Ship Superintendent.."
 course.spaces = course_spaces
 course.status = :closed
-puts 'Marine Engineering - Year 2 Direct Entry HND saving!'
+puts 'Marine Engineering - Year 2 Direct Entry HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -2373,7 +2373,7 @@ course.entry_requirements = "* HNC Complementary Therapies (15 credits), must 
 course.career_prospects = "This course prepares you for a career in the field of complementary therapies, for example in healthcare services, cruise ships, spas, hotels or self-employment.."
 course.spaces = course_spaces
 course.status = :open
-puts 'Complementary Therapies (Year 2 Direct Entry) HND saving!'
+puts 'Complementary Therapies (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -2391,7 +2391,7 @@ course.entry_requirements = "* NC Product Design or related discipline (eg Furni
 course.career_prospects = "Upon graduating, you'll be able to seek employment as a qualified Product Designer, Solidworks 3D Modeller, or Digital Media Designer.."
 course.spaces = course_spaces
 course.status = :open
-puts '3D Design/ HNC 3D Design: Product Design HNC saving!'
+puts '3D Design/ HNC 3D Design: Product Design HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -2410,7 +2410,7 @@ course.entry_requirements = "* NC Model Making, or a NC in a related discipline,
 course.career_prospects = "Many graduates work as model makers all over the world, including New Zealand, Dubai and Australia.."
 course.spaces = course_spaces
 course.status = :closed
-puts '3D Design: Model Making for the Creative Industries HND saving!'
+puts '3D Design: Model Making for the Creative Industries HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -2429,7 +2429,7 @@ course.entry_requirements = "* Two Higher Grade passes at band C or above. One H
 course.career_prospects = "On successful completion of your HND you may enter a related field, working as a trainee paralegal or as part of an in-house legal team. You can find employment with local authorities, the Sheriff Court, or Procurator Fiscal office.\n\nThere are also opportunities for you in the Banking and Insurance Sectors, and a number of graduates have joined Police Scotland.."
 course.spaces = course_spaces
 course.status = :open
-puts 'Legal Services HND saving!'
+puts 'Legal Services HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -2448,7 +2448,7 @@ course.entry_requirements = "* One Higher at grade C or above, preferably Englis
 course.career_prospects = "This course prepares you for a career in the police service, prison service, and other related agencies.."
 course.spaces = course_spaces
 course.status = :open
-puts 'Legal Services (With Criminology and Police Studies) HNC saving!'
+puts 'Legal Services (With Criminology and Police Studies) HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -2467,7 +2467,7 @@ course.entry_requirements = "* One Higher pass in a relevant* academic subject 
 course.career_prospects = "You could expect to apply for a trainee management position and/or a team leader in industry or commerce.."
 course.spaces = course_spaces
 course.status = :open
-puts 'Business HNC saving!'
+puts 'Business HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -2486,7 +2486,7 @@ course.entry_requirements = "Year 1 Entry\n\n* Two Highers in a relevant* academ
 course.career_prospects = "This course will prepare you for trainee positions in management and administration in industry, financial services and the public sector.."
 course.spaces = course_spaces
 course.status = :open
-puts 'Business HND saving!'
+puts 'Business HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -2505,7 +2505,7 @@ course.entry_requirements = "* One Higher at grade C or above (preferably Englis
 course.career_prospects = "This course prepares you for a career in marketing, promotion and export departments of industrial, or commercial companies.."
 course.spaces = course_spaces
 course.status = :open
-puts 'Marketing HNC saving!'
+puts 'Marketing HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -2524,7 +2524,7 @@ course.entry_requirements = "* NC Furniture Making; OR\n* One Higher in Craft a
 course.career_prospects = "After completing the course youmay go on to become self-employed Designers/Makers of furniture, as well as pursuing jobs in the furniture trades and shop-fitting.."
 course.spaces = course_spaces
 course.status = :open
-puts 'Furniture Craftsmanship with Design HND saving!'
+puts 'Furniture Craftsmanship with Design HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -2542,7 +2542,7 @@ course.entry_requirements = "* Two Higher Grade passes at grade C or above, in A
 course.career_prospects = "This course prepares you for a career in:\n\n* 2D or 3D Design.\n* Crafts.\n* Sculpture.\n* Theatre Design.\n* Teaching.\n* Community Art.\n* Art Therap."
 course.spaces = course_spaces
 course.status = :open
-puts 'Art and Design /  Applied Arts  HND saving!'
+puts 'Art and Design /  Applied Arts  HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -2561,7 +2561,7 @@ course.entry_requirements = "* Two Higher Grade passes at grade C or above, in A
 course.career_prospects = "This course prepares you for work as an independent exhibiting artist, depending on the calibre of your work, your motivation and self-promotion skills.."
 course.spaces = course_spaces
 course.status = :closed
-puts 'Fine Art HNC saving!'
+puts 'Fine Art HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -2580,7 +2580,7 @@ course.entry_requirements = "* NC in Art and Design or related subject; OR\n* H
 course.career_prospects = "The HNC/D course can lead to self-employment as a freelance Illustrator working with advertising agencies, design consultants, and book, magazine and newspaper publishers, or in your own private practice.."
 course.spaces = course_spaces
 course.status = :open
-puts 'Illustration HND saving!'
+puts 'Illustration HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -2599,7 +2599,7 @@ course.entry_requirements = "* NQ or NC Media: TV or equivalent SVQ; OR\n* High
 course.career_prospects = "The Television Industry is expanding and there are opportunities for skilled graduates, both in broadcasting and with independent production companies.."
 course.spaces = course_spaces
 course.status = :open
-puts 'Creative Industries: Television HND saving!'
+puts 'Creative Industries: Television HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -2618,7 +2618,7 @@ course.entry_requirements = "* NQ or NC Media: TV or equivalent SVQ; OR\n* High
 course.career_prospects = "."
 course.spaces = course_spaces
 course.status = :open
-puts 'Creative Industries: Television HNC saving!'
+puts 'Creative Industries: Television HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -2637,7 +2637,7 @@ course.entry_requirements = "​HNC Television with 15 credits\n\nOR\n\nRelevant
 course.career_prospects = "The Television Industry is expanding and there are opportunities for skilled graduates, both in broadcasting and with independent production companies.."
 course.spaces = course_spaces
 course.status = :open
-puts 'Creative Industries: Television  (Year 2 Direct Entry) HND saving!'
+puts 'Creative Industries: Television  (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -2656,7 +2656,7 @@ course.entry_requirements = "* Higher English or Higher Media Studies at Grade C
 course.career_prospects = "This course prepares you for a career in journalism, television and radio production, video production, public relations and advertising.."
 course.spaces = course_spaces
 course.status = :closed
-puts 'Media and Communication HNC saving!'
+puts 'Media and Communication HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -2675,7 +2675,7 @@ course.entry_requirements = "* One Higher at Grade C or above preferably English
 course.career_prospects = "This course prepares you for a career in journalism, television and radio production, video production, public relations and advertising.."
 course.spaces = course_spaces
 course.status = :open
-puts 'Media with Journalism HNC saving!'
+puts 'Media with Journalism HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -2694,7 +2694,7 @@ course.entry_requirements = "* Two Higher grades at C or above, English preferab
 course.career_prospects = "This course can lead to various careers within the care or administrative sector, within the private and public sectors.."
 course.spaces = course_spaces
 course.status = :open
-puts 'Care and Administrative Practice (Clinical Route) HNC saving!'
+puts 'Care and Administrative Practice (Clinical Route) HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -2713,7 +2713,7 @@ course.entry_requirements = "* Two or more Highers at C or above including Engli
 course.career_prospects = "This course prepares you for a career as a practitioner in the Childcare and Early Education sectors.."
 course.spaces = course_spaces
 course.status = :cancelled
-puts 'Childhood Practice HNC saving!'
+puts 'Childhood Practice HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -2732,7 +2732,7 @@ course.entry_requirements = "* Two Higher Grades at C or above preferably includ
 course.career_prospects = "This course prepares you for a career in:\n\n* Social work.\n* Social care worker.\nSupport worker with various groups such as older adults, people with learning difficulties, adult care, community care, offenders, residential child care, or the addiction field.\n\nVarious careers in Care both within the private and public sector.."
 course.spaces = course_spaces
 course.status = :open
-puts 'Social Services HNC saving!'
+puts 'Social Services HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -2751,7 +2751,7 @@ course.entry_requirements = "* Four or more Higher Grade pass at grade C or abov
 course.career_prospects = "This course prepares you for a career in public and private sectors including:\n\n* Health service.\n* Community work.\n* Welfare rights.\n* Social research.\n* Teaching.\n* Aid agencies.\n* Social work.\n* Housing.\n* Local, national and European Governmen."
 course.spaces = course_spaces
 course.status = :open
-puts 'Social Sciences Diploma of Higher Education saving!'
+puts 'Social Sciences Diploma of Higher Education saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -2770,7 +2770,7 @@ course.entry_requirements = "* Two SQA Higher Grade passes or equivalent at firs
 course.career_prospects = "The vast majority of our successful HNC students apply for the second year of study – HND Social Sciences but others:\n\n* Enter employment.\n* Apply to university for entry at level 1 or ."
 course.spaces = course_spaces
 course.status = :cancelled
-puts 'Social Sciences HNC saving!'
+puts 'Social Sciences HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -2789,7 +2789,7 @@ course.entry_requirements = "* HNC Social Sciences with 15 credits at SCQF level
 course.career_prospects = "."
 course.spaces = course_spaces
 course.status = :cancelled
-puts 'Social Sciences (Year 2 Direct Entry) HND saving!'
+puts 'Social Sciences (Year 2 Direct Entry) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -2808,7 +2808,7 @@ course.entry_requirements = "* Professional Cookery year two / NC Professional C
 course.career_prospects = "This course prepares you for a career in professional cookery, special event catering, commercial catering or airline catering.."
 course.spaces = course_spaces
 course.status = :closed
-puts 'Patisserie HNC saving!'
+puts 'Patisserie HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -2827,7 +2827,7 @@ course.entry_requirements = "* SCQF Level 5 or SVQ Level 2 Ladies Hairdresssing 
 course.career_prospects = "On successful completion of the course you could gain employment within the make-up, or beauty business, become self employed as a freelance make-up artist, or further your career in hairdressing.."
 course.spaces = course_spaces
 course.status = :closed
-puts 'Fashion Make-Up HNC saving!'
+puts 'Fashion Make-Up HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -2846,7 +2846,7 @@ course.entry_requirements = "* Two Highers at grade C or above including English
 course.career_prospects = "."
 course.spaces = course_spaces
 course.status = :open
-puts 'Coaching and Developing Sport HND saving!'
+puts 'Coaching and Developing Sport HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -2865,7 +2865,7 @@ course.entry_requirements = "* At least one Higher at Grade C in English or equi
 course.career_prospects = "This course prepares you for a career in sports as a Sports Development Officer, or a Sports Co-ordinator.."
 course.spaces = course_spaces
 course.status = :open
-puts 'Coaching and Developing Sport HNC saving!'
+puts 'Coaching and Developing Sport HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -2884,7 +2884,7 @@ course.entry_requirements = "* A minimum of two Highers, preferably English and
 course.career_prospects = "On successful completion, you'll be qualified to work as a Soft Tissue Therapist.."
 course.spaces = course_spaces
 course.status = :cancelled
-puts 'Soft Tissue Therapy HNC saving!'
+puts 'Soft Tissue Therapy HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 2
@@ -2903,7 +2903,7 @@ course.entry_requirements = "* At least two highers at grade C or above in a rel
 course.career_prospects = "This course prepares you for a career as a sports therapist working freelance, in sports clubs, or as part of a government health initiative.."
 course.spaces = course_spaces
 course.status = :cancelled
-puts 'Sports Therapy HND saving!'
+puts 'Sports Therapy HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -2922,7 +2922,7 @@ course.entry_requirements = "To gain entry to the course you should have any of 
 course.career_prospects = "On successful completion of the HNC programme, Cadets can gain employment as a fully qualified officer of the watch or choose to progress onto the HND Marine Engineering top up course, which will provide academic exemptions up to management level.."
 course.spaces = course_spaces
 course.status = :open
-puts 'Marine Engineering (Cadet Training) HNC saving!'
+puts 'Marine Engineering (Cadet Training) HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -2941,7 +2941,7 @@ course.entry_requirements = "* Higher English at grade C or above (or another re
 course.career_prospects = "Apply for second year of HND Retail Management. You can also apply for first or second year entry to relevant degree programmes at Glasgow Caledonian University, Stirling University, Queen Margaret University or Robert Gordon University.."
 course.spaces = course_spaces
 course.status = :open
-puts 'Retail Management - January Start HNC saving!'
+puts 'Retail Management - January Start HNC saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -2959,7 +2959,7 @@ course.entry_requirements = "* A recognised complete sea time of 12 months at OO
 course.career_prospects = "."
 course.spaces = course_spaces
 course.status = :open
-puts 'Nautical Science/ Chief Mate/ Master (Jan) HND saving!'
+puts 'Nautical Science/ Chief Mate/ Master (Jan) HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 3
@@ -2978,7 +2978,7 @@ course.entry_requirements = "To gain entry to the course you should have any of 
 course.career_prospects = "On successful completion of the SPD programme, Cadets can gain employment as a fully qualified officer of the watch or choose to progress onto university to study at a higher level.."
 course.spaces = course_spaces
 course.status = :open
-puts 'SPD Marine Engineering Cadet Programme - January Start HND saving!'
+puts 'SPD Marine Engineering Cadet Programme - January Start HND saving!' if upload_images
 course.save! validate: false
 
 course = Course.new college_id: 1
@@ -2997,6 +2997,6 @@ course.entry_requirements = "To gain entry to the course you should have any of 
 course.career_prospects = "On successful completion of the HNC programme, Cadets can gain employment as a fully qualified officer of the watch or choose to progress onto the HND Marine Engineering top up course, which will provide academic exemptions up to management level.."
 course.spaces = course_spaces
 course.status = :cancelled
-puts 'Marine Engineering (Cadet Programme) (Jan) HNC saving!'
+puts 'Marine Engineering (Cadet Programme) (Jan) HNC saving!' if upload_images
 course.save! validate: false
 

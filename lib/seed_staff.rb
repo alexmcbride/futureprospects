@@ -7,10 +7,14 @@ def add_roles(roles, staff)
 end
 
 admin = Staff.create! first_name: 'Admin', family_name: 'McAdmin', email: 'admin@admin.com', job_title: 'Admin', college_id: 1, password: 'admin1', password_confirmation: 'admin1', confirmed_at: DateTime.now
-add_roles roles, admin
+admin.add_role :site_admin
 
 staff = Staff.create! first_name: 'Bonnie', family_name: 'Snyder', email: 'bsnyder0@hc360.com', job_title: 'Compensation Analyst', college_id: 1, password: 'secret', password_confirmation: 'secret', confirmed_at: DateTime.now
-add_roles roles.sample(2), staff
+staff.add_role :can_view_courses
+staff.add_role :can_add_courses
+staff.add_role :can_edit_courses
+staff.add_role :can_remove_courses
+
 staff = Staff.create! first_name: 'Albert', family_name: 'Stephens', email: 'astephens1@shutterfly.com', job_title: 'Assistant Professor', college_id: 2, password: 'secret', password_confirmation: 'secret', confirmed_at: DateTime.now
 add_roles roles.sample(3), staff
 staff = Staff.create! first_name: 'Michelle', family_name: 'Woods', email: 'mwoods2@techcrunch.com', job_title: 'Help Desk Technician', college_id: 2, password: 'secret', password_confirmation: 'secret', confirmed_at: DateTime.now

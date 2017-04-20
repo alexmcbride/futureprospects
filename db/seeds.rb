@@ -114,7 +114,8 @@ category_names.split(/\n/).each do |line|
 end
 
 # Roles
-roles = %w(manage_applications manage_courses manage_categories manage_colleges manage_staff manage_reports)
+Role.create! name: :site_admin
+roles = %w(can_view_courses can_add_courses can_edit_courses can_remove_courses)
 roles.each do |role|
   Role.create! name: role
 end

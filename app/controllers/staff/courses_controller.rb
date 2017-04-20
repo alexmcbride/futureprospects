@@ -1,7 +1,7 @@
 class Staff::CoursesController < Staff::StaffController
   before_action :set_course, only: [:show, :edit, :update, :remove, :destroy]
   before_action :set_categories, only: [:index, :new, :edit]
-  before_action :set_colleges, only: [:new, :edit]
+  before_action :set_colleges, only: [:index, :new, :edit]
 
   # GET /staff/courses
   def index

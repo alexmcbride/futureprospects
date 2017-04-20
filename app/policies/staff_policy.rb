@@ -9,7 +9,7 @@ class StaffPolicy < ApplicationPolicy
 
     def resolve
       if user.has_role? :site_admin
-        scope.where(type: 'Staff')
+        scope.all
       elsif user.has_role? :can_view_staff
         scope.where(college_id: user.college_id)
       else

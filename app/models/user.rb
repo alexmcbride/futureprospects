@@ -99,6 +99,12 @@ class User < ApplicationRecord
     else
       # Loop through each role, if it's in permission add or keep it, otherwise remove it.
       Role.all.each do |role|
+        # We don't let anyone change top level admin.
+        if role.name == :site_admin
+          continue
+        end
+
+        # Check other roles.
         has_role = has_role? role.name
         if permissions.key? role.name
           unless has_role

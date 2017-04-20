@@ -1,13 +1,21 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  description: MyText
-  address: MyString
-  postcode: MyString
+college_one:
+  name: College Name 1
+  description: Description 1
+  address: Address 1
+  postcode: Post code 1
+  telephone: 01411231234
+  email: example@college.com
+  website: www.examplecollege.com
+  image: college-image-1.jpg
 
-two:
-  name: MyString
-  description: MyText
-  address: MyString
-  postcode: MyString
+college_two:
+  name: College Name 2
+  description: Description 2
+  address: Address 2
+  postcode: Post code 2
+  telephone: 01411231234
+  email: example@college.com
+  website: www.examplecollege.com
+  image: college-image-2.jpg

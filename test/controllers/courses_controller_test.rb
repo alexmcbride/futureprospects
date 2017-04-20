@@ -2,47 +2,33 @@ require 'test_helper'
 
 class CoursesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @course = courses(:one)
+    @course = courses(:course_one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get courses_url
     assert_response :success
   end
 
-  test "should get new" do
-    get new_course_url
+  test 'should get category' do
+    category = categories(:category_one)
+    get courses_category_url(category)
     assert_response :success
   end
 
-  test "should create course" do
-    assert_difference('Course.count') do
-      post courses_url, params: { course: {  } }
-    end
-
-    assert_redirected_to course_url(Course.last)
-  end
-
-  test "should show course" do
+  test 'should show course' do
     get course_url(@course)
     assert_response :success
   end
 
-  test "should get edit" do
-    get edit_course_url(@course)
+  test 'should return search results' do
+    get courses_search_url, params: {format: :json, term: 'course'}
     assert_response :success
-  end
-
-  test "should update course" do
-    patch course_url(@course), params: { course: {  } }
-    assert_redirected_to course_url(@course)
-  end
-
-  test "should destroy course" do
-    assert_difference('Course.count', -1) do
-      delete course_url(@course)
-    end
-
-    assert_redirected_to courses_url
+    body = JSON.parse(response.body)
+    puts body
+    assert_equal @course.id, body.first['id']
+    assert_equal @course.title, body.first['title']
+    assert_equal @course.status, body.first['status']
+    assert_equal @course.college.name, body.first['college']['name']
   end
 end

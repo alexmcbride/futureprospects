@@ -1,19 +1,31 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  description: MyText
-  entry_requirements: MyText
-  career_prospects: MyText
+course_one:
+  title: My Course 1
+  description: My course description 1
+  entry_requirements: My course entry requirements 1
+  career_prospects:  My course career prospects 1
   start_date: 2017-03-28 09:31:34
   end_date: 2017-03-28 09:31:34
-  level: MyString
+  level: 8
+  college: college_one
+  category: category_one
+  image: course-image-1.jpg
+  spaces: 2
+  status: :open
+  course_selections_count: 0
 
-two:
-  title: MyString
-  description: MyText
-  entry_requirements: MyText
-  career_prospects: MyText
+course_two:
+  title: My Course 2
+  description: My course description 2
+  entry_requirements: My course entry requirements 2
+  career_prospects:  My course career prospects 2
   start_date: 2017-03-28 09:31:34
   end_date: 2017-03-28 09:31:34
-  level: MyString
+  level: 8
+  college: college_one
+  category: category_one
+  image: course-image-2.jpg
+  spaces: 2
+  status: :open
+  course_selections_count: 0

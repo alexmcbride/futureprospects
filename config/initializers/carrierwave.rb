@@ -5,7 +5,27 @@
 # In Heroku, follow http://devcenter.heroku.com/articles/config-vars
 #
 # $ heroku config:add S3_KEY=your_s3_access_key S3_SECRET=your_s3_secret S3_REGION=eu-west-1 S3_ASSET_URL=http://assets.example.com/ S3_BUCKET_NAME=s3_bucket/folder
+# NullStorage provider for CarrierWave for use in tests.  Doesn't actually upload or store files but allows test to
+# pass as if files were stored and the use of fixtures.
+class NullStorage
+  attr_reader :uploader
 
+  def initialize(uploader)
+    @uploader = uploader
+  end
+
+  def identifier
+    uploader.filename
+  end
+
+  def store!(_file)
+    true
+  end
+
+  def retrieve!(_identifier)
+    true
+  end
+end
 
 CarrierWave.configure do |config|
   config.fog_provider = 'fog/aws'                        # required
@@ -20,4 +40,8 @@ CarrierWave.configure do |config|
   config.fog_directory  = ENV['AWS_BUCKET']                          # required
   config.fog_public     = false                                        # optional, defaults to true
   config.fog_attributes = { 'Cache-Control' => "max-age=#{365.day.to_i}" } # optional, defaults to {}
+
+  if Rails.env.test?
+    config.storage NullStorage
+  end
 end

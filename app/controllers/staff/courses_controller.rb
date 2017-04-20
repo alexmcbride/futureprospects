@@ -7,7 +7,8 @@ class Staff::CoursesController < Staff::StaffController
   def index
     @courses = policy_scope(Course)
                    .includes(:category)
-                   .filter_and_sort(params)
+                   .order(:title)
+                   .filter(params)
                    .paginate(page: params[:page], per_page: 15)
   end
 

@@ -91,22 +91,21 @@ class Course < ApplicationRecord
     courses
   end
 
-  # Sort courses
-  def self.sort_courses(courses, params)
-    if params[:sort].present?
-      courses.order("#{params[:sort]} #{'DESC' if params[:dir] == 'desc'}")
-    else
-      courses.order :title
+  # Filters courses by status
+  def self.filter_by_college_id(courses, college_id)
+    unless college_id.nil? or college_id.to_i == 0
+      return courses.where(college_id: college_id)
     end
+    courses
   end
 
   # Filter and sort the courses
-  def self.filter_and_sort(params)
+  def self.filter(params)
     courses = Course.all
     courses = filter_by_title courses, params[:title]
     courses =  filter_by_category courses, params[:category_id]
     courses = filter_by_status courses, params[:status]
-    courses = sort_courses courses, params
+    courses = filter_by_college_id courses, params[:college_id]
     courses
   end
 

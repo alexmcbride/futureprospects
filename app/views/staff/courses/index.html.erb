@@ -64,30 +64,10 @@
         <table class="table table-striped">
           <thead>
           <tr>
-            <th>
-              <%= link_to course_table_filter_path :title, params do %>
-                  Course
-                  <%= icon('arrows-v', class: 'sort-arrow') %>
-              <% end %>
-            </th>
-            <th>
-              <%= link_to course_table_filter_path :category_id, params do %>
-                  Category
-                  <%= icon('arrows-v', class: 'sort-arrow') %>
-              <% end %>
-            </th>
-            <th>
-              <%= link_to course_table_filter_path :status, params do %>
-                  Status
-                  <%= icon('arrows-v', class: 'sort-arrow') %>
-              <% end %>
-            </th>
-            <th>
-              <%= link_to course_table_filter_path :course_selections_count, params do %>
-                  Students
-                  <%= icon('arrows-v', class: 'sort-arrow') %>
-              <% end %>
-            </th>
+            <th>Course</th>
+            <th>Category</th>
+            <th>Status</th>
+            <th>Students</th>
             <th colspan="2"></th>
           </tr>
           </thead>

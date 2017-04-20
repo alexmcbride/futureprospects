@@ -23,7 +23,7 @@ class CoursePolicy < ApplicationPolicy
   end
 
   def show?
-    belongs_to_college_and_role :can_view_courses
+    user.college == record.college && user.has_role?(:can_view_courses)
   end
 
   def new?

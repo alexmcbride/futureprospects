@@ -137,7 +137,7 @@ class Application < ApplicationRecord
   # Attempts to save the profile stage
   def save_profile?(params)
     self.attributes = params
-    self.state = :active
+    self.state = :applying
     if self.valid?
       self.completed_profile = true
       self.save

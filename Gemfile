@@ -67,3 +67,4 @@ gem 'jquery-ui-rails' # jquery-ui
 gem 'bootstrap-datepicker-rails' # bootstrap datepicker control
 gem 'mini_magick' # Image resizing (requires ImageMagick installed too)
 gem 'fog-aws' # Cloud storage (through Amazon Web Services)
+gem 'pundit' # permissions

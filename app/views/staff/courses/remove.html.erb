@@ -6,11 +6,6 @@
     <%= render 'staff/shared/courses_sidenav', page: :index %>
   </div>
   <div class="col-sm-9">
-    <div class="alert-warning alert">
-      <%= icon 'exclamation-circle' %>
-      Warning: This action cannot be undone.
-    </div>
-
     <p>Are you sure you want to delete the following course?</p>
     <p><strong><%= @course.title %></strong></p>
     <p>For security purposes you must type the full name of the course exactly as it appears in order for it to be deleted.</p>

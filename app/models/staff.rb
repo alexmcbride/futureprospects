@@ -1,6 +1,6 @@
 class Staff < User
   validates :job_title, presence: true, length: {maximum: 35}
-  validates :college_id, presence: true
+  validates :college_id, presence: false
 
   belongs_to :college
 
@@ -11,5 +11,13 @@ class Staff < User
 
   def self.all_job_titles
     Staff.select(:job_title).distinct
+  end
+
+  def role_name
+    if self.college.present?
+      "#{self.college.name} - #{self.job_title}"
+    else
+      'Site Admin'
+    end
   end
 end

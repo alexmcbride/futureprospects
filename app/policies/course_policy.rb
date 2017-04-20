@@ -31,11 +31,23 @@ class CoursePolicy < ApplicationPolicy
     user.has_role? :site_admin or user.has_role?(:can_add_courses)
   end
 
+  def create?
+    user.has_role? :site_admin or (user.college_id == record.college_id && user.has_role?(:can_add_courses))
+  end
+
   def edit?
     user.has_role? :site_admin or (user.college_id == record.college_id && user.has_role?(:can_edit_courses))
   end
 
+  def update?
+    edit?
+  end
+
   def remove?
     user.has_role? :site_admin or (user.college_id == record.college_id && user.has_role?(:can_remove_courses))
+  end
+
+  def destroy?
+    remove?
   end
 end

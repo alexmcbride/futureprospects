@@ -130,7 +130,7 @@ def add_roles(roles, staff)
   end
 end
 
-admin = Staff.create! first_name: 'Admin', family_name: 'McAdmin', email: 'admin@admin.com', job_title: 'Admin', college_id: 1, password: 'admin1', password_confirmation: 'admin1', confirmed_at: DateTime.now
+admin = Staff.create! first_name: 'Admin', family_name: 'McAdmin', email: 'admin@admin.com', job_title: 'Admin', password: 'admin1', password_confirmation: 'admin1', confirmed_at: DateTime.now
 admin.add_role :site_admin
 
 staff = Staff.create! first_name: 'Bonnie', family_name: 'Snyder', email: 'bsnyder0@hc360.com', job_title: 'Compensation Analyst', college_id: 1, password: 'secret', password_confirmation: 'secret', confirmed_at: DateTime.now

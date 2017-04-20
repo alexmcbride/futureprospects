@@ -60,7 +60,7 @@
           <% @members.each do |member| %>
             <tr>
               <td><%= link_to member.full_name, staff_user_path(member) %></td>
-              <td><%= member.college.name %></td>
+              <td><%= member.college.name if member.college.present? %></td>
               <td><%= member.job_title %></td>
               <td><%= format_date member.created_at %></td>
               <td>

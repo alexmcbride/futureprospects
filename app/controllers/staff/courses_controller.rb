@@ -1,6 +1,7 @@
 class Staff::CoursesController < Staff::StaffController
   before_action :set_course, only: [:show, :edit, :update, :remove, :destroy]
   before_action :set_categories, only: [:index, :new, :edit]
+  before_action :set_colleges, only: [:new, :edit]
 
   # GET /staff/courses
   def index
@@ -18,7 +19,7 @@ class Staff::CoursesController < Staff::StaffController
   # GET /staff/courses/new
   def new
     authorize Course
-    @course = Course.new
+    @course = Course.new college: current_staff.college
   end
 
   # GET /staff/courses/1/edit
@@ -29,12 +30,19 @@ class Staff::CoursesController < Staff::StaffController
   # POST /staff/courses
   def create
     @course = Course.new(staff_course_params)
-    @course.college = current_staff.college
+
+    # Non-admin can only administer their own college.
+    unless current_staff.has_role? :site_admin
+      @course.college = current_staff.college
+    end
+
+    authorize @course
     respond_to do |format|
       if @course.save
-        format.html { redirect_to staff_course_path(@course), notice: "Course '#{@course.title}' was successfully created." }
+        format.html { redirect_to staff_course_path(@course), notice: 'Course was successfully created.' }
       else
         set_categories
+        set_colleges
         format.html { render :new }
       end
     end
@@ -42,11 +50,13 @@ class Staff::CoursesController < Staff::StaffController
 
   # PATCH/PUT /staff/courses/1
   def update
+    authorize @course
     respond_to do |format|
       if @course.update_with_status(staff_course_params)
-        format.html { redirect_to staff_course_path(@course), notice: "Course '#{@course.title}' was successfully updated." }
+        format.html { redirect_to staff_course_path(@course), notice: 'Course was successfully updated.' }
       else
         set_categories
+        set_colleges
         format.html { render :edit }
       end
     end
@@ -80,8 +90,12 @@ class Staff::CoursesController < Staff::StaffController
       @categories = Category.order(:name)
     end
 
+    def set_colleges
+      @colleges = College.order(:name)
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def staff_course_params
-      params.require(:course).permit(:title, :description, :entry_requirements, :career_prospects, :start_date, :end_date, :spaces, :level, :image, :image_cache, :category_id, :status)
+      params.require(:course).permit(:title, :description, :entry_requirements, :career_prospects, :start_date, :end_date, :spaces, :level, :image, :image_cache, :category_id, :college_id, :status)
     end
 end

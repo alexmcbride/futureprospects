@@ -19,17 +19,16 @@ class CoursePolicy < ApplicationPolicy
   end
 
   def initialize(user, course)
-    @user = user
-    @course = course
+    super(user, course)
   end
 
   def show?
-    belongs_to_college && has_role?(:can_view_courses)
+    belongs_to_college_and_role :can_view_courses
   end
 
   def new?
     # No college as not added yet.
-    has_role?(:can_add_courses)
+    has_role_or_admin? :can_add_courses
   end
 
   def create?
@@ -37,7 +36,7 @@ class CoursePolicy < ApplicationPolicy
   end
 
   def edit?
-    belongs_to_college && has_role?(:can_edit_courses)
+    belongs_to_college_and_role :can_edit_courses
   end
 
   def update?
@@ -45,7 +44,7 @@ class CoursePolicy < ApplicationPolicy
   end
 
   def remove?
-    belongs_to_college && has_role?(:can_remove_courses)
+    belongs_to_college_and_role :can_remove_courses
   end
 
   def destroy?
@@ -53,11 +52,15 @@ class CoursePolicy < ApplicationPolicy
   end
 
   private
-    def belongs_to_college
-      @user.college_id == @course.college_id
+    def belongs_to_college_and_role(role)
+      (belongs_to_college && @user.has_role?(role)) or @user.has_role?(:site_admin)
     end
 
-    def has_role?(role)
-      @user.has_role?(role) or @user.has_role?(:site_admin)
+    def has_role_or_admin?(role)
+      @user.has_role(role) or @user.has_role?(:admin)
+    end
+
+    def belongs_to_college
+      @user.college_id == @record.college_id
     end
 end

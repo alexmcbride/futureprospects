@@ -1,32 +1,39 @@
-class Staff::CollegesController < ApplicationController
-  before_action do
-    authenticate_staff_role! :manage_colleges
-  end
+class Staff::CollegesController < Staff::StaffController
   before_action :set_college, only: [:show, :edit, :update, :remove, :destroy]
 
   # GET /staff/colleges
   # GET /staff/colleges.json
   def index
-    @colleges = College.all
+    # If the user isn't an admin, we just redirect them to their own college page
+    if current_staff.has_role? :site_admin
+      @colleges = policy_scope College
+    else
+      skip_policy_scope # Skip this rule to stop pundit complaining.
+      redirect_to staff_college_path(current_staff.college)
+    end
   end
 
   # GET /staff/colleges/1
   # GET /staff/colleges/1.json
   def show
+    authorize @college
   end
 
   # GET /staff/colleges/new
   def new
+    authorize College
     @college = College.new
   end
 
   # GET /staff/colleges/1/edit
   def edit
+    authorize @college
   end
 
   # POST /staff/colleges
   # POST /staff/colleges.json
   def create
+    authorize College
     @college = College.new(college_params)
 
     respond_to do |format|
@@ -41,6 +48,7 @@ class Staff::CollegesController < ApplicationController
   # PATCH/PUT /staff/colleges/1
   # PATCH/PUT /staff/colleges/1.json
   def update
+    authorize @college
     respond_to do |format|
       if @college.update(college_params)
         format.html { redirect_to staff_college_path(@college), notice: 'College was successfully updated.' }
@@ -51,11 +59,13 @@ class Staff::CollegesController < ApplicationController
   end
 
   def remove
+    authorize @college
   end
 
   # DELETE /staff/colleges/1
   # DELETE /staff/colleges/1.json
   def destroy
+    authorize @college
     respond_to do |format|
       if @college.remove_college params[:college_name]
         format.html { redirect_to root_path, notice: 'College was successfully destroyed.' }

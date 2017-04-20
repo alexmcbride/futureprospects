@@ -1,5 +1,4 @@
-class Staff::CoursesController < ApplicationController
-  before_action :authenticate_staff!
+class Staff::CoursesController < Staff::StaffController
   before_action :set_course, only: [:show, :edit, :update, :remove, :destroy]
   before_action :set_categories, only: [:index, :new, :edit]
 

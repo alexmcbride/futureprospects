@@ -50,4 +50,9 @@ class ApplicationPolicy
       scope
     end
   end
+
+  protected
+    def has_role?(role)
+      @user.has_role?(role) or @user.has_role?(:site_admin)
+    end
 end

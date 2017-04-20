@@ -98,7 +98,7 @@ module ApplicationHelper
   end
 
   def format_datetime(dt)
-    dt.strftime '%d/%m/%Y, %H:%m' if dt
+    dt.strftime '%d/%m/%Y - %H:%m' if dt
   end
 
   # Outputs a text field with bootstrap style

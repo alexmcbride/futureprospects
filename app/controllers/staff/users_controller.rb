@@ -1,7 +1,4 @@
-class Staff::UsersController < ApplicationController
-  before_action do
-    authenticate_staff_role! :manage_staff
-  end
+class Staff::UsersController < Staff::StaffController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :remove, :permissions, :permissions_update]
   before_action :set_colleges, only: [:index, :new, :edit]
   before_action :forbid_self, only: [:edit, :update, :destroy, :remove, :permissions, :permissions_update]
@@ -108,7 +105,7 @@ class Staff::UsersController < ApplicationController
     # Checks if this is your own user account, then redirects you.
     def forbid_self
       if @user.id == current_staff.id
-        user_not_authorized 'You cannot change your own user account'
+        user_not_authorized
       end
     end
 end

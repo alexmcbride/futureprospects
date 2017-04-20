@@ -5,38 +5,41 @@
   <div class="col-sm-3">
     <%= render 'staff/shared/courses_sidenav', page: :index %>
 
+    <% if policy(@course).edit? %>
+      <%= link_to edit_staff_course_path(@course), class: 'btn btn-default btn-block', role: 'button' do |link| %>
+        <%= icon('edit') %>
+        Edit Course Details
+      <% end %>
+    <% end %>
+    <% if policy(@course).remove? %>
+      <%= link_to staff_course_remove_path(@course), class: 'btn btn-default btn-block', role: 'button' do |link| %>
+        <%= icon('trash') %>
+        Delete Course
+      <% end %>
+    <% end %>
+
+    <hr>
+
     <h4>
       Current Applicants
       <%= "(#{@course.course_selections_count})" unless @course.course_selections.empty?  %>
     </h4>
-
     <% if @course.course_selections.empty? %>
         <p class="text-darkish small"><em>There are no applicants to this course.</em></p>
     <% else %>
         <div class="list-group">
           <% @course.course_selections.each do |selection| %>
-            <%= link_to nil, class: 'list-group-item' do %>
-                <%= selection.application.student.full_name %>
-                <span class="badge"><%= selection.application.state.humanize %></span>
-            <% end %>
+              <%= link_to nil, class: 'list-group-item' do %>
+                  <%= selection.application.student.full_name %>
+                  <span class="badge"><%= selection.application.state.humanize %></span>
+              <% end %>
           <% end %>
         </div>
     <% end %>
   </div>
 
   <div class="col-sm-9">
-    <div class="row">
-      <div class="col-sm-9">
-        <h3 class="no-top-margin"><%= @course.title %></h3>
-      </div>
-      <div class="col-sm-3">
-        <p class="text-right small">
-          <%= link_to 'Edit', edit_staff_course_path(@course) %>
-          |
-          <%= link_to 'Delete', staff_course_remove_path(@course) %>
-        </p>
-      </div>
-    </div>
+    <h3 class="no-top-margin"><%= @course.title %></h3>
 
     <div class="well">
       <div class="row">

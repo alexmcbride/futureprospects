@@ -24,10 +24,28 @@
       </div>
     </div>
 
-    <%= link_to 'Edit College Details', edit_staff_college_path(@college), class: 'btn btn-default btn-block' %>
-    <%= link_to 'Delete College', staff_college_remove_path(@college), class: 'btn btn-default btn-block' %>
-
+    <% if policy(@college).edit? %>
+      <%= link_to edit_staff_college_path(@college), class: 'btn btn-default btn-block' do %>
+        <%= icon('edit') %>
+        Edit College Details
+      <% end %>
+    <% end %>
+    <% if policy(@college).remove? %>
+      <%= link_to staff_college_remove_path(@college), class: 'btn btn-default btn-block' do %>
+        <%= icon('trash') %>
+        Delete College
+      <% end %>
+    <% end %>
     <br>
+
+    <div class="row text-darkish small">
+      <div class="col-xs-5">Created:</div>
+      <div class="col-xs-7"><%= format_datetime @college.created_at %></div>
+    </div>
+    <div class="row text-darkish small">
+      <div class="col-xs-5">Last Updated:</div>
+      <div class="col-xs-7"><%= format_datetime @college.updated_at%></div>
+    </div>
   </div>
 
   <div class="col-sm-9">

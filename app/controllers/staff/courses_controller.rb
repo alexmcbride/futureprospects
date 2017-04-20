@@ -30,8 +30,6 @@ class Staff::CoursesController < Staff::StaffController
   def create
     @course = Course.new(staff_course_params)
     @course.college = current_staff.college
-    authorize @course
-
     respond_to do |format|
       if @course.save
         format.html { redirect_to staff_course_path(@course), notice: "Course '#{@course.title}' was successfully created." }
@@ -44,7 +42,6 @@ class Staff::CoursesController < Staff::StaffController
 
   # PATCH/PUT /staff/courses/1
   def update
-    authorize @course
     respond_to do |format|
       if @course.update_with_status(staff_course_params)
         format.html { redirect_to staff_course_path(@course), notice: "Course '#{@course.title}' was successfully updated." }
@@ -62,7 +59,6 @@ class Staff::CoursesController < Staff::StaffController
 
   # DELETE /staff/courses/1
   def destroy
-    authorize @course
     respond_to do |format|
       if @course.remove_valid? params[:course_title]
         @course.destroy!

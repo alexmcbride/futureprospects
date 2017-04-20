@@ -18,49 +18,24 @@ class CoursePolicy < ApplicationPolicy
     end
   end
 
-  def initialize(user, course)
-    super(user, course)
+  def allow?
+    user.has_role? :site_admin or user.has_role?(:can_view_courses)
   end
 
   def show?
-    user.college == record.college && user.has_role?(:can_view_courses)
+    user.has_role? :site_admin or (user.college_id == record.college_id && user.has_role?(:can_view_courses))
   end
 
   def new?
     # No college as not added yet.
-    has_role_or_admin? :can_add_courses
-  end
-
-  def create?
-    belongs_to_college && new?
+    user.has_role? :site_admin or user.has_role?(:can_add_courses)
   end
 
   def edit?
-    belongs_to_college_and_role :can_edit_courses
-  end
-
-  def update?
-    edit?
+    user.has_role? :site_admin or (user.college_id == record.college_id && user.has_role?(:can_edit_courses))
   end
 
   def remove?
-    belongs_to_college_and_role :can_remove_courses
+    user.has_role? :site_admin or (user.college_id == record.college_id && user.has_role?(:can_remove_courses))
   end
-
-  def destroy?
-    remove?
-  end
-
-  private
-    def belongs_to_college_and_role(role)
-      (belongs_to_college && @user.has_role?(role)) or @user.has_role?(:site_admin)
-    end
-
-    def has_role_or_admin?(role)
-      @user.has_role(role) or @user.has_role?(:admin)
-    end
-
-    def belongs_to_college
-      @user.college_id == @record.college_id
-    end
 end

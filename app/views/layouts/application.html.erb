@@ -60,9 +60,15 @@
 
             <% if staff_signed_in? %>
               <li><%= link_to 'Applications', courses_path %></li>
-              <li><%= link_to 'Courses', staff_courses_path %></li>
-              <li><%= link_to 'College', staff_colleges_path %></li>
-              <li><%= link_to 'Staff', staff_users_path %></li>
+              <% if policy(Course).allow? %>
+                <li><%= link_to 'Courses', staff_courses_path %></li>
+              <% end %>
+              <% if policy(College).allow? %>
+                <li><%= link_to 'College', staff_colleges_path %></li>
+              <% end %>
+              <% if policy(Staff).allow? %>
+                <li><%= link_to 'Staff', staff_users_path %></li>
+              <% end %>
               <li><%= link_to 'Reports', courses_path %></li>
             <% else %>
               <li><%= link_to 'Courses', courses_path %></li>

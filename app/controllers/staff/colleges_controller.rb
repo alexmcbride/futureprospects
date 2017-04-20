@@ -33,7 +33,6 @@ class Staff::CollegesController < Staff::StaffController
   # POST /staff/colleges
   # POST /staff/colleges.json
   def create
-    authorize College
     @college = College.new(college_params)
 
     respond_to do |format|
@@ -48,7 +47,6 @@ class Staff::CollegesController < Staff::StaffController
   # PATCH/PUT /staff/colleges/1
   # PATCH/PUT /staff/colleges/1.json
   def update
-    authorize @college
     respond_to do |format|
       if @college.update(college_params)
         format.html { redirect_to staff_college_path(@college), notice: 'College was successfully updated.' }
@@ -65,7 +63,6 @@ class Staff::CollegesController < Staff::StaffController
   # DELETE /staff/colleges/1
   # DELETE /staff/colleges/1.json
   def destroy
-    authorize @college
     respond_to do |format|
       if @college.remove_college params[:college_name]
         format.html { redirect_to root_path, notice: 'College was successfully destroyed.' }

@@ -1,22 +1,17 @@
-<% breadcrumb :staff_users_remove, @user %>
+<% breadcrumb :staff_users_remove, @member %>
 <% @title = 'Remove User' %>
 
-<div class="alert-warning alert">
-  <%= icon 'exclamation-circle' %>
-  Warning: This action cannot be undone.
-</div>
-
 <p>Are you sure you want to delete the following user?</p>
-<p><strong><%= @user.username %></strong></p>
+<p><strong><%= @member.username %></strong></p>
 <p>For security purposes you must type the full username exactly as it appears in order for the user to be deleted.</p>
 
-<%= form_for @user, url: staff_user_path(@user), method: :delete do |f| %>
+<%= form_for @member, url: staff_user_path(@member), method: :delete do |f| %>
     <%= hidden_field_tag :_method, 'delete' %>
 
-    <%= form_errors @user %>
+    <%= form_errors @member %>
 
     <div class="form-group">
-      <%= text_field_tag :user_username, nil, class: 'form-control', autocomplete: :off %>
+      <%= text_field_tag :member_username, nil, class: 'form-control', autocomplete: :off %>
     </div>
 
     <div class="text-right">

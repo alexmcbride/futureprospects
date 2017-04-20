@@ -1,4 +1,4 @@
 
 users_roles_1:
-  user: user_admin_one
+  user: user_admin
   role: can_view_courses_role

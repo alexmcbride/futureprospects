@@ -1,4 +1,4 @@
-<% breadcrumb :staff_users_show, @user %>
+<% breadcrumb :staff_users_show, @member %>
 <% @title = 'Staff Member Details' %>
 
 <div class="row">
@@ -8,7 +8,7 @@
         <strong>Username:</strong>
       </div>
       <div class="col-xs-8">
-        <%= @user.username %>
+        <%= @member.username %>
       </div>
     </div>
   </div>
@@ -19,7 +19,7 @@
         <strong>Email:</strong>
       </div>
       <div class="col-xs-8">
-        <%= @user.email %>
+        <%= @member.email %>
       </div>
     </div>
   </div>
@@ -32,7 +32,7 @@
         <strong>First Name:</strong>
       </div>
       <div class="col-xs-8">
-        <%= @user.first_name %>
+        <%= @member.first_name %>
       </div>
     </div>
   </div>
@@ -43,7 +43,7 @@
         <strong>Family Name:</strong>
       </div>
       <div class="col-xs-8">
-        <%= @user.family_name %>
+        <%= @member.family_name %>
       </div>
     </div>
   </div>
@@ -56,7 +56,7 @@
         <strong>Job Title:</strong>
       </div>
       <div class="col-xs-8">
-        <%= @user.job_title %>
+        <%= @member.job_title %>
       </div>
     </div>
   </div>
@@ -67,7 +67,7 @@
         <strong>College:</strong>
       </div>
       <div class="col-xs-8">
-        <%= @user.college.name %>
+        <%= @member.college.name %>
       </div>
     </div>
   </div>
@@ -80,7 +80,7 @@
         <strong>Created:</strong>
       </div>
       <div class="col-xs-8">
-        <%= (distance_of_time_in_words_to_now @user.created_at).capitalize  %> ago
+        <%= (distance_of_time_in_words_to_now @member.created_at).capitalize  %> ago
       </div>
     </div>
   </div>
@@ -91,40 +91,46 @@
         <strong>Updated:</strong>
       </div>
       <div class="col-xs-8">
-        <%= (distance_of_time_in_words_to_now @user.updated_at).capitalize %> ago
+        <%= (distance_of_time_in_words_to_now @member.updated_at).capitalize %> ago
       </div>
-  </div>
+    </div>
   </div>
 </div>
 
-<% unless @user.last_sign_in_at.nil? %>
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="row">
-        <div class="col-xs-4">
-          <strong>Last Sign-in:</strong>
-        </div>
-        <div class="col-xs-8">
-          <%= (distance_of_time_in_words_to_now @user.last_sign_in_at).capitalize %> ago
-        </div>
+<div class="row">
+  <div class="col-sm-6">
+    <div class="row">
+      <div class="col-xs-4">
+        <strong>Last Sign-in:</strong>
       </div>
-    </div>
-
-    <div class="col-sm-6">
-      <div class="row">
-        <div class="col-xs-4">
-          <strong>Sign-in IP:</strong>
-        </div>
-        <div class="col-xs-8">
-          <%= @user.last_sign_in_ip %>
-        </div>
+      <div class="col-xs-8">
+        <% if @member.last_sign_in_at.nil? %>
+          Never
+        <% else %>
+          <%= (distance_of_time_in_words_to_now @member.last_sign_in_at).capitalize %> ago
+        <% end %>
       </div>
     </div>
   </div>
-<% end %>
+
+  <div class="col-sm-6">
+    <div class="row">
+      <div class="col-xs-4">
+        <strong>Last Sign-in IP:</strong>
+      </div>
+      <div class="col-xs-8">
+        <% if @member.last_sign_in_ip.nil? %>
+          None
+        <% else %>
+          <%= @member.last_sign_in_ip %> ago
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 
 <br>
 
-<%= link_to 'Permissions', staff_user_permissions_path(@user) %> |
-<%= link_to 'Edit', edit_staff_user_path(@user) %> |
-<%= link_to 'Delete', staff_user_remove_path(@user) %>
+<%= link_to 'Permissions', staff_user_permissions_path(@member) if policy(@member).permissions? %> |
+<%= link_to 'Edit', edit_staff_user_path(@member) if policy(@member).edit? %> |
+<%= link_to 'Delete', staff_user_remove_path(@member) if policy(@member).remove?  %>

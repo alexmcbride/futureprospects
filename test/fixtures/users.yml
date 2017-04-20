@@ -4,11 +4,19 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-user_admin_one:
+user_admin:
   email: admin@admin.com
   username: aadmin123
   college: :college_one
   job_title: Admin
   first_name: Admin
   family_name: McAdmin
+
+user_two:
+  email: user@user.com
+  username: uuser123
+  college: :college_one
+  job_title: Test User
+  first_name: User
+  family_name: McUser
 

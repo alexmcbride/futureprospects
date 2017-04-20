@@ -46,3 +46,5 @@ do we need app intro? make this the home page? that way we have more info to put
 caching?
 
 create staff
+
+remove verify_authorized once permissions done

@@ -1,4 +1,4 @@
-<% breadcrumb :staff_user_permissions, @user %>
+<% breadcrumb :staff_user_permissions, @member %>
 <%@title = 'Permissions' %>
 
 <div class="row">
@@ -9,31 +9,31 @@
       <div class="col-sm-6">
         <div class="row">
           <div class="col-xs-3"><strong>Username:</strong></div>
-          <div class="col-xs-9"><%= @user.username %></div>
+          <div class="col-xs-9"><%= @member.username %></div>
         </div>
 
         <div class="row">
           <div class="col-xs-3"><strong>Email Address:</strong></div>
-          <div class="col-xs-9"><%= @user.email %></div>
+          <div class="col-xs-9"><%= @member.email %></div>
         </div>
       </div>
 
       <div class="col-sm-6">
         <div class="row">
           <div class="col-xs-3"><strong>Full Name:</strong></div>
-          <div class="col-xs-9"><%= @user.full_name %></div>
+          <div class="col-xs-9"><%= @member.full_name %></div>
         </div>
 
         <div class="row">
           <div class="col-xs-3"><strong>College Name:</strong></div>
-          <div class="col-xs-9"><%= @user.college.name %></div>
+          <div class="col-xs-9"><%= @member.college.name %></div>
         </div>
       </div>
     </div>
 
     <hr>
 
-    <%= form_tag staff_user_permissions_update_path(@user) do %>
+    <%= form_tag staff_user_permissions_update_path(@member) do %>
       <table class="table table-condensed table-striped">
         <thead>
           <tr>
@@ -46,7 +46,7 @@
           <% @roles.each do |role| %>
             <tr>
               <td><%= label_tag "permission[#{role.name}]", role.name.humanize %></td>
-              <td><%= check_box_tag "permission[#{role.name}]", 'yes', @user.has_role?(role.name) %></td>
+              <td><%= check_box_tag "permission[#{role.name}]", 'yes', @member.has_role?(role.name) %></td>
             </tr>
           <% end %>
         </tbody>

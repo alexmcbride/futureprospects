@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170414083149) do
+ActiveRecord::Schema.define(version: 20170421172351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,8 @@ ActiveRecord::Schema.define(version: 20170414083149) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.index ["application_id", "course_id"], name: "index_course_selections_on_application_id_and_course_id", unique: true, using: :btree
+    t.index ["application_id"], name: "index_course_selections_on_application_id", using: :btree
+    t.index ["course_id"], name: "index_course_selections_on_course_id", using: :btree
   end
 
   create_table "courses", force: :cascade do |t|
@@ -104,6 +106,8 @@ ActiveRecord::Schema.define(version: 20170414083149) do
     t.integer  "spaces"
     t.integer  "status"
     t.integer  "course_selections_count", default: 0, null: false
+    t.index ["category_id"], name: "index_courses_on_category_id", using: :btree
+    t.index ["college_id"], name: "index_courses_on_college_id", using: :btree
     t.index ["title"], name: "index_courses_on_title", using: :btree
   end
 
@@ -120,6 +124,7 @@ ActiveRecord::Schema.define(version: 20170414083149) do
     t.date     "end_date"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.index ["application_id"], name: "index_jobs_on_application_id", using: :btree
   end
 
   create_table "qualifications", force: :cascade do |t|
@@ -131,6 +136,7 @@ ActiveRecord::Schema.define(version: 20170414083149) do
     t.date     "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["school_id"], name: "index_qualifications_on_school_id", using: :btree
   end
 
   create_table "references", force: :cascade do |t|
@@ -155,6 +161,7 @@ ActiveRecord::Schema.define(version: 20170414083149) do
     t.string   "reference_2_email"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.index ["application_id"], name: "index_references_on_application_id", using: :btree
   end
 
   create_table "roles", force: :cascade do |t|
@@ -176,6 +183,7 @@ ActiveRecord::Schema.define(version: 20170414083149) do
     t.string   "country"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.index ["application_id"], name: "index_schools_on_application_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -206,16 +214,22 @@ ActiveRecord::Schema.define(version: 20170414083149) do
     t.string   "job_title"
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
+    t.index ["college_id"], name: "index_users_on_college_id", using: :btree
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["family_name"], name: "index_users_on_family_name", using: :btree
+    t.index ["first_name"], name: "index_users_on_first_name", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
+    t.index ["username"], name: "index_users_on_username", using: :btree
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
     t.integer "user_id"
     t.integer "role_id"
+    t.index ["role_id"], name: "index_users_roles_on_role_id", using: :btree
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
+    t.index ["user_id"], name: "index_users_roles_on_user_id", using: :btree
   end
 
 end

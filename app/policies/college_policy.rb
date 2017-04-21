@@ -30,11 +30,23 @@ class CollegePolicy < ApplicationPolicy
     user.has_role? :site_admin or user.has_role?(:can_add_colleges)
   end
 
+  def create?
+    user.has_role? :site_admin or (user.college_id == record.id and user.has_role?(:can_add_colleges))
+  end
+
   def edit?
     user.has_role? :site_admin or (user.college_id == record.id and user.has_role?(:can_edit_colleges))
   end
 
+  def update?
+    edit?
+  end
+
   def remove?
     user.has_role? :site_admin or (user.college_id == record.id and user.has_role?(:can_remove_colleges))
+  end
+
+  def destroy?
+    remove?
   end
 end

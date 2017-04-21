@@ -5,7 +5,7 @@ class Staff::CollegesController < Staff::StaffController
   # GET /staff/colleges.json
   def index
     # If the user isn't an admin, we just redirect them to their own college page
-    if current_staff.has_role? :site_admin
+    if current_staff.has_role?(:site_admin)
       @colleges = policy_scope College
     else
       skip_policy_scope # Skip this rule to stop pundit complaining.
@@ -34,6 +34,7 @@ class Staff::CollegesController < Staff::StaffController
   # POST /staff/colleges.json
   def create
     @college = College.new(college_params)
+    authorize @college
 
     respond_to do |format|
       if @college.save
@@ -47,6 +48,7 @@ class Staff::CollegesController < Staff::StaffController
   # PATCH/PUT /staff/colleges/1
   # PATCH/PUT /staff/colleges/1.json
   def update
+    authorize @college
     respond_to do |format|
       if @college.update(college_params)
         format.html { redirect_to staff_college_path(@college), notice: 'College was successfully updated.' }
@@ -63,6 +65,7 @@ class Staff::CollegesController < Staff::StaffController
   # DELETE /staff/colleges/1
   # DELETE /staff/colleges/1.json
   def destroy
+    authorize @college
     respond_to do |format|
       if @college.remove_college params[:college_name]
         format.html { redirect_to root_path, notice: 'College was successfully destroyed.' }

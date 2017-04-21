@@ -99,11 +99,11 @@ class Course < ApplicationRecord
     courses
   end
 
-  # Filter and sort the courses
+  # Filter the courses
   def self.filter(params)
     courses = Course.all
     courses = filter_by_title courses, params[:title]
-    courses =  filter_by_category courses, params[:category_id]
+    courses = filter_by_category courses, params[:category_id]
     courses = filter_by_status courses, params[:status]
     courses = filter_by_college_id courses, params[:college_id]
     courses
@@ -119,7 +119,10 @@ class Course < ApplicationRecord
       self.errors.add(:course, 'has one or more students who have applied for the course and so cannot be removed')
     end
 
-    self.errors.empty?
+    if self.errors.empty?
+      destroy!
+      true
+    end
   end
 
   # Updates attributes and takes action depending on status change (e.g. cancelled etc.)

@@ -9,7 +9,7 @@ class Staff::UsersController < Staff::StaffController
     if current_staff.has_role? :site_admin
       @job_titles = Staff.all_job_titles
     else
-      @job_titles = Staff.job_titles current_staff.college_id
+      @job_titles = current_staff.college_job_titles
     end
   end
 
@@ -97,9 +97,9 @@ class Staff::UsersController < Staff::StaffController
 
   def permissions_update
     authorize @member
-    @member.change_roles params[:permission]
+    @member.change_roles params
     respond_to do |format|
-      format.html { redirect_to staff_user_permissions_path(@member), notice: 'The permissions were successfully updated.' }
+      format.html { redirect_to staff_user_path(@member), notice: 'The permissions were successfully updated.' }
     end
   end
 
@@ -111,7 +111,7 @@ class Staff::UsersController < Staff::StaffController
 
     # Sets the colleges attribute for certain actions.
     def set_colleges
-      @colleges = College.select('id, name').order(:name) # only need id, name for select inputs
+      @colleges = policy_scope(College).select('id, name').order(:name) # only need id, name for select inputs
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

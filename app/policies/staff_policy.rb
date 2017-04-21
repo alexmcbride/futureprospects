@@ -57,10 +57,23 @@ class StaffPolicy < ApplicationPolicy
   end
 
   def permissions?
-    if user.id == record.id or record.has_role? :site_admin
+    # Can't change your own permissions
+    if user.id == record.id
       return false
     end
-    user.has_role? :site_admin or (user.college_id == record.college_id and user.has_role? :can_promote_staff)
+
+    # Admin can edit any role (except their own)
+    if user.has_role? :site_admin
+      return true
+    end
+
+    # Only admin can edit admin.
+    if record.has_role? :site_admin
+      return false
+    end
+
+    # Everyone else
+    user.college_id == record.college_id and user.has_role? :can_promote_staff
   end
 
   def permissions_update?

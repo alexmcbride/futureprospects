@@ -30,12 +30,14 @@
         Edit College Details
       <% end %>
     <% end %>
+
     <% if policy(@college).remove? %>
       <%= link_to staff_college_remove_path(@college), class: 'btn btn-default btn-block' do %>
         <%= icon('trash') %>
         Delete College
       <% end %>
     <% end %>
+
     <br>
 
     <div class="row text-darkish small">

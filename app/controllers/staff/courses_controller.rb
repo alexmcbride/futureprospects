@@ -37,7 +37,7 @@ class Staff::CoursesController < Staff::StaffController
       @course.college = current_staff.college
     end
 
-    authorize @course
+    authorize @course # Do this after college set so it gets checked
     respond_to do |format|
       if @course.save
         format.html { redirect_to staff_course_path(@course), notice: 'Course was successfully created.' }
@@ -70,9 +70,9 @@ class Staff::CoursesController < Staff::StaffController
 
   # DELETE /staff/courses/1
   def destroy
+    authorize @course
     respond_to do |format|
       if @course.remove_valid? params[:course_title]
-        @course.destroy!
         format.html { redirect_to staff_courses_path, notice: 'Course was successfully destroyed.' }
       else
         format.html { render :remove }
@@ -88,11 +88,11 @@ class Staff::CoursesController < Staff::StaffController
 
     # Sets categories for action what need them.
     def set_categories
-      @categories = Category.order(:name)
+      @categories = Category.where('courses_count > 0').order(:name)
     end
 
     def set_colleges
-      @colleges = College.order(:name)
+      @colleges = policy_scope(College).order(:name)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

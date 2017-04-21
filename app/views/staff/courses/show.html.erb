@@ -11,6 +11,7 @@
         Edit Course Details
       <% end %>
     <% end %>
+
     <% if policy(@course).remove? %>
       <%= link_to staff_course_remove_path(@course), class: 'btn btn-default btn-block', role: 'button' do |link| %>
         <%= icon('trash') %>
@@ -25,16 +26,16 @@
       <%= "(#{@course.course_selections_count})" unless @course.course_selections.empty?  %>
     </h4>
     <% if @course.course_selections.empty? %>
-        <p class="text-darkish small"><em>There are no applicants to this course.</em></p>
+      <p class="text-darkish small"><em>There are no applicants to this course.</em></p>
     <% else %>
-        <div class="list-group">
-          <% @course.course_selections.each do |selection| %>
-              <%= link_to nil, class: 'list-group-item' do %>
-                  <%= selection.application.student.full_name %>
-                  <span class="badge"><%= selection.application.state.humanize %></span>
-              <% end %>
+      <div class="list-group">
+        <% @course.course_selections.each do |selection| %>
+          <%= link_to nil, class: 'list-group-item' do %>
+            <%= selection.application.student.full_name %>
+            <span class="badge"><%= selection.application.state.humanize %></span>
           <% end %>
-        </div>
+        <% end %>
+      </div>
     <% end %>
   </div>
 

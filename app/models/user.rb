@@ -13,8 +13,6 @@ class User < ApplicationRecord
 
   rolify
 
-  self.per_page = 20
-
   # Sets the login
   def login=(login)
     @login = login

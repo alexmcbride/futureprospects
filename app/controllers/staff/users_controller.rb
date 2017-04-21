@@ -5,11 +5,11 @@ class Staff::UsersController < Staff::StaffController
   # GET /staff/users
   # GET /staff/users.json
   def index
-    @members = policy_scope(Staff).includes(:college).order(:created_at).paginate(page: params[:page])
+    @members = policy_scope(Staff).filter(params).includes(:college).order(:created_at).paginate(page: params[:page])
     if current_staff.has_role? :site_admin
-      @job_titles = Staff.all_job_titles
+      @job_titles = Staff.all_job_titles.order(:job_title)
     else
-      @job_titles = current_staff.college_job_titles
+      @job_titles = current_staff.college_job_titles.order(:job_title)
     end
   end
 

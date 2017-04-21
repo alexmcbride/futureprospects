@@ -23,16 +23,20 @@ class Staff < User
     end
   end
 
-  # Changed a staff member's roles. Permissions is a hash: {role_name: 'yes'}
-  def change_roles(params)
-    permissions = params[:permission]
-    Role.all.each do |role|
-      if !permissions.nil? and permissions.key? role.name
-        add_role role.name
-      else
-        remove_role role.name
+  # Changed a staff member's roles.
+  def change_roles(new_roles)
+    old_roles = self.roles.map {|r| r.name.to_s}
+
+    # add
+    new_roles.each do |role|
+      unless old_roles.include? role
+        self.add_role role
       end
+      old_roles.delete role
     end
+
+    old_roles.each {|r| self.remove_role r }
+    new_roles
   end
 
   def promote_admin

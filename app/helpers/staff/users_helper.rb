@@ -4,13 +4,13 @@ module Staff::UsersHelper
     content_tag(:div, class: 'form-group') do
       concat(check_box_tag "permission[#{role}]", role, roles.include?(role.to_s))
       concat(content_tag(:div, class: 'btn-group') do
-        concat(label_tag("permission[#{role}]", class: 'btn btn-success') do
+        concat(label_tag("permission[#{role}]", class: 'btn btn-success btn-sm') do
           concat(content_tag(:span) do
             concat(icon('check'))
           end)
           concat(content_tag(:span, ' '))
         end)
-        concat(label_tag("permission[#{role}]", class: 'btn btn-default active', style: 'width: 8vw') do
+        concat(label_tag("permission[#{role}]", class: 'btn btn-default btn-sm active', style: 'width: 8vw') do
           name
         end)
       end)

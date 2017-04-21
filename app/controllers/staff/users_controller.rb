@@ -97,7 +97,7 @@ class Staff::UsersController < Staff::StaffController
 
   def permissions_update
     authorize @member
-    @member.change_roles params
+    @member.change_roles params[:permission].nil? ? [] : params[:permission].map {|k, v| k}
     respond_to do |format|
       format.html { redirect_to staff_user_path(@member), notice: 'The permissions were successfully updated.' }
     end

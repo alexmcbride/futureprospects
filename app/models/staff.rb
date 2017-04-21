@@ -34,4 +34,12 @@ class Staff < User
       end
     end
   end
+
+  def promote_admin
+    self.add_role :site_admin
+  end
+
+  def demote_admin
+    self.remove_role :site_admin
+  end
 end

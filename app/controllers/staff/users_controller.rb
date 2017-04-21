@@ -1,5 +1,5 @@
 class Staff::UsersController < Staff::StaffController
-  before_action :set_member, only: [:show, :edit, :update, :destroy, :remove, :permissions, :permissions_update]
+  before_action :set_member, only: [:show, :edit, :update, :destroy, :remove, :permissions, :permissions_update, :promote_admin, :demote_admin]
   before_action :set_colleges, only: [:index, :new, :edit]
 
   # GET /staff/users
@@ -100,6 +100,22 @@ class Staff::UsersController < Staff::StaffController
     @member.change_roles params
     respond_to do |format|
       format.html { redirect_to staff_user_path(@member), notice: 'The permissions were successfully updated.' }
+    end
+  end
+
+  def promote_admin
+    authorize @member
+    @member.promote_admin
+    respond_to do |format|
+      format.html { redirect_to staff_user_path(@member), notice: 'The admin permission was successfully added.' }
+    end
+  end
+
+  def demote_admin
+    authorize @member
+    @member.demote_admin
+    respond_to do |format|
+      format.html { redirect_to staff_user_path(@member), notice: 'The admin permission was successfully revoked.' }
     end
   end
 

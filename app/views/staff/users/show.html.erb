@@ -37,7 +37,7 @@
         <strong>Email:</strong>
       </div>
       <div class="col-xs-10">
-        <%= @member.email %>
+        <%= mail_to @member.email %>
       </div>
     </div>
 
@@ -73,7 +73,7 @@
         <strong>College:</strong>
       </div>
       <div class="col-xs-10">
-        <%= @member.college.name %>
+        <%= @member.college.nil? ? 'None' : @member.college.name %>
       </div>
     </div>
 

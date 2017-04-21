@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     resources :colleges
     get 'users/:id/permissions', to: 'users#permissions', as: 'user_permissions'
     post 'users/:id/permissions', to: 'users#permissions_update', as: 'user_permissions_update'
+    post 'users/:id/promote_admin', to: 'users#promote_admin', as: 'user_promote_admin'
+    post 'users/:id/demote_admin', to: 'users#demote_admin', as: 'user_demote_admin'
     get 'users/:id/remove', to: 'users#remove', as: 'user_remove'
     resources :users
   end

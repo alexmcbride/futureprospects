@@ -79,4 +79,12 @@ class StaffPolicy < ApplicationPolicy
   def permissions_update?
     permissions?
   end
+
+  def promote_admin?
+    user.id != record.id && user.has_role?(:site_admin)
+  end
+
+  def demote_admin?
+    promote_admin?
+  end
 end

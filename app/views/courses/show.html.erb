@@ -34,7 +34,9 @@
           <li class="list-group-item list-group-item-heading"><%= format_date @course.start_date %></li>
           <li class="list-group-item list-group-item-heading"><%= pluralize(@course.years, 'Year') %></li>
           <li class="list-group-item list-group-item-heading"><%= @course.course_type %></li>
-          <li class="list-group-item list-group-item-heading"><%= @course.level %></li>
+          <% unless @course.level.nil? %>
+            <li class="list-group-item list-group-item-heading"><%= @course.level %></li>
+          <% end %>
           <li class="list-group-item list-group-item-heading"><%= pluralize @course.spaces, 'Space' %></li>
           <li class="list-group-item list-group-item-heading">Status: <%= @course.status.humanize %></li>
         </ul>

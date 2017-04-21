@@ -8,8 +8,13 @@ class CategoryPolicy < ApplicationPolicy
     end
 
     def resolve
-      if user.has_role? :site_admin or user.has_role? :can_view_categories
+      if user.has_role? :site_admin
         scope.all
+      elsif user.has_role? :can_view_categories
+        # Only categories that have a course that belongs to this user's college.
+        scope.joins(:courses)
+            .select('categories.name, categories.id, categories.courses_count')
+            .where('courses.college_id=?', user.college_id)
       else
         scope.none
       end

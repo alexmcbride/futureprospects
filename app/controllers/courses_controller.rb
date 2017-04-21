@@ -1,26 +1,25 @@
 class CoursesController < ApplicationController
+  before_action :set_categories, except: [:search]
+
   # GET /courses
   def index
     @search_term = params[:search]
     # Do search using scoped_search. If search term is empty then all records are returned.
-    @courses = Course.search(@search_term).order(:title).paginate(:page => params[:page])
-    @categories = Category.order(:name)
-
-    
+    @courses = Course.open_courses.search(@search_term).order(:title).paginate(:page => params[:page])
   end
 
   # GET /courses/category/1
   def category
-    @categories = Category.order(:name)
     @category = Category.left_outer_joins(:courses).find params[:id] # Left outer join as courses can be empty
-    @courses = @category.courses.paginate(:page => params[:page]).includes(:college).order(:title)
+    @courses = Course.open_courses(@category).paginate(:page => params[:page]).includes(:college).order(:title)
     render :index
   end
 
   # GET /courses/1
   def show
     @course = Course.find(params[:id])
-    @categories = Category.order(:name)
+
+    # For the add to application button
     @course_selection = CourseSelection.new course_id: @course.id
   end
 
@@ -39,4 +38,9 @@ class CoursesController < ApplicationController
       end
     end
   end
+
+  private
+    def set_categories
+      @categories = Category.where('courses_count > 0').order(:name)
+    end
 end

@@ -154,4 +154,12 @@ class Course < ApplicationRecord
       StudentMailer.course_cancelled(student, self).deliver_later
     end
   end
+
+  def self.open_courses(category=nil)
+    if category
+      Course.where(status: :open, category_id: category.id)
+    else
+      Course.where(status: :open)
+    end
+  end
 end

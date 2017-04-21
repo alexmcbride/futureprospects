@@ -1,0 +1,136 @@
+<%
+  breadcrumb :staff_members_show, @member
+  @title = 'Staff Member Details'
+%>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="row member-margin">
+      <div class="col-xs-4">
+        <strong>Username:</strong>
+      </div>
+      <div class="col-xs-8">
+        <%= @member.username %>
+      </div>
+    </div>
+
+    <div class="row member-margin">
+      <div class="col-xs-4">
+        <strong>First Name:</strong>
+      </div>
+      <div class="col-xs-8">
+        <%= @member.first_name %>
+      </div>
+    </div>
+
+    <div class="row member-margin">
+      <div class="col-xs-4">
+        <strong>Job Title:</strong>
+      </div>
+      <div class="col-xs-8">
+        <%= @member.job_title %>
+      </div>
+    </div>
+
+    <div class="row member-margin">
+      <div class="col-xs-4">
+        <strong>Updated:</strong>
+      </div>
+      <div class="col-xs-8">
+        <%= (distance_of_time_in_words_to_now @member.updated_at).capitalize %> ago
+      </div>
+    </div>
+
+    <div class="row member-margin">
+      <div class="col-xs-4">
+        <strong>Last Sign-in:</strong>
+      </div>
+      <div class="col-xs-8">
+        <% if @member.last_sign_in_at.nil? %>
+            Never
+        <% else %>
+            <%= (distance_of_time_in_words_to_now @member.last_sign_in_at).capitalize %> ago
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="row member-margin">
+      <div class="col-xs-4">
+        <strong>Email:</strong>
+      </div>
+      <div class="col-xs-8">
+        <%= mail_to @member.email %>
+      </div>
+    </div>
+
+    <div class="row member-margin">
+      <div class="col-xs-4">
+        <strong>Family Name:</strong>
+      </div>
+      <div class="col-xs-8">
+        <%= @member.family_name %>
+      </div>
+    </div>
+
+    <div class="row member-margin">
+      <div class="col-xs-4">
+        <strong>College:</strong>
+      </div>
+      <div class="col-xs-8">
+        <%= @member.college.nil? ? 'None' : @member.college.name %>
+      </div>
+    </div>
+
+    <div class="row member-margin">
+      <div class="col-xs-4">
+        <strong>Created:</strong>
+      </div>
+      <div class="col-xs-8">
+        <%= (distance_of_time_in_words_to_now @member.created_at).capitalize  %> ago
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-4">
+        <strong>Last Sign-in IP:</strong>
+      </div>
+      <div class="col-xs-8">
+        <% if @member.last_sign_in_ip.nil? %>
+            None
+        <% else %>
+            <%= @member.last_sign_in_ip %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="well">
+      <h4 class="no-top-margin">Permissions</h4>
+      <% if @member.roles.empty? %>
+          <p class="text-darkish small"><em>This staff member has no permissions</em></p>
+      <% else %>
+          <ul class="list-inline small">
+            <% @member.roles.each do |role| %>
+                <li><%= role.name %></li>
+            <% end %>
+          </ul>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <%= link_to 'Permissions', staff_member_permissions_path(@member) %> |
+    <%= link_to 'Edit', edit_staff_member_path(@member) %> |
+    <%= link_to 'Remove', staff_member_remove_path(@member) %>
+  </div>
+</div>
+

@@ -1,10 +1,10 @@
-<% breadcrumb :staff_users %>
+<% breadcrumb :staff_members %>
 <% @title = 'Staff Members' %>
 
 <div class="row">
   <div class="col-sm-3">
     <div class="well">
-      <%= form_tag staff_users_path, method: :get do %>
+      <%= form_tag staff_members_path, method: :get do %>
         <div class="form-group">
           <%= label_tag :full_name, 'Filter name' %>
           <div class="input-group">
@@ -33,7 +33,7 @@
      <% end %>
     </div>
 
-    <%= link_to new_staff_user_path, class: 'btn btn-default btn-block', role: 'button' do %>
+    <%= link_to new_staff_member_path, class: 'btn btn-default btn-block', role: 'button' do %>
       <%= icon('plus-circle') %>
       Add Staff Member
     <% end %>
@@ -55,17 +55,17 @@
         <tbody>
         <% @members.each do |member| %>
             <tr>
-              <td><%= link_to member.full_name, staff_user_path(member) %></td>
+              <td><%= link_to member.full_name, staff_member_path(member) %></td>
               <td><%= member.username %></td>
               <td><%= member.job_title %></td>
               <td><%= member.college.nil? ? 'None' : member.college.name %></td>
               <td>
-                <%= link_to staff_user_permissions_path(member), title: 'Permissions' do %>
+                <%= link_to staff_member_permissions_path(member), title: 'Permissions' do %>
                     <%= icon('ban') %>
                 <% end %>
               </td>
-              <td><%= link_to icon('pencil-square'), edit_staff_user_path(member), title: 'Edit' %></td>
-              <td><%= link_to icon('trash'), staff_user_remove_path(member), title: 'Delete' %></td>
+              <td><%= link_to icon('pencil-square'), edit_staff_member_path(member), title: 'Edit' %></td>
+              <td><%= link_to icon('trash'), staff_member_remove_path(member), title: 'Remove' %></td>
             </tr>
         <% end %>
         </tbody>

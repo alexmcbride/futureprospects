@@ -1,6 +1,6 @@
 # require 'test_helper'
 #
-# class Staff::UsersControllerTest < ActionDispatch::IntegrationTest
+# class Staff::MembersControllerTest < ActionDispatch::IntegrationTest
 #   setup do
 #     @staff_user = staff_users(:one)
 #   end

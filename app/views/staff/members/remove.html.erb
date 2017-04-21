@@ -1,11 +1,11 @@
-<% breadcrumb :staff_users_remove, @member %>
+<% breadcrumb :staff_members_remove, @member %>
 <% @title = 'Remove User' %>
 
 <p>Are you sure you want to delete the following user?</p>
 <p><strong><%= @member.username %></strong></p>
 <p>For security purposes you must type the full username exactly as it appears in order for the user to be deleted.</p>
 
-<%= form_for @member, url: staff_user_path(@member), method: :delete do |f| %>
+<%= form_for @member, url: staff_member_path(@member), method: :delete do |f| %>
     <%= hidden_field_tag :_method, 'delete' %>
 
     <%= form_errors @member %>

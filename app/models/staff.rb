@@ -29,7 +29,7 @@ class Staff < User
   def change_roles(new_roles)
     old_roles = self.roles.map {|r| r.name.to_s}
 
-    # add
+    # Add any new role and remove from old ones
     new_roles.each do |role|
       unless old_roles.include? role
         self.add_role role
@@ -37,22 +37,25 @@ class Staff < User
       old_roles.delete role
     end
 
+    # Remove any old roles from the user.
     old_roles.each {|r| self.remove_role r }
-    new_roles
   end
 
+  # Promote user to admin.
   def promote_admin
     self.add_role :site_admin
   end
 
+  # Demote user from admin
   def demote_admin
     self.remove_role :site_admin
   end
 
+  # Filter staff list based on parameters
   def self.filter(params)
     staff = Staff.all
     if params[:full_name].present?
-      staff = staff.where('LOWER(first_name || family_name || username) LIKE LOWER(?)', "%#{params[:full_name]}%")
+      staff = staff.where('LOWER(first_name || \' \' || family_name || \' \' || username) LIKE LOWER(?)', "%#{params[:full_name]}%")
     end
     if params[:college].present? and params[:college] != '0'
       staff = staff.where(college_id: params[:college])

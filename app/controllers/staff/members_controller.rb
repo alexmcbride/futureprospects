@@ -1,5 +1,6 @@
-class Staff::UsersController < Staff::StaffController
-  before_action :set_member, only: [:show, :edit, :update, :destroy, :remove, :permissions, :permissions_update, :promote_admin, :demote_admin]
+class Staff::MembersController < Staff::StaffController
+  before_action :set_member, only: [:show, :edit, :update, :destroy, :remove, :permissions, :permissions_update,
+                                    :promote_admin, :demote_admin]
   before_action :set_colleges, only: [:index, :new, :edit]
 
   # GET /staff/users
@@ -38,7 +39,7 @@ class Staff::UsersController < Staff::StaffController
     authorize @member
     respond_to do |format|
       if @member.save
-        format.html { redirect_to staff_user_path(@member), notice: 'User was successfully created.' }
+        format.html { redirect_to staff_member_permissions_path(@member), notice: 'User was successfully created.' }
       else
         set_colleges
         format.html { render :new }
@@ -63,7 +64,7 @@ class Staff::UsersController < Staff::StaffController
 
     respond_to do |format|
       if @member.update(user_params)
-        format.html { redirect_to staff_user_path(@member), notice: 'User was successfully updated.' }
+        format.html { redirect_to staff_member_path(@member), notice: 'User was successfully updated.' }
       else
         set_colleges
         format.html { render :edit }
@@ -77,12 +78,11 @@ class Staff::UsersController < Staff::StaffController
   end
 
   # DELETE /staff/users/1
-  # DELETE /staff/users/1.json
   def destroy
     authorize @member
     respond_to do |format|
       if @member.remove_user params[:member_username]
-        format.html { redirect_to staff_users_url, notice: 'User was successfully destroyed.' }
+        format.html { redirect_to staff_members_url, notice: 'User was successfully destroyed.' }
       else
         format.html { render :remove }
       end
@@ -95,27 +95,30 @@ class Staff::UsersController < Staff::StaffController
     @roles = Role.all
   end
 
+  # POST /staff/users/1/permission
   def permissions_update
     authorize @member
     @member.change_roles params[:permission].nil? ? [] : params[:permission].map {|k, v| k}
     respond_to do |format|
-      format.html { redirect_to staff_user_path(@member), notice: 'The permissions were successfully updated.' }
+      format.html { redirect_to staff_member_path(@member), notice: 'The permissions were successfully updated.' }
     end
   end
 
+  # POST /staff/users/1/promote_admin
   def promote_admin
     authorize @member
     @member.promote_admin
     respond_to do |format|
-      format.html { redirect_to staff_user_path(@member), notice: 'The admin permission was successfully added.' }
+      format.html { redirect_to staff_member_path(@member), notice: 'The admin permission was successfully added.' }
     end
   end
 
+  # POST /staff/users/1/demote_admin
   def demote_admin
     authorize @member
     @member.demote_admin
     respond_to do |format|
-      format.html { redirect_to staff_user_path(@member), notice: 'The admin permission was successfully revoked.' }
+      format.html { redirect_to staff_member_path(@member), notice: 'The admin permission was successfully revoked.' }
     end
   end
 
@@ -132,7 +135,8 @@ class Staff::UsersController < Staff::StaffController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params_with_password
-      params.require(:staff).permit(:first_name, :family_name, :email, :college, :college_id, :job_title, :password, :password_confirmation)
+      params.require(:staff).permit(:first_name, :family_name, :email, :college, :college_id, :job_title, :password,
+                                    :password_confirmation)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

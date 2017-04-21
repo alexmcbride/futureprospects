@@ -189,32 +189,32 @@ crumb :staff_new_college do
   link 'New', new_staff_college_path
 end
 
-crumb :staff_users do
+crumb :staff_members do
   parent :root
-  link 'Staff', staff_users_path
+  link 'Staff', staff_members_path
 end
 
-crumb :staff_users_new do
-  parent :staff_users
-  link 'New', new_staff_user_path
+crumb :staff_members_new do
+  parent :staff_members
+  link 'New', new_staff_member_path
 end
 
-crumb :staff_users_show do |user|
-  parent :staff_users
-  link user.full_name, staff_user_path(user)
+crumb :staff_members_show do |user|
+  parent :staff_members
+  link user.full_name, staff_member_path(user)
 end
 
-crumb :staff_users_edit do |user|
-  parent :staff_users_show, user
-  link 'Show', staff_user_path(user)
+crumb :staff_members_edit do |user|
+  parent :staff_members_show, user
+  link 'Show', staff_member_path(user)
 end
 
-crumb :staff_users_remove do |user|
-  parent :staff_users_show, user
-  link 'Remove', staff_user_remove_path(user)
+crumb :staff_members_remove do |user|
+  parent :staff_members_show, user
+  link 'Remove', staff_member_remove_path(user)
 end
 
-crumb :staff_user_permissions do |user|
-  parent :staff_users_show, user
-  link 'Permissions', staff_user_permissions_path(user)
+crumb :staff_member_permissions do |user|
+  parent :staff_members_show, user
+  link 'Permissions', staff_member_permissions_path(user)
 end

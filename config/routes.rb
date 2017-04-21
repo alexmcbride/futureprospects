@@ -16,12 +16,12 @@ Rails.application.routes.draw do
     resources :categories
     get 'colleges/:id/remove', to: 'colleges#remove', as: 'college_remove'
     resources :colleges
-    get 'users/:id/permissions', to: 'users#permissions', as: 'user_permissions'
-    post 'users/:id/permissions', to: 'users#permissions_update', as: 'user_permissions_update'
-    post 'users/:id/promote_admin', to: 'users#promote_admin', as: 'user_promote_admin'
-    post 'users/:id/demote_admin', to: 'users#demote_admin', as: 'user_demote_admin'
-    get 'users/:id/remove', to: 'users#remove', as: 'user_remove'
-    resources :users
+    get 'members/:id/permissions', to: 'members#permissions', as: 'member_permissions'
+    post 'members/:id/permissions', to: 'members#permissions_update', as: 'member_permissions_update'
+    post 'members/:id/promote_admin', to: 'members#promote_admin', as: 'member_promote_admin'
+    post 'members/:id/demote_admin', to: 'members#demote_admin', as: 'member_demote_admin'
+    get 'members/:id/remove', to: 'members#remove', as: 'member_remove'
+    resources :members
   end
 
   # Application routes

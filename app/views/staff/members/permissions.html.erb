@@ -1,0 +1,73 @@
+<% breadcrumb :staff_member_permissions, @member %>
+<%@title = 'Permissions' %>
+
+<div class="row">
+  <div class="col-sm-12">
+    <p class="text-darkish">You can update individual permissions for staff member <%= @member.full_name %>.</p>
+
+    <br>
+
+    <%= form_tag staff_member_permissions_update_path(@member) do %>
+
+      <table style="margin: 0 auto;">
+        <tbody>
+          <tr>
+            <td><%= permission_checkbox @member, :can_view_courses, 'Courses View' %></td>
+            <td><%= permission_checkbox @member, :can_view_colleges, 'Colleges View' %></td>
+            <td><%= permission_checkbox @member, :can_view_staff, 'Staff View' %></td>
+            <td><%= permission_checkbox @member, :can_view_categories, 'Categories View' %></td>
+          </tr>
+          <tr>
+            <td><%= permission_checkbox @member, :can_add_courses, 'Courses Add' %></td>
+            <td><%= permission_checkbox @member, :can_edit_colleges, 'Colleges Edit' %></td>
+            <td><%= permission_checkbox @member, :can_add_staff, 'Staff Add' %></td>
+            <td><%= permission_checkbox @member, :can_add_category, 'Category Add' %></td>
+          </tr>
+          <tr>
+            <td><%= permission_checkbox @member, :can_edit_courses, 'Courses Edit' %></td>
+            <td></td>
+            <td><%= permission_checkbox @member, :can_edit_staff, 'Staff Edit' %></td>
+            <td><%= permission_checkbox @member, :can_edit_category, 'Category Edit' %></td>
+          </tr>
+          <tr>
+            <td><%= permission_checkbox @member, :can_remove_courses, 'Courses Remove' %></td>
+            <td></td>
+            <td><%= permission_checkbox @member, :can_remove_staff, 'Staff Remove' %></td>
+            <td><%= permission_checkbox @member, :can_remove_category, 'Category Remove' %></td>
+          </tr>
+          <tr>
+            <td colspan="2"></td>
+            <td><%= permission_checkbox @member, :can_promote_staff, 'Staff Promote' %></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="text-right">
+        <%= submit_tag 'Update Permissions', class: 'btn btn-default' %>
+      </div>
+    <% end %>
+
+    <% if policy(@member).promote_admin? %>
+        <hr>
+      <div class="well">
+        <% if @member.has_role? :site_admin %>
+          <%= form_for @member, url: staff_member_demote_admin_path(@member), method: :post do |f| %>
+            <p class="text-darkish">You can demote this user can remove their admin permission.</p>
+            <%= f.submit 'Demote from Admin', class: 'btn btn-default' %>
+          <% end %>
+        <% else %>
+          <%= form_for @member, url: staff_member_promote_admin_path(@member), method: :post do |f| %>
+            <p class="text-darkish">You can promote this user to be an admin, they will have full access to all site
+              functionality, including the ability to delete users, courses, colleges, applications, and more. Be careful
+              about who you give this power to!</p>
+            <%= f.submit 'Promote to Admin', class: 'btn btn-default' %>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+
+

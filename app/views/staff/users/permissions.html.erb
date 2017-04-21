@@ -51,13 +51,11 @@
       <br>
       <% if @member.has_role? :site_admin %>
         <%= form_for @member, url: staff_user_demote_admin_path(@member), method: :post do |f| %>
-            <p class="text-darkish small text-right">Do you want to take away this person's admin status?</p>
             <%= f.submit 'Demote from Admin', class: 'btn btn-default btn-block' %>
         <% end %>
       <% else %>
         <%= form_for @member, url: staff_user_promote_admin_path(@member), method: :post do |f| %>
-            <p class="text-darkish small text-right">Do you want to make this person an admin?</p>
-            <%= f.submit 'Promote to Admin', class: 'btn btn-default btn-block' %>
+            <%= f.submit 'Promote to Admin', class: 'btn btn-primary btn-block' %>
         <% end %>
       <% end %>
     <% end %>

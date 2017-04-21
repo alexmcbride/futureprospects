@@ -5,18 +5,14 @@
   <div class="col-sm-3">
     <%= render 'staff/shared/courses_sidenav', page: :index %>
 
-    <% if policy(@course).edit? %>
-      <%= link_to edit_staff_course_path(@course), class: 'btn btn-default btn-block', role: 'button' do |link| %>
-        <%= icon('edit') %>
-        Edit Course Details
-      <% end %>
+    <%= link_to edit_staff_course_path(@course), class: 'btn btn-default btn-block', role: 'button' do |link| %>
+      <%= icon('edit') %>
+      Edit Course Details
     <% end %>
 
-    <% if policy(@course).remove? %>
-      <%= link_to staff_course_remove_path(@course), class: 'btn btn-default btn-block', role: 'button' do |link| %>
-        <%= icon('trash') %>
-        Delete Course
-      <% end %>
+    <%= link_to staff_course_remove_path(@course), class: 'btn btn-default btn-block', role: 'button' do |link| %>
+      <%= icon('trash') %>
+      Delete Course
     <% end %>
 
     <hr>

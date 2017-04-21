@@ -24,18 +24,14 @@
       </div>
     </div>
 
-    <% if policy(@college).edit? %>
-      <%= link_to edit_staff_college_path(@college), class: 'btn btn-default btn-block' do %>
-        <%= icon('edit') %>
-        Edit College Details
-      <% end %>
+    <%= link_to edit_staff_college_path(@college), class: 'btn btn-default btn-block' do %>
+      <%= icon('edit') %>
+      Edit College Details
     <% end %>
 
-    <% if policy(@college).remove? %>
-      <%= link_to staff_college_remove_path(@college), class: 'btn btn-default btn-block' do %>
-        <%= icon('trash') %>
-        Delete College
-      <% end %>
+    <%= link_to staff_college_remove_path(@college), class: 'btn btn-default btn-block' do %>
+      <%= icon('trash') %>
+      Delete College
     <% end %>
 
     <br>

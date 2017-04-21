@@ -11,20 +11,20 @@
     <p>For security purposes you must type the full name of the course exactly as it appears in order for it to be deleted.</p>
 
     <%= form_for @course, url: staff_course_path(@course), method: :delete do |f| %>
-        <%= hidden_field_tag :_method, 'delete' %>
+      <%= hidden_field_tag :_method, 'delete' %>
 
-        <%= form_errors @course %>
+      <%= form_errors @course %>
 
-        <div class="form-group">
-          <%= text_field_tag :course_title, nil, class: 'form-control', autocomplete: :off %>
-        </div>
+      <div class="form-group">
+        <%= text_field_tag :course_title, nil, class: 'form-control', autocomplete: :off %>
+      </div>
 
-        <div class="text-right">
-          <%= button_tag(:class => "btn btn-danger") do |s| %>
-              <%= icon('exclamation-triangle') %>
-              Delete Course
-          <% end %>
-        </div>
+      <div class="text-right">
+        <%= button_tag(:class => "btn btn-danger") do |s| %>
+            <%= icon('exclamation-triangle') %>
+            Delete Course
+        <% end %>
+      </div>
     <% end %>
   </div>
 </div>

@@ -59,11 +59,11 @@
             <li><%= link_to 'Home', root_path %></li>
 
             <% if staff_signed_in? %>
-              <li><%= link_to 'Applications', courses_path %></li>
+              <li><%= link_to 'Applications', nil %></li>
               <li><%= link_to 'Courses', staff_courses_path %></li>
               <li><%= link_to 'College', staff_colleges_path %></li>
               <li><%= link_to 'Staff', staff_members_path %></li>
-              <li><%= link_to 'Reports', courses_path %></li>
+              <li><%= link_to 'Reports', nil %></li>
             <% else %>
               <li><%= link_to 'Courses', courses_path %></li>
               <li><%= link_to 'Colleges', colleges_path %></li>
@@ -101,9 +101,11 @@
                 <%= breadcrumbs separator: ' &rsaquo; ' %>
               </div>
               <% if staff_signed_in? %>
-                <div class="col-sm-5 col-xs-12 text-right text-darkish small">
-                  <strong><%= current_staff.college_and_job %></strong>
-                </div>
+                <% cache do %>
+                  <div class="col-sm-5 col-xs-12 text-right text-darkish small">
+                    <strong><%= college_and_job %></strong>
+                  </div>
+                <% end %>
               <% end %>
             </div>
           </div>

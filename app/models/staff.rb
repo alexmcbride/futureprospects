@@ -16,15 +16,6 @@ class Staff < User
     Staff.select(:job_title).distinct
   end
 
-  # Gets the combined college name and job title of the staff member.
-  def college_and_job
-    if self.college.present?
-      "#{self.college.name} - #{self.job_title}"
-    else
-      'Site Admin'
-    end
-  end
-
   # Changed a staff member's roles.
   def change_roles(new_roles)
     old_roles = self.roles.map {|r| r.name.to_s}
@@ -55,7 +46,8 @@ class Staff < User
   def self.filter(params)
     staff = Staff.all
     if params[:full_name].present?
-      staff = staff.where('LOWER(first_name || \' \' || family_name || \' \' || username) LIKE LOWER(?)', "%#{params[:full_name]}%")
+      sql = 'LOWER(first_name) LIKE :term OR LOWER(family_name) LIKE :term OR LOWER(username) LIKE :term'
+      staff = staff.where(sql, {term: "%#{params[:full_name.downcase]}%"})
     end
     if params[:college].present? and params[:college] != '0'
       staff = staff.where(college_id: params[:college])

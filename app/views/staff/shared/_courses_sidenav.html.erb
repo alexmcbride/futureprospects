@@ -3,8 +3,5 @@
 <h4 class="no-top-margin"><strong>Courses Navigation</strong></h4>
 <div class="list-group">
   <%= link_to 'Browse Courses', staff_courses_path, class: "list-group-item #{'active' if page == :index}" %>
-
-  <% if policy(Category).allow? %>
-    <%= link_to 'Manage Categories', staff_categories_path, class: "list-group-item #{'active' if page == :categories}" %>
-  <% end %>
+  <%= link_to 'Manage Categories', staff_categories_path, class: "list-group-item #{'active' if page == :categories}" %>
 </div>

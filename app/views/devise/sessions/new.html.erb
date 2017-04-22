@@ -4,8 +4,8 @@
   <div class="col-sm-6 col-sm-offset-3">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <% if resource.staff? %>
-        <p>Sign in to the site in order to manage your student intake.</p>
-        <% @title = 'Sign In (Staff)' %>
+        <p>Sign in to the site in order to manage your college area.</p>
+        <% @title = 'Sign In (College)' %>
       <% else %>
         <p>Sign in to the site in order to track your application.</p>
         <% @title = 'Sign In' %>

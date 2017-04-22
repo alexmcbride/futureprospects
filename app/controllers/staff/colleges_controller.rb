@@ -2,7 +2,6 @@ class Staff::CollegesController < Staff::StaffController
   before_action :set_college, only: [:show, :edit, :update, :remove, :destroy]
 
   # GET /staff/colleges
-  # GET /staff/colleges.json
   def index
     # If the user isn't an admin, we just redirect them to their own college page
     if current_staff.has_role?(:site_admin)
@@ -14,7 +13,6 @@ class Staff::CollegesController < Staff::StaffController
   end
 
   # GET /staff/colleges/1
-  # GET /staff/colleges/1.json
   def show
     authorize @college
   end
@@ -31,7 +29,6 @@ class Staff::CollegesController < Staff::StaffController
   end
 
   # POST /staff/colleges
-  # POST /staff/colleges.json
   def create
     @college = College.new(college_params)
     authorize @college
@@ -46,7 +43,6 @@ class Staff::CollegesController < Staff::StaffController
   end
 
   # PATCH/PUT /staff/colleges/1
-  # PATCH/PUT /staff/colleges/1.json
   def update
     authorize @college
     respond_to do |format|
@@ -63,7 +59,6 @@ class Staff::CollegesController < Staff::StaffController
   end
 
   # DELETE /staff/colleges/1
-  # DELETE /staff/colleges/1.json
   def destroy
     authorize @college
     respond_to do |format|

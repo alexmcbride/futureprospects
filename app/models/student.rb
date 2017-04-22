@@ -7,9 +7,7 @@ class Student < User
 
   # Creates a new application, filled with some info we already know.
   def create_application
-    if self.has_current_application?
-      nil
-    else
+    unless self.has_current_application?
       application = Application.new
       application.email = self.email
       application.first_name = self.first_name

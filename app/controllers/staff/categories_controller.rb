@@ -3,7 +3,7 @@ class Staff::CategoriesController < Staff::StaffController
 
   # GET /staff/categories
   def index
-    @categories = policy_scope(Category).includes(:courses).order(:name)
+    @categories = policy_scope(Category).order(:name)
   end
 
   # GET /staff/categories/1

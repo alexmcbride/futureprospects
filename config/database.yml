@@ -3,7 +3,7 @@
 production:
   adapter: postgresql
   encoding: unicode
-  database: futureprospects
+  database: futureprospects_production
   pool: 5
   username: alexm
   password: admin

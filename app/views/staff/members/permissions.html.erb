@@ -7,45 +7,47 @@
 
     <br>
 
-    <%= form_tag staff_member_permissions_update_path(@member) do %>
+    <div id="permissions-area">
+      <%= form_tag staff_member_permissions_update_path(@member) do %>
 
-      <table style="margin: 0 auto;">
-        <tbody>
-          <tr>
-            <td><%= permission_checkbox @member, :can_view_courses, 'Courses View' %></td>
-            <td><%= permission_checkbox @member, :can_view_colleges, 'Colleges View' %></td>
-            <td><%= permission_checkbox @member, :can_view_staff, 'Staff View' %></td>
-            <td><%= permission_checkbox @member, :can_view_categories, 'Categories View' %></td>
-          </tr>
-          <tr>
-            <td><%= permission_checkbox @member, :can_add_courses, 'Courses Add' %></td>
-            <td><%= permission_checkbox @member, :can_edit_colleges, 'Colleges Edit' %></td>
-            <td><%= permission_checkbox @member, :can_add_staff, 'Staff Add' %></td>
-            <td><%= permission_checkbox @member, :can_add_category, 'Category Add' %></td>
-          </tr>
-          <tr>
-            <td><%= permission_checkbox @member, :can_edit_courses, 'Courses Edit' %></td>
-            <td></td>
-            <td><%= permission_checkbox @member, :can_edit_staff, 'Staff Edit' %></td>
-            <td><%= permission_checkbox @member, :can_edit_category, 'Category Edit' %></td>
-          </tr>
-          <tr>
-            <td><%= permission_checkbox @member, :can_remove_courses, 'Courses Remove' %></td>
-            <td></td>
-            <td><%= permission_checkbox @member, :can_remove_staff, 'Staff Remove' %></td>
-            <td><%= permission_checkbox @member, :can_remove_category, 'Category Remove' %></td>
-          </tr>
-          <tr>
-            <td colspan="2"></td>
-            <td><%= permission_checkbox @member, :can_promote_staff, 'Staff Promote' %></td>
-          </tr>
-        </tbody>
-      </table>
+        <table style="margin: 0 auto;">
+          <tbody>
+            <tr>
+              <td><%= permission_checkbox @member, :can_view_courses, 'Courses View' %></td>
+              <td><%= permission_checkbox @member, :can_view_colleges, 'Colleges View' %></td>
+              <td><%= permission_checkbox @member, :can_view_staff, 'Staff View' %></td>
+              <td><%= permission_checkbox @member, :can_view_categories, 'Categories View' %></td>
+            </tr>
+            <tr>
+              <td><%= permission_checkbox @member, :can_add_courses, 'Courses Add' %></td>
+              <td><%= permission_checkbox @member, :can_edit_colleges, 'Colleges Edit' %></td>
+              <td><%= permission_checkbox @member, :can_add_staff, 'Staff Add' %></td>
+              <td><%= permission_checkbox @member, :can_add_category, 'Category Add' %></td>
+            </tr>
+            <tr>
+              <td><%= permission_checkbox @member, :can_edit_courses, 'Courses Edit' %></td>
+              <td></td>
+              <td><%= permission_checkbox @member, :can_edit_staff, 'Staff Edit' %></td>
+              <td><%= permission_checkbox @member, :can_edit_category, 'Category Edit' %></td>
+            </tr>
+            <tr>
+              <td><%= permission_checkbox @member, :can_remove_courses, 'Courses Remove' %></td>
+              <td></td>
+              <td><%= permission_checkbox @member, :can_remove_staff, 'Staff Remove' %></td>
+              <td><%= permission_checkbox @member, :can_remove_category, 'Category Remove' %></td>
+            </tr>
+            <tr>
+              <td colspan="2"></td>
+              <td><%= permission_checkbox @member, :can_promote_staff, 'Staff Promote' %></td>
+            </tr>
+          </tbody>
+        </table>
 
-      <div class="text-right">
-        <%= submit_tag 'Update Permissions', class: 'btn btn-default' %>
-      </div>
-    <% end %>
+        <div class="text-right">
+          <%= submit_tag 'Update Permissions', class: 'btn btn-default' %>
+        </div>
+      <% end %>
+    </div>
 
     <% if policy(@member).promote_admin? %>
         <hr>

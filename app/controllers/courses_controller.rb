@@ -5,7 +5,7 @@ class CoursesController < ApplicationController
   def index
     @search_term = params[:search]
     # Do search using scoped_search. If search term is empty then all records are returned.
-    @courses = Course.open_courses.search(@search_term).order(:title).paginate(:page => params[:page])
+    @courses = Course.open_courses.full_search(@search_term).order(:title).paginate(:page => params[:page])
   end
 
   # GET /courses/category/1
@@ -32,7 +32,7 @@ class CoursesController < ApplicationController
         format.json { head :ok } # blank json response
       else
         # Perform search.
-        @courses = Course.search(params[:term]).take 10
+        @courses = Course.full_search(params[:term]).take 10
         format.json { render :json => @courses, :only => [:id, :title, :status],
                              :include => {:college => {:only => :name}} }
       end

@@ -6,8 +6,8 @@ class Course < ApplicationRecord
 
   # Search
   scoped_search on: :title
-  scoped_search relation: :category, on: :name
-  scoped_search relation: :college, on: :name
+  scoped_search relation: :category, on: :name, profile: :full
+  scoped_search relation: :college, on: :name, profile: :full
 
   # Image Upload
   mount_uploader :image, CourseImageUploader
@@ -50,9 +50,14 @@ class Course < ApplicationRecord
     'Full Time'
   end
 
-  # Searches courses for the specified term
+  # Searches course titles for the specified term
   def self.search(search_term)
-    Course.search_for(search_term).includes(:category, :college)
+    Course.search_for(search_term)
+  end
+
+  # Searches course titles, categories, and colleges for the specified term
+  def self.full_search(search_term)
+    Course.search_for(search_term, profile: :full).includes(:category, :college)
   end
 
   # Checks if the course has spaces
@@ -67,46 +72,19 @@ class Course < ApplicationRecord
     end
   end
 
-  # Filters courses by title
-  def self.filter_by_title(courses, title)
-    unless title.nil? or title.empty?
-      return courses.where('LOWER(title) LIKE LOWER(?)', "%#{title}%")
-    end
-    courses
-  end
-
-  # Filters courses by category
-  def self.filter_by_category(courses, category_id)
-    unless category_id.nil? or category_id.to_i == 0
-      return courses.where(category_id: category_id)
-    end
-    courses
-  end
-
-  # Filters courses by status
-  def self.filter_by_status(courses, status)
-    unless status.nil? or status.to_i == -1
-      return courses.where(status: status)
-    end
-    courses
-  end
-
-  # Filters courses by status
-  def self.filter_by_college_id(courses, college_id)
-    unless college_id.nil? or college_id.to_i == 0
-      return courses.where(college_id: college_id)
-    end
-    courses
-  end
-
   # Filter the courses
   def self.filter(params)
-    courses = Course.all
-    courses = filter_by_title courses, params[:title]
-    courses = filter_by_category courses, params[:category_id]
-    courses = filter_by_status courses, params[:status]
-    courses = filter_by_college_id courses, params[:college_id]
-    courses
+    scope = Course.search params[:title]
+    unless params[:category_id].nil? or params[:category_id] == '0'
+      scope = scope.where(category_id: params[:category_id])
+    end
+    unless params[:status].nil? or params[:status] == '-1'
+      scope = scope.where(status: params[:status])
+    end
+    unless params[:college_id].nil? or params[:college_id] == '0'
+      scope = scope.where(college_id: params[:college_id])
+    end
+    scope
   end
 
   # Gets a boolean indicating if the course can be deleted.

@@ -1,3 +1,4 @@
+# Model class to represent a student. Inherits from User and uses Single-Table Inheritance.
 class Student < User
   # Some validations are shared between student and application
   include StudentValidator
@@ -6,6 +7,8 @@ class Student < User
   has_many :applications
 
   # Creates a new application, filled with some info we already know.
+  #
+  # Returns - a new application object, or nil if one already exists.
   def create_application
     unless self.has_current_application?
       application = Application.new
@@ -21,13 +24,17 @@ class Student < User
     end
   end
 
-  # Gets the current application, which is an application made in the last year.
+  # Finds the current application, which is an application made in the last year.
+  #
+  # Returns - the student's current application, which is defined as any application active in the last year.
   def current_application
     # Get from last year for Postgresql
     self.applications.where("created_at > CURRENT_DATE - INTERVAL '1 year'").first
   end
 
   # Checks if the student has a current application
+  #
+  # Returns - a boolean indicating if the student has a current_application.
   def has_current_application?
     not self.current_application.nil?
   end

@@ -1,5 +1,12 @@
+# Module to define HTML helpers for the applications section.
 module NewApplicationsHelper
   # Outputs a text field with bootstrap style
+  #
+  # * +form+ - the form to add the text field to
+  # * +item+ - the item (e.g. :title) to add.
+  # * +args+ - various options hash.
+  #
+  # Returns  - HTML
   def form_text_field(form, item, args={})
     label = args[:label]
     label_col = (args[:label_col] or 4)
@@ -12,7 +19,13 @@ module NewApplicationsHelper
     end
   end
 
-  # Outputs an email field with bootstrap style
+  # Outputs an emal field with bootstrap style
+  #
+  # * +form+ - the form to add the email field to
+  # * +item+ - the item (e.g. :title) to add.
+  # * +args+ - various options hash.
+  #
+  # Returns  - HTML
   def form_email_field(form, item, args={})
     label = args[:label]
     label_col = (args[:label_col] or 4)
@@ -25,7 +38,14 @@ module NewApplicationsHelper
     end
   end
 
-  # Outputs a select control with bootstrap style
+  # Outputs a select control with bootstrap style.
+  #
+  # * +form+ - the form to add the select field to.
+  # * +item+ - the item (e.g. :title) to add.
+  # * +choices+ - the select fields options.
+  # * +args+ - various options hash.
+  #
+  # Returns  - HTML
   def form_select(form, item, choices, args={})
     label = args[:label]
     label_col = (args[:label_col] or 4)
@@ -39,6 +59,12 @@ module NewApplicationsHelper
   end
 
   # Outputs a date field with bootstrap style
+  #
+  # * +form+ - the form to add the date field to.
+  # * +item+ - the item (e.g. :title) to add.
+  # * +args+ - various options hash.
+  #
+  # Returns  - HTML
   def form_date(form, item, args={})
     label = args[:label]
     label_col = (args[:label_col] or 4)

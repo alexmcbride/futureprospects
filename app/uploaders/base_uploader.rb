@@ -1,5 +1,8 @@
+# Abstract class that uploaders inherit from.
 class BaseUploader < CarrierWave::Uploader::Base
-  # So we can set the filename in the DB from seed data.
+  # Custom method so we can set the uploaders filename from seed data.
+  #
+  # * +value+ - the value to set.
   def filename=(value)
     @filename = value
   end

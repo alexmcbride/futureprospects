@@ -68,12 +68,12 @@
           <tbody>
           <% @courses.each do |course| %>
             <tr>
-              <td title="<%= course.title %>"><%= link_to truncate(course.title, length: 50), staff_course_path(course) %></td>
+              <td title="<%= course.title %>"><%= link_to truncate(course.title, length: 55), staff_course_path(course) %></td>
               <td title="<%= course.category.name %>"><%= truncate course.category.name, length: 25 %></td>
               <td><%= course.status.humanize %></td>
               <td><%= pluralize course.course_selections_count, 'student' %></td>
-              <td><%= link_to icon('pencil-square'), edit_staff_course_path(course), title: 'Edit' %></td>
-              <td><%= link_to icon('trash'), staff_course_remove_path(course), title: 'Delete' %></td>
+              <td><%= link_to icon('pencil-square'), edit_staff_course_path(course), title: 'Edit Course' %></td>
+              <td><%= link_to icon('trash'), staff_course_remove_path(course), title: 'Remove Course' %></td>
             </tr>
           <% end %>
           </tbody>

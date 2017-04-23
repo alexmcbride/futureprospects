@@ -1,3 +1,4 @@
+# Model class to represent a student's job.
 class Job < ApplicationRecord
   validates :employer, presence: true, length: {maximum: 35}
   validates :address_1, presence: true, length: {maximum: 35}

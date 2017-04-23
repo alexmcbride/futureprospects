@@ -2,8 +2,7 @@
 encoding: UTF-8
 static_path: []
 rdoc_include:
-- "."
-- C:/Users/alexm/Documents/GitHub/futureprospects
+- C:/Users/alexm/Documents/GitHub/futureprospects/app
 charset: UTF-8
 exclude: 
 hyperlink_all: false

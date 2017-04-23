@@ -1,13 +1,36 @@
+# Model for a student application.
 class Application < ApplicationRecord
-  # Constants
+  # The maximum length of a personal statement.
   STATEMENT_LENGTH = 2000
+
+  # The maximum number of allowed courses.
   MAX_COURSES = 5
+
+  # The cost of a single course.
   SINGLE_COURSE_FEE = 10
+
+  # The cost of multiple courses.
   MULTIPLE_COURSE_FEE = 20
 
-  # Enums
+  # Enums for student gender.
+  #
+  # * +:male+ - Student is male
+  # * +:female+ - Student is female
+  # * +:other+ - Student is LGBT or prefer not to say
   enum gender: [:male, :female, :other]
+
+  # Enum for the application state.
+  #
+  # * +:applying+ -  Student is still applying.
+  # * +:submitted+ -  Application has been submitted.
+  # * +:paid+ -  Application payment has been processed successfully.
+  # * +:completed - Application has been completed
   enum state: [:applying, :submitted, :paid, :completed]
+
+  # Enum for the payment type.
+  #
+  # * +:credit_card+ -  Paid by credit card
+  # * +:paypal+ -  Paid by PayPal
   enum payment_type: [:credit_card, :paypal]
 
   # Validators
@@ -49,27 +72,39 @@ class Application < ApplicationRecord
   has_many :course_selections
 
   # Checks if the application is owned by this student
+  #
+  # * +student+ - the student to check against.
+  #
+  # Returns - true if the application is owned by the student.
   def owned_by?(student)
     student.id == self.student_id
   end
 
   # Checks if the application is complete.
+  #
+  # Returns - true if all stages are complete.
   def complete?
     self.incomplete_stages.empty?
   end
 
   # Checks if the application is incomplete.
+  #
+  # Returns - true if all stages are incomplete.
   def incomplete?
     not complete?
   end
 
-  # Gets a symbol indicating the first uncompleted stage of the application
+  # Gets a symbol indicating the first uncompleted stage of the application.
+  #
+  # Returns - a symbol indicating the first incomplete stage.
   def first_incomplete_stage
     stage = self.incomplete_stages.first
     stage.nil? ? :submit : stage
   end
 
-  # Determines which stages of the application are incomplete
+  # Gets an array of incomplete stages in the application.
+  #
+  # Returns - an array of symbols.
   def incomplete_stages
     stages = {intro: self.completed_intro,
               profile: self.completed_profile,
@@ -81,7 +116,9 @@ class Application < ApplicationRecord
     (stages.map { |k, v| k unless v }).compact
   end
 
-  # Checks that a school hasn't been added without a qualification.
+  # Checks that all added schools have at least one qualification.
+  #
+  # Returns - true if the schools are valid.
   def schools_valid?
     valid = true
     self.schools.each do |school|
@@ -93,17 +130,23 @@ class Application < ApplicationRecord
     valid
   end
 
-  # Gets the number of courses the student can still add
+  # Calculates the number of courses the student can still add.
+  #
+  # Returns - integer
   def available_courses
     MAX_COURSES - self.course_selections.size
   end
 
-  # Checks if a student can still add courses to their application
+  # Checks if a student can still add courses to their application.
+  #
+  # Returns - true if can add courses.
   def can_add_course?
     self.available_courses > 0
   end
 
   # Calculates the student's application fee.
+  #
+  # Returns - BigDecimal contaning application fee amount.
   def calculate_fee
     if self.course_selections.size > 1
       BigDecimal.new MULTIPLE_COURSE_FEE
@@ -112,13 +155,30 @@ class Application < ApplicationRecord
     end
   end
 
-  # Gets all of this applications course selections.
+  # Finds all of this applications course selections.
+  #
+  # Returns - ActiveRecord::Relation with course selections.
   def find_course_selections
     CourseSelection.includes(:course).where application_id: self.id
   end
 
-  # Attempts to save the education stage
-  def save_education?
+  # Adds a course selection to the application.
+  #
+  # * +selection+ - The selection to add.
+  #
+  # Returns: a boolean indicating if the selection was added or not.
+  def add_course(selection)
+    selection.application = self
+    if selection.valid?
+      return selection.save
+    end
+    false
+  end
+
+  # Attempts to save the education stage.
+  #
+  # Returns - boolean indicating if the stage was saved.
+  def save_education
     if self.schools_valid?
       self.completed_education = true
       self.save validate: false
@@ -127,15 +187,21 @@ class Application < ApplicationRecord
     false
   end
 
-  # Attempts to save the intro stage
-  def save_intro?
+  # Attempts to save the intro stage.
+  #
+  # Returns - boolean indicating if the stage was saved.
+  def save_intro
     self.completed_intro = true
     self.save validate: false
     true
   end
 
-  # Attempts to save the profile stage
-  def save_profile?(params)
+  # Attempts to save the profile stage.
+  #
+  # * +params+ - the request params containing profile data.
+  #
+  # Returns - boolean indicating if the stage was saved.
+  def save_profile(params)
     self.attributes = params
     self.state = :applying
     if self.valid?
@@ -146,20 +212,29 @@ class Application < ApplicationRecord
     false
   end
 
-  # Attempts to save the employment stage
-  def save_employment?
+  # Attempts to save the employment stage.
+  #
+  # Returns - boolean indicating if the stage was saved.
+  def save_employment
     self.completed_employment = true
     self.save
     true
   end
 
-  # Retrieve reference or create new one as needed
+  # Retrieve reference or create new one as needed.
+  #
+  # Returns - the reference.
   def create_reference
     self.reference or Reference.new
   end
 
-  # Attempts to save updated references stage
-  def save_references?(reference, params)
+  # Attempts to save updated references stage.
+  #
+  # * +reference+ - the reference object to add or update.
+  # * +params+ - the request params containing reference data.
+  #
+  # Returns - boolean indicating if the stage was saved.
+  def save_references(reference, params)
     reference.attributes = params
     if reference.valid?
       self.completed_references = true
@@ -170,8 +245,12 @@ class Application < ApplicationRecord
     false
   end
 
-  # Attempt to save the personal statement stage
-  def save_statement?(params)
+  # Attempt to save the personal statement stage.
+  #
+  # * +params+ - the request params containing statement data.
+  #
+  # Returns - boolean indicating if the stage was saved.
+  def save_statement(params)
     self.attributes = params
     if self.personal_statement.empty? or self.personal_statement.length == 0
       self.errors.add(:personal_statement, "can't be blank")
@@ -185,17 +264,10 @@ class Application < ApplicationRecord
     false
   end
 
-  # Adds the course selection
-  def add_course?(selection)
-    selection.application = self
-    if selection.valid?
-      return selection.save
-    end
-    false
-  end
-
-  # Attempts to save the course selection
-  def save_courses?
+  # Attempts to save the course selection.
+  #
+  # Returns - boolean indicating if the stage was saved.
+  def save_courses
     if self.course_selections.empty?
       self.errors.add(:saving, 'requires that you must apply for at least one course')
       return false
@@ -205,7 +277,11 @@ class Application < ApplicationRecord
   end
 
   # Attempts to submit the application.
-  def save_submit?(confirmed)
+  #
+  # * +confirmed+ - a boolean indicating if the student has confirmed the submission.
+  #
+  # Returns - boolean indicating if the stage was saved.
+  def save_submit(confirmed)
     unless confirmed
       self.errors.add(:confirm, 'box must be checked in order to submit.')
       return false

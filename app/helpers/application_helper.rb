@@ -1,15 +1,24 @@
+# Module for application wide helpers. These are functions that can be called in views.
 module ApplicationHelper
-  # Markdown variables
-  @renderer = nil
-  @markdown = nil
+  # Markdown rendered
+  @@renderer = nil
 
-  # Helper function for flash_messages.
+  # Markdown object.
+  @@markdown = nil
+
+  # Determines the type of bootstrap class to use for the alert.
+  #
+  # * +flash_type+ - the type of flash message.
+  #
+  # Returns - the bootstrap class to use e.g. warning, success etc.
   def bootstrap_class_for(flash_type)
     { notice: 'alert-success', alert: 'alert-warning', success: 'alert-success', error: 'alert-danger', warning: 'alert-warning'}[flash_type.to_sym]
   end
 
-  # Displays any flash messages in a bootstrap compatible way.
-  def flash_messages(opts = {})
+  # Displays any queued flash messages in a bootstrap friendly way.
+  #
+  # Returns - the HTML for a pretty bootstrap alert contaning the flash message.
+  def flash_messages
     flash.each do |msg_type, message|
       concat(content_tag(:div, message, class: "text-center alert #{bootstrap_class_for(msg_type)} fade in") do
         concat content_tag(:button, 'x'.html_safe, class: 'close', data: {dismiss: 'alert'})
@@ -20,7 +29,11 @@ module ApplicationHelper
     nil
   end
 
-  # Displays form errors in a nice bootstrap way
+  # Helper to dsplay form errors in a nice pretty bootstrap compatible way.
+  #
+  # * +obj+ - the form to show error for.
+  #
+  # Returns - HTML with pretty bootstrap errors.
   def form_errors(obj)
     if obj.errors.any?
       content_tag(:div, class: 'panel panel-danger') do
@@ -40,7 +53,11 @@ module ApplicationHelper
     end
   end
 
-  # Returns the specified text as markdown.
+  # Converts the specified text into markdown.
+  #
+  # * +text+ - the text to convert.
+  #
+  # Returns - the HTML the markdown was converted to.
   def markdown(text)
     options = {
         filter_html:     true,
@@ -56,18 +73,29 @@ module ApplicationHelper
     }
 
     # Create if they don't exist.
-    @renderer ||= Redcarpet::Render::HTML.new(options)
-    @markdown ||= Redcarpet::Markdown.new(@renderer, extensions)
+    @@renderer ||= Redcarpet::Render::HTML.new(options)
+    @@markdown ||= Redcarpet::Markdown.new(@@renderer, extensions)
 
-    @markdown.render(text).html_safe
+    @@markdown.render(text).html_safe
   end
 
   # Removes the http:// bit from the start of URLs
+  #
+  # * +url+ - the url to process.
+  #
+  # Returns - a clean URL string.
   def clean_url(url)
     (URI.split url).compact.slice(1, 1).join
   end
 
   # Generates HTML for a list-item on the stages sidebar.
+  #
+  # * +name+ - the name of the stage.
+  # * +path+ - the path to the stage (url).
+  # * +selected+ - optional boolean to indicate if the stage is selected (active).
+  # * +completed+ - optional boolean to indicate if the stage is completed (green tick).
+  #
+  # Returns - the HTML of the item.
   def stage_item(name, path, selected=false, completed=false)
     if selected
       content_tag(:a, href: url_for(path), class: 'list-group-item active') do
@@ -92,26 +120,41 @@ module ApplicationHelper
     end
   end
 
-  # Formats a date as dd/mm/yyyy
+  # Formats a date as dd/mm/yyyy.
+  #
+  # * +date+ - the date to format.
+  #
+  # Returns - the formatted date.
   def format_date(date)
     date.strftime '%d/%m/%Y' if date
   end
 
+  # Formats a datetime as dd/mm/yyyy - H:m.
+  #
+  # * +date+ - the datetime to format.
+  #
+  # Returns - the formatted datetime.
   def format_datetime(dt)
     dt.strftime '%d/%m/%Y - %H:%m' if dt
   end
 
   # Gets any current user
+  #
+  # Returns - the current user.
   def current_user
     current_student or current_staff
   end
 
   # Gets if any user is signed in
+  #
+  # Returns - true if the user is signed in.
   def user_signed_in?
     student_signed_in? or staff_signed_in?
   end
 
   # Adds the little markdown guide ? thing next to some text fields
+  #
+  # Returns - HTML for the little markdown guide thing.
   def markdown_support_text
     content_tag(:div, class: 'pull-right text-darkish small', style: 'margin-top: 5px;') do
       concat(icon('arrow-circle-down'))

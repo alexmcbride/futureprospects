@@ -39,8 +39,9 @@ class CourseImageUploader < BaseUploader
   #   process resize_to_fit: [50, 50]
   # end
 
-  # Add a white list of extensions which are allowed to be uploaded.
-  # For images you might use something like this:
+  # Gets a list of allowed image file extensions.
+  #
+  # Returns - the list of strings.
   def extension_whitelist
     %w(jpg jpeg gif png)
   end

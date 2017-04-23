@@ -1,3 +1,4 @@
+# Model class to represent a college
 class College < ApplicationRecord
   # Image Upload
   mount_uploader :image, CollegeImageUploader
@@ -15,17 +16,25 @@ class College < ApplicationRecord
   has_many :courses
   has_many :staff
 
-  # Gets the number applicants to this college.
+  # Calculates the number applicants to this college.
+  #
+  # Returns - integer for number of applications.
   def count_applicants
     CourseSelection.count_applicants self
   end
 
-  # Gets the number of courses that have been applied for.
+  # Calculates the number of courses that have been applied for.
+  #
+  # Returns - integer for number of course selections.
   def count_course_selections
     CourseSelection.count_courses self
   end
 
   # Removes the college, plus all staff, courses, and course selections, if the names match.
+  #
+  # * +college_name+ - the name of the college, as entered by the user.
+  #
+  # Returns - a boolean indicating if the operation was successful.
   def remove_college(college_name)
     if self.name != college_name
       errors.add(:college_name, "does not match '#{name}'")

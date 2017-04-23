@@ -36,7 +36,7 @@ class NewApplicationsController < ApplicationController
 
   # GET: /applications/:id
   def index
-    @application.save_intro?
+    @application.save_intro
   end
 
   # GET: /applications/:id/profile
@@ -46,7 +46,7 @@ class NewApplicationsController < ApplicationController
   # POST: /applications/:id/profile
   def profile_next
     respond_to do |format|
-      if @application.save_profile? application_params
+      if @application.save_profile application_params
         format.html { redirect_to applications_education_path(@application) }
       else
         format.html { render :profile }
@@ -85,7 +85,7 @@ class NewApplicationsController < ApplicationController
   # POST: /applications/:id/education_next
   def education_next
     respond_to do |format|
-      if @application.save_education?
+      if @application.save_education
         format.html { redirect_to applications_employment_path(@application) }
       else
         @school = School.new
@@ -107,7 +107,7 @@ class NewApplicationsController < ApplicationController
     @qualification = Qualification.new qualification_params
 
     respond_to do |format|
-      if @school.add_qualification? @qualification
+      if @school.add_qualification @qualification
         format.html { redirect_to applications_qualifications_path(@school), notice: 'Added qualification' }
       else
         format.html { render :qualifications }
@@ -154,7 +154,7 @@ class NewApplicationsController < ApplicationController
   # POST: /applications/:id/employment/next
   def employment_next
     respond_to do |format|
-      @application.save_employment?
+      @application.save_employment
       format.html { redirect_to applications_references_path(@application) }
     end
   end
@@ -168,7 +168,7 @@ class NewApplicationsController < ApplicationController
   def references_next
     @reference = @application.create_reference
     respond_to do |format|
-      if @application.save_references? @reference, reference_params
+      if @application.save_references @reference, reference_params
         format.html { redirect_to applications_statement_path(@application) }
       else
         format.html { render :references }
@@ -181,7 +181,7 @@ class NewApplicationsController < ApplicationController
 
   def statement_next
     respond_to do |format|
-      if @application.save_statement? statement_params
+      if @application.save_statement statement_params
         format.html { redirect_to applications_courses_path(@application) }
       else
         format.html { render :statement }
@@ -198,7 +198,7 @@ class NewApplicationsController < ApplicationController
     @course_selection = CourseSelection.new course_params
     @course_selections = @application.find_course_selections
     respond_to do |format|
-      if @application.add_course? @course_selection
+      if @application.add_course @course_selection
         format.html { redirect_to applications_courses_path(@application), notice: 'Course added to application' }
       else
         format.html { render :courses }
@@ -217,7 +217,7 @@ class NewApplicationsController < ApplicationController
 
   def courses_next
     respond_to do |format|
-      if @application.save_courses?
+      if @application.save_courses
         format.html { redirect_to applications_submit_path(@application) }
       else
         @course_selection = CourseSelection.new
@@ -233,7 +233,7 @@ class NewApplicationsController < ApplicationController
   def submit_next
     respond_to do |format|
       confirmed = !params[:confirm].nil?
-      if @application.save_submit? confirmed
+      if @application.save_submit confirmed
         format.html { redirect_to root_path, notice: 'Submitted application' }
       else
         format.html { render :submit }

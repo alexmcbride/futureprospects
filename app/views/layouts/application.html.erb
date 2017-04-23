@@ -101,11 +101,9 @@
                 <%= breadcrumbs separator: ' &rsaquo; ' %>
               </div>
               <% if staff_signed_in? %>
-                <% cache do %>
-                  <div class="col-sm-5 col-xs-12 text-right text-darkish small">
-                    <strong><%= college_and_job %></strong>
-                  </div>
-                <% end %>
+                <div class="col-sm-5 col-xs-12 text-right text-darkish small">
+                  <%= current_staff.college ? current_staff.college.name : 'Site Admin' %>
+                </div>
               <% end %>
             </div>
           </div>
@@ -113,7 +111,7 @@
         <hr class="title-hr">
       <% end %>
 
-      <%# Displays any flash messages that are available. %>
+      <%# Displays any flash messages that are queued. %>
       <%= flash_messages %>
 
       <%# Main Content %>

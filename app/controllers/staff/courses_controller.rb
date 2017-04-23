@@ -72,7 +72,7 @@ class Staff::CoursesController < Staff::StaffController
   def destroy
     authorize @course
     respond_to do |format|
-      if @course.remove_valid? params[:course_title]
+      if @course.remove params[:course_title]
         format.html { redirect_to staff_courses_path, notice: 'Course was successfully destroyed.' }
       else
         format.html { render :remove }

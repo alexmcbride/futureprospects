@@ -50,3 +50,6 @@ Thumbs.db
 *.py
 
 /app/assets/images/seed_images2
+
+/doc
+/app/doc

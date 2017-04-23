@@ -34,15 +34,6 @@
 
     <div class="row member-margin">
       <div class="col-xs-4">
-        <strong>Updated:</strong>
-      </div>
-      <div class="col-xs-8">
-        <%= (distance_of_time_in_words_to_now @member.updated_at).capitalize %> ago
-      </div>
-    </div>
-
-    <div class="row member-margin">
-      <div class="col-xs-4">
         <strong>Last Sign-in:</strong>
       </div>
       <div class="col-xs-8">
@@ -83,15 +74,6 @@
       </div>
     </div>
 
-    <div class="row member-margin">
-      <div class="col-xs-4">
-        <strong>Created:</strong>
-      </div>
-      <div class="col-xs-8">
-        <%= (distance_of_time_in_words_to_now @member.created_at).capitalize  %> ago
-      </div>
-    </div>
-
     <div class="row">
       <div class="col-xs-4">
         <strong>Last Sign-in IP:</strong>
@@ -127,10 +109,13 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-12">
+  <div class="col-sm-6">
     <%= link_to 'Permissions', staff_member_permissions_path(@member) %> |
     <%= link_to 'Edit', edit_staff_member_path(@member) %> |
     <%= link_to 'Remove', staff_member_remove_path(@member) %>
   </div>
+  <div class="col-sm-6 small text-right text-darkish">
+    Created <%= (distance_of_time_in_words_to_now @member.created_at).capitalize  %> ago<br>
+    Updated <%= (distance_of_time_in_words_to_now @member.updated_at).capitalize %> ago
+  </div>
 </div>
-

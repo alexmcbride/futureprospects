@@ -1,3 +1,4 @@
+# Model class for representing a student's references.
 class Reference < ApplicationRecord
   validates :reference_1_full_name, presence: true, length: {maximum: 70}
   validates :reference_1_occupation, presence: true, length: {maximum: 70}

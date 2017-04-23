@@ -1,3 +1,4 @@
+# Model class for a CourseSelection. Stores the courses associated with a particular application.
 class CourseSelection < ApplicationRecord
   include ActionView::Helpers::TextHelper
 
@@ -16,21 +17,22 @@ class CourseSelection < ApplicationRecord
   belongs_to :application
   belongs_to :course, counter_cache: true
 
-  # Checks if a course selection already exists
+  # Checks if a course selection already exists.
+  #
+  # Returns - a boolean indicating if the selection exists.
   def exists?
     not CourseSelection.where('application_id=? AND course_id=?', self.application_id, self.course_id).empty?
   end
 
-  # Validates that selection is unique
+  # Adds a validation error if the course selection is not unique.
   def course_is_unique
     if self.exists?
       self.errors.add(:course, 'has already been added to the application')
     end
   end
 
-  # Validates that selected course is open
+  # Adds a validation error if the course does not have a open status.
   def course_is_open
-    # Check course has free spaces
     if self.course
       unless self.course.open?
         self.errors.add(:course, "cannot be added as status is #{self.course.status}")
@@ -38,14 +40,18 @@ class CourseSelection < ApplicationRecord
     end
   end
 
-  # Validates that application can add course selection
+  # Adds a validation error if the application already has max number courses added.
   def application_can_add
     unless self.application.can_add_course?
       self.errors.add(:maximum, "of #{pluralize Application::MAX_COURSES, 'course'} has been reached")
     end
   end
 
-  # Creates a new CourseSelection object based on the course_id
+  # Creates a new CourseSelection object based on the course_id.
+  #
+  # * +params+ - the rquest params including the course_id.
+  #
+  # Returns - a new CourseSelection object with the course_id set.
   def self.from_course_id(params)
     selection = CourseSelection.new
     selection.course_id = params[:course_id]
@@ -53,6 +59,10 @@ class CourseSelection < ApplicationRecord
   end
 
   # Calculates the number of applicants for the specified college
+  #
+  # * +college+ - the college to count applicants for.
+  #
+  # Returns - an integer with the number of applicants.
   def self.count_applicants(college)
     sql = 'SELECT COUNT(DISTINCT s.application_id)
            FROM course_selections s
@@ -63,7 +73,11 @@ class CourseSelection < ApplicationRecord
     result.first['count']
   end
 
-  # Counts the number of courses applied to
+  # Calculates the number of course selections for the specified college
+  #
+  # * +college+ - the college to count course selection for.
+  #
+  # Returns - an integer with the number of course selections.
   def self.count_courses(college)
     sql = "SELECT COUNT(*)
            FROM course_selections s

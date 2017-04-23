@@ -36,14 +36,10 @@
 
     <br>
 
-    <div class="row text-darkish small">
-      <div class="col-xs-5">Created:</div>
-      <div class="col-xs-7"><%= format_datetime @college.created_at %></div>
-    </div>
-    <div class="row text-darkish small">
-      <div class="col-xs-5">Last Updated:</div>
-      <div class="col-xs-7"><%= format_datetime @college.updated_at%></div>
-    </div>
+    <p class="text-darkish small">
+      Created <%= distance_of_time_in_words_to_now @college.created_at %> ago<br>
+      Last Updated <%= distance_of_time_in_words_to_now @college.updated_at %> ago
+    </p>
   </div>
 
   <div class="col-sm-9">

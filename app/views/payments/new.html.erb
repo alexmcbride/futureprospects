@@ -3,7 +3,18 @@
 %>
 
 <div class="row">
-  <div class="col-sm-6 col-sm-offset-3">
+  <div class="col-sm-4">
+    <div class="well">
+
+    </div>
+  </div>
+
+  <div class="col-sm-8">
+    <div class="alert alert-warning small">
+      <strong>Development Note</strong>
+      <p>These payments are not processed, they are made in sandbox mode. To see suitable testing values to use
+        <%= link_to 'go here', 'https://developers.braintreepayments.com/reference/general/testing/ruby#credit-card-numbers', style: 'color: white; text-decoration: underline;' %>.</p>
+    </div>
 
     <%= form_for(@payment, url: payments_path, method: :post) do |f| %>
       <div class="well">
@@ -12,12 +23,6 @@
         <p><strong><%= number_to_currency @application.calculate_fee_pounds, unit: '£' %></strong></p>
 
         <p>Enter your credit or debit card details below.</p>
-      </div>
-
-      <div class="alert alert-warning">
-        <strong>Development Note</strong>
-        <p>These payments are not processed, they are made in sandbox mode. To see suitable testing values to use
-          <%= link_to 'go here', 'https://developers.braintreepayments.com/reference/general/testing/ruby#credit-card-numbers', style: 'color: white; text-decoration: underline;' %>.</p>
       </div>
 
       <%= form_errors @payment %>

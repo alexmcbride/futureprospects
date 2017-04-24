@@ -170,6 +170,34 @@ class Application < ApplicationRecord
     CourseSelection.includes(:course).where application_id: self.id
   end
 
+  # Checks if the application contains a successful payment.
+  #
+  # Returns: a boolean indicating if the payment was successful or not.
+  def has_successful_payment
+    self.payments.where(status: :authorized).any?
+  end
+
+  # Checks if the application contains a failed payment.
+  #
+  # Returns: a boolean indicating if a failed payment exists or not.
+  def has_failed_payment
+    self.payments.where(status: :failed).any?
+  end
+
+  # Finds the applications successful payment, if it exists. There can only be one successful payment at a time.
+  #
+  # Returns: the successful payment object.
+  def find_successful_payment
+    self.payments.find_by_status(:authorized).first
+  end
+
+  # Finds the first failed payment, if it exists.
+  #
+  # Returns: the failed payment object.
+  def find_failed_payments
+    self.payments.where(status: :failed).order(:created_at)
+  end
+
   # Adds a course selection to the application.
   #
   # * +selection+ - The selection to add.

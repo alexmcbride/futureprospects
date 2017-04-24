@@ -59,10 +59,18 @@ class Payment < ApplicationRecord
   #
   # Returns - a boolean indicating if the payment was authorized.
   def authorize
+    # Check if payment has already been received.
+    if self.application.has_successful_payment
+      self.errors.add(:authorization, 'for this payment has already been received.')
+      return false
+    end
+
+    # Check card and take payment.
     if card_valid?
       take_payment
       return authorized?
     end
+
     false
   end
 

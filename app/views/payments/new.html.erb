@@ -1,77 +1,44 @@
 <%
-  @title = 'New Payment'
+  breadcrumb :payments_new
+  @title = 'Make Payment'
 %>
 
 <div class="row">
-  <div class="col-sm-4">
-    <div class="well">
+  <div class="col-sm-3">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h3 class="no-top-margin">Payment Stages</h3>
+        <p><em>This section will walk you through the process of paying your application fee.</em></p>
+        <ul class="list-group">
+          <li class="list-group-item">Check Amount</li>
+          <li class="list-group-item active">
+            <div class="row">
+              <div class="col-xs-10">Enter Details</div>
+              <div class="col-xs-2 text-right"><%= icon('arrow-circle-right', class: 'app-arrow') %></div>
+            </div>
+          </li>
+          <li class="list-group-item">Confirmation</li>
+        </ul>
+      </div>
+    </div>
 
+    <div class="alert alert-warning">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <h4>Testing Note</h4>
+      <p>These payments are currently not processed, they are made in sandbox mode. To see suitable testing values to use
+        <%=link_to 'go here', 'https://developers.braintreepayments.com/reference/general/testing/ruby#credit-card-numbers', style: 'color: white; text-decoration: underline;' %>.</p>
     </div>
   </div>
 
-  <div class="col-sm-8">
-    <div class="alert alert-warning small">
-      <strong>Development Note</strong>
-      <p>These payments are not processed, they are made in sandbox mode. To see suitable testing values to use
-        <%= link_to 'go here', 'https://developers.braintreepayments.com/reference/general/testing/ruby#credit-card-numbers', style: 'color: white; text-decoration: underline;' %>.</p>
+  <div class="col-sm-9">
+    <h3 class="no-top-margin">Enter Card Details</h3>
+
+    <div class="well" style="border: 1px solid #acacac;">
+      <p>Please make a payment for the following application fee for <%= pluralize @application.course_selections_count, 'course' %>:</p>
+      <p><strong><%= number_to_currency @application.calculate_fee_pounds, unit: '£' %></strong></p>
+      <p>Enter your credit or debit card details below and click authorize payment.</p>
     </div>
 
-    <%= form_for(@payment, url: payments_path, method: :post) do |f| %>
-      <div class="well">
-        <p>Make a payment for the following amount:</p>
-
-        <p><strong><%= number_to_currency @application.calculate_fee_pounds, unit: '£' %></strong></p>
-
-        <p>Enter your credit or debit card details below.</p>
-      </div>
-
-      <%= form_errors @payment %>
-
-      <div class="form-group">
-        <%= f.label :card_brand, 'Brand' %>
-        <%= f.select :card_brand, options_for_select(Payment::card_brands.map {|k, v| [k.humanize, k] }), {}, class: 'form-control' %>
-      </div>
-
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="form-group">
-            <%= f.label :card_first_name, 'First Name' %>
-            <%= f.text_field :card_first_name, class: 'form-control' %>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="form-group">
-            <%= f.label :card_last_name, 'Last Name' %>
-            <%= f.text_field :card_last_name, class: 'form-control' %>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :card_number, 'Number' %>
-        <%= f.text_field :card_number, class: 'form-control' %>
-      </div>
-
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="form-group">
-            <%= f.label :card_expiry, 'Expiry Date' %>
-            <%= f.text_field :card_expiry, 'data-provide' => 'datepicker', class: 'form-control datepicker-expiry-field', placeholder: 'mm/yyyy' %>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="form-group">
-            <%= f.label :card_cvv, 'CVV <a title="The three-digit number on the back">(?)</a>'.html_safe %>
-            <%= f.text_field :card_cvv, class: 'form-control', maxlength: '3' %>
-          </div>
-        </div>
-      </div>
-
-      <hr>
-
-      <div class="actions text-right">
-        <%= f.submit 'Authorize Payment', class: 'btn btn-primary' %>
-      </div>
-    <% end %>
+    <%= render 'form', payment: @payment, application: @application %>
   </div>
 </div>

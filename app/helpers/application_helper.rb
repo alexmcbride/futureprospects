@@ -163,7 +163,7 @@ module ApplicationHelper
     content_tag(:div, class: 'pull-right text-darkish small', style: 'margin-top: 5px;') do
       concat(icon('arrow-circle-down'))
       concat(' Markdown ')
-      concat(link_to '(?)', 'https://daringfireball.net/projects/markdown/basics', title: 'Markdown Guide')
+      concat(link_to '(?)', 'https://daringfireball.net/projects/markdown/basics', class: 'help-cursor', title: 'Markdown Guide')
     end
   end
 end

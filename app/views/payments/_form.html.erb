@@ -1,7 +1,50 @@
-<%= form_for(credit_card) do |f| %>
-  <%= form_errors credit_card %>
+<%= form_for(payment, url: payments_path, method: :post) do |f| %>
+  <%= form_errors payment %>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <%= f.label :card_brand, 'Card Type' %>
+    <%= f.select :card_brand, options_for_select(Payment::card_brands.map {|k, v| [k.humanize, k] }), {}, class: 'form-control' %>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= f.label :card_first_name, 'First Name' %>
+        <%= f.text_field :card_first_name, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= f.label :card_last_name, 'Last Name' %>
+        <%= f.text_field :card_last_name, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :card_number, 'Number' %>
+    <%= f.text_field :card_number, class: 'form-control' %>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= f.label :card_expiry, 'Expiry Date' %>
+        <%= f.text_field :card_expiry, 'data-provide' => 'datepicker', class: 'form-control datepicker-expiry-field', placeholder: 'mm/yyyy' %>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= f.label :card_cvv, 'CVV <a title="The three-digit number on the back of the card" class="help-cursor">(?)</a>'.html_safe %>
+        <%= f.text_field :card_cvv, class: 'form-control', maxlength: '3' %>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="actions text-right">
+    <p class="text-darkish small">Authorize the payment with your payment provider.</p>
+    <%= f.submit 'Authorize Payment', class: 'next-button' %>
   </div>
 <% end %>

@@ -55,7 +55,7 @@ class Application < ApplicationRecord
   validates :correspondence_address_2, presence: false, length: { maximum: 35 }
   validates :correspondence_postcode, presence: false, length: { maximum: 8 }
   validates :correspondence_country, presence: false, length: { maximum: 35 }
-  validates :state, presence: true
+  validates :status, presence: true
   validates :submitted_date, presence: false
   validates :payment_amount, presence: false
   validates :payment_type, presence: false
@@ -135,7 +135,7 @@ class Application < ApplicationRecord
   #
   # Returns - integer
   def available_courses
-    MAX_COURSES - self.course_selections.size
+    MAX_COURSES - self.course_selections_count
   end
 
   # Checks if a student can still add courses to their application.
@@ -149,11 +149,31 @@ class Application < ApplicationRecord
   #
   # Returns - the application fee amount in pence.
   def calculate_fee
-    if self.course_selections.size > 1
+    Application::course_fee(course_selections_count > 1 ? :multiple : :single)
+  end
+
+  # Gets the course fee for the submission type (e.g. :single or :multiple)
+  #
+  # * +type+ - :single or :multiple
+  #
+  # Returns - the course fee in pence.
+  def self.course_fee(type)
+    if type == :single
+      SINGLE_COURSE_FEE
+    elsif type == :multiple
       MULTIPLE_COURSE_FEE
     else
-      SINGLE_COURSE_FEE
+      0
     end
+  end
+
+  # Gets the course fee for the submission type (e.g. :single or :multiple)
+  #
+  # * +type+ - :single or :multiple
+  #
+  # Returns - the course fee in pounds.
+  def self.course_fee_pounds(type)
+    course_fee(type) / 100
   end
 
   # Calculates the student's application fee.
@@ -174,28 +194,14 @@ class Application < ApplicationRecord
   #
   # Returns: a boolean indicating if the payment was successful or not.
   def has_successful_payment
-    self.payments.where(status: :authorized).any?
+    Payment.has_paid? self
   end
 
   # Checks if the application contains a failed payment.
   #
   # Returns: a boolean indicating if a failed payment exists or not.
   def has_failed_payment
-    self.payments.where(status: :failed).any?
-  end
-
-  # Finds the applications successful payment, if it exists. There can only be one successful payment at a time.
-  #
-  # Returns: the successful payment object.
-  def find_successful_payment
-    self.payments.find_by_status(:authorized).first
-  end
-
-  # Finds the first failed payment, if it exists.
-  #
-  # Returns: the failed payment object.
-  def find_failed_payments
-    self.payments.where(status: :failed).order(:created_at)
+    Payment.has_failed_payment? self
   end
 
   # Adds a course selection to the application.

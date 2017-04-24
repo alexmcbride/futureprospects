@@ -119,6 +119,16 @@ crumb :application_submit do |application|
   link 'Submit', applications_submit_path(application)
 end
 
+crumb :payments do
+  parent :root
+  link 'Payments', payments_path
+end
+
+crumb :payments_new do
+  parent :payments
+  link 'Enter Details', new_payment_path
+end
+
 crumb :staff_courses do
   parent :root
   link 'Courses', staff_courses_path

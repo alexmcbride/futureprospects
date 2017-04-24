@@ -14,7 +14,7 @@ class CourseSelection < ApplicationRecord
   validate :application_can_add
 
   # Associations
-  belongs_to :application
+  belongs_to :application, counter_cache: true
   belongs_to :course, counter_cache: true
 
   # Checks if a course selection already exists.

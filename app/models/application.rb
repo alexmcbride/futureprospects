@@ -12,6 +12,9 @@ class Application < ApplicationRecord
   # The cost of multiple courses.
   MULTIPLE_COURSE_FEE = 2000
 
+  # Used for converting pence into pounds.
+  PENCE_IN_POUND = 100
+
   # Enums for student gender.
   #
   # * +:male+ - Student is male
@@ -173,14 +176,14 @@ class Application < ApplicationRecord
   #
   # Returns - the course fee in pounds.
   def self.course_fee_pounds(type)
-    course_fee(type) / 100
+    course_fee(type) / PENCE_IN_POUND
   end
 
   # Calculates the student's application fee.
   #
   # Returns - the application fee amount in pounds.
   def calculate_fee_pounds
-    calculate_fee / 100
+    calculate_fee / PENCE_IN_POUND
   end
 
   # Finds all of this applications course selections.

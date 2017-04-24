@@ -17,10 +17,28 @@ class Student < User
       application.family_name = self.family_name
       application.scottish_candidate_number = self.scottish_candidate_number
       application.national_insurance_number = self.national_insurance_number
-      application.state = :applying
+      application.state = :creating
       application.student = self
       application.save validate: false # Can't validate at this point
       application
+    end
+  end
+
+  # Gets next stage of the application process.
+  #
+  # Returns - a symbol indicating the next stage.
+  def application_status
+    application = current_application
+    if application.nil?
+      :create_application
+    elsif application.submitting?
+      :continue_application
+    elsif application.submitted?
+      :make_payment
+    elsif application.payment_failed?
+      :make_repayment
+    elsif application.completed?
+      :track_application
     end
   end
 

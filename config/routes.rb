@@ -1,6 +1,11 @@
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 Rails.application.routes.draw do
+
+  resources :payments
+  post 'payments/continue', to: 'payments#index_continue', as: 'payments_continue'
+
+
   devise_for :staff, :skip => [:registrations] # Skip staff sign-up
   devise_scope :staff do
     # We skip registrations to stop staff sign up, but we still need to enable staff profile editing

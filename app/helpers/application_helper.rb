@@ -129,6 +129,10 @@ module ApplicationHelper
     date.strftime '%d/%m/%Y' if date
   end
 
+  def format_expiry(date)
+    date.strftime '%m/%y' if date
+  end
+
   # Formats a datetime as dd/mm/yyyy - H:m.
   #
   # * +date+ - the datetime to format.

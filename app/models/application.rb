@@ -7,10 +7,10 @@ class Application < ApplicationRecord
   MAX_COURSES = 5
 
   # The cost of a single course.
-  SINGLE_COURSE_FEE = 10
+  SINGLE_COURSE_FEE = 1000 # Amounts are in pence.
 
   # The cost of multiple courses.
-  MULTIPLE_COURSE_FEE = 20
+  MULTIPLE_COURSE_FEE = 2000
 
   # Enums for student gender.
   #
@@ -19,13 +19,13 @@ class Application < ApplicationRecord
   # * +:other+ - Student is LGBT or prefer not to say
   enum gender: [:male, :female, :other]
 
-  # Enum for the application state.
+  # Enum for the application status.
   #
   # * +:applying+ -  Student is still applying.
   # * +:submitted+ -  Application has been submitted.
   # * +:paid+ -  Application payment has been processed successfully.
   # * +:completed - Application has been completed
-  enum state: [:applying, :submitted, :paid, :completed]
+  enum status: [:submitting, :submitted, :paid, :payment_failed, :completed]
 
   # Enum for the payment type.
   #
@@ -70,6 +70,7 @@ class Application < ApplicationRecord
   has_many :jobs
   has_one :reference
   has_many :course_selections
+  has_many :payments
 
   # Checks if the application is owned by this student
   #
@@ -146,13 +147,20 @@ class Application < ApplicationRecord
 
   # Calculates the student's application fee.
   #
-  # Returns - BigDecimal contaning application fee amount.
+  # Returns - the application fee amount in pence.
   def calculate_fee
     if self.course_selections.size > 1
-      BigDecimal.new MULTIPLE_COURSE_FEE
+      MULTIPLE_COURSE_FEE
     else
-      BigDecimal.new SINGLE_COURSE_FEE
+      SINGLE_COURSE_FEE
     end
+  end
+
+  # Calculates the student's application fee.
+  #
+  # Returns - the application fee amount in pounds.
+  def calculate_fee_pounds
+    calculate_fee / 100
   end
 
   # Finds all of this applications course selections.
@@ -203,7 +211,7 @@ class Application < ApplicationRecord
   # Returns - boolean indicating if the stage was saved.
   def save_profile(params)
     self.attributes = params
-    self.state = :applying
+    self.status = :submitting
     if self.valid?
       self.completed_profile = true
       self.save
@@ -289,7 +297,7 @@ class Application < ApplicationRecord
 
     stages = self.incomplete_stages
     if stages.empty?
-      self.state = :submitted
+      self.status = :submitted
       self.submitted_date = DateTime.now
       self.save
       true

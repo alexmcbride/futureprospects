@@ -23,4 +23,8 @@ $(function () {
     $('.datepicker-field').datepicker({
         format: 'dd/mm/yyyy'
     });
+
+    $('.datepicker-expiry-field').datepicker({
+        format: 'mm/yyyy'
+    });
 });

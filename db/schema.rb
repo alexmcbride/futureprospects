@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170421172351) do
+ActiveRecord::Schema.define(version: 20170423161638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20170421172351) do
     t.string   "correspondence_address_2"
     t.string   "correspondence_postcode"
     t.string   "correspondence_country"
-    t.integer  "state"
+    t.integer  "status"
     t.datetime "submitted_date"
     t.decimal  "payment_amount",              precision: 4, scale: 2
     t.integer  "payment_type"
@@ -125,6 +125,17 @@ ActiveRecord::Schema.define(version: 20170421172351) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.index ["application_id"], name: "index_jobs_on_application_id", using: :btree
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.integer  "application_id"
+    t.integer  "type"
+    t.integer  "amount"
+    t.integer  "status"
+    t.string   "last_four_digits"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["application_id"], name: "index_payments_on_application_id", using: :btree
   end
 
   create_table "qualifications", force: :cascade do |t|

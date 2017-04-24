@@ -47,4 +47,6 @@ caching?
 
 create staff
 
-remove verify_authorized once permissions done
+remove pundit verify_authorized from global staff controller once permissions done
+
+add save and continue to qualifications, even if in sub-page, makes sense from flow pov.

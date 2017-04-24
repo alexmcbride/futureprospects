@@ -234,7 +234,7 @@ class NewApplicationsController < ApplicationController
     respond_to do |format|
       confirmed = !params[:confirm].nil?
       if @application.save_submit confirmed
-        format.html { redirect_to root_path, notice: 'Submitted application' }
+        format.html { redirect_to payments_path, notice: 'Submitted application' }
       else
         format.html { render :submit }
       end

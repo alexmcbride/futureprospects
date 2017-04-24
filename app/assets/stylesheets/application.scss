@@ -42,6 +42,12 @@ footer {
   padding-bottom: 0;
 }
 
+.vcenter {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+}
+
 .table-striped > tbody > tr:nth-child(odd) > td,
 .table-striped > tbody > tr:nth-child(odd) > th {
   background-color: #ecf0f1;
@@ -345,5 +351,31 @@ li.home-category-item {
   }
   .form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
     display: none;
+  }
+}
+
+.home-stage-item {
+  @extend .list-group-item;
+  @extend .text-right;
+  border: 1px solid #c0c0c0;
+}
+
+.home-stage-item-active {
+  @extend .home-stage-item;
+  font-size: 16pt;
+  background-color: #18BC9C;
+  color: white;
+}
+
+.home-stage-panel {
+  @extend .panel;
+  @extend .panel-default;
+  border: 1px solid #c0c0c0;
+
+  input[type=submit], a {
+    @extend .btn;
+    @extend .btn-success;
+    width: 30%;
+    margin-top: 16px;
   }
 }

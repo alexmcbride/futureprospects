@@ -1,22 +1,31 @@
 class PaymentsController < ApplicationController
   before_action :authenticate_student!
-  #before_action :set_payment, only: [:show, :edit, :update, :destroy]
-  before_action :set_application, only: [:index, :new, :create]
+  before_action :set_payment, only: [:confirmation]#, :edit, :update, :destroy]
+  before_action :set_application, only: [:check, :new, :create]
 
   # GET /payments
   def index
+
   end
 
-  # POST / payments
-  def index_continue
+  # GET /payments/:id
+  def show
+  end
+
+  # GET /payments/check
+  def check
+
+  end
+
+  # POST /payments/check
+  def check_continue
     # We store the current payment type in the session.
     session[:payment_type] = params[:payment_type]
     redirect_to new_payment_path
   end
 
-  # GET /payments/1
-  # GET /payments/1.json
-  def show
+  # GET /payments/1/confirmation
+  def confirmation
   end
 
   # GET /payments/new
@@ -29,40 +38,15 @@ class PaymentsController < ApplicationController
   end
 
   # POST /payments
-  # POST /payments.json
   def create
     @payment = Payment.new(payment_params)
     @payment.application = @application
     respond_to do |format|
       if @payment.authorize
-        format.html { redirect_to @payment, notice: 'Payment was successfully authorized.' }
+        format.html { redirect_to payment_confirmation_path(@payment), notice: 'Payment was successfully authorized.' }
       else
         format.html { render :new }
       end
-    end
-  end
-
-  # PATCH/PUT /payments/1
-  # PATCH/PUT /payments/1.json
-  def update
-    respond_to do |format|
-      if @payment.update(payment_params)
-        format.html { redirect_to @payment, notice: 'Payment was successfully updated.' }
-        format.json { render :show, status: :ok, location: @payment }
-      else
-        format.html { render :edit }
-        format.json { render json: @payment.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /payments/1
-  # DELETE /payments/1.json
-  def destroy
-    @payment.destroy
-    respond_to do |format|
-      format.html { redirect_to payments_url, notice: 'Payment was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

@@ -207,6 +207,18 @@ class Application < ApplicationRecord
     Payment.has_failed_payment? self
   end
 
+  # Has a failed payment more than 7 days old.
+  #
+  # Returns - true if a payment has expired, failed otherwise.
+  def has_expired_payment?
+    self.payments.each do |payment|
+      if payment.has_expired?
+        return true
+      end
+    end
+    false
+  end
+
   # Adds a course selection to the application.
   #
   # * +selection+ - The selection to add.

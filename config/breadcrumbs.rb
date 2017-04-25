@@ -129,6 +129,11 @@ crumb :payments_new do
   link 'Enter Details', new_payment_path
 end
 
+crumb :payment_authorized do |payment|
+  parent :root
+  link 'Payment Authorized', payment_path(payment)
+end
+
 crumb :staff_courses do
   parent :root
   link 'Courses', staff_courses_path

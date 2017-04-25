@@ -17,6 +17,7 @@ class Payment < ApplicationRecord
   validates :amount, presence: true, numericality: {greater_than: 0}
   validates :status, presence: true
   validates :last_four_digits, presence: true, length: {is: 4}
+  validates :card_holder, presence: true
 
   # Attributes for holding card data while payment is being authorized.
   attr_accessor :card_brand
@@ -35,6 +36,7 @@ class Payment < ApplicationRecord
     self.payment_type = :credit_card
     self.last_four_digits = credit_card.last_digits
     self.status = :authorized
+    self.card_holder = "#{card_first_name} #{card_last_name}"
 
     # Take payment
     card = credit_card
@@ -96,6 +98,13 @@ class Payment < ApplicationRecord
     StudentMailer.payment_received(application.student, self).deliver_later
   end
 
+  # Checks if this payment has expired, meaning that it is failed and more than 7 days old.
+  #
+  # Returns - true if the payment has expired, false otherwise.
+  def has_expired?
+    failed? && self.created_at < (DateTime.now - 7.days)
+  end
+
   private
     # Checks if the current card details are valid
     #
@@ -120,7 +129,7 @@ class Payment < ApplicationRecord
 
       response = Payment::gateway.purchase(self.amount, card)
 
-      puts 'Payment response: ' + response.inspect
+      # puts 'Payment response: ' + response.inspect
       unless response.success?
         self.errors.add(:credit_card, response.message) # Add auth failed message.
         return :auth_failed

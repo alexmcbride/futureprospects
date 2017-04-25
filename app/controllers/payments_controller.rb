@@ -1,7 +1,7 @@
 class PaymentsController < ApplicationController
   before_action :authenticate_student!
-  before_action :set_payment, only: [:confirmation, :check]#, :edit, :update, :destroy]
-  before_action :set_application, only: [:check, :new, :create]
+  before_action :set_payment, only: [:show]
+  before_action :set_application, only: [:choose_payment_method, :new, :create]
 
   # GET /payments
   def index
@@ -12,20 +12,26 @@ class PaymentsController < ApplicationController
   def show
   end
 
+  # GET  /payments/choose_payment_method
+  def choose_payment_method
+
+  end
+
+  # POST  /payments/choose_payment_method/continue
+  def choose_payment_method_continue
+
+  end
+
   # GET /payments/check
-  def check
+  def check_amount
 
   end
 
   # POST /payments/check
-  def check_continue
+  def check_amount_continue
     # We store the current payment type in the session.
     session[:payment_type] = params[:payment_type]
     redirect_to new_payment_path
-  end
-
-  # GET /payments/1/confirmation
-  def confirmation
   end
 
   # GET /payments/new

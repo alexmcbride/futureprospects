@@ -1,0 +1,43 @@
+<%
+  breadcrumb :payment_authorized, @payment
+  @title = 'Payment Authorized'
+%>
+
+<div class="row">
+  <div class="col-sm-3">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h3 class="no-top-margin">Payment Stages</h3>
+        <p><em>This section will walk you through the process of paying your application fee.</em></p>
+        <ul class="list-group">
+          <li class="list-group-item">Payment Method</li>
+          <li class="list-group-item">Enter Details</li>
+          <li class="list-group-item">Check Amount</li>
+          <li class="list-group-item active">
+          <div class="row">
+            <div class="col-xs-10">Confirmation</div>
+            <div class="col-xs-2 text-right"><%= icon('arrow-circle-right', class: 'app-arrow') %></div>
+          </div>
+        </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-9">
+    <h3 class="no-top-margin">Payment Received</h3>
+
+    <p class="text-darkish">The following payment has been successfully received:</p>
+
+    <%= render 'show', payment: @payment %>
+
+    <hr>
+
+    <div class="well">
+      <h3 class="no-top-margin">What Next?</h3>
+      <p>Your application will now be sent to your selected colleges in order for a decision to be made. You can check
+      back to keep track of how your application is doing.</p>
+    </div>
+  </div>
+</div>
+

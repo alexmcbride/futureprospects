@@ -5,9 +5,13 @@
 <p>Here is a list of all of the payments made by your account.</p>
 
 <% if @payments.any? %>
-  <% @payments.each do |payment| %>
-    <%= render 'show', payment: payment %>
-  <% end %>
+  <div class="list-group">
+    <% @payments.each do |payment| %>
+      <div class="list-group-item list-group-item-heading">
+        <%= render 'show', payment: payment %>
+      </div>
+    <% end %>
+  </div>
 <% else %>
   <p class="text-darkish"><em>There are no payments to display</em></p>
 <% end %>

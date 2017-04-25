@@ -6,6 +6,8 @@ class Student < User
   # Foreign Keys
   has_many :applications
 
+  attr_reader :current_application
+
   # Creates a new application, filled with some info we already know.
   #
   # Returns - a new application object, or nil if one already exists.
@@ -47,7 +49,7 @@ class Student < User
   # Returns - the student's current application, which is defined as any application active in the last year.
   def current_application
     # Get from last year for Postgresql
-    self.applications.where("created_at > CURRENT_DATE - INTERVAL '1 year'").first
+    @current_application ||= self.applications.where("created_at > CURRENT_DATE - INTERVAL '1 year'").first
   end
 
   # Checks if the student has a current application
@@ -55,5 +57,9 @@ class Student < User
   # Returns - a boolean indicating if the student has a current_application.
   def has_current_application?
     not self.current_application.nil?
+  end
+
+  def all_payments
+    Payment.joins(:application).where('applications.student_id=?', id).order(:created_at)
   end
 end

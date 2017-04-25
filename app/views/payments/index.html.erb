@@ -1,0 +1,13 @@
+<%
+  @title = 'Payments'
+%>
+
+<p>Here is a list of all of the payments made by your account.</p>
+
+<% if @payments.any? %>
+  <% @payments.each do |payment| %>
+    <%= render 'show', payment: payment %>
+  <% end %>
+<% else %>
+  <p class="text-darkish"><em>There are no payments to display</em></p>
+<% end %>

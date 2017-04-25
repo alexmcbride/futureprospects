@@ -105,6 +105,10 @@ class Payment < ApplicationRecord
     failed? && self.created_at < (DateTime.now - 7.days)
   end
 
+  def owner?(application)
+    application_id == application.id
+  end
+
   private
     # Checks if the current card details are valid
     #

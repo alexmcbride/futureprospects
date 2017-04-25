@@ -1,11 +1,11 @@
 class PaymentsController < ApplicationController
   before_action :authenticate_student!
-  before_action :set_payment, only: [:confirmation]#, :edit, :update, :destroy]
+  before_action :set_payment, only: [:confirmation, :check]#, :edit, :update, :destroy]
   before_action :set_application, only: [:check, :new, :create]
 
   # GET /payments
   def index
-
+    @payments = current_student.all_payments
   end
 
   # GET /payments/:id
@@ -58,6 +58,9 @@ class PaymentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_payment
       @payment = Payment.find(params[:id])
+      unless @payment.owner? current_student.current_application
+        user_not_authorized
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

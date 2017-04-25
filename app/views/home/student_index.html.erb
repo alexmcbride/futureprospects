@@ -51,7 +51,7 @@
           <p>We are waiting to receive a payment for the application fee of <strong><%= number_to_currency @application.calculate_fee_pounds, unit: '£' %></strong>. The payment needs to be made before your application can be processed. You can make a payment either with a debit or credit card, or through PayPal.</p>
           <p>Once payment is received your application will be sent to your chosen colleges to be considered.</p>
           <div class="text-right">
-            <%= link_to 'Make Payment', payments_choose_payment_method_path, role: 'button' %>
+            <%= link_to 'Make Payment', payment_method_path, role: 'button' %>
           </div>
         <% elsif status == :track_application %>
             <%= link_to 'Track Application', applications_continue_path(@application), role: 'button' %>

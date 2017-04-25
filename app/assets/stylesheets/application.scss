@@ -357,13 +357,12 @@ li.home-category-item {
 .home-stage-item {
   @extend .list-group-item;
   @extend .text-right;
-  border: 1px solid #c0c0c0;
 }
 
 .home-stage-item-active {
   @extend .home-stage-item;
+  @extend .active;
   font-size: 16pt;
-  background-color: #18BC9C;
   color: white;
 }
 
@@ -374,7 +373,7 @@ li.home-category-item {
 
   input[type=submit], a {
     @extend .btn;
-    @extend .btn-success;
+    @extend .btn-primary;
     width: 30%;
     margin-top: 16px;
   }

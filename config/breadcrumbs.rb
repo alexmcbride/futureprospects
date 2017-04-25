@@ -121,7 +121,7 @@ end
 
 crumb :payments do
   parent :root
-  link 'Payments', payments_path
+  link 'Payments', payment_method_path
 end
 
 crumb :payments_new do

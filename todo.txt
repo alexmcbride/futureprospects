@@ -13,8 +13,6 @@ guard against loading application methods (remove course etc.) after application
 
 when student makes change to associative-model page (e.g. education) then automatically mark stage as incomplete?
 
-add staff seed data
-
 improve layout of add course autocomplete
 
 switch navbar bg colour for staff members?

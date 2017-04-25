@@ -16,7 +16,7 @@ class Payment < ApplicationRecord
   validates :payment_type, presence: true
   validates :amount, presence: true, numericality: {greater_than: 0}
   validates :status, presence: true
-  validates :last_four_digits, presence: true, length: {is: 4}
+  validates :last_four_digits, presence: false
   validates :card_holder, presence: true
 
   # Attributes for holding card data while payment is being authorized.
@@ -31,25 +31,29 @@ class Payment < ApplicationRecord
   #
   # Returns - a boolean indicating if the payment was authorized.
   def authorize
-    # Set payment attributes.
+    # Set this model's attributes so it can be saved.
     self.amount = self.application.calculate_fee
     self.payment_type = :credit_card
     self.last_four_digits = credit_card.last_digits
-    self.status = :authorized
     self.card_holder = "#{card_first_name} #{card_last_name}"
+    self.status = :failed
 
-    # Take payment
+    # Take payment if card and model are valid.
     card = credit_card
     if card_valid?(card) and valid?
+      # Make payment
       result = authorize_payment card
-      if result == :payment_received
+
+      # Handle result.
+      if result == :already_paid
         self.errors.add(:payment, 'for this application has already been received.')
         return false
       elsif result == :auth_failed
-        self.status = :failed
-        save! validate: false
+        self.errors.add(:authentication, 'has failed for this payment.')
+        save!
         return false
       elsif result == :auth_success
+        self.status = :authorized
         save!
         send_payment_received_email
         return true
@@ -75,6 +79,15 @@ class Payment < ApplicationRecord
   # Returns - a boolean indicating if a failed payment exists.
   def self.has_failed_payment?(application)
     application.payments.where(status: :failed).any?
+  end
+
+  # Checks if a payment_type is valid.
+  #
+  # * +payment_type+ - the payment type to test
+  #
+  # Returns - true if the payment type is valid.
+  def self.valid_payment_type?(payment_type)
+    %w(credit_card paypal).include? payment_type
   end
 
   # Finds an authorized payment
@@ -128,14 +141,13 @@ class Payment < ApplicationRecord
     def authorize_payment(card)
       # Check if this application has already been paid for (just to be safe).
       if Payment::has_paid? application
-        return :payment_received
+        return :already_paid
       end
 
       response = Payment::gateway.purchase(self.amount, card)
 
       # puts 'Payment response: ' + response.inspect
       unless response.success?
-        self.errors.add(:credit_card, response.message) # Add auth failed message.
         return :auth_failed
       end
 

@@ -1,8 +1,10 @@
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 Rails.application.routes.draw do
-  get 'payments/choose_payment_method', to: 'payments#choose_payment_method', as: 'payments_choose_payment_method'
-  post 'payments/choose_payment_method/continue', to: 'payments#choose_payment_method_continue', as: 'payments_choose_payment_method_continue'
+  get 'payments/payment_method', to: 'payments#payment_method', as: 'payment_method'
+  post 'payments/payment_method/continue', to: 'payments#payment_method_continue', as: 'payment_method_continue'
+  get 'payments/amount', to: 'payments#amount', as: 'payment_amount'
+  post 'payments/amount/continue', to: 'payments#amount_continue', as: 'payment_amount_continue'
   resources :payments
 
 

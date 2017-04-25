@@ -29,6 +29,7 @@ def student(tokens, schools, jobs, refs)
   # Student
   student = 'student'
   puts student + ' = Student.new'
+  full_name = "#{tokens[1]} #{tokens[2]}"
   puts student + ".first_name = '#{tokens[1]}'"
   puts student + ".family_name = '#{tokens[2]}'"
   puts student + ".email = '#{tokens[14]}'"
@@ -72,7 +73,7 @@ def student(tokens, schools, jobs, refs)
     puts app + ".correspondence_postcode = '#{tokens[23]} 2GR'"
     puts app + ".correspondence_country = '#{tokens[21]}'"
   end
-  puts app + ".state = :completed"
+  puts app + ".status = :submitted"
   puts app + '.completed_intro = true'
   puts app + '.completed_profile = true'
   puts app + '.completed_education = true'
@@ -166,6 +167,17 @@ def student(tokens, schools, jobs, refs)
     puts ''
     $courses += 1
   end
+
+  # Payments
+  amount = num > 1 ? 2000 : 1000
+  payments = ["Payment.create! application: #{app}, payment_type: :credit_card, amount: #{amount}, status: :failed, card_holder: '#{full_name}', last_four_digits: '0004'",
+              "Payment.create! application: #{app}, payment_type: :paypal, amount: #{amount}, status: :failed, card_holder: '#{full_name}'",
+              "Payment.create! application: #{app}, payment_type: :credit_card, amount: #{amount}, status: :failed, card_holder: '#{full_name}', last_four_digits: '0004'",
+              "Payment.create! application: #{app}, payment_type: :paypal, amount: #{amount}, status: :authorized, card_holder: '#{full_name}'"]
+  payments.sample(rand(0..4)).each do |payment|
+    puts payment
+  end
+  puts ''
 
   $counter += 1
 end

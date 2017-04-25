@@ -79,7 +79,7 @@
               <div class="col-xs-4 text-right">
                 <strong>
                   <%= pluralize @application.available_courses, 'course' %> left &mdash;
-                  <%= number_to_currency@application.calculate_fee, unit: '£' %> fee
+                  <%= number_to_currency @application.calculate_fee_pounds, unit: '£' %> fee
                 </strong>
               </div>
             </div>

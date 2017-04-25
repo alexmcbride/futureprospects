@@ -1,6 +1,8 @@
 <%= form_for(payment, url: payments_path, method: :post) do |f| %>
   <%= form_errors payment %>
 
+  <%= f.hidden_field :payment_type %>
+
   <div class="form-group">
     <%= f.label :card_brand, 'Card Type' %>
     <%= f.select :card_brand, card_options(@payment), {}, class: 'form-control' %>

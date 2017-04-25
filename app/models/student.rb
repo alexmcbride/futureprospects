@@ -59,6 +59,9 @@ class Student < User
     not self.current_application.nil?
   end
 
+  # Gets all payments made by this student.
+  #
+  # Returns - an ActiveRecord::Relation containing the payment objects.
   def all_payments
     Payment.joins(:application).where('applications.student_id=?', id).order(:created_at)
   end

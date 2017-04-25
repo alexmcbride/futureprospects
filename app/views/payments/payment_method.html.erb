@@ -17,7 +17,6 @@
             </div>
           </li>
           <li class="list-group-item">Enter Details</li>
-          <li class="list-group-item">Check Amount</li>
           <li class="list-group-item">Confirmation</li>
         </ul>
       </div>
@@ -26,24 +25,27 @@
 
   <div class="col-sm-9">
     <h3 class="no-top-margin">Choose Payment Method</h3>
-
-    <p>Before the application can be considered, a payment must be received for the following amount:</p>
-
+    <p>Before the application can be considered, a payment must be received for the following:</p>
     <p><strong>Amount: <%= number_to_currency @application.calculate_fee_pounds, unit: '£' %></strong></p>
-
-    <p>You are being charged for these <%= pluralize @application.course_selections_count, 'course' %>:</p>
+    <p>You are being charged for <%= pluralize @application.course_selections_count, 'course' %>:</p>
 
     <ol>
       <% @application.course_selections.each do |selection| %>
-          <li><strong><%= selection.course.title %></strong> at <%= selection.course.college.name %></li>
+        <li><%= selection.course.title %></li>
       <% end %>
     </ol>
 
-    <%= form_tag payments_choose_payment_method_continue_path, method: :post do %>
+    <hr>
+
+    <%= form_tag payment_method_continue_path, method: :post do %>
       <p>Please choose your prefer payment method.</p>
 
       <div class="form-group">
-        <% options = options_for_select(Payment.payment_types.map {|name, value| [name.humanize, value]}) %>
+        <%
+          options = '<option disabled="disabled" selected="selected">-- Choose --</option>'.html_safe +
+                    '<option value="credit_card">Credit/Debit Card</option>'.html_safe +
+                    '<option value="paypal">PayPal</option>'.html_safe
+        %>
         <%= select_tag :payment_type, options, {class: 'form-control'} %>
       </div>
 

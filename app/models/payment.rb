@@ -6,14 +6,14 @@ class Payment < ApplicationRecord
 
   # Enums
   enum status: [:authorized, :failed]
-  enum type: [:credit_card, :paypal]
+  enum payment_type: [:credit_card, :paypal]
   enum card_brands: [:visa, :mastercard]
 
   # Relations
   belongs_to :application
 
   # Validators
-  validates :type, presence: true
+  validates :payment_type, presence: true
   validates :amount, presence: true, numericality: {greater_than: 0}
   validates :status, presence: true
   validates :last_four_digits, presence: true, length: {is: 4}
@@ -32,18 +32,29 @@ class Payment < ApplicationRecord
   def authorize
     # Set payment attributes.
     self.amount = self.application.calculate_fee
-    self.type = :credit_card
+    self.payment_type = :credit_card
     self.last_four_digits = credit_card.last_digits
     self.status = :authorized
 
     # Take payment
     card = credit_card
-    if card_valid?(card) and valid? and authorize_payment card
-      save! # We save payment whether it authorized or not.
-      return authorized? # Result auth result.
+    if card_valid?(card) and valid?
+      result = authorize_payment card
+      if result == :payment_received
+        self.errors.add(:payment, 'for this application has already been received.')
+        return false
+      elsif result == :auth_failed
+        self.status = :failed
+        save! validate: false
+        return false
+      elsif result == :auth_success
+        save!
+        send_payment_received_email
+        return true
+      end
     end
 
-    false # validation error or auth failed.
+    false # validation error
   end
 
   # Checks if the application has a successful payment
@@ -73,6 +84,18 @@ class Payment < ApplicationRecord
     application.payments.find_by_status(:authorized)
   end
 
+  # Gets the amount paid in pounds
+  #
+  # Returns - the amount in pounds.
+  def amount_pounds
+    amount / 100
+  end
+
+  # Sends a payment confirmation email to the student who made the payment.
+  def send_payment_received_email
+    StudentMailer.payment_received(application.student, self).deliver_later
+  end
+
   private
     # Checks if the current card details are valid
     #
@@ -88,21 +111,22 @@ class Payment < ApplicationRecord
 
     # Takes a payment using the card details.
     #
-    # Returns - a boolean indicating if the payment was authorized.
+    # Returns - true if the payment authorization was processed, false if payment has already been mad.e
     def authorize_payment(card)
       # Check if this application has already been paid for (just to be safe).
       if Payment::has_paid? application
-        errors.add(:payment, 'for this application has already been received.')
-        return false
+        return :payment_received
       end
 
       response = Payment::gateway.purchase(self.amount, card)
+
+      puts 'Payment response: ' + response.inspect
       unless response.success?
-        self.status = :failed
         self.errors.add(:credit_card, response.message) # Add auth failed message.
+        return :auth_failed
       end
 
-      true
+      :auth_success
     end
 
     # Creates a new CreditCard object from the options.
@@ -138,7 +162,7 @@ class Payment < ApplicationRecord
     #
     # Returns - a new GateWay object, in test mode.
     def self.gateway
-      ActiveMerchant::Billing::Base.mode = :test
+      ActiveMerchant::Billing::Base.mode = :test # sandbox mode
       ActiveMerchant::Billing::BraintreeGateway.new(
           :merchant_id => ENV['BRAINTREE_MERCHANT_ID'],
           :public_key  => ENV['BRAINTREE_PUBLIC_KEY'],

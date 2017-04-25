@@ -42,7 +42,7 @@
       <p>Please choose your prefer payment method.</p>
 
       <div class="form-group">
-        <% options = options_for_select(Payment.types.map {|name, value| [name.humanize, value]}) %>
+        <% options = options_for_select(Payment.payment_types.map {|name, value| [name.humanize, value]}) %>
         <%= select_tag :payment_type, options, {class: 'form-control'} %>
       </div>
 

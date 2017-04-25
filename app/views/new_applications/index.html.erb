@@ -22,7 +22,7 @@
           Single course:
         </div>
         <div class="col-xs-9">
-          <strong><%= number_to_currency Application::course_fee_pounds(:single), unit: '£' %></strong>
+          <strong><%= number_to_currency Application::courses_fee_pounds(:single), unit: '£' %></strong>
         </div>
       </div>
       <div class="row">
@@ -30,7 +30,7 @@
           Two or more courses:
         </div>
         <div class="col-xs-9">
-          <strong><%= number_to_currency Application::course_fee_pounds(:multiple), unit: '£' %></strong>
+          <strong><%= number_to_currency Application::courses_fee_pounds(:multiple), unit: '£' %></strong>
         </div>
       </div>
     </div>
@@ -39,7 +39,7 @@
     <h3>Decisions</h3>
     <p>Once submitted your application will be considered and, if successful, the colleges will make
       you an offer. You can then prioritise offers so as to select the college and course that's best
-      for you. Once submitted you can sign back in to the site to track you application.</p>
+      for you. Once submitted you can sign back in to the site to track your application.</p>
 
     <div class="text-right">
       <p class="text-darkish small">Continue to the next section when ready.</p>

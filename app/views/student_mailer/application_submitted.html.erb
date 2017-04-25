@@ -1,0 +1,21 @@
+<h1>Future Prospects - Application Submitted</h1>
+
+<p>Hello <%= @student.full_name %>,</p>
+
+<p>This email is to inform you that your application has been submitted. You have applied for the following
+  <%= pluralize @application.course_selections_count, 'course' %>:</p>
+
+<ul>
+  <% @application.course_selections.each do |selection| %>
+    <li><%= link_to selection.course.title, course_url(selection.course) %> &mdash; <%= selection.course.college.name %> </li>
+  <% end %>
+</ul>
+
+<p>An application fee of <strong><%= number_to_currency @application.calculate_fee_pounds, unit: '£' %></strong> must be paid before your application can be processed.</p>
+
+<p>In order to make this payment, please <%= link_to 'sign in', root_url %> to the Future Prospects site and follow the
+  Make Payment link.</p>
+
+<p>Sincerely,
+  <br><br>
+  Future Prospects</p>

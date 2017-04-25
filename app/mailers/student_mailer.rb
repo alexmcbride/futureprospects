@@ -9,4 +9,16 @@ class StudentMailer < ApplicationMailer
     @course = course
     mail(to: @student.email, subject: 'Future Prospects - Course Cancelled')
   end
+
+  def application_submitted(student, application)
+    @student = student
+    @application = application
+    mail(to: @student.email, subject: 'Future Prospects - Application Submitted')
+  end
+
+  def payment_received(student, payment)
+    @student = student
+    @payment = payment
+    mail(to: @student.email, subject: 'Future Prospects - Payment Received')
+  end
 end

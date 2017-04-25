@@ -1,6 +1,6 @@
 class AddCourseSelectionsCountToApplications < ActiveRecord::Migration[5.0]
   def up
-    add_column :applications, :course_selections_count, :integer
+    add_column :applications, :course_selections_count, :integer, :null => false, :default => 0
 
     Application.all.each do |app|
       app.course_selections_count = app.course_selections.count

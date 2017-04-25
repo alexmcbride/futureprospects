@@ -120,6 +120,13 @@ class Application < ApplicationRecord
     (stages.map { |k, v| k unless v }).compact
   end
 
+  # Finds all of this applications course selections.
+  #
+  # Returns - ActiveRecord::Relation with course selections.
+  def find_course_selections
+    CourseSelection.includes(:course).where application_id: self.id
+  end
+
   # Checks that all added schools have at least one qualification.
   #
   # Returns - true if the schools are valid.
@@ -152,7 +159,14 @@ class Application < ApplicationRecord
   #
   # Returns - the application fee amount in pence.
   def calculate_fee
-    Application::course_fee(course_selections_count > 1 ? :multiple : :single)
+    Application::courses_fee(course_selections_count > 1 ? :multiple : :single)
+  end
+
+  # Calculates the student's application fee.
+  #
+  # Returns - the application fee amount in pounds.
+  def calculate_fee_pounds
+    calculate_fee / PENCE_IN_POUND
   end
 
   # Gets the course fee for the submission type (e.g. :single or :multiple)
@@ -160,7 +174,7 @@ class Application < ApplicationRecord
   # * +type+ - :single or :multiple
   #
   # Returns - the course fee in pence.
-  def self.course_fee(type)
+  def self.courses_fee(type)
     if type == :single
       SINGLE_COURSE_FEE
     elsif type == :multiple
@@ -175,22 +189,8 @@ class Application < ApplicationRecord
   # * +type+ - :single or :multiple
   #
   # Returns - the course fee in pounds.
-  def self.course_fee_pounds(type)
-    course_fee(type) / PENCE_IN_POUND
-  end
-
-  # Calculates the student's application fee.
-  #
-  # Returns - the application fee amount in pounds.
-  def calculate_fee_pounds
-    calculate_fee / PENCE_IN_POUND
-  end
-
-  # Finds all of this applications course selections.
-  #
-  # Returns - ActiveRecord::Relation with course selections.
-  def find_course_selections
-    CourseSelection.includes(:course).where application_id: self.id
+  def self.courses_fee_pounds(type)
+    courses_fee(type) / PENCE_IN_POUND
   end
 
   # Checks if the application contains a successful payment.
@@ -337,10 +337,18 @@ class Application < ApplicationRecord
       self.status = :submitted
       self.submitted_date = DateTime.now
       self.save
+
+      send_application_submitted_email
+
       true
     else
       stages.each {|s| self.errors.add(s, 'section has not been completed')}
       false
     end
+  end
+
+  # Sends an application submitted email the student who submitted the application.
+  def send_application_submitted_email
+    StudentMailer.application_submitted(student, self).deliver_later
   end
 end

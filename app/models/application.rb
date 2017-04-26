@@ -193,16 +193,20 @@ class Application < ApplicationRecord
     courses_fee(type) / PENCE_IN_POUND
   end
 
-  # Has a failed payment more than 7 days old.
+  # Cancelled if no authorized and has failed payment over 7 days old.
   #
   # Returns - true if a payment has expired, failed otherwise.
-  def has_expired_payment?
+  def cancelled?
+    expired = false
     self.payments.each do |payment|
+      if payment.authorized?
+        return false # If a payment was authorized then it's not expired.
+      end
       if payment.has_expired?
-        return true
+        expired = true
       end
     end
-    false
+    expired
   end
 
   def expiry_time

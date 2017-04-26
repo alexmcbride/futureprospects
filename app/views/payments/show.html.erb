@@ -28,7 +28,54 @@
 
     <p class="text-darkish">The following payment has been successfully received:</p>
 
-    <%= render 'show', payment: @payment %>
+    <div class="row">
+      <div class="col-xs-3">
+        <strong>Status</strong>
+      </div>
+      <div class="col-xs-6">
+        <%= payment.status.humanize %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">
+        <strong>Amount</strong>
+      </div>
+      <div class="col-xs-6">
+        <%= number_to_currency payment.amount_pounds, unit: '£' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">
+        <strong>Payment Type</strong>
+      </div>
+      <div class="col-xs-6">
+        <%= payment.payment_type.humanize %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">
+        <strong>Payment Date</strong>
+      </div>
+      <div class="col-xs-6">
+        <%= format_date payment.created_at %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">
+        <strong>Card Holder</strong>
+      </div>
+      <div class="col-xs-6">
+        <%= payment.card_holder %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">
+        <strong>Card Number</strong>
+      </div>
+      <div class="col-xs-6">
+        ************<%= payment.last_four_digits %>
+      </div>
+    </div>
 
     <hr>
 

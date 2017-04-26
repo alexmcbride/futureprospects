@@ -55,6 +55,7 @@ class PaymentsController < ApplicationController
     # Sets the application for actions what need it.
     def set_application
       @application = current_student.current_application
+      user_not_authorized if @application.cancelled?
     end
 
     # Sets the payment and checks if the student has permission to view it.

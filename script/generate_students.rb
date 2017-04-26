@@ -169,11 +169,13 @@ def student(tokens, schools, jobs, refs)
   end
 
   # Payments
+  last_year = (DateTime.now - 6.months)..DateTime.now
+  dates = last_year.to_a.sample(4).sort
   amount = num > 1 ? 2000 : 1000
-  payments = ["Payment.create! application: #{app}, payment_type: :credit_card, amount: #{amount}, status: :failed, card_holder: '#{full_name}', last_four_digits: '0004'",
-              "Payment.create! application: #{app}, payment_type: :paypal, amount: #{amount}, status: :failed, card_holder: '#{full_name}'",
-              "Payment.create! application: #{app}, payment_type: :credit_card, amount: #{amount}, status: :failed, card_holder: '#{full_name}', last_four_digits: '0004'",
-              "Payment.create! application: #{app}, payment_type: :paypal, amount: #{amount}, status: :authorized, card_holder: '#{full_name}'"]
+  payments = ["Payment.create! application: #{app}, payment_type: :credit_card, amount: #{amount}, status: :failed, card_holder: '#{full_name}', last_four_digits: '0004', created_at: '#{dates[0]}', updated_at: '#{dates[0]}'",
+              "Payment.create! application: #{app}, payment_type: :paypal, amount: #{amount}, status: :failed, card_holder: '#{full_name}', created_at: '#{dates[1]}', updated_at: '#{dates[1]}'",
+              "Payment.create! application: #{app}, payment_type: :credit_card, amount: #{amount}, status: :failed, card_holder: '#{full_name}', last_four_digits: '0004', created_at: '#{dates[2]}', updated_at: '#{dates[2]}'",
+              "Payment.create! application: #{app}, payment_type: :paypal, amount: #{amount}, status: :authorized, card_holder: '#{full_name}', created_at: '#{dates[3]}', updated_at: '#{dates[3]}'"]
   payments.sample(rand(0..4)).each do |payment|
     puts payment
   end

@@ -249,7 +249,8 @@ class NewApplicationsController < ApplicationController
     # Sets current application object and checks if student is owner of application
     def set_application
       @application = (Application.all.find(params[:id]) or not_found)
-      @application.owned_by? current_student or user_not_authorized
+      user_not_authorized unless @application.owned_by? current_student
+      user_not_authorized if @application.cancelled?
     end
 
     # Sanitises submitted form parameters

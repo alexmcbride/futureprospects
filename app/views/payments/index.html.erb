@@ -11,6 +11,7 @@
       <thead>
         <tr>
           <th>Status</th>
+          <th>Type</th>
           <th>Amount</th>
           <th>Date</th>
           <th>Card Holder</th>
@@ -20,11 +21,12 @@
       <tbody>
         <% @payments.each do |payment| %>
           <tr>
-            <th><%= payment.status.humanize %></th>
-            <th><%= number_to_currency payment.amount_pounds, unit: '£' %></th>
-            <th><%= format_date payment.created_at %></th>
-            <th><%= payment.card_holder %></th>
-            <th>************<%= payment.last_four_digits %></th>
+            <td><%= payment.status.humanize %></td>
+            <td><%= payment.payment_type.humanize %></td>
+            <td><%= number_to_currency payment.amount_pounds, unit: '£' %></td>
+            <td><%= format_date payment.created_at %></td>
+            <td><%= payment.card_holder %></td>
+            <td><%= "************#{payment.last_four_digits}" if payment.credit_card? %></td>
           </tr>
         <% end %>
       </tbody>

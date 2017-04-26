@@ -43,7 +43,7 @@ class Payment < ApplicationRecord
     # Take payment if card and model are valid.
     card = credit_card
     if card_valid?(card) and valid?
-      # Make payment
+      # Take payment
       result = authorize_payment card
 
       # Handle result.
@@ -51,10 +51,14 @@ class Payment < ApplicationRecord
         self.errors.add(:payment, 'for this application has already been received.')
         return false
       elsif result == :auth_failed
-        handle_auth_failed
+        save! # We save payment even if failed.
+        self.errors.add(:authentication, 'failed for this payment.')
+        send_payment_failed_email
         return false
       elsif result == :auth_success
-        handle_auth_success
+        self.status = :authorized
+        save!
+        send_payment_received_email
         return true
       end
     end
@@ -112,18 +116,6 @@ class Payment < ApplicationRecord
   end
 
   private
-    def handle_auth_failed
-      save! # We save payment even if failed.
-      self.errors.add(:authentication, 'failed for this payment.')
-      send_payment_failed_email
-    end
-
-    def handle_auth_success
-      self.status = :authorized
-      save!
-      send_payment_received_email
-    end
-
     # Sends a payment confirmation email to the student who made the payment.
     def send_payment_received_email
       StudentMailer.payment_received(application.student, self).deliver_later
@@ -159,13 +151,7 @@ class Payment < ApplicationRecord
       end
 
       response = Payment::gateway.purchase(self.amount, card)
-
-      # puts 'Payment response: ' + response.inspect
-      unless response.success?
-        return :auth_failed
-      end
-
-      :auth_success
+      response.success? ? :auth_success : :auth_failed
     end
 
     # Creates a new CreditCard object from the options.

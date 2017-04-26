@@ -38,6 +38,8 @@ class Student < User
     elsif application.submitted?
       if application.has_expired_payment?
         :application_cancelled
+      elsif application.payments.count > 0
+        :make_repayment
       else
         :make_payment
       end

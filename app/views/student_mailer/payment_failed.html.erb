@@ -13,7 +13,7 @@
 <% end %>
 
 <p>Your application cannot be processed until this payment is received. You have
-  <strong><%= Payment::PAYMENT_EXPIRY_DAYS %> days</strong> to pay a successful payment.</p>
+  <strong><%= Payment::PAYMENT_EXPIRY_DAYS %> days</strong> to make a successful payment.</p>
 <p>This means we must receive a payment from you by <strong><%= format_date @payment.expiry_time %></strong>.</p>
 
 <p>In order to make a payment, please <%= link_to 'sign in', root_url %> to the Future Prospects site and use

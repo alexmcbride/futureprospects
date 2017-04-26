@@ -28,7 +28,7 @@ class Application < ApplicationRecord
   # * +:submitted+ -  Application has been submitted.
   # * +:paid+ -  Application payment has been processed successfully.
   # * +:completed - Application has been completed
-  enum status: [:submitting, :submitted, :paid, :payment_failed, :completed, :overdue]
+  enum status: [:submitting, :submitted, :paid, :payment_failed, :completed, :cancelled]
 
   # Enum for the payment type.
   #
@@ -193,20 +193,6 @@ class Application < ApplicationRecord
     courses_fee(type) / PENCE_IN_POUND
   end
 
-  # Checks if the application contains a successful payment.
-  #
-  # Returns: a boolean indicating if the payment was successful or not.
-  def has_successful_payment
-    Payment.has_paid? self
-  end
-
-  # Checks if the application contains a failed payment.
-  #
-  # Returns: a boolean indicating if a failed payment exists or not.
-  def has_failed_payment
-    Payment.has_failed_payment? self
-  end
-
   # Has a failed payment more than 7 days old.
   #
   # Returns - true if a payment has expired, failed otherwise.
@@ -217,6 +203,11 @@ class Application < ApplicationRecord
       end
     end
     false
+  end
+
+  def expiry_time
+    payment = Payment.where(status: :failed).order(:created_at).first
+    payment.expiry_time unless payment.nil?
   end
 
   # Adds a course selection to the application.
@@ -358,18 +349,6 @@ class Application < ApplicationRecord
     else
       stages.each {|s| self.errors.add(s, 'section has not been completed')}
       false
-    end
-  end
-
-  def expire_payments
-    # Check if member has paid since this task was queued.
-    unless self.overdue? or Payment.has_paid?(self)
-      payments = Payment.find_expired_payments self.id
-      payments.each do |payment|
-        self.status = :overdue
-        self.save!
-        StudentMailer.application_cancelled(self.student, payment)
-      end
     end
   end
 end

@@ -371,7 +371,7 @@ li.home-category-item {
   @extend .panel-default;
   border: 1px solid #c0c0c0;
 
-  input[type=submit], a {
+  input[type=submit], a.link-button {
     @extend .btn;
     @extend .btn-primary;
     width: 30%;

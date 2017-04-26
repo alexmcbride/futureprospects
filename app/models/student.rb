@@ -36,9 +36,11 @@ class Student < User
     elsif application.submitting?
       :continue_application
     elsif application.submitted?
-      :make_payment
-    elsif application.payment_failed?
-      :make_repayment
+      if application.has_expired_payment?
+        :application_cancelled
+      else
+        :make_payment
+      end
     elsif application.completed?
       :track_application
     end
@@ -63,6 +65,6 @@ class Student < User
   #
   # Returns - an ActiveRecord::Relation containing the payment objects.
   def all_payments
-    Payment.joins(:application).where('applications.student_id=?', id).order(:created_at)
+    Payment.joins(:application).where('applications.student_id=?', id)
   end
 end

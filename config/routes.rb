@@ -67,6 +67,8 @@ Rails.application.routes.draw do
   get 'applications/:id/submit', to: 'new_applications#submit', as: 'applications_submit'
   post 'applications/:id/submit', to: 'new_applications#submit_next', as: 'applications_submit_next'
 
+  get 'applications/:id/cancelled', to: 'new_applications#cancelled', as: 'application_cancelled'
+
   get 'courses/search', to: 'courses#search', as: 'courses_search'
 
   # Courses

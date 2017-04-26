@@ -241,6 +241,10 @@ class NewApplicationsController < ApplicationController
     end
   end
 
+  # GET /applications/:id/cancelled
+  def cancelled
+  end
+
   private
     # Sets current application object and checks if student is owner of application
     def set_application

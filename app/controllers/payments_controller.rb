@@ -2,10 +2,11 @@ class PaymentsController < ApplicationController
   before_action :authenticate_student!
   before_action :set_payment, only: [:show]
   before_action :set_application, only: [:payment_method, :new, :create]
+  before_action :check_for_expired_payments, only: [:payment_method, :new]
 
   # GET /payments
   def index
-    @payments = current_student.all_payments
+    @payments = current_student.all_payments.order(created_at: :desc)
   end
 
   # GET /payments/choose_payment_method
@@ -65,5 +66,11 @@ class PaymentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def payment_params
       params.require(:payment).permit(:payment_type, :card_brand, :card_number, :card_cvv, :card_expiry, :card_first_name, :card_last_name)
+    end
+
+    def check_for_expired_payments
+      if @application.has_expired_payment?
+        redirect_to root_path # Go back to route where there's a cancellation message.
+      end
     end
 end

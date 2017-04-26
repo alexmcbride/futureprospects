@@ -71,15 +71,6 @@ class Payment < ApplicationRecord
     application.payments.where(status: :authorized).any?
   end
 
-  # Checks if the application has a failed payment
-  #
-  # * +application+ - the application to check
-  #
-  # Returns - a boolean indicating if a failed payment exists.
-  def self.has_failed_payment?(application)
-    application.payments.where(status: :failed).any?
-  end
-
   # Checks if a payment_type is valid.
   #
   # * +payment_type+ - the payment type to test
@@ -89,7 +80,7 @@ class Payment < ApplicationRecord
     %w(credit_card paypal).include? payment_type
   end
 
-  # Finds an authorized payment
+  # Finds an authorized payment, there should only be one.
   #
   # * +application+ - the application to find the payment for.
   #
@@ -105,24 +96,15 @@ class Payment < ApplicationRecord
     amount / 100
   end
 
-  # Sends a payment confirmation email to the student who made the payment.
-  def send_payment_received_email
-    StudentMailer.payment_received(application.student, self).deliver_later
-  end
-
   # Checks if this payment has expired, meaning that it is failed and more than 7 days old.
   #
   # Returns - true if the payment has expired, false otherwise.
   def has_expired?
-    failed? && self.created_at < (DateTime.now -  PAYMENT_EXPIRY_DAYS.days)
+    failed? && self.created_at < (DateTime.now - PAYMENT_EXPIRY_DAYS.days)
   end
 
   def owner?(application)
     application_id == application.id
-  end
-
-  def self.find_expired_payments(application_id)
-    Payment.where(application_id: application_id).where(status: :failed).where("created_at < CURRENT_DATE - INTERVAL '1 hour'")
   end
 
   def expiry_time
@@ -131,17 +113,28 @@ class Payment < ApplicationRecord
 
   private
     def handle_auth_failed
-      self.errors.add(:authentication, 'has not been received for this payment.')
-      save! # We save payment even if failed, for background processing.
-
-      # Add background job to Resque, this expires unpaid payments after PAYMENT_EXPIRY_DAYS.
-      ExpirePaymentJob.set(wait: PAYMENT_EXPIRY_DAYS.days).perform_later(self.application_id)
+      save! # We save payment even if failed.
+      self.errors.add(:authentication, 'failed for this payment.')
+      send_payment_failed_email
     end
 
     def handle_auth_success
       self.status = :authorized
       save!
       send_payment_received_email
+    end
+
+    # Sends a payment confirmation email to the student who made the payment.
+    def send_payment_received_email
+      StudentMailer.payment_received(application.student, self).deliver_later
+    end
+
+    # Sends a payment failed email to the student who made the payment.
+    def send_payment_failed_email
+      # Check if we've already sent a failed payment email for this application.
+      if Payment.where(status: :failed).where(application_id: self.application_id).empty?
+        StudentMailer.payment_failed(application.student, self).deliver_later
+      end
     end
 
     # Checks if the current card details are valid

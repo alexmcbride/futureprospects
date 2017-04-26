@@ -1,5 +1,7 @@
 # Model class to represent a payment.
 class Payment < ApplicationRecord
+  PAYMENT_EXPIRY_DAYS = 7
+
   # Imports
   require 'active_merchant'
   require 'active_merchant/billing/rails'
@@ -49,13 +51,10 @@ class Payment < ApplicationRecord
         self.errors.add(:payment, 'for this application has already been received.')
         return false
       elsif result == :auth_failed
-        self.errors.add(:authentication, 'has failed for this payment.')
-        save!
+        handle_auth_failed
         return false
       elsif result == :auth_success
-        self.status = :authorized
-        save!
-        send_payment_received_email
+        handle_auth_success
         return true
       end
     end
@@ -115,14 +114,36 @@ class Payment < ApplicationRecord
   #
   # Returns - true if the payment has expired, false otherwise.
   def has_expired?
-    failed? && self.created_at < (DateTime.now - 7.days)
+    failed? && self.created_at < (DateTime.now -  PAYMENT_EXPIRY_DAYS.days)
   end
 
   def owner?(application)
     application_id == application.id
   end
 
+  def self.find_expired_payments(application_id)
+    Payment.where(application_id: application_id).where(status: :failed).where("created_at < CURRENT_DATE - INTERVAL '1 hour'")
+  end
+
+  def expiry_time
+    self.created_at + PAYMENT_EXPIRY_DAYS.days
+  end
+
   private
+    def handle_auth_failed
+      self.errors.add(:authentication, 'has not been received for this payment.')
+      save! # We save payment even if failed, for background processing.
+
+      # Add background job to Resque, this expires unpaid payments after PAYMENT_EXPIRY_DAYS.
+      ExpirePaymentJob.set(wait: PAYMENT_EXPIRY_DAYS.days).perform_later(self.application_id)
+    end
+
+    def handle_auth_success
+      self.status = :authorized
+      save!
+      send_payment_received_email
+    end
+
     # Checks if the current card details are valid
     #
     # Returns - a boolean indicating if the details are valid.

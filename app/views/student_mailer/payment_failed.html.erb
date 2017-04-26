@@ -1,0 +1,24 @@
+<h1>Future Prospects - Payment Failed</h1>
+
+<p><%= @student.full_name %>,</p>
+
+<p>This email is to inform you that we were unable to take a payment for the amount of
+  <strong><%= number_to_currency @payment.amount_pounds, unit: '£' %></strong> using the supplied payment details.</p>
+
+<% if @payment.credit_card? %>
+<ul>
+  <li>Card Holder: <%= @payment.card_holder %></li>
+  <li>Card Number: ************<%= @payment.last_four_digits %></li>
+</ul>
+<% end %>
+
+<p>Your application cannot be processed until this payment is received. You have
+  <strong><%= Payment::PAYMENT_EXPIRY_DAYS %> days</strong> to pay a successful payment.</p>
+<p>This means we must receive a payment from you by <strong><%= format_date @payment.expiry_time %></strong>.</p>
+
+<p>In order to make a payment, please <%= link_to 'sign in', root_url %> to the Future Prospects site and use
+  the make payment option.</p>
+
+<p>Sincerely,
+  <br><br>
+  Future Prospects</p>

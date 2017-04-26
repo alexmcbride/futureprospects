@@ -1,5 +1,8 @@
 # Class to represent student emails.
 class StudentMailer < ApplicationMailer
+  # Make application helpers available to mailers
+  add_template_helper(ApplicationHelper)
+
   # Sends the specified student a course cancelled email.
   #
   # * +student+ - the student to sent the email to.
@@ -20,5 +23,17 @@ class StudentMailer < ApplicationMailer
     @student = student
     @payment = payment
     mail(to: @student.email, subject: 'Future Prospects - Payment Received')
+  end
+
+  def payment_failed(student, payment)
+    @student = student
+    @payment = payment
+    mail(to: @student.email, subject: 'Future Prospects - Payment Failed')
+  end
+
+  def application_cancelled(student, payment)
+    @student = student
+    @payment = payment
+    mail(to: @student.email, subject: 'Future Prospects - Application Cancelled')
   end
 end

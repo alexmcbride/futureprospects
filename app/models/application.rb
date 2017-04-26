@@ -28,7 +28,7 @@ class Application < ApplicationRecord
   # * +:submitted+ -  Application has been submitted.
   # * +:paid+ -  Application payment has been processed successfully.
   # * +:completed - Application has been completed
-  enum status: [:submitting, :submitted, :paid, :payment_failed, :completed]
+  enum status: [:submitting, :submitted, :paid, :payment_failed, :completed, :overdue]
 
   # Enum for the payment type.
   #
@@ -350,7 +350,9 @@ class Application < ApplicationRecord
       self.submitted_date = DateTime.now
       self.save
 
-      send_application_submitted_email
+      # Send mass email for cancellation
+      # TODO: add this is background queue
+      StudentMailer.application_submitted(student, self).deliver_later
 
       true
     else
@@ -359,8 +361,15 @@ class Application < ApplicationRecord
     end
   end
 
-  # Sends an application submitted email the student who submitted the application.
-  def send_application_submitted_email
-    StudentMailer.application_submitted(student, self).deliver_later
+  def expire_payments
+    # Check if member has paid since this task was queued.
+    unless self.overdue? or Payment.has_paid?(self)
+      payments = Payment.find_expired_payments self.id
+      payments.each do |payment|
+        self.status = :overdue
+        self.save!
+        StudentMailer.application_cancelled(self.student, payment)
+      end
+    end
   end
 end

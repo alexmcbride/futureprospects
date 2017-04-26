@@ -1,6 +1,6 @@
 <h1>Future Prospects - Payment Received</h1>
 
-<p>Hello <%= @student.full_name %>,</p>
+<p><%= @student.full_name %>,</p>
 
 <p>This email is to inform you that the application fee of
   <strong><%= number_to_currency @payment.amount_pounds, unit: '£' %></strong> has been paid.</p>

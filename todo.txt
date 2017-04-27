@@ -32,3 +32,9 @@ add save and continue to qualifications, even if in sub-page, makes sense from f
 heroku scheduler - https://devcenter.heroku.com/articles/scheduler
 
 print payment receipt?
+
+heroku braintree env variables?
+
+test heroku application cancel with real email
+
+listen gem?

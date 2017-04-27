@@ -1,6 +1,8 @@
 # Model class to represent a payment.
 class Payment < ApplicationRecord
+  # Constants
   PAYMENT_EXPIRY_DAYS = 7
+  CURRENCY = 'GBP'
 
   # Imports
   require 'active_merchant'
@@ -19,47 +21,56 @@ class Payment < ApplicationRecord
   validates :amount, presence: true, numericality: {greater_than: 0}
   validates :status, presence: true
   validates :last_four_digits, presence: false
-  validates :card_holder, presence: true
+  validates :card_holder, presence: false
 
-  # Attributes for holding card data while payment is being authorized.
+  # Attributes for holding card or paypal data while payment is being authorized.
   attr_accessor :card_brand
   attr_accessor :card_number
   attr_accessor :card_cvv
   attr_accessor :card_expiry
   attr_accessor :card_first_name
   attr_accessor :card_last_name
+  attr_accessor :remote_ip
+  attr_accessor :paypal_payer_id
+  attr_accessor :paypal_token
 
   # Authorizes a payment using the card details.
   #
   # Returns - a boolean indicating if the payment was authorized.
   def authorize
-    # Set this model's attributes so it can be saved.
-    self.amount = self.application.calculate_fee
-    self.payment_type = :credit_card
-    self.last_four_digits = credit_card.last_digits
-    self.card_holder = "#{card_first_name} #{card_last_name}"
-    self.status = :failed
-
-    # Take payment if card and model are valid.
-    card = credit_card
-    if card_valid?(card) and valid?
-      # Take payment
-      result = authorize_payment card
-
-      # Handle result.
-      if result == :already_paid
-        self.errors.add(:payment, 'for this application has already been received.')
-        return false
-      elsif result == :auth_failed
-        handle_auth_failed
-        return false
-      elsif result == :auth_success
-        handle_auth_success
-        return true
-      end
+    if has_paid?
+      self.errors.add(:payment, 'for this application has already been received.')
+      return false
     end
 
-    false # validation error
+    # Set some general payment options.
+    self.amount = self.application.calculate_fee
+    self.status = :failed
+
+    # Take correct payment depending on type.
+    if self.payment_type == :credit_card
+      result = authorize_credit_card
+    else
+      result = authorize_paypal
+    end
+
+    # Check result.
+    if result == :auth_failed
+      handle_auth_failed
+    elsif result == :auth_success
+      handle_auth_success
+      return true
+    end
+    false
+  end
+
+  # Updates payment with info from PayPal token.
+  #
+  # * +token+ - the PayPal payment token.
+  def update_from_token(token)
+    details = PAYPAL_GATEWAY.details_for token
+    @paypal_payer_id = details.payer_id
+    @paypal_token = token
   end
 
   # Checks if the application has a successful payment
@@ -120,13 +131,61 @@ class Payment < ApplicationRecord
     end
   end
 
+  # Sets up a PayPal payment with the specified params
+  #
+  # * +amount+ - the amount to charge the student
+  # * +ip+ - the buyer's IP address
+  # * +return_url+ - the URL the buyer is returned to. This URL then needs to call authorize.
+  # * +cancel_url+ - the URL the buyer is returned to, if they cancel their PayPal purchase.
+  #
+  # Returns - the PayPal URL to direct to the buyer to.
+  def self.setup_paypal(amount, ip, return_url, cancel_url)
+    response = PAYPAL_GATEWAY.setup_purchase(amount,
+                                             ip: ip,
+                                             return_url: return_url,
+                                             cancel_return_url: cancel_url,
+                                             currency: Payment::CURRENCY,
+                                             allow_guest_checkout: true,
+                                             items: [{name: 'Future Prospects', description: 'Application fee', quantity: 1, amount: amount}])
+    PAYPAL_GATEWAY.redirect_url_for response.token
+  end
+
   private
+    # Authorizes a credit/debit card payment with BrainTree
+    def authorize_credit_card
+      # Set this model's attributes so it can be saved.
+      self.last_four_digits = credit_card.last_digits
+      self.card_holder = "#{card_first_name} #{card_last_name}"
+
+      # Take payment if card and model are valid.
+      card = credit_card
+      if card_valid?(card) and valid?
+        # Take payment
+        response = BRAINTREE_GATEWAY.purchase(self.amount, card)
+        puts "BrainTree Response: #{response.inspect}"
+        return response.success? ? :auth_success : :auth_failed
+      end
+
+      :payment_invalid
+    end
+
+    # Authorizes a payment with PayPal.
+    def authorize_paypal
+      if valid?
+        response = PAYPAL_GATEWAY.purchase(self.amount, currency: CURRENCY, ip: @remote_ip, token: @paypal_token, payer_id: @paypal_payer_id)
+        puts "PayPal Response: #{response.inspect}"
+        return response.success? ? :auth_success : :auth_failed
+      end
+
+      :payment_invalid
+    end
+
     # Called when authentication is successful.
     def handle_auth_success
       self.status = :authorized
       self.save!
       self.application.update_status :paid
-      self.send_payment_received_email
+      send_payment_received_email
     end
 
     # Called when authentication fails.
@@ -135,7 +194,7 @@ class Payment < ApplicationRecord
       self.save! # We save payment even if failed.
       self.application.update_status :payment_failed
       self.errors.add(:authentication, 'failed for this payment.')
-      self.send_payment_failed_email
+      send_payment_failed_email
     end
 
     # Sends a payment confirmation email to the student who made the payment.
@@ -158,19 +217,6 @@ class Payment < ApplicationRecord
         return false
       end
       true
-    end
-
-    # Takes a payment using the card details.
-    #
-    # Returns - true if the payment authorization was processed, false if payment has already been mad.e
-    def authorize_payment(card)
-      # Check if this application has already been paid for (just to be safe).
-      if has_paid?
-        return :already_paid
-      end
-
-      response = Payment::gateway.purchase(self.amount, card)
-      response.success? ? :auth_success : :auth_failed
     end
 
     # Creates a new CreditCard object from the options.
@@ -200,17 +246,5 @@ class Payment < ApplicationRecord
       rescue ArgumentError
         [0, 0]
       end
-    end
-
-    # Creates a new gateway object, for taking a payment
-    #
-    # Returns - a new GateWay object, in test mode.
-    def self.gateway
-      ActiveMerchant::Billing::Base.mode = :test # sandbox mode
-      ActiveMerchant::Billing::BraintreeGateway.new(
-          :merchant_id => ENV['BRAINTREE_MERCHANT_ID'],
-          :public_key  => ENV['BRAINTREE_PUBLIC_KEY'],
-          :private_key => ENV['BRAINTREE_PRIVATE_KEY']
-      )
     end
 end

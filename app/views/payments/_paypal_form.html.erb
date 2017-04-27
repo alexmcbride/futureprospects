@@ -1,0 +1,12 @@
+<%= form_for payment, url: payments_path, method: :post do |f| %>
+  <%= f.hidden_field :payment_type %>
+  <%= f.hidden_field :paypal_payer_id %>
+  <%= f.hidden_field :paypal_token %>
+
+  <%= form_errors payment %>
+
+  <div class="actions text-right">
+    <p class="text-darkish small">Complete the payment through PayPal.</p>
+    <%= f.submit 'Authorize Payment', class: 'next-button' %>
+  </div>
+<% end %>

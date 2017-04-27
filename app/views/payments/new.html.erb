@@ -31,13 +31,20 @@
   </div>
 
   <div class="col-sm-9">
-    <h3 class="no-top-margin">Enter Credit/Debit Card Details</h3>
-    <p>Amount to be paid: <strong><%= number_to_currency @application.calculate_fee_pounds, unit: '£' %></strong></p>
-    <p>Enter your credit or debit card details below.</p>
-
-    <hr>
-
-    <%= render 'form', payment: @payment %>
-
+    <% if @payment.paypal? %>
+      <!-- Show paypal form. -->
+      <h3 class="no-top-margin">Confirm PayPal Purchase</h3>
+      <p>Amount to be paid: <strong><%= number_to_currency @application.calculate_fee_pounds, unit: '£' %></strong></p>
+      <p>Continue to authorize your payment through the PayPal express provider.</p>
+      <hr>
+      <%= render 'paypal_form', payment: @payment %>
+    <% else %>
+        <!-- Show credit card form. -->
+      <h3 class="no-top-margin">Enter Credit/Debit Card Details</h3>
+      <p>Amount to be paid: <strong><%= number_to_currency @application.calculate_fee_pounds, unit: '£' %></strong></p>
+      <p>Enter your credit or debit card details below.</p>
+      <hr>
+      <%= render 'credit_card_form', payment: @payment %>
+    <% end %>
   </div>
 </div>

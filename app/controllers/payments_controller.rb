@@ -14,14 +14,18 @@ class PaymentsController < ApplicationController
 
   # POST  /payments/choose_payment_method/continue
   def payment_method_continue
-    # Store payment type in session if it exists.
-    if params[:payment_type].present? && Payment::valid_payment_type?(params[:payment_type])
-      session[:payment_type] = params[:payment_type].to_sym
+    # Store payment method in session
+    session[:payment_type] = params[:payment_type].to_sym if params[:payment_type]
+
+    if session[:payment_type] == :paypal
+      set_application
+      redirect_to Payment::setup_paypal @application.calculate_fee, request.remote_ip, new_payment_url, payment_method_url
+    elsif session[:payment_type] == :credit_card
       redirect_to new_payment_path
     else
-      # Show error.
-      flash[:notice] = 'You must choose a payment method.'
+      session.delete :payment_type
       set_application
+      flash[:notice] = 'You must choose a payment method.'
       render :payment_method
     end
   end
@@ -29,11 +33,17 @@ class PaymentsController < ApplicationController
   # GET /payments/new
   def new
     @payment = Payment.new payment_type: session[:payment_type]
+
+    # Paypal redirects us to this action with the token set.
+    if @payment.paypal?
+      @payment.update_from_token params[:token]
+    end
   end
 
   # POST /payments
   def create
     @payment = Payment.new(payment_params)
+    @payment.remote_ip = request.remote_ip # Needed for PayPal payment.
     @payment.application = @application
     respond_to do |format|
       if @payment.authorize
@@ -63,6 +73,6 @@ class PaymentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def payment_params
-      params.require(:payment).permit(:payment_type, :card_brand, :card_number, :card_cvv, :card_expiry, :card_first_name, :card_last_name)
+      params.require(:payment).permit(:payment_type, :card_brand, :card_number, :card_cvv, :card_expiry, :card_first_name, :card_last_name, :paypal_payer_id, :paypal_token)
     end
 end

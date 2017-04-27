@@ -5,22 +5,7 @@
 
 <div class="row">
   <div class="col-sm-3">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <h3 class="no-top-margin">Payment Stages</h3>
-        <p><em>This section will walk you through the process of paying your application fee.</em></p>
-        <ul class="list-group">
-          <li class="list-group-item active">
-            <div class="row">
-              <div class="col-xs-10">Payment Method</div>
-              <div class="col-xs-2 text-right"><%= icon('arrow-circle-right', class: 'app-arrow') %></div>
-            </div>
-          </li>
-          <li class="list-group-item">Enter Details</li>
-          <li class="list-group-item">Confirmation</li>
-        </ul>
-      </div>
-    </div>
+    <%= render 'stages_sidebar', stage: :payment_method %>
   </div>
 
   <div class="col-sm-9">
@@ -29,16 +14,16 @@
     <p><strong>Amount: <%= number_to_currency @application.calculate_fee_pounds, unit: '£' %></strong></p>
     <p>You are being charged for <%= pluralize @application.course_selections_count, 'course' %>:</p>
 
-    <ol>
+    <ul>
       <% @application.course_selections.each do |selection| %>
         <li><%= selection.course.title %></li>
       <% end %>
-    </ol>
+    </ul>
 
     <hr>
 
     <%= form_tag payment_method_continue_path, method: :post do %>
-      <p>Please choose your prefer payment method.</p>
+      <p>Please choose your preferred payment method.</p>
 
       <div class="form-group">
         <%

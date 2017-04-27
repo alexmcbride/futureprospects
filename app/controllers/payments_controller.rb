@@ -14,6 +14,10 @@ class PaymentsController < ApplicationController
   #
   # Lets student choose the payment method.
   def payment_method
+    # If redirected here with token, means user selected cancel option at PayPal.
+    if params.key? :token
+      flash[:notice] = 'PayPal payment cancelled'
+    end
   end
 
   # POST  /payments/payment_method/continue
@@ -24,7 +28,8 @@ class PaymentsController < ApplicationController
     session[:payment_type] = params[:payment_type].to_sym if params[:payment_type]
 
     if session[:payment_type] == :paypal
-      redirect_to Payment::setup_paypal @application.calculate_fee, request.remote_ip, new_payment_url, payment_method_url
+      payment = Payment.new application: @application
+      redirect_to payment.generate_paypal_url request.remote_ip, new_payment_url, payment_method_url
     elsif session[:payment_type] == :credit_card
       redirect_to new_payment_path
     else
@@ -35,14 +40,11 @@ class PaymentsController < ApplicationController
 
   # GET /payments/new
   #
-  # Displays new payment form, unless redirected from payment, in which case displayed the authorize paypal form.
+  # Displays new payment form, unless redirected from payment, in which case the authorize paypal form is displayed.
+  # When PayPal redirects us here its includes a token in the URL that we need later for authorization.
   def new
     @payment = Payment.new payment_type: session[:payment_type]
-
-    # Paypal redirects us to this action with the token set.
-    if @payment.paypal?
-      @payment.update_from_token params[:token]
-    end
+    @payment.update_from_paypal params[:token]
   end
 
   # POST /payments

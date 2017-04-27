@@ -5,22 +5,7 @@
 
 <div class="row">
   <div class="col-sm-3">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <h3 class="no-top-margin">Payment Stages</h3>
-        <p><em>This section will walk you through the process of paying your application fee.</em></p>
-        <ul class="list-group">
-          <li class="list-group-item">Payment Method</li>
-          <li class="list-group-item">Enter Details</li>
-          <li class="list-group-item active">
-          <div class="row">
-            <div class="col-xs-10">Confirmation</div>
-            <div class="col-xs-2 text-right"><%= icon('arrow-circle-right', class: 'app-arrow') %></div>
-          </div>
-        </li>
-        </ul>
-      </div>
-    </div>
+    <%= render 'stages_sidebar', stage: :show %>
   </div>
 
   <div class="col-sm-9">

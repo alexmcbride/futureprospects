@@ -9,6 +9,7 @@ class Payment < ApplicationRecord
   # Imports
   require 'active_merchant'
   require 'active_merchant/billing/rails'
+  include ActionView::Helpers::TextHelper
 
   # Enums
   enum status: [:authorized, :failed]
@@ -83,13 +84,43 @@ class Payment < ApplicationRecord
     false
   end
 
+  # Generates a PayPal payment URL with the specified params.
+  #
+  # * +amount+ - the amount to charge the student
+  # * +ip+ - the buyer's IP address
+  # * +return_url+ - the URL the buyer is returned to. This return action then needs to call authorize.
+  # * +cancel_url+ - the URL the buyer is returned to, if they cancel their PayPal purchase.
+  #
+  # Returns - the PayPal URL to direct to the buyer to.
+  def generate_paypal_url(ip, return_url, cancel_url)
+    amount = self.application.calculate_fee
+    courses = self.application.course_selections_count
+
+    items = {name: 'Future Prospects',
+             description: "Application fee (#{pluralize courses, 'course'})",
+             quantity: 1,
+             amount: amount}
+
+    options = {ip: ip,
+               return_url: return_url,
+               cancel_return_url: cancel_url,
+               currency: Payment::CURRENCY,
+               allow_guest_checkout: true,
+               items: [items]}
+
+    response = PAYPAL_GATEWAY.setup_purchase(amount, options)
+    PAYPAL_GATEWAY.redirect_url_for response.token
+  end
+
   # Updates payment with info from PayPal token.
   #
   # * +token+ - the token given to us by PayPal.
-  def update_from_token(token)
-    details = PAYPAL_GATEWAY.details_for token
-    @paypal_payer_id = details.payer_id
-    @paypal_token = token
+  def update_from_paypal(token)
+    if self.paypal?
+      details = PAYPAL_GATEWAY.details_for token
+      @paypal_payer_id = details.payer_id
+      @paypal_token = token
+    end
   end
 
   # Checks if the application has a successful payment
@@ -144,25 +175,6 @@ class Payment < ApplicationRecord
       application.cancel
       StudentMailer.application_cancelled(application.student, application)
     end
-  end
-
-  # Sets up a PayPal payment with the specified params
-  #
-  # * +amount+ - the amount to charge the student
-  # * +ip+ - the buyer's IP address
-  # * +return_url+ - the URL the buyer is returned to. This URL then needs to call authorize.
-  # * +cancel_url+ - the URL the buyer is returned to, if they cancel their PayPal purchase.
-  #
-  # Returns - the PayPal URL to direct to the buyer to.
-  def self.setup_paypal(amount, ip, return_url, cancel_url)
-    response = PAYPAL_GATEWAY.setup_purchase(amount,
-                                             ip: ip,
-                                             return_url: return_url,
-                                             cancel_return_url: cancel_url,
-                                             currency: Payment::CURRENCY,
-                                             allow_guest_checkout: true,
-                                             items: [{name: 'Future Prospects', description: 'Application fee', quantity: 1, amount: amount}])
-    PAYPAL_GATEWAY.redirect_url_for response.token
   end
 
   private

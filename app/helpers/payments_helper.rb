@@ -21,4 +21,23 @@ module PaymentsHelper
     options = options_for_select(Payment::card_brands.map {|k, v| [k.humanize, card_values(k)] }, payment.card_brand)
     "<option disabled=\"disabled\"#{ 'selected="selected"' unless payment.card_brand}>-- Choose --</option>".html_safe + options
   end
+
+  def stage_item(value, selected=false)
+    if selected
+      content_tag(:li, class: 'list-group-item active') do
+        concat(content_tag(:div, class: 'row') do
+          concat(content_tag(:div, class: 'col-xs-10') do
+            concat(value)
+          end)
+          concat(content_tag(:div, class: 'col-xs-2 text-right') do
+            concat(icon('arrow-circle-right', class: 'app-arrow'))
+          end)
+        end)
+      end
+    else
+      content_tag(:li, class: 'list-group-item') do
+        concat(value)
+      end
+    end
+  end
 end

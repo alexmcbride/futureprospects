@@ -176,9 +176,16 @@ def student(tokens, schools, jobs, refs)
               "Payment.create! application: #{app}, payment_type: :paypal, amount: #{amount}, status: :failed, card_holder: '#{full_name}', created_at: '#{dates[1]}', updated_at: '#{dates[1]}'",
               "Payment.create! application: #{app}, payment_type: :credit_card, amount: #{amount}, status: :failed, card_holder: '#{full_name}', last_four_digits: '0004', created_at: '#{dates[2]}', updated_at: '#{dates[2]}'",
               "Payment.create! application: #{app}, payment_type: :paypal, amount: #{amount}, status: :authorized, card_holder: '#{full_name}', created_at: '#{dates[3]}', updated_at: '#{dates[3]}'"]
+  puts 'auth = :payment_failed'
   payments.sample(rand(0..4)).each do |payment|
+    if payment == payments.last
+      puts 'auth = :paid'
+    end
     puts payment
   end
+  puts ''
+  puts 'app.status = auth'
+  puts 'app.save!'
   puts ''
 
   $counter += 1

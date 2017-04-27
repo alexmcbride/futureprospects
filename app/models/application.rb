@@ -16,25 +16,10 @@ class Application < ApplicationRecord
   PENCE_IN_POUND = 100
 
   # Enums for student gender.
-  #
-  # * +:male+ - Student is male
-  # * +:female+ - Student is female
-  # * +:other+ - Student is LGBT or prefer not to say
   enum gender: [:male, :female, :other]
 
   # Enum for the application status.
-  #
-  # * +:applying+ -  Student is still applying.
-  # * +:submitted+ -  Application has been submitted.
-  # * +:paid+ -  Application payment has been processed successfully.
-  # * +:completed - Application has been completed
   enum status: [:submitting, :submitted, :paid, :payment_failed, :completed, :cancelled]
-
-  # Enum for the payment type.
-  #
-  # * +:credit_card+ -  Paid by credit card
-  # * +:paypal+ -  Paid by PayPal
-  enum payment_type: [:credit_card, :paypal]
 
   # Validators
   validates :title, presence: true, length: { maximum: 35 }
@@ -60,9 +45,6 @@ class Application < ApplicationRecord
   validates :correspondence_country, presence: false, length: { maximum: 35 }
   validates :status, presence: true
   validates :submitted_date, presence: false
-  validates :payment_amount, presence: false
-  validates :payment_type, presence: false
-  validates :payment_date, presence: false
 
   # Validations shared between application and student.
   include StudentValidator
@@ -75,6 +57,24 @@ class Application < ApplicationRecord
   has_many :course_selections
   has_many :payments
 
+  # Creates a new application based on existing student.
+  #
+  # * +student+ - the existing student.
+  #
+  # Returns - the new application.
+  def self.create_for_student(student)
+    application = Application.new
+    application.email = student.email
+    application.first_name = student.first_name
+    application.family_name = student.family_name
+    application.scottish_candidate_number = student.scottish_candidate_number
+    application.national_insurance_number = student.national_insurance_number
+    application.status = :submitting
+    application.student = student
+    application.save validate: false # Can't validate at this point
+    application
+  end
+
   # Checks if the application is owned by this student
   #
   # * +student+ - the student to check against.
@@ -82,20 +82,6 @@ class Application < ApplicationRecord
   # Returns - true if the application is owned by the student.
   def owned_by?(student)
     student.id == self.student_id
-  end
-
-  # Checks if the application is complete.
-  #
-  # Returns - true if all stages are complete.
-  def complete?
-    self.incomplete_stages.empty?
-  end
-
-  # Checks if the application is incomplete.
-  #
-  # Returns - true if all stages are incomplete.
-  def incomplete?
-    not complete?
   end
 
   # Gets a symbol indicating the first uncompleted stage of the application.
@@ -193,25 +179,26 @@ class Application < ApplicationRecord
     courses_fee(type) / PENCE_IN_POUND
   end
 
-  # Cancelled if no authorized and has failed payment over 7 days old.
+  # Gets the expiry time of the first payment made on this application.
   #
-  # Returns - true if a payment has expired, failed otherwise.
-  def cancelled?
-    expired = false
-    self.payments.each do |payment|
-      if payment.authorized?
-        return false # If a payment was authorized then it's not expired.
-      end
-      if payment.has_expired?
-        expired = true
-      end
-    end
-    expired
-  end
-
+  # Returns - the expiry datetime, or nil if there are no failed payments.
   def expiry_time
     payment = Payment.where(status: :failed).order(:created_at).first
     payment.expiry_time unless payment.nil?
+  end
+
+  # Cancels this application by setting status to :cancelled.
+  def cancel
+    self.status = :cancelled
+    self.save!
+  end
+
+  # Updates the status and saves the application.
+  #
+  # * +status+ - the new status to set.
+  def update_status(status)
+    self.status = status
+    self.save!
   end
 
   # Adds a course selection to the application.
@@ -346,7 +333,7 @@ class Application < ApplicationRecord
       self.save
 
       # Send mass email for cancellation
-      # TODO: add this is background queue
+      # TODO: add this is background queue?
       StudentMailer.application_submitted(student, self).deliver_later
 
       true

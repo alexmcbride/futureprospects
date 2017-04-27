@@ -13,23 +13,7 @@ guard against loading application methods (remove course etc.) after application
 
 when student makes change to associative-model page (e.g. education) then automatically mark stage as incomplete?
 
-improve layout of add course autocomplete
-
 switch navbar bg colour for staff members?
-
-markdown preview?
-
-apply for course
-
-when change status, do the right thing... e.g. if cancelled, email students.
-
-staff members need their own nav menu, it's too confusing otherwise.
-
-use bullet to optimize database queries: https://github.com/flyerhzm/bullet
-
-look to reducing amount of stuff selected from DB, for instance display all colleges list, only need college name and id, not everything...
-
-Images from AWS have weird alt text?
 
 application stages not links until stage marked as complete
 
@@ -41,10 +25,10 @@ add college new, destroy safeguards
 
 do we need app intro? make this the home page? that way we have more info to put on home.
 
-caching?
-
-create staff
-
 remove pundit verify_authorized from global staff controller once permissions done
 
 add save and continue to qualifications, even if in sub-page, makes sense from flow pov.
+
+heroku scheduler - https://devcenter.heroku.com/articles/scheduler
+
+print payment receipt?

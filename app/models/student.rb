@@ -13,38 +13,7 @@ class Student < User
   # Returns - a new application object, or nil if one already exists.
   def create_application
     unless self.has_current_application?
-      application = Application.new
-      application.email = self.email
-      application.first_name = self.first_name
-      application.family_name = self.family_name
-      application.scottish_candidate_number = self.scottish_candidate_number
-      application.national_insurance_number = self.national_insurance_number
-      application.status = :submitting
-      application.student = self
-      application.save validate: false # Can't validate at this point
-      application
-    end
-  end
-
-  # Gets next stage of the application process.
-  #
-  # Returns - a symbol indicating the next stage.
-  def application_status
-    application = current_application
-    if application.nil?
-      :create_application
-    elsif application.submitting?
-      :continue_application
-    elsif application.submitted?
-      if application.cancelled?
-        :application_cancelled
-      elsif application.payments.count > 0
-        :make_repayment
-      else
-        :make_payment
-      end
-    elsif application.completed?
-      :track_application
+      Application.create_for_student self
     end
   end
 

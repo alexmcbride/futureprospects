@@ -21,18 +21,18 @@
   <!-- Main Content -->
   <div class="col-md-9">
     <% if @search_term %>
-        <p class="text-right text-darkish">Search results for "<%= @search_term %>"</p>
+      <p class="text-right text-darkish">Search results for "<%= @search_term %>"</p>
     <% end %>
 
     <% if @courses.empty? %>
-        <p class="text-center text-warning"><em>There are no courses to display.</em></p>
+      <p class="text-center text-warning"><em>There are no courses to display.</em></p>
     <% else %>
       <div class="list-group">
         <% @courses.each do |course| %>
           <a href="<%= url_for(course) %>" class="course-item list-group-item">
             <div class="row">
               <div class="col-sm-2 col-xs-12">
-                <%= image_tag course.image.thumb, class: 'img-responsive course-image' %>
+                <%= image_tag course.image.thumb, class: 'img-responsive course-image', alt: course.title %>
               </div>
 
               <div class="col-sm-10 col-xs-12">

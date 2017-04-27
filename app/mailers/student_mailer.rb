@@ -31,9 +31,9 @@ class StudentMailer < ApplicationMailer
     mail(to: @student.email, subject: 'Future Prospects - Payment Failed')
   end
 
-  def application_cancelled(student, payment)
+  def application_cancelled(student, application)
     @student = student
-    @payment = payment
+    @application = application
     mail(to: @student.email, subject: 'Future Prospects - Application Cancelled')
   end
 end

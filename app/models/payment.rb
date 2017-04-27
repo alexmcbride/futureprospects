@@ -51,14 +51,10 @@ class Payment < ApplicationRecord
         self.errors.add(:payment, 'for this application has already been received.')
         return false
       elsif result == :auth_failed
-        save! # We save payment even if failed.
-        self.errors.add(:authentication, 'failed for this payment.')
-        send_payment_failed_email
+        handle_auth_failed
         return false
       elsif result == :auth_success
-        self.status = :authorized
-        save!
-        send_payment_received_email
+        handle_auth_success
         return true
       end
     end
@@ -71,8 +67,8 @@ class Payment < ApplicationRecord
   # * +application+ - the application to check
   #
   # Returns - a boolean indicating if a successful payment exists.
-  def self.has_paid?(application)
-    application.payments.where(status: :authorized).any?
+  def has_paid?
+    self.application.payments.where(status: :authorized).any?
   end
 
   # Checks if a payment_type is valid.
@@ -84,15 +80,6 @@ class Payment < ApplicationRecord
     %w(credit_card paypal).include? payment_type
   end
 
-  # Finds an authorized payment, there should only be one.
-  #
-  # * +application+ - the application to find the payment for.
-  #
-  # Returns - the payment, if it exists.
-  def find_authorized_payment(application)
-    application.payments.find_by_status(:authorized)
-  end
-
   # Gets the amount paid in pounds
   #
   # Returns - the amount in pounds.
@@ -100,22 +87,57 @@ class Payment < ApplicationRecord
     amount / 100
   end
 
-  # Checks if this payment has expired, meaning that it is failed and more than 7 days old.
+  # Checks if the specified application 'owns' this payment.
   #
-  # Returns - true if the payment has expired, false otherwise.
-  def has_expired?
-    failed? && self.created_at < (DateTime.now - PAYMENT_EXPIRY_DAYS.days)
-  end
-
+  # * +application+ - the application to check.
+  #
+  # Returns - true if the application owns it, otherwise false.
   def owner?(application)
     application_id == application.id
   end
 
+  # Gets when this payment will expire.
+  #
+  # Returns - the expiry datetime object.
   def expiry_time
     self.created_at + PAYMENT_EXPIRY_DAYS.days
   end
 
+  # Method called by rake task that cancels any applications with an outstanding payment over 7 days old. To run this
+  # you can do it manually `ruby bin\rake site_tasks:handle_failed_payments`, on Heroku it is run by the scheduler once
+  # every 24 hours. See for more details: https://devcenter.heroku.com/articles/scheduler
+  def self.handle_failed_payments
+    # Gets all applications (eager loading students), that are still sitting at submitted, and have at least one failed
+    # payment over 7 days old.
+    applications = Application.includes(:student)
+                       .where(status: :payment_failed)
+                       .where(id: Payment.where(status: :failed).where("created_at < CURRENT_DATE - INTERVAL '#{PAYMENT_EXPIRY_DAYS} days'"))
+
+    # Cancel application and emails student.
+    applications.each do |application|
+      application.cancel
+      StudentMailer.application_cancelled(application.student, application)
+    end
+  end
+
   private
+    # Called when authentication is successful.
+    def handle_auth_success
+      self.status = :authorized
+      self.save!
+      self.application.update_status :paid
+      self.send_payment_received_email
+    end
+
+    # Called when authentication fails.
+    def handle_auth_failed
+      self.status = :failed
+      self.save! # We save payment even if failed.
+      self.application.update_status :payment_failed
+      self.errors.add(:authentication, 'failed for this payment.')
+      self.send_payment_failed_email
+    end
+
     # Sends a payment confirmation email to the student who made the payment.
     def send_payment_received_email
       StudentMailer.payment_received(application.student, self).deliver_later
@@ -123,10 +145,7 @@ class Payment < ApplicationRecord
 
     # Sends a payment failed email to the student who made the payment.
     def send_payment_failed_email
-      # Check if we've already sent a failed payment email for this application.
-      if Payment.where(status: :failed).where(application_id: self.application_id).empty?
-        StudentMailer.payment_failed(application.student, self).deliver_later
-      end
+      StudentMailer.payment_failed(application.student, self).deliver_later
     end
 
     # Checks if the current card details are valid
@@ -146,7 +165,7 @@ class Payment < ApplicationRecord
     # Returns - true if the payment authorization was processed, false if payment has already been mad.e
     def authorize_payment(card)
       # Check if this application has already been paid for (just to be safe).
-      if Payment::has_paid? application
+      if has_paid?
         return :already_paid
       end
 

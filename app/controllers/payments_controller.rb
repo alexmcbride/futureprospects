@@ -10,9 +10,6 @@ class PaymentsController < ApplicationController
 
   # GET /payments/choose_payment_method
   def payment_method
-    if @application.cancelled?
-      redirect_to root_path # Go back to route where there's a cancellation message.
-    end
   end
 
   # POST  /payments/choose_payment_method/continue
@@ -52,7 +49,7 @@ class PaymentsController < ApplicationController
   end
 
   private
-    # Sets the application for actions what need it.
+    # Sets the application for actions what need it, unless the application is cancelled.
     def set_application
       @application = current_student.current_application
       user_not_authorized if @application.cancelled?
@@ -61,9 +58,7 @@ class PaymentsController < ApplicationController
     # Sets the payment and checks if the student has permission to view it.
     def set_payment
       @payment = Payment.find(params[:id])
-      unless @payment.owner? current_student.current_application
-        user_not_authorized
-      end
+      user_not_authorized unless @payment.owner? current_student.current_application
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

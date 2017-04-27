@@ -246,7 +246,7 @@ class NewApplicationsController < ApplicationController
   end
 
   private
-    # Sets current application object and checks if student is owner of application
+    # Sets current application object,  checks if student is owner of application, and checks application not cancelled.
     def set_application
       @application = (Application.all.find(params[:id]) or not_found)
       user_not_authorized unless @application.owned_by? current_student

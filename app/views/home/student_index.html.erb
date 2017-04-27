@@ -1,7 +1,3 @@
-<%
-  status = current_student.application_status
-%>
-
 <div class=well>
   <h2>Welcome, <%= current_student.full_name %>!</h2>
   <p>This section of the site will walk you through the college application process.</p>
@@ -13,10 +9,10 @@
   <div class="col-xs-3">
     <p class="text-darkish small">Application steps</p>
     <ul class="list-group" >
-      <%= home_stage_item 'Create Application ', [:create_application, :continue_application].include?(status) %>
-      <%= home_stage_item 'Make Payment ', [:make_payment, :make_repayment].include?(status) %>
-      <%= home_stage_item 'Await Decisions ', status == :track_application %>
-      <%= home_stage_item 'Make Choices ', status == :track_application %>
+      <%= home_stage_item 'Create Application ', @application.nil? || @application.submitting? %>
+      <%= home_stage_item 'Make Payment ', @application.submitted? || @application.payment_failed? %>
+      <%= home_stage_item 'Await Decisions ', @application.paid? %>
+      <%= home_stage_item 'Make Choices ', false %>
     </ul>
   </div>
 
@@ -24,7 +20,8 @@
     <p class="text-darkish small">Your next step</p>
     <div class="home-stage-panel">
       <div class="panel-body">
-        <% if status == :create_application %>
+        <!-- Text here varies depending on application status -->
+        <% if @application.nil? %>
           <%= form_tag applications_create_path, method: :post do %>
             <p><strong>You need to create an application.</strong></p>
             <p>You currently don't have an application, so first thing's first, you'll need to create one. Creating an
@@ -37,7 +34,7 @@
               <%= submit_tag 'Create application' %>
             </div>
           <% end %>
-        <% elsif status == :continue_application %>
+        <% elsif @application.submitting? %>
           <p><strong>You've started your application, but it's not finished</strong></p>
           <p>Finishing your application allows you to tell us about yourself, what skills, qualities, and experience you have, and what you can offer.</p>
           <p>You can also use it to tell us what courses you'd like to study. Once submitted you'll need to make a
@@ -46,7 +43,7 @@
           <div class="text-right">
             <%= link_to 'Continue Application', applications_continue_path(@application), role: 'button', class: 'link-button' %>
           </div>
-        <% elsif status == :make_payment %>
+        <% elsif @application.submitted? %>
           <p><strong>Your application has been submitted but we haven't received your application fee yet.</strong></p>
           <p>We are waiting to receive a payment for the application fee of <strong><%= number_to_currency @application.calculate_fee_pounds, unit: '£' %></strong>.
             The payment needs to be made before your application can be processed. You can make a payment either with a debit or credit card, or through PayPal.</p>
@@ -54,17 +51,17 @@
           <div class="text-right">
             <%= link_to 'Make Payment', payment_method_path, role: 'button', class: 'link-button' %>
           </div>
-        <% elsif status == :make_repayment %>
+        <% elsif @application.payment_failed? %>
             <p><strong>You made a payment but it was not successful.</strong></p>
             <p>We are waiting to receive a payment for the application fee of <strong><%= number_to_currency @application.calculate_fee_pounds, unit: '£' %></strong>.</p>
             <p>The payment needs to be received by the <strong><%= format_date @application.expiry_time %></strong> or your application will be cancelled. You can make a payment either with a debit or credit card, or through PayPal. Once payment is received your application will be sent to your chosen colleges to be considered.</p>
             <div class="text-right">
               <%= link_to 'Make Payment', payment_method_path, role: 'button', class: 'link-button' %>
             </div>
-        <% elsif status == :application_cancelled %>
+        <% elsif @application.cancelled? %>
             <div class="alert alert-danger"><strong>Your application has been cancelled</strong></div>
             <p>We have not received your application fee. We were due to receive your application fee of <strong><%= number_to_currency @application.calculate_fee_pounds, unit: '£' %></strong> by the <strong><%= format_date @application.expiry_time %></strong>. This payment was not made in due time. For this reason we have cancelled your application. If you would like to discuss the matter further, please contact the <%= mail_to 'futureprospectsapp@gmail.com', 'site admin' %>.</p>
-        <% elsif status == :track_application %>
+        <% elsif @application.paid? %>
             <%= link_to 'Track Application', applications_continue_path(@application), role: 'button', class: 'link-button' %>
         <% end %>
       </div>

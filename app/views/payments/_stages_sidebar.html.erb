@@ -3,9 +3,9 @@
     <h3 class="no-top-margin">Payment Stages</h3>
     <p><em>This section will walk you through the process of paying your application fee.</em></p>
     <ul class="list-group">
-      <%= stage_item 'Payment Method', stage == :payment_method %>
-      <%= stage_item 'Enter Payment Details', stage == :new %>
-      <%= stage_item 'Payment Confirmation', stage == :show %>
+      <%= payment_stage_item 'Payment Method', stage == :payment_method %>
+      <%= payment_stage_item 'Enter Payment Details', stage == :new %>
+      <%= payment_stage_item 'Payment Confirmation', stage == :show %>
     </ul>
   </div>
 </div>

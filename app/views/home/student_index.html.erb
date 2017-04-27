@@ -35,8 +35,8 @@
             </div>
           <% end %>
         <% elsif @application.submitting? %>
-          <p><strong>You've started your application, but it's not finished</strong></p>
-          <p>Finishing your application allows you to tell us about yourself, what skills, qualities, and experience you have, and what you can offer.</p>
+          <p><strong>You've started your application but it's not finished.</strong></p>
+          <p>You need to complete your application in order to apply for a course. Your application allows you to tell us about yourself, what skills, qualities, and experience you have, and what you can offer.</p>
           <p>You can also use it to tell us what courses you'd like to study. Once submitted you'll need to make a
             payment for the application fee. After that, your application will be sent to your chosen colleges to be
             considered.</p>
@@ -59,7 +59,7 @@
               <%= link_to 'Make Payment', payment_method_path, role: 'button', class: 'link-button' %>
             </div>
         <% elsif @application.cancelled? %>
-            <div class="alert alert-danger"><strong>Your application has been cancelled</strong></div>
+            <div class="alert alert-danger"><strong>Your application has been cancelled.</strong></div>
             <p>We have not received your application fee. We were due to receive your application fee of <strong><%= number_to_currency @application.calculate_fee_pounds, unit: '£' %></strong> by the <strong><%= format_date @application.expiry_time %></strong>. This payment was not made in due time. For this reason we have cancelled your application. If you would like to discuss the matter further, please contact the <%= mail_to 'futureprospectsapp@gmail.com', 'administrative staff' %>.</p>
         <% elsif @application.paid? %>
             <p>You can now track your application.</p>

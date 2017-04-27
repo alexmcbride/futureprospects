@@ -22,7 +22,7 @@ module PaymentsHelper
     "<option disabled=\"disabled\"#{ 'selected="selected"' unless payment.card_brand}>-- Choose --</option>".html_safe + options
   end
 
-  def stage_item(value, selected=false)
+  def payment_stage_item(value, selected=false)
     if selected
       content_tag(:li, class: 'list-group-item active') do
         concat(content_tag(:div, class: 'row') do

@@ -31,8 +31,7 @@ class NewApplicationsController < ApplicationController
               courses: applications_courses_path(@application),
               submit: applications_submit_path(@application) }
 
-    stage = @application.incomplete_stages.first
-
+    stage = @application.first_incomplete_stage
     respond_to do |format|
       format.html { redirect_to paths[stage] }
     end

@@ -84,6 +84,13 @@ class Application < ApplicationRecord
     student.id == self.student_id
   end
 
+  # Gets the first incomplete stage of the application.
+  #
+  # Returns - the first incomplete stage.
+  def first_incomplete_stage
+    incomplete_stages.first or :submit
+  end
+
   # Gets an array of incomplete stages in the application.
   #
   # Returns - an array of symbols.
@@ -94,8 +101,7 @@ class Application < ApplicationRecord
               employment: self.completed_employment,
               references: self.completed_references,
               statement: self.completed_statement,
-              courses: self.completed_courses,
-              submit: self.submitted?}
+              courses: self.completed_courses}
     (stages.map { |k, v| k unless v }).compact
   end
 

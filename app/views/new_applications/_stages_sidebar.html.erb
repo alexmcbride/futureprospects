@@ -1,9 +1,7 @@
 <div class="panel panel-default">
   <div class="panel-body">
     <p><em>This section will guide you through the process of creating your college application.</em></p>
-
     <h3>Application Stages</h3>
-
     <div class="list-group">
       <%= stage_item 'Introduction', applications_index_path(application), stage == :introduction, application.completed_intro %>
       <%= stage_item 'Profile', applications_profile_path(application), stage == :profile, application.completed_profile %>
@@ -12,7 +10,7 @@
       <%= stage_item 'References', applications_references_path(application), stage == :references, application.completed_references %>
       <%= stage_item 'Personal Statement', applications_statement_path(application), stage == :statement, application.completed_statement %>
       <%= stage_item 'Add Courses', applications_courses_path, stage == :courses, application.completed_courses %>
-      <%= stage_item 'Submit', applications_submit_path, stage == :submit %>
+      <%= stage_item 'Submit', applications_submit_path, stage == :submit, application.submitted? %>
     </div>
   </div>
 </div>

@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   # GET /
+  #
   # Displays home page depending on what the user is logged in as.
   def index
     @categories = Category.order(:name)

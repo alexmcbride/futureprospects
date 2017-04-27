@@ -1,7 +1,9 @@
 # Model class to represent a payment.
 class Payment < ApplicationRecord
-  # Constants
+  # The number of days until a payment expires.
   PAYMENT_EXPIRY_DAYS = 7
+
+  # The currency to use for the payments.
   CURRENCY = 'GBP'
 
   # Imports
@@ -23,15 +25,31 @@ class Payment < ApplicationRecord
   validates :last_four_digits, presence: false
   validates :card_holder, presence: false
 
-  # Attributes for holding card or paypal data while payment is being authorized.
+  # The card brand (e.g. visa, mastercard etc).
   attr_accessor :card_brand
+
+  # The card number.
   attr_accessor :card_number
+
+  # The card verification number
   attr_accessor :card_cvv
+
+  # The expiry date
   attr_accessor :card_expiry
+
+  # The card holder's first name
   attr_accessor :card_first_name
+
+  # The card holder's last name
   attr_accessor :card_last_name
+
+  # The remote IP of the payer.
   attr_accessor :remote_ip
+
+  # The payers PayPal ID
   attr_accessor :paypal_payer_id
+
+  # The token returned by PayPal.
   attr_accessor :paypal_token
 
   # Authorizes a payment using the card details.
@@ -67,7 +85,7 @@ class Payment < ApplicationRecord
 
   # Updates payment with info from PayPal token.
   #
-  # * +token+ - the PayPal payment token.
+  # * +token+ - the token given to us by PayPal.
   def update_from_token(token)
     details = PAYPAL_GATEWAY.details_for token
     @paypal_payer_id = details.payer_id
@@ -75,8 +93,6 @@ class Payment < ApplicationRecord
   end
 
   # Checks if the application has a successful payment
-  #
-  # * +application+ - the application to check
   #
   # Returns - a boolean indicating if a successful payment exists.
   def has_paid?
@@ -116,7 +132,7 @@ class Payment < ApplicationRecord
   end
 
   # Method called by rake task that cancels any applications with an outstanding payment over 7 days old. To run this
-  # you can do it manually `ruby bin\rake site_tasks:handle_failed_payments`, on Heroku it is run by the scheduler once
+  # you can do it manually `ruby bin\\rake site_tasks:handle_failed_payments`, on Heroku it is run by the scheduler once
   # every 24 hours. See for more details: https://devcenter.heroku.com/articles/scheduler
   def self.handle_failed_payments
     applications = Application.includes(:student)

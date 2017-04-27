@@ -179,7 +179,7 @@ class Application < ApplicationRecord
     courses_fee(type) / PENCE_IN_POUND
   end
 
-  # Gets the expiry time of the first payment made on this application.
+  # Gets the expiry time of the first failed payment made on this application.
   #
   # Returns - the expiry datetime, or nil if there are no failed payments.
   def expiry_time

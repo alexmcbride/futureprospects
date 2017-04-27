@@ -4,6 +4,7 @@ class NewApplicationsController < ApplicationController
                                            :qualifications_remove, :employment_remove, :courses_remove]
 
   # POST: /applications
+  # Creates a new application.
   def create
     respond_to do |format|
       @application = current_student.create_application
@@ -16,6 +17,7 @@ class NewApplicationsController < ApplicationController
   end
 
   # GET /applications/:id/continue
+  # Continues an existing application, redirects to the path of first incomplete stage.
   def continue
     # Redirects student to the first incomplete part of their application.
     paths = { intro: applications_index_path(@application),
@@ -35,15 +37,18 @@ class NewApplicationsController < ApplicationController
   end
 
   # GET: /applications/:id
+  # Shows intro stage.
   def index
     @application.save_intro
   end
 
   # GET: /applications/:id/profile
+  # Displays profile form.
   def profile
   end
 
   # POST: /applications/:id/profile
+  # Updates application profile.
   def profile_next
     respond_to do |format|
       if @application.save_profile application_params
@@ -55,11 +60,13 @@ class NewApplicationsController < ApplicationController
   end
 
   # GET: /applications/:id/education
+  # Displays add education form.
   def education
     @school = School.new
   end
 
   # POST: /applications/:id/education/add
+  # Adds a new educational establishment to the application.
   def education_add
     @school = School.new school_params
     @school.application = @application
@@ -73,6 +80,7 @@ class NewApplicationsController < ApplicationController
   end
 
   # DELETE: /applications/:id/education
+  # Removes an education establishment from the application.
   def education_remove
     school = School.find params[:id]
     id = school.application_id
@@ -83,6 +91,7 @@ class NewApplicationsController < ApplicationController
   end
 
   # POST: /applications/:id/education_next
+  # Submits the education stage
   def education_next
     respond_to do |format|
       if @application.save_education
@@ -95,12 +104,14 @@ class NewApplicationsController < ApplicationController
   end
 
   # GET: /applications/qualifications/:id
+  # Displays the add qualifications form.
   def qualifications
     @school = School.find params[:id]
     @qualification = Qualification.new
   end
 
   # POST: /applications/qualifications/:id
+  # Adds a qualification to the school.
   def qualifications_add
     @school = School.find params[:id]
     @application = @school.application
@@ -116,6 +127,7 @@ class NewApplicationsController < ApplicationController
   end
 
   # DELETE: /applications/qualifications/:id
+  # Removes a qualification from a school.
   def qualifications_remove
     qualification = Qualification.find params[:id]
     qualification.destroy
@@ -125,11 +137,13 @@ class NewApplicationsController < ApplicationController
   end
 
   # GET: /applications/:id/employment
+  # Displays add employment form.
   def employment
     @job = Job.new
   end
 
   # POST: /applications/:id/employment
+  # Adds new job to the application.
   def employment_add
     @job = Job.new job_params
     @job.application = @application
@@ -143,6 +157,7 @@ class NewApplicationsController < ApplicationController
   end
 
   # DELETE: /applications/:id/employment
+  # Removes job from the application.
   def employment_remove
     @job = (Job.find params[:id] or not_found)
     @job.destroy
@@ -152,6 +167,7 @@ class NewApplicationsController < ApplicationController
   end
 
   # POST: /applications/:id/employment/next
+  # Submits employment stage.
   def employment_next
     respond_to do |format|
       @application.save_employment
@@ -160,11 +176,13 @@ class NewApplicationsController < ApplicationController
   end
 
   # GET: /applications/:id/references
+  # Shows references form.
   def references
     @reference = @application.create_reference
   end
 
   # POST: /applications/:id/references
+  # Submits references stage.
   def references_next
     @reference = @application.create_reference
     respond_to do |format|
@@ -176,9 +194,13 @@ class NewApplicationsController < ApplicationController
     end
   end
 
+  # GET /applications/:id/statement
+  # Displays personal statement form.
   def statement
   end
 
+  # POST /applications/:id/statement
+  # Submits personal statement stage
   def statement_next
     respond_to do |format|
       if @application.save_statement statement_params
@@ -189,11 +211,15 @@ class NewApplicationsController < ApplicationController
     end
   end
 
+  # GET /applications/:id/courses
+  # Displays add courses form.
   def courses
     @course_selection = CourseSelection.new
     @course_selections = @application.find_course_selections
   end
 
+  # POST /applications/:id/courses
+  # Adds course to application.
   def courses_add
     @course_selection = CourseSelection.new course_params
     @course_selections = @application.find_course_selections
@@ -206,6 +232,8 @@ class NewApplicationsController < ApplicationController
     end
   end
 
+  # DELETE /applications/:id/courses
+  # Removes course from application.
   def courses_remove
     @selection = (CourseSelection.find params[:id] or not_found)
     id = @selection.application_id
@@ -215,6 +243,8 @@ class NewApplicationsController < ApplicationController
     end
   end
 
+  # POST /applications/:id/courses/next
+  # Submits courses stage.
   def courses_next
     respond_to do |format|
       if @application.save_courses
@@ -227,9 +257,13 @@ class NewApplicationsController < ApplicationController
     end
   end
 
+  # GET /applications/:id/submit
+  # Shows submit stage.
   def submit
   end
 
+  # POST /applications/:id/submit
+  # Submits final stage.
   def submit_next
     respond_to do |format|
       confirmed = !params[:confirm].nil?
@@ -239,10 +273,6 @@ class NewApplicationsController < ApplicationController
         format.html { render :submit }
       end
     end
-  end
-
-  # GET /applications/:id/cancelled
-  def cancelled
   end
 
   private

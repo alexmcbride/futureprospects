@@ -2,6 +2,7 @@ class CoursesController < ApplicationController
   before_action :set_categories, except: [:search]
 
   # GET /courses
+  # Shows a list searchable list of college courses.
   def index
     @search_term = params[:search]
     # Do search using scoped_search. If search term is empty then all records are returned.
@@ -9,6 +10,7 @@ class CoursesController < ApplicationController
   end
 
   # GET /courses/category/1
+  # Shows courses in a particular category.
   def category
     @category = Category.left_outer_joins(:courses).find params[:id] # Left outer join as courses can be empty
     @courses = Course.find_open_courses(@category).paginate(:page => params[:page]).includes(:college).order(:title)
@@ -16,6 +18,7 @@ class CoursesController < ApplicationController
   end
 
   # GET /courses/1
+  # Shows details of a specific course.
   def show
     @course = Course.find(params[:id])
 
@@ -24,6 +27,7 @@ class CoursesController < ApplicationController
   end
 
   # GET /courses/search.json
+  # Returns course search results as JSON, for use in autocomplete text inputs.
   def search
     # with empty term scoped_search returns all results, which we don't want.
     term = params[:term].strip unless params[:term].nil?
@@ -40,6 +44,7 @@ class CoursesController < ApplicationController
   end
 
   private
+    # Sets categories for courses what need it.
     def set_categories
       @categories = Category.where('courses_count > 0').order(:name)
     end

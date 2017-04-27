@@ -1,36 +1,37 @@
 class PaymentsController < ApplicationController
   before_action :authenticate_student!
   before_action :set_payment, only: [:show]
-  before_action :set_application, only: [:payment_method, :new, :create]
+  before_action :set_application, only: [:payment_method, :payment_method_continue, :new, :create]
 
   # GET /payments
+  # Displays list of student's payments.
   def index
     @payments = current_student.all_payments.order(created_at: :desc)
   end
 
-  # GET /payments/choose_payment_method
+  # GET /payments/payment_method
+  # Lets student choose the payment method.
   def payment_method
   end
 
-  # POST  /payments/choose_payment_method/continue
+  # POST  /payments/payment_method/continue
+  # Saves payment method to session and redirects to the new_payment_path, optionally through PayPal if the option is chosen.
   def payment_method_continue
     # Store payment method in session
     session[:payment_type] = params[:payment_type].to_sym if params[:payment_type]
 
     if session[:payment_type] == :paypal
-      set_application
       redirect_to Payment::setup_paypal @application.calculate_fee, request.remote_ip, new_payment_url, payment_method_url
     elsif session[:payment_type] == :credit_card
       redirect_to new_payment_path
     else
-      session.delete :payment_type
-      set_application
       flash[:notice] = 'You must choose a payment method.'
       render :payment_method
     end
   end
 
   # GET /payments/new
+  # Displays new payment form, unless redirected from payment, in which case displayed the authorize paypal form.
   def new
     @payment = Payment.new payment_type: session[:payment_type]
 
@@ -41,6 +42,7 @@ class PaymentsController < ApplicationController
   end
 
   # POST /payments
+  # Authorizes either credit card or paypal payments depending on the form that posts to it..
   def create
     @payment = Payment.new(payment_params)
     @payment.remote_ip = request.remote_ip # Needed for PayPal payment.
@@ -55,6 +57,7 @@ class PaymentsController < ApplicationController
   end
 
   # GET /payments/:id
+  # Shows a specific payment.
   def show
   end
 

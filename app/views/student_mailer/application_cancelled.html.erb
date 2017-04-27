@@ -8,7 +8,7 @@
 <p>The amount was due to be paid within <strong><%= Payment::PAYMENT_EXPIRY_DAYS %> days</strong> by the date of <strong><%= format_date @application.expiry_time %></strong>,
   however this payment was not received.</p>
 
-<p>In order to continue this application you will need to contact Future Prospects <%= mail_to 'futureprospectsapp@gmail.com', 'administrative staff' %></p>
+<p>In order to continue this application you will need to contact <%= mail_to 'futureprospectsapp@gmail.com', 'administrative staff' %>.</p>
 
 <p>Sincerely,
   <br><br>

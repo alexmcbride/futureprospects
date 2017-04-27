@@ -45,12 +45,13 @@ class Payment < ApplicationRecord
 
     # Set some general payment options.
     self.amount = self.application.calculate_fee
-    self.status = :failed
+    self.status = :failed # default
 
     # Take correct payment depending on type.
-    if self.payment_type == :credit_card
+    result = nil
+    if self.credit_card?
       result = authorize_credit_card
-    else
+    elsif self.paypal?
       result = authorize_paypal
     end
 
@@ -118,8 +119,6 @@ class Payment < ApplicationRecord
   # you can do it manually `ruby bin\rake site_tasks:handle_failed_payments`, on Heroku it is run by the scheduler once
   # every 24 hours. See for more details: https://devcenter.heroku.com/articles/scheduler
   def self.handle_failed_payments
-    # Gets all applications (eager loading students), that are still sitting at submitted, and have at least one failed
-    # payment over 7 days old.
     applications = Application.includes(:student)
                        .where(status: :payment_failed)
                        .where(id: Payment.where(status: :failed).where("created_at < CURRENT_DATE - INTERVAL '#{PAYMENT_EXPIRY_DAYS} days'"))

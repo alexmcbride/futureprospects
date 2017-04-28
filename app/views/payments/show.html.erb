@@ -14,50 +14,52 @@
     <p class="text-darkish">The following payment has been successfully received:</p>
 
     <div class="row">
-      <div class="col-xs-3">
+      <div class="col-xs-4">
         <strong>Amount</strong>
       </div>
-      <div class="col-xs-6">
+      <div class="col-xs-8">
         <%= number_to_currency @payment.amount_pounds, unit: '£' %>
       </div>
     </div>
     <div class="row">
-      <div class="col-xs-3">
+      <div class="col-xs-4">
         <strong>Payment Type</strong>
       </div>
-      <div class="col-xs-6">
+      <div class="col-xs-8">
         <%= @payment.payment_type.humanize %>
       </div>
     </div>
     <div class="row">
-      <div class="col-xs-3">
+      <div class="col-xs-4">
         <strong>Payment Date</strong>
       </div>
-      <div class="col-xs-6">
+      <div class="col-xs-8">
         <%= format_date @payment.created_at %>
       </div>
     </div>
+    <% if @payment.credit_card?  %>
+      <div class="row">
+        <div class="col-xs-4">
+          <strong>Card Holder</strong>
+        </div>
+        <div class="col-xs-8">
+          <%= @payment.card_holder %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4">
+          <strong>Card Number</strong>
+        </div>
+        <div class="col-xs-8">
+          <%= "#{'&Chi;' * 12}#{@payment.last_four_digits}".html_safe%>
+        </div>
+      </div>
+    <% end %>
     <div class="row">
-      <div class="col-xs-3">
-        <strong>Card Holder</strong>
-      </div>
-      <div class="col-xs-6">
-        <%= @payment.card_holder %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-3">
-        <strong>Card Number</strong>
-      </div>
-      <div class="col-xs-6">
-        ************<%= @payment.last_four_digits %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-3">
+      <div class="col-xs-4">
         <strong>Status</strong>
       </div>
-      <div class="col-xs-6">
+      <div class="col-xs-8">
         <%= @payment.status.humanize %>
       </div>
     </div>
@@ -67,7 +69,7 @@
     <div class="well">
       <h3 class="no-top-margin">What Next?</h3>
       <p>Your application will now be sent to your selected colleges in order to be considered. You will be contacted
-        when a decision has been made. You can check back to track the status of your application as needed.</p>
+        when a decision has been made. You can track the status of your application of your application by signing in.</p>
 
       <br>
 

@@ -47,6 +47,10 @@
 
   <div class="actions text-right">
     <p class="text-darkish small">Authorize the payment with your payment provider.</p>
-    <%= f.submit 'Authorize Payment', class: 'next-button' %>
+    <%= f.button class: 'next-button' do %>
+      <%= icon('credit-card-alt') %>
+      &nbsp;
+      Authorize Payment
+    <% end %>
   </div>
 <% end %>

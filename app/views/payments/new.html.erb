@@ -20,9 +20,17 @@
   <div class="col-sm-9">
     <% if @payment.paypal? %>
       <!-- Show paypal form. -->
-      <h3 class="no-top-margin">Confirm PayPal Purchase</h3>
+        <div class="row">
+          <div class="col-xs-10">
+            <h3 class="no-top-margin">Confirm PayPal Purchase</h3>
+          </div>
+          <div class="col-xs-2">
+            <%= image_tag 'paypal.png', class: 'img-responsive' %>
+          </div>
+        </div>
+
       <p>Amount to be paid: <strong><%= number_to_currency @application.calculate_fee_pounds, unit: '£' %></strong></p>
-      <p>Continue to authorize your payment through the PayPal express provider.</p>
+      <p>Continue to authorize your payment through the PayPal provider.</p>
       <hr>
       <%= render 'paypal_form', payment: @payment %>
     <% else %>

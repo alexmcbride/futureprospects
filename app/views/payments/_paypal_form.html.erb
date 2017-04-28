@@ -7,6 +7,10 @@
 
   <div class="actions text-right">
     <p class="text-darkish small">Complete the payment through PayPal.</p>
-    <%= f.submit 'Authorize Payment', class: 'next-button' %>
+    <%= f.button class: 'next-button' do %>
+        <%= icon('paypal') %>
+        &nbsp;
+        Authorize Payment
+    <% end %>
   </div>
 <% end %>

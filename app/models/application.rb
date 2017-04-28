@@ -1,4 +1,7 @@
-# Model for a student application.
+# Name: Alex McBride
+# Date: 28/04/2017
+# Project: Future Prospects
+# Class: Application - model class for a student application.
 class Application < ApplicationRecord
   # The maximum length of a personal statement.
   STATEMENT_LENGTH = 2000

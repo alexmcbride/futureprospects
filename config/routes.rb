@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   post 'payments/amount/continue', to: 'payments#amount_continue', as: 'payment_amount_continue'
   resources :payments
 
-
   devise_for :staff, :skip => [:registrations] # Skip staff sign-up
   devise_scope :staff do
     # We skip registrations to stop staff sign up, but we still need to enable staff profile editing

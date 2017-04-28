@@ -374,7 +374,6 @@ li.home-category-item {
   input[type=submit], a.link-button {
     @extend .btn;
     @extend .btn-primary;
-    width: 30%;
     margin-top: 16px;
   }
 }

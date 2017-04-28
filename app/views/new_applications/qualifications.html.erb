@@ -11,7 +11,7 @@
   </div>
 
   <div class="col-sm-9">
-    <p><%= link_to 'Back to education...', applications_education_path(@school.application) %></p>
+    <p><%= link_to 'Go back', applications_education_path(@school.application) %></p>
     <hr>
 
     <%= form_for @qualification, :html => {:class => 'form-horizontal', :role => 'form' }, url: applications_qualifications_add_path(@school), method: :post do |f| %>

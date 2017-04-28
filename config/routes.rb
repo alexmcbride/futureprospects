@@ -53,6 +53,8 @@ Rails.application.routes.draw do
   post 'applications/:id/employment', to: 'new_applications#employment_add', as: 'applications_employment_add'
   delete 'applications/:id/employment', to: 'new_applications#employment_remove', as: 'applications_employment_remove'
   post 'applications/:id/employment/next', to: 'new_applications#employment_next', as: 'applications_employment_next'
+  get 'applications/employment/:id/edit', to: 'new_applications#employment_edit', as: 'applications_employment_edit'
+  patch 'applications/:id/employment', to: 'new_applications#employment_update', as: 'applications_employment_update'
 
   get 'applications/:id/references', to: 'new_applications#references', as: 'applications_references'
   post 'applications/:id/references', to: 'new_applications#references_next', as: 'applications_references_next'

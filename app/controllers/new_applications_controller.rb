@@ -1,7 +1,7 @@
 class NewApplicationsController < ApplicationController
   before_action :authenticate_student!
   before_action :set_application, except: [:create, :education_remove, :qualifications, :qualifications_add,
-                                           :qualifications_remove, :employment_remove, :courses_remove]
+                                           :qualifications_remove, :employment_remove, :employment_edit, :employment_update, :courses_remove]
 
   # POST: /applications
   #
@@ -197,6 +197,19 @@ class NewApplicationsController < ApplicationController
     @job.destroy
     respond_to do |format|
       format.html { redirect_to applications_employment_path(@job.application_id), notice: 'Employment removed' }
+    end
+  end
+
+  def employment_edit
+    @job = Job.find params[:id]
+  end
+
+  def employment_update
+    @job = Job.find params[:id]
+    if @job.update job_params
+      redirect_to applications_employment_path(@job.application), notice: 'Employment update'
+    else
+      render :employment_edit
     end
   end
 

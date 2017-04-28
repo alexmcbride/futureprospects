@@ -1,0 +1,24 @@
+<% breadcrumb :application_employment, @job %>
+<% @title = 'Edit Employment' %>
+
+<div class="row">
+  <div class="col-sm-3">
+    <%= render partial: 'stages_sidebar', locals: {application: @job.application, stage: :employment_stage} %>
+  </div>
+
+  <div class="col-sm-9">
+    <p><%= link_to 'Go back', applications_employment_path(@job.application) %></p>
+    <hr>
+    
+    <div class="row">
+      <div class="col-xs-10">
+        <h3 class="no-top-margin">Edit Employment</h3>
+      </div>
+      <div class="col-xs-2 text-darkish small text-right">
+        <em>* Optional</em>
+      </div>
+    </div>
+
+    <%= render 'employment_form', path: applications_employment_update_path(@job) %>
+  </div>
+</div>

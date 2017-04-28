@@ -22,31 +22,7 @@
 
     <p class="text-darkish small">Add your employment history, any experience you have  in the workplace may help you earn a space on your chosen course.</p>
 
-    <%= form_for @job, :html => {:class => 'form-horizontal', :role => 'form' }, url: applications_employment_add_path(@application), method: :post do |f| %>
-      <%= form_errors @job %>
-
-      <div class="row">
-        <div class="col-sm-6 col-xs-12">
-          <%= form_text_field f, :employer %>
-          <%= form_text_field f, :job_title %>
-          <%= form_text_field f, :duties %>
-          <%= form_date f, :start_date %>
-          <%= form_date f, :end_date %>
-        </div>
-
-        <div class="col-sm-6 col-xs-12">
-          <%= form_text_field f, :address_1 %>
-          <%= form_text_field f, :address_2, {label: '* Address 2'} %>
-          <%= form_text_field f, :city %>
-          <%= form_text_field f, :postcode, {label: 'Post code'} %>
-          <%= form_text_field f, :country %>
-        </div>
-      </div>
-
-      <div class="text-right">
-        <%= f.submit 'Add Employment', class: 'add-button' %>
-      </div>
-    <% end %>
+    <%= render 'employment_form', path: applications_employment_add_path(@application) %>
 
     <hr>
     <h3>Employment History</h3>
@@ -62,6 +38,11 @@
                 <h4 class="no-top-margin"><strong><%= job.employer %></strong></h4>
               </div>
               <div class="col-xs-6 text-right">
+                <%= link_to applications_employment_edit_path(job), class: "add-button", role: "button" do %>
+                  <%= icon 'pencil-square', style: 'font-size: 13pt;' %>
+                  &nbsp;
+                  Edit
+                <% end %>
                 <a data-modal-name="<%= job.employer %> &mdash; <%= job.job_title %>"
                    data-modal-path="<%= applications_employment_remove_path(job) %>"
                    class="add-button custom-modal-button"
@@ -102,7 +83,7 @@
                 </div>
                 <div class="row small">
                   <div class="col-xs-2">
-                    Start Date:
+                    Duration:
                   </div>
                   <div class="col-xs-10">
                     <%= format_date job.start_date %>

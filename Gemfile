@@ -70,4 +70,4 @@ gem 'fog-aws' # Cloud storage (through Amazon Web Services)
 gem 'pundit' # permissions
 gem 'braintree' # braintree payments
 gem 'activemerchant' # general payments
-gem 'recaptcha', require: 'recaptcha/rails' # recaptcha
+gem 'recaptcha', '~> 4.1.0', require: 'recaptcha/rails' # recaptcha

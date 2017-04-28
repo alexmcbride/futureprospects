@@ -15,7 +15,14 @@
     <hr>
 
     <%= form_for @qualification, :html => {:class => 'form-horizontal', :role => 'form' }, url: applications_qualifications_add_path(@school), method: :post do |f| %>
-      <h3 class="no-top-margin">Add Qualifications</h3>
+      <div class="row">
+        <div class="col-xs-10">
+          <h3 class="no-top-margin">Add Qualifications</h3>
+        </div>
+        <div class="col-xs-2 text-darkish small text-right">
+          <em>* Optional</em>
+        </div>
+      </div>
 
       <p class="text-darkish small">Add the qualifications you gained at this institution. If you have not completed
         your studies, enter the future end date and predicated grade.</p>
@@ -34,13 +41,8 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-xs-6">
-          <p class="text-darkish small"><em>* Optional</em></p>
-        </div>
-        <div class="col-xs-6 text-right">
-          <%= f.submit 'Add Qualification', class: 'add-button' %>
-        </div>
+      <div class="text-right">
+        <%= f.submit 'Add Qualification', class: 'add-button' %>
       </div>
     <% end %>
 

@@ -18,7 +18,14 @@
 
       <div class="row">
         <div class="col-sm-6 col-xs-12">
-          <h4 class="no-top-margin">Reference 1</h4>
+          <div class="row">
+            <div class="col-xs-8">
+              <h4 class="no-top-margin">Reference 1</h4>
+            </div>
+            <div class="col-xs-4 text-darkish small text-right">
+              <em>* Optional</em>
+            </div>
+          </div>
 
           <p class="text-darkish small">Enter details about your first reference.</p>
 
@@ -34,7 +41,14 @@
         </div>
 
         <div class="col-sm-6 col-xs-12">
-          <h4 class="no-top-margin">Reference 2</h4>
+          <div class="row">
+            <div class="col-xs-8">
+              <h4 class="no-top-margin">Reference 2</h4>
+            </div>
+            <div class="col-xs-4 text-darkish small text-right">
+              <em>* Optional</em>
+            </div>
+          </div>
 
           <p class="text-darkish small">Enter details about your second reference.</p>
 
@@ -47,12 +61,6 @@
           <%= form_text_field f, :reference_2_postcode, {label: 'Post code'} %>
           <%= form_text_field f, :reference_2_telephone, {label: 'Telephone'} %>
           <%= form_email_field f, :reference_2_email, {label: 'Email'} %>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-12">
-          <p class="text-darkish small"><em>* Optional</em></p>
         </div>
       </div>
 

@@ -73,14 +73,8 @@ def student(tokens, schools, jobs, refs)
     puts app + ".correspondence_postcode = '#{tokens[23]} 2GR'"
     puts app + ".correspondence_country = '#{tokens[21]}'"
   end
-  puts app + ".status = :submitted"
-  puts app + '.completed_intro = true'
-  puts app + '.completed_profile = true'
-  puts app + '.completed_education = true'
-  puts app + '.completed_employment = true'
-  puts app + '.completed_references = true'
-  puts app + '.completed_statement = true'
-  puts app + '.completed_courses = true'
+  puts app + '.status = :submitted'
+  puts app + '.current_stage = :submit_stage'
   puts app + '.save! validate: false'
   puts ''
 

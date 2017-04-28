@@ -22,16 +22,17 @@ class NewApplicationsController < ApplicationController
   # Continues an existing application, redirects to the path of first incomplete stage.
   def continue
     # Redirects student to the first incomplete part of their application.
-    paths = { intro: applications_index_path(@application),
-              profile: applications_profile_path(@application),
-              education: applications_education_path(@application),
-              employment: applications_employment_path(@application),
-              references: applications_references_path(@application),
-              statement: applications_statement_path(@application),
-              courses: applications_courses_path(@application),
-              submit: applications_submit_path(@application) }
+    paths = { intro_stage: applications_index_path(@application),
+              profile_stage: applications_profile_path(@application),
+              education_stage: applications_education_path(@application),
+              employment_stage: applications_employment_path(@application),
+              references_stage: applications_references_path(@application),
+              statement_stage: applications_statement_path(@application),
+              courses_stage: applications_courses_path(@application),
+              submit_stage: applications_submit_path(@application) }
 
-    stage = @application.first_incomplete_stage
+    stage = @application.current_stage.to_sym
+
     respond_to do |format|
       format.html { redirect_to paths[stage] }
     end

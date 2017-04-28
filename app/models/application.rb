@@ -24,6 +24,10 @@ class Application < ApplicationRecord
   # Enum for the application status.
   enum status: [:submitting, :submitted, :paid, :payment_failed, :completed, :cancelled]
 
+  # Enum for current application stage.
+  enum current_stage: [:intro_stage, :profile_stage, :education_stage, :employment_stage, :references_stage,
+                      :statement_stage, :courses_stage, :submit_stage]
+
   # Validators
   validates :title, presence: true, length: { maximum: 35 }
   validates :first_name, presence: true, length: { maximum: 35 }
@@ -48,6 +52,7 @@ class Application < ApplicationRecord
   validates :correspondence_country, presence: false, length: { maximum: 35 }
   validates :status, presence: true
   validates :submitted_date, presence: false
+  validates :current_stage, presence: true
 
   # Validations shared between application and student.
   include StudentValidator
@@ -73,6 +78,7 @@ class Application < ApplicationRecord
     application.scottish_candidate_number = student.scottish_candidate_number
     application.national_insurance_number = student.national_insurance_number
     application.status = :submitting
+    application.current_stage = :intro_stage
     application.student = student
     application.save validate: false # Can't validate at this point
     application
@@ -85,27 +91,6 @@ class Application < ApplicationRecord
   # Returns - true if the application is owned by the student.
   def owned_by?(student)
     student.id == self.student_id
-  end
-
-  # Gets the first incomplete stage of the application.
-  #
-  # Returns - the first incomplete stage.
-  def first_incomplete_stage
-    incomplete_stages.first or :submit
-  end
-
-  # Gets an array of incomplete stages in the application.
-  #
-  # Returns - an array of symbols.
-  def incomplete_stages
-    stages = {intro: self.completed_intro,
-              profile: self.completed_profile,
-              education: self.completed_education,
-              employment: self.completed_employment,
-              references: self.completed_references,
-              statement: self.completed_statement,
-              courses: self.completed_courses}
-    (stages.map { |k, v| k unless v }).compact
   end
 
   # Finds all of this applications course selections.
@@ -127,6 +112,12 @@ class Application < ApplicationRecord
       end
     end
     valid
+  end
+
+  def self.stage_complete?(stage, current)
+    current = Application.current_stages[current]
+    stage = Application.current_stages[stage]
+    stage > current
   end
 
   # Calculates the number of courses the student can still add.
@@ -216,23 +207,15 @@ class Application < ApplicationRecord
     false
   end
 
-  # Attempts to save the education stage.
-  #
-  # Returns - boolean indicating if the stage was saved.
-  def save_education
-    if self.schools_valid?
-      self.completed_education = true
-      self.save validate: false
-      return true
-    end
-    false
+  def remove_course(selection)
+
   end
 
   # Attempts to save the intro stage.
   #
   # Returns - boolean indicating if the stage was saved.
   def save_intro
-    self.completed_intro = true
+    self.current_stage = :profile_stage
     self.save validate: false
     true
   end
@@ -246,8 +229,20 @@ class Application < ApplicationRecord
     self.attributes = params
     self.status = :submitting
     if self.valid?
-      self.completed_profile = true
+      self.current_stage = :education_stage
       self.save
+      return true
+    end
+    false
+  end
+
+  # Attempts to save the education stage.
+  #
+  # Returns - boolean indicating if the stage was saved.
+  def save_education
+    if self.schools_valid?
+      self.current_stage = :employment_stage
+      self.save validate: false
       return true
     end
     false
@@ -257,7 +252,7 @@ class Application < ApplicationRecord
   #
   # Returns - boolean indicating if the stage was saved.
   def save_employment
-    self.completed_employment = true
+    self.current_stage = :references_stage
     self.save
     true
   end
@@ -278,7 +273,7 @@ class Application < ApplicationRecord
   def save_references(reference, params)
     reference.attributes = params
     if reference.valid?
-      self.completed_references = true
+      self.current_stage = :statement_stage
       self.reference = reference
       self.save
       return true
@@ -297,7 +292,7 @@ class Application < ApplicationRecord
       self.errors.add(:personal_statement, "can't be blank")
     else
       if self.valid?
-        self.completed_statement = true
+        self.current_stage = :courses_stage
         self.save
         return true
       end
@@ -313,7 +308,7 @@ class Application < ApplicationRecord
       self.errors.add(:saving, 'requires that you must apply for at least one course')
       return false
     end
-    self.completed_courses = true
+    self.current_stage = :submit_stage
     self.save validate: false # don't want to worry about rest of application here.
   end
 
@@ -328,8 +323,7 @@ class Application < ApplicationRecord
       return false
     end
 
-    stages = self.incomplete_stages
-    if stages.empty?
+    if self.submitting? and self.submit_stage?
       self.status = :submitted
       self.submitted_date = DateTime.now
       self.save
@@ -340,7 +334,7 @@ class Application < ApplicationRecord
 
       true
     else
-      stages.each {|s| self.errors.add(s, 'section has not been completed')}
+      self.errors.add(:section, "'#{self.current_stage.humanize}' has not been completed")
       false
     end
   end

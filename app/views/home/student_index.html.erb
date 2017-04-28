@@ -10,8 +10,8 @@
     <p class="text-darkish small">Application steps</p>
     <ul class="list-group" >
       <%= home_stage_item 'Create Application ', @application.nil? || @application.submitting? %>
-      <%= home_stage_item 'Make Payment ', @application.submitted? || @application.payment_failed? %>
-      <%= home_stage_item 'Await Decisions ', @application.paid? %>
+      <%= home_stage_item 'Make Payment ', @application.present? && (@application.submitted? || @application.payment_failed?) %>
+      <%= home_stage_item 'Await Decisions ', @application.present? && @application.paid? %>
       <%= home_stage_item 'Make Choices ', false %>
     </ul>
   </div>

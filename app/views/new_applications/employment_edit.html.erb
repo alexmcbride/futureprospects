@@ -9,7 +9,7 @@
   <div class="col-sm-9">
     <p><%= link_to 'Go back', applications_employment_path(@job.application) %></p>
     <hr>
-    
+
     <div class="row">
       <div class="col-xs-10">
         <h3 class="no-top-margin">Edit Employment</h3>
@@ -18,6 +18,8 @@
         <em>* Optional</em>
       </div>
     </div>
+
+    <p class="text-darkish small">Edit your employment history.</p>
 
     <%= render 'employment_form', path: applications_employment_update_path(@job) %>
   </div>

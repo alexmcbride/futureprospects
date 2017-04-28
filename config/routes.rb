@@ -13,7 +13,8 @@ Rails.application.routes.draw do
     get 'staff/edit', to: 'devise/registrations#edit', as: 'edit_staff_registration'
     put 'staff', to: 'devise/registrations#update', as: 'staff_registration'
   end
-  devise_for :students
+  devise_for :students, controllers: { registrations: 'registrations'}
+
 
   namespace :staff do
     get 'courses/:id/remove', to: 'courses#remove', as: 'course_remove'

@@ -12,7 +12,12 @@ module ApplicationHelper
   #
   # Returns - the bootstrap class to use e.g. warning, success etc.
   def bootstrap_class_for(flash_type)
-    { notice: 'alert-success', alert: 'alert-warning', success: 'alert-success', error: 'alert-danger', warning: 'alert-warning'}[flash_type.to_sym]
+    { notice: 'alert-success',
+      alert: 'alert-warning',
+      success: 'alert-success',
+      error: 'alert-danger',
+      warning: 'alert-warning',
+      recaptcha_error: 'alert-danger' }[flash_type.to_sym]
   end
 
   # Displays any queued flash messages in a bootstrap friendly way.

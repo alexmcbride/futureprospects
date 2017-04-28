@@ -126,7 +126,7 @@ module ApplicationHelper
   end
 
   def credit_card_number(last_four_digits)
-    ((('x' * 4) + '-') * 3) + last_four_digits
+    ((('X' * 4) + '-') * 3) + last_four_digits
   end
 
   # Formats a date as dd/mm/yyyy.

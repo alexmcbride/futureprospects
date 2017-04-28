@@ -16,7 +16,7 @@
         <h2><%= icon('info-circle', class: 'index-icon') %> Browse Courses</h2>
         <p>Browse the categories list to view all of the opportunities we offer.</p>
         <% if @categories.any? %>
-          <ul>
+          <ul class="list-inline">
             <% @categories.each do |category| %>
               <li><%= link_to category.name, courses_category_path(category) %></li>
             <% end %>

@@ -30,21 +30,17 @@
       <div class="list-group">
         <% @courses.each do |course| %>
           <a href="<%= url_for(course) %>" class="course-item list-group-item">
-            <div class="row">
+            <div class="row" title="<%= course.title %>">
               <div class="col-sm-2 col-xs-12">
                 <%= image_tag course.image.thumb, class: 'img-responsive course-image', alt: course.title %>
               </div>
 
-              <div class="col-sm-10 col-xs-12">
-                <div class="row">
-                  <div class="h3 course-title"><%= course.title %></div>
-                </div>
+              <div class="col-sm-10 col-xs-12" style="padding-left: 0;">
+                <h3 class="course-title"><%= truncate course.title, length: 57 %></h3>
 
-                <div class="row">
-                  <%= course.category.name %>
-                  &mdash;
-                  <%= course.college.name %>
-                </div>
+                <%= course.category.name %>
+                &mdash;
+                <%= course.college.name %>
               </div>
             </div>
           </a>

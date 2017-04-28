@@ -3,7 +3,7 @@ class HomeController < ApplicationController
   #
   # Displays home page depending on what the user is logged in as.
   def index
-    @categories = Category.order(:name)
+    @categories = Category.where('courses_count>0').order(:name)
     respond_to do |format|
       # Show home page depending on whether the user is signed in or not
       if student_signed_in?

@@ -6,7 +6,8 @@ class Course < ApplicationRecord
   self.per_page = 10
 
   # Search
-  scoped_search on: :title
+  scoped_search on: :title, profile: :title
+  scoped_search on: :title, profile: :full
   scoped_search relation: :category, on: :name, profile: :full
   scoped_search relation: :college, on: :name, profile: :full
 
@@ -63,7 +64,7 @@ class Course < ApplicationRecord
   #
   # Returns - an ActiveRecord:Relation containing the search results.
   def self.search(search_term)
-    Course.search_for(search_term)
+    Course.search_for(search_term, profile: :title)
   end
 
   # Searches course titles, categories, and colleges for the specified term.

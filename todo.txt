@@ -25,4 +25,7 @@ heroku - sms messaging
 
 heroku - error handling
 
-PDF: prawn (pure ruby?)
+PDF: prawn
+Excel: alxsx
+
+dates validate - end date after start date, dates not in future...

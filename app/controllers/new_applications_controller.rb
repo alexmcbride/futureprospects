@@ -98,6 +98,25 @@ class NewApplicationsController < ApplicationController
     end
   end
 
+  # GET: /applications/education/:id/edit
+  #
+  # Shows the edit school form.
+  def education_edit
+    @school = School.find params[:id]
+  end
+
+  # PATCH: /applications/:id/education
+  #
+  # Updated the school.
+  def education_update
+    @school = School.find params[:id]
+    if @school.update(school_params)
+      redirect_to applications_education_path(@application), notice: 'Updated school'
+    else
+      render :education_edit
+    end
+  end
+
   # POST: /applications/:id/education_next
   #
   # Submits the education stage
@@ -325,7 +344,7 @@ class NewApplicationsController < ApplicationController
 
     # Sanitises submitted form parameters
     def school_params
-      params.require(:school).permit(:name, :address_1, :address_2, :city, :postcode, :country)
+      params.require(:school).permit(:id, :name, :address_1, :address_2, :city, :postcode, :country)
     end
 
     # Sanitises submitted form parameters

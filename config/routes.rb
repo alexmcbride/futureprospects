@@ -42,6 +42,8 @@ Rails.application.routes.draw do
   post 'applications/:id/education', to: 'new_applications#education_add', as: 'applications_education_add'
   delete 'applications/:id/education', to: 'new_applications#education_remove', as: 'applications_education_remove'
   post 'applications/:id/education/next', to: 'new_applications#education_next', as: 'applications_education_next'
+  get 'applications/education/:id/edit', to: 'new_applications#education_edit', as: 'applications_education_edit'
+  patch 'applications/:id/education', to: 'new_applications#education_update', as: 'applications_education_update'
 
   get 'applications/qualifications/:id', to: 'new_applications#qualifications', as: 'applications_qualifications'
   post 'applications/qualifications/:id', to: 'new_applications#qualifications_add', as: 'applications_qualifications_add'

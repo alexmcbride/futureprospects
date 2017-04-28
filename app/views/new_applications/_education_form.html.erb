@@ -1,12 +1,6 @@
-<%= form_for @school, :html => {:class => 'form-horizontal', :role => 'form' }, url: applications_education_add_path(@application), method: :post do |f|%>
-  <div class="row">
-    <div class="col-xs-10">
-      <h3 class="no-top-margin">Add Education</h3>
-    </div>
-    <div class="col-xs-2 text-darkish small text-right">
-      <em>* Optional</em>
-    </div>
-  </div>
+<%= form_for @school, url: path, :html => {:class => 'form-horizontal', :role => 'form' }, url: applications_education_add_path(@application) do |f|%>
+
+  <%= f.hidden_field :id %>
 
   <p class="text-darkish small">Add any school, college, university, or other institution where you have gained a qualification.</p>
   <%= form_errors @school %>
@@ -26,6 +20,6 @@
   </div>
 
   <div class="text-right">
-    <%= f.submit 'Add School', class: 'add-button' %>
+    <%= f.submit class: 'add-button' %>
   </div>
 <% end %>

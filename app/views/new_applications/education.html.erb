@@ -12,7 +12,16 @@
 
   <div class="col-sm-9">
     <!-- Add school form -->
-    <%= render 'education_form' %>
+    <div class="row">
+      <div class="col-xs-10">
+        <h3 class="no-top-margin">Add Education</h3>
+      </div>
+      <div class="col-xs-2 text-darkish small text-right">
+        <em>* Optional</em>
+      </div>
+    </div>
+
+    <%= render 'education_form', path: applications_education_add_path %>
 
     <!-- Form used to validate that schools/courses have been added -->
     <%= form_for @application, url: applications_education_next_path(@application), method: :post do |f| %>
@@ -41,17 +50,16 @@
                   </address>
                 </div> <!-- End col -->
                 <div class="col-sm-6 text-right">
-                  <div>
-                  <a href="<%= url_for applications_qualifications_path(school) %>" class="add-button" role="button" >
+                  <%= link_to applications_qualifications_path(school), class: 'add-button', role: 'button' do %>
                     <%= icon 'plus-circle', style: 'font-size: 13pt;' %>
                     &nbsp;
-                    Add Qualifications
-                    <% count = school.qualifications.size %>
-                    <% if count > 0 %>
-                        (<%= count %>)
-                    <% end %>
-                  </a>
-                  &nbsp;
+                    Add Qualifications (<%= school.qualifications.size %>)
+                  <% end %>
+                  <%= link_to applications_education_edit_path(school), class: 'add-button', role: 'button' do %>
+                      <%= icon 'pencil-square', style: 'font-size: 13pt;' %>
+                      &nbsp;
+                      Edit
+                  <% end %>
                   <a data-modal-name="<%= school.name %>"
                      data-modal-path="<%= applications_education_remove_path(school) %>"
                      class="add-button custom-modal-button"
@@ -60,7 +68,6 @@
                     &nbsp;
                     Remove
                   </a>
-                  </div>
                 </div> <!-- End col -->
               </div> <!-- End row -->
             </div> <!-- End list item -->

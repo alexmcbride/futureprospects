@@ -11,9 +11,6 @@
   </div>
 
   <div class="col-sm-9">
-    <p><%= link_to 'Go back', applications_education_path(@school.application) %></p>
-    <hr>
-
     <%= form_for @qualification, :html => {:class => 'form-horizontal', :role => 'form' }, url: applications_qualifications_add_path(@school), method: :post do |f| %>
       <div class="row">
         <div class="col-xs-10">
@@ -85,5 +82,8 @@
         <% end %> <!-- loop -->
       </div>
     <% end %> <!-- if -->
+
+    <p><%= link_to 'Go back...', applications_education_path(@school.application) %></p>
+
   </div>
 </div>

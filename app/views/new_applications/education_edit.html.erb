@@ -1,4 +1,4 @@
-<% breadcrumb :application_qualifications, @school %>
+<% breadcrumb :application_education_edit, @school %>
 <% @title = 'Edit Education' %>
 
 <div class="row">
@@ -7,9 +7,6 @@
   </div>
 
   <div class="col-sm-9">
-    <p><%= link_to 'Go back', applications_education_path(@school.application) %></p>
-    <hr>
-
     <div class="row">
       <div class="col-xs-10">
         <h3 class="no-top-margin">Edit Education History</h3>
@@ -22,5 +19,7 @@
     <p class="text-darkish small">Edit the school, college, university, or other institution.</p>
 
     <%= render 'education_form', path: applications_education_update_path(@school) %>
+
+    <p><%= link_to 'Go back...', applications_education_path(@school.application) %></p>
   </div>
 </div>

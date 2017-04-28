@@ -89,14 +89,24 @@ crumb :application_education do |application|
   link 'Education', applications_education_path(application)
 end
 
-crumb :application_qualifications do |institution|
-  parent :application_education, institution.application
-  link institution.name, applications_qualifications_path(institution)
+crumb :application_qualifications do |school|
+  parent :application_education, school.application
+  link 'Qualifications', applications_qualifications_path(school)
+end
+
+crumb :application_education_edit do |school|
+  parent :application_education, school.application
+  link 'Edit', applications_education_edit_path(school)
 end
 
 crumb :application_employment do |application|
   parent :application, application
   link 'Employment', applications_employment_path(application)
+end
+
+crumb :application_employment_edit do |school|
+  parent :application_employment, school.application
+  link 'Edit', applications_employment_edit_path(school)
 end
 
 crumb :application_references do |application|

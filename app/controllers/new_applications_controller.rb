@@ -1,6 +1,6 @@
 class NewApplicationsController < ApplicationController
   before_action :authenticate_student!
-  before_action :set_application, except: [:create, :education_remove, :qualifications, :qualifications_add,
+  before_action :set_application, except: [:create, :education_remove, :education_edit, :education_update, :qualifications, :qualifications_add,
                                            :qualifications_remove, :employment_remove, :employment_edit, :employment_update, :courses_remove]
 
   # POST: /applications
@@ -111,7 +111,7 @@ class NewApplicationsController < ApplicationController
   def education_update
     @school = School.find params[:id]
     if @school.update(school_params)
-      redirect_to applications_education_path(@application), notice: 'Updated school'
+      redirect_to applications_education_path(@school.application), notice: 'Updated school'
     else
       render :education_edit
     end
@@ -207,7 +207,7 @@ class NewApplicationsController < ApplicationController
   def employment_update
     @job = Job.find params[:id]
     if @job.update job_params
-      redirect_to applications_employment_path(@job.application), notice: 'Employment update'
+      redirect_to applications_employment_path(@job.application), notice: 'Employment updated'
     else
       render :employment_edit
     end

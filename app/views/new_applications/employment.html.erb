@@ -59,6 +59,7 @@
                 <address class="small">
                   <%= job.address_1 %><br>
                   <%= job.address_2 %> <%= '<br>'.html_safe unless job.address_2.empty? %>
+                  <%= job.city %><br>
                   <%= job.country %><br>
                   <%= job.postcode %>
                 </address>

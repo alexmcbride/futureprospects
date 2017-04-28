@@ -1,4 +1,4 @@
-<% breadcrumb :application_employment, @job %>
+<% breadcrumb :application_employment_edit, @job %>
 <% @title = 'Edit Employment' %>
 
 <div class="row">
@@ -7,9 +7,6 @@
   </div>
 
   <div class="col-sm-9">
-    <p><%= link_to 'Go back', applications_employment_path(@job.application) %></p>
-    <hr>
-
     <div class="row">
       <div class="col-xs-10">
         <h3 class="no-top-margin">Edit Employment</h3>
@@ -22,5 +19,7 @@
     <p class="text-darkish small">Edit your employment history.</p>
 
     <%= render 'employment_form', path: applications_employment_update_path(@job) %>
+
+    <p><%= link_to 'Go back...', applications_employment_path(@job.application) %></p>
   </div>
 </div>

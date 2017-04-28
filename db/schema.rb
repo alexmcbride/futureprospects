@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170428085746) do
+ActiveRecord::Schema.define(version: 20170428102226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,8 @@ ActiveRecord::Schema.define(version: 20170428085746) do
     t.string   "national_insurance_number"
     t.integer  "course_selections_count",     default: 0, null: false
     t.integer  "current_stage"
+    t.string   "permanent_city"
+    t.string   "correspondence_city"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -116,6 +118,7 @@ ActiveRecord::Schema.define(version: 20170428085746) do
     t.date     "end_date"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.string   "city"
     t.index ["application_id"], name: "index_jobs_on_application_id", using: :btree
   end
 
@@ -165,6 +168,8 @@ ActiveRecord::Schema.define(version: 20170428085746) do
     t.string   "reference_2_email"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.string   "reference_1_city"
+    t.string   "reference_2_city"
     t.index ["application_id"], name: "index_references_on_application_id", using: :btree
   end
 
@@ -187,6 +192,7 @@ ActiveRecord::Schema.define(version: 20170428085746) do
     t.string   "country"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.string   "city"
     t.index ["application_id"], name: "index_schools_on_application_id", using: :btree
   end
 

@@ -65,12 +65,14 @@ def student(tokens, schools, jobs, refs)
     puts app + ".permanent_address_2 = '#{tokens[7]}'"
   end
   puts app + ".permanent_postcode = '#{tokens[22]} 2GR'"
+  puts app + ".permanent_city = 'Glasgow'"
   puts app + ".permanent_country = '#{tokens[8]}'"
   unless tokens[20].empty?
     puts app + ".correspondence_house_number = '#{tokens[17]}'"
     puts app + ".correspondence_address_1 = '#{tokens[18]} #{tokens[19]}'"
-    puts app + ".correspondence_address_2 = '#{tokens[10]}'"
+    puts app + ".correspondence_address_2 = '#{tokens[20]}'"
     puts app + ".correspondence_postcode = '#{tokens[23]} 2GR'"
+    puts app + ".correspondence_city = 'Glasgow'"
     puts app + ".correspondence_country = '#{tokens[21]}'"
   end
   puts app + '.status = :submitted'
@@ -86,6 +88,7 @@ def student(tokens, schools, jobs, refs)
     puts education + ".address_1 = '#{schools[$schools][1]} #{schools[$schools][2]} #{schools[$schools][3]}'"
     puts education + ".address_2 = '#{schools[$schools][4]}'"
     puts education + ".country = '#{schools[$schools][5]}'"
+    puts education + ".city = 'Glasgow'"
     puts education + ".postcode = '#{schools[$schools][6]} 3FB'"
     puts education + '.save! validate: false'
     puts ''
@@ -115,6 +118,7 @@ def student(tokens, schools, jobs, refs)
     puts job + ".address_1 = '#{jobs[$jobs][1]} #{jobs[$jobs][2]} #{jobs[$jobs][3]}'"
     puts job + ".address_2 = '#{jobs[$jobs][4]}'"
     puts job + ".postcode = '#{jobs[$jobs][5]}'"
+    puts job + ".city = 'Glasgow'"
     puts job + ".country = '#{jobs[$jobs][6]}'"
     puts job + ".job_title = '#{jobs[$jobs][7]}'"
     puts job + ".duties = '#{jobs[$jobs][8]}'"
@@ -134,6 +138,7 @@ def student(tokens, schools, jobs, refs)
   puts ref + ".reference_1_address_1 = '#{refs[$refs][3]} #{refs[$refs][4]} #{refs[$refs][5]}'"
   puts ref + ".reference_1_address_2 = '#{refs[$refs][6]}'"
   puts ref + ".reference_1_postcode = '#{refs[$refs][7]} 7QW'"
+  puts ref + ".reference_1_city = 'Glasgow'"
   puts ref + ".reference_1_country = '#{refs[$refs][8]}'"
   puts ref + ".reference_1_relationship = '#{refs[$refs][9]}'"
   puts ref + ".reference_1_telephone = '#{refs[$refs][10]}'"
@@ -144,6 +149,7 @@ def student(tokens, schools, jobs, refs)
   puts ref + ".reference_2_address_1 = '#{refs[$refs][3]} #{refs[$refs][4]} #{refs[$refs][5]}'"
   puts ref + ".reference_2_address_2 = '#{refs[$refs][6]}'"
   puts ref + ".reference_2_postcode = '#{refs[$refs][7]} 3TR'"
+  puts ref + ".reference_2_city = 'Glasgow'"
   puts ref + ".reference_2_country = '#{refs[$refs][8]}'"
   puts ref + ".reference_2_relationship = '#{refs[$refs][9]}'"
   puts ref + ".reference_2_telephone = '#{refs[$refs][10]}'"

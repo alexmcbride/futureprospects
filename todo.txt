@@ -7,29 +7,17 @@ search terms should be:
 
 Devise recaptcha: https://github.com/plataformatec/devise/wiki/How-To:-Use-Recaptcha-with-Devise
 
-have checkbox to complete only on optional stages, like education and employment?
-
 guard against loading application methods (remove course etc.) after application has been submitted.
-
-when student makes change to associative-model page (e.g. education) then automatically mark stage as incomplete?
 
 switch navbar bg colour for staff members?
 
-application stages not links until stage marked as complete
-
 add city field to addresses...
-
-applications, move optional label to top on all pages (currently just profile)
 
 add college new, destroy safeguards
 
 do we need app intro? make this the home page? that way we have more info to put on home.
 
 remove pundit verify_authorized from global staff controller once permissions done
-
-add save and continue to qualifications, even if in sub-page, makes sense from flow pov.
-
-heroku scheduler - https://devcenter.heroku.com/articles/scheduler
 
 print payment receipt?
 

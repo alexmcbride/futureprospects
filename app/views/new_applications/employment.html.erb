@@ -28,17 +28,18 @@
       <div class="row">
         <div class="col-sm-6 col-xs-12">
           <%= form_text_field f, :employer %>
-          <%= form_text_field f, :address_1 %>
-          <%= form_text_field f, :address_2, {label: '* Address 2'} %>
-          <%= form_text_field f, :postcode, {label: 'Post code'} %>
-          <%= form_text_field f, :country %>
-        </div>
-
-        <div class="col-sm-6 col-xs-12">
           <%= form_text_field f, :job_title %>
           <%= form_text_field f, :duties %>
           <%= form_date f, :start_date %>
           <%= form_date f, :end_date %>
+        </div>
+
+        <div class="col-sm-6 col-xs-12">
+          <%= form_text_field f, :address_1 %>
+          <%= form_text_field f, :address_2, {label: '* Address 2'} %>
+          <%= form_text_field f, :city %>
+          <%= form_text_field f, :postcode, {label: 'Post code'} %>
+          <%= form_text_field f, :country %>
         </div>
       </div>
 

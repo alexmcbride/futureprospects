@@ -43,11 +43,13 @@ class Application < ApplicationRecord
   validates :permanent_house_number, presence: true, length: { maximum: 12 }
   validates :permanent_address_1, presence: true, length: { maximum: 35 }
   validates :permanent_address_2, presence: false, length: { maximum: 35 }
-  validates :permanent_postcode, presence: true, length: { maximum: 8 }
+  validates :permanent_city, presence: true, length: { maximum: 35 }
+  validates :permanent_postcode, presence: true, length: { maximum: 35 }
   validates :permanent_country, presence: true, length: { maximum: 35 }
   validates :correspondence_house_number, presence: false, length: { maximum: 12 }
   validates :correspondence_address_1, presence: false, length: { maximum: 35 }
   validates :correspondence_address_2, presence: false, length: { maximum: 35 }
+  validates :correspondence_city, presence: false, length: { maximum: 35 }
   validates :correspondence_postcode, presence: false, length: { maximum: 8 }
   validates :correspondence_country, presence: false, length: { maximum: 35 }
   validates :status, presence: true

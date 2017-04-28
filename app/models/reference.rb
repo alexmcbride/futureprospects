@@ -6,6 +6,7 @@ class Reference < ApplicationRecord
   validates :reference_1_address_1, presence: true, length: {maximum: 35}
   validates :reference_1_address_2, presence: false, length: {maximum: 35}
   validates :reference_1_country, presence: true, length: {maximum: 35}
+  validates :reference_1_city, presence: true, length: {maximum: 35}
   validates :reference_1_postcode, presence: true, length: {maximum: 8}
   validates :reference_1_telephone, presence: true, length: {maximum: 20}
   validates :reference_1_email, presence: true, length: {maximum: 254}
@@ -16,6 +17,7 @@ class Reference < ApplicationRecord
   validates :reference_2_address_1, presence: true, length: {maximum: 35}
   validates :reference_2_address_2, presence: false, length: {maximum: 35}
   validates :reference_2_country, presence: true, length: {maximum: 35}
+  validates :reference_2_city, presence: true, length: {maximum: 35}
   validates :reference_2_postcode, presence: true, length: {maximum: 8}
   validates :reference_2_telephone, presence: true, length: {maximum: 20}
   validates :reference_2_email, presence: true, length: {maximum: 254}

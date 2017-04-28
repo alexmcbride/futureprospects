@@ -310,7 +310,7 @@ class NewApplicationsController < ApplicationController
 
     # Sanitises submitted form parameters
     def course_params
-      params.require(:course_selection).permit(:course_id, :college_offer, :student_choice)
+      params.require(:course_selection).permit(:course_id)
     end
 
     # Sanitises submitted form parameters
@@ -325,21 +325,21 @@ class NewApplicationsController < ApplicationController
 
     # Sanitises submitted form parameters
     def school_params
-      params.require(:school).permit(:name, :address_1, :address_2, :postcode, :country)
+      params.require(:school).permit(:name, :address_1, :address_2, :city, :postcode, :country)
     end
 
     # Sanitises submitted form parameters
     def job_params
-      params.require(:job).permit(:employer, :address_1, :address_2, :postcode, :country, :job_title, :duties, :start_date, :end_date)
+      params.require(:job).permit(:employer, :address_1, :address_2, :city, :postcode, :country, :job_title, :duties, :start_date, :end_date)
     end
 
     # Sanitises submitted form parameters
     def reference_params
       params.require(:reference).permit(:reference_1_full_name, :reference_1_occupation, :reference_1_relationship,
-                                        :reference_1_address_1, :reference_1_address_2, :reference_1_country,
+                                        :reference_1_address_1, :reference_1_address_2, :reference_1_city, :reference_1_country,
                                         :reference_1_postcode, :reference_1_telephone, :reference_1_email,
                                         :reference_2_full_name, :reference_2_occupation, :reference_2_relationship,
-                                        :reference_2_address_1, :reference_2_address_2, :reference_2_country,
+                                        :reference_2_address_1, :reference_2_address_2, :reference_2_city,:reference_2_country,
                                         :reference_2_postcode, :reference_2_telephone, :reference_2_email)
     end
 
@@ -348,7 +348,7 @@ class NewApplicationsController < ApplicationController
       params.require(:application).permit(:title, :first_name, :middle_name, :family_name, :previous_name, :gender,
                      :telephone, :mobile, :email, :disability, :scottish_candidate_number,
                      :national_insurance_number, :permanent_house_number, :permanent_address_1, :permanent_address_2,
-                     :permanent_postcode, :permanent_country, :correspondence_house_number, :correspondence_address_1,
-                     :correspondence_address_2, :correspondence_postcode, :correspondence_country)
+                     :permanent_city, :permanent_postcode, :permanent_country, :correspondence_house_number, :correspondence_address_1,
+                     :correspondence_address_2, :correspondence_city, :correspondence_postcode, :correspondence_country)
     end
 end

@@ -5,17 +5,9 @@ search terms should be:
 *Entry qualifications
 *Career Prospects
 
-Devise recaptcha: https://github.com/plataformatec/devise/wiki/How-To:-Use-Recaptcha-with-Devise
-
 guard against loading application methods (remove course etc.) after application has been submitted.
 
 switch navbar bg colour for staff members?
-
-add city field to addresses...
-
-add college new, destroy safeguards
-
-do we need app intro? make this the home page? that way we have more info to put on home.
 
 remove pundit verify_authorized from global staff controller once permissions done
 

@@ -17,7 +17,7 @@ heroku braintree env variables?
 
 test heroku application cancel with real email
 
-listen gem?
+listen gem? (look it up)
 
 comments - name, date, etc. at top of each file.
 
@@ -29,3 +29,30 @@ PDF: prawn
 Excel: alxsx
 
 dates validate - end date after start date, dates not in future...
+
+plaint text emails
+
+don't count decisions from cancelled courses...
+
+markdown preview
+
+staff show (created / first sign in)
+
+staff students
+
+staff permission groups
+
+remove email, scn, nin from application, display from student, edit through profile.
+
+mobile - have course category list turn into drop down
+
+QUESTIONS
+---------
+
+rdoc
+clearance
+reports (word is a bit hard... pdf?)
+testing delayed tasks, auth fail payment when amount is fixed.
+
+
+

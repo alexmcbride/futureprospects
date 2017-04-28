@@ -76,7 +76,9 @@
                 </a>
                 <ul class="dropdown-menu">
                   <li><%= link_to 'Edit Profile', edit_registration_path(current_user) %></li>
-                  <li><%= link_to 'View Payments', payments_path %></li>
+                  <% if student_signed_in? %>
+                    <li><%= link_to 'View Payments', payments_path %></li>
+                  <% end %>
                   <li role="separator" class="divider"></li>
                   <li><%= link_to 'Sign Out', destroy_session_path(current_user), method: :delete %></li>
                 </ul>

@@ -95,4 +95,23 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Init payment methods using ActiveMerchant.
+  config.after_initialize do
+    ActiveMerchant::Billing::Base.mode = :test # sandbox mode
+
+    # BrainTree for integrated credit/debit card payments.
+    ::BRAINTREE_GATEWAY = ActiveMerchant::Billing::BraintreeGateway.new(
+        :merchant_id => ENV['BRAINTREE_MERCHANT_ID'],
+        :public_key  => ENV['BRAINTREE_PUBLIC_KEY'],
+        :private_key => ENV['BRAINTREE_PRIVATE_KEY']
+    )
+
+    # Or PayPal express checkout.
+    ::PAYPAL_GATEWAY = ActiveMerchant::Billing::PaypalExpressGateway.new(
+        :login => ENV['PAYPAL_USERNAME'],
+        :password  => ENV['PAYPAL_PASSWORD'],
+        :signature => ENV['PAYPAL_SIGNATURE']
+    )
+  end
 end

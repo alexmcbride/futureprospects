@@ -123,37 +123,10 @@ module ApplicationHelper
         concat(name)
       end
     end
+  end
 
-
-
-    # if completed
-    #
-    # else
-    #
-    # end
-    #
-    # disabled = ' disabled' unless completed
-    # if selected
-    #   content_tag(:a, href: url_for(path), class: "list-group-item active#{disabled}", disabled: !completed) do
-    #     concat(content_tag(:div, class: 'row') do
-    #       concat(content_tag(:div, name, class: 'col-xs-10'))
-    #       concat(content_tag(:div, class: 'col-xs-2') do
-    #         concat(content_tag(:i, '', class: 'fa fa-arrow-circle-right app-arrow'))
-    #       end)
-    #     end)
-    #   end
-    # else
-    #   content_tag(:a, href: url_for(path), class: "list-group-item#{disabled}", disabled: !completed) do
-    #     concat(content_tag(:div, class: 'row') do
-    #       concat(content_tag(:div, name, class: 'col-xs-10'))
-    #       if completed
-    #         concat(content_tag(:div, class: 'col-xs-2') do
-    #           concat(content_tag(:i, '', class: 'fa fa-check-circle app-tick'))
-    #         end)
-    #       end
-    #     end)
-    #   end
-    # end
+  def credit_card_number(last_four_digits)
+    ((('x' * 4) + '-') * 3) + last_four_digits
   end
 
   # Formats a date as dd/mm/yyyy.

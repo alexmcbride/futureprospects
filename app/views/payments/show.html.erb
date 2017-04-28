@@ -51,7 +51,7 @@
           <strong>Card Number</strong>
         </div>
         <div class="col-xs-8">
-          <%= "#{'&Chi;' * 12}#{@payment.last_four_digits}".html_safe%>
+          <%= credit_card_number @payment.last_four_digits %>
         </div>
       </div>
     <% end %>

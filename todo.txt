@@ -46,6 +46,8 @@ remove email, scn, nin from application, display from student, edit through prof
 
 mobile - have course category list turn into drop down
 
+add user test@test.com for testing, show things like auth fail select options.
+
 QUESTIONS
 ---------
 

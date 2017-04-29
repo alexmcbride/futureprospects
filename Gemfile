@@ -60,7 +60,7 @@ gem 'gretel' # breadcrumb
 gem 'carrierwave', '~> 1.0' # image upload
 gem 'figaro' # configuration (for heroku)
 gem 'devise' # authentication
-gem 'devise-bootstrapped' # authentication views
+#gem 'devise-bootstrapped' # authentication views
 gem 'rolify' # roles
 gem 'font-awesome-sass', '~> 4.7.0' # glyphs and icons
 gem 'jquery-ui-rails' # jquery-ui
@@ -71,3 +71,4 @@ gem 'pundit' # permissions
 gem 'braintree' # braintree payments
 gem 'activemerchant' # general payments
 gem 'recaptcha', '~> 4.1.0', require: 'recaptcha/rails' # recaptcha
+gem 'prawn' # PDF generation

@@ -15,6 +15,7 @@
           <th>Date</th>
           <th>Card Holder</th>
           <th>Card Number</th>
+          <th>Invoice</th>
         </tr>
       </thead>
       <tbody>
@@ -26,6 +27,7 @@
             <td><%= format_date payment.created_at %></td>
             <td><%= payment.credit_card? ? payment.card_holder : 'N/A' %></td>
             <td><%= payment.credit_card? ? credit_card_number(payment.last_four_digits) : 'N/A' %></td>
+            <td><%= link_to 'Download', payment_path(payment, format: :pdf) unless payment.paypal? || payment.failed? %></td>
           </tr>
         <% end %>
       </tbody>

@@ -3,8 +3,6 @@
 Rails.application.routes.draw do
   get 'payments/payment_method', to: 'payments#payment_method', as: 'payment_method'
   post 'payments/payment_method/continue', to: 'payments#payment_method_continue', as: 'payment_method_continue'
-  get 'payments/amount', to: 'payments#amount', as: 'payment_amount'
-  post 'payments/amount/continue', to: 'payments#amount_continue', as: 'payment_amount_continue'
   resources :payments
 
   devise_for :staff, :skip => [:registrations] # Skip staff sign-up
@@ -14,7 +12,6 @@ Rails.application.routes.draw do
     put 'staff', to: 'devise/registrations#update', as: 'staff_registration'
   end
   devise_for :students, controllers: { registrations: 'registrations'}
-
 
   namespace :staff do
     get 'courses/:id/remove', to: 'courses#remove', as: 'course_remove'

@@ -1,6 +1,6 @@
 class PaymentsController < ApplicationController
   before_action :authenticate_student!
-  before_action :set_payment, only: [:show]
+  before_action :set_payment, only: [:show, :receipt]
   before_action :set_application, only: [:payment_method, :payment_method_continue, :new, :create]
 
   # GET /payments
@@ -64,9 +64,17 @@ class PaymentsController < ApplicationController
   end
 
   # GET /payments/:id
+  # GET /payments/:id.pdf
   #
-  # Shows a specific payment.
+  # Shows a specific payment, or if provided with a format (e.g. .pdf) allows downloading of invoice file.
   def show
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = PaymentPdf.new @payment, view_context
+        send_data pdf.render, filename: pdf.filename, type: pdf.mime_type
+      end
+    end
   end
 
   private

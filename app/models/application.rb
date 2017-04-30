@@ -3,6 +3,9 @@
 # Project: Future Prospects
 # Class: Application - model class for a student application.
 class Application < ApplicationRecord
+  # Imports
+  include ActionView::Helpers::TextHelper
+
   # The maximum length of a personal statement.
   STATEMENT_LENGTH = 2000
 
@@ -250,8 +253,9 @@ class Application < ApplicationRecord
   # * +payment_type+ - the payment type (:credit_card or :paypal)
   # * +paypal_token+ - the token provided by PayPal, required by PayPal payments.
   def create_payment(payment_type, paypal_token)
-    @payment = Payment.new payment_type: payment_type
-    @payment.update_from_paypal paypal_token
+    payment = Payment.new payment_type: payment_type
+    payment.update_from_paypal paypal_token
+    payment
   end
 
   # Authorizes payment.
@@ -270,10 +274,10 @@ class Application < ApplicationRecord
     if payment.valid?
       if payment.authorize
         update_status :paid
-        StudentMailer.payment_received(@application.student, @payment).deliver_later
+        StudentMailer.payment_received(self.student, @payment).deliver_later
       else
         update_status :payment_failed
-        StudentMailer.payment_failed(@application.student, @payment).deliver_later
+        StudentMailer.payment_failed(self.student, @payment).deliver_later
       end
     end
 

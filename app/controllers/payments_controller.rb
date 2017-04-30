@@ -4,9 +4,6 @@ class PaymentsController < ApplicationController
   before_action :set_payment, only: [:show]
   before_action :set_application, only: [:payment_method, :payment_method_continue, :new, :create]
 
-  # Imports
-  include ActionView::Helpers::TextHelper
-
   # GET /payments
   #
   # Displays list of student's payments.
@@ -59,7 +56,7 @@ class PaymentsController < ApplicationController
   #
   # Authorizes either credit card or paypal payments depending on the form that posts to it..
   def create
-    @payment = Application.authorize_payment payment_params, request.remote_ip
+    @payment = @application.authorize_payment payment_params, request.remote_ip
     if @payment.authorized?
       redirect_to payment_path(@payment), notice: 'Payment was successfully authorized.'
     else

@@ -6,7 +6,6 @@ class Payment < ApplicationRecord
   # Imports
   require 'active_merchant'
   require 'active_merchant/billing/rails'
-  include ActionView::Helpers::TextHelper
 
   # Enums
   enum status: [:authorized, :failed]
@@ -20,8 +19,11 @@ class Payment < ApplicationRecord
   validates :payment_type, presence: true
   validates :amount, presence: true, numericality: {greater_than: 0}
   validates :status, presence: true
-  validates :last_four_digits, presence: false
-  validates :card_holder, presence: false
+  validates :description, presence: true
+  validate :validate_card_details, if: :credit_card?
+
+  # Callbacks
+  before_validation :set_default_status
 
   # The card brand (e.g. visa, mastercard etc).
   attr_accessor :card_brand
@@ -54,31 +56,27 @@ class Payment < ApplicationRecord
   #
   # Returns - a boolean indicating if the payment was authorized.
   def authorize
-    if has_paid?
-      self.errors.add(:payment, 'for this application has already been received.')
-      return false
-    end
-
-    # Set some general payment options.
-    self.amount = self.application.calculate_fee
-    self.status = :failed # default
-
     # Take correct payment depending on type.
-    result = nil
-    if self.credit_card?
-      result = authorize_credit_card
-    elsif self.paypal?
-      result = authorize_paypal
+    if self.paypal?
+      response = paypal_purchase
+    else
+      response = credit_card_purchase
     end
 
-    # Check result.
-    if result == :auth_failed
-      handle_auth_failed
-    elsif result == :auth_success
-      handle_auth_success
-      return true
+    # Debug message.
+    puts "Payment Response: #{response.inspect}"
+
+    # Handle response.
+    if response.success?
+      self.status = :authorized
+      self.save!
+      true
+    else
+      self.status = :failed
+      self.save!
+      self.errors.add(:authentication, response.message)
+      false
     end
-    false
   end
 
   # Generates a PayPal payment URL with the specified params.
@@ -90,11 +88,8 @@ class Payment < ApplicationRecord
   #
   # Returns - the PayPal URL to direct to the buyer to.
   def generate_paypal_url(ip, return_url, cancel_url)
-    amount = self.application.calculate_fee
-    courses = self.application.course_selections_count
-
     items = {name: 'Future Prospects',
-             description: "Application fee (#{pluralize courses, 'course'})",
+             description: description,
              quantity: 1,
              amount: amount}
 
@@ -118,13 +113,6 @@ class Payment < ApplicationRecord
       @paypal_payer_id = details.payer_id
       @paypal_token = token
     end
-  end
-
-  # Checks if the application has a successful payment
-  #
-  # Returns - a boolean indicating if a successful payment exists.
-  def has_paid?
-    self.application.payments.where(status: :authorized).any?
   end
 
   # Checks if a payment_type is valid.
@@ -153,100 +141,70 @@ class Payment < ApplicationRecord
   end
 
   private
-    # Authorizes a credit/debit card payment with BrainTree
-    def authorize_credit_card
-      # Set this model's attributes so it can be saved.
-      self.last_four_digits = credit_card.last_digits
-      self.card_holder = "#{card_first_name} #{card_last_name}"
-
-      # Take payment if card and model are valid.
-      card = credit_card
-      if card_valid?(card) and valid?
-        # Take payment
-        response = BRAINTREE_GATEWAY.purchase(self.amount, card)
-        puts "BrainTree Response: #{response.inspect}"
-        return response.success? ? :auth_success : :auth_failed
-      end
-
-      :payment_invalid
-    end
-
-    # Authorizes a payment with PayPal.
-    def authorize_paypal
-      if valid?
-        response = PAYPAL_GATEWAY.purchase(self.amount, currency: CURRENCY, ip: @remote_ip, token: @paypal_token, payer_id: @paypal_payer_id)
-        puts "PayPal Response: #{response.inspect}"
-        return response.success? ? :auth_success : :auth_failed
-      end
-
-      :payment_invalid
-    end
-
-    # Called when authentication is successful.
-    def handle_auth_success
-      self.status = :authorized
-      self.save!
-      self.application.update_status :paid
-      send_payment_received_email
-    end
-
-    # Called when authentication fails.
-    def handle_auth_failed
+  # Called before validation, defaults payment to failed.
+  def set_default_status
+    if self.status.nil?
       self.status = :failed
-      self.save! # We save payment even if failed.
-      self.application.update_status :payment_failed
-      self.errors.add(:authentication, 'failed for this payment.')
-      send_payment_failed_email
     end
+  end
 
-    # Sends a payment confirmation email to the student who made the payment.
-    def send_payment_received_email
-      StudentMailer.payment_received(application.student, self).deliver_later
-    end
+  # Custom validator to check cc details are correct.
+  def validate_card_details
+    card = credit_card
 
-    # Sends a payment failed email to the student who made the payment.
-    def send_payment_failed_email
-      StudentMailer.payment_failed(application.student, self).deliver_later
+    unless card.valid?
+      # Add card errors to this model, so errors gets displayed in form.
+      card.errors.each {|k, v| errors.add(k, v[0])}
     end
+  end
 
-    # Checks if the current card details are valid
-    #
-    # Returns - a boolean indicating if the details are valid.
-    def card_valid?(card)
-      unless card.valid?
-        # Add card errors to this model, so errors gets displayed in form.
-        card.errors.each {|k, v| errors.add(k, v[0])}
-        return false
-      end
-      true
-    end
+  # Makes a credit card purchase
+  #
+  # Returns - an ActiveMerchant Response object
+  def credit_card_purchase
+    card = credit_card
+    self.last_four_digits = card.last_digits
+    self.card_holder = "#{card_first_name} #{card_last_name}"
+    BRAINTREE_GATEWAY.purchase(self.amount, card)
+  end
 
-    # Creates a new CreditCard object from the options.
-    #
-    # Returns - a new credit card object, or nil if the object wasn't built.
-    def credit_card
-      card = ActiveMerchant::Billing::CreditCard.new(
-          brand: card_brand,
-          number: card_number,
-          verification_value: card_cvv,
-          first_name: card_first_name,
-          last_name: card_last_name
-      )
-      card.month, card.year = Payment::try_parse_expiry card_expiry
-      card
-    end
+  # Makes a PayPal purchase
+  #
+  # Returns - an ActiveMerchant Response object
+  def paypal_purchase
+    PAYPAL_GATEWAY.purchase(self.amount,
+                            currency: CURRENCY,
+                            ip: @remote_ip,
+                            token: @paypal_token,
+                            payer_id: @paypal_payer_id)
+  end
 
-    # Parses a Date object from a string.
-    #
-    # * +expiry+ - the string to parse (format: mm/yyyy)
-    #
-    # Returns - a tuple with (month, year) as integers.
-    def self.try_parse_expiry(expiry)
-      begin
-        expiry = Date.strptime expiry, '%m/%Y'
-        [expiry.month, expiry.year]
-      rescue ArgumentError
-        [0, 0]
-      end
+  # Creates a new CreditCard object from the options.
+  #
+  # Returns - a new credit card object, or nil if the object wasn't built.
+  def credit_card
+    card = ActiveMerchant::Billing::CreditCard.new(
+        brand: card_brand,
+        number: card_number,
+        verification_value: card_cvv,
+        first_name: card_first_name,
+        last_name: card_last_name
+    )
+    card.month, card.year = Payment::try_parse_expiry card_expiry
+    card
+  end
+
+  # Parses a Date object from a string.
+  #
+  # * +expiry+ - the string to parse (format: mm/yyyy)
+  #
+  # Returns - a tuple with (month, year) as integers.
+  def self.try_parse_expiry(expiry)
+    begin
+      expiry = Date.strptime expiry, '%m/%Y'
+      [expiry.month, expiry.year]
+    rescue ArgumentError
+      [0, 0]
     end
+  end
 end

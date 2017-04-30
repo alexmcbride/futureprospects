@@ -48,6 +48,8 @@ mobile - have course category list turn into drop down
 
 make PDF pretty? move PDF generation into some sort of view?
 
+add user test@test.com for testing, show things like auth fail select options.
+
 Student Colleges SQL
 --------------------
 
@@ -63,7 +65,6 @@ join colleges o
 on o.id=c.college_id
 where u.type='Student'
 and u.id=1;
-
 
 QUESTIONS
 ---------

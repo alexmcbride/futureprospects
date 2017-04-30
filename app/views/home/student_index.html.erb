@@ -54,13 +54,13 @@
         <% elsif @application.payment_failed? %>
             <p><strong>You made a payment but it was not successful.</strong></p>
             <p>We are waiting to receive a payment for the application fee of <strong><%= number_to_currency @application.calculate_fee_pounds, unit: '£' %></strong>.</p>
-            <p>The payment needs to be received by the <strong><%= format_date @application.expiry_time %></strong> or your application will be cancelled. You can make a payment either with a debit or credit card, or through PayPal. Once payment is received your application will be sent to your chosen colleges to be considered.</p>
+            <p>The payment needs to be received by the <strong><%= format_date @application.payment_expiry_time %></strong> or your application will be cancelled. You can make a payment either with a debit or credit card, or through PayPal. Once payment is received your application will be sent to your chosen colleges to be considered.</p>
             <div class="text-right">
               <%= link_to 'Make Payment', payment_method_path, role: 'button', class: 'link-button' %>
             </div>
         <% elsif @application.cancelled? %>
             <div class="alert alert-danger"><strong>Your application has been cancelled.</strong></div>
-            <p>We have not received your application fee. We were due to receive your application fee of <strong><%= number_to_currency @application.calculate_fee_pounds, unit: '£' %></strong> by the <strong><%= format_date @application.expiry_time %></strong>. This payment was not made in due time. For this reason we have cancelled your application. If you would like to discuss the matter further, please contact the <%= mail_to 'futureprospectsapp@gmail.com', 'administrative staff' %>.</p>
+            <p>We have not received your application fee. We were due to receive your application fee of <strong><%= number_to_currency @application.calculate_fee_pounds, unit: '£' %></strong> by the <strong><%= format_date @application.payment_expiry_time %></strong>. This payment was not made in due time. For this reason we have cancelled your application. If you would like to discuss the matter further, please contact the <%= mail_to 'futureprospectsapp@gmail.com', 'administrative staff' %>.</p>
         <% elsif @application.paid? %>
             <p>You can now track your application.</p>
             <%= link_to 'Track Application', applications_continue_path(@application), role: 'button', class: 'link-button' %>

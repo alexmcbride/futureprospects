@@ -18,6 +18,9 @@ class Application < ApplicationRecord
   # Used for converting pence into pounds.
   PENCE_IN_POUND = 100
 
+  # The number of days until a payment expires.
+  PAYMENT_EXPIRY_DAYS = 7
+
   # Enums for student gender.
   enum gender: [:male, :female, :other]
 
@@ -174,19 +177,31 @@ class Application < ApplicationRecord
     courses_fee(type) / PENCE_IN_POUND
   end
 
-  # Gets the expiry time of the first failed payment made on this application.
+  # Gets the expiry time of the first failed payment made on this application. This is used to determine when the an
+  # application with a failed payment gets cancelled.
   #
   # Returns - the expiry datetime, or nil if there are no failed payments.
-  def expiry_time
+  def payment_expiry_time
     payment = Payment.where(status: :failed).order(:created_at).first
-    payment.expiry_time unless payment.nil?
+    unless payment.nil?
+      return payment.created_at + PAYMENT_EXPIRY_DAYS.days
+    end
+    nil
   end
 
-  # Checks if the application has a successful payment
-  #
-  # Returns - a boolean indicating if a successful payment exists.
-  def has_paid?
-    self.payments.where(status: :authorized).any?
+  # Method called by rake task that cancels any applications with an outstanding payment over 7 days old. To run this
+  # you can do it manually `ruby bin\\rake site_tasks:handle_failed_payments`, on Heroku it is run by the scheduler once
+  # every 24 hours. See for more details: https://devcenter.heroku.com/articles/scheduler
+  def self.handle_failed_payments
+    applications = Application.includes(:student)
+                       .where(status: :payment_failed)
+                       .where(id: Payment.where(status: :failed).where("created_at < CURRENT_DATE - INTERVAL '#{PAYMENT_EXPIRY_DAYS} days'"))
+
+    # Cancel application and emails student.
+    applications.each do |application|
+      application.cancel
+      StudentMailer.application_cancelled(application.student, application)
+    end
   end
 
   # Cancels this application by setting status to :cancelled.

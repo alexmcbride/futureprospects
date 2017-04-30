@@ -5,7 +5,7 @@
 <p>This email is to inform you that your application cannot be processed due to non-payment for the amount of
   <strong><%= number_to_currency @application.calculate_fee_pounds, unit: '£' %></strong>.</p>
 
-<p>The amount was due to be paid within <strong><%= Payment::PAYMENT_EXPIRY_DAYS %> days</strong> by the date of <strong><%= format_date @application.expiry_time %></strong>,
+<p>The amount was due to be paid within <strong><%= Payment::PAYMENT_EXPIRY_DAYS %> days</strong> by the date of <strong><%= format_date @application.payment_expiry_time %></strong>,
   however this payment was not received.</p>
 
 <p>In order to continue this application you will need to contact <%= mail_to 'futureprospectsapp@gmail.com', 'administrative staff' %>.</p>

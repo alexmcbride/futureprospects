@@ -49,7 +49,7 @@ class PaymentsController < ApplicationController
   # When PayPal redirects us here its includes a token in the URL that we need later for authorization.
   def new
     # Check payment hasn't already been received.
-    if @application.has_paid?
+    if @application.paid?
       flash[:notice] = 'This application has already been paid for.'
       render :payment_method
     end

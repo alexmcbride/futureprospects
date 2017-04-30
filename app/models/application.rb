@@ -142,6 +142,32 @@ class Application < ApplicationRecord
     self.available_courses > 0
   end
 
+  # Cancels this application by setting status to :cancelled.
+  def cancel
+    self.update_status :cancelled
+  end
+
+  # Updates the status and saves the application.
+  #
+  # * +status+ - the new status to set.
+  def update_status(status)
+    self.status = status
+    self.save! validate: false
+  end
+
+  # Adds a course selection to the application.
+  #
+  # * +selection+ - The selection to add.
+  #
+  # Returns: a boolean indicating if the selection was added or not.
+  def add_course(selection)
+    selection.application = self
+    if selection.valid?
+      return selection.save
+    end
+    false
+  end
+
   # Calculates the student's application fee.
   #
   # Returns - the application fee amount in pence.
@@ -203,34 +229,9 @@ class Application < ApplicationRecord
     # Cancel application and emails student.
     applications.each do |application|
       application.cancel
+      puts "Cancelled application for: #{application.student.username}..."
       StudentMailer.application_cancelled(application.student, application)
     end
-  end
-
-  # Cancels this application by setting status to :cancelled.
-  def cancel
-    self.update_status :cancelled
-  end
-
-  # Updates the status and saves the application.
-  #
-  # * +status+ - the new status to set.
-  def update_status(status)
-    self.status = status
-    self.save! validate: false
-  end
-
-  # Adds a course selection to the application.
-  #
-  # * +selection+ - The selection to add.
-  #
-  # Returns: a boolean indicating if the selection was added or not.
-  def add_course(selection)
-    selection.application = self
-    if selection.valid?
-      return selection.save
-    end
-    false
   end
 
   # Generates a PayPal payment URL with the specified params.
@@ -250,10 +251,10 @@ class Application < ApplicationRecord
   # * +payment_type+ - the payment type (:credit_card or :paypal)
   # * +paypal_token+ - the token provided by PayPal, required by PayPal payments.
   def create_payment(payment_type, paypal_token)
-    payment = create_payment_obj
-    payment.payment_type = payment_type
-    payment.update_from_paypal paypal_token
-    payment
+    create_payment_obj do |p|
+      p.payment_type = payment_type
+      p.update_from_paypal paypal_token
+    end
   end
 
   # Authorizes payment.
@@ -263,9 +264,9 @@ class Application < ApplicationRecord
   #
   # Returns - the payment object.
   def authorize_payment(params, remote_ip)
-    payment = create_payment_obj(params)
-    payment.remote_ip = remote_ip
-    payment.application = self
+    payment = create_payment_obj(params) do |p|
+      p.remote_ip = remote_ip # Needed for PayPal
+    end
 
     if payment.valid?
       if payment.authorize
@@ -416,9 +417,10 @@ class Application < ApplicationRecord
     # Returns - the created payment object.
     def create_payment_obj(params={})
       payment = Payment.new params
-      payment.application = @application
+      payment.application = self
       payment.amount = calculate_fee
       payment.description = "Application fee (#{pluralize course_selections_count, 'course'})"
+      yield(payment) if block_given?
       payment
     end
 end

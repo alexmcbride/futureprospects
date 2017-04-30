@@ -209,8 +209,7 @@ class Application < ApplicationRecord
 
   # Cancels this application by setting status to :cancelled.
   def cancel
-    self.status = :cancelled
-    self.save!
+    self.update_status :cancelled
   end
 
   # Updates the status and saves the application.
@@ -242,9 +241,7 @@ class Application < ApplicationRecord
   #
   # Returns - the PayPal URL to direct to the buyer to.
   def generate_paypal_url(ip, return_url, cancel_url)
-    payment = Payment.new application: @application
-    payment.amount = calculate_fee
-    payment.description = "Application fee (#{pluralize course_selections_count, 'course'})"
+    payment = create_payment_obj
     payment.generate_paypal_url ip, return_url, cancel_url
   end
 
@@ -253,7 +250,8 @@ class Application < ApplicationRecord
   # * +payment_type+ - the payment type (:credit_card or :paypal)
   # * +paypal_token+ - the token provided by PayPal, required by PayPal payments.
   def create_payment(payment_type, paypal_token)
-    payment = Payment.new payment_type: payment_type
+    payment = create_payment_obj
+    payment.payment_type = payment_type
     payment.update_from_paypal paypal_token
     payment
   end
@@ -265,9 +263,7 @@ class Application < ApplicationRecord
   #
   # Returns - the payment object.
   def authorize_payment(params, remote_ip)
-    payment = Payment.new(params)
-    payment.amount = calculate_fee
-    payment.description = "Application fee (#{pluralize course_selections_count, 'course'})"
+    payment = create_payment_obj(params)
     payment.remote_ip = remote_ip
     payment.application = self
 
@@ -411,4 +407,18 @@ class Application < ApplicationRecord
       false
     end
   end
+
+  private
+    # Creates payment object with valid attributes
+    #
+    # * +params+ - the request params
+    #
+    # Returns - the created payment object.
+    def create_payment_obj(params={})
+      payment = Payment.new params
+      payment.application = @application
+      payment.amount = calculate_fee
+      payment.description = "Application fee (#{pluralize course_selections_count, 'course'})"
+      payment
+    end
 end

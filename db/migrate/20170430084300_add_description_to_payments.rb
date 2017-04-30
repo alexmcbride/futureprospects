@@ -7,7 +7,7 @@ class AddDescriptionToPayments < ActiveRecord::Migration[5.0]
     Payment.all.each do |payment|
       courses = payment.application.course_selections_count
       payment.description = "Application fee (#{pluralize courses, 'course'})"
-      payment.save!
+      payment.save! validate: false
     end
   end
 

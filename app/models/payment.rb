@@ -52,7 +52,7 @@ class Payment < ApplicationRecord
   # The token returned by PayPal.
   attr_accessor :paypal_token
 
-  # Authorizes a payment using the card details.
+  # Authorizes the payment
   #
   # Returns - a boolean indicating if the payment was authorized.
   def authorize
@@ -203,7 +203,7 @@ class Payment < ApplicationRecord
     begin
       expiry = Date.strptime expiry, '%m/%Y'
       [expiry.month, expiry.year]
-    rescue ArgumentError
+    rescue ArgumentError, TypeError
       [0, 0]
     end
   end

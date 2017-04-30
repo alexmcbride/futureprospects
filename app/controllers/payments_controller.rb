@@ -1,7 +1,7 @@
 class PaymentsController < ApplicationController
   # Callbacks
   before_action :authenticate_student!
-  before_action :set_payment, only: [:show, :receipt]
+  before_action :set_payment, only: [:show]
   before_action :set_application, only: [:payment_method, :payment_method_continue, :new, :create]
 
   # Imports
@@ -32,9 +32,7 @@ class PaymentsController < ApplicationController
     session[:payment_type] = params[:payment_type].to_sym if params[:payment_type]
 
     if session[:payment_type] == :paypal
-      payment = Payment.new application: @application
-      payment.amount = @application.calculate_fee
-      redirect_to payment.generate_paypal_url request.remote_ip, new_payment_url, payment_method_url
+      redirect_to @application.generate_paypal_url request.remote_ip, new_payment_url, payment_method_url
     elsif session[:payment_type] == :credit_card
       redirect_to new_payment_path
     else
@@ -54,30 +52,16 @@ class PaymentsController < ApplicationController
       render :payment_method
     end
 
-    @payment = Payment.new payment_type: session[:payment_type]
-    @payment.update_from_paypal params[:token]
+    @payment = @application.create_payment session[:payment_type], params[:token]
   end
 
   # POST /payments
   #
   # Authorizes either credit card or paypal payments depending on the form that posts to it..
   def create
-    @payment = Payment.new(payment_params)
-    @payment.amount = @application.calculate_fee
-    @payment.description = "Application fee (#{pluralize @application.course_selections_count, 'course'})"
-    @payment.remote_ip = request.remote_ip # Needed for PayPal payment.
-    @payment.application = @application
-
-    if @payment.valid?
-      if @payment.authorize
-        @application.update_status :paid
-        StudentMailer.payment_received(@application.student, @payment).deliver_later
-        redirect_to payment_path(@payment), notice: 'Payment was successfully authorized.'
-      else
-        @application.update_status :payment_failed
-        StudentMailer.payment_failed(@application.student, @payment).deliver_later
-        render :new
-      end
+    @payment = Application.authorize_payment payment_params, request.remote_ip
+    if @payment.authorized?
+      redirect_to payment_path(@payment), notice: 'Payment was successfully authorized.'
     else
       render :new
     end

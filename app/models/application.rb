@@ -231,6 +231,55 @@ class Application < ApplicationRecord
     false
   end
 
+  # Generates a PayPal payment URL with the specified params.
+  #
+  # * +ip+ - the buyer's IP address
+  # * +return_url+ - the URL the buyer is returned to. This return action then needs to call authorize.
+  # * +cancel_url+ - the URL the buyer is returned to, if they cancel their PayPal purchase.
+  #
+  # Returns - the PayPal URL to direct to the buyer to.
+  def generate_paypal_url(ip, return_url, cancel_url)
+    payment = Payment.new application: @application
+    payment.amount = calculate_fee
+    payment.description = "Application fee (#{pluralize course_selections_count, 'course'})"
+    payment.generate_paypal_url ip, return_url, cancel_url
+  end
+
+  # Creates a payment object, of the specified payment type
+  #
+  # * +payment_type+ - the payment type (:credit_card or :paypal)
+  # * +paypal_token+ - the token provided by PayPal, required by PayPal payments.
+  def create_payment(payment_type, paypal_token)
+    @payment = Payment.new payment_type: payment_type
+    @payment.update_from_paypal paypal_token
+  end
+
+  # Authorizes payment.
+  #
+  # * +params+ - the payment params from the payment form
+  # * +remote_up+ - the buyer's IP, needed for PayPal.
+  #
+  # Returns - the payment object.
+  def authorize_payment(params, remote_ip)
+    payment = Payment.new(params)
+    payment.amount = calculate_fee
+    payment.description = "Application fee (#{pluralize course_selections_count, 'course'})"
+    payment.remote_ip = remote_ip
+    payment.application = self
+
+    if payment.valid?
+      if payment.authorize
+        update_status :paid
+        StudentMailer.payment_received(@application.student, @payment).deliver_later
+      else
+        update_status :payment_failed
+        StudentMailer.payment_failed(@application.student, @payment).deliver_later
+      end
+    end
+
+    payment
+  end
+
   # Attempts to save the intro stage.
   #
   # Returns - boolean indicating if the stage was saved.

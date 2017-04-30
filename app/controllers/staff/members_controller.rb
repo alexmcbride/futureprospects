@@ -4,7 +4,6 @@ class Staff::MembersController < Staff::StaffController
   before_action :set_colleges, only: [:index, :new, :edit]
 
   # GET /staff/users
-  # GET /staff/users.json
   def index
     @members = policy_scope(Staff).filter(params).includes(:college).order(:created_at).paginate(page: params[:page])
     if current_staff.has_role? :site_admin
@@ -15,7 +14,6 @@ class Staff::MembersController < Staff::StaffController
   end
 
   # GET /staff/users/1
-  # GET /staff/users/1.json
   def show
     authorize @member
   end
@@ -27,7 +25,6 @@ class Staff::MembersController < Staff::StaffController
   end
 
   # POST /staff/users
-  # POST /staff/users.json
   def create
     @member = Staff.new user_params_with_password
 
@@ -53,7 +50,6 @@ class Staff::MembersController < Staff::StaffController
   end
 
   # PATCH/PUT /staff/users/1
-  # PATCH/PUT /staff/users/1.json
   def update
     # Make sure correct college set
     unless current_staff.has_role? :site_admin

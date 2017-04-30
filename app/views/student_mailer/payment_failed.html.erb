@@ -2,15 +2,18 @@
 
 <p><%= @student.full_name %>,</p>
 
-<p>This email is to inform you that we were unable to take a payment for the amount of
-  <strong><%= number_to_currency @payment.amount_pounds, unit: '£' %></strong> using the supplied payment details.</p>
+<p>This email is to inform you that we were unable to take the following payment using the supplied payment details.</p>
 
-<% if @payment.credit_card? %>
 <ul>
-  <li>Card Holder: <%= @payment.card_holder %></li>
-  <li>Card Number: ************<%= @payment.last_four_digits %></li>
+  <li>Amount: <strong><%= number_to_currency @payment.amount_pounds, unit: '£' %></strong></li>
+  <li>Description: <strong><%= @payment.description %></strong></li>
+  <li>Payment Type: <strong><%= @payment.payment_type %></strong></li>
+  <li>Payment Date: <strong><%= format_date @payment.created_at %></strong></li>
+  <% if @payment.credit_card? %>
+    <li>Card Holder: <strong><%= @payment.card_holder %></strong></li>
+    <li>Card Number: <strong><%= credit_card_number @payment.last_four_digits %></strong></li>
+  <% end %>
 </ul>
-<% end %>
 
 <p>Your application cannot be processed until this payment is received. You have
   <strong><%= Payment::PAYMENT_EXPIRY_DAYS %> days</strong> to make a successful payment.</p>

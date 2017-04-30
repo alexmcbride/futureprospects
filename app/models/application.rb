@@ -182,6 +182,13 @@ class Application < ApplicationRecord
     payment.expiry_time unless payment.nil?
   end
 
+  # Checks if the application has a successful payment
+  #
+  # Returns - a boolean indicating if a successful payment exists.
+  def has_paid?
+    self.payments.where(status: :authorized).any?
+  end
+
   # Cancels this application by setting status to :cancelled.
   def cancel
     self.status = :cancelled
@@ -193,7 +200,7 @@ class Application < ApplicationRecord
   # * +status+ - the new status to set.
   def update_status(status)
     self.status = status
-    self.save!
+    self.save! validate: false
   end
 
   # Adds a course selection to the application.
@@ -207,10 +214,6 @@ class Application < ApplicationRecord
       return selection.save
     end
     false
-  end
-
-  def remove_course(selection)
-
   end
 
   # Attempts to save the intro stage.

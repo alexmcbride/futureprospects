@@ -46,6 +46,25 @@ remove email, scn, nin from application, display from student, edit through prof
 
 mobile - have course category list turn into drop down
 
+make PDF pretty? move PDF generation into some sort of view?
+
+Student Colleges SQL
+--------------------
+
+select distinct(u.id, u.username, o.name)
+from users u 
+join applications a 
+on u.id=a.student_id
+join course_selections s
+on s.application_id=u.id
+join courses c
+on s.course_id=c.id
+join colleges o
+on o.id=c.college_id
+where u.type='Student'
+and u.id=1;
+
+
 QUESTIONS
 ---------
 

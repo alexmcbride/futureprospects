@@ -1,15 +1,25 @@
 <h1>Future Prospects - Payment Received</h1>
 
-<p><%= @student.full_name %>,</p>
+<p>Hello <%= @student.full_name %>,</p>
 
-<p>This email is to inform you that the application fee of
-  <strong><%= number_to_currency @payment.amount_pounds, unit: '£' %></strong> has been paid.</p>
+<p>This email is to inform you that the following payment has been received:</p>
+
+<ul>
+  <li>Amount: <strong><%= number_to_currency @payment.amount_pounds, unit: '£' %></strong></li>
+  <li>Description: <strong><%= @payment.description %></strong></li>
+  <li>Payment Type: <strong><%= @payment.payment_type %></strong></li>
+  <li>Payment Date: <strong><%= format_date @payment.created_at %></strong></li>
+  <% if @payment.credit_card? %>
+    <li>Card Holder: <strong><%= @payment.card_holder %></strong></li>
+    <li>Card Number: <strong><%= credit_card_number @payment.last_four_digits %></strong></li>
+  <% end %>
+</ul>
 
 <p>This means that you application can now be processed and sent to your selected colleges for consideration. You will
 be contacted when a decision has been made about a course you have applied for.</p>
 
 <p>In order to track your application, please <%= link_to 'sign in', root_url %> to the Future Prospects site and use
-  the Track Application option.</p>
+  the track application option.</p>
 
 <p>Sincerely,
   <br><br>

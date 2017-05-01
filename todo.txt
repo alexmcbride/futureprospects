@@ -52,30 +52,3 @@ search within a category?
 
 add user test@test.com for testing, show things like auth fail select options.
 
-Student Colleges SQL
---------------------
-
-select distinct(u.id, u.username, o.name)
-from users u 
-join applications a 
-on u.id=a.student_id
-join course_selections s
-on s.application_id=u.id
-join courses c
-on s.course_id=c.id
-join colleges o
-on o.id=c.college_id
-where u.type='Student'
-and u.id=1;
-
-QUESTIONS
----------
-
-who gets the money
-rdoc
-clearance
-reports (word is a bit hard... pdf?)
-testing delayed tasks, auth fail payment when amount is fixed.
-
-
-

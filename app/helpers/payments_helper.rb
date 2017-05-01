@@ -1,3 +1,4 @@
+# Module to define helpers for the payments controller.
 module PaymentsHelper
   # Helper method for getting card symbol from string
   #
@@ -22,6 +23,12 @@ module PaymentsHelper
     "<option disabled=\"disabled\"#{ 'selected="selected"' unless payment.card_brand}>-- Choose --</option>".html_safe + options
   end
 
+  # Payments stage item HTML.
+  #
+  # * +value+ - the value of the item
+  # * +selected+ - whether the item is selected or not.
+  #
+  # Returns - the HTML to display the item.
   def payment_stage_item(value, selected=false)
     if selected
       content_tag(:li, class: 'list-group-item active') do

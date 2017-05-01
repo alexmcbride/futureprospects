@@ -108,6 +108,24 @@ class Application < ApplicationRecord
     CourseSelection.includes(:course).where application_id: self.id
   end
 
+  # Gets all of the applications that have at least one course selection at the specified college.
+  #
+  # * +college_id+ - the college to check for.
+  #
+  # Returns - an ActiveRecord::Relation containing the applications.
+  def self.college_applications(college_id)
+    Application.select('DISTINCT applications.*').joins(course_selections: :course).where('courses.college_id=?', college_id)
+  end
+
+  # Checks if this applications has a course selection for the specified college.
+  #
+  # * +college_id+ - the college to check for.
+  #
+  # Returns - true if it does belong, otherwise false.
+  def belongs_to_college(college_id)
+    self.course_selections.joins(:course).where('courses.college_id=?', college_id).any?
+  end
+
   # Checks that all added schools have at least one qualification.
   #
   # Returns - true if the schools are valid.
@@ -271,10 +289,10 @@ class Application < ApplicationRecord
     if payment.valid?
       if payment.authorize
         update_status :paid
-        StudentMailer.payment_received(self.student, @payment).deliver_later
+        StudentMailer.payment_received(self.student, payment).deliver_later
       else
         update_status :payment_failed
-        StudentMailer.payment_failed(self.student, @payment).deliver_later
+        StudentMailer.payment_failed(self.student, payment).deliver_later
       end
     end
 

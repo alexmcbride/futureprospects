@@ -1,9 +1,9 @@
 # Module for application wide helpers. These are functions that can be called in views.
 module ApplicationHelper
-  # Markdown rendered
+  # Class variable to hold the markdown renderer.
   @@renderer = nil
 
-  # Markdown object.
+  # Class variable to hold the markdown object.
   @@markdown = nil
 
   # Determines the type of bootstrap class to use for the alert.
@@ -22,7 +22,7 @@ module ApplicationHelper
 
   # Displays any queued flash messages in a bootstrap friendly way.
   #
-  # Returns - the HTML for a pretty bootstrap alert contaning the flash message.
+  # Returns - the HTML for a pretty bootstrap alert containing the flash message.
   def flash_messages
     flash.each do |msg_type, message|
       concat(content_tag(:div, message, class: "text-center alert #{bootstrap_class_for(msg_type)} fade in") do
@@ -125,6 +125,11 @@ module ApplicationHelper
     end
   end
 
+  # Returns a masked credit card number
+  #
+  # * +last_four_digits+ - the last four digits of the card number
+  #
+  # Returns - the masked card number as a string.
   def credit_card_number(last_four_digits)
     ((('X' * 4) + '-') * 3) + last_four_digits
   end
@@ -138,6 +143,11 @@ module ApplicationHelper
     date.strftime '%d/%m/%Y' if date
   end
 
+  # Formats an expiry date (dd/yy)
+  #
+  # * +date+ - the date to format.
+  #
+  # Returns - the formatted date.
   def format_expiry(date)
     date.strftime '%m/%y' if date
   end

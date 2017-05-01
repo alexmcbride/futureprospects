@@ -14,6 +14,7 @@ class Staff::ApplicationsController < ApplicationController
                        .includes(:reference)
                        .includes(:payments)
                        .find params[:id]
+    authorize @application
   end
 
   # GET /staff/applications/1/edit

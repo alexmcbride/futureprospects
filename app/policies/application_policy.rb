@@ -21,9 +21,13 @@ class ApplicationPolicy < BaseApplicationPolicy
         scope.all
       else
         # Get list of apps that have at least one course selection for staff member's college.
-        scope.select('DISTINCT applications.*').joins(course_selections: :course).where('courses.college_id=?', user.college_id)
+        scope.college_applications user.college_id
       end
     end
   end
 
+  # Determines if the user is authorized to view the show action.
+  def show?
+    user.has_role?(:site_admin) || record.belongs_to_college(user.college_id)
+  end
 end

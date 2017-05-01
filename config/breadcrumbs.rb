@@ -243,3 +243,13 @@ crumb :staff_member_permissions do |user|
   parent :staff_members_show, user
   link 'Permissions', staff_member_permissions_path(user)
 end
+
+crumb :staff_applications do
+  parent :root
+  link 'Applications', staff_applications_path
+end
+
+crumb :staff_applications_show do |application|
+  parent :staff_applications
+  link application.student.full_name, staff_application_path(application)
+end

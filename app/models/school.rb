@@ -10,6 +10,15 @@ class School < ApplicationRecord
   belongs_to :application
   has_many :qualifications
 
+  # Generates an address
+  #
+  # * +separator+ - the line separator.
+  #
+  # Returns - the address as a string.
+  def address(separator='<br>')
+    [address_1, address_2, city, postcode, country].join(separator).html_safe
+  end
+
   # Checks if the school has at least one qualification
   #
   # Returns - a boolean indicating if the school has at least a single qualification.

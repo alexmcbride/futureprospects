@@ -1,40 +1,23 @@
 class Staff::ApplicationsController < ApplicationController
-  before_action :set_staff_application, only: [:show, :edit, :update, :destroy]
-
   # GET /staff/applications
   # GET /staff/applications.json
   def index
-    @applications = policy_scope(Application).includes(:student).where.not(status: :submitting)
+    @applications = policy_scope(Application).includes(:student)#.where.not(status: :submitting)
   end
 
   # GET /staff/applications/1
   # GET /staff/applications/1.json
   def show
-  end
-
-  # GET /staff/applications/new
-  def new
-    @application = Application.new
+    @application = Application.includes(course_selections: [:course])
+                       .includes(schools: [:qualifications])
+                       .includes(:jobs)
+                       .includes(:reference)
+                       .includes(:payments)
+                       .find params[:id]
   end
 
   # GET /staff/applications/1/edit
   def edit
-  end
-
-  # POST /staff/applications
-  # POST /staff/applications.json
-  def create
-    @application = Application.new(staff_application_params)
-
-    respond_to do |format|
-      if @application.save
-        format.html { redirect_to @application, notice: 'Application was successfully created.' }
-        format.json { render :show, status: :created, location: @application }
-      else
-        format.html { render :new }
-        format.json { render json: @application.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /staff/applications/1

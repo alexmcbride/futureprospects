@@ -12,4 +12,13 @@ class Job < ApplicationRecord
   validates :end_date, presence: true
 
   belongs_to :application
+
+  # Generates an address
+  #
+  # * +separator+ - the line separator.
+  #
+  # Returns - the address as a string.
+  def address(separator='<br>')
+    [address_1, address_2, city, postcode, country].join(separator).html_safe
+  end
 end

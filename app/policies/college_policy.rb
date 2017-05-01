@@ -1,5 +1,5 @@
 # Class to represent which users can assess college models. Used for staff permissions.
-class CollegePolicy < ApplicationPolicy
+class CollegePolicy < BaseApplicationPolicy
   # Class to represent lists of categories.
   class Scope < Scope
     attr_reader :user, :scope

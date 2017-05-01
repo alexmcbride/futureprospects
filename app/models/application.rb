@@ -28,7 +28,7 @@ class Application < ApplicationRecord
   enum gender: [:male, :female, :other]
 
   # Enum for the application status.
-  enum status: [:submitting, :submitted, :paid, :payment_failed, :completed, :cancelled]
+  enum status: [:submitting, :submitted, :paid, :payment_failed, :cancelled] # :completed
 
   # Enum for current application stage.
   enum current_stage: [:intro_stage, :profile_stage, :education_stage, :employment_stage, :references_stage,

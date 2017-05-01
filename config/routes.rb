@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     post 'members/:id/demote_admin', to: 'members#demote_admin', as: 'member_demote_admin'
     get 'members/:id/remove', to: 'members#remove', as: 'member_remove'
     resources :members
+    resources :applications
   end
 
   # Application routes

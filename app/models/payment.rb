@@ -115,15 +115,6 @@ class Payment < ApplicationRecord
     end
   end
 
-  # Checks if a payment_type is valid.
-  #
-  # * +payment_type+ - the payment type to test
-  #
-  # Returns - true if the payment type is valid.
-  def self.valid_payment_type?(payment_type)
-    %w(credit_card paypal).include? payment_type
-  end
-
   # Gets the amount paid in pounds
   #
   # Returns - the amount in pounds.
@@ -141,70 +132,69 @@ class Payment < ApplicationRecord
   end
 
   private
-  # Called before validation, defaults payment to failed.
-  def set_default_status
-    if self.status.nil?
-      self.status = :failed
+    # Called before validation, defaults payment to failed.
+    def set_default_status
+      if self.status.nil?
+        self.status = :failed
+      end
     end
-  end
 
-  # Custom validator to check cc details are correct.
-  def validate_card_details
-    card = credit_card
-
-    unless card.valid?
-      # Add card errors to this model, so errors gets displayed in form.
-      card.errors.each {|k, v| errors.add(k, v[0])}
+    # Custom validator to check cc details are correct.
+    def validate_card_details
+      card = credit_card
+      unless card.valid?
+        # Add card errors to this model, so errors gets displayed in form.
+        card.errors.each {|k, v| errors.add(k, v[0])}
+      end
     end
-  end
 
-  # Makes a credit card purchase
-  #
-  # Returns - an ActiveMerchant Response object
-  def credit_card_purchase
-    card = credit_card
-    self.last_four_digits = card.last_digits
-    self.card_holder = "#{card_first_name} #{card_last_name}"
-    BRAINTREE_GATEWAY.purchase(self.amount, card)
-  end
-
-  # Makes a PayPal purchase
-  #
-  # Returns - an ActiveMerchant Response object
-  def paypal_purchase
-    PAYPAL_GATEWAY.purchase(self.amount,
-                            currency: CURRENCY,
-                            ip: @remote_ip,
-                            token: @paypal_token,
-                            payer_id: @paypal_payer_id)
-  end
-
-  # Creates a new CreditCard object from the options.
-  #
-  # Returns - a new credit card object, or nil if the object wasn't built.
-  def credit_card
-    card = ActiveMerchant::Billing::CreditCard.new(
-        brand: card_brand,
-        number: card_number,
-        verification_value: card_cvv,
-        first_name: card_first_name,
-        last_name: card_last_name
-    )
-    card.month, card.year = Payment::try_parse_expiry card_expiry
-    card
-  end
-
-  # Parses a Date object from a string.
-  #
-  # * +expiry+ - the string to parse (format: mm/yyyy)
-  #
-  # Returns - a tuple with (month, year) as integers.
-  def self.try_parse_expiry(expiry)
-    begin
-      expiry = Date.strptime expiry, '%m/%Y'
-      [expiry.month, expiry.year]
-    rescue ArgumentError, TypeError
-      [0, 0]
+    # Makes a credit card purchase
+    #
+    # Returns - an ActiveMerchant Response object
+    def credit_card_purchase
+      card = credit_card
+      self.last_four_digits = card.last_digits
+      self.card_holder = "#{card_first_name} #{card_last_name}"
+      BRAINTREE_GATEWAY.purchase(self.amount, card)
     end
-  end
+
+    # Makes a PayPal purchase
+    #
+    # Returns - an ActiveMerchant Response object
+    def paypal_purchase
+      PAYPAL_GATEWAY.purchase(self.amount,
+                              currency: CURRENCY,
+                              ip: @remote_ip,
+                              token: @paypal_token,
+                              payer_id: @paypal_payer_id)
+    end
+
+    # Creates a new CreditCard object from the options.
+    #
+    # Returns - a new credit card object, or nil if the object wasn't built.
+    def credit_card
+      card = ActiveMerchant::Billing::CreditCard.new(
+          brand: card_brand,
+          number: card_number,
+          verification_value: card_cvv,
+          first_name: card_first_name,
+          last_name: card_last_name
+      )
+      card.month, card.year = Payment::try_parse_expiry card_expiry
+      card
+    end
+
+    # Parses a Date object from a string.
+    #
+    # * +expiry+ - the string to parse (format: mm/yyyy)
+    #
+    # Returns - a tuple with (month, year) as integers.
+    def self.try_parse_expiry(expiry)
+      begin
+        expiry = Date.strptime expiry, '%m/%Y'
+        [expiry.month, expiry.year]
+      rescue ArgumentError, TypeError
+        [0, 0]
+      end
+    end
 end

@@ -54,6 +54,7 @@ class Staff::CollegesController < Staff::StaffController
     end
   end
 
+  # GET /staff/colleges/1/remove
   def remove
     authorize @college
   end

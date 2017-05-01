@@ -44,9 +44,11 @@ staff permission groups
 
 remove email, scn, nin from application, display from student, edit through profile.
 
-mobile - have course category list turn into drop down
+mobile - have course category list turn into drop down (possible?)
 
 make PDF pretty? move PDF generation into some sort of view?
+
+search within a category?
 
 add user test@test.com for testing, show things like auth fail select options.
 
@@ -69,6 +71,7 @@ and u.id=1;
 QUESTIONS
 ---------
 
+who gets the money
 rdoc
 clearance
 reports (word is a bit hard... pdf?)

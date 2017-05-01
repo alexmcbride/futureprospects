@@ -4,18 +4,20 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable,
          :lockable, :timeoutable, :authentication_keys => [:login]
 
+  # Relations
   has_many :applications
   belongs_to :college
   attr_accessor :login
   before_create :before_create
 
+  # Validators
   validates :first_name, presence: true, length: {maximum: 35, minimum: 1}
   validates :family_name, presence: true, length: {maximum: 35, minimum: 2}
 
-  # Rolify adds role support.
+  # Add role support.
   rolify
 
-  # Sets the login name, either username or email address.
+  # Sets the login name - either username or email address.
   #
   # * +login+ - the user's login.
   def login=(login)
@@ -35,7 +37,7 @@ class User < ApplicationRecord
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     if (login = conditions.delete(:login))
-      where(conditions.to_h).where(['lower(username) = :value OR lower(email) = :value', {:value => login.downcase }]).first
+      where(conditions.to_h).where(['lower(username) = :value OR lower(email) = :value', {value: login.downcase}]).first
     elsif conditions.has_key?(:username) || conditions.has_key?(:email)
       where(conditions.to_h).first
     end

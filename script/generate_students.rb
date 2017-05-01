@@ -67,6 +67,7 @@ def student(tokens, schools, jobs, refs)
   puts app + ".permanent_postcode = '#{tokens[22]} 2GR'"
   puts app + ".permanent_city = 'Glasgow'"
   puts app + ".permanent_country = '#{tokens[8]}'"
+  puts app + ".submitted_date = Date.strptime('#{(Date.new(2016, 10, 1)..Date.today).to_a.sample}')"
   unless tokens[20].empty?
     puts app + ".correspondence_house_number = '#{tokens[17]}'"
     puts app + ".correspondence_address_1 = '#{tokens[18]} #{tokens[19]}'"
@@ -75,7 +76,8 @@ def student(tokens, schools, jobs, refs)
     puts app + ".correspondence_city = 'Glasgow'"
     puts app + ".correspondence_country = '#{tokens[21]}'"
   end
-  puts app + '.status = :submitted'
+  status = Application.statuses.to_a.sample[0]
+  puts app + ".status = :#{status}"
   puts app + '.current_stage = :submit_stage'
   puts app + '.save! validate: false'
   puts ''
@@ -169,25 +171,26 @@ def student(tokens, schools, jobs, refs)
   end
 
   # Payments
-  last_year = (DateTime.now - 6.months)..DateTime.now
-  dates = last_year.to_a.sample(4).sort
-  amount = num > 1 ? 2000 : 1000
-  payments = ["payment = Payment.new application: #{app}, payment_type: :credit_card, amount: #{amount}, status: :failed, card_holder: '#{full_name}', last_four_digits: '0004', created_at: '#{dates[0]}', updated_at: '#{dates[0]}', description: 'Application Fee (#{num} Courses)'",
-              "payment = Payment.new application: #{app}, payment_type: :paypal, amount: #{amount}, status: :failed, card_holder: '#{full_name}', created_at: '#{dates[1]}', updated_at: '#{dates[1]}', description: 'Application Fee (#{num} Courses)'",
-              "payment = Payment.new application: #{app}, payment_type: :credit_card, amount: #{amount}, status: :failed, card_holder: '#{full_name}', last_four_digits: '0004', created_at: '#{dates[2]}', updated_at: '#{dates[2]}', description: 'Application Fee (#{num} Courses)'",
-              "payment = Payment.new application: #{app}, payment_type: :paypal, amount: #{amount}, status: :authorized, card_holder: '#{full_name}', created_at: '#{dates[3]}', updated_at: '#{dates[3]}', description: 'Application Fee (#{num} Courses)'"]
-  puts 'auth = :payment_failed'
-  payments.sample(rand(0..4)).each do |payment|
-    if payment == payments.last
-      puts 'auth = :paid'
+  status = status.to_sym
+  if [:paid, :payment_failed, :cancelled].include? status
+    last_year = (DateTime.now - 6.months)..DateTime.now
+    dates = last_year.to_a.sample(4).sort
+    amount = num > 1 ? 2000 : 1000
+    failed_payments = ["payment = Payment.new application: #{app}, payment_type: :credit_card, amount: #{amount}, status: :failed, card_holder: '#{full_name}', last_four_digits: '0004', created_at: '#{dates[0]}', updated_at: '#{dates[0]}', description: 'Application Fee (#{num} Courses)'",
+                "payment = Payment.new application: #{app}, payment_type: :paypal, amount: #{amount}, status: :failed, card_holder: '#{full_name}', created_at: '#{dates[1]}', updated_at: '#{dates[1]}', description: 'Application Fee (#{num} Courses)'",
+                "payment = Payment.new application: #{app}, payment_type: :credit_card, amount: #{amount}, status: :failed, card_holder: '#{full_name}', last_four_digits: '0004', created_at: '#{dates[2]}', updated_at: '#{dates[2]}', description: 'Application Fee (#{num} Courses)'",]
+    payment_auth = "payment = Payment.new application: #{app}, payment_type: :paypal, amount: #{amount}, status: :authorized, card_holder: '#{full_name}', created_at: '#{dates[3]}', updated_at: '#{dates[3]}', description: 'Application Fee (#{num} Courses)'"
+    failed_payments.sample(rand(1..failed_payments.count)).each do |payment|
+      puts payment
+      puts 'payment.save! validate: false'
     end
-    puts payment
-    puts 'payment.save! validate: false'
+    if status == :paid
+      puts payment_auth
+      puts 'payment.save! validate: false'
+    end
+    puts ''
   end
-  puts ''
-  puts 'app.status = auth'
-  puts 'app.save!'
-  puts ''
+
 
   $counter += 1
 end

@@ -1,0 +1,30 @@
+<%
+  @title = 'Applications'
+%>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Student</th>
+        <th>Submitted</th>
+        <th>Updated</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @applications.each do |application| %>
+        <tr>
+          <td><%= application.student.full_name %></td>
+          <td><%= format_date application.submitted_date %></td>
+          <td><%= format_date application.updated_at %></td>
+          <td><%= application.status.humanize %></td>
+          <td><%= link_to 'Show', staff_application_path(application) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+

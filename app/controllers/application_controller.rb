@@ -1,9 +1,7 @@
+# Base controller that all controllers inherit from.
 class ApplicationController < ActionController::Base
   include Pundit
-
   protect_from_forgery with: :exception
-
-  # Add sanitised parameters for devise
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   protected
@@ -22,12 +20,5 @@ class ApplicationController < ActionController::Base
     # Gets the currently signed in user.
     def current_user
       current_student or current_staff
-    end
-
-    def authenticate_staff_role! role
-      authenticate_staff!
-      if staff_signed_in? and not current_staff.has_role? role
-        user_not_authorized
-      end
     end
 end

@@ -1,87 +1,29 @@
-# Abstract class all policies inherit from. Policies are used to control which users have access certain models.
-class ApplicationPolicy
-  attr_reader :user, :record
-
-  # Constructor
-  #
-  # * +user+ - the user to check for access rights
-  # * +record+ - the model resource to check
-  def initialize(user, record)
-    @user = user
-    @record = record
-  end
-
-  # Default index? access rights.
-  #
-  # Returns - false
-  def index?
-    false
-  end
-
-  # Default show? access rights.
-  #
-  # Returns - if the record exists in the scope.
-  def show?
-    scope.where(:id => record.id).exists?
-  end
-
-  # Default create? access rights.
-  #
-  # Returns - false
-  def create?
-    false
-  end
-
-  # Default new? access rights.
-  #
-  # Returns - false
-  def new?
-    create?
-  end
-
-  # Default update? access rights.
-  #
-  # Returns - false
-  def update?
-    false
-  end
-
-  # Default edit? access rights.
-  #
-  # Returns - false
-  def edit?
-    update?
-  end
-
-  # Default destroy? access rights.
-  #
-  # Returns - false
-  def destroy?
-    false
-  end
-
-  # Default scope access rights.
-  #
-  # Returns - the default policy
-  def scope
-    Pundit.policy_scope!(user, record.class)
-  end
-
-  # Class to represent policy scope.
-  class Scope
+# Class to manage staff application policy.
+class ApplicationPolicy < BaseApplicationPolicy
+  # Class to represent lists of categories.
+  class Scope < Scope
     attr_reader :user, :scope
 
-    # Constructor.
+    # Constructor
+    #
+    # * +user+ - the user to check for access rights
+    # * +scope+ - the scope to check
     def initialize(user, scope)
-      @user = user
+      @user  = user
       @scope = scope
     end
 
-    # Resolve the permissions for the scope.
+    # Resolves the scope for the policy
     #
-    # Returns - all scope.
+    # Returns - the scope this user can access.
     def resolve
-      scope
+      if user.has_role? :site_admin
+        scope.all
+      else
+        # Get list of apps that have at least one course selection for staff member's college.
+        scope.select('DISTINCT applications.*').joins(course_selections: :course).where('courses.college_id=?', user.college_id)
+      end
     end
   end
+
 end

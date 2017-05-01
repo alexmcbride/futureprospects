@@ -37,7 +37,7 @@ class Staff::CoursesController < Staff::StaffController
       @course.college = current_staff.college
     end
 
-    authorize @course # Do this after college set so it gets checked
+    authorize @course # Do this after college set so its gets checked too
     respond_to do |format|
       if @course.save
         format.html { redirect_to staff_course_path(@course), notice: 'Course was successfully created.' }
@@ -91,6 +91,7 @@ class Staff::CoursesController < Staff::StaffController
       @categories = policy_scope(Category).where('courses_count > 0').order(:name)
     end
 
+    # Sets colleges attribute based on policy scope.
     def set_colleges
       @colleges = policy_scope(College).order(:name)
     end

@@ -28,7 +28,7 @@ class Application < ApplicationRecord
   enum gender: [:male, :female, :other]
 
   # Enum for the application status.
-  enum status: [:submitting, :submitted, :paid, :payment_failed, :cancelled] # :completed
+  enum status: [:submitting, :submitted, :awaiting_decisions, :payment_failed, :cancelled, :completed]
 
   # Enum for current application stage.
   enum current_stage: [:intro_stage, :profile_stage, :education_stage, :employment_stage, :references_stage,
@@ -72,6 +72,8 @@ class Application < ApplicationRecord
   has_one :reference
   has_many :course_selections
   has_many :payments
+
+  before_save :update_status_for_offers
 
   # Allows support of nested forms for the course offers form.
   accepts_nested_attributes_for :course_selections, reject_if:  lambda {|attr| attr[:college_offer].blank?}
@@ -291,7 +293,7 @@ class Application < ApplicationRecord
 
     if payment.valid?
       if payment.authorize
-        update_status :paid
+        update_status :awaiting_decisions
         StudentMailer.payment_received(self.student, payment).deliver_later
       else
         update_status :payment_failed
@@ -300,6 +302,20 @@ class Application < ApplicationRecord
     end
 
     payment
+  end
+
+  def self.filter(params)
+    scope = Application.all
+    unless params[:name].nil? || params[:name].empty?
+      scope = scope.where('LOWER(first_name || family_name) LIKE LOWER(?)', "%#{params[:name]}%")
+    end
+    unless params[:status].nil? or params[:status] == '-1'
+      scope = scope.where(status: params[:status])
+    end
+    unless params[:college_id].nil? or params[:college_id] == '0'
+      scope = scope.where(college_id: params[:college_id])
+    end
+    scope
   end
 
   # Attempts to save the intro stage.
@@ -443,5 +459,20 @@ class Application < ApplicationRecord
       payment.description = "Application fee (#{pluralize course_selections_count, 'course'})"
       yield(payment) if block_given?
       payment
+    end
+
+    # Checks if all selections have offers, if they do then marks application as completed.
+    def update_status_for_offers
+      if awaiting_decisions? && all_selections_have_offers
+        update_status :completed
+      end
+    end
+
+    # Determines if all selections have had offers made.
+    #
+    # Returns - true if they all have offers.
+    def all_selections_have_offers
+      # TODO: this also returns true if all are nil.
+      self.course_selections.select(:college_offer).map {|c| c.college_offer}.compact.empty?
     end
 end

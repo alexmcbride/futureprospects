@@ -172,7 +172,7 @@ def student(tokens, schools, jobs, refs)
 
   # Payments
   status = status.to_sym
-  if [:paid, :payment_failed, :cancelled].include? status
+  if [:awaiting_decisions, :payment_failed, :cancelled, :completed].include? status
     last_year = (DateTime.now - 6.months)..DateTime.now
     dates = last_year.to_a.sample(4).sort
     amount = num > 1 ? 2000 : 1000
@@ -184,7 +184,7 @@ def student(tokens, schools, jobs, refs)
       puts payment
       puts 'payment.save! validate: false'
     end
-    if status == :paid
+    if status == :awaiting_decisions || status == :completed
       puts payment_auth
       puts 'payment.save! validate: false'
     end

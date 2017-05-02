@@ -4,7 +4,11 @@ class Staff::ApplicationsController < ApplicationController
   # GET /staff/applications
   # GET /staff/applications.json
   def index
-    @applications = policy_scope(Application).includes(:student)#.where.not(status: :submitting)
+    @applications = policy_scope(Application)
+                        .filter(params)
+                        .order(:submitted_date)
+                        .includes(:student)
+    @colleges = policy_scope(College)
   end
 
   # GET /staff/applications/1
@@ -25,8 +29,8 @@ class Staff::ApplicationsController < ApplicationController
     respond_to do |format|
       format.html do
         authorize @application
-        unless @application.paid?
-          redirect_to staff_applications_path, notice: 'This application has not received payment'
+        unless @application.awaiting_decisions?
+          redirect_to staff_applications_path, notice: 'This application cannot receive decisions'
         end
       end
     end

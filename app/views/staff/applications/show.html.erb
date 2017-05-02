@@ -6,312 +6,44 @@
 <div class="row">
   <div class="col-sm-3">
     <div class="well">
-      <h3 class="no-top-margin">Application Info</h3>
+      <h3 class="no-top-margin">Information</h3>
       <ul class="list-unstyled">
         <li>Username: <%= @application.student.username %></li>
-        <li>Status: <%= @application.status.humanize %></li>
         <li>Submitted: <%= format_date @application.submitted_date %></li>
         <li>Created: <%= format_date @application.created_at %></li>
         <li>Updated: <%= format_date @application.updated_at %></li>
+        <li>Status: <%= @application.status.humanize %></li>
       </ul>
     </div>
-
-    <%= link_to 'Make Decision', edit_staff_application_path(@application), class: 'btn btn-default btn-block', role: 'button' %>
   </div>
 
   <div class="col-sm-9">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <h3 class="no-top-margin">Personal Profile</h3>
-        <div class="row">
-          <div class="col-sm-6">
+    <div class="well">
+      <h3 class="no-top-margin">Course Selections</h3>
+      <p class="text-darkish">The student has made the following course selections.</p>
+      <ol class="list-group">
+        <% policy_scope(@application.course_selections_without_offers).each do |selection| %>
+          <li class="list-group-item list-group-item-info">
             <div class="row">
-              <div class="col-xs-4">SC Number:</div>
-              <div class="col-xs-8"><%= @application.scottish_candidate_number %></div>
+              <div class="col-sm-9">
+                <%= selection.course.title %>
+              </div>
+              <div class="col-sm-3 text-right">
+                <%= selection.college_offer ? selection.college_offer.humanize : 'Awaiting Decision' %>
+              </div>
             </div>
-            <div class="row">
-              <div class="col-xs-4">NI Number:</div>
-              <div class="col-xs-8"><%= @application.national_insurance_number %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Email:</div>
-              <div class="col-xs-8"><%= mail_to @application.email %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Telephone:</div>
-              <div class="col-xs-8"><%= @application.telephone %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Mobile:</div>
-              <div class="col-xs-8"><%= @application.mobile or 'N/A' %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Disability:</div>
-              <div class="col-xs-8"><%= @application.disability or 'N/A' %></div>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="row">
-              <div class="col-xs-4">Title:</div>
-              <div class="col-xs-8"><%= @application.title %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">First Name:</div>
-              <div class="col-xs-8"><%= @application.first_name %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Middle Name:</div>
-              <div class="col-xs-8"><%= @application.middle_name or 'N/A' %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Family Name:</div>
-              <div class="col-xs-8"><%= @application.family_name %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Previous Name:</div>
-              <div class="col-xs-8"><%= @application.previous_name or 'N/A' %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Gender:</div>
-              <div class="col-xs-8"><%= @application.gender.humanize %></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <div class="row">
-          <div class="col-sm-6">
-            <h3 class="no-top-margin">Permanent Address</h3>
-            <div class="row">
-              <div class="col-xs-4">House Number:</div>
-              <div class="col-xs-8"><%= @application.permanent_house_number %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Address 1:</div>
-              <div class="col-xs-8"><%= @application.permanent_address_1 %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Address 2:</div>
-              <div class="col-xs-8"><%= @application.permanent_address_2 or 'N/A' %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">City:</div>
-              <div class="col-xs-8"><%= @application.permanent_city %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Post Code:</div>
-              <div class="col-xs-8"><%= @application.permanent_postcode %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Country:</div>
-              <div class="col-xs-8"><%= @application.permanent_country %></div>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <h3 class="no-top-margin">Correspondence Address</h3>
-            <div class="row">
-              <div class="col-xs-4">House Number:</div>
-              <div class="col-xs-8"><%= @application.correspondence_house_number or 'N/A' %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Address 1:</div>
-              <div class="col-xs-8"><%= @application.correspondence_address_1 or 'N/A' %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Address 2:</div>
-              <div class="col-xs-8"><%= @application.correspondence_address_2 or 'N/A' %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">City:</div>
-              <div class="col-xs-8"><%= @application.correspondence_city or 'N/A' %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Post Code:</div>
-              <div class="col-xs-8"><%= @application.correspondence_postcode or 'N/A' %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Country:</div>
-              <div class="col-xs-8"><%= @application.correspondence_country or 'N/A' %></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <h3 class="no-top-margin">Education</h3>
-        <% if @application.schools.any? %>
-          <% @application.schools.each do |school| %>
-            <address>
-              <%= school.name %> &mdash;
-              <%= school.address ', ' %>
-            </address>
-            <table class="table table-condensed">
-              <thead>
-                <tr>
-                  <th>Subject</th>
-                  <th>Award</th>
-                  <th>Grade</th>
-                  <th>Start</th>
-                  <th>End</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% school.qualifications.each do |qual| %>
-                  <tr>
-                    <td><%= qual.subject %></td>
-                    <td><%= qual.grade %></td>
-                    <td><%= qual.award %></td>
-                    <td><%= qual.start_date %></td>
-                    <td><%= qual.end_date %></td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          <% end %>
-        <% else %>
-          <p><em>There are no schools in this application.</em></p>
+          </li>
         <% end %>
+      </ol>
+      <div class="text-right">
+        <p class="text-darkish small">Check the student's application to make sure they meet the entry requirements of the course.</p>
+        <%= link_to 'Update Decisions', edit_staff_application_path(@application), class: 'btn btn-default', role: 'button' %>
       </div>
     </div>
 
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <h3 class="no-top-margin">Employment</h3>
-        <% if @application.jobs.any? %>
-          <table class="table table-condensed">
-            <thead>
-              <tr>
-                <th>Employer</th>
-                <th>Address</th>
-                <th>Job Title</th>
-                <th>Duties</th>
-                <th>Start</th>
-                <th>End</th>
-              </tr>
-            </thead>
-            <tbody>
-                <% @application.jobs.each do |job| %>
-                  <tr>
-                    <td><%= job.employer %></td>
-                    <td><%= job.address %></td>
-                    <td><%= job.job_title %></td>
-                    <td><%= job.duties %></td>
-                    <td><%= job.start_date %></td>
-                    <td><%= job.end_date %></td>
-                  </tr>
-                <% end %>
-            </tbody>
-          </table>
-        <% else %>
-            <p><em>There are no jobs in this application.</em></p>
-        <% end %>
-      </div>
-    </div>
+    <h3>View Application</h3>
 
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <h3 class="no-top-margin">Personal Statement</h3>
-        <%= markdown @application.personal_statement %>
-      </div>
-    </div>
-
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <div class="row">
-          <div class="col-sm-6">
-            <h3 class="no-top-margin">Reference 1</h3>
-            <div class="row">
-              <div class="col-xs-4">Full Name:</div>
-              <div class="col-xs-8"><%= @application.reference.reference_1_full_name %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Occupation:</div>
-              <div class="col-xs-8"><%= @application.reference.reference_1_occupation %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Relationship:</div>
-              <div class="col-xs-8"><%= @application.reference.reference_1_relationship %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Telephone:</div>
-              <div class="col-xs-8"><%= @application.reference.reference_1_telephone %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Email:</div>
-              <div class="col-xs-8"><%= mail_to @application.reference.reference_1_email %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Address 1:</div>
-              <div class="col-xs-8"><%= @application.reference.reference_1_address_1 %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Address 2:</div>
-              <div class="col-xs-8"><%= @application.reference.reference_1_address_2 or 'N/A' %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">City:</div>
-              <div class="col-xs-8"><%= @application.reference.reference_1_city %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Post Code:</div>
-              <div class="col-xs-8"><%= @application.reference.reference_1_postcode %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Country:</div>
-              <div class="col-xs-8"><%= @application.reference.reference_1_country %></div>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <h3 class="no-top-margin">Reference 2</h3>
-            <div class="row">
-              <div class="col-xs-4">Full Name:</div>
-              <div class="col-xs-8"><%= @application.reference.reference_2_full_name %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Occupation:</div>
-              <div class="col-xs-8"><%= @application.reference.reference_2_occupation %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Relationship:</div>
-              <div class="col-xs-8"><%= @application.reference.reference_2_relationship %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Telephone:</div>
-              <div class="col-xs-8"><%= @application.reference.reference_2_telephone %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Email:</div>
-              <div class="col-xs-8"><%= mail_to @application.reference.reference_2_email %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Address 1:</div>
-              <div class="col-xs-8"><%= @application.reference.reference_2_address_1 %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Address 2:</div>
-              <div class="col-xs-8"><%= @application.reference.reference_2_address_2 or 'N/A' %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">City:</div>
-              <div class="col-xs-8"><%= @application.reference.reference_2_city %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Post Code:</div>
-              <div class="col-xs-8"><%= @application.reference.reference_2_postcode %></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">Country:</div>
-              <div class="col-xs-8"><%= @application.reference.reference_2_country %></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
+    <%= render 'show', application: @application %>
   </div> <!-- col -->
 </div> <!-- row -->

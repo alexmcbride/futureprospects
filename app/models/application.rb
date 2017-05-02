@@ -131,6 +131,13 @@ class Application < ApplicationRecord
     self.course_selections.joins(:course).where('courses.college_id=?', college_id).any?
   end
 
+  # Returns course selections that don't have a college offer yet.
+  #
+  # Returns - An ActiveRecord::Relation for the course selections.
+  def course_selections_without_offers
+    self.course_selections.includes(:course)
+  end
+
   # Checks that all added schools have at least one qualification.
   #
   # Returns - true if the schools are valid.
@@ -304,6 +311,11 @@ class Application < ApplicationRecord
     payment
   end
 
+  # Filters applications by params.
+  #
+  # * +params+ - the params with the filter data
+  #
+  # Returns - an ActiveRecord::Relation containing application data.
   def self.filter(params)
     scope = Application.all
     unless params[:name].nil? || params[:name].empty?
@@ -313,10 +325,10 @@ class Application < ApplicationRecord
       scope = scope.where(status: params[:status])
     end
     unless params[:college_id].nil? or params[:college_id] == '0'
-      scope = scope.select('DISTINCT applications.*').joins(course_selections: :course).where('courses.college_id=?', params[:college_id])
+      scope = scope.college_applications params[:college_id]
     end
     scope
-end
+  end
 
   # Attempts to save the intro stage.
   #
@@ -446,7 +458,7 @@ end
     end
   end
 
-  # private
+  private
     # Creates payment object with valid attributes
     #
     # * +params+ - the request params
@@ -464,12 +476,13 @@ end
     # Checks if all selections have offers, if they do then marks application as completed.
     def update_status_for_offers
       if awaiting_decisions? && all_selections_have_offers
-        completed
+        update_awaiting_student
       end
     end
 
-    def completed
-      self.status = :awaiting_choices
+    # Marks application as awaiting student input.
+    def update_awaiting_student
+      self.status = :awaiting_student
       self.save!
 
       # Email student

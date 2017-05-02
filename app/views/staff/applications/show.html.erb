@@ -15,31 +15,11 @@
         <li>Updated: <%= format_date @application.updated_at %></li>
       </ul>
     </div>
+
+    <%= link_to 'Edit', edit_staff_application_path(@application), class: 'btn btn-default btn-block', role: 'button' %>
   </div>
 
   <div class="col-sm-9">
-    <div class="well">
-      <h3 class="no-top-margin">Courses</h3>
-      <ul class="list-unstyled">
-        <% @application.course_selections.each do |selection| %>
-          <li><%= selection.course.title %> - Decision?</li>
-        <% end %>
-      </ul>
-    </div>
-
-    <div class="well">
-      <h3 class="no-top-margin">Payments</h3>
-      <ul class="list-unstyled">
-        <% if @application.payments.any? %>
-          <% @application.payments.each do |payment| %>
-            <li><%= payment.payment_type %> &mdash; <%= payment.status %> </li>
-          <% end %>
-        <% else %>
-          <p><em>This student has made no payments.</em></p>
-        <% end %>
-      </ul>
-    </div>
-
     <div class="panel panel-default">
       <div class="panel-body">
         <h3 class="no-top-margin">Personal Profile</h3>

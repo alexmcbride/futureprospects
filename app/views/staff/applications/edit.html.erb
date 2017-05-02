@@ -1,6 +1,36 @@
-<h1>Editing Staff Application</h1>
+<%
+  breadcrumb :staff_applications_edit, @application
+  @title = 'Make Decisions'
+%>
 
-<%= render 'form', application: @application %>
+<%= form_for(@application, url: staff_application_path(@application)) do |f| %>
+    <p class="text-darkish">Make offers to this student for a particular course. Make sure the student meets the
+      requirements for the course. Optionally you can leave a note for the student, with information about the decision,
+    or instructions about what to do next.</p>
 
-<%= link_to 'Show', @application %> |
-<%= link_to 'Back', staff_applications_path %>
+    <%= form_errors @application %>
+
+    <%= f.fields_for :course_selections, policy_scope(@application.course_selections) do |g| %>
+      <h3><%= g.object.course.title %></h3>
+      <p><%= g.object.course.college.name %></p>
+      <div class="form-group">
+        <%= g.label :college_offer, 'Make Decision' %>
+        <% options = '<option disabled="disabled" selected="selected">-- Choose --</option>'.html_safe + options_for_select(CourseSelection.college_offers.map {|k, v| [k.humanize, k]}, g.object.college_offer) %>
+        <%= g.select :college_offer, options, {}, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= g.label :note, 'Note (optional)' %>
+        <%= g.text_area :note, class: 'form-control' %>
+      </div>
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit 'Make Decision' %>
+    </div>
+<% end %>
+
+<br>
+
+<p><%= link_to 'Show', staff_application_path(@application) %> |
+  <%= link_to 'Back', staff_applications_path %></p>

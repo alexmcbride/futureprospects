@@ -73,6 +73,9 @@ class Application < ApplicationRecord
   has_many :course_selections
   has_many :payments
 
+  # Allows support of nested forms for the course offers form.
+  accepts_nested_attributes_for :course_selections, reject_if:  lambda {|attr| attr[:college_offer].blank?}
+
   # Creates a new application based on existing student.
   #
   # * +student+ - the existing student.

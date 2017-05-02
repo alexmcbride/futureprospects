@@ -11,8 +11,7 @@
         <th>Submitted</th>
         <th>Updated</th>
         <th>Status</th>
-        <th>College</th>
-        <th></th>
+        <th colspan="2"></th>
       </tr>
     </thead>
 
@@ -20,11 +19,11 @@
       <% @applications.each do |application| %>
         <tr>
           <td><%= application.student.full_name %></td>
-          <td><%= format_date application.submitted_date %></td>
-          <td><%= format_date application.updated_at %></td>
+          <td title="<%= format_datetime application.submitted_date %>"><%= format_date application.submitted_date %></td>
+          <td title="<%= format_datetime application.updated_at %>"><%= format_date application.updated_at %></td>
           <td><%= application.status.humanize %></td>
-          <td><%= current_staff.college.name %></td>
-          <td><%= link_to 'Show', staff_application_path(application) %></td>
+          <td><%= link_to 'View', staff_application_path(application) %></td>
+          <td><%= link_to 'Edit', edit_staff_application_path(application) %></td>
         </tr>
       <% end %>
     </tbody>

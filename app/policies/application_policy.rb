@@ -19,15 +19,25 @@ class ApplicationPolicy < BaseApplicationPolicy
     def resolve
       if user.has_role? :site_admin
         scope.all
-      else
+      elsif user.has_role? :can_view_applications
         # Get list of apps that have at least one course selection for staff member's college.
         scope.college_applications user.college_id
+      else
+        scope.none
       end
     end
   end
 
   # Determines if the user is authorized to view the show action.
   def show?
-    user.has_role?(:site_admin) || record.belongs_to_college(user.college_id)
+    user.has_role?(:site_admin) || (user.has_role?(:can_view_applications) && record.belongs_to_college(user.college_id))
+  end
+
+  def edit?
+    user.has_role?(:site_admin) || (user.has_role?(:can_edit_applications) && record.belongs_to_college(user.college_id))
+  end
+
+  def update?
+    edit?
   end
 end

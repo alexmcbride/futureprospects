@@ -18,7 +18,7 @@ module Staff::MembersHelper
           end)
           concat(content_tag(:span, ' '))
         end)
-        concat(label_tag("permission[#{role}]", class: 'btn btn-default btn-sm active', style: 'width: 7vw') do
+        concat(label_tag("permission[#{role}]", class: 'btn btn-default btn-sm active') do
           name
         end)
       end)

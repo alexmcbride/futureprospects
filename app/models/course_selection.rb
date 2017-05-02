@@ -9,9 +9,9 @@ class CourseSelection < ApplicationRecord
   # Validators
   validates :application_id, presence: true
   validates :course_id, presence: true
-  validate :course_is_unique
-  validate :course_is_open
-  validate :application_can_add
+  validate :course_is_unique, on: :create
+  validate :course_is_open, on: :create
+  validate :application_can_add, on: :create
 
   # Associations
   belongs_to :application, counter_cache: true

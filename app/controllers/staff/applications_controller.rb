@@ -1,4 +1,6 @@
 class Staff::ApplicationsController < ApplicationController
+  before_action :set_application, only: [:update, :destroy]
+
   # GET /staff/applications
   # GET /staff/applications.json
   def index
@@ -8,29 +10,37 @@ class Staff::ApplicationsController < ApplicationController
   # GET /staff/applications/1
   # GET /staff/applications/1.json
   def show
-    @application = Application.includes(course_selections: [:course])
-                       .includes(schools: [:qualifications])
+    @application = Application.includes(schools: [:qualifications])
                        .includes(:jobs)
                        .includes(:reference)
-                       .includes(:payments)
                        .find params[:id]
     authorize @application
   end
 
   # GET /staff/applications/1/edit
   def edit
+    @application = Application.includes(course_selections: [:course])
+                       .includes(:payments)
+                       .find params[:id]
+    respond_to do |format|
+      format.html do
+        authorize @application
+        unless @application.paid?
+          redirect_to staff_applications_path, notice: 'This application has not received payment'
+        end
+      end
+    end
   end
 
   # PATCH/PUT /staff/applications/1
   # PATCH/PUT /staff/applications/1.json
   def update
+    authorize @application
     respond_to do |format|
-      if @application.update(staff_application_params)
-        format.html { redirect_to @application, notice: 'Application was successfully updated.' }
-        format.json { render :show, status: :ok, location: @application }
+      if @application.update(application_params)
+        format.html { redirect_to staff_application_path(@application), notice: 'Application was successfully updated.' }
       else
         format.html { render :edit }
-        format.json { render json: @application.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -47,12 +57,12 @@ class Staff::ApplicationsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_staff_application
+    def set_application
       @application = Application.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def staff_application_params
-      params.fetch(:staff_application, {})
+    def application_params
+      params.require(:application).permit(course_selections_attributes: [:id, :college_offer, :note])
     end
 end

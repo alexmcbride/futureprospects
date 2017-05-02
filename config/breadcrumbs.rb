@@ -253,3 +253,8 @@ crumb :staff_applications_show do |application|
   parent :staff_applications
   link application.student.full_name, staff_application_path(application)
 end
+
+crumb :staff_applications_edit do |application|
+  parent :staff_applications_show, application
+  link 'Decisions', edit_staff_application_path(application)
+end

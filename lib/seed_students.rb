@@ -1789,7 +1789,7 @@ app.permanent_postcode = 'NN11 2GR'
 app.permanent_city = 'Glasgow'
 app.permanent_country = 'United Kingdom'
 app.submitted_date = Date.strptime('2016-11-14')
-app.status = :completed
+app.status = :awaiting_choices
 app.current_stage = :submit_stage
 app.save! validate: false
 

@@ -150,6 +150,15 @@ staff.add_role :can_edit_staff
 staff.add_role :can_remove_staff
 staff.add_role :can_promote_staff
 
+staff.add_role :can_view_categories
+staff.add_role :can_add_categories
+staff.add_role :can_edit_categories
+staff.add_role :can_remove_categories
+
+staff.add_role :can_view_applications
+staff.add_role :can_edit_applications
+
+
 staff = Staff.create! first_name: 'Albert', family_name: 'Stephens', email: 'astephens1@shutterfly.com', job_title: 'Assistant Professor', college_id: 2, password: 'secret', password_confirmation: 'secret', confirmed_at: DateTime.now
 add_roles roles.sample(3), staff
 staff = Staff.create! first_name: 'Michelle', family_name: 'Woods', email: 'mwoods2@techcrunch.com', job_title: 'Help Desk Technician', college_id: 2, password: 'secret', password_confirmation: 'secret', confirmed_at: DateTime.now

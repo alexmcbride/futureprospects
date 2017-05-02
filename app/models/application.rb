@@ -28,7 +28,7 @@ class Application < ApplicationRecord
   enum gender: [:male, :female, :other]
 
   # Enum for the application status.
-  enum status: [:submitting, :submitted, :awaiting_decisions, :payment_failed, :cancelled, :completed]
+  enum status: [:submitting, :submitted, :payment_failed, :cancelled, :awaiting_decisions, :awaiting_student]
 
   # Enum for current application stage.
   enum current_stage: [:intro_stage, :profile_stage, :education_stage, :employment_stage, :references_stage,
@@ -313,10 +313,10 @@ class Application < ApplicationRecord
       scope = scope.where(status: params[:status])
     end
     unless params[:college_id].nil? or params[:college_id] == '0'
-      scope = scope.where(college_id: params[:college_id])
+      scope = scope.select('DISTINCT applications.*').joins(course_selections: :course).where('courses.college_id=?', params[:college_id])
     end
     scope
-  end
+end
 
   # Attempts to save the intro stage.
   #
@@ -446,7 +446,7 @@ class Application < ApplicationRecord
     end
   end
 
-  private
+  # private
     # Creates payment object with valid attributes
     #
     # * +params+ - the request params
@@ -464,15 +464,21 @@ class Application < ApplicationRecord
     # Checks if all selections have offers, if they do then marks application as completed.
     def update_status_for_offers
       if awaiting_decisions? && all_selections_have_offers
-        update_status :completed
+        completed
       end
+    end
+
+    def completed
+      self.status = :awaiting_choices
+      self.save!
+
+      # Email student
     end
 
     # Determines if all selections have had offers made.
     #
     # Returns - true if they all have offers.
     def all_selections_have_offers
-      # TODO: this also returns true if all are nil.
-      self.course_selections.select(:college_offer).map {|c| c.college_offer}.compact.empty?
+      self.course_selections.any? && self.course_selections.map {|c| c.college_offer.present?}.all?
     end
 end

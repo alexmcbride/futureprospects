@@ -56,12 +56,16 @@
               <td title="<%= format_datetime application.submitted_date %>"><%= format_date application.submitted_date %></td>
               <td title="<%= format_datetime application.updated_at %>"><%= format_date application.updated_at %></td>
               <td><%= application.status.humanize %></td>
-              <td><%= link_to 'View', staff_application_path(application) %></td>
-              <td><%= link_to 'Edit', edit_staff_application_path(application) %></td>
+              <td><%= link_to 'View Application', staff_application_path(application) %></td>
+              <td><%= link_to 'Make Decision', edit_staff_application_path(application) %></td>
             </tr>
         <% end %>
         </tbody>
       </table>
+    </div>
+
+    <div class="digg_pagination text-center">
+      <%= will_paginate @applications %>
     </div>
   </div>
 </div>

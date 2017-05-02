@@ -7,6 +7,7 @@ class Staff::ApplicationsController < ApplicationController
     @applications = policy_scope(Application)
                         .filter(params)
                         .order(:submitted_date)
+                        .paginate(page: params[:page], per_page: 15)
                         .includes(:student)
     @colleges = policy_scope(College)
   end
@@ -30,7 +31,7 @@ class Staff::ApplicationsController < ApplicationController
       format.html do
         authorize @application
         unless @application.awaiting_decisions?
-          redirect_to staff_applications_path, notice: 'This application cannot receive decisions'
+          redirect_to staff_applications_path, notice: 'This action cannot be completed at this time'
         end
       end
     end

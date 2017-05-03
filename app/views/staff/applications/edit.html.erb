@@ -5,9 +5,9 @@
 
 <%= form_for(@application, url: staff_application_path(@application)) do |f| %>
   <p class="text-darkish">You can make decisions for the courses listed. Once the student has received decisions on all
-    their courses they will be asked to choose which ones they would like to study. You may optionally leave a note on
-    an decision, either explaining why a rejection was taken, or what requirements a student must meet with a
-    conditional offer.</p>
+    their courses they will be asked to choose which ones they would like to study. If the decision is conditional, or
+    the application is rejected, you must leave a note, either explaining why the application was rejected, or what
+    requirements a student must meet for a conditional offer.</p>
 
   <%= form_errors @application %>
 

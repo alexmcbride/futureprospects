@@ -12,6 +12,7 @@ class CourseSelection < ApplicationRecord
   validate :course_is_unique, on: :create
   validate :course_is_open, on: :create
   validate :application_can_add, on: :create
+  validates :note, presence: true, if: :rejected? || :conditional?
 
   # Associations
   belongs_to :application, counter_cache: true

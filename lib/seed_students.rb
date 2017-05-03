@@ -31,7 +31,7 @@ app.correspondence_address_2 = 'Dean'
 app.correspondence_postcode = 'OX7 2GR'
 app.correspondence_city = 'Glasgow'
 app.correspondence_country = 'United Kingdom'
-app.status = :submitted
+app.status = :awaiting_payment
 app.current_stage = :submit_stage
 app.save! validate: false
 
@@ -514,7 +514,7 @@ app.correspondence_address_2 = 'Norton'
 app.correspondence_postcode = 'NN11 2GR'
 app.correspondence_city = 'Glasgow'
 app.correspondence_country = 'United Kingdom'
-app.status = :submitted
+app.status = :awaiting_payment
 app.current_stage = :submit_stage
 app.save! validate: false
 
@@ -681,7 +681,7 @@ app.correspondence_address_2 = 'Pentre'
 app.correspondence_postcode = 'SY4 2GR'
 app.correspondence_city = 'Glasgow'
 app.correspondence_country = 'United Kingdom'
-app.status = :submitted
+app.status = :awaiting_payment
 app.current_stage = :submit_stage
 app.save! validate: false
 
@@ -841,7 +841,7 @@ app.permanent_postcode = 'BS37 2GR'
 app.permanent_city = 'Glasgow'
 app.permanent_country = 'United Kingdom'
 app.submitted_date = Date.strptime('2016-10-23')
-app.status = :submitted
+app.status = :awaiting_payment
 app.current_stage = :submit_stage
 app.save! validate: false
 
@@ -1153,7 +1153,7 @@ app.permanent_postcode = 'GL54 2GR'
 app.permanent_city = 'Glasgow'
 app.permanent_country = 'United Kingdom'
 app.submitted_date = Date.strptime('2016-11-15')
-app.status = :submitted
+app.status = :awaiting_payment
 app.current_stage = :submit_stage
 app.save! validate: false
 
@@ -2414,7 +2414,7 @@ app.permanent_postcode = 'PR1 2GR'
 app.permanent_city = 'Glasgow'
 app.permanent_country = 'United Kingdom'
 app.submitted_date = Date.strptime('2017-02-04')
-app.status = :submitted
+app.status = :awaiting_payment
 app.current_stage = :submit_stage
 app.save! validate: false
 

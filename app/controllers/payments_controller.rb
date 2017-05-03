@@ -43,12 +43,6 @@ class PaymentsController < ApplicationController
   # Displays new payment form, unless redirected from payment, in which case the authorize paypal form is displayed.
   # When PayPal redirects us here its includes a token in the URL that we need later for authorization.
   def new
-    # Check payment hasn't already been received.
-    if @application.paid?
-      flash[:notice] = 'This application has already been paid for.'
-      render :payment_method
-    end
-
     @payment = @application.create_payment session[:payment_type], params[:token]
   end
 
@@ -82,7 +76,7 @@ class PaymentsController < ApplicationController
     # Sets the application for actions what need it, unless the application is cancelled.
     def set_application
       @application = current_student.current_application
-      user_not_authorized if @application.cancelled?
+      user_not_authorized unless @application.awaiting_payment?
     end
 
     # Sets the payment and checks if the student has permission to view it.

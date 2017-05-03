@@ -30,15 +30,13 @@ Excel: alxsx
 
 dates validate - end date after start date, dates not in future...
 
-plaint text emails
+plain text emails
 
 don't count decisions from cancelled courses...
 
 markdown preview
 
 staff show (created / first sign in)
-
-staff students
 
 staff permission groups
 
@@ -52,3 +50,4 @@ search within a category?
 
 add user test@test.com for testing, show things like auth fail select options.
 
+staff applications edit improve validation error messages

@@ -28,7 +28,7 @@ class Application < ApplicationRecord
   enum gender: [:male, :female, :other]
 
   # Enum for the application status.
-  enum status: [:submitting, :submitted, :payment_failed, :cancelled, :awaiting_decisions, :awaiting_student]
+  enum status: [:submitting, :awaiting_payment, :payment_failed, :cancelled, :awaiting_decisions, :awaiting_student]
 
   # Enum for current application stage.
   enum current_stage: [:intro_stage, :profile_stage, :education_stage, :employment_stage, :references_stage,
@@ -339,6 +339,9 @@ class Application < ApplicationRecord
     unless params[:college_id].nil? or params[:college_id] == '0'
       scope = scope.college_applications params[:college_id]
     end
+    unless params[:category_id].nil? or params[:category_id] == '0'
+      scope = scope.joins(course_selections: :course).where('courses.category_id=?', params[:category_id])
+    end
     scope
   end
 
@@ -455,7 +458,7 @@ class Application < ApplicationRecord
     end
 
     if self.submitting? and self.submit_stage?
-      self.status = :submitted
+      self.status = :awaiting_payment
       self.submitted_date = DateTime.now
       self.save
 

@@ -26,7 +26,7 @@
           <li class="list-group-item list-group-item-info">
             <div class="row">
               <div class="col-sm-9">
-                <%= selection.course.title %>
+                <%= truncate selection.course.title, length: 83 %>
               </div>
               <div class="col-sm-3 text-right">
                 <%= selection.college_offer ? selection.college_offer.humanize : 'Awaiting Decision' %>

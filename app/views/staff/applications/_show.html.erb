@@ -13,7 +13,7 @@
         </div>
         <div class="row">
           <div class="col-xs-4">Middle Name:</div>
-          <div class="col-xs-8"><%= application.middle_name or 'N/A' %></div>
+          <div class="col-xs-8"><%= application.middle_name or '' %></div>
         </div>
         <div class="row">
           <div class="col-xs-4">Family Name:</div>
@@ -21,7 +21,7 @@
         </div>
         <div class="row">
           <div class="col-xs-4">Previous Name:</div>
-          <div class="col-xs-8"><%= application.previous_name or 'N/A' %></div>
+          <div class="col-xs-8"><%= application.previous_name or '' %></div>
         </div>
         <div class="row">
           <div class="col-xs-4">Gender:</div>
@@ -47,11 +47,11 @@
         </div>
         <div class="row">
           <div class="col-xs-4">Mobile:</div>
-          <div class="col-xs-8"><%= application.mobile or 'N/A' %></div>
+          <div class="col-xs-8"><%= application.mobile or '' %></div>
         </div>
         <div class="row">
           <div class="col-xs-4">Disability:</div>
-          <div class="col-xs-8"><%= application.disability or 'N/A' %></div>
+          <div class="col-xs-8"><%= application.disability or '' %></div>
         </div>
       </div>
     </div>
@@ -73,7 +73,7 @@
         </div>
         <div class="row">
           <div class="col-xs-4">Address 2:</div>
-          <div class="col-xs-8"><%= application.permanent_address_2 or 'N/A' %></div>
+          <div class="col-xs-8"><%= application.permanent_address_2 or '' %></div>
         </div>
         <div class="row">
           <div class="col-xs-4">City:</div>
@@ -92,27 +92,27 @@
         <h3 class="no-top-margin">Correspondence Address</h3>
         <div class="row">
           <div class="col-xs-4">House Number:</div>
-          <div class="col-xs-8"><%= application.correspondence_house_number or 'N/A' %></div>
+          <div class="col-xs-8"><%= application.correspondence_house_number or '' %></div>
         </div>
         <div class="row">
           <div class="col-xs-4">Address 1:</div>
-          <div class="col-xs-8"><%= application.correspondence_address_1 or 'N/A' %></div>
+          <div class="col-xs-8"><%= application.correspondence_address_1 or '' %></div>
         </div>
         <div class="row">
           <div class="col-xs-4">Address 2:</div>
-          <div class="col-xs-8"><%= application.correspondence_address_2 or 'N/A' %></div>
+          <div class="col-xs-8"><%= application.correspondence_address_2 or '' %></div>
         </div>
         <div class="row">
           <div class="col-xs-4">City:</div>
-          <div class="col-xs-8"><%= application.correspondence_city or 'N/A' %></div>
+          <div class="col-xs-8"><%= application.correspondence_city or '' %></div>
         </div>
         <div class="row">
           <div class="col-xs-4">Post Code:</div>
-          <div class="col-xs-8"><%= application.correspondence_postcode or 'N/A' %></div>
+          <div class="col-xs-8"><%= application.correspondence_postcode or '' %></div>
         </div>
         <div class="row">
           <div class="col-xs-4">Country:</div>
-          <div class="col-xs-8"><%= application.correspondence_country or 'N/A' %></div>
+          <div class="col-xs-8"><%= application.correspondence_country or '' %></div>
         </div>
       </div>
     </div>
@@ -123,36 +123,35 @@
   <div class="panel-body">
     <h3 class="no-top-margin">Education</h3>
     <% if application.schools.any? %>
-        <% application.schools.each do |school| %>
-            <address>
-              <%= school.name %> &mdash;
-              <%= school.address ', ' %>
-            </address>
-            <table class="table table-condensed">
-              <thead>
-              <tr>
-                <th>Subject</th>
-                <th>Award</th>
-                <th>Grade</th>
-                <th>Start</th>
-                <th>End</th>
-              </tr>
-              </thead>
-              <tbody>
-              <% school.qualifications.each do |qual| %>
-                  <tr>
-                    <td><%= qual.subject %></td>
-                    <td><%= qual.grade %></td>
-                    <td><%= qual.award %></td>
-                    <td><%= qual.start_date %></td>
-                    <td><%= qual.end_date %></td>
-                  </tr>
-              <% end %>
-              </tbody>
-            </table>
+      <% application.schools.each do |school| %>
+        <address style="margin-bottom: 10px;">
+          <%= school.name %> &mdash; <%= school.address ', ' %>
+        </address>
+        <table class="table table-condensed">
+          <thead>
+          <tr>
+            <th>Subject</th>
+            <th>Award</th>
+            <th>Grade</th>
+            <th>Start</th>
+            <th>End</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% school.qualifications.each do |qual| %>
+            <tr>
+              <td><%= qual.subject %></td>
+              <td><%= qual.grade %></td>
+              <td><%= qual.award %></td>
+              <td><%= format_date qual.start_date %></td>
+              <td><%= format_date qual.end_date %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
         <% end %>
     <% else %>
-        <p><em>There are no schools in this application.</em></p>
+      <p><em>There are no schools in this application.</em></p>
     <% end %>
   </div>
 </div>
@@ -161,39 +160,47 @@
   <div class="panel-body">
     <h3 class="no-top-margin">Employment</h3>
     <% if application.jobs.any? %>
-        <table class="table table-condensed">
-          <thead>
+      <table class="table table-condensed">
+        <thead>
+        <tr>
+          <th>Employer</th>
+          <th>Address</th>
+          <th>Job Title</th>
+          <th>Duties</th>
+          <th>Start</th>
+          <th>End</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% application.jobs.each do |job| %>
           <tr>
-            <th>Employer</th>
-            <th>Address</th>
-            <th>Job Title</th>
-            <th>Duties</th>
-            <th>Start</th>
-            <th>End</th>
+            <td><%= job.employer %></td>
+            <td><%= job.address %></td>
+            <td><%= job.job_title %></td>
+            <td><%= job.duties %></td>
+            <td><%= format_date job.start_date %></td>
+            <td><%= format_date job.end_date %></td>
           </tr>
-          </thead>
-          <tbody>
-          <% application.jobs.each do |job| %>
-              <tr>
-                <td><%= job.employer %></td>
-                <td><%= job.address %></td>
-                <td><%= job.job_title %></td>
-                <td><%= job.duties %></td>
-                <td><%= job.start_date %></td>
-                <td><%= job.end_date %></td>
-              </tr>
-          <% end %>
-          </tbody>
-        </table>
+        <% end %>
+        </tbody>
+      </table>
     <% else %>
-        <p><em>There are no jobs in this application.</em></p>
+      <p><em>There are no jobs in this application.</em></p>
     <% end %>
   </div>
 </div>
 
 <div class="panel panel-default">
   <div class="panel-body">
-    <h3 class="no-top-margin">Personal Statement</h3>
+    <div class="row">
+      <div class="col-sm-6">
+        <h3 class="no-top-margin">Personal Statement</h3>
+      </div>
+      <div class="col-sm-6 text-right small text-darkish">
+        <%= application.personal_statement.length %> characters
+      </div>
+    </div>
+
     <%= markdown application.personal_statement %>
   </div>
 </div>
@@ -223,25 +230,18 @@
           <div class="col-xs-4">Email:</div>
           <div class="col-xs-8"><%= mail_to application.reference.reference_1_email %></div>
         </div>
+
         <div class="row">
-          <div class="col-xs-4">Address 1:</div>
-          <div class="col-xs-8"><%= application.reference.reference_1_address_1 %></div>
-        </div>
-        <div class="row">
-          <div class="col-xs-4">Address 2:</div>
-          <div class="col-xs-8"><%= application.reference.reference_1_address_2 or 'N/A' %></div>
-        </div>
-        <div class="row">
-          <div class="col-xs-4">City:</div>
-          <div class="col-xs-8"><%= application.reference.reference_1_city %></div>
-        </div>
-        <div class="row">
-          <div class="col-xs-4">Post Code:</div>
-          <div class="col-xs-8"><%= application.reference.reference_1_postcode %></div>
-        </div>
-        <div class="row">
-          <div class="col-xs-4">Country:</div>
-          <div class="col-xs-8"><%= application.reference.reference_1_country %></div>
+          <div class="col-xs-4">Address:</div>
+          <div class="col-xs-8">
+            <address>
+              <%= application.reference.reference_1_address_1 %><br>
+              <%= application.reference.reference_1_address_2 %><br>
+              <%= application.reference.reference_1_city %><br>
+              <%= application.reference.reference_1_postcode %><br>
+              <%= application.reference.reference_1_country %>
+            </address>
+          </div>
         </div>
       </div>
       <div class="col-sm-6">
@@ -267,24 +267,16 @@
           <div class="col-xs-8"><%= mail_to application.reference.reference_2_email %></div>
         </div>
         <div class="row">
-          <div class="col-xs-4">Address 1:</div>
-          <div class="col-xs-8"><%= application.reference.reference_2_address_1 %></div>
-        </div>
-        <div class="row">
-          <div class="col-xs-4">Address 2:</div>
-          <div class="col-xs-8"><%= application.reference.reference_2_address_2 or 'N/A' %></div>
-        </div>
-        <div class="row">
-          <div class="col-xs-4">City:</div>
-          <div class="col-xs-8"><%= application.reference.reference_2_city %></div>
-        </div>
-        <div class="row">
-          <div class="col-xs-4">Post Code:</div>
-          <div class="col-xs-8"><%= application.reference.reference_2_postcode %></div>
-        </div>
-        <div class="row">
-          <div class="col-xs-4">Country:</div>
-          <div class="col-xs-8"><%= application.reference.reference_2_country %></div>
+          <div class="col-xs-4">Address:</div>
+          <div class="col-xs-8">
+            <address>
+              <%= application.reference.reference_2_address_1 %><br>
+              <%= application.reference.reference_2_address_2 %><br>
+              <%= application.reference.reference_2_city %><br>
+              <%= application.reference.reference_2_postcode %><br>
+              <%= application.reference.reference_2_country %>
+            </address>
+          </div>
         </div>
       </div>
     </div>

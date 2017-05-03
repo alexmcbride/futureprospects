@@ -14,7 +14,14 @@
   <%= f.fields_for :course_selections, policy_scope(@application.course_selections) do |g| %>
 
     <div class="well">
-      <h3 class="no-top-margin"><%= g.object.course.title %></h3>
+      <div class="row">
+        <div class="col-sm-8">
+          <h3 class="no-top-margin"><%= g.object.course.title %></h3>
+        </div>
+        <div class="col-sm-4 text-right">
+          <%= link_to 'View Course', staff_course_path(g.object.course_id) %>
+        </div>
+      </div>
 
       <ul class="list-unstyled">
         <li>College: <%= g.object.course.college.name %></li>

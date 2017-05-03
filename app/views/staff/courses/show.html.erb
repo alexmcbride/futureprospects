@@ -26,9 +26,9 @@
     <% else %>
       <div class="list-group">
         <% @course.course_selections.each do |selection| %>
-          <%= link_to nil, class: 'list-group-item' do %>
+          <%= link_to staff_application_path(selection.application_id), class: 'list-group-item' do %>
             <%= selection.application.student.full_name %>
-            <span class="badge"><%= selection.application.state.humanize %></span>
+            <span class="badge"><%= selection.application.status.humanize %></span>
           <% end %>
         <% end %>
       </div>

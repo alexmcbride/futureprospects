@@ -3,8 +3,8 @@ class CourseSelection < ApplicationRecord
   include ActionView::Helpers::TextHelper
 
   # Enums
-  enum college_offer: [:rejected, :conditional, :definite]
-  enum student_choice: [:firm, :insurance, :declined]
+  enum college_offer: [:rejected, :conditional_offer, :definite_offer]
+  enum student_choice: [:firm_choice, :insurance_choice, :declined]
 
   # Validators
   validates :application_id, presence: true

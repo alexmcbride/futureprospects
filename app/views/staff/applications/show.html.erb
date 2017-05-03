@@ -48,7 +48,7 @@
           <p class="text-darkish small">Check the student's application to make sure they meet the entry requirements of the course.</p>
           <%= link_to 'Update Decisions', edit_staff_application_path(@application), class: 'btn btn-default', role: 'button' %>
         <% else %>
-          <p class="text-darkish small">You cannot make decisions on this application yet. Reason: <span class="text-lowercase"><%= @application.status.humanize %></span></p>
+          <p class="text-darkish small">You cannot make decisions on this application as it is marked as '<span class="text-lowercase"><%= @application.status.humanize %></span>'.</p>
         <% end %>
       </div>
     </div>

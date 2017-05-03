@@ -9,7 +9,13 @@ class Staff::ApplicationsController < ApplicationController
                         .order(:submitted_date)
                         .paginate(page: params[:page], per_page: 15)
                         .includes(:student)
+
+    # Stuff for filter sidebar
+    @categories = policy_scope(Category).order(:name)
     @colleges = policy_scope(College)
+
+    # This is an optimisation to stop the query having to be done up for every application that's being iterated over.
+    @awaiting_ids = Application.awaiting_other_colleges(current_staff.college_id)
   end
 
   # GET /staff/applications/1

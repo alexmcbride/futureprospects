@@ -22,7 +22,7 @@
       <h3 class="no-top-margin">Course Selections</h3>
       <p class="text-darkish">The student has made the following course selections.</p>
       <ol class="list-group">
-        <% policy_scope(@application.course_selections_without_offers).each do |selection| %>
+        <% policy_scope(@application.course_selections).each do |selection| %>
           <li class="list-group-item list-group-item-info">
             <div class="row">
               <div class="col-sm-9">
@@ -37,8 +37,12 @@
         <% end %>
       </ol>
       <div class="text-right">
-        <p class="text-darkish small">Check the student's application to make sure they meet the entry requirements of the course.</p>
-        <%= link_to 'Update Decisions', edit_staff_application_path(@application), class: 'btn btn-default', role: 'button' %>
+        <% if @application.awaiting_decisions? %>
+          <p class="text-darkish small">Check the student's application to make sure they meet the entry requirements of the course.</p>
+          <%= link_to 'Update Decisions', edit_staff_application_path(@application), class: 'btn btn-default', role: 'button' %>
+        <% else %>
+          <p class="text-darkish small">This application cannot accept any decisions at this time. Reason: <%= @application.status.humanize %></p>
+        <% end %>
       </div>
     </div>
 

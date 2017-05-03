@@ -131,11 +131,23 @@ class Application < ApplicationRecord
     self.course_selections.joins(:course).where('courses.college_id=?', college_id).any?
   end
 
-  # Returns course selections that don't have a college offer yet.
+  # Finds an array of application IDs that are still waiting on offers from other colleges. This is an optimisation to
+  # prevent having to perform the lookup for every application in a loop.
   #
-  # Returns - An ActiveRecord::Relation for the course selections.
-  def course_selections_without_offers
-    self.course_selections.includes(:course)
+  # * +college_id+ - the ID of the college to look for applications. If this is nil then an empty array is returned.
+  #
+  # Returns - an array of application IDs.
+  def self.awaiting_other_colleges(college_id)
+    if college_id.nil?
+      return []
+    end
+
+    # Find all applications that are marked awaiting_decisions but that have no NULL offers at this college.
+    Application.select('applications.id')
+        .joins(course_selections: :course)
+        .where('applications.status' => :awaiting_decisions)
+        .where('courses.college_id=?', college_id)
+        .where.not('course_selections.college_offer' => nil).map {|s| s.id}
   end
 
   # Checks that all added schools have at least one qualification.

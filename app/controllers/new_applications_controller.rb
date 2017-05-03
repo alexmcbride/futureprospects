@@ -1,7 +1,6 @@
 class NewApplicationsController < ApplicationController
   before_action :authenticate_student!
-  before_action :set_application, except: [:create, :education_remove, :education_edit, :education_update, :qualifications, :qualifications_add,
-                                           :qualifications_remove, :employment_remove, :employment_edit, :employment_update, :courses_remove]
+  before_action :set_application, except: [:create]
 
   # POST: /applications
   #
@@ -336,8 +335,8 @@ class NewApplicationsController < ApplicationController
     # Sets current application object,  checks if student is owner of application, and checks application not cancelled.
     def set_application
       @application = (Application.all.find(params[:id]) or not_found)
-      user_not_authorized unless @application.owned_by? current_student
-      user_not_authorized if @application.cancelled?
+
+      user_not_authorized unless @application.owned_by?(current_student) && @application.submitting?
     end
 
     # Sanitises submitted form parameters

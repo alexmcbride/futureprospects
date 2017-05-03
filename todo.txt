@@ -5,15 +5,7 @@ search terms should be:
 *Entry qualifications
 *Career Prospects
 
-guard against loading application methods (remove course etc.) after application has been submitted.
-
-switch navbar bg colour for staff members?
-
 remove pundit verify_authorized from global staff controller once permissions done
-
-print payment receipt?
-
-heroku braintree env variables?
 
 test heroku application cancel with real email
 

@@ -18,6 +18,13 @@
   </div>
 
   <div class="col-sm-9">
+    <% if @application.submitting? %>
+      <div class="alert alert-warning">
+        <strong>Warning</strong>
+        This application has not been submitted yet.
+      </div>
+    <% end %>
+
     <div class="well">
       <h3 class="no-top-margin">Course Selections</h3>
       <p class="text-darkish">The student has made the following course selections.</p>
@@ -29,7 +36,7 @@
                 <%= truncate selection.course.title, length: 83 %>
               </div>
               <div class="col-sm-3 text-right">
-                <%= selection.college_offer ? selection.college_offer.humanize : 'Awaiting Decision' %>
+                <%= selection.college_offer.humanize if selection.college_offer %>
               </div>
             </div>
 
@@ -41,7 +48,7 @@
           <p class="text-darkish small">Check the student's application to make sure they meet the entry requirements of the course.</p>
           <%= link_to 'Update Decisions', edit_staff_application_path(@application), class: 'btn btn-default', role: 'button' %>
         <% else %>
-          <p class="text-darkish small">This application cannot accept any decisions at this time. Reason: <%= @application.status.humanize %></p>
+          <p class="text-darkish small">You cannot make decisions on this application yet. Reason: <span class="text-lowercase"><%= @application.status.humanize %></span></p>
         <% end %>
       </div>
     </div>

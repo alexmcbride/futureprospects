@@ -78,6 +78,10 @@ Rails.application.routes.draw do
   # Colleges
   resources :colleges
 
+  # Decisions
+  get 'decisions/:id', to: 'decisions#index', as: 'decisions'
+  get 'decisions/:id/firm', to: 'decisions#firm', as: 'decisions_firm'
+
   # Root
   get 'home/index'
   root to: 'home#index'

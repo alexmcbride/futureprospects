@@ -1,0 +1,19 @@
+<h1>Future Prospects - Application Submitted</h1>
+
+<p>Hello <%= @student.full_name %>,</p>
+
+<p>This email is to inform you that your have received decisions on the following
+  <%= pluralize @application.course_selections_count, 'course' %>:</p>
+
+<ul>
+  <% @application.course_selections.each do |selection| %>
+      <li><%= link_to selection.course.title, course_url(selection.course) %> &mdash; <%= selection.course.college.name %> </li>
+  <% end %>
+</ul>
+
+<p>Please sign in to the Future Prospects site to <%= link_to 'see what decisions have been made', root_url %>. You can
+now make your own choices and decide which of your offers is right for you.</p>
+
+<p>Sincerely,
+  <br><br>
+  Future Prospects</p>

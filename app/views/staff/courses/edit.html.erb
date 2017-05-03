@@ -2,11 +2,11 @@
 <% @title = 'Edit College Course' %>
 
 <div class="row">
-  <div class="col-sm-3">
+  <div class="col-md-3 col-sm-12">
     <%= render 'staff/shared/courses_sidenav', page: :index %>
   </div>
 
-  <div class="col-sm-9">
+  <div class="col-md-9 col-sm-12">
     <%= render 'form', course: @course, path: staff_course_path(@course) %>
   </div>
 </div>

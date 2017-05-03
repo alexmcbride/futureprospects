@@ -2,7 +2,7 @@
 <% @title = 'Manage Courses' %>
 
 <div class="row">
-  <div class="col-sm-3">
+  <div class="col-md-3 col-sm-12">
     <%= render 'staff/shared/courses_sidenav', page: :index %>
 
     <div class="well">
@@ -50,7 +50,7 @@
     <br>
   </div>
 
-  <div class="col-sm-9">
+  <div class="col-md-9 col-sm-12">
     <% if @courses.empty? %>
       <p class="text-darkish small text-center"><em>There are no courses to display</em></p>
     <% else %>

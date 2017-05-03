@@ -2,7 +2,7 @@
 <% @title = 'Show Course' %>
 
 <div class="row">
-  <div class="col-sm-3">
+  <div class="col-md-3 col-sm-12">
     <%= render 'staff/shared/courses_sidenav', page: :index %>
 
     <%= link_to edit_staff_course_path(@course), class: 'btn btn-default btn-block', role: 'button' do |link| %>
@@ -35,7 +35,7 @@
     <% end %>
   </div>
 
-  <div class="col-sm-9">
+  <div class="col-md-9 col-sm-12">
     <h3 class="no-top-margin"><%= @course.title %></h3>
 
     <div class="well small">

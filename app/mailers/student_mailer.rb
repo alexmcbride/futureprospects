@@ -36,4 +36,10 @@ class StudentMailer < ApplicationMailer
     @payment = payment
     mail(to: @student.email, subject: 'Future Prospects - Payment Failed')
   end
+
+  def decisions_made(student, application)
+    @student = student
+    @application = application
+    mail(to: @student.email, subject: 'Future Prospects - Decisions Made')
+  end
 end

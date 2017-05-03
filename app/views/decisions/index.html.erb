@@ -1,0 +1,70 @@
+<%
+  breadcrumb :decisions
+  @title = 'Track Application'
+%>
+
+<div class="row">
+  <div class="col-md-3">
+    <p><em>This section will guide you through the decisions needed for your college application.</em></p>
+    <h3>Application Stages</h3>
+    <div class="list-group">
+      <div class="list-group-item active">
+        Await Decisions
+      </div>
+      <div class="list-group-item">
+        Firm Choice
+      </div>
+      <div class="list-group-item">
+        Insurance Choice
+      </div>
+      <div class="list-group-item">
+        Review Choices
+      </div>
+      <div class="list-group-item">
+        Completed
+      </div>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <% if @application.pending_course_selections.any? %>
+      <h3 class="no-top-margin">Pending Decisions</h3>
+      <p class="text-darkish">These courses are still awaiting decisions.</p>
+      <div class="list-group">
+        <% @application.pending_course_selections.each do |selection| %>
+          <div class="list-group-item list-group-item-heading">
+            <h4><%= link_to selection.course.title, course_path(selection.course) %></h4>
+            <div class="row">
+              <div class="col-sm-6"><%= selection.course.college.name %></div>
+              <div class="col-sm-6 text-right">Decision: <%= selection.college_offer or 'Pending' %></div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if @application.final_course_selections.any? %>
+      <h3 class="no-top-margin">Finalised Decisions</h3>
+      <p>The following courses have received their decisions.</p>
+      <div class="list-group">
+        <% @application.final_course_selections.each do |selection| %>
+          <div class="list-group-item">
+            <h4><%= selection.course.title %></h4>
+            <p>Decision: <%= selection.college_offer.humanize or 'Pending...' %></p>
+            <% if selection.note.present? %>
+              <p><strong>Note:</strong> <%= selection.note %></p>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if @application.all_selections_have_offers %>
+      <div class="text-darkish text-right">
+        <p class="small text-darkish">You can now make your choices.</p>
+        <%= link_to 'Make Choices', decisions_firm_path , class: 'next-button', role: 'button' %>
+      </div>
+    <% else %>
+      <p class="text-darkish text-right">Once you have received all your decisions, you will be able to make your choices.</p>
+    <% end %>
+  </div>
+</div>

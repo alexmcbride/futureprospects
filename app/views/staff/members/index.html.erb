@@ -2,7 +2,7 @@
 <% @title = 'Staff Members' %>
 
 <div class="row">
-  <div class="col-sm-3">
+  <div class="col-md-3 col-sm-12">
     <div class="well">
       <%= form_tag staff_members_path, method: :get do %>
         <div class="form-group">
@@ -37,9 +37,10 @@
       <%= icon('plus-circle') %>
       Add Staff Member
     <% end %>
+    <br>
   </div>
 
-  <div class="col-sm-9">
+  <div class="col-md-9 col-sm-12">
     <div class="table-responsive">
       <table class="table table-striped table-condensed">
         <thead>

@@ -31,4 +31,10 @@ class StudentMailerPreview < ActionMailer::Preview
     payment = student.applications.first.payments.first
     StudentMailer.payment_failed(student, payment)
   end
+
+  def decisions_made
+    student = Student.find 2
+    application = student.applications.first
+    StudentMailer.decisions_made(student, application)
+  end
 end

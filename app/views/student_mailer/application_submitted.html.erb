@@ -1,4 +1,4 @@
-<h1>Future Prospects - Application Submitted</h1>
+<h1>Future Prospects - Decisions Made</h1>
 
 <p><%= @student.full_name %>,</p>
 
@@ -7,7 +7,7 @@
 
 <ul>
   <% @application.course_selections.each do |selection| %>
-    <li><%= link_to selection.course.title, course_url(selection.course) %> &mdash; <%= selection.course.college.name %> </li>
+      <li><%= link_to selection.course.title, course_url(selection.course) %> &mdash; <%= selection.course.college.name %> </li>
   <% end %>
 </ul>
 

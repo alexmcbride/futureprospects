@@ -276,6 +276,14 @@ class Application < ApplicationRecord
     end
   end
 
+  def pending_course_selections
+    self.course_selections.where(college_offer: nil)
+  end
+
+  def final_course_selections
+    self.course_selections.where.not(college_offer: nil)
+  end
+
   # Generates a PayPal payment URL with the specified params.
   #
   # * +ip+ - the buyer's IP address
@@ -473,6 +481,13 @@ class Application < ApplicationRecord
     end
   end
 
+  # Determines if all selections have had offers made.
+  #
+  # Returns - true if they all have offers.
+  def all_selections_have_offers
+    self.course_selections.any? && self.course_selections.map {|c| c.college_offer.present?}.all?
+  end
+
   private
     # Creates payment object with valid attributes
     #
@@ -491,22 +506,11 @@ class Application < ApplicationRecord
     # Checks if all selections have offers, if they do then marks application as completed.
     def update_status_for_offers
       if awaiting_decisions? && all_selections_have_offers
-        update_awaiting_student
+        self.status = :awaiting_student
+        self.save!
+
+        # Email student to inform them that all of their decisions have been made.
+        StudentMailer.decisions_made(self.student, self).deliver_later
       end
-    end
-
-    # Marks application as awaiting student input.
-    def update_awaiting_student
-      self.status = :awaiting_student
-      self.save!
-
-      # Email student
-    end
-
-    # Determines if all selections have had offers made.
-    #
-    # Returns - true if they all have offers.
-    def all_selections_have_offers
-      self.course_selections.any? && self.course_selections.map {|c| c.college_offer.present?}.all?
     end
 end

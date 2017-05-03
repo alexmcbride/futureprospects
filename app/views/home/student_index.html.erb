@@ -6,17 +6,17 @@
 <hr>
 
 <div class="row">
-  <div class="col-sm-3 col-xs-12">
+  <div class="col-md-3 col-sm-12">
     <p class="text-darkish small">Application steps</p>
     <ul class="list-group" >
       <%= home_stage_item 'Create Application ', @application.nil? || @application.submitting? %>
       <%= home_stage_item 'Make Payment ', @application.present? && (@application.awaiting_payment? || @application.payment_failed?) %>
       <%= home_stage_item 'Await Decisions ', @application.present? && @application.awaiting_decisions? %>
-      <%= home_stage_item 'Make Choices ', false %>
+      <%= home_stage_item 'Make Choices ', @application.present? && @application.awaiting_student? %>
     </ul>
   </div>
 
-  <div class="col-sm-9 col-xs-12">
+  <div class="col-md-9 col-sm-12">
     <p class="text-darkish small">Your next step</p>
     <div class="home-stage-panel">
       <div class="panel-body">
@@ -63,7 +63,14 @@
           <p>We have not received your application fee. We were due to receive your application fee of <strong><%= number_to_currency @application.calculate_fee_pounds, unit: '£' %></strong> by the <strong><%= format_date @application.payment_expiry_time %></strong>. This payment was not made in due time. For this reason we have cancelled your application. If you would like to discuss the matter further, please contact the <%= mail_to 'futureprospectsapp@gmail.com', 'administrative staff' %>.</p>
         <% elsif @application.awaiting_decisions? %>
           <p>You can now track your application.</p>
-          <%= link_to 'Track Application', applications_continue_path(@application), role: 'button', class: 'link-button' %>
+          <div class="text-right">
+            <%= link_to 'Track Application', decisions_path(@application), role: 'button', class: 'link-button' %>
+          </div>
+        <% elsif @application.awaiting_student? %>
+          <p>All of your decisions have been made, you can now make your choices.</p>
+          <div class="text-right">
+            <%= link_to 'Make Your Choices', decisions_path(@application), role: 'button', class: 'link-button' %>
+          </div>
         <% end %>
       </div>
     </div>

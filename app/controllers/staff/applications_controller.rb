@@ -1,4 +1,4 @@
-class Staff::ApplicationsController < ApplicationController
+class Staff::ApplicationsController < Staff::StaffController
   before_action :set_application, only: [:update, :destroy]
 
   # GET /staff/applications

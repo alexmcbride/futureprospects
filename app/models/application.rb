@@ -447,7 +447,7 @@ class Application < ApplicationRecord
   # Returns - boolean indicating if the stage was saved.
   def save_courses
     if self.course_selections.empty?
-      self.errors.add(:saving, 'requires that you must apply for at least one course')
+      self.errors.add(:saving, 'requires that you apply for at least one course')
       return false
     end
     self.current_stage = :submit_stage

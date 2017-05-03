@@ -1,6 +1,9 @@
 class NewApplicationsController < ApplicationController
   before_action :authenticate_student!
-  before_action :set_application, except: [:create]
+  before_action :set_application, except: [:create,
+                                           :qualifications, :qualifications_add, :qualifications_remove,
+                                           :education_remove, :education_edit, :education_update,
+                                           :employment_edit, :employment_update, :employment_remove, :courses_remove]
 
   # POST: /applications
   #

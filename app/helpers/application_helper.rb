@@ -131,7 +131,7 @@ module ApplicationHelper
   #
   # Returns - the masked card number as a string.
   def credit_card_number(last_four_digits)
-    ((('X' * 4) + '-') * 3) + last_four_digits
+    ((('#' * 4) + '-') * 3) + last_four_digits
   end
 
   # Formats a date as dd/mm/yyyy.
@@ -184,5 +184,14 @@ module ApplicationHelper
       concat(' Markdown ')
       concat(link_to '(?)', 'https://daringfireball.net/projects/markdown/basics', class: 'help-cursor', title: 'Markdown Guide')
     end
+  end
+
+  # Generates an address
+  #
+  # * +separator+ - the line separator.
+  #
+  # Returns - the address as a string.
+  def address(resource, separator='<br>')
+    [resource.address_1, (resource.address_2 if resource.address_2.present?), resource.city, resource.postcode, resource.country].compact.join(separator).html_safe
   end
 end

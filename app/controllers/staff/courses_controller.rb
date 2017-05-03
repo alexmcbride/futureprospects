@@ -88,7 +88,7 @@ class Staff::CoursesController < Staff::StaffController
 
     # Sets categories for action what need them.
     def set_categories
-      @categories = policy_scope(Category).where('courses_count > 0').order(:name)
+      @categories = Category.order(:name)
     end
 
     # Sets colleges attribute based on policy scope.

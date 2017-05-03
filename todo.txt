@@ -43,3 +43,5 @@ search within a category?
 add user test@test.com for testing, show things like auth fail select options.
 
 staff applications edit improve validation error messages
+
+rename awaiting decisions to awaiting college?

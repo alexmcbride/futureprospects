@@ -3,7 +3,8 @@ class Staff::CategoriesController < Staff::StaffController
 
   # GET /staff/categories
   def index
-    @categories = policy_scope(Category).order(:name)
+    @categories = Category.order(:name)
+    skip_policy_scope
   end
 
   # GET /staff/categories/1

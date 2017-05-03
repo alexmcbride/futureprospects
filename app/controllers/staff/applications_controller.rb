@@ -11,7 +11,7 @@ class Staff::ApplicationsController < Staff::StaffController
                         .includes(:student)
 
     # Stuff for filter sidebar
-    @categories = policy_scope(Category).order(:name)
+    @categories = Category.order(:name)
     @colleges = policy_scope(College)
 
     # This is an optimisation to stop the query having to be done up for every application that's being iterated over.

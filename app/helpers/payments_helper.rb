@@ -29,7 +29,7 @@ module PaymentsHelper
   # * +selected+ - whether the item is selected or not.
   #
   # Returns - the HTML to display the item.
-  def payment_stage_item(value, selected=false)
+  def payment_stage_item(value, selected=false, completed=false)
     if selected
       content_tag(:li, class: 'list-group-item active') do
         concat(content_tag(:div, class: 'row') do
@@ -43,7 +43,16 @@ module PaymentsHelper
       end
     else
       content_tag(:li, class: 'list-group-item') do
-        concat(value)
+        concat(content_tag(:div, class: 'row') do
+          concat(content_tag(:div, class: 'col-xs-10') do
+            concat(value)
+          end)
+          if completed
+            concat(content_tag(:div, class: 'col-xs-2 text-right') do
+              concat(icon('check', class: 'app-tick'))
+            end)
+          end
+        end)
       end
     end
   end

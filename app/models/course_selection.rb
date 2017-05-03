@@ -36,7 +36,7 @@ class CourseSelection < ApplicationRecord
   def course_is_open
     if self.course
       unless self.course.open?
-        self.errors.add(:course, "cannot be added as status is #{self.course.status}")
+        self.errors.add(:course, "cannot be added as its marked as '#{self.course.status}'")
       end
     end
   end

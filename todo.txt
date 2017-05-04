@@ -24,8 +24,6 @@ dates validate - end date after start date, dates not in future...
 
 plain text emails
 
-don't count decisions from cancelled courses...
-
 markdown preview
 
 staff show (created / first sign in)
@@ -45,3 +43,5 @@ add user test@test.com for testing, show things like auth fail select options.
 staff applications edit improve validation error messages
 
 rename awaiting decisions to awaiting college?
+
+move decisionscontroller stuff into model?

@@ -23,7 +23,11 @@ class DecisionsController < ApplicationController
       selection.save!
     end
 
-    redirect_to decisions_insurance_path(@application), notice: 'Firm choice saved'
+    if @application.has_all_choices?
+      redirect_to decisions_review_path(@application), notice: 'Firm choice saved'
+    else
+      redirect_to decisions_insurance_path(@application), notice: 'Firm choice saved'
+    end
   end
 
   # GET /decisions/:id/insurance

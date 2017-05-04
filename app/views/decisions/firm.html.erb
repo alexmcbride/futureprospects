@@ -36,8 +36,10 @@
   <div class="col-md-9">
     <h3 class="no-top-margin">Make Your Firm Choice.</h3>
 
+    <p>This is your preferred choice, the course you would most like to study, and the college you would most like to attend.</p>
+
     <div class="list-group">
-      <% @application.course_selections.each do |selection| %>
+      <% @application.course_selections.where.not(college_offer: :rejected).each do |selection| %>
         <div class="list-group-item list-group-item-heading">
           <div class="row">
             <div class="col-sm-9">
@@ -57,7 +59,7 @@
     <br>
 
     <div class="text-right">
-      <p class="text-darkish small">You will have a chance to review your decisions.</p>
+      <p class="text-darkish small">You will have a chance to review your choices.</p>
       <%= form_tag decisions_decline_path(@application), method: :post do %>
         <%= hidden_field_tag :which_to_decline, :all %>
         <%= submit_tag 'Decline All Choices', class: 'btn btn-danger', style: 'width: 25%;' %>

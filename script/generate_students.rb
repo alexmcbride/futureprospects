@@ -76,7 +76,7 @@ def student(tokens, schools, jobs, refs)
     puts app + ".correspondence_city = 'Glasgow'"
     puts app + ".correspondence_country = '#{tokens[21]}'"
   end
-  status = [:submitting, :awaiting_payment, :payment_failed, :cancelled, :awaiting_decisions, :awaiting_decisions, :awaiting_decisions, :all_decisions_made].sample
+  status = Application.statuses.map {|k, v| k}.sample
   puts app + ".status = :#{status}"
   puts app + '.current_stage = :submit_stage'
   puts app + '.save! validate: false'
@@ -165,6 +165,18 @@ def student(tokens, schools, jobs, refs)
   ids.each do |id|
     course = 'course'#{$courses}"'
     puts course + " = CourseSelection.new application_id: #{app}.id, course_id: #{id}"
+
+    offer = nil
+    if status == :all_decisions_made or status == :completed
+      offer = [:definite_offer, :conditional_offer].sample
+      puts "course.college_offer = :#{offer}"
+    elsif status == :all_rejected
+      puts "course.college_offer = :rejected"
+    else
+      offer = CourseSelection.college_offers.map {|k, v| k}.sample.to_sym
+      puts "course.college_offer = :#{offer}"
+    end
+    puts "course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'"
     puts course + '.save! validate: false'
     puts ''
     $courses += 1
@@ -172,7 +184,7 @@ def student(tokens, schools, jobs, refs)
 
   # Payments
   status = status.to_sym
-  if [:awaiting_decisions, :payment_failed, :cancelled, :awaiting_choices].include? status
+  if [:awaiting_decisions, :payment_failed, :cancelled, :awaiting_decisions, :all_decisions_made, :all_rejected, :completed].include? status
     last_year = (DateTime.now - 6.months)..DateTime.now
     dates = last_year.to_a.sample(4).sort
     amount = num > 1 ? 2000 : 1000
@@ -184,13 +196,12 @@ def student(tokens, schools, jobs, refs)
       puts payment
       puts 'payment.save! validate: false'
     end
-    if status == :awaiting_decisions || status == :awaiting_choices
+    if [:awaiting_decisions, :all_decisions_made, :all_rejected, :completed].include? status
       puts payment_auth
       puts 'payment.save! validate: false'
     end
     puts ''
   end
-
 
   $counter += 1
 end

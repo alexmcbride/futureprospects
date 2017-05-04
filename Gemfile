@@ -63,7 +63,7 @@ gem 'devise' # authentication
 #gem 'devise-bootstrapped' # authentication views
 gem 'rolify' # roles
 gem 'font-awesome-sass', '~> 4.7.0' # glyphs and icons
-gem 'jquery-ui-rails' # jquery-ui
+gem 'jquery-ui-rails' # jquery-ui (autocomplete)
 gem 'bootstrap-datepicker-rails' # bootstrap datepicker control
 gem 'mini_magick' # Image resizing (requires ImageMagick installed too)
 gem 'fog-aws' # Cloud storage (through Amazon Web Services)

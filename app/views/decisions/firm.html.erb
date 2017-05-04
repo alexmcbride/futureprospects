@@ -1,0 +1,67 @@
+<%
+  breadcrumb :decisions_firm, @application
+  @title = 'Make Firm Choice'
+%>
+
+<div class="row">
+  <div class="col-md-3">
+    <p><em>This section will guide you through the decisions needed for your college application.</em></p>
+    <h3>Application Stages</h3>
+    <div class="list-group">
+      <div class="list-group-item">
+        <div class="row">
+          <div class="col-xs-10">
+            Await Decisions
+          </div>
+          <div class="col-xs-2">
+            <%= icon('check', class: 'app-tick') %>
+          </div>
+        </div>
+      </div>
+      <div class="list-group-item active">
+        Firm Choice
+      </div>
+      <div class="list-group-item">
+        Insurance Choice
+      </div>
+      <div class="list-group-item">
+        Review Choices
+      </div>
+      <div class="list-group-item">
+        Completed
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-9">
+    <h3 class="no-top-margin">Make Your Firm Choice.</h3>
+
+    <div class="list-group">
+      <% @application.course_selections.each do |selection| %>
+        <div class="list-group-item list-group-item-heading">
+          <div class="row">
+            <div class="col-sm-9">
+              <h4><%= truncate selection.course.title, length: 80 %></h4>
+            </div>
+            <div class="col-sm-3 text-right">
+              <%= form_tag decisions_firm_path(@application), method: :post do %>
+                <%= hidden_field_tag :course_selection_id, selection.id %>
+                <%= submit_tag 'Make Firm Choice', class: 'btn btn-default' %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <br>
+
+    <div class="text-right">
+      <p class="text-darkish small">You will have a chance to review your decisions.</p>
+      <%= form_tag decisions_decline_path(@application), method: :post do %>
+        <%= hidden_field_tag :which_to_decline, :all %>
+        <%= submit_tag 'Decline All Choices', class: 'btn btn-danger', style: 'width: 25%;' %>
+      <% end %>
+    </div>
+  </div>
+</div>

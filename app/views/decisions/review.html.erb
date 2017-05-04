@@ -1,0 +1,93 @@
+<%
+  breadcrumb :decisions_review, @application
+  @title = 'Make Form Choice'
+%>
+
+<div class="row">
+  <div class="col-md-3">
+    <p><em>This section will guide you through the decisions needed for your college application.</em></p>
+    <h3>Application Stages</h3>
+    <div class="list-group">
+      <div class="list-group-item">
+        <div class="row">
+          <div class="col-xs-10">
+            Await Decisions
+          </div>
+          <div class="col-xs-2">
+            <%= icon('check', class: 'app-tick') %>
+          </div>
+        </div>
+      </div>
+      <div class="list-group-item">
+        <div class="row">
+          <div class="col-xs-10">
+            Firm Choice
+          </div>
+          <div class="col-xs-2">
+            <%= icon('check', class: 'app-tick') %>
+          </div>
+        </div>
+      </div>
+      <div class="list-group-item">
+        <div class="row">
+          <div class="col-xs-10">
+            Insurance Choice
+          </div>
+          <div class="col-xs-2">
+            <%= icon('check', class: 'app-tick') %>
+          </div>
+        </div>
+      </div>
+      <div class="list-group-item active">
+        Review Choices
+      </div>
+      <div class="list-group-item">
+        Completed
+      </div>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <h3 class="no-top-margin">Review Your Choices.</h3>
+
+    <div class="list-group">
+      <% @application.course_selections.order(:student_choice).each do |selection| %>
+        <div class="list-group-item list-group-item-heading">
+          <div class="row">
+            <div class="col-sm-9">
+              <h4><%= truncate selection.course.title, length: 70 %></h4>
+            </div>
+            <div class="col-sm-3 text-right">
+              <% if selection.firm_choice? %>
+                Firm Choice
+                <%= icon('check-circle', style: 'color: green; font-size: 22pt;') %>
+              <% elsif selection.insurance_choice? %>
+                Insurance Choice
+                <%= icon('check-circle', style: 'color: green; font-size: 22pt;') %>
+              <% else %>
+                Declined
+                  <%= icon('ban', style: 'color: red; font-size: 22pt;') %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <br>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <p class="text-darkish small">Go back and make different choices.</p>
+        <%= link_to 'Make Changes', decisions_firm_path, class: 'btn btn-default', role: 'button' %>
+      </div>
+      <div class="col-sm-6 text-right">
+        <p class="text-darkish small">Continue and finalise your choices.</p>
+        <%= form_tag decisions_review_post_path(@application), method: :post do %>
+          <%= hidden_field_tag :which_to_decline, :insurance %>
+          <%= submit_tag 'Accept Choices', class: 'btn btn-primary' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+

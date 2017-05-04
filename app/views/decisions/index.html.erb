@@ -1,5 +1,5 @@
 <%
-  breadcrumb :decisions
+  breadcrumb :decisions, @application
   @title = 'Track Application'
 %>
 
@@ -28,7 +28,7 @@
   <div class="col-md-9">
     <% if @application.pending_course_selections.any? %>
       <h3 class="no-top-margin">Pending Decisions</h3>
-      <p class="text-darkish">These courses are still awaiting decisions.</p>
+      <p class="text-darkish">These courses are still awaiting decisions from the respective colleges.</p>
       <div class="list-group">
         <% @application.pending_course_selections.each do |selection| %>
           <div class="list-group-item list-group-item-heading">
@@ -44,7 +44,7 @@
 
     <% if @application.final_course_selections.any? %>
       <h3 class="no-top-margin">Finalised Decisions</h3>
-      <p>The following courses have received their decisions.</p>
+      <p>The following courses have received decisions.</p>
       <div class="list-group">
         <% @application.final_course_selections.each do |selection| %>
           <div class="list-group-item">
@@ -58,13 +58,18 @@
       </div>
     <% end %>
 
-    <% if @application.all_selections_have_offers %>
-      <div class="text-darkish text-right">
-        <p class="small text-darkish">You can now make your choices.</p>
-        <%= link_to 'Make Choices', decisions_firm_path , class: 'next-button', role: 'button' %>
+    <% if @application.all_decisions_made? %>
+      <div class="text-right">
+        <p class="small text-darkish">Make your first choice of course to study.</p>
+        <%= link_to 'Make Firm Choice', decisions_firm_path(@application), class: 'next-button' %>
       </div>
+    <% elsif @application.all_rejected? %>
+      <h4>All Refused</h4>
+      <p>Sadly, all of your applications have been refused. You cannot accept any offers at this time. However, you may
+        qualify for clearance courses in the future. You will be contacted about this in due time.</p>
     <% else %>
-      <p class="text-darkish text-right">Once you have received all your decisions, you will be able to make your choices.</p>
+      <h4>Still Waiting</h4>
+      <p>Once you have received all your decisions, you will be able to make your choices.</p>
     <% end %>
   </div>
 </div>

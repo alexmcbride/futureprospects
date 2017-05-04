@@ -81,8 +81,17 @@ Rails.application.routes.draw do
   # Decisions
   get 'decisions/:id', to: 'decisions#index', as: 'decisions'
   get 'decisions/:id/firm', to: 'decisions#firm', as: 'decisions_firm'
+  post 'decisions/:id/firm', to: 'decisions#firm_post', as: 'decisions_firm_post'
+  get 'decisions/:id/insurance', to: 'decisions#insurance', as: 'decisions_insurance'
+  post 'decisions/:id/insurance', to: 'decisions#insurance_post', as: 'decisions_insurance_post'
+  post 'decisions/:id/decline', to: 'decisions#decline', as: 'decisions_decline'
+  get 'decisions/:id/review', to: 'decisions#review', as: 'decisions_review'
+  post 'decisions/:id/review', to: 'decisions#review_post', as: 'decisions_review_post'
+  get 'decisions/:id/completed', to: 'decisions#completed', as: 'decisions_completed'
 
   # Root
   get 'home/index'
   root to: 'home#index'
 end
+
+

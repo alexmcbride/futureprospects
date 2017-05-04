@@ -12,7 +12,7 @@
       <%= home_stage_item 'Create Application ', @application.nil? || @application.submitting? %>
       <%= home_stage_item 'Make Payment ', @application.present? && (@application.awaiting_payment? || @application.payment_failed?) %>
       <%= home_stage_item 'Await Decisions ', @application.present? && @application.awaiting_decisions? %>
-      <%= home_stage_item 'Make Choices ', @application.present? && @application.awaiting_student? %>
+      <%= home_stage_item 'Make Choices ', @application.present? && (@application.all_decisions_made? || @application.all_rejected?) %>
     </ul>
   </div>
 
@@ -66,7 +66,7 @@
           <div class="text-right">
             <%= link_to 'Track Application', decisions_path(@application), role: 'button', class: 'link-button' %>
           </div>
-        <% elsif @application.awaiting_student? %>
+        <% elsif @application.all_decisions_made? || @application.all_rejected?  %>
           <p>All of your decisions have been made, you can now make your choices.</p>
           <div class="text-right">
             <%= link_to 'Make Your Choices', decisions_path(@application), role: 'button', class: 'link-button' %>

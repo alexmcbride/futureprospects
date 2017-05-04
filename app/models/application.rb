@@ -28,7 +28,8 @@ class Application < ApplicationRecord
   enum gender: [:male, :female, :other]
 
   # Enum for the application status.
-  enum status: [:submitting, :awaiting_payment, :payment_failed, :cancelled, :awaiting_decisions, :awaiting_student]
+  enum status: [:submitting, :awaiting_payment, :payment_failed, :cancelled, :awaiting_decisions, :all_decisions_made,
+                :all_rejected, :completed]
 
   # Enum for current application stage.
   enum current_stage: [:intro_stage, :profile_stage, :education_stage, :employment_stage, :references_stage,
@@ -73,7 +74,7 @@ class Application < ApplicationRecord
   has_many :course_selections
   has_many :payments
 
-  before_save :update_status_for_offers
+  before_save :update_status_for_decisions
 
   # Allows support of nested forms for the course offers form.
   accepts_nested_attributes_for :course_selections, reject_if:  lambda {|attr| attr[:college_offer].blank?}
@@ -261,7 +262,7 @@ class Application < ApplicationRecord
   end
 
   # Method called by rake task that cancels any applications with an outstanding payment over 7 days old. To run this
-  # you can do it manually `ruby bin\\rake site_tasks:handle_failed_payments`, on Heroku it is run by the scheduler once
+  # you can do it manually `ruby bin\rake site_tasks:handle_failed_payments`, on Heroku it is run by the scheduler once
   # every 24 hours. See for more details: https://devcenter.heroku.com/articles/scheduler
   def self.handle_failed_payments
     applications = Application.includes(:student)
@@ -276,10 +277,16 @@ class Application < ApplicationRecord
     end
   end
 
+  # Finds all course selections that do not have an offer.
+  #
+  # Returns - a relation of course selections.
   def pending_course_selections
     self.course_selections.where(college_offer: nil)
   end
 
+  # Finds all course selections that do have an offer.
+  #
+  # Returns - a relation of course selections.
   def final_course_selections
     self.course_selections.where.not(college_offer: nil)
   end
@@ -484,7 +491,7 @@ class Application < ApplicationRecord
   # Determines if all selections have had offers made.
   #
   # Returns - true if they all have offers.
-  def all_selections_have_offers
+  def all_selections_have_updates?
     self.course_selections.any? && self.course_selections.map {|c| c.college_offer.present?}.all?
   end
 
@@ -504,13 +511,21 @@ class Application < ApplicationRecord
     end
 
     # Checks if all selections have offers, if they do then marks application as completed.
-    def update_status_for_offers
-      if awaiting_decisions? && all_selections_have_offers
-        self.status = :awaiting_student
+    def update_status_for_decisions
+      if awaiting_decisions? && all_selections_have_updates?
+        if all_selections_rejected?
+          self.status = :all_rejected
+        else
+          self.status = :all_decisions_made
+        end
         self.save!
 
         # Email student to inform them that all of their decisions have been made.
         StudentMailer.decisions_made(self.student, self).deliver_later
       end
+    end
+
+    def all_selections_rejected?
+      self.course_selections.all? {|s| s.rejected?}
     end
 end

@@ -1651,7 +1651,7 @@ app.correspondence_address_2 = 'Birmingham'
 app.correspondence_postcode = 'B40 2GR'
 app.correspondence_city = 'Glasgow'
 app.correspondence_country = 'United Kingdom'
-app.status = :awaiting_student
+app.status = :all_decisions_made
 app.current_stage = :submit_stage
 app.save! validate: false
 
@@ -1968,7 +1968,7 @@ app.permanent_postcode = 'CT15 2GR'
 app.permanent_city = 'Glasgow'
 app.permanent_country = 'United Kingdom'
 app.submitted_date = Date.strptime('2016-12-02')
-app.status = :awaiting_student
+app.status = :all_decisions_made
 app.current_stage = :submit_stage
 app.save! validate: false
 

@@ -76,7 +76,7 @@ def student(tokens, schools, jobs, refs)
     puts app + ".correspondence_city = 'Glasgow'"
     puts app + ".correspondence_country = '#{tokens[21]}'"
   end
-  status = [:submitting, :awaiting_payment, :payment_failed, :cancelled, :awaiting_decisions, :awaiting_decisions, :awaiting_decisions, :awaiting_student].sample
+  status = [:submitting, :awaiting_payment, :payment_failed, :cancelled, :awaiting_decisions, :awaiting_decisions, :awaiting_decisions, :all_decisions_made].sample
   puts app + ".status = :#{status}"
   puts app + '.current_stage = :submit_stage'
   puts app + '.save! validate: false'

@@ -76,7 +76,7 @@ def student(file, tokens, schools, jobs, refs)
     file.puts app + ".correspondence_city = 'Glasgow'"
     file.puts app + ".correspondence_country = '#{tokens[21]}'"
   end
-  status = Application.statuses.map {|k, v| k}.sample
+  status = Application.statuses.map {|k, v| k}.sample.to_sym
   file.puts app + ".status = :#{status}"
   file.puts app + '.current_stage = :submit_stage'
   file.puts app + '.save! validate: false'

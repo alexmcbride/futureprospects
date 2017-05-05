@@ -5,6 +5,7 @@ class DecisionsController < ApplicationController
 
   # GET /decisions/:id
   def index
+    
   end
 
   # get /decisions/:id/firm

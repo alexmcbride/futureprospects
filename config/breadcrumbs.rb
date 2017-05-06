@@ -144,24 +144,29 @@ crumb :payment_authorized do |payment|
   link 'Payment Authorized', payment_path(payment)
 end
 
-crumb :decisions do |application|
+crumb :decisions do
   parent :root
-  link 'Decisions', decisions_path(application)
+  link 'Decisions', decisions_path
 end
 
-crumb :decisions_firm do |application|
-  parent :decisions, application
-  link 'Firm Choice', decisions_firm_path(application)
+crumb :decisions_firm do
+  parent :decisions
+  link 'Firm Choice', decisions_firm_path
 end
 
-crumb :decisions_insurance do |application|
-  parent :decisions, application
-  link 'Insurance Choice', decisions_insurance_path(application)
+crumb :decisions_insurance do
+  parent :decisions
+  link 'Insurance Choice', decisions_insurance_path
 end
 
-crumb :decisions_review do |application|
-  parent :decisions, application
-  link 'Review Choices', decisions_review_path(application)
+crumb :decisions_review do
+  parent :decisions
+  link 'Review Choices', decisions_review_path
+end
+
+crumb :decisions_change do
+  parent :decisions
+  link 'Change Course', decisions_change_path
 end
 
 crumb :staff_courses do

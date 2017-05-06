@@ -88,4 +88,45 @@ class CourseSelection < ApplicationRecord
     result = ActiveRecord::Base.connection.execute(sql)
     result.first['count']
   end
+
+  def has_all_choices?
+    self.application.course_selections.all? {|s| s.student_choice.present? || s.rejected?}
+  end
+
+  def make_firm_choice
+    self.student_choice = :firm_choice
+    save!
+    has_all_choices?
+  end
+
+  def make_insurance_choice
+    self.student_choice = :insurance_choice
+    save!
+    CourseSelection.decline_all(self.application)
+  end
+
+  def self.clear_all_choices(application)
+    application.course_selections.each do |selection|
+      selection.student_choice = nil
+      selection.save!
+    end
+  end
+
+  def self.decline_all(application)
+    application.course_selections.each do |selection|
+      unless selection.firm_choice? or selection.insurance_choice?
+        selection.student_choice = :declined
+        selection.save!
+      end
+    end
+  end
+
+  def self.decline_insurance(application)
+    application.course_selections.each do |selection|
+      unless selection.firm_choice?
+        selection.student_choice = :declined
+        selection.save!
+      end
+    end
+  end
 end

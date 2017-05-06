@@ -1,0 +1,73 @@
+<%
+  breadcrumb :decisions_change
+  @title = 'Change Course Selection'
+%>
+
+<script>
+  function auto_focus(event, ui) {
+    var id = $(this).attr('data-id');
+    $('#course_title_' + id).val(ui.item.title);
+    $('#course_id_' + id).val(ui.item.id);
+    return false;
+  }
+
+  function auto_select(event, ui) {
+      return auto_focus(event, ui);
+  }
+
+  function auto_render(ul, item) {
+      return $( "<li>" )
+          .append( '<div class="text-capitalize"><strong>' +
+              item.title +
+              '</strong><br>' +
+              item.college.name + ' &raquo; ' + item.category.name +
+              '</div>')
+          .appendTo( ul );
+  }
+
+  $(function () {
+    var options = {
+        minLength: 1,
+        source: '<%= url_for courses_search_path(:json) %>',
+        focus: auto_focus,
+        select: auto_select
+    };
+    <% @course_selections.each do |selection| %>
+      $('#course_title_<%= selection.id %>').autocomplete(options).autocomplete('instance')._renderItem = auto_render;
+    <% end %>
+  })
+</script>
+
+<p>In order to change your course selection we will require another payment for the following fee: </p>
+
+<p><strong>Amount: £10</strong></p>
+
+<hr>
+
+<p>You can change the selected course using the form below.</p>
+
+<div class="list-group">
+  <%= form_tag decisions_change_path, method: :post do %>
+    <% @course_selections.each do |selection| %>
+      <div class="list-group-item list-group-item-heading">
+        <h4 style="margin-top: 4px;">
+          <strong><%= selection.course.title %></strong>
+          <small><%= selection.course.college.name %></small>
+        </h4>
+
+        <%= hidden_field_tag 'course_selection[id]', selection.id %>
+        <%= hidden_field_tag 'course_selection[course_id]', selection.course_id, id: "course_id_#{selection.id}" %>
+        <input type="text" name="course_selection[title]" id="course_title_<%= selection.id %>" class="form-control" placeholder="Enter new course title" data-id="<%= selection.id %>">
+      </div>
+    <% end %>
+
+    <br><br>
+
+    <div class="text-right">
+      <p class="text-darkish small">Proceed to make course change fee payment.</p>
+      <%= submit_tag 'Change Course(s)', class: 'btn btn-default' %>
+    </div>
+  <% end %>
+</div>
+
+

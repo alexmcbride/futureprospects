@@ -1,90 +1,81 @@
 class DecisionsController < ApplicationController
-  before_action :set_application, only: [:index, :firm, :firm_post, :insurance, :insurance_post, :decline, :review,
-                                         :review_post, :completed]
-  before_action :check_allowed, except: [:index, :completed]
+  before_action :set_application#, only: [:index, :firm, :firm_post, :insurance, :insurance_post, :decline, :review,
+                                 #        :review_post, :completed]
+  before_action :check_can_view
 
   # GET /decisions/:id
   def index
-    
   end
 
-  # get /decisions/:id/firm
+  # get /decisions/firm
   def firm
+    CourseSelection.clear_all_choices @application
   end
 
-  # POST /decisions/:id/firm
+  # POST /decisions/firm
   def firm_post
-    @application.course_selections.each do |selection|
-      # Update all courses with new choice.
-      if selection.id.to_s == params[:course_selection_id]
-        selection.student_choice = :firm_choice
-      else
-        selection.student_choice = nil
-      end
-      selection.save!
-    end
-
-    if @application.has_all_choices?
-      redirect_to decisions_review_path(@application), notice: 'Firm choice saved'
+    selection = CourseSelection.find params[:course_selection_id]
+    if selection.make_firm_choice
+      redirect_to decisions_review_path
     else
-      redirect_to decisions_insurance_path(@application), notice: 'Firm choice saved'
+      redirect_to decisions_insurance_path
     end
   end
 
-  # GET /decisions/:id/insurance
+  # GET /decisions/insurance
   def insurance
   end
 
-  # POST /decisions/:id/insurance
+  # POST /decisions/insurance
   def insurance_post
-    @application.course_selections.each do |selection|
-      # Update all courses with new choice.
-      if selection.id.to_s == params[:course_selection_id]
-        selection.student_choice = :insurance_choice
-      elsif !selection.firm_choice?
-        selection.student_choice = :declined
-      end
-      selection.save!
-    end
-
-    redirect_to decisions_review_path(@application), notice: 'Insurance choice saved'
+    selection = CourseSelection.find params[:course_selection_id]
+    selection.make_insurance_choice
+    redirect_to decisions_review_path
   end
 
-  # POST /decisions/:id/decline
+  # POST /decisions/decline
   def decline
     which = params[:which_to_decline].to_sym
-    @application.course_selections.each do |selection|
-      if which == :all || (which == :insurance && !selection.firm_choice?)
-        selection.student_choice = :declined
-      end
-      selection.save!
+    if which == :all
+      CourseSelection.decline_all @application
+    elsif which == :insurance
+      CourseSelection.decline_insurance @application
     end
     redirect_to decisions_review_path(@application), notice: 'All choices declined'
   end
 
-  # GET /decisions/:id/review
+  # GET /decisions/review
   def review
   end
 
-  # POST /decisions/:id/review
+  # POST /decisions/review
   def review_post
     @application.status = :completed
     @application.save!
     redirect_to decisions_completed_path(@application), notice: 'Application completed'
   end
 
-  # GET /decisions/:id/completed
+  # GET /decisions/completed
   def completed
 
+  end
+
+  # GET /decisions/change
+  def change
+    @course_selections = @application.course_selections.where(college_offer: nil)
+  end
+
+  def change_post
+    p = params
   end
 
   private
     # Sets the application object for action that need it.
     def set_application
-      @application = Application.find params[:id]
+      @application = current_student.current_application
     end
 
-    def check_allowed
-      @application.all_rejected? and user_not_authorized
+    def check_can_view
+      user_not_authorized unless (@application.awaiting_decisions? || @application.all_decisions_made? || @application.all_rejected?)
     end
 end

@@ -40,9 +40,9 @@ class CoursesController < ApplicationController
         format.json { head :ok } # blank json response
       else
         # Perform search.
-        @courses = Course.full_search(params[:term]).take 10
-        format.json { render :json => @courses, :only => [:id, :title, :status],
-                             :include => {:college => {:only => :name}} }
+        @courses = Course.full_search(params[:term]).where(status: :open).take 10
+        format.json { render :json => @courses, :only => [:id, :title],
+                             :include => {:college => {:only => :name}, :category => {:only => :name}} }
       end
     end
   end

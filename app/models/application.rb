@@ -291,10 +291,6 @@ class Application < ApplicationRecord
     self.course_selections.where.not(college_offer: nil)
   end
 
-  def has_all_choices?
-    self.course_selections.all? {|s| !s.student_choice.nil? || s.rejected?}
-  end
-
   # Generates a PayPal payment URL with the specified params.
   #
   # * +ip+ - the buyer's IP address

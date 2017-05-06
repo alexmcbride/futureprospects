@@ -5,50 +5,30 @@
 
 <div class="row">
   <div class="col-md-3">
-    <p><em>This section will guide you through the decisions needed for your college application.</em></p>
-    <h3>Application Stages</h3>
-    <div class="list-group">
-      <div class="list-group-item">
-        <div class="row">
-          <div class="col-xs-10">
-            Await Decisions
-          </div>
-          <div class="col-xs-2">
-            <%= icon('check', class: 'app-tick') %>
-          </div>
-        </div>
-      </div>
-      <div class="list-group-item active">
-        Firm Choice
-      </div>
-      <div class="list-group-item">
-        Insurance Choice
-      </div>
-      <div class="list-group-item">
-        Review Choices
-      </div>
-      <div class="list-group-item">
-        Completed
-      </div>
-    </div>
+    <%= render 'sidebar', stage: :firm %>
   </div>
 
   <div class="col-md-9">
     <h3 class="no-top-margin">Make Your Firm Choice.</h3>
 
-    <p>This is your preferred choice, the course you would most like to study, and the college you would most like to attend.</p>
+    <p>This is your preferred choice, the course you would most like to study and the college you would most like to
+      attend. Alternatively, you can turn down all offers. You are given a chance to review your choices before commiting to them.</p>
 
     <div class="list-group">
       <% @application.course_selections.where.not(college_offer: :rejected).each do |selection| %>
         <div class="list-group-item list-group-item-heading">
           <div class="row">
             <div class="col-sm-9">
-              <h4><%= truncate selection.course.title, length: 80 %></h4>
+              <h4 style="margin-bottom: 4px;">
+                <%= truncate selection.course.title, length: 80 %>
+                <small><%= truncate selection.course.college.name %></small>
+              </h4>
+              <p class="small"><%= selection.college_offer.humanize %></p>
             </div>
             <div class="col-sm-3 text-right">
-              <%= form_tag decisions_firm_path(@application), method: :post do %>
-                <%= hidden_field_tag :course_selection_id, selection.id %>
-                <%= submit_tag 'Make Firm Choice', class: 'btn btn-default' %>
+              <%= form_tag decisions_firm_path, method: :post do %>
+                  <%= hidden_field_tag :course_selection_id, selection.id %>
+                  <%= submit_tag 'Firm Choice', class: 'btn btn-info', title: "Make '#{selection.course.title}' your firm choice" %>
               <% end %>
             </div>
           </div>

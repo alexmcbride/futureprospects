@@ -64,12 +64,12 @@
         <% elsif @application.awaiting_decisions? %>
           <p>You can now track your application.</p>
           <div class="text-right">
-            <%= link_to 'Track Application', decisions_path(@application), role: 'button', class: 'link-button' %>
+            <%= link_to 'Track Application', decisions_path, role: 'button', class: 'link-button' %>
           </div>
         <% elsif @application.all_decisions_made? || @application.all_rejected?  %>
           <p>All of your decisions have been made, you can now make your choices.</p>
           <div class="text-right">
-            <%= link_to 'Make Your Choices', decisions_path(@application), role: 'button', class: 'link-button' %>
+            <%= link_to 'Make Your Choices', decisions_path, role: 'button', class: 'link-button' %>
           </div>
         <% end %>
       </div>

@@ -79,15 +79,17 @@ Rails.application.routes.draw do
   resources :colleges
 
   # Decisions
-  get 'decisions/:id', to: 'decisions#index', as: 'decisions'
-  get 'decisions/:id/firm', to: 'decisions#firm', as: 'decisions_firm'
-  post 'decisions/:id/firm', to: 'decisions#firm_post', as: 'decisions_firm_post'
-  get 'decisions/:id/insurance', to: 'decisions#insurance', as: 'decisions_insurance'
-  post 'decisions/:id/insurance', to: 'decisions#insurance_post', as: 'decisions_insurance_post'
-  post 'decisions/:id/decline', to: 'decisions#decline', as: 'decisions_decline'
-  get 'decisions/:id/review', to: 'decisions#review', as: 'decisions_review'
-  post 'decisions/:id/review', to: 'decisions#review_post', as: 'decisions_review_post'
-  get 'decisions/:id/completed', to: 'decisions#completed', as: 'decisions_completed'
+  get 'decisions', to: 'decisions#index', as: 'decisions'
+  get 'decisions/firm', to: 'decisions#firm', as: 'decisions_firm'
+  post 'decisions/firm', to: 'decisions#firm_post', as: 'decisions_firm_post'
+  get 'decisions/insurance', to: 'decisions#insurance', as: 'decisions_insurance'
+  post 'decisions/insurance', to: 'decisions#insurance_post', as: 'decisions_insurance_post'
+  post 'decisions/decline', to: 'decisions#decline', as: 'decisions_decline'
+  get 'decisions/review', to: 'decisions#review', as: 'decisions_review'
+  post 'decisions/review', to: 'decisions#review_post', as: 'decisions_review_post'
+  get 'decisions/completed', to: 'decisions#completed', as: 'decisions_completed'
+  get 'decisions/change', to: 'decisions#change', as: 'decisions_change'
+  post 'decisions/change', to: 'decisions#change_post', as: 'decisions_change_post'
 
   # Root
   get 'home/index'

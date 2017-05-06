@@ -26,9 +26,7 @@
              .append( '<div class="text-capitalize"><strong>' +
                  item.title +
                  '</strong><br>' +
-                 item.college.name +
-                 ' | Status: ' +
-                 item.status +
+                 item.college.name + ' &raquo; ' + item.category.name +
                  '</div>')
              .appendTo( ul );
      };
@@ -41,12 +39,13 @@
   </div>
 
   <div class="col-sm-9">
+    <h3 class="no-top-margin">Add Courses</h3>
+    <p>
+      Add the courses that you wish to apply for, up to a maximum of five. Use the auto-complete search box below to
+      select the course and then click the add button. You will be charged the specified amount as an application fee
+      when your application is submitted.
+    </p>
     <%= form_for @course_selection, url: applications_courses_add_path(@application), method: :post do |f| %>
-      <h3 class="no-top-margin">Add Courses</h3>
-      <p>
-        Add the courses that you wish to apply for, up to a maximum of five. Use the auto-complete search box below to select the course and then click the add button.
-        You will be charged the specified amount as an application fee when your application is submitted.
-      </p>
       <%= form_errors @course_selection %>
       <%= f.hidden_field :course_id %>
       <div class="row">

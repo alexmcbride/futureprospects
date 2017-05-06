@@ -1,0 +1,9 @@
+<p><em>This section will guide you through choosing the college course that's right for you.</em></p>
+<h3>Application Stages</h3>
+<div class="list-group">
+  <%= decision_stage_item 'Await Decisions', stage == :index, [:firm, :insurance, :review, :completed].include?(stage) %>
+  <%= decision_stage_item 'Make Firm Choice', stage == :firm, [:insurance, :review, :completed].include?(stage) %>
+  <%= decision_stage_item 'Make Insurance Choice', stage == :insurance, [:review, :completed].include?(stage) %>
+  <%= decision_stage_item 'Review Choices', stage == :review, [:completed].include?(stage) %>
+  <%= decision_stage_item 'Completed', stage == :completed %>
+</div>

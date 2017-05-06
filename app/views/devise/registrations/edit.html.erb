@@ -24,7 +24,7 @@
                 </div>
                 <div class="row slight-margin-bottom">
                   <div class="col-xs-6">College</div>
-                  <div class="col-xs-6"><strong><%= resource.college.name %></strong></div>
+                  <div class="col-xs-6"><strong><%= resource.college ? resource.college.name : 'None' %></strong></div>
                 </div>
               <% end %>
 

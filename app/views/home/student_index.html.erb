@@ -42,7 +42,7 @@
             payment for the application fee. After that, your application will be sent to your chosen colleges to be
             considered.</p>
           <div class="text-right">
-            <%= link_to 'Continue Application', applications_continue_path(@application), role: 'button', class: 'link-button' %>
+            <%= link_to 'Continue Application', applications_continue_path, role: 'button', class: 'link-button' %>
           </div>
         <% elsif @application.awaiting_payment? %>
           <p><strong>Your application has been submitted but we haven't received your application fee yet.</strong></p>

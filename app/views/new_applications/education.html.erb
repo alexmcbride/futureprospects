@@ -1,4 +1,4 @@
-<% breadcrumb :application_education, @application %>
+<% breadcrumb :application_education %>
 <% @title = 'Education' %>
 
 <%= render partial: 'remove_modal',
@@ -26,7 +26,7 @@
     <%= render 'education_form', path: applications_education_add_path %>
 
     <!-- Form used to validate that schools/courses have been added -->
-    <%= form_for @application, url: applications_education_next_path(@application), method: :post do |f| %>
+    <%= form_for @application, url: applications_education_next_path, method: :post do |f| %>
       <!-- Display schools list -->
       <hr>
       <h3 class="no-top-margin">Education History</h3>

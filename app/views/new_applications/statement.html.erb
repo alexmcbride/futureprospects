@@ -1,4 +1,4 @@
-<% breadcrumb :application_statement, @application %>
+<% breadcrumb :application_statement %>
 <% @title = 'Personal Statement' %>
 
 <script type="text/javascript">
@@ -51,7 +51,7 @@
         <div class="col-sm-12 text-right">
           <hr>
           <p class="text-darkish small">Continue to the next section when ready.</p>
-          <%= button_to 'Save and continue...', applications_statement_next_path(@application), method: :post, class: 'next-button' %>
+          <%= button_to 'Save and continue...', applications_statement_next_path, method: :post, class: 'next-button' %>
         </div>
       </div>
     <% end %>

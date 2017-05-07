@@ -30,44 +30,44 @@ Rails.application.routes.draw do
   end
 
   # Application routes
-  get 'applications/:id', to: 'new_applications#index', as: 'applications_index'
   post 'applications', to: 'new_applications#create', as: 'applications_create'
-  get 'applications/:id/continue', to: 'new_applications#continue', as: 'applications_continue'
+  get 'applications/continue', to: 'new_applications#continue', as: 'applications_continue'
+  get 'applications/intro', to: 'new_applications#intro', as: 'applications_intro'
 
-  get 'applications/:id/profile', to: 'new_applications#profile', as: 'applications_profile'
-  post 'applications/:id/profile', to: 'new_applications#profile_next', as: 'applications_profile_next'
+  get 'applications/profile', to: 'new_applications#profile', as: 'applications_profile'
+  post 'applications/profile', to: 'new_applications#profile_next', as: 'applications_profile_next'
 
-  get 'applications/:id/education', to: 'new_applications#education', as: 'applications_education'
-  post 'applications/:id/education', to: 'new_applications#education_add', as: 'applications_education_add'
-  delete 'applications/:id/education', to: 'new_applications#education_remove', as: 'applications_education_remove'
-  post 'applications/:id/education/next', to: 'new_applications#education_next', as: 'applications_education_next'
-  get 'applications/education/:id/edit', to: 'new_applications#education_edit', as: 'applications_education_edit'
-  patch 'applications/:id/education', to: 'new_applications#education_update', as: 'applications_education_update'
+  get 'applications/education', to: 'new_applications#education', as: 'applications_education'
+  post 'applications/education', to: 'new_applications#education_add', as: 'applications_education_add'
+  delete 'applications/education/:id', to: 'new_applications#education_remove', as: 'applications_education_remove'
+  post 'applications/education/next', to: 'new_applications#education_next', as: 'applications_education_next'
+  get 'applications/education/:id/edit/', to: 'new_applications#education_edit', as: 'applications_education_edit'
+  patch 'applications/education/:id', to: 'new_applications#education_update', as: 'applications_education_update'
 
   get 'applications/qualifications/:id', to: 'new_applications#qualifications', as: 'applications_qualifications'
   post 'applications/qualifications/:id', to: 'new_applications#qualifications_add', as: 'applications_qualifications_add'
   delete 'applications/qualifications/:id', to: 'new_applications#qualifications_remove', as: 'applications_qualifications_remove'
 
-  get 'applications/:id/employment', to: 'new_applications#employment', as: 'applications_employment'
-  post 'applications/:id/employment', to: 'new_applications#employment_add', as: 'applications_employment_add'
-  delete 'applications/:id/employment', to: 'new_applications#employment_remove', as: 'applications_employment_remove'
-  post 'applications/:id/employment/next', to: 'new_applications#employment_next', as: 'applications_employment_next'
+  get 'applications/employment', to: 'new_applications#employment', as: 'applications_employment'
+  post 'applications/employment', to: 'new_applications#employment_add', as: 'applications_employment_add'
+  delete 'applications/employment/:id', to: 'new_applications#employment_remove', as: 'applications_employment_remove'
+  post 'applications/employment/next', to: 'new_applications#employment_next', as: 'applications_employment_next'
   get 'applications/employment/:id/edit', to: 'new_applications#employment_edit', as: 'applications_employment_edit'
-  patch 'applications/:id/employment', to: 'new_applications#employment_update', as: 'applications_employment_update'
+  patch 'applications/employment/:id', to: 'new_applications#employment_update', as: 'applications_employment_update'
 
-  get 'applications/:id/references', to: 'new_applications#references', as: 'applications_references'
-  post 'applications/:id/references', to: 'new_applications#references_next', as: 'applications_references_next'
+  get 'applications/references', to: 'new_applications#references', as: 'applications_references'
+  post 'applications/references', to: 'new_applications#references_next', as: 'applications_references_next'
 
-  get 'applications/:id/statement', to: 'new_applications#statement', as: 'applications_statement'
-  post 'applications/:id/statement', to: 'new_applications#statement_next', as: 'applications_statement_next'
+  get 'applications/statement', to: 'new_applications#statement', as: 'applications_statement'
+  post 'applications/statement', to: 'new_applications#statement_next', as: 'applications_statement_next'
 
-  get 'applications/:id/courses', to: 'new_applications#courses', as: 'applications_courses'
-  post 'applications/:id/courses', to: 'new_applications#courses_add', as: 'applications_courses_add'
-  delete 'applications/:id/courses', to: 'new_applications#courses_remove', as: 'applications_courses_remove'
-  post 'applications/:id/courses/next', to: 'new_applications#courses_next', as: 'applications_courses_next'
+  get 'applications/courses', to: 'new_applications#courses', as: 'applications_courses'
+  post 'applications/courses', to: 'new_applications#courses_add', as: 'applications_courses_add'
+  delete 'applications/courses/:id', to: 'new_applications#courses_remove', as: 'applications_courses_remove'
+  post 'applications/courses/next', to: 'new_applications#courses_next', as: 'applications_courses_next'
 
-  get 'applications/:id/submit', to: 'new_applications#submit', as: 'applications_submit'
-  post 'applications/:id/submit', to: 'new_applications#submit_next', as: 'applications_submit_next'
+  get 'applications/submit', to: 'new_applications#submit', as: 'applications_submit'
+  post 'applications/submit', to: 'new_applications#submit_next', as: 'applications_submit_next'
 
   get 'courses/search', to: 'courses#search', as: 'courses_search'
 

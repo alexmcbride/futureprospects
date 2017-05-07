@@ -74,24 +74,24 @@ crumb :resend_confirmation do|resource|
   link 'Resend Confirmation Instructions', new_confirmation_path(resource)
 end
 
-crumb :application do |application|
+crumb :application_intro do |application|
   parent :root
-  link 'Application', applications_index_path(application)
+  link 'Application', applications_intro_path(application)
 end
 
 crumb :application_profile do |application|
-  parent :application, application
+  parent :application_intro, application
   link 'Profile', applications_profile_path(application)
 end
 
 crumb :application_education do |application|
-  parent :application, application
+  parent :application_intro, application
   link 'Education', applications_education_path(application)
 end
 
 crumb :application_qualifications do |school|
   parent :application_education, school.application
-  link 'Qualifications', applications_qualifications_path(school)
+  link school.name, applications_qualifications_path(school)
 end
 
 crumb :application_education_edit do |school|
@@ -100,7 +100,7 @@ crumb :application_education_edit do |school|
 end
 
 crumb :application_employment do |application|
-  parent :application, application
+  parent :application_intro, application
   link 'Employment', applications_employment_path(application)
 end
 
@@ -110,22 +110,22 @@ crumb :application_employment_edit do |school|
 end
 
 crumb :application_references do |application|
-  parent :application, application
+  parent :application_intro, application
   link 'References', applications_references_path(application)
 end
 
 crumb :application_statement do |application|
-  parent :application, application
+  parent :application_intro, application
   link 'Personal Statement', applications_statement_path(application)
 end
 
 crumb :application_courses do |application|
-  parent :application, application
+  parent :application_intro, application
   link 'Courses', applications_courses_path(application)
 end
 
 crumb :application_submit do |application|
-  parent :application, application
+  parent :application_intro, application
   link 'Submit', applications_submit_path(application)
 end
 

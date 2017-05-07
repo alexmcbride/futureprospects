@@ -21,7 +21,7 @@
         </div>
       </div>
 
-      <p class="text-darkish small">Add the qualifications you gained at this institution. If you have not completed
+      <p class="text-darkish small">Add the qualifications you gained at <%= @school.name %>. If you have not completed
         your studies, enter the future end date and predicated grade.</p>
       <%= form_errors @qualification %>
 
@@ -47,7 +47,7 @@
     <h3 class="no-top-margin">
       Qualifications
       <% count = @school.qualifications.size%>
-      <%= "#{count}" if count > 0 %>
+      <%= "(#{count})" if count > 0 %>
     </h3>
 
     <% if count == 0 %>
@@ -83,7 +83,7 @@
       </div>
     <% end %> <!-- if -->
 
-    <p><%= link_to 'Go back...', applications_education_path(@school.application) %></p>
+    <p><%= link_to 'Go back...', applications_education_path %></p>
 
   </div>
 </div>

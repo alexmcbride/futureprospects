@@ -1,4 +1,4 @@
-<% breadcrumb :application_employment, @application %>
+<% breadcrumb :application_employment %>
 <% @title = 'Employment' %>
 
 <%= render partial: 'remove_modal',
@@ -22,7 +22,7 @@
 
     <p class="text-darkish small">Add your employment history, any experience you have  in the workplace may help you earn a space on your chosen course.</p>
 
-    <%= render 'employment_form', path: applications_employment_add_path(@application) %>
+    <%= render 'employment_form', path: applications_employment_add_path %>
 
     <hr>
     <h3>Employment History</h3>
@@ -103,7 +103,7 @@
       <div class="col-sm-12 text-right">
         <hr>
         <p class="text-darkish small">Continue to the next section when ready.</p>
-        <%= button_to 'Save and continue...', applications_employment_next_path(@application), method: :post, class: 'next-button' %>
+        <%= button_to 'Save and continue...', applications_employment_next_path, method: :post, class: 'next-button' %>
       </div>
     </div>
   </div>

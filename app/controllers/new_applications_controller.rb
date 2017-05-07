@@ -1,9 +1,13 @@
 class NewApplicationsController < ApplicationController
   before_action :authenticate_student!
-  before_action :set_application, except: [:create,
+  before_action :set_application, except: [:index, :create,
                                            :qualifications, :qualifications_add, :qualifications_remove,
                                            :education_remove, :education_edit, :education_update,
                                            :employment_edit, :employment_update, :employment_remove, :courses_remove]
+
+  def index
+    @applications = current_student.applications
+  end
 
   # POST: /applications
   #
@@ -14,7 +18,7 @@ class NewApplicationsController < ApplicationController
       if @application.nil?
         format.html { redirect_to root_path, notice: 'Application has already been created' }
       else
-        format.html { redirect_to applications_index_path(@application) }
+        format.html { redirect_to applications_intro_path(@application) }
       end
     end
   end
@@ -24,15 +28,14 @@ class NewApplicationsController < ApplicationController
   # Continues an existing application, redirects to the path of first incomplete stage.
   def continue
     # Redirects student to the first incomplete part of their application.
-    paths = { intro_stage: applications_index_path(@application),
-              profile_stage: applications_profile_path(@application),
-              education_stage: applications_education_path(@application),
-              employment_stage: applications_employment_path(@application),
-              references_stage: applications_references_path(@application),
-              statement_stage: applications_statement_path(@application),
-              courses_stage: applications_courses_path(@application),
-              submit_stage: applications_submit_path(@application) }
-
+    paths = { intro_stage: applications_intro_path,
+              profile_stage: applications_profile_path,
+              education_stage: applications_education_path,
+              employment_stage: applications_employment_path,
+              references_stage: applications_references_path,
+              statement_stage: applications_statement_path,
+              courses_stage: applications_courses_path,
+              submit_stage: applications_submit_path }
     stage = @application.current_stage.to_sym
 
     respond_to do |format|
@@ -40,10 +43,10 @@ class NewApplicationsController < ApplicationController
     end
   end
 
-  # GET: /applications/:id
+  # GET: /applications/:id/intro
   #
   # Shows intro stage.
-  def index
+  def intro
     @application.save_intro
   end
 
@@ -59,7 +62,7 @@ class NewApplicationsController < ApplicationController
   def profile_next
     respond_to do |format|
       if @application.save_profile application_params
-        format.html { redirect_to applications_education_path(@application) }
+        format.html { redirect_to applications_education_path }
       else
         format.html { render :profile }
       end
@@ -81,7 +84,7 @@ class NewApplicationsController < ApplicationController
     @school.application = @application
     respond_to do |format|
       if @school.save
-        format.html { redirect_to applications_education_path(@application), notice: 'Added school' }
+        format.html { redirect_to applications_education_path, notice: 'Added school' }
       else
         format.html { render :education }
       end
@@ -125,7 +128,7 @@ class NewApplicationsController < ApplicationController
   def education_next
     respond_to do |format|
       if @application.save_education
-        format.html { redirect_to applications_employment_path(@application) }
+        format.html { redirect_to applications_employment_path }
       else
         @school = School.new
         format.html { render :education }
@@ -184,7 +187,7 @@ class NewApplicationsController < ApplicationController
     @job.application = @application
     respond_to do |format|
       if @job.save
-        format.html { redirect_to applications_employment_path(@application), notice: 'Employment added' }
+        format.html { redirect_to applications_employment_path, notice: 'Employment added' }
       else
         format.html { render :employment }
       end
@@ -221,7 +224,7 @@ class NewApplicationsController < ApplicationController
   def employment_next
     respond_to do |format|
       @application.save_employment
-      format.html { redirect_to applications_references_path(@application) }
+      format.html { redirect_to applications_references_path }
     end
   end
 
@@ -239,7 +242,7 @@ class NewApplicationsController < ApplicationController
     @reference = @application.create_reference
     respond_to do |format|
       if @application.save_references @reference, reference_params
-        format.html { redirect_to applications_statement_path(@application) }
+        format.html { redirect_to applications_statement_path }
       else
         format.html { render :references }
       end
@@ -257,7 +260,7 @@ class NewApplicationsController < ApplicationController
   def statement_next
     respond_to do |format|
       if @application.save_statement statement_params
-        format.html { redirect_to applications_courses_path(@application) }
+        format.html { redirect_to applications_courses_path }
       else
         format.html { render :statement }
       end
@@ -280,7 +283,7 @@ class NewApplicationsController < ApplicationController
     @course_selections = @application.find_course_selections
     respond_to do |format|
       if @application.add_course @course_selection
-        format.html { redirect_to applications_courses_path(@application), notice: 'Course added to application' }
+        format.html { redirect_to applications_courses_path, notice: 'Course added to application' }
       else
         format.html { render :courses }
       end
@@ -305,7 +308,7 @@ class NewApplicationsController < ApplicationController
   def courses_next
     respond_to do |format|
       if @application.save_courses
-        format.html { redirect_to applications_submit_path(@application) }
+        format.html { redirect_to applications_submit_path }
       else
         @course_selection = CourseSelection.new
         @course_selections = @application.find_course_selections
@@ -337,9 +340,8 @@ class NewApplicationsController < ApplicationController
   private
     # Sets current application object,  checks if student is owner of application, and checks application not cancelled.
     def set_application
-      @application = (Application.all.find(params[:id]) or not_found)
-
-      user_not_authorized unless @application.owned_by?(current_student) && @application.submitting?
+      @application = current_student.current_application
+      user_not_authorized unless @application.submitting?
     end
 
     # Sanitises submitted form parameters

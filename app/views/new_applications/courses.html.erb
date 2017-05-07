@@ -1,4 +1,4 @@
-<% breadcrumb :application_courses, @application %>
+<% breadcrumb :application_courses %>
 <% @title = 'Add Courses' %>
 
 <%= render partial: 'remove_modal',
@@ -23,7 +23,7 @@
       select the course and then click the add button. You will be charged the specified amount as an application fee
       when your application is submitted.
     </p>
-    <%= form_for @course_selection, url: applications_courses_add_path(@application), method: :post do |f| %>
+    <%= form_for @course_selection, url: applications_courses_add_path, method: :post do |f| %>
       <%= form_errors @course_selection %>
       <%= f.hidden_field :course_id %>
       <div class="row">

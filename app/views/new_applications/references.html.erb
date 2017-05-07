@@ -1,4 +1,4 @@
-<% breadcrumb :application_references, @application %>
+<% breadcrumb :application_references %>
 <% @title = 'References' %>
 
 <div class="row">
@@ -70,7 +70,7 @@
         <div class="col-sm-12 text-right">
           <hr>
           <p class="text-darkish small">Continue to the next section when ready.</p>
-          <%= button_to 'Save and continue...', applications_statement_next_path(@application), method: :post, class: 'next-button' %>
+          <%= button_to 'Save and continue...', applications_statement_next_path, method: :post, class: 'next-button' %>
         </div>
       </div>
     <% end %>

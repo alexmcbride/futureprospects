@@ -1,12 +1,23 @@
 class NewApplicationsController < ApplicationController
   before_action :authenticate_student!
-  before_action :set_application, except: [:index, :create,
+  before_action :set_application, except: [:index, :show, :create,
                                            :qualifications, :qualifications_add, :qualifications_remove,
                                            :education_remove, :education_edit, :education_update,
                                            :employment_edit, :employment_update, :employment_remove, :courses_remove]
 
+  # GET: /applications
+  #
+  # Shows a list of the student's previous applications.
   def index
-    @applications = current_student.applications
+    @applications = current_student.applications.where.not(status: :submitting)
+  end
+
+  # GET: /applications/:id
+  #
+  # Shows a particular student application.
+  def show
+    @application = Application.find params[:id]
+    @application.owned_by?(current_student) or user_not_authorized
   end
 
   # POST: /applications

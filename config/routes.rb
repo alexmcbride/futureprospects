@@ -31,6 +31,8 @@ Rails.application.routes.draw do
 
   # Application routes
   post 'applications', to: 'new_applications#create', as: 'applications_create'
+  get 'applications', to: 'new_applications#index', as: 'applications'
+  get 'applications/:id', to: 'new_applications#show', as: 'application'
   get 'applications/continue', to: 'new_applications#continue', as: 'applications_continue'
   get 'applications/intro', to: 'new_applications#intro', as: 'applications_intro'
 

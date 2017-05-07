@@ -1,0 +1,18 @@
+<%
+  breadcrumb :applications
+  @title = 'Applications'
+%>
+
+<p>This is a list of all of your submitted applications.</p>
+
+<% if @applications.any? %>
+  <ul>
+    <% @applications.each do |application| %>
+      <li><%= link_to 'Application - ' + format_date(application.submitted_date), application_path(application) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <div class="alert alert-info">
+    There are no submitted applications.
+  </div>
+<% end %>

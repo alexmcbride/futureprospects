@@ -74,6 +74,16 @@ crumb :resend_confirmation do|resource|
   link 'Resend Confirmation Instructions', new_confirmation_path(resource)
 end
 
+crumb :applications do
+  parent :root
+  link 'Applications', applications_path
+end
+
+crumb :applications_show do |application|
+  parent :applications
+  link format_date(application.submitted_date), applications_path(application)
+end
+
 crumb :application_intro do |application|
   parent :root
   link 'Application', applications_intro_path(application)

@@ -15,7 +15,7 @@ module DecisionsHelper
     content_tag(:div, class: 'list-group-item list-group-item-heading', style: 'background-color: #F5F5F5; clear: both;') do
       yield if block_given?
       concat(content_tag(:h4, style: 'margin-top: 6px;') do
-        concat(content_tag(:strong, selection.course.title))
+        concat(content_tag(:strong, truncate(selection.course.title, length: 60)))
         concat('&nbsp;'.html_safe)
         concat(content_tag(:small, selection.course.college.name, style: 'color: #787878;'))
       end)

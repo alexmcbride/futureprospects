@@ -19,8 +19,8 @@
         <div class="list-group-item list-group-item-heading">
           <div class="row">
             <div class="col-sm-9">
-              <h4 style="margin-bottom: 4px;">
-                <%= truncate selection.course.title, length: 80 %>
+              <h4 style="margin-bottom: 4px;" title="<%= selection.course.title %>">
+                <%= truncate selection.course.title, length: 50 %>
                 <small><%= truncate selection.course.college.name %></small>
               </h4>
               <p class="small"><%= selection.college_offer.humanize %></p>
@@ -28,7 +28,10 @@
             <div class="col-sm-3 text-right">
               <%= form_tag decisions_firm_path, method: :post do %>
                 <%= hidden_field_tag :course_selection_id, selection.id %>
-                <%= submit_tag 'Firm Choice', class: 'btn btn-info', title: "Make '#{selection.course.title}' your firm choice" %>
+                <%= button_tag class: 'btn btn-primary', title: "Make '#{selection.course.title}' your firm choice", style: 'margin-top: 10px;' do %>
+                  <%= icon('check-square-o') %>
+                  Firm Choice
+                <% end %>
               <% end %>
             </div>
           </div>
@@ -42,7 +45,10 @@
       <p class="text-darkish small">You will have a chance to review your choices.</p>
       <%= form_tag decisions_decline_path(@application), method: :post do %>
         <%= hidden_field_tag :which_to_decline, :all %>
-        <%= submit_tag 'Decline All Choices', class: 'btn btn-danger', style: 'width: 25%;' %>
+        <%= button_tag class: 'btn btn-danger' do %>
+          <%= icon('ban') %>
+          Decline All Choices
+        <% end %>
       <% end %>
     </div>
   </div>

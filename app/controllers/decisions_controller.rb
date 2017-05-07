@@ -59,40 +59,42 @@ class DecisionsController < ApplicationController
 
   end
 
-  # # GET /decisions/change
-  # def change
-  #   @course_selections = @application.course_selections.where(college_offer: nil)
-  # end
-  #
-  # def change_post
-  #   errors = false
-  #
-  #   params[:course_selection].each do |p|
-  #     course = Course.find p[:course_id]
-  #     unless course.open?
-  #       flash[:error] = "Course '#{course.title}' is not open."
-  #       errors = true
-  #     end
-  #
-  #     if CourseSelection.exists? @application.id, p[:course_id]
-  #       flash[:error] = "Course '#{course.title}' has already been added to the application."
-  #       errors = true
-  #     end
-  #   end
-  #
-  #   if errors
-  #     change
-  #     render :change
-  #   else
-  #     # Store in session.
-  #     session[:course_selection] = params[:course_selection]
-  #     redirect_to decisions_change_payment_path
-  #   end
-  # end
-  #
-  # def change_payment
-  #
-  # end
+  # GET /decisions/change
+  def change
+    @course_selections = @application.course_selections.where(college_offer: nil)
+  end
+
+  def change_post
+    byebug
+
+    errors = false
+
+    params[:course_selection].each do |p|
+      course = Course.find p[:course_id]
+      unless course.open?
+        flash[:error] = "Course '#{course.title}' is not open."
+        errors = true
+      end
+
+      if CourseSelection.exists? @application.id, p[:course_id]
+        flash[:error] = "Course '#{course.title}' has already been added to the application."
+        errors = true
+      end
+    end
+
+    if errors
+      change
+      render :change
+    else
+      # Store in session.
+      session[:course_selection] = params[:course_selection]
+      redirect_to decisions_change_payment_path
+    end
+  end
+
+  def change_payment
+
+  end
 
   private
     # Sets the application object for action that need it.

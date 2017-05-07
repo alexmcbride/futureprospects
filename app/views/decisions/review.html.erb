@@ -37,12 +37,18 @@
     <div class="row">
       <div class="col-sm-6">
         <p class="text-darkish small">Go back and make different choices.</p>
-        <%= link_to 'Make Changes', decisions_path, class: 'btn btn-default', role: 'button' %>
+        <%= link_to decisions_path, class: 'btn btn-default', role: 'button' do %>
+          <%= icon('eraser') %>
+          Make Changes
+        <% end %>
       </div>
       <div class="col-sm-6 text-right">
         <p class="text-darkish small">Continue and finalise your choices.</p>
         <%= form_tag decisions_review_post_path, method: :post do %>
-          <%= submit_tag 'Accept Choices', class: 'btn btn-primary' %>
+          <%= button_tag class: 'btn btn-primary' do %>
+            <%= icon('check') %>
+            Accept Choices
+          <% end %>
         <% end %>
       </div>
     </div>

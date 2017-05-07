@@ -16,8 +16,8 @@
         <div class="list-group-item list-group-item-heading">
           <div class="row">
             <div class="col-sm-9">
-              <h4 style="margin-bottom: 4px;">
-                <%= truncate selection.course.title, length: 80 %>
+              <h4 style="margin-bottom: 4px;" title="<%= selection.course.title %>">
+                <%= truncate selection.course.title, length: 50 %>
                 <small><%= truncate selection.course.college.name %></small>
               </h4>
               <p class="small"><%= selection.college_offer.humanize %></p>
@@ -26,13 +26,16 @@
               <% if selection.student_choice.nil? %>
                 <%= form_tag decisions_insurance_path, method: :post do %>
                   <%= hidden_field_tag :course_selection_id, selection.id %>
-                  <%= submit_tag 'Insurance Choice', class: 'btn btn-info', title: "Make '#{selection.course.title}' your insurance choice" %>
+                  <%= button_tag class: 'btn btn-primary', title: "Make '#{selection.course.title}' your insurance choice", style: 'margin-top: 10px;' do %>
+                    <%= icon('check-square-o') %>
+                    Insurance Choice
+                  <% end %>
                 <% end %>
               <% else %>
-                <%= icon('check-circle', style: 'color: green; font-size: 2.8em;') %>
-                  <br>
+                <%= icon('check-circle', style: 'color: green; font-size: 2.8em; margin-top: 0px;') %>
+                <br>
                 <strong><%= selection.student_choice.humanize %></strong>
-              <% end %>
+            <% end %>
             </div>
           </div>
         </div>
@@ -45,7 +48,10 @@
       <p class="text-darkish small">You can choose not to make an insurance choice.</p>
       <%= form_tag decisions_decline_path(@application), method: :post do %>
         <%= hidden_field_tag :which_to_decline, :insurance %>
-        <%= submit_tag 'Decline Insurance Choice', class: 'btn btn-danger', style: 'width: 25%;' %>
+        <%= button_tag class: 'btn btn-danger' do %>
+          <%= icon('ban') %>
+          Decline Insurance Choice
+        <% end %>
       <% end %>
     </div>
   </div>

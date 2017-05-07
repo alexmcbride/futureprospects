@@ -9,25 +9,27 @@
   <div class="panel-body">
     <h3 class="no-top-margin">Course Selection</h3>
 
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>College</th>
-          <th>Offer</th>
-          <th>Decision</th>
-          <th>Start Date</th>
-        </tr>
-      </thead>
-      <% @application.course_selections.each do |selection| %>
-        <tr>
-          <td><%= selection.course.title %></td>
-          <td><%= selection.course.college.name %></td>
-          <td><%= selection.college_offer %></td>
-          <td><%= selection.student_choice %></td>
-          <td><%= format_date selection.course.start_date %></td>
-        </tr>
-      <% end %>
-    </table>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>College</th>
+            <th>Offer</th>
+            <th>Decision</th>
+            <th>Start Date</th>
+          </tr>
+        </thead>
+        <% @application.course_selections.each do |selection| %>
+          <tr>
+            <td><%= selection.course.title %></td>
+            <td><%= selection.course.college.name %></td>
+            <td><%= selection.college_offer.humanize %></td>
+            <td><%= selection.student_choice.humanize %></td>
+            <td><%= format_date selection.course.start_date %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
   </div>
 </div>

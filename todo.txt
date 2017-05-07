@@ -17,7 +17,7 @@ heroku - sms messaging
 
 heroku - error handling
 
-PDF: prawn
+PDF: prawn / https://github.com/rposborne/wkhtmltopdf-heroku maybe better????
 Excel: alxsx
 
 dates validate - end date after start date, dates not in future...

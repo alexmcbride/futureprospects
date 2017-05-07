@@ -1,6 +1,6 @@
 # Graded Unit 2 Project
 
-Year two graded unit project created for HND Software Development at City of Glasgow College. The site is a college admissions site, developed using Ruby on Rails. Students sign up for accounts, apply for courses, and accept/decline offers. The initial brief is included below.
+Year two graded unit project created for HND Software Development at City of Glasgow College. The site is a college admissions site, developed using Ruby on Rails. Students sign up for accounts, apply for courses, and accept/decline offers.
 
 **Installation**
 
@@ -20,7 +20,7 @@ development:
   paypal_password: <SECRET>
   paypal_signature: <SECRET>
   recaptcha_site_key: <SECRET>
-  recaptcha_secret_key: 
+  recaptcha_secret_key: <SECRET>
 
 test:
   secret_key_base: <SECRET>

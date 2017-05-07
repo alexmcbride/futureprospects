@@ -11,8 +11,9 @@
     <ul class="list-group" >
       <%= home_stage_item 'Create Application ', @application.nil? || @application.submitting? %>
       <%= home_stage_item 'Make Payment ', @application.present? && (@application.awaiting_payment? || @application.payment_failed?) %>
-      <%= home_stage_item 'Await Decisions ', @application.present? && @application.awaiting_decisions? %>
+      <%= home_stage_item 'Track Application ', @application.present? && @application.awaiting_decisions? %>
       <%= home_stage_item 'Make Choices ', @application.present? && (@application.all_decisions_made? || @application.all_rejected?) %>
+      <%= home_stage_item 'Completed ', @application.present? && @application.completed? %>
     </ul>
   </div>
 
@@ -62,15 +63,27 @@
           <div class="alert alert-danger"><strong>Your application has been cancelled.</strong></div>
           <p>We have not received your application fee. We were due to receive your application fee of <strong><%= number_to_currency @application.calculate_fee_pounds, unit: '£' %></strong> by the <strong><%= format_date @application.payment_expiry_time %></strong>. This payment was not made in due time. For this reason we have cancelled your application. If you would like to discuss the matter further, please contact the <%= mail_to 'futureprospectsapp@gmail.com', 'administrative staff' %>.</p>
         <% elsif @application.awaiting_decisions? %>
-          <p>You can now track your application.</p>
+          <p><strong>Your application has been sent to your chosen colleges to be considered.</strong></p>
+          <p>Once you have received all of your
+            decisions you can then prioritise them so you can choose the college and course that's right for you. You
+            will be notified once your decisions have been made, until then you can keep up-to-date with what's happening
+            with your application in the track application section.</p>
           <div class="text-right">
             <%= link_to 'Track Application', decisions_path, role: 'button', class: 'link-button' %>
           </div>
         <% elsif @application.all_decisions_made? || @application.all_rejected?  %>
-          <p>All of your decisions have been made, you can now make your choices.</p>
+          <p><strong>All of your decisions have been made.</strong></p>
+            <p>All of your selected colleges have made their decisions, and you are now able to make your own. You can
+            now prioritise your decisions in order to choose the course and college that's right for you. You can also
+            decline your offers, if you decide not to take them.</p>
           <div class="text-right">
             <%= link_to 'Make Your Choices', decisions_path, role: 'button', class: 'link-button' %>
           </div>
+        <% elsif @application.completed? %>
+          <p>Your application is completed. You will hear from your chosen colleges in due time.</p>
+            <div class="text-right">
+              <%= link_to 'What Next?', decisions_completed_path, role: 'button', class: 'link-button' %>
+            </div>
         <% end %>
       </div>
     </div>

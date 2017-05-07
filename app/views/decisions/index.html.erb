@@ -5,20 +5,27 @@
 
 <div class="row">
   <div class="col-md-3">
-    <%= render 'sidebar', stage: :index %>
+    <%= render 'sidebar', stage: @application.all_decisions_made? ? :view : :index %>
   </div>
 
   <div class="col-md-9">
-    <h2 class="no-top-margin">College Decisions</h2>
-    <p>This page lets you keep track of your courses and what decisions have been made on them. Each course will be
-    considered by the respective college and once a decision has been made you will be notified. Once all decisions
-    have been received you can then proceed to prioritise your offers, so you can pick the course or college that's
-    right for you.</p>
-
+    <% if @application.all_decisions_made? %>
+      <h2 class="no-top-margin">All Decisions Made</h2>
+      <p>This page lets you keep track of your courses and what decisions have been made on them. All of your selected
+      colleges have made their decisions and you can view them below. A decision may be accompanied by a note, either
+      explaining why a decision was taken, or what your next steps should be. Once ready, select the option to make
+      your choices to move to the next stage.</p>
+    <% else %>
+      <h2 class="no-top-margin">College Decisions</h2>
+      <p>This page lets you keep track of your courses and what decisions have been made on them. Each course will be
+      considered by the respective college and once a decision has been made you will be notified. Once all decisions
+      have been received you can then proceed to prioritise your offers, so you can pick the course or college that's
+      right for you.</p>
+    <% end %>
     <hr>
 
     <div class="list-group">
-      <% @application.course_selections.order(college_offer: :desc).each do |selection| %>
+      <% @application.pending_course_selections.each do |selection| %>
         <%= decision_list_item selection do %>
           <% if selection.college_offer.nil? %>
             <%= icon('question-circle', class: 'pull-right', style: 'font-size: 6.6em; color: grey;') %>
@@ -48,11 +55,11 @@
     <% else %>
       <hr>
       <h4>Still Waiting</h4>
-      <p>Once you have received all your decisions, you will be able to make your choices.</p>
-      <hr>
-      <h4>Change Courses</h4>
-      <p>You can change a selected course for a small fee, so long as a decision has not been made on it yet.</p>
-      <%= link_to 'Change Course', decisions_change_path, class: 'btn btn-default', role: 'button' %>
+      <p>You are still awaiting for all of your decisions. Once they have all been received you will be able to make your choices.</p>
+      <!--<hr>-->
+      <!--<h4>Change Courses</h4>-->
+      <!--<p>You can change a selected course for a small fee, so long as a decision has not been made on it yet.</p>-->
+      <!--<%= link_to 'Change Course', decisions_change_path, class: 'btn btn-default', role: 'button' %>-->
     <% end %>
   </div>
 </div>

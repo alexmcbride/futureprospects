@@ -90,6 +90,7 @@ Rails.application.routes.draw do
   get 'decisions/completed', to: 'decisions#completed', as: 'decisions_completed'
   get 'decisions/change', to: 'decisions#change', as: 'decisions_change'
   post 'decisions/change', to: 'decisions#change_post', as: 'decisions_change_post'
+  get 'decisions/change/payment', to: 'decisions#change_payment', as: 'decisions_change_payment'
 
   # Root
   get 'home/index'

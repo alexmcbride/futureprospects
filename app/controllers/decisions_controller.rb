@@ -1,7 +1,6 @@
 class DecisionsController < ApplicationController
-  before_action :set_application#, only: [:index, :firm, :firm_post, :insurance, :insurance_post, :decline, :review,
-                                 #        :review_post, :completed]
-  before_action :check_can_view
+  before_action :set_application
+  before_action :check_can_view, except: [:completed]
 
   # GET /decisions/:id
   def index
@@ -50,8 +49,8 @@ class DecisionsController < ApplicationController
 
   # POST /decisions/review
   def review_post
-    @application.status = :completed
-    @application.save!
+    @application.save_completed
+
     redirect_to decisions_completed_path(@application), notice: 'Application completed'
   end
 
@@ -60,14 +59,40 @@ class DecisionsController < ApplicationController
 
   end
 
-  # GET /decisions/change
-  def change
-    @course_selections = @application.course_selections.where(college_offer: nil)
-  end
-
-  def change_post
-    p = params
-  end
+  # # GET /decisions/change
+  # def change
+  #   @course_selections = @application.course_selections.where(college_offer: nil)
+  # end
+  #
+  # def change_post
+  #   errors = false
+  #
+  #   params[:course_selection].each do |p|
+  #     course = Course.find p[:course_id]
+  #     unless course.open?
+  #       flash[:error] = "Course '#{course.title}' is not open."
+  #       errors = true
+  #     end
+  #
+  #     if CourseSelection.exists? @application.id, p[:course_id]
+  #       flash[:error] = "Course '#{course.title}' has already been added to the application."
+  #       errors = true
+  #     end
+  #   end
+  #
+  #   if errors
+  #     change
+  #     render :change
+  #   else
+  #     # Store in session.
+  #     session[:course_selection] = params[:course_selection]
+  #     redirect_to decisions_change_payment_path
+  #   end
+  # end
+  #
+  # def change_payment
+  #
+  # end
 
   private
     # Sets the application object for action that need it.

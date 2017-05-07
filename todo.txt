@@ -45,3 +45,6 @@ staff applications edit improve validation error messages
 rename awaiting decisions to awaiting college?
 
 move decisionscontroller stuff into model?
+
+application course selection query (only see apps for own college) when the app is unsubmitted?
+maybe only site_admin can see unsubmitted apps?

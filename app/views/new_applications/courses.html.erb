@@ -5,31 +5,9 @@
            locals: {title: 'Remove Course',
                     message: 'Are you sure you want to remove the following course?'} %>
 
-<script type="text/javascript">
-  /* jquery auto-complete for courses text field */
+<script>
   $(function() {
-     $('#selected-course').autocomplete({
-         minLength: 1,
-         source: '<%= url_for courses_search_path(:json) %>',
-         focus: function( event, ui ) {
-             $( "#selected-course" ).val( ui.item.title );
-             $( "#course_selection_course_id" ).val( ui.item.id );
-             return false;
-         },
-         select: function( event, ui ) {
-             $( "#selected-course" ).val( ui.item.title );
-             $( "#course_selection_course_id" ).val( ui.item.id );
-             return false;
-         }
-     }).autocomplete( "instance" )._renderItem = function( ul, item ) {
-         return $( "<li>" )
-             .append( '<div class="text-capitalize"><strong>' +
-                 item.title +
-                 '</strong><br>' +
-                 item.college.name + ' &raquo; ' + item.category.name +
-                 '</div>')
-             .appendTo( ul );
-     };
+     registerAutocomplete('#selected-course', '#course_selection_course_id', '<%= url_for courses_search_path(:json) %>');
   });
 </script>
 

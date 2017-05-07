@@ -12,7 +12,7 @@
     <p>Review your choices and make sure they are correct. Once you finalise them you won't be able to change them. If
     you spot an error or change your mind, select 'make changes' to go back to the start.</p>
     <div class="list-group">
-      <% @application.course_selections.order(:student_choice).each do |selection| %>
+      <% @application.final_course_selections.each do |selection| %>
         <div class="list-group-item list-group-item-heading" style="background-color: #F5F5F5;">
           <% if selection.firm_choice? %>
             <%= icon('check-circle', class: 'pull-right', style: 'font-size: 6.8em; color: #4CBB17;') %>
@@ -26,7 +26,7 @@
             <strong><%= selection.course.title %></strong>
             <small style="color: #787878;"><%= selection.course.college.name %></small>
           </h3>
-          <p><%= selection.student_choice.humanize %></p>
+          <p><%= selection.rejected? ? selection.college_offer.humanize : selection.student_choice.humanize %></p>
           <p><%= selection.note %></p>
         </div>
       <% end %>

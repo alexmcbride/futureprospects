@@ -281,14 +281,14 @@ class Application < ApplicationRecord
   #
   # Returns - a relation of course selections.
   def pending_course_selections
-    self.course_selections.where(college_offer: nil)
+    self.course_selections.order('college_offer IS NULL', college_offer: :desc)
   end
 
   # Finds all course selections that do have an offer.
   #
   # Returns - a relation of course selections.
   def final_course_selections
-    self.course_selections.where.not(college_offer: nil)
+    self.course_selections.where.not(college_offer: :rejected).order(:student_choice)
   end
 
   # Generates a PayPal payment URL with the specified params.
@@ -486,6 +486,13 @@ class Application < ApplicationRecord
       self.errors.add(:section, "'#{self.current_stage.humanize}' has not been completed")
       false
     end
+  end
+
+  # Saves the application as completed.
+  def save_completed
+    self.status = :completed
+    self.save!
+    StudentMailer.application_completed(self.student, self).deliver_later
   end
 
   # Determines if all selections have had offers made.

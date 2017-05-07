@@ -15,7 +15,7 @@
       attend. Alternatively, you can turn down all offers. You are given a chance to review your choices before commiting to them.</p>
 
     <div class="list-group">
-      <% @application.course_selections.where.not(college_offer: :rejected).each do |selection| %>
+      <% @application.final_course_selections.each do |selection| %>
         <div class="list-group-item list-group-item-heading">
           <div class="row">
             <div class="col-sm-9">
@@ -27,8 +27,8 @@
             </div>
             <div class="col-sm-3 text-right">
               <%= form_tag decisions_firm_path, method: :post do %>
-                  <%= hidden_field_tag :course_selection_id, selection.id %>
-                  <%= submit_tag 'Firm Choice', class: 'btn btn-info', title: "Make '#{selection.course.title}' your firm choice" %>
+                <%= hidden_field_tag :course_selection_id, selection.id %>
+                <%= submit_tag 'Firm Choice', class: 'btn btn-info', title: "Make '#{selection.course.title}' your firm choice" %>
               <% end %>
             </div>
           </div>

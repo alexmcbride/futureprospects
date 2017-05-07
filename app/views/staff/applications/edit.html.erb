@@ -5,13 +5,12 @@
 
 <%= form_for(@application, url: staff_application_path(@application)) do |f| %>
   <p class="text-darkish">You can make decisions for the courses listed. Once the student has received decisions on all
-    their courses they will be asked to choose which ones they would like to study. If the decision is conditional, or
-    the application is rejected, you must leave a note, either explaining why the application was rejected, or what
-    requirements a student must meet for a conditional offer.</p>
+    their courses they will be asked to choose which ones they would like to study. If the decision is conditional or
+    rejected, you must leave a note explaining the reason for the decision.</p>
 
   <%= form_errors @application %>
 
-  <%= f.fields_for :course_selections, policy_scope(@application.course_selections) do |g| %>
+  <%= f.fields_for :course_selections, policy_scope(@application.course_selections).order(:course_id) do |g| %>
 
     <div class="well">
       <div class="row">

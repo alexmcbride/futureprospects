@@ -12,7 +12,7 @@ module DecisionsHelper
   end
 
   def decision_list_item(selection)
-    content_tag(:div, class: 'list-group-item list-group-item-heading', style: 'background-color: #F5F5F5;') do
+    content_tag(:div, class: 'list-group-item list-group-item-heading', style: 'background-color: #F5F5F5; clear: both;') do
       yield if block_given?
       concat(content_tag(:h4, style: 'margin-top: 6px;') do
         concat(content_tag(:strong, selection.course.title))
@@ -20,7 +20,7 @@ module DecisionsHelper
         concat(content_tag(:small, selection.course.college.name, style: 'color: #787878;'))
       end)
       concat(content_tag(:p, selection.college_offer.nil? ? 'Decision pending...' : selection.college_offer.humanize))
-      concat(content_tag(:p, selection.note))
+      concat(selection.note.present? ? content_tag(:p, selection.note) : '&nbsp;'.html_safe)
     end
   end
 end

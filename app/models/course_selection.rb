@@ -22,12 +22,16 @@ class CourseSelection < ApplicationRecord
   #
   # Returns - a boolean indicating if the selection exists.
   def exists?
-    not CourseSelection.where('application_id=? AND course_id=?', self.application_id, self.course_id).empty?
+    CourseSelection.exists? self.application_id, self.course_id
+  end
+
+  def self.exists?(application_id, course_id)
+    not CourseSelection.where('application_id=? AND course_id=?', application_id, course_id).empty?
   end
 
   # Adds a validation error if the course selection is not unique.
   def course_is_unique
-    if self.exists?
+    if CourseSelection.exists? self.application_id, self.course_id
       self.errors.add(:course, 'has already been added to the application')
     end
   end

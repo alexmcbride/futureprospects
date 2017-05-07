@@ -162,7 +162,9 @@ def student(file, tokens, schools, jobs, refs)
   # Courses
   num = rand(1..5)
   ids = $course_ids.sample(num)
-  ids.each do |id|
+  count = CourseSelection.student_choices.count
+  choices = CourseSelection.student_choices.map{|k,v|k}.sample(num < count ? num : count - 1)
+  ids.each_with_index do |id, index|
     course = 'course'#{$courses}"'
     file.puts course + " = CourseSelection.new application_id: #{app}.id, course_id: #{id}"
 
@@ -172,10 +174,19 @@ def student(file, tokens, schools, jobs, refs)
       file.puts "course.college_offer = :#{offer}"
     elsif status == :all_rejected
       file.puts "course.college_offer = :rejected"
-    else
+    elsif status != :awaiting_decisions
       offer = CourseSelection.college_offers.map {|k, v| k}.sample.to_sym
       file.puts "course.college_offer = :#{offer}"
     end
+
+    if status == :completed
+      if index < choices.count
+        file.puts "course.student_choice = :#{choices[index]}"
+      else
+        file.puts "course.student_choice = :declined"
+      end
+    end
+
     file.puts "course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'"
     file.puts course + '.save! validate: false'
     file.puts ''

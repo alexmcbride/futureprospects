@@ -19,6 +19,13 @@ class StudentMailerPreview < ActionMailer::Preview
     StudentMailer.application_cancelled(student, application)
   end
 
+  # Previews application completed mail
+  def application_completed
+    application = Application.find 13
+    student = application.student
+    StudentMailer.application_completed(student, application)
+  end
+
   # Previews payment_received email
   def payment_received
     student = Student.find 2

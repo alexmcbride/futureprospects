@@ -1,0 +1,29 @@
+<h1>Future Prospects - Application Completed</h1>
+
+<p>Hello <%= @student.full_name %>,</p>
+
+<p>This email is to inform you that your application is now complete. You have received offers from your chosen colleges
+  and have made your decisions as to which ones you would like to study at.</p>
+
+<p>Your choices are as follows:</p>
+
+<ul>
+  <% @application.final_course_selections.each do |selection| %>
+    <li><%= selection.student_choice.humanize %> &mdash; <%= selection.course.title %> (<%= selection.course.college.name %>)</li>
+  <% end %>
+</ul>
+
+<p><strong>What's Next?</strong></p>
+
+<p>If your decision was a conditional offer then you will have additional criteria that you need to meet before your
+application can be finalised. This may be specific exam grades that you need to achieve, or other requirements. Keep
+working hard!</p>
+
+<p>You will be contacted by your selected colleges before the the course start dates, in order to be given further
+instructions.</p>
+
+<p>We hope that you have fun at your new college!</p>
+
+<p>Sincerely,
+  <br><br>
+  Future Prospects</p>

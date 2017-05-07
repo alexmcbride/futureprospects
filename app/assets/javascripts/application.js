@@ -28,3 +28,28 @@ $(function () {
         format: 'mm/yyyy'
     });
 });
+
+function registerAutocomplete(name, id, source) {
+    $(name).autocomplete({
+        minLength: 1,
+        source: source,
+        focus: function(event, ui) {
+            $(name).val(ui.item.title);
+            $(id).val(ui.item.id);
+            return false;
+        },
+        select: function(event, ui) {
+            $(name).val(ui.item.title);
+            $(id).val(ui.item.id);
+            return false;
+        }
+    }).autocomplete('instance')._renderItem = function(ul, item) {
+        return $( "<li>" )
+            .append( '<div class="text-capitalize"><strong>' +
+                item.title +
+                '</strong><br>' +
+                item.college.name + ' &raquo; ' + item.category.name +
+                '</div>')
+            .appendTo( ul );
+    };
+}

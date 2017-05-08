@@ -30,7 +30,7 @@ class Staff::ApplicationsController < Staff::StaffController
 
   # GET /staff/applications/1/edit
   def edit
-    @application = Application.includes(course_selections: [:course])
+    @application = Application
                        .includes(:payments)
                        .find params[:id]
     respond_to do |format|

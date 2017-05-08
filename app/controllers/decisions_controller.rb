@@ -65,8 +65,6 @@ class DecisionsController < ApplicationController
   end
 
   def change_post
-    byebug
-
     errors = false
 
     params[:course_selection].each do |p|

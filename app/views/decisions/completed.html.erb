@@ -16,14 +16,14 @@
     <p>If you need to contact your chosen colleges for any reason, please find their contact details below.</p>
     <div class="row">
       <% CourseSelection.selected_colleges(@application).each do |college| %>
-          <div class="col-sm-6">
-            <h4><%= college.name %></h4>
-            <%= simple_format(college.address, {}, wrapper_tag: 'span') %><br>
-            <%= college.postcode %><br>
-            Web: <%= link_to clean_url(college.website), college.website %><br>
-            Telephone: <%= college.telephone %><br>
-            Email: <%= mail_to college.email %>
-          </div>
+        <div class="col-sm-6">
+          <h4><%= college.name %></h4>
+          <%= simple_format(college.address, {}, wrapper_tag: 'span') %><br>
+          <%= college.postcode %><br>
+          Web: <%= link_to clean_url(college.website), college.website %><br>
+          Telephone: <%= college.telephone %><br>
+          Email: <%= mail_to college.email %>
+        </div>
       <% end %>
     </div>
   </div>
@@ -36,19 +36,19 @@
     <thead>
     <tr>
       <th>Course</th>
+      <th>College</th>
       <th>Offer</th>
       <th>Choice</th>
-      <th>College</th>
       <th>Note</th>
     </tr>
     </thead>
     <tbody>
-    <% @application.final_course_selections.each do |selection| %>
+    <% @application.final_course_selections.includes(course: :college).each do |selection| %>
       <tr>
         <td title="<%= selection.course.title %>"><%= truncate selection.course.title, length: 50 %></td>
+        <td><%= selection.course.college.name %></td>
         <td><%= selection.college_offer.humanize %></td>
         <td><%= selection.student_choice.humanize %></td>
-        <td><%= selection.course.college.name %></td>
         <td><%= selection.note %></td>
       </tr>
     <% end %>

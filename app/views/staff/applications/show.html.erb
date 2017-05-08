@@ -29,7 +29,7 @@
       <h3 class="no-top-margin">Course Selections</h3>
       <p class="text-darkish">The student has made the following course selections.</p>
       <ol class="list-group">
-        <% policy_scope(@application.course_selections).each do |selection| %>
+        <% policy_scope(@application.course_selections).includes(:course).each do |selection| %>
           <li class="list-group-item list-group-item-info">
             <div class="row">
               <div class="col-sm-9">
@@ -39,7 +39,6 @@
                 <%= selection.college_offer.humanize if selection.college_offer %>
               </div>
             </div>
-
           </li>
         <% end %>
       </ol>

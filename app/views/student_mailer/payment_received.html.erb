@@ -8,7 +8,7 @@
   <li>Amount: <strong><%= number_to_currency @payment.amount_pounds, unit: '£' %></strong></li>
   <li>Description: <strong><%= @payment.description %></strong></li>
   <li>Payment Type: <strong><%= @payment.payment_type %></strong></li>
-  <li>Payment Date: <strong><%= format_date @payment.created_at %></strong></li>
+  <li>Payment Date: <strong><%= format_date @payment.paid_at %></strong></li>
   <% if @payment.credit_card? %>
     <li>Card Holder: <strong><%= @payment.card_holder %></strong></li>
     <li>Card Number: <strong><%= credit_card_number @payment.last_four_digits %></strong></li>

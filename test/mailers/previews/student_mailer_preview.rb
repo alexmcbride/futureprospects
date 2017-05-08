@@ -34,9 +34,8 @@ class StudentMailerPreview < ActionMailer::Preview
   end
 
   def payment_failed
-    student = Student.find 2
-    payment = student.applications.first.payments.first
-    StudentMailer.payment_failed(student, payment)
+    application = Application.where(status: :payment_failed).first
+    StudentMailer.payment_failed(application.student, application.unpaid_payment)
   end
 
   def decisions_made

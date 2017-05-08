@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170502092547) do
+ActiveRecord::Schema.define(version: 20170508182702) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(version: 20170502092547) do
     t.integer  "current_stage"
     t.string   "permanent_city"
     t.string   "correspondence_city"
+    t.index ["created_at"], name: "index_applications_on_created_at", using: :btree
+    t.index ["student_id"], name: "index_applications_on_student_id", using: :btree
   end
 
   create_table "categories", force: :cascade do |t|
@@ -133,6 +135,7 @@ ActiveRecord::Schema.define(version: 20170502092547) do
     t.datetime "updated_at",       null: false
     t.string   "card_holder"
     t.string   "description"
+    t.datetime "paid_at"
     t.index ["application_id"], name: "index_payments_on_application_id", using: :btree
   end
 

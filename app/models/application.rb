@@ -254,9 +254,9 @@ class Application < ApplicationRecord
   #
   # Returns - the expiry datetime, or nil if there are no failed payments.
   def payment_expiry_time
-    payment = Payment.where(status: :failed).order(:created_at).first
+    payment = self.payments.where(status: :failed).order(:paid_at).first
     unless payment.nil?
-      return payment.created_at + PAYMENT_EXPIRY_DAYS.days
+      return payment.paid_at + PAYMENT_EXPIRY_DAYS.days
     end
     nil
   end
@@ -267,7 +267,7 @@ class Application < ApplicationRecord
   def self.handle_failed_payments
     applications = Application.includes(:student)
                        .where(status: :payment_failed)
-                       .where(id: Payment.where(status: :failed).where("created_at < CURRENT_DATE - INTERVAL '#{PAYMENT_EXPIRY_DAYS} days'"))
+                       .where(id: Payment.select(:application_id).where(status: :failed).where("paid_at < CURRENT_DATE - INTERVAL '#{PAYMENT_EXPIRY_DAYS} days'"))
 
     # Cancel application and emails student.
     applications.each do |application|
@@ -299,19 +299,19 @@ class Application < ApplicationRecord
   #
   # Returns - the PayPal URL to direct to the buyer to.
   def generate_paypal_url(ip, return_url, cancel_url)
-    payment = create_payment_obj
-    payment.generate_paypal_url ip, return_url, cancel_url
+    unpaid_payment.generate_paypal_url ip, return_url, cancel_url
   end
 
   # Creates a payment object, of the specified payment type
   #
   # * +payment_type+ - the payment type (:credit_card or :paypal)
   # * +paypal_token+ - the token provided by PayPal, required by PayPal payments.
-  def create_payment(payment_type, paypal_token)
-    create_payment_obj do |p|
-      p.payment_type = payment_type
-      p.update_from_paypal paypal_token
-    end
+  def update_payment(payment_type, paypal_token)
+    payment = self.unpaid_payment
+    payment.payment_type = payment_type
+    payment.update_from_paypal paypal_token
+    payment.save validate: false
+    payment
   end
 
   # Authorizes payment.
@@ -321,9 +321,9 @@ class Application < ApplicationRecord
   #
   # Returns - the payment object.
   def authorize_payment(params, remote_ip)
-    payment = create_payment_obj(params) do |p|
-      p.remote_ip = remote_ip # Needed for PayPal
-    end
+    payment = self.unpaid_payment
+    payment.update_attributes params
+    payment.remote_ip = remote_ip # Needed for PayPal
 
     if payment.valid?
       if payment.authorize
@@ -477,8 +477,8 @@ class Application < ApplicationRecord
       self.submitted_date = DateTime.now
       self.save
 
-      # Send mass email for cancellation
-      # TODO: add this is background queue?
+      create_payment.save!
+
       StudentMailer.application_submitted(student, self).deliver_later
 
       true
@@ -486,6 +486,16 @@ class Application < ApplicationRecord
       self.errors.add(:section, "'#{self.current_stage.humanize}' has not been completed")
       false
     end
+  end
+
+  def create_payment
+    Payment.new application: self,
+                amount: self.calculate_fee,
+                description: "Application fee (#{pluralize self.course_selections_count, 'course'})"
+  end
+
+  def unpaid_payment
+    self.payments.where(status: nil).or(self.payments.where(status: :failed)).first
   end
 
   # Saves the application as completed.
@@ -503,20 +513,6 @@ class Application < ApplicationRecord
   end
 
   private
-    # Creates payment object with valid attributes
-    #
-    # * +params+ - the request params
-    #
-    # Returns - the created payment object.
-    def create_payment_obj(params={})
-      payment = Payment.new params
-      payment.application = self
-      payment.amount = calculate_fee
-      payment.description = "Application fee (#{pluralize course_selections_count, 'course'})"
-      yield(payment) if block_given?
-      payment
-    end
-
     # Checks if all selections have offers, if they do then marks application as completed.
     def update_status_for_decisions
       if awaiting_decisions? && all_selections_have_updates?

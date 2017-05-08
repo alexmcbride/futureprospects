@@ -39,7 +39,7 @@ class PaymentPdf < Prawn::Document
       text 'Amount: ' + number_to_currency(payment.amount_pounds, unit: '£')
       text 'Description: ' + payment.description
       text 'Payment Type: ' + payment.payment_type.humanize
-      text 'Payment Date: ' + context.format_date(payment.created_at)
+      text 'Payment Date: ' + context.format_date(payment.paid_at)
       if payment.credit_card?
         text 'Card Holder: ' + payment.card_holder
         text 'Card Number: ' + context.credit_card_number(payment.last_four_digits)

@@ -193,25 +193,33 @@ def student(file, tokens, schools, jobs, refs)
     $courses += 1
   end
 
+  file.puts "app.course_selections_count = #{num}"
+  file.puts 'app.save validate: false'
+  file.puts ''
+
+  def payment(file, status, full_name)
+    file.puts 'payment = app.create_payment'
+    file.puts "payment.status = :#{status}"
+    file.puts "payment.paid_at = '#{(Date.new(2016, 6, 1)..Date.today).to_a.sample}'"
+    type = Payment.payment_types.map{|k,v|k}.sample.to_sym
+    file.puts "payment.payment_type = :#{type}"
+    if type == :credit_card
+      file.puts 'payment.last_four_digits = 1234'
+      file.puts "payment.card_holder = '#{full_name}'"
+    end
+    file.puts 'payment.save! validate: false'
+    file.puts ''
+  end
+
   # Payments
   status = status.to_sym
-  if [:awaiting_decisions, :payment_failed, :cancelled, :awaiting_decisions, :all_decisions_made, :all_rejected, :completed].include? status
-    last_year = (DateTime.now - 6.months)..DateTime.now
-    dates = last_year.to_a.sample(4).sort
-    amount = num > 1 ? 2000 : 1000
-    failed_payments = ["payment = Payment.new application: #{app}, payment_type: :credit_card, amount: #{amount}, status: :failed, card_holder: '#{full_name}', last_four_digits: '0004', created_at: '#{dates[0]}', updated_at: '#{dates[0]}', description: 'Application Fee (#{num} Courses)'",
-                "payment = Payment.new application: #{app}, payment_type: :paypal, amount: #{amount}, status: :failed, card_holder: '#{full_name}', created_at: '#{dates[1]}', updated_at: '#{dates[1]}', description: 'Application Fee (#{num} Courses)'",
-                "payment = Payment.new application: #{app}, payment_type: :credit_card, amount: #{amount}, status: :failed, card_holder: '#{full_name}', last_four_digits: '0004', created_at: '#{dates[2]}', updated_at: '#{dates[2]}', description: 'Application Fee (#{num} Courses)'",]
-    payment_auth = "payment = Payment.new application: #{app}, payment_type: :paypal, amount: #{amount}, status: :authorized, card_holder: '#{full_name}', created_at: '#{dates[3]}', updated_at: '#{dates[3]}', description: 'Application Fee (#{num} Courses)'"
-    failed_payments.sample(rand(1..failed_payments.count)).each do |payment|
-      file.puts payment
-      file.puts 'payment.save! validate: false'
-    end
-    if [:awaiting_decisions, :all_decisions_made, :all_rejected, :completed].include? status
-      file.puts payment_auth
-      file.puts 'payment.save! validate: false'
-    end
+  if status == :awaiting_payment
+    file.puts 'app.create_payment.save!'
     file.puts ''
+  elsif status == :payment_failed || status == :cancelled
+    payment file, :failed, full_name
+  elsif [:awaiting_decisions, :all_decisions_made, :all_rejected, :completed].include? status
+    payment file, :authorized, full_name
   end
 
   $counter += 1

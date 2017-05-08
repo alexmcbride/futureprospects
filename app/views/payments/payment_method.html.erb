@@ -10,14 +10,11 @@
 
   <div class="col-sm-9">
     <h3 class="no-top-margin">Choose Payment Method</h3>
-    <p>Before the application can be considered, a payment must be received for the following:</p>
-    <p><strong>Amount: <%= number_to_currency @application.calculate_fee_pounds, unit: '£' %></strong></p>
-    <p>You are being charged for <%= pluralize @application.course_selections_count, 'course' %>:</p>
+    <p>Before continuing a payment must be received for the following:</p>
 
-    <ul>
-      <% @application.course_selections.each do |selection| %>
-        <li><%= selection.course.title %></li>
-      <% end %>
+    <ul class="list-unstyled">
+      <li>Amount: <%= number_to_currency @payment.amount_pounds, unit: '£' %></li>
+      <li>Description: <%= @payment.description %></li>
     </ul>
 
     <hr>

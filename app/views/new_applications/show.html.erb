@@ -26,8 +26,8 @@
                 <tr>
                   <td><%= selection.course.title %></td>
                   <td><%= selection.course.college.name %></td>
-                  <td><%= selection.college_offer.humanize %></td>
-                  <td><%= selection.student_choice.humanize %></td>
+                  <td><%= selection.college_offer.humanize if selection.college_offer %></td>
+                  <td><%= selection.student_choice.humanize if selection.student_choice %></td>
                   <td><%= format_date selection.course.start_date %></td>
                 </tr>
             <% end %>

@@ -7,8 +7,8 @@
 <ul>
   <li>Amount: <strong><%= number_to_currency @payment.amount_pounds, unit: '£' %></strong></li>
   <li>Description: <strong><%= @payment.description %></strong></li>
-  <li>Payment Type: <strong><%= @payment.payment_type %></strong></li>
-  <li>Payment Date: <strong><%= format_date @payment.created_at %></strong></li>
+  <li>Payment Type: <strong><%= @payment.payment_type.humanize %></strong></li>
+  <li>Payment Date: <strong><%= format_date @payment.paid_at %></strong></li>
   <% if @payment.credit_card? %>
     <li>Card Holder: <strong><%= @payment.card_holder %></strong></li>
     <li>Card Number: <strong><%= credit_card_number @payment.last_four_digits %></strong></li>
@@ -16,8 +16,8 @@
 </ul>
 
 <p>Your application cannot be processed until this payment is received. You have
-  <strong><%= Payment::PAYMENT_EXPIRY_DAYS %> days</strong> to make a successful payment.</p>
-<p>This means we must receive a payment from you by <strong><%= format_date @payment.payment_expiry_time %></strong>.</p>
+  <strong><%= Application::PAYMENT_EXPIRY_DAYS %> days</strong> to make a successful payment.</p>
+<p>This means we must receive a payment from you by <strong><%= format_date @payment.application.payment_expiry_time %></strong>.</p>
 
 <p>In order to make a payment, please <%= link_to 'sign in', root_url %> to the Future Prospects site and use
   the make payment option.</p>

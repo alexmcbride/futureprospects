@@ -16,14 +16,11 @@ class Payment < ApplicationRecord
   belongs_to :application
 
   # Validators
-  validates :payment_type, presence: true
+  validates :payment_type, presence: false
   validates :amount, presence: true, numericality: {greater_than: 0}
-  validates :status, presence: true
+  validates :status, presence: false
   validates :description, presence: true
   validate :validate_card_details, if: :credit_card?
-
-  # Callbacks
-  before_validation :set_default_status
 
   # The card brand (e.g. visa, mastercard etc).
   attr_accessor :card_brand
@@ -132,13 +129,6 @@ class Payment < ApplicationRecord
   end
 
   private
-    # Called before validation, defaults payment to failed.
-    def set_default_status
-      if self.status.nil?
-        self.status = :failed
-      end
-    end
-
     # Custom validator to check cc details are correct.
     def validate_card_details
       card = credit_card

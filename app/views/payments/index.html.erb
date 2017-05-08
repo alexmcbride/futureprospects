@@ -25,7 +25,7 @@
             <td><%= icon(payment.authorized? ? 'check' : 'ban', style: 'width: 1em;') %> <%= payment.status.humanize %></td>
             <td><%= icon(payment.paypal? ? 'cc-paypal' : 'credit-card-alt') %> <%= payment.payment_type.humanize %></td>
             <td><%= number_to_currency payment.amount_pounds, unit: '£' %></td>
-            <td><%= format_date payment.created_at %></td>
+            <td><%= format_date payment.paid_at %></td>
             <td><%= payment.credit_card? ? payment.card_holder : 'N/A' %></td>
             <td><%= payment.credit_card? ? credit_card_number(payment.last_four_digits) : 'N/A' %></td>
             <td><%= payment.description %></td>

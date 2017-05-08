@@ -42,7 +42,7 @@
         <strong>Payment Date</strong>
       </div>
       <div class="col-xs-8">
-        <%= format_date @payment.created_at %>
+        <%= format_date @payment.paid_at %>
       </div>
     </div>
     <% if @payment.credit_card?  %>

@@ -19,6 +19,8 @@ class PaymentsController < ApplicationController
     if params.key? :token
       flash[:notice] = 'PayPal payment cancelled'
     end
+
+    @payment = @application.unpaid_payment
   end
 
   # POST  /payments/payment_method/continue
@@ -34,6 +36,7 @@ class PaymentsController < ApplicationController
       redirect_to new_payment_path
     else
       flash[:notice] = 'You must choose a payment method.'
+      @payment = @application.unpaid_payment
       render :payment_method
     end
   end
@@ -43,7 +46,7 @@ class PaymentsController < ApplicationController
   # Displays new payment form, unless redirected from payment, in which case the authorize paypal form is displayed.
   # When PayPal redirects us here its includes a token in the URL that we need later for authorization.
   def new
-    @payment = @application.create_payment session[:payment_type], params[:token]
+    @payment = @application.update_payment session[:payment_type], params[:token]
   end
 
   # POST /payments
@@ -76,7 +79,7 @@ class PaymentsController < ApplicationController
     # Sets the application for actions what need it, unless the application is cancelled.
     def set_application
       @application = current_student.current_application
-      user_not_authorized unless @application.awaiting_payment?
+      user_not_authorized unless @application.awaiting_payment? || @application.payment_failed?
     end
 
     # Sets the payment and checks if the student has permission to view it.

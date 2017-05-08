@@ -179,6 +179,11 @@ crumb :decisions_change do
   link 'Change Course', decisions_change_path
 end
 
+crumb :decisions_completed do
+  parent :root
+  link 'Application Completed', decisions_completed_path
+end
+
 crumb :staff_courses do
   parent :root
   link 'Courses', staff_courses_path

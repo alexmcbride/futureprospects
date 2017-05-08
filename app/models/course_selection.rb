@@ -93,6 +93,13 @@ class CourseSelection < ApplicationRecord
     result.first['count']
   end
 
+  def self.selected_colleges(application)
+    application.course_selections
+        .select('DISTINCT (colleges.*)')
+        .joins(course: :college)
+        .where(student_choice: [:firm_choice, :insurance_choice])
+  end
+
   def has_all_choices?
     self.application.course_selections.all? {|s| s.student_choice.present? || s.rejected?}
   end

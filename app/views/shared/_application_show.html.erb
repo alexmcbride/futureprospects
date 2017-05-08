@@ -121,12 +121,37 @@
 
 <div class="panel panel-default">
   <div class="panel-body">
-    <h3 class="no-top-margin">Education</h3>
+
     <% if application.schools.any? %>
-      <% application.schools.each do |school| %>
-        <address style="margin-bottom: 10px;">
-          <%= school.name %> &mdash; <%= address school, ', ' %>
-        </address>
+      <h3 class="no-top-margin">Education</h3>
+      <div class="table-responsive">
+        <table class="table table-condensed">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Address 2</th>
+            <th>City</th>
+            <th>Post Code</th>
+            <th>Country</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% application.schools.each do |school| %>
+            <tr>
+              <td><%= school.name %></td>
+              <td><%= school.address_1 %></td>
+              <td><%= school.address_2 %></td>
+              <td><%= school.city %></td>
+              <td><%= school.postcode %></td>
+              <td><%= school.country %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+      <h4 class="no-top-margin">Qualifications</h4>
+      <div class="table-responsive">
         <table class="table table-condensed">
           <thead>
           <tr>
@@ -135,21 +160,25 @@
             <th>Grade</th>
             <th>Start</th>
             <th>End</th>
+            <th>School</th>
           </tr>
           </thead>
           <tbody>
-          <% school.qualifications.each do |qual| %>
-            <tr>
-              <td><%= qual.subject %></td>
-              <td><%= qual.grade %></td>
-              <td><%= qual.award %></td>
-              <td><%= format_date qual.start_date %></td>
-              <td><%= format_date qual.end_date %></td>
-            </tr>
-          <% end %>
+            <% application.schools.each do |school| %>
+              <% school.qualifications.each do |qual| %>
+                <tr>
+                  <td><%= qual.subject %></td>
+                  <td><%= qual.grade %></td>
+                  <td><%= qual.award %></td>
+                  <td><%= format_date qual.start_date %></td>
+                  <td><%= format_date qual.end_date %></td>
+                  <td><%= school.name %></td>
+                </tr>
+              <% end %>
+            <% end %>
           </tbody>
         </table>
-        <% end %>
+      </div>
     <% else %>
       <p><em>There are no schools in this application.</em></p>
     <% end %>
@@ -160,30 +189,32 @@
   <div class="panel-body">
     <h3 class="no-top-margin">Employment</h3>
     <% if application.jobs.any? %>
-      <table class="table table-condensed">
-        <thead>
-        <tr>
-          <th>Employer</th>
-          <th>Address</th>
-          <th>Job Title</th>
-          <th>Duties</th>
-          <th>Start</th>
-          <th>End</th>
-        </tr>
-        </thead>
-        <tbody>
-        <% application.jobs.each do |job| %>
+      <div class="table-responsive">
+        <table class="table table-condensed">
+          <thead>
           <tr>
-            <td><%= job.employer %></td>
-            <td><%= address job %></td>
-            <td><%= job.job_title %></td>
-            <td><%= job.duties %></td>
-            <td><%= format_date job.start_date %></td>
-            <td><%= format_date job.end_date %></td>
+            <th>Employer</th>
+            <th>Address</th>
+            <th>Job Title</th>
+            <th>Duties</th>
+            <th>Start</th>
+            <th>End</th>
           </tr>
-        <% end %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+          <% application.jobs.each do |job| %>
+            <tr>
+              <td><%= job.employer %></td>
+              <td><%= address job %></td>
+              <td><%= job.job_title %></td>
+              <td><%= job.duties %></td>
+              <td><%= format_date job.start_date %></td>
+              <td><%= format_date job.end_date %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
     <% else %>
       <p><em>There are no jobs in this application.</em></p>
     <% end %>
@@ -208,77 +239,94 @@
 <div class="panel panel-default">
   <div class="panel-body">
     <div class="row">
-      <div class="col-sm-6">
-        <h3 class="no-top-margin">Reference 1</h3>
-        <div class="row">
-          <div class="col-xs-4">Full Name:</div>
-          <div class="col-xs-8"><%= application.reference.reference_1_full_name if application.reference %></div>
-        </div>
-        <div class="row">
-          <div class="col-xs-4">Occupation:</div>
-          <div class="col-xs-8"><%= application.reference.reference_1_occupation if application.reference %></div>
-        </div>
-        <div class="row">
-          <div class="col-xs-4">Relationship:</div>
-          <div class="col-xs-8"><%= application.reference.reference_1_relationship if application.reference %></div>
-        </div>
-        <div class="row">
-          <div class="col-xs-4">Telephone:</div>
-          <div class="col-xs-8"><%= application.reference.reference_1_telephone if application.reference %></div>
-        </div>
-        <div class="row">
-          <div class="col-xs-4">Email:</div>
-          <div class="col-xs-8"><%= mail_to application.reference.reference_1_email if application.reference %></div>
-        </div>
-
-        <div class="row">
-          <div class="col-xs-4">Address:</div>
-          <div class="col-xs-8">
-            <address>
-              <%= application.reference.reference_1_address_1 if application.reference %><br>
-              <%= (application.reference.reference_1_address_2 + '<br>').html_safe if application.reference && application.reference.reference_1_address_2.present? %>
-              <%= application.reference.reference_1_city if application.reference%><br>
-              <%= application.reference.reference_1_postcode if application.reference %><br>
-              <%= application.reference.reference_1_country if application.reference %>
-            </address>
+      <% if application.reference.present? %>
+        <div class="col-sm-6">
+          <h3 class="no-top-margin">Reference 1</h3>
+          <div class="row">
+            <div class="col-xs-4">Full Name:</div>
+            <div class="col-xs-8"><%= application.reference.reference_1_full_name if application.reference %></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4">Occupation:</div>
+            <div class="col-xs-8"><%= application.reference.reference_1_occupation if application.reference %></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4">Relationship:</div>
+            <div class="col-xs-8"><%= application.reference.reference_1_relationship if application.reference %></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4">Telephone:</div>
+            <div class="col-xs-8"><%= application.reference.reference_1_telephone if application.reference %></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4">Email:</div>
+            <div class="col-xs-8"><%= mail_to application.reference.reference_1_email if application.reference %></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4">Address 1:</div>
+            <div class="col-xs-8"><%= application.reference.reference_1_address_1 %></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4">Address 2:</div>
+            <div class="col-xs-8"><%= application.reference.reference_1_address_2 %></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4">City:</div>
+            <div class="col-xs-8"><%= application.reference.reference_1_city %></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4">Post Code:</div>
+            <div class="col-xs-8"><%= application.reference.reference_1_postcode %></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4">Country:</div>
+            <div class="col-xs-8"><%= application.reference.reference_1_country %></div>
           </div>
         </div>
-      </div>
-      <div class="col-sm-6">
-        <h3 class="no-top-margin">Reference 2</h3>
-        <div class="row">
-          <div class="col-xs-4">Full Name:</div>
-          <div class="col-xs-8"><%= application.reference.reference_2_full_name if application.reference %></div>
-        </div>
-        <div class="row">
-          <div class="col-xs-4">Occupation:</div>
-          <div class="col-xs-8"><%= application.reference.reference_2_occupation if application.reference %></div>
-        </div>
-        <div class="row">
-          <div class="col-xs-4">Relationship:</div>
-          <div class="col-xs-8"><%= application.reference.reference_2_relationship if application.reference %></div>
-        </div>
-        <div class="row">
-          <div class="col-xs-4">Telephone:</div>
-          <div class="col-xs-8"><%= application.reference.reference_2_telephone if application.reference %></div>
-        </div>
-        <div class="row">
-          <div class="col-xs-4">Email:</div>
-          <div class="col-xs-8"><%= mail_to application.reference.reference_2_email if application.reference %></div>
-        </div>
-        <div class="row">
-          <div class="col-xs-4">Address:</div>
-          <div class="col-xs-8">
-            <address>
-              <%= application.reference.reference_2_address_1 if application.reference %><br>
-              <%= (application.reference.reference_2_address_2 + '<br>').html_safe if application.reference && application.reference.reference_2_address_2.present? %>
-              <%= application.reference.reference_2_city if application.reference %><br>
-              <%= application.reference.reference_2_postcode if application.reference %><br>
-              <%= application.reference.reference_2_country if application.reference %>
-            </address>
+        <div class="col-sm-6">
+          <h3 class="no-top-margin">Reference 2</h3>
+          <div class="row">
+            <div class="col-xs-4">Full Name:</div>
+            <div class="col-xs-8"><%= application.reference.reference_2_full_name if application.reference %></div>
           </div>
+          <div class="row">
+            <div class="col-xs-4">Occupation:</div>
+            <div class="col-xs-8"><%= application.reference.reference_2_occupation if application.reference %></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4">Relationship:</div>
+            <div class="col-xs-8"><%= application.reference.reference_2_relationship if application.reference %></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4">Telephone:</div>
+            <div class="col-xs-8"><%= application.reference.reference_2_telephone if application.reference %></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4">Email:</div>
+            <div class="col-xs-8"><%= mail_to application.reference.reference_2_email if application.reference %></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4">Address 1:</div>
+            <div class="col-xs-8"><%= application.reference.reference_2_address_1 %></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4">Address 2:</div>
+            <div class="col-xs-8"><%= application.reference.reference_2_address_2 %></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4">City:</div>
+            <div class="col-xs-8"><%= application.reference.reference_2_city %></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4">Post Code:</div>
+            <div class="col-xs-8"><%= application.reference.reference_2_postcode %></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4">Country:</div>
+            <div class="col-xs-8"><%= application.reference.reference_2_country %></div>
         </div>
       </div>
+      <% end %>
     </div>
   </div>
 </div>

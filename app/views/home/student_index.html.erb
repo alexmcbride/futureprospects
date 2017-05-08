@@ -80,7 +80,10 @@
             <%= link_to 'Make Your Choices', decisions_path, role: 'button', class: 'link-button' %>
           </div>
         <% elsif @application.completed? %>
-          <p>Your application is completed. You will hear from your chosen colleges in due time.</p>
+            <p><strong>Your application is completed!</strong></p>
+
+            <p>You will hear from your chosen colleges in due time. For contact details, or if you have any issues or
+            questions, please select the What Next? button below.</p>
             <div class="text-right">
               <%= link_to 'What Next?', decisions_completed_path, role: 'button', class: 'link-button' %>
             </div>

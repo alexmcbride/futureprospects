@@ -68,18 +68,24 @@ class DecisionsController < ApplicationController
     errors = false
 
     params[:course_selection].each do |p|
+      # Skip empty form entries.
+      next if p[:course_id].empty?
+
+      # Check course is open.
       course = Course.find p[:course_id]
       unless course.open?
         flash[:error] = "Course '#{course.title}' is not open."
         errors = true
       end
 
+      # Check course has not been added to app.
       if CourseSelection.exists? @application.id, p[:course_id]
         flash[:error] = "Course '#{course.title}' has already been added to the application."
         errors = true
       end
     end
 
+    # Valid?
     if errors
       change
       render :change
@@ -91,7 +97,8 @@ class DecisionsController < ApplicationController
   end
 
   def change_payment
-
+    # payment = Payment.new
+    # payment.save!
   end
 
   private

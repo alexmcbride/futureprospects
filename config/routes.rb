@@ -32,7 +32,6 @@ Rails.application.routes.draw do
   # Application routes
   post 'applications', to: 'new_applications#create', as: 'applications_create'
   get 'applications', to: 'new_applications#index', as: 'applications'
-  get 'applications/:id', to: 'new_applications#show', as: 'application'
   get 'applications/continue', to: 'new_applications#continue', as: 'applications_continue'
   get 'applications/intro', to: 'new_applications#intro', as: 'applications_intro'
 
@@ -70,10 +69,10 @@ Rails.application.routes.draw do
 
   get 'applications/submit', to: 'new_applications#submit', as: 'applications_submit'
   post 'applications/submit', to: 'new_applications#submit_next', as: 'applications_submit_next'
-
-  get 'courses/search', to: 'courses#search', as: 'courses_search'
+  get 'applications/:id', to: 'new_applications#show', as: 'application'
 
   # Courses
+  get 'courses/search', to: 'courses#search', as: 'courses_search'
   resources :courses
   get 'courses/category/:id', to: 'courses#category', as: 'courses_category'
 

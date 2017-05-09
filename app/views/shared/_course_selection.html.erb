@@ -1,0 +1,24 @@
+<div class="table-responsive">
+  <table class="table table-condensed table-striped">
+    <thead>
+    <tr>
+      <th>Course</th>
+      <th>College</th>
+      <th>Offer</th>
+      <th>Choice</th>
+      <th>Note</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% application.course_selections.includes(course: :college).each do |selection| %>
+        <tr>
+          <td title="<%= selection.course.title %>"><%= truncate selection.course.title, length: 50 %></td>
+          <td><%= selection.course.college.name %></td>
+          <td><%= selection.college_offer.humanize %></td>
+          <td><%= selection.student_choice.humanize %></td>
+          <td><%= selection.note %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

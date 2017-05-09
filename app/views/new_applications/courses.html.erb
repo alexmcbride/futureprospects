@@ -7,7 +7,7 @@
 
 <script>
   $(function() {
-     registerAutocomplete('#selected-course', '#course_selection_course_id', '<%= url_for courses_search_path(:json) %>');
+     registerAutocomplete('#selected_course', '#course_selection_course_id', '<%= url_for courses_search_path(:json) %>');
   });
 </script>
 
@@ -28,7 +28,7 @@
       <%= f.hidden_field :course_id %>
       <div class="row">
         <div class="col-sm-10">
-          <%= text_field_tag 'selected-course', nil, placeholder: 'Enter the title of the course', class: 'form-control full-width courses-autocomplete' %>
+          <%= text_field_tag 'selected_course', params[:selected_course], placeholder: 'Enter the title of the course', class: 'form-control full-width courses-autocomplete' %>
         </div>
         <div class="col-sm-2">
           <%= f.submit 'Add Course', class: 'add-button-md btn-block' %>

@@ -76,11 +76,11 @@ class Course < ApplicationRecord
     Course.search_for(search_term, profile: :full).includes(:category, :college)
   end
 
-  # Checks if the course has spaces.
+  # Checks if the course is full.
   #
   # Returns - a boolean indicating if the course has spaces.
-  def has_spaces
-    self.spaces > self.course_selections.size
+  def full?
+    self.course_selections_count >= self.spaces
   end
 
   # ActiveRecord callback, called before validation, that adds a default status if one does not exist.

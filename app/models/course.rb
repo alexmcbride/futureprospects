@@ -22,7 +22,8 @@ class Course < ApplicationRecord
   validates :start_date, presence: true
   validates :end_date, presence: true
   validates :level, presence: false
-  validates :spaces, presence: true
+  validates :spaces, presence: true, numericality: { only_integer: true }
+  validate :spaces_is_valid, on: :update
   validates :category_id, presence: true
   validates :college_id, presence: true
   validates :spaces, presence: true, numericality: {only_integer: true, greater_than: 0, less_than: 120}
@@ -36,6 +37,14 @@ class Course < ApplicationRecord
   belongs_to :college
   belongs_to :category, counter_cache: true
   has_many :course_selections
+
+  # Checks that a staff member doesn't try to change spaces to be a number
+  # less than the current number of applicants.
+  def spaces_is_valid
+    if self.spaces < self.course_selections_count
+      self.errors.add(:spaces, 'cannot be less than number of applicants')
+    end
+  end
 
   # Gets the number of years the course lasts for.
   #

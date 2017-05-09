@@ -38,14 +38,6 @@ class Course < ApplicationRecord
   belongs_to :category, counter_cache: true
   has_many :course_selections
 
-  # Checks that a staff member doesn't try to change spaces to be a number
-  # less than the current number of applicants.
-  def spaces_is_valid
-    if self.spaces < self.course_selections_count
-      self.errors.add(:spaces, 'cannot be less than number of applicants')
-    end
-  end
-
   # Gets the number of years the course lasts for.
   #
   # Returns - the years as an integer.
@@ -90,13 +82,6 @@ class Course < ApplicationRecord
   # Returns - a boolean indicating if the course has spaces.
   def full?
     self.course_selections_count >= self.spaces
-  end
-
-  # ActiveRecord callback, called before validation, that adds a default status if one does not exist.
-  def default_to_open_status
-    unless self.status
-      self.status = :open
-    end
   end
 
   # Filters the courses based on the request params (:title, :category_id, :status, and :college_id)
@@ -170,14 +155,6 @@ class Course < ApplicationRecord
     false
   end
 
-  # Sends a cancellation email to all student's who have applied for the course.
-  def send_mass_cancellation_email
-    self.course_selections.each do |selection|
-      student = selection.application.student
-      StudentMailer.course_cancelled(student, self).deliver_later
-    end
-  end
-
   # Finds all courses with an open status.
   #
   # * +category+ - optional category the include the where clause
@@ -188,6 +165,30 @@ class Course < ApplicationRecord
       Course.where(status: :open, category_id: category.id)
     else
       Course.where(status: :open)
+    end
+  end
+
+  private
+  # ActiveRecord callback, called before validation, that adds a default status if one does not exist.
+  def default_to_open_status
+    unless self.status
+      self.status = :open
+    end
+  end
+
+  # Checks that a staff member doesn't try to change spaces to be a number
+  # less than the current number of applicants.
+  def spaces_is_valid
+    if self.spaces < self.course_selections_count
+      self.errors.add(:spaces, 'cannot be less than number of applicants')
+    end
+  end
+
+  # Sends a cancellation email to all student's who have applied for the course.
+  def send_mass_cancellation_email
+    self.course_selections.each do |selection|
+      student = selection.application.student
+      StudentMailer.course_cancelled(student, self).deliver_later
     end
   end
 end

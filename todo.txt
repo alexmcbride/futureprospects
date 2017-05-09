@@ -52,3 +52,5 @@ maybe only site_admin can see unsubmitted apps?
 put some kind of message in application when all your college's decisions have been made but waiting for other colleges.
 
 put --choose-- on select in app (profile etc.) also look at genders (prefer not to say)
+
+investigate scopes?

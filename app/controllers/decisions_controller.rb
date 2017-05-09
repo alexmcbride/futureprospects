@@ -34,6 +34,7 @@ class DecisionsController < ApplicationController
 
   # POST /decisions/decline
   def decline
+    # TODO: move into model?
     which = params[:which_to_decline].to_sym
     if which == :all
       CourseSelection.decline_all @application

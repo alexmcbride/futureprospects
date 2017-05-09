@@ -30,36 +30,6 @@ class CourseSelection < ApplicationRecord
     not CourseSelection.where('application_id=? AND course_id=?', application_id, course_id).empty?
   end
 
-  # Adds a validation error if the course selection is not unique.
-  def course_is_unique
-    if CourseSelection.exists? self.application_id, self.course_id
-      self.errors.add(:course, 'has already been added to the application')
-    end
-  end
-
-  # Adds a validation error if the course does not have a open status.
-  def course_is_open
-    if self.course
-      unless self.course.open?
-        self.errors.add(:course, "cannot be added as its marked as '#{self.course.status}'")
-      end
-    end
-  end
-
-  # Adds a validation error if the application already has max number courses added.
-  def application_can_add
-    unless self.application.can_add_course?
-      self.errors.add(:maximum, "of #{pluralize Application::MAX_COURSES, 'course'} has been reached")
-    end
-  end
-
-  # Adds a validation error if the course is full.
-  def course_not_full
-    if self.course.full?
-      self.errors.add(:course, 'is full')
-    end
-  end
-
   # Creates a new CourseSelection object based on the course_id.
   #
   # * +params+ - the rquest params including the course_id.
@@ -148,4 +118,35 @@ class CourseSelection < ApplicationRecord
       end
     end
   end
+
+  private
+    # Adds a validation error if the course selection is not unique.
+    def course_is_unique
+      if CourseSelection.exists? self.application_id, self.course_id
+        self.errors.add(:course, 'has already been added to the application')
+      end
+    end
+
+    # Adds a validation error if the course does not have a open status.
+    def course_is_open
+      if self.course
+        unless self.course.open?
+          self.errors.add(:course, "cannot be added as its marked as '#{self.course.status}'")
+        end
+      end
+    end
+
+    # Adds a validation error if the application already has max number courses added.
+    def application_can_add
+      unless self.application.can_add_course?
+        self.errors.add(:maximum, "of #{pluralize Application::MAX_COURSES, 'course'} has been reached")
+      end
+    end
+
+    # Adds a validation error if the course is full.
+    def course_not_full
+      if self.course.full?
+        self.errors.add(:course, 'is full')
+      end
+    end
 end

@@ -23,33 +23,12 @@ class School < ApplicationRecord
   #
   # Returns - a boolean indicating if the operation was successful.
   def add_qualification(qualification)
-    if self.dates_valid? qualification
-      if qualification.valid?
-        qualification.school = self
-        qualification.save
-        return true
-      end
-    else
-      qualification.errors.add(:qualification, 'cannot be added as its dates overlap with an existing qualification')
+    if qualification.valid?
+      qualification.school = self
+      qualification.save
+      return true
     end
     false
-  end
-
-  # Checks if any of the qualification dates overlap
-  #
-  # * +qualification+ - the qualification to check.
-  #
-  # Returns - a boolean indicating if the dates are valid.
-  def dates_valid?(qualification)
-    # if self.qualifications.count > 0
-    #   durations = self.qualifications.map {|q| q.duration}
-    #   durations.each do |duration|
-    #     if qualification.duration.overlaps?(duration)
-    #       return false
-    #     end
-    #   end
-    # end
-    true
   end
 
   # Destroys school and any associated qualifications

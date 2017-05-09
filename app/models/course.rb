@@ -22,13 +22,12 @@ class Course < ApplicationRecord
   validates :start_date, presence: true
   validates :end_date, presence: true
   validates :level, presence: false
-  validates :spaces, presence: true, numericality: { only_integer: true }
-  validate :spaces_is_valid, on: :update
   validates :category_id, presence: true
   validates :college_id, presence: true
   validates :spaces, presence: true, numericality: {only_integer: true, greater_than: 0, less_than: 120}
   validates :status, presence: true
   validates :image, presence: true
+  validate :spaces_greater_than_applicants, on: :update
 
   # Callbacks
   before_validation :default_to_open_status
@@ -169,26 +168,26 @@ class Course < ApplicationRecord
   end
 
   private
-  # ActiveRecord callback, called before validation, that adds a default status if one does not exist.
-  def default_to_open_status
-    unless self.status
-      self.status = :open
+    # ActiveRecord callback, called before validation, that adds a default status if one does not exist.
+    def default_to_open_status
+      unless self.status
+        self.status = :open
+      end
     end
-  end
 
-  # Checks that a staff member doesn't try to change spaces to be a number
-  # less than the current number of applicants.
-  def spaces_is_valid
-    if self.spaces < self.course_selections_count
-      self.errors.add(:spaces, 'cannot be less than number of applicants')
+    # Checks that a staff member doesn't try to change spaces to be a number
+    # less than the current number of applicants.
+    def spaces_greater_than_applicants
+      if self.spaces < self.course_selections_count
+        self.errors.add(:spaces, 'cannot be less than number of applicants')
+      end
     end
-  end
 
-  # Sends a cancellation email to all student's who have applied for the course.
-  def send_mass_cancellation_email
-    self.course_selections.each do |selection|
-      student = selection.application.student
-      StudentMailer.course_cancelled(student, self).deliver_later
+    # Sends a cancellation email to all student's who have applied for the course.
+    def send_mass_cancellation_email
+      self.course_selections.each do |selection|
+        student = selection.application.student
+        StudentMailer.course_cancelled(student, self).deliver_later
+      end
     end
-  end
 end

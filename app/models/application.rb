@@ -18,6 +18,9 @@ class Application < ApplicationRecord
   # The cost of multiple courses.
   MULTIPLE_COURSE_FEE = 2000
 
+  # Cost of changing courses.
+  COURSE_CHANGE_FEE = 1000
+
   # Used for converting pence into pounds.
   PENCE_IN_POUND = 100
 
@@ -265,9 +268,12 @@ class Application < ApplicationRecord
   # you can do it manually `ruby bin\rake site_tasks:handle_failed_payments`, on Heroku it is run by the scheduler once
   # every 24 hours. See for more details: https://devcenter.heroku.com/articles/scheduler
   def self.handle_failed_payments
+    payments = Payment.select(:application_id)
+                   .where(status: :failed)
+                   .where("paid_at < CURRENT_DATE - INTERVAL '#{PAYMENT_EXPIRY_DAYS} days'")
     applications = Application.includes(:student)
                        .where(status: :payment_failed)
-                       .where(id: Payment.select(:application_id).where(status: :failed).where("paid_at < CURRENT_DATE - INTERVAL '#{PAYMENT_EXPIRY_DAYS} days'"))
+                       .where(id: payments)
 
     # Cancel application and emails student.
     applications.each do |application|
@@ -477,7 +483,7 @@ class Application < ApplicationRecord
       self.submitted_date = DateTime.now
       self.save
 
-      create_payment.save!
+      create_application_payment.save!
 
       StudentMailer.application_submitted(student, self).deliver_later
 
@@ -488,14 +494,14 @@ class Application < ApplicationRecord
     end
   end
 
-  def create_payment
+  def create_application_payment
     Payment.new application: self,
                 amount: self.calculate_fee,
                 description: "Application fee (#{pluralize self.course_selections_count, 'course'})"
   end
 
   def unpaid_payment
-    self.payments.where(status: nil).or(self.payments.where(status: :failed)).first
+    self.payments.where(status: nil).or(self.payments.where(status: :failed)).last
   end
 
   # Saves the application as completed.

@@ -3,7 +3,8 @@ class NewApplicationsController < ApplicationController
   before_action :set_application, except: [:index, :show, :create,
                                            :qualifications, :qualifications_add, :qualifications_remove,
                                            :education_remove, :education_edit, :education_update,
-                                           :employment_edit, :employment_update, :employment_remove, :courses_remove]
+                                           :employment_edit, :employment_update, :employment_remove, :courses_remove,
+                                           :completed]
 
   # GET: /applications
   #
@@ -341,11 +342,15 @@ class NewApplicationsController < ApplicationController
     respond_to do |format|
       confirmed = !params[:confirm].nil?
       if @application.save_submit confirmed
-        format.html { redirect_to payment_method_path, notice: 'Submitted application' }
+        format.html { redirect_to payment_redirect_path(applications_completed_path), notice: 'Submitted application' }
       else
         format.html { render :submit }
       end
     end
+  end
+
+  def completed
+
   end
 
   private

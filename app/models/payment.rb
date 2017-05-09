@@ -54,26 +54,27 @@ class Payment < ApplicationRecord
   # Returns - a boolean indicating if the payment was authorized.
   def authorize
     # Take correct payment depending on type.
-    if self.paypal?
-      response = paypal_purchase
-    else
-      response = credit_card_purchase
-    end
-
-    # Debug message.
-    puts "Payment Response: #{response.inspect}"
+    response = if self.paypal?
+                 paypal_purchase
+               elsif self.credit_card?
+                 credit_card_purchase
+               else
+                 raise 'Unknown payment type'
+               end
+    puts "Payment Response: #{response.inspect}" # Debug message.
 
     # Handle response.
     if response.success?
       self.status = :authorized
-      self.save!
-      true
     else
       self.status = :failed
-      self.save!
       self.errors.add(:authentication, response.message)
-      false
     end
+
+    # We always save, whether it was successful or not.
+    self.paid_at = DateTime.now
+    self.save!
+    response.success?
   end
 
   # Generates a PayPal payment URL with the specified params.

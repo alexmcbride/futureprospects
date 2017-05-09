@@ -1,3 +1,8 @@
+# Handles credit-card and paypal payments.
+# A payment item is created with a null status and inserted into payments table. The other controller then redirects to
+# payments/payment_method, this controller then takes over from there. Optionally the calling controller can set
+# session[:payment_redirect] with a path the payment controller will redirect to once the payment has finished.
+# Otherwise it will redirect to root.
 class PaymentsController < ApplicationController
   # Callbacks
   before_action :authenticate_student!

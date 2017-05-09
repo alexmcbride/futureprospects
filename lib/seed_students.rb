@@ -3,8 +3,8 @@ student = Student.new
 student.first_name = 'Mary'
 student.family_name = 'Morrison'
 student.email = 'vmorrison0@merriam-webster.com'
-student.scottish_candidate_number = '178546929'
-student.national_insurance_number = 'NJ214977B'
+student.scottish_candidate_number = '174071551'
+student.national_insurance_number = 'NJ557961A'
 student.password = 'secret'
 student.password_confirmation = 'secret'
 student.confirmed_at = DateTime.now
@@ -24,14 +24,14 @@ app.permanent_address_2 = 'Twyford'
 app.permanent_postcode = 'LE14 2GR'
 app.permanent_city = 'Glasgow'
 app.permanent_country = 'United Kingdom'
-app.submitted_date = Date.strptime('2017-05-03')
+app.submitted_date = Date.strptime('2017-03-03')
 app.correspondence_house_number = '6'
 app.correspondence_address_1 = 'Stang Park'
 app.correspondence_address_2 = 'Dean'
 app.correspondence_postcode = 'OX7 2GR'
 app.correspondence_city = 'Glasgow'
 app.correspondence_country = 'United Kingdom'
-app.status = :completed
+app.status = :payment_failed
 app.current_stage = :submit_stage
 app.save! validate: false
 
@@ -45,27 +45,27 @@ school.postcode = 'M34 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Geography'
+qualification.subject = 'Chemistry'
 qualification.award = 'NQ'
 qualification.grade = 'B'
 qualification.start_date = Date.new(2013, 8, 23)
+qualification.end_date = Date.new(2014, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'Chemistry'
+qualification.award = 'NQ'
+qualification.grade = 'C'
+qualification.start_date = Date.new(2014, 8, 23)
 qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Art'
-qualification.award = 'HND'
-qualification.grade = 'A'
-qualification.start_date = Date.new(2014, 8, 23)
-qualification.end_date = Date.new(2014, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Physics'
+qualification.subject = 'English'
 qualification.award = 'Standard'
 qualification.grade = 'C'
 qualification.start_date = Date.new(2013, 8, 23)
-qualification.end_date = Date.new(2014, 6, 8)
+qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 school = School.new application: app
@@ -78,27 +78,27 @@ school.postcode = 'SW1E 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Computing'
+qualification.subject = 'Woodworking'
 qualification.award = 'Standard'
 qualification.grade = 'Pass'
-qualification.start_date = Date.new(2013, 8, 23)
-qualification.end_date = Date.new(2014, 6, 8)
+qualification.start_date = Date.new(2015, 8, 23)
+qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'English'
-qualification.award = 'Higher'
-qualification.grade = 'D'
-qualification.start_date = Date.new(2012, 8, 23)
+qualification.subject = 'PE'
+qualification.award = 'NQ'
+qualification.grade = 'Pass'
+qualification.start_date = Date.new(2014, 8, 23)
 qualification.end_date = Date.new(2013, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Woodworking'
-qualification.award = 'HNC'
+qualification.subject = 'Geography'
+qualification.award = 'HND'
 qualification.grade = 'A'
-qualification.start_date = Date.new(2012, 8, 23)
-qualification.end_date = Date.new(2013, 6, 8)
+qualification.start_date = Date.new(2014, 8, 23)
+qualification.end_date = Date.new(2015, 6, 8)
 qualification.save! validate: false
 
 job = Job.new application: app
@@ -150,24 +150,27 @@ ref.reference_2_relationship = 'Adaptive'
 ref.reference_2_telephone = '44-(500)939-8365'
 ref.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 122
-course.college_offer = :conditional_offer
-course.student_choice = :firm_choice
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
-course.save! validate: false
-
-course = CourseSelection.new application_id: app.id, course_id: 97
+course = CourseSelection.new application_id: app.id, course_id: 111
 course.college_offer = :definite_offer
-course.student_choice = :declined
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-app.course_selections_count = 2
+course = CourseSelection.new application_id: app.id, course_id: 143
+course.college_offer = :definite_offer
+course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
+course.save! validate: false
+
+course = CourseSelection.new application_id: app.id, course_id: 63
+course.college_offer = :rejected
+course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
+course.save! validate: false
+
+app.course_selections_count = 3
 app.save validate: false
 
-payment = app.create_payment
-payment.status = :authorized
-payment.paid_at = '2017-03-27'
+payment = app.create_application_payment
+payment.status = :failed
+payment.paid_at = '2016-09-22'
 payment.payment_type = :credit_card
 payment.last_four_digits = 1234
 payment.card_holder = 'Mary Morrison'
@@ -177,8 +180,8 @@ student = Student.new
 student.first_name = 'Brian'
 student.family_name = 'Owens'
 student.email = 'jowens1@altervista.org'
-student.scottish_candidate_number = '172376274'
-student.national_insurance_number = 'NJ967171A'
+student.scottish_candidate_number = '174418268'
+student.national_insurance_number = 'NJ955048D'
 student.password = 'secret'
 student.password_confirmation = 'secret'
 student.confirmed_at = DateTime.now
@@ -198,14 +201,14 @@ app.permanent_address_1 = 'Service Lane'
 app.permanent_postcode = 'LS6 2GR'
 app.permanent_city = 'Glasgow'
 app.permanent_country = 'United Kingdom'
-app.submitted_date = Date.strptime('2017-03-11')
+app.submitted_date = Date.strptime('2016-11-22')
 app.correspondence_house_number = 'Mcbride'
 app.correspondence_address_1 = 'Parkway Leeds'
 app.correspondence_address_2 = 'United Kingdom'
 app.correspondence_postcode = ' 2GR'
 app.correspondence_city = 'Glasgow'
 app.correspondence_country = 'SY4'
-app.status = :cancelled
+app.status = :all_decisions_made
 app.current_stage = :submit_stage
 app.save! validate: false
 
@@ -219,27 +222,27 @@ school.postcode = 'DN21 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Chemistry'
+qualification.subject = 'PE'
 qualification.award = 'HNC'
-qualification.grade = 'D'
-qualification.start_date = Date.new(2014, 8, 23)
+qualification.grade = 'B'
+qualification.start_date = Date.new(2013, 8, 23)
 qualification.end_date = Date.new(2013, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Computing'
-qualification.award = 'HND'
-qualification.grade = 'D'
-qualification.start_date = Date.new(2014, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
 qualification.subject = 'Woodworking'
-qualification.award = 'Standard'
-qualification.grade = 'C'
+qualification.award = 'HND'
+qualification.grade = 'D'
 qualification.start_date = Date.new(2012, 8, 23)
-qualification.end_date = Date.new(2013, 6, 8)
+qualification.end_date = Date.new(2014, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'Woodworking'
+qualification.award = 'HNC'
+qualification.grade = 'D'
+qualification.start_date = Date.new(2014, 8, 23)
+qualification.end_date = Date.new(2014, 6, 8)
 qualification.save! validate: false
 
 school = School.new application: app
@@ -252,27 +255,27 @@ school.postcode = 'CV35 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Art'
-qualification.award = 'Standard'
-qualification.grade = 'B'
+qualification.subject = 'Geography'
+qualification.award = 'Higher'
+qualification.grade = 'D'
 qualification.start_date = Date.new(2012, 8, 23)
+qualification.end_date = Date.new(2015, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'Computing'
+qualification.award = 'NQ'
+qualification.grade = 'C'
+qualification.start_date = Date.new(2015, 8, 23)
 qualification.end_date = Date.new(2014, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Chemistry'
+qualification.subject = 'Computing'
 qualification.award = 'HND'
-qualification.grade = 'C'
+qualification.grade = 'Pass'
 qualification.start_date = Date.new(2015, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Art'
-qualification.award = 'HNC'
-qualification.grade = 'B'
-qualification.start_date = Date.new(2013, 8, 23)
-qualification.end_date = Date.new(2013, 6, 8)
+qualification.end_date = Date.new(2014, 6, 8)
 qualification.save! validate: false
 
 job = Job.new application: app
@@ -324,31 +327,28 @@ ref.reference_2_relationship = 'Compatible'
 ref.reference_2_telephone = '44-(323)158-3111'
 ref.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 8
-course.college_offer = :conditional_offer
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
-course.save! validate: false
-
 course = CourseSelection.new application_id: app.id, course_id: 123
-course.college_offer = :rejected
+course.college_offer = :definite_offer
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-app.course_selections_count = 2
+app.course_selections_count = 1
 app.save validate: false
 
-payment = app.create_payment
-payment.status = :failed
-payment.paid_at = '2016-10-17'
-payment.payment_type = :paypal
+payment = app.create_application_payment
+payment.status = :authorized
+payment.paid_at = '2017-02-27'
+payment.payment_type = :credit_card
+payment.last_four_digits = 1234
+payment.card_holder = 'Brian Owens'
 payment.save! validate: false
 
 student = Student.new
 student.first_name = 'Antonio'
 student.family_name = 'Sims'
 student.email = 'bsims2@utexas.edu'
-student.scottish_candidate_number = '178122517'
-student.national_insurance_number = 'NJ536260B'
+student.scottish_candidate_number = '174134057'
+student.national_insurance_number = 'NJ416100B'
 student.password = 'secret'
 student.password_confirmation = 'secret'
 student.confirmed_at = DateTime.now
@@ -367,8 +367,8 @@ app.permanent_address_1 = 'Merchant Terrace'
 app.permanent_postcode = 'GL54 2GR'
 app.permanent_city = 'Glasgow'
 app.permanent_country = 'United Kingdom'
-app.submitted_date = Date.strptime('2017-05-01')
-app.status = :submitting
+app.submitted_date = Date.strptime('2017-02-16')
+app.status = :all_decisions_made
 app.current_stage = :submit_stage
 app.save! validate: false
 
@@ -382,27 +382,27 @@ school.postcode = 'RH5 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'English'
+qualification.subject = 'Biology'
 qualification.award = 'Standard'
-qualification.grade = 'C'
-qualification.start_date = Date.new(2012, 8, 23)
-qualification.end_date = Date.new(2014, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Geography'
-qualification.award = 'HND'
-qualification.grade = 'A'
-qualification.start_date = Date.new(2013, 8, 23)
-qualification.end_date = Date.new(2014, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Woodworking'
-qualification.award = 'NQ'
 qualification.grade = 'D'
-qualification.start_date = Date.new(2012, 8, 23)
+qualification.start_date = Date.new(2015, 8, 23)
+qualification.end_date = Date.new(2014, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'Chemistry'
+qualification.award = 'Standard'
+qualification.grade = 'Pass'
+qualification.start_date = Date.new(2014, 8, 23)
 qualification.end_date = Date.new(2016, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'Physics'
+qualification.award = 'Standard'
+qualification.grade = 'Pass'
+qualification.start_date = Date.new(2012, 8, 23)
+qualification.end_date = Date.new(2014, 6, 8)
 qualification.save! validate: false
 
 school = School.new application: app
@@ -415,27 +415,27 @@ school.postcode = 'BD23 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Maths'
-qualification.award = 'HND'
+qualification.subject = 'PE'
+qualification.award = 'Higher'
 qualification.grade = 'D'
-qualification.start_date = Date.new(2015, 8, 23)
+qualification.start_date = Date.new(2012, 8, 23)
 qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Technological Studies'
-qualification.award = 'HND'
-qualification.grade = 'D'
-qualification.start_date = Date.new(2014, 8, 23)
+qualification.subject = 'Chemistry'
+qualification.award = 'HNC'
+qualification.grade = 'C'
+qualification.start_date = Date.new(2013, 8, 23)
 qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Woodworking'
+qualification.subject = 'English'
 qualification.award = 'NQ'
-qualification.grade = 'Pass'
+qualification.grade = 'A'
 qualification.start_date = Date.new(2014, 8, 23)
-qualification.end_date = Date.new(2015, 6, 8)
+qualification.end_date = Date.new(2014, 6, 8)
 qualification.save! validate: false
 
 job = Job.new application: app
@@ -487,35 +487,33 @@ ref.reference_2_relationship = 'background'
 ref.reference_2_telephone = '44-(605)194-9501'
 ref.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 93
-course.college_offer = :definite_offer
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
-course.save! validate: false
-
-course = CourseSelection.new application_id: app.id, course_id: 113
-course.college_offer = :rejected
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
-course.save! validate: false
-
-course = CourseSelection.new application_id: app.id, course_id: 4
+course = CourseSelection.new application_id: app.id, course_id: 37
 course.college_offer = :conditional_offer
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 151
-course.college_offer = :rejected
+course = CourseSelection.new application_id: app.id, course_id: 57
+course.college_offer = :conditional_offer
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-app.course_selections_count = 4
+app.course_selections_count = 2
 app.save validate: false
+
+payment = app.create_application_payment
+payment.status = :authorized
+payment.paid_at = '2016-06-29'
+payment.payment_type = :credit_card
+payment.last_four_digits = 1234
+payment.card_holder = 'Antonio Sims'
+payment.save! validate: false
 
 student = Student.new
 student.first_name = 'Beverly'
 student.family_name = 'Ferguson'
 student.email = 'tferguson3@twitter.com'
-student.scottish_candidate_number = '172925774'
-student.national_insurance_number = 'NJ272069C'
+student.scottish_candidate_number = '171800234'
+student.national_insurance_number = 'NJ624604A'
 student.password = 'secret'
 student.password_confirmation = 'secret'
 student.confirmed_at = DateTime.now
@@ -534,14 +532,14 @@ app.permanent_address_1 = 'Canary Crossing'
 app.permanent_postcode = 'BD23 2GR'
 app.permanent_city = 'Glasgow'
 app.permanent_country = 'United Kingdom'
-app.submitted_date = Date.strptime('2017-04-17')
+app.submitted_date = Date.strptime('2017-02-04')
 app.correspondence_house_number = '5401'
 app.correspondence_address_1 = 'Johnson Terrace'
 app.correspondence_address_2 = 'Norton'
 app.correspondence_postcode = 'NN11 2GR'
 app.correspondence_city = 'Glasgow'
 app.correspondence_country = 'United Kingdom'
-app.status = :cancelled
+app.status = :awaiting_payment
 app.current_stage = :submit_stage
 app.save! validate: false
 
@@ -555,7 +553,7 @@ school.postcode = 'M14 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Woodworking'
+qualification.subject = 'Chemistry'
 qualification.award = 'Standard'
 qualification.grade = 'C'
 qualification.start_date = Date.new(2012, 8, 23)
@@ -563,17 +561,17 @@ qualification.end_date = Date.new(2014, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Geography'
-qualification.award = 'Higher'
-qualification.grade = 'Pass'
+qualification.subject = 'Biology'
+qualification.award = 'NQ'
+qualification.grade = 'D'
 qualification.start_date = Date.new(2015, 8, 23)
-qualification.end_date = Date.new(2013, 6, 8)
+qualification.end_date = Date.new(2015, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Woodworking'
-qualification.award = 'Higher'
-qualification.grade = 'B'
+qualification.subject = 'PE'
+qualification.award = 'Standard'
+qualification.grade = 'A'
 qualification.start_date = Date.new(2015, 8, 23)
 qualification.end_date = Date.new(2014, 6, 8)
 qualification.save! validate: false
@@ -588,27 +586,27 @@ school.postcode = 'WC1B 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Maths'
-qualification.award = 'HNC'
-qualification.grade = 'A'
-qualification.start_date = Date.new(2013, 8, 23)
+qualification.subject = 'Biology'
+qualification.award = 'NQ'
+qualification.grade = 'C'
+qualification.start_date = Date.new(2014, 8, 23)
 qualification.end_date = Date.new(2013, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Geography'
+qualification.subject = 'Chemistry'
 qualification.award = 'Standard'
 qualification.grade = 'Pass'
-qualification.start_date = Date.new(2015, 8, 23)
-qualification.end_date = Date.new(2013, 6, 8)
+qualification.start_date = Date.new(2013, 8, 23)
+qualification.end_date = Date.new(2015, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
 qualification.subject = 'Technological Studies'
-qualification.award = 'Standard'
-qualification.grade = 'B'
-qualification.start_date = Date.new(2013, 8, 23)
-qualification.end_date = Date.new(2013, 6, 8)
+qualification.award = 'Higher'
+qualification.grade = 'Pass'
+qualification.start_date = Date.new(2015, 8, 23)
+qualification.end_date = Date.new(2015, 6, 8)
 qualification.save! validate: false
 
 job = Job.new application: app
@@ -660,38 +658,27 @@ ref.reference_2_relationship = 'User-friendly'
 ref.reference_2_telephone = '44-(178)717-3351'
 ref.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 23
+course = CourseSelection.new application_id: app.id, course_id: 91
 course.college_offer = :conditional_offer
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 139
-course.college_offer = :rejected
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
-course.save! validate: false
-
-course = CourseSelection.new application_id: app.id, course_id: 136
+course = CourseSelection.new application_id: app.id, course_id: 112
 course.college_offer = :definite_offer
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-app.course_selections_count = 3
+app.course_selections_count = 2
 app.save validate: false
 
-payment = app.create_payment
-payment.status = :failed
-payment.paid_at = '2016-10-10'
-payment.payment_type = :credit_card
-payment.last_four_digits = 1234
-payment.card_holder = 'Beverly Ferguson'
-payment.save! validate: false
+app.create_application_payment.save!
 
 student = Student.new
 student.first_name = 'Marilyn'
 student.family_name = 'Sullivan'
 student.email = 'wsullivan4@yellowbook.com'
-student.scottish_candidate_number = '173642954'
-student.national_insurance_number = 'NJ864458B'
+student.scottish_candidate_number = '175923241'
+student.national_insurance_number = 'NJ923878D'
 student.password = 'secret'
 student.password_confirmation = 'secret'
 student.confirmed_at = DateTime.now
@@ -712,14 +699,14 @@ app.permanent_address_1 = 'Marcy Place'
 app.permanent_postcode = 'TF6 2GR'
 app.permanent_city = 'Glasgow'
 app.permanent_country = 'United Kingdom'
-app.submitted_date = Date.strptime('2017-05-07')
+app.submitted_date = Date.strptime('2017-04-02')
 app.correspondence_house_number = '28'
 app.correspondence_address_1 = 'Chive Terrace'
 app.correspondence_address_2 = 'Pentre'
 app.correspondence_postcode = 'SY4 2GR'
 app.correspondence_city = 'Glasgow'
 app.correspondence_country = 'United Kingdom'
-app.status = :submitting
+app.status = :cancelled
 app.current_stage = :submit_stage
 app.save! validate: false
 
@@ -733,27 +720,27 @@ school.postcode = 'EC1V 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Art'
+qualification.subject = 'Chemistry'
 qualification.award = 'NQ'
-qualification.grade = 'D'
+qualification.grade = 'A'
+qualification.start_date = Date.new(2015, 8, 23)
+qualification.end_date = Date.new(2014, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'Technological Studies'
+qualification.award = 'HND'
+qualification.grade = 'C'
 qualification.start_date = Date.new(2013, 8, 23)
 qualification.end_date = Date.new(2013, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Woodworking'
-qualification.award = 'Higher'
-qualification.grade = 'Pass'
+qualification.subject = 'Technological Studies'
+qualification.award = 'Standard'
+qualification.grade = 'D'
 qualification.start_date = Date.new(2015, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Biology'
-qualification.award = 'Higher'
-qualification.grade = 'C'
-qualification.start_date = Date.new(2012, 8, 23)
-qualification.end_date = Date.new(2013, 6, 8)
+qualification.end_date = Date.new(2015, 6, 8)
 qualification.save! validate: false
 
 school = School.new application: app
@@ -766,27 +753,27 @@ school.postcode = 'TF6 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Maths'
-qualification.award = 'HND'
-qualification.grade = 'D'
-qualification.start_date = Date.new(2014, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
+qualification.subject = 'Technological Studies'
+qualification.award = 'HNC'
+qualification.grade = 'C'
+qualification.start_date = Date.new(2013, 8, 23)
+qualification.end_date = Date.new(2013, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'English'
-qualification.award = 'Standard'
-qualification.grade = 'B'
-qualification.start_date = Date.new(2015, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Maths'
+qualification.subject = 'Geography'
 qualification.award = 'HNC'
 qualification.grade = 'B'
-qualification.start_date = Date.new(2014, 8, 23)
-qualification.end_date = Date.new(2013, 6, 8)
+qualification.start_date = Date.new(2015, 8, 23)
+qualification.end_date = Date.new(2014, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'Computing'
+qualification.award = 'Higher'
+qualification.grade = 'A'
+qualification.start_date = Date.new(2013, 8, 23)
+qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 job = Job.new application: app
@@ -838,35 +825,33 @@ ref.reference_2_relationship = 'knowledge user'
 ref.reference_2_telephone = '44-(235)596-1647'
 ref.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 2
+course = CourseSelection.new application_id: app.id, course_id: 4
 course.college_offer = :definite_offer
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 115
+course = CourseSelection.new application_id: app.id, course_id: 3
 course.college_offer = :definite_offer
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 11
-course.college_offer = :conditional_offer
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
-course.save! validate: false
-
-course = CourseSelection.new application_id: app.id, course_id: 157
-course.college_offer = :definite_offer
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
-course.save! validate: false
-
-app.course_selections_count = 4
+app.course_selections_count = 2
 app.save validate: false
+
+payment = app.create_application_payment
+payment.status = :failed
+payment.paid_at = '2016-06-27'
+payment.payment_type = :credit_card
+payment.last_four_digits = 1234
+payment.card_holder = 'Marilyn Sullivan'
+payment.save! validate: false
 
 student = Student.new
 student.first_name = 'Judith'
 student.family_name = 'Matthews'
 student.email = 'mmatthews5@china.com.cn'
-student.scottish_candidate_number = '173739060'
-student.national_insurance_number = 'NJ970298D'
+student.scottish_candidate_number = '175773460'
+student.national_insurance_number = 'NJ948659D'
 student.password = 'secret'
 student.password_confirmation = 'secret'
 student.confirmed_at = DateTime.now
@@ -886,8 +871,8 @@ app.permanent_address_1 = 'Tennessee Point'
 app.permanent_postcode = 'BS37 2GR'
 app.permanent_city = 'Glasgow'
 app.permanent_country = 'United Kingdom'
-app.submitted_date = Date.strptime('2017-05-01')
-app.status = :all_decisions_made
+app.submitted_date = Date.strptime('2017-02-12')
+app.status = :completed
 app.current_stage = :submit_stage
 app.save! validate: false
 
@@ -901,27 +886,27 @@ school.postcode = 'LS6 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Maths'
-qualification.award = 'Higher'
-qualification.grade = 'C'
-qualification.start_date = Date.new(2015, 8, 23)
-qualification.end_date = Date.new(2015, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Chemistry'
+qualification.subject = 'Technological Studies'
 qualification.award = 'Standard'
-qualification.grade = 'B'
+qualification.grade = 'C'
 qualification.start_date = Date.new(2013, 8, 23)
 qualification.end_date = Date.new(2013, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Computing'
-qualification.award = 'NQ'
+qualification.subject = 'Art'
+qualification.award = 'HNC'
+qualification.grade = 'A'
+qualification.start_date = Date.new(2012, 8, 23)
+qualification.end_date = Date.new(2015, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'Maths'
+qualification.award = 'Standard'
 qualification.grade = 'B'
 qualification.start_date = Date.new(2013, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
+qualification.end_date = Date.new(2013, 6, 8)
 qualification.save! validate: false
 
 school = School.new application: app
@@ -934,27 +919,27 @@ school.postcode = 'SG4 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Technological Studies'
+qualification.subject = 'Chemistry'
 qualification.award = 'Higher'
+qualification.grade = 'D'
+qualification.start_date = Date.new(2014, 8, 23)
+qualification.end_date = Date.new(2016, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'Woodworking'
+qualification.award = 'NQ'
 qualification.grade = 'C'
 qualification.start_date = Date.new(2014, 8, 23)
-qualification.end_date = Date.new(2014, 6, 8)
+qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'English'
-qualification.award = 'HND'
-qualification.grade = 'A'
-qualification.start_date = Date.new(2013, 8, 23)
-qualification.end_date = Date.new(2015, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Geography'
-qualification.award = 'HND'
-qualification.grade = 'D'
-qualification.start_date = Date.new(2015, 8, 23)
-qualification.end_date = Date.new(2015, 6, 8)
+qualification.subject = 'Biology'
+qualification.award = 'Standard'
+qualification.grade = 'Pass'
+qualification.start_date = Date.new(2014, 8, 23)
+qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 job = Job.new application: app
@@ -1006,31 +991,41 @@ ref.reference_2_relationship = 'Enterprise-wide'
 ref.reference_2_telephone = '44-(855)623-4558'
 ref.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 41
-course.college_offer = :conditional_offer
+course = CourseSelection.new application_id: app.id, course_id: 114
+course.college_offer = :definite_offer
+course.student_choice = :firm_choice
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 100
-course.college_offer = :conditional_offer
+course = CourseSelection.new application_id: app.id, course_id: 28
+course.college_offer = :definite_offer
+course.student_choice = :declined
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-app.course_selections_count = 2
+course = CourseSelection.new application_id: app.id, course_id: 101
+course.college_offer = :conditional_offer
+course.student_choice = :declined
+course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
+course.save! validate: false
+
+app.course_selections_count = 3
 app.save validate: false
 
-payment = app.create_payment
+payment = app.create_application_payment
 payment.status = :authorized
-payment.paid_at = '2017-04-12'
-payment.payment_type = :paypal
+payment.paid_at = '2016-11-10'
+payment.payment_type = :credit_card
+payment.last_four_digits = 1234
+payment.card_holder = 'Judith Matthews'
 payment.save! validate: false
 
 student = Student.new
 student.first_name = 'Chris'
 student.family_name = 'Duncan'
 student.email = 'rduncan6@blogger.com'
-student.scottish_candidate_number = '170919564'
-student.national_insurance_number = 'NJ522078A'
+student.scottish_candidate_number = '171154618'
+student.national_insurance_number = 'NJ437384B'
 student.password = 'secret'
 student.password_confirmation = 'secret'
 student.confirmed_at = DateTime.now
@@ -1050,8 +1045,8 @@ app.permanent_address_2 = 'Craigavon'
 app.permanent_postcode = 'BT66 2GR'
 app.permanent_city = 'Glasgow'
 app.permanent_country = 'United Kingdom'
-app.submitted_date = Date.strptime('2017-01-07')
-app.status = :completed
+app.submitted_date = Date.strptime('2017-03-14')
+app.status = :awaiting_decisions
 app.current_stage = :submit_stage
 app.save! validate: false
 
@@ -1065,27 +1060,27 @@ school.postcode = 'CT16 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'English'
-qualification.award = 'NQ'
-qualification.grade = 'D'
-qualification.start_date = Date.new(2012, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Computing'
-qualification.award = 'HNC'
+qualification.subject = 'Geography'
+qualification.award = 'Standard'
 qualification.grade = 'C'
-qualification.start_date = Date.new(2015, 8, 23)
-qualification.end_date = Date.new(2015, 6, 8)
+qualification.start_date = Date.new(2013, 8, 23)
+qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
 qualification.subject = 'Technological Studies'
-qualification.award = 'NQ'
-qualification.grade = 'Pass'
-qualification.start_date = Date.new(2015, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
+qualification.award = 'HNC'
+qualification.grade = 'D'
+qualification.start_date = Date.new(2013, 8, 23)
+qualification.end_date = Date.new(2015, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'Computing'
+qualification.award = 'Standard'
+qualification.grade = 'B'
+qualification.start_date = Date.new(2013, 8, 23)
+qualification.end_date = Date.new(2014, 6, 8)
 qualification.save! validate: false
 
 school = School.new application: app
@@ -1098,24 +1093,24 @@ school.postcode = 'CV35 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Technological Studies'
+qualification.subject = 'PE'
 qualification.award = 'Higher'
-qualification.grade = 'Pass'
-qualification.start_date = Date.new(2015, 8, 23)
-qualification.end_date = Date.new(2014, 6, 8)
+qualification.grade = 'C'
+qualification.start_date = Date.new(2013, 8, 23)
+qualification.end_date = Date.new(2015, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Maths'
-qualification.award = 'NQ'
-qualification.grade = 'A'
+qualification.subject = 'English'
+qualification.award = 'Higher'
+qualification.grade = 'D'
 qualification.start_date = Date.new(2012, 8, 23)
-qualification.end_date = Date.new(2014, 6, 8)
+qualification.end_date = Date.new(2013, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Art'
-qualification.award = 'HND'
+qualification.subject = 'Woodworking'
+qualification.award = 'Standard'
 qualification.grade = 'C'
 qualification.start_date = Date.new(2013, 8, 23)
 qualification.end_date = Date.new(2016, 6, 8)
@@ -1170,53 +1165,25 @@ ref.reference_2_relationship = 'composite'
 ref.reference_2_telephone = '44-(572)482-6969'
 ref.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 85
-course.college_offer = :conditional_offer
-course.student_choice = :firm_choice
+course = CourseSelection.new application_id: app.id, course_id: 143
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 132
-course.college_offer = :definite_offer
-course.student_choice = :insurance_choice
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
-course.save! validate: false
-
-course = CourseSelection.new application_id: app.id, course_id: 93
-course.college_offer = :definite_offer
-course.student_choice = :declined
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
-course.save! validate: false
-
-course = CourseSelection.new application_id: app.id, course_id: 58
-course.college_offer = :conditional_offer
-course.student_choice = :declined
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
-course.save! validate: false
-
-course = CourseSelection.new application_id: app.id, course_id: 78
-course.college_offer = :definite_offer
-course.student_choice = :declined
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
-course.save! validate: false
-
-app.course_selections_count = 5
+app.course_selections_count = 1
 app.save validate: false
 
-payment = app.create_payment
+payment = app.create_application_payment
 payment.status = :authorized
-payment.paid_at = '2017-02-10'
-payment.payment_type = :credit_card
-payment.last_four_digits = 1234
-payment.card_holder = 'Chris Duncan'
+payment.paid_at = '2016-09-09'
+payment.payment_type = :paypal
 payment.save! validate: false
 
 student = Student.new
 student.first_name = 'Patrick'
 student.family_name = 'Carr'
 student.email = 'rcarr7@soup.io'
-student.scottish_candidate_number = '171851599'
-student.national_insurance_number = 'NJ885448C'
+student.scottish_candidate_number = '171277884'
+student.national_insurance_number = 'NJ227254A'
 student.password = 'secret'
 student.password_confirmation = 'secret'
 student.confirmed_at = DateTime.now
@@ -1237,7 +1204,7 @@ app.permanent_address_2 = 'Ford'
 app.permanent_postcode = 'GL54 2GR'
 app.permanent_city = 'Glasgow'
 app.permanent_country = 'United Kingdom'
-app.submitted_date = Date.strptime('2016-11-09')
+app.submitted_date = Date.strptime('2016-12-08')
 app.status = :awaiting_payment
 app.current_stage = :submit_stage
 app.save! validate: false
@@ -1252,25 +1219,25 @@ school.postcode = 'BT2 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Chemistry'
-qualification.award = 'Higher'
+qualification.subject = 'Biology'
+qualification.award = 'Standard'
+qualification.grade = 'A'
+qualification.start_date = Date.new(2014, 8, 23)
+qualification.end_date = Date.new(2013, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'Geography'
+qualification.award = 'Standard'
 qualification.grade = 'A'
 qualification.start_date = Date.new(2013, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
+qualification.end_date = Date.new(2013, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Woodworking'
+qualification.subject = 'English'
 qualification.award = 'NQ'
 qualification.grade = 'Pass'
-qualification.start_date = Date.new(2015, 8, 23)
-qualification.end_date = Date.new(2014, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Technological Studies'
-qualification.award = 'HNC'
-qualification.grade = 'A'
 qualification.start_date = Date.new(2013, 8, 23)
 qualification.end_date = Date.new(2013, 6, 8)
 qualification.save! validate: false
@@ -1285,26 +1252,26 @@ school.postcode = 'SN1 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'PE'
-qualification.award = 'Standard'
+qualification.subject = 'Woodworking'
+qualification.award = 'NQ'
 qualification.grade = 'D'
-qualification.start_date = Date.new(2012, 8, 23)
-qualification.end_date = Date.new(2013, 6, 8)
+qualification.start_date = Date.new(2013, 8, 23)
+qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
 qualification.subject = 'English'
 qualification.award = 'Higher'
-qualification.grade = 'A'
+qualification.grade = 'D'
 qualification.start_date = Date.new(2015, 8, 23)
-qualification.end_date = Date.new(2015, 6, 8)
+qualification.end_date = Date.new(2013, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Computing'
-qualification.award = 'Standard'
-qualification.grade = 'C'
-qualification.start_date = Date.new(2014, 8, 23)
+qualification.subject = 'Geography'
+qualification.award = 'HNC'
+qualification.grade = 'D'
+qualification.start_date = Date.new(2012, 8, 23)
 qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
@@ -1357,32 +1324,22 @@ ref.reference_2_relationship = 'Graphical User Interface'
 ref.reference_2_telephone = '44-(404)908-1556'
 ref.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 53
+course = CourseSelection.new application_id: app.id, course_id: 73
 course.college_offer = :rejected
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 3
-course.college_offer = :rejected
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
-course.save! validate: false
-
-course = CourseSelection.new application_id: app.id, course_id: 36
-course.college_offer = :rejected
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
-course.save! validate: false
-
-app.course_selections_count = 3
+app.course_selections_count = 1
 app.save validate: false
 
-app.create_payment.save!
+app.create_application_payment.save!
 
 student = Student.new
 student.first_name = 'Diane'
 student.family_name = 'Myers'
 student.email = 'amyers8@zdnet.com'
-student.scottish_candidate_number = '171593670'
-student.national_insurance_number = 'NJ832910A'
+student.scottish_candidate_number = '171032539'
+student.national_insurance_number = 'NJ317996B'
 student.password = 'secret'
 student.password_confirmation = 'secret'
 student.confirmed_at = DateTime.now
@@ -1402,14 +1359,14 @@ app.permanent_address_1 = 'Eastlawn Street'
 app.permanent_postcode = 'N3 2GR'
 app.permanent_city = 'Glasgow'
 app.permanent_country = 'United Kingdom'
-app.submitted_date = Date.strptime('2017-01-21')
+app.submitted_date = Date.strptime('2016-12-09')
 app.correspondence_house_number = '649'
 app.correspondence_address_1 = 'Summit Parkway'
 app.correspondence_address_2 = 'Norton'
 app.correspondence_postcode = 'S8 2GR'
 app.correspondence_city = 'Glasgow'
 app.correspondence_country = 'United Kingdom'
-app.status = :awaiting_decisions
+app.status = :payment_failed
 app.current_stage = :submit_stage
 app.save! validate: false
 
@@ -1423,16 +1380,16 @@ school.postcode = 'LS6 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Biology'
-qualification.award = 'NQ'
-qualification.grade = 'Pass'
-qualification.start_date = Date.new(2015, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
+qualification.subject = 'Technological Studies'
+qualification.award = 'Standard'
+qualification.grade = 'B'
+qualification.start_date = Date.new(2013, 8, 23)
+qualification.end_date = Date.new(2015, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Chemistry'
-qualification.award = 'Higher'
+qualification.subject = 'Physics'
+qualification.award = 'HNC'
 qualification.grade = 'D'
 qualification.start_date = Date.new(2015, 8, 23)
 qualification.end_date = Date.new(2016, 6, 8)
@@ -1440,10 +1397,10 @@ qualification.save! validate: false
 
 qualification = Qualification.new school: school
 qualification.subject = 'PE'
-qualification.award = 'HNC'
-qualification.grade = 'D'
-qualification.start_date = Date.new(2014, 8, 23)
-qualification.end_date = Date.new(2013, 6, 8)
+qualification.award = 'NQ'
+qualification.grade = 'Pass'
+qualification.start_date = Date.new(2013, 8, 23)
+qualification.end_date = Date.new(2014, 6, 8)
 qualification.save! validate: false
 
 school = School.new application: app
@@ -1456,27 +1413,27 @@ school.postcode = 'CT16 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Physics'
-qualification.award = 'Higher'
-qualification.grade = 'D'
-qualification.start_date = Date.new(2012, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
+qualification.subject = 'Technological Studies'
+qualification.award = 'Standard'
+qualification.grade = 'A'
+qualification.start_date = Date.new(2015, 8, 23)
+qualification.end_date = Date.new(2013, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
 qualification.subject = 'Geography'
-qualification.award = 'Higher'
-qualification.grade = 'B'
+qualification.award = 'NQ'
+qualification.grade = 'Pass'
 qualification.start_date = Date.new(2015, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
+qualification.end_date = Date.new(2014, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'English'
-qualification.award = 'Standard'
-qualification.grade = 'D'
+qualification.subject = 'Maths'
+qualification.award = 'HND'
+qualification.grade = 'C'
 qualification.start_date = Date.new(2012, 8, 23)
-qualification.end_date = Date.new(2013, 6, 8)
+qualification.end_date = Date.new(2015, 6, 8)
 qualification.save! validate: false
 
 job = Job.new application: app
@@ -1528,24 +1485,22 @@ ref.reference_2_relationship = 'Mandatory'
 ref.reference_2_telephone = '44-(860)595-0211'
 ref.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 123
+course = CourseSelection.new application_id: app.id, course_id: 40
+course.college_offer = :conditional_offer
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 65
+course = CourseSelection.new application_id: app.id, course_id: 94
+course.college_offer = :conditional_offer
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 91
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
-course.save! validate: false
-
-app.course_selections_count = 3
+app.course_selections_count = 2
 app.save validate: false
 
-payment = app.create_payment
-payment.status = :authorized
-payment.paid_at = '2016-07-27'
+payment = app.create_application_payment
+payment.status = :failed
+payment.paid_at = '2017-01-22'
 payment.payment_type = :paypal
 payment.save! validate: false
 
@@ -1553,8 +1508,8 @@ student = Student.new
 student.first_name = 'Sharon'
 student.family_name = 'Murphy'
 student.email = 'dmurphy9@hibu.com'
-student.scottish_candidate_number = '177110965'
-student.national_insurance_number = 'NJ604657A'
+student.scottish_candidate_number = '179859955'
+student.national_insurance_number = 'NJ770816B'
 student.password = 'secret'
 student.password_confirmation = 'secret'
 student.confirmed_at = DateTime.now
@@ -1575,8 +1530,8 @@ app.permanent_address_2 = 'Denton'
 app.permanent_postcode = 'M34 2GR'
 app.permanent_city = 'Glasgow'
 app.permanent_country = 'United Kingdom'
-app.submitted_date = Date.strptime('2017-02-22')
-app.status = :cancelled
+app.submitted_date = Date.strptime('2016-12-01')
+app.status = :all_rejected
 app.current_stage = :submit_stage
 app.save! validate: false
 
@@ -1590,27 +1545,27 @@ school.postcode = 'EC3M 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Computing'
+qualification.subject = 'Technological Studies'
 qualification.award = 'NQ'
 qualification.grade = 'A'
-qualification.start_date = Date.new(2012, 8, 23)
-qualification.end_date = Date.new(2014, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Physics'
-qualification.award = 'NQ'
-qualification.grade = 'D'
 qualification.start_date = Date.new(2015, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
+qualification.end_date = Date.new(2013, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'PE'
+qualification.award = 'HND'
+qualification.grade = 'B'
+qualification.start_date = Date.new(2012, 8, 23)
+qualification.end_date = Date.new(2015, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
 qualification.subject = 'Physics'
-qualification.award = 'NQ'
-qualification.grade = 'B'
-qualification.start_date = Date.new(2013, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
+qualification.award = 'Higher'
+qualification.grade = 'Pass'
+qualification.start_date = Date.new(2015, 8, 23)
+qualification.end_date = Date.new(2015, 6, 8)
 qualification.save! validate: false
 
 school = School.new application: app
@@ -1623,25 +1578,25 @@ school.postcode = 'NG34 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Art'
-qualification.award = 'NQ'
-qualification.grade = 'B'
+qualification.subject = 'Woodworking'
+qualification.award = 'Higher'
+qualification.grade = 'D'
+qualification.start_date = Date.new(2013, 8, 23)
+qualification.end_date = Date.new(2014, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'Computing'
+qualification.award = 'HND'
+qualification.grade = 'Pass'
 qualification.start_date = Date.new(2013, 8, 23)
 qualification.end_date = Date.new(2013, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Woodworking'
-qualification.award = 'HND'
-qualification.grade = 'D'
-qualification.start_date = Date.new(2015, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Computing'
+qualification.subject = 'Chemistry'
 qualification.award = 'Standard'
-qualification.grade = 'A'
+qualification.grade = 'C'
 qualification.start_date = Date.new(2013, 8, 23)
 qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
@@ -1695,27 +1650,32 @@ ref.reference_2_relationship = 'Configurable'
 ref.reference_2_telephone = '44-(114)854-5865'
 ref.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 129
-course.college_offer = :conditional_offer
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
-course.save! validate: false
-
-course = CourseSelection.new application_id: app.id, course_id: 121
+course = CourseSelection.new application_id: app.id, course_id: 128
 course.college_offer = :rejected
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 17
+course = CourseSelection.new application_id: app.id, course_id: 31
 course.college_offer = :rejected
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-app.course_selections_count = 3
+course = CourseSelection.new application_id: app.id, course_id: 14
+course.college_offer = :rejected
+course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
+course.save! validate: false
+
+course = CourseSelection.new application_id: app.id, course_id: 54
+course.college_offer = :rejected
+course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
+course.save! validate: false
+
+app.course_selections_count = 4
 app.save validate: false
 
-payment = app.create_payment
-payment.status = :failed
-payment.paid_at = '2017-03-06'
+payment = app.create_application_payment
+payment.status = :authorized
+payment.paid_at = '2017-03-16'
 payment.payment_type = :credit_card
 payment.last_four_digits = 1234
 payment.card_holder = 'Sharon Murphy'
@@ -1725,8 +1685,8 @@ student = Student.new
 student.first_name = 'Terry'
 student.family_name = 'Johnson'
 student.email = 'sjohnsona@java.com'
-student.scottish_candidate_number = '170717716'
-student.national_insurance_number = 'NJ456037A'
+student.scottish_candidate_number = '173911289'
+student.national_insurance_number = 'NJ830360C'
 student.password = 'secret'
 student.password_confirmation = 'secret'
 student.confirmed_at = DateTime.now
@@ -1746,14 +1706,14 @@ app.permanent_address_1 = 'Jackson Court'
 app.permanent_postcode = 'SN13 2GR'
 app.permanent_city = 'Glasgow'
 app.permanent_country = 'United Kingdom'
-app.submitted_date = Date.strptime('2016-12-26')
+app.submitted_date = Date.strptime('2016-11-06')
 app.correspondence_house_number = '6207'
 app.correspondence_address_1 = 'Oak Way'
 app.correspondence_address_2 = 'Birmingham'
 app.correspondence_postcode = 'B40 2GR'
 app.correspondence_city = 'Glasgow'
 app.correspondence_country = 'United Kingdom'
-app.status = :cancelled
+app.status = :completed
 app.current_stage = :submit_stage
 app.save! validate: false
 
@@ -1767,27 +1727,27 @@ school.postcode = 'S1 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'English'
-qualification.award = 'Standard'
-qualification.grade = 'D'
-qualification.start_date = Date.new(2015, 8, 23)
-qualification.end_date = Date.new(2014, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Art'
-qualification.award = 'HND'
+qualification.subject = 'Geography'
+qualification.award = 'Higher'
 qualification.grade = 'Pass'
-qualification.start_date = Date.new(2014, 8, 23)
-qualification.end_date = Date.new(2014, 6, 8)
+qualification.start_date = Date.new(2012, 8, 23)
+qualification.end_date = Date.new(2015, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
 qualification.subject = 'Chemistry'
-qualification.award = 'NQ'
-qualification.grade = 'A'
-qualification.start_date = Date.new(2013, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
+qualification.award = 'HNC'
+qualification.grade = 'Pass'
+qualification.start_date = Date.new(2015, 8, 23)
+qualification.end_date = Date.new(2013, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'Art'
+qualification.award = 'Higher'
+qualification.grade = 'D'
+qualification.start_date = Date.new(2015, 8, 23)
+qualification.end_date = Date.new(2014, 6, 8)
 qualification.save! validate: false
 
 school = School.new application: app
@@ -1800,27 +1760,27 @@ school.postcode = 'SW19 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Technological Studies'
-qualification.award = 'Standard'
-qualification.grade = 'C'
-qualification.start_date = Date.new(2015, 8, 23)
+qualification.subject = 'English'
+qualification.award = 'HND'
+qualification.grade = 'B'
+qualification.start_date = Date.new(2014, 8, 23)
 qualification.end_date = Date.new(2015, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Computing'
+qualification.subject = 'Woodworking'
 qualification.award = 'Higher'
 qualification.grade = 'A'
-qualification.start_date = Date.new(2013, 8, 23)
-qualification.end_date = Date.new(2013, 6, 8)
+qualification.start_date = Date.new(2012, 8, 23)
+qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Computing'
-qualification.award = 'Higher'
-qualification.grade = 'Pass'
-qualification.start_date = Date.new(2015, 8, 23)
-qualification.end_date = Date.new(2015, 6, 8)
+qualification.subject = 'Chemistry'
+qualification.award = 'HND'
+qualification.grade = 'A'
+qualification.start_date = Date.new(2014, 8, 23)
+qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 job = Job.new application: app
@@ -1872,41 +1832,41 @@ ref.reference_2_relationship = 'service-desk'
 ref.reference_2_telephone = '44-(170)511-1742'
 ref.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 140
+course = CourseSelection.new application_id: app.id, course_id: 60
+course.college_offer = :conditional_offer
+course.student_choice = :insurance_choice
+course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
+course.save! validate: false
+
+course = CourseSelection.new application_id: app.id, course_id: 145
 course.college_offer = :definite_offer
+course.student_choice = :firm_choice
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 39
+course = CourseSelection.new application_id: app.id, course_id: 54
 course.college_offer = :conditional_offer
+course.student_choice = :declined
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 103
-course.college_offer = :conditional_offer
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
-course.save! validate: false
-
-course = CourseSelection.new application_id: app.id, course_id: 91
-course.college_offer = :conditional_offer
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
-course.save! validate: false
-
-app.course_selections_count = 4
+app.course_selections_count = 3
 app.save validate: false
 
-payment = app.create_payment
-payment.status = :failed
-payment.paid_at = '2016-09-03'
-payment.payment_type = :paypal
+payment = app.create_application_payment
+payment.status = :authorized
+payment.paid_at = '2016-12-23'
+payment.payment_type = :credit_card
+payment.last_four_digits = 1234
+payment.card_holder = 'Terry Johnson'
 payment.save! validate: false
 
 student = Student.new
 student.first_name = 'Bruce'
 student.family_name = 'Hill'
 student.email = 'bhillb@quantcast.com'
-student.scottish_candidate_number = '172478077'
-student.national_insurance_number = 'NJ901790A'
+student.scottish_candidate_number = '172584829'
+student.national_insurance_number = 'NJ837505B'
 student.password = 'secret'
 student.password_confirmation = 'secret'
 student.confirmed_at = DateTime.now
@@ -1926,8 +1886,8 @@ app.permanent_address_1 = 'Autumn Leaf Avenue'
 app.permanent_postcode = 'NN11 2GR'
 app.permanent_city = 'Glasgow'
 app.permanent_country = 'United Kingdom'
-app.submitted_date = Date.strptime('2017-01-05')
-app.status = :all_decisions_made
+app.submitted_date = Date.strptime('2016-11-19')
+app.status = :cancelled
 app.current_stage = :submit_stage
 app.save! validate: false
 
@@ -1941,26 +1901,26 @@ school.postcode = 'RH5 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Physics'
-qualification.award = 'Standard'
-qualification.grade = 'A'
-qualification.start_date = Date.new(2013, 8, 23)
+qualification.subject = 'Technological Studies'
+qualification.award = 'HND'
+qualification.grade = 'C'
+qualification.start_date = Date.new(2012, 8, 23)
 qualification.end_date = Date.new(2013, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Art'
-qualification.award = 'HNC'
-qualification.grade = 'B'
+qualification.subject = 'English'
+qualification.award = 'Standard'
+qualification.grade = 'A'
 qualification.start_date = Date.new(2013, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
+qualification.end_date = Date.new(2014, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'English'
-qualification.award = 'Higher'
-qualification.grade = 'C'
-qualification.start_date = Date.new(2014, 8, 23)
+qualification.subject = 'Art'
+qualification.award = 'HND'
+qualification.grade = 'D'
+qualification.start_date = Date.new(2012, 8, 23)
 qualification.end_date = Date.new(2015, 6, 8)
 qualification.save! validate: false
 
@@ -1975,26 +1935,26 @@ school.save! validate: false
 
 qualification = Qualification.new school: school
 qualification.subject = 'PE'
-qualification.award = 'Standard'
-qualification.grade = 'C'
-qualification.start_date = Date.new(2012, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Geography'
 qualification.award = 'NQ'
 qualification.grade = 'B'
-qualification.start_date = Date.new(2013, 8, 23)
+qualification.start_date = Date.new(2014, 8, 23)
+qualification.end_date = Date.new(2013, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'PE'
+qualification.award = 'Higher'
+qualification.grade = 'C'
+qualification.start_date = Date.new(2015, 8, 23)
 qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Biology'
-qualification.award = 'HND'
-qualification.grade = 'A'
-qualification.start_date = Date.new(2013, 8, 23)
-qualification.end_date = Date.new(2015, 6, 8)
+qualification.subject = 'PE'
+qualification.award = 'HNC'
+qualification.grade = 'B'
+qualification.start_date = Date.new(2015, 8, 23)
+qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 job = Job.new application: app
@@ -2046,38 +2006,36 @@ ref.reference_2_relationship = 'Devolved'
 ref.reference_2_telephone = '44-(120)704-2170'
 ref.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 101
-course.college_offer = :definite_offer
+course = CourseSelection.new application_id: app.id, course_id: 5
+course.college_offer = :rejected
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 56
-course.college_offer = :definite_offer
+course = CourseSelection.new application_id: app.id, course_id: 84
+course.college_offer = :rejected
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 95
-course.college_offer = :conditional_offer
+course = CourseSelection.new application_id: app.id, course_id: 72
+course.college_offer = :rejected
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
 app.course_selections_count = 3
 app.save validate: false
 
-payment = app.create_payment
-payment.status = :authorized
-payment.paid_at = '2017-04-02'
-payment.payment_type = :credit_card
-payment.last_four_digits = 1234
-payment.card_holder = 'Bruce Hill'
+payment = app.create_application_payment
+payment.status = :failed
+payment.paid_at = '2017-03-03'
+payment.payment_type = :paypal
 payment.save! validate: false
 
 student = Student.new
 student.first_name = 'Douglas'
 student.family_name = 'Phillips'
 student.email = 'gphillipsc@biblegateway.com'
-student.scottish_candidate_number = '177986380'
-student.national_insurance_number = 'NJ319778A'
+student.scottish_candidate_number = '174177953'
+student.national_insurance_number = 'NJ305333C'
 student.password = 'secret'
 student.password_confirmation = 'secret'
 student.confirmed_at = DateTime.now
@@ -2097,8 +2055,8 @@ app.permanent_address_1 = 'Canary Road'
 app.permanent_postcode = 'CT15 2GR'
 app.permanent_city = 'Glasgow'
 app.permanent_country = 'United Kingdom'
-app.submitted_date = Date.strptime('2017-01-14')
-app.status = :payment_failed
+app.submitted_date = Date.strptime('2016-11-26')
+app.status = :completed
 app.current_stage = :submit_stage
 app.save! validate: false
 
@@ -2112,27 +2070,27 @@ school.postcode = 'LE15 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'English'
-qualification.award = 'Standard'
-qualification.grade = 'A'
-qualification.start_date = Date.new(2014, 8, 23)
+qualification.subject = 'Biology'
+qualification.award = 'NQ'
+qualification.grade = 'D'
+qualification.start_date = Date.new(2015, 8, 23)
 qualification.end_date = Date.new(2014, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Physics'
-qualification.award = 'Higher'
-qualification.grade = 'A'
-qualification.start_date = Date.new(2015, 8, 23)
-qualification.end_date = Date.new(2013, 6, 8)
+qualification.subject = 'Computing'
+qualification.award = 'Standard'
+qualification.grade = 'B'
+qualification.start_date = Date.new(2013, 8, 23)
+qualification.end_date = Date.new(2014, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Computing'
+qualification.subject = 'Art'
 qualification.award = 'HND'
 qualification.grade = 'D'
-qualification.start_date = Date.new(2013, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
+qualification.start_date = Date.new(2012, 8, 23)
+qualification.end_date = Date.new(2013, 6, 8)
 qualification.save! validate: false
 
 school = School.new application: app
@@ -2145,27 +2103,27 @@ school.postcode = 'EC3M 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Woodworking'
-qualification.award = 'NQ'
-qualification.grade = 'C'
-qualification.start_date = Date.new(2015, 8, 23)
+qualification.subject = 'PE'
+qualification.award = 'HNC'
+qualification.grade = 'Pass'
+qualification.start_date = Date.new(2012, 8, 23)
 qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Biology'
-qualification.award = 'Standard'
-qualification.grade = 'Pass'
+qualification.subject = 'English'
+qualification.award = 'HND'
+qualification.grade = 'B'
 qualification.start_date = Date.new(2013, 8, 23)
-qualification.end_date = Date.new(2015, 6, 8)
+qualification.end_date = Date.new(2014, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Biology'
+qualification.subject = 'Technological Studies'
 qualification.award = 'NQ'
-qualification.grade = 'C'
+qualification.grade = 'B'
 qualification.start_date = Date.new(2012, 8, 23)
-qualification.end_date = Date.new(2013, 6, 8)
+qualification.end_date = Date.new(2014, 6, 8)
 qualification.save! validate: false
 
 job = Job.new application: app
@@ -2217,43 +2175,45 @@ ref.reference_2_relationship = 'Mandatory'
 ref.reference_2_telephone = '44-(744)835-3534'
 ref.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 52
-course.college_offer = :conditional_offer
+course = CourseSelection.new application_id: app.id, course_id: 38
+course.college_offer = :definite_offer
+course.student_choice = :declined
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 58
-course.college_offer = :rejected
+course = CourseSelection.new application_id: app.id, course_id: 13
+course.college_offer = :definite_offer
+course.student_choice = :firm_choice
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 145
-course.college_offer = :conditional_offer
+course = CourseSelection.new application_id: app.id, course_id: 56
+course.college_offer = :definite_offer
+course.student_choice = :declined
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 135
-course.college_offer = :rejected
+course = CourseSelection.new application_id: app.id, course_id: 48
+course.college_offer = :definite_offer
+course.student_choice = :declined
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
 app.course_selections_count = 4
 app.save validate: false
 
-payment = app.create_payment
-payment.status = :failed
-payment.paid_at = '2017-02-23'
-payment.payment_type = :credit_card
-payment.last_four_digits = 1234
-payment.card_holder = 'Douglas Phillips'
+payment = app.create_application_payment
+payment.status = :authorized
+payment.paid_at = '2017-02-20'
+payment.payment_type = :paypal
 payment.save! validate: false
 
 student = Student.new
 student.first_name = 'Irene'
 student.family_name = 'Freeman'
 student.email = 'dfreemand@thetimes.co.uk'
-student.scottish_candidate_number = '174353530'
-student.national_insurance_number = 'NJ379713C'
+student.scottish_candidate_number = '172167624'
+student.national_insurance_number = 'NJ283078C'
 student.password = 'secret'
 student.password_confirmation = 'secret'
 student.confirmed_at = DateTime.now
@@ -2272,8 +2232,8 @@ app.permanent_address_2 = 'Milton'
 app.permanent_postcode = 'NG22 2GR'
 app.permanent_city = 'Glasgow'
 app.permanent_country = 'United Kingdom'
-app.submitted_date = Date.strptime('2016-11-07')
-app.status = :submitting
+app.submitted_date = Date.strptime('2017-02-01')
+app.status = :completed
 app.current_stage = :submit_stage
 app.save! validate: false
 
@@ -2289,24 +2249,24 @@ school.save! validate: false
 qualification = Qualification.new school: school
 qualification.subject = 'Biology'
 qualification.award = 'HNC'
-qualification.grade = 'C'
+qualification.grade = 'B'
+qualification.start_date = Date.new(2014, 8, 23)
+qualification.end_date = Date.new(2016, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'Art'
+qualification.award = 'Standard'
+qualification.grade = 'A'
 qualification.start_date = Date.new(2012, 8, 23)
 qualification.end_date = Date.new(2015, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Computing'
-qualification.award = 'NQ'
-qualification.grade = 'D'
-qualification.start_date = Date.new(2013, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
 qualification.subject = 'Biology'
-qualification.award = 'Higher'
-qualification.grade = 'D'
-qualification.start_date = Date.new(2013, 8, 23)
+qualification.award = 'HND'
+qualification.grade = 'Pass'
+qualification.start_date = Date.new(2014, 8, 23)
 qualification.end_date = Date.new(2013, 6, 8)
 qualification.save! validate: false
 
@@ -2320,27 +2280,27 @@ school.postcode = 'BH21 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
+qualification.subject = 'Biology'
+qualification.award = 'HND'
+qualification.grade = 'Pass'
+qualification.start_date = Date.new(2013, 8, 23)
+qualification.end_date = Date.new(2015, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
 qualification.subject = 'Technological Studies'
 qualification.award = 'HNC'
 qualification.grade = 'C'
 qualification.start_date = Date.new(2014, 8, 23)
-qualification.end_date = Date.new(2015, 6, 8)
+qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Physics'
-qualification.award = 'HNC'
-qualification.grade = 'B'
+qualification.subject = 'Woodworking'
+qualification.award = 'NQ'
+qualification.grade = 'C'
 qualification.start_date = Date.new(2012, 8, 23)
-qualification.end_date = Date.new(2013, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'English'
-qualification.award = 'HNC'
-qualification.grade = 'B'
-qualification.start_date = Date.new(2014, 8, 23)
-qualification.end_date = Date.new(2015, 6, 8)
+qualification.end_date = Date.new(2014, 6, 8)
 qualification.save! validate: false
 
 job = Job.new application: app
@@ -2393,34 +2353,26 @@ ref.reference_2_telephone = '44-(551)706-9879'
 ref.save! validate: false
 
 course = CourseSelection.new application_id: app.id, course_id: 131
-course.college_offer = :conditional_offer
+course.college_offer = :definite_offer
+course.student_choice = :insurance_choice
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 31
-course.college_offer = :rejected
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
-course.save! validate: false
-
-course = CourseSelection.new application_id: app.id, course_id: 35
-course.college_offer = :conditional_offer
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
-course.save! validate: false
-
-course = CourseSelection.new application_id: app.id, course_id: 50
-course.college_offer = :rejected
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
-course.save! validate: false
-
-app.course_selections_count = 4
+app.course_selections_count = 1
 app.save validate: false
+
+payment = app.create_application_payment
+payment.status = :authorized
+payment.paid_at = '2016-08-01'
+payment.payment_type = :paypal
+payment.save! validate: false
 
 student = Student.new
 student.first_name = 'Phyllis'
 student.family_name = 'Harvey'
 student.email = 'dharveye@ehow.com'
-student.scottish_candidate_number = '175770879'
-student.national_insurance_number = 'NJ568912D'
+student.scottish_candidate_number = '176113669'
+student.national_insurance_number = 'NJ662749D'
 student.password = 'secret'
 student.password_confirmation = 'secret'
 student.confirmed_at = DateTime.now
@@ -2441,8 +2393,8 @@ app.permanent_address_2 = 'Edinburgh'
 app.permanent_postcode = 'EH9 2GR'
 app.permanent_city = 'Glasgow'
 app.permanent_country = 'United Kingdom'
-app.submitted_date = Date.strptime('2016-12-20')
-app.status = :payment_failed
+app.submitted_date = Date.strptime('2017-03-02')
+app.status = :all_decisions_made
 app.current_stage = :submit_stage
 app.save! validate: false
 
@@ -2456,27 +2408,27 @@ school.postcode = 'PR1 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Computing'
+qualification.subject = 'Chemistry'
 qualification.award = 'HND'
-qualification.grade = 'B'
+qualification.grade = 'C'
 qualification.start_date = Date.new(2013, 8, 23)
-qualification.end_date = Date.new(2013, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Biology'
-qualification.award = 'HNC'
-qualification.grade = 'B'
-qualification.start_date = Date.new(2012, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Biology'
-qualification.award = 'NQ'
-qualification.grade = 'A'
-qualification.start_date = Date.new(2012, 8, 23)
 qualification.end_date = Date.new(2014, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'Art'
+qualification.award = 'NQ'
+qualification.grade = 'B'
+qualification.start_date = Date.new(2014, 8, 23)
+qualification.end_date = Date.new(2014, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'Physics'
+qualification.award = 'HND'
+qualification.grade = 'C'
+qualification.start_date = Date.new(2015, 8, 23)
+qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 school = School.new application: app
@@ -2489,27 +2441,27 @@ school.postcode = 'S8 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Physics'
-qualification.award = 'Standard'
-qualification.grade = 'D'
-qualification.start_date = Date.new(2014, 8, 23)
-qualification.end_date = Date.new(2013, 6, 8)
+qualification.subject = 'Geography'
+qualification.award = 'NQ'
+qualification.grade = 'B'
+qualification.start_date = Date.new(2012, 8, 23)
+qualification.end_date = Date.new(2015, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Physics'
-qualification.award = 'Standard'
-qualification.grade = 'C'
-qualification.start_date = Date.new(2015, 8, 23)
+qualification.subject = 'Art'
+qualification.award = 'NQ'
+qualification.grade = 'B'
+qualification.start_date = Date.new(2012, 8, 23)
 qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Maths'
-qualification.award = 'NQ'
-qualification.grade = 'C'
-qualification.start_date = Date.new(2015, 8, 23)
-qualification.end_date = Date.new(2015, 6, 8)
+qualification.subject = 'Biology'
+qualification.award = 'HND'
+qualification.grade = 'B'
+qualification.start_date = Date.new(2012, 8, 23)
+qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 job = Job.new application: app
@@ -2561,43 +2513,31 @@ ref.reference_2_relationship = 'Adaptive'
 ref.reference_2_telephone = '44-(251)612-1118'
 ref.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 115
-course.college_offer = :rejected
+course = CourseSelection.new application_id: app.id, course_id: 91
+course.college_offer = :conditional_offer
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 14
-course.college_offer = :definite_offer
+course = CourseSelection.new application_id: app.id, course_id: 74
+course.college_offer = :conditional_offer
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 92
-course.college_offer = :definite_offer
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
-course.save! validate: false
-
-course = CourseSelection.new application_id: app.id, course_id: 129
-course.college_offer = :rejected
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
-course.save! validate: false
-
-app.course_selections_count = 4
+app.course_selections_count = 2
 app.save validate: false
 
-payment = app.create_payment
-payment.status = :failed
-payment.paid_at = '2017-03-26'
-payment.payment_type = :credit_card
-payment.last_four_digits = 1234
-payment.card_holder = 'Phyllis Harvey'
+payment = app.create_application_payment
+payment.status = :authorized
+payment.paid_at = '2016-10-06'
+payment.payment_type = :paypal
 payment.save! validate: false
 
 student = Student.new
 student.first_name = 'Shirley'
 student.family_name = 'Henry'
 student.email = 'ahenryf@360.cn'
-student.scottish_candidate_number = '170822994'
-student.national_insurance_number = 'NJ778998B'
+student.scottish_candidate_number = '173395833'
+student.national_insurance_number = 'NJ315305C'
 student.password = 'secret'
 student.password_confirmation = 'secret'
 student.confirmed_at = DateTime.now
@@ -2617,8 +2557,8 @@ app.permanent_address_1 = 'Cascade Crossing'
 app.permanent_postcode = 'PR1 2GR'
 app.permanent_city = 'Glasgow'
 app.permanent_country = 'United Kingdom'
-app.submitted_date = Date.strptime('2017-01-11')
-app.status = :submitting
+app.submitted_date = Date.strptime('2016-11-03')
+app.status = :awaiting_payment
 app.current_stage = :submit_stage
 app.save! validate: false
 
@@ -2632,27 +2572,27 @@ school.postcode = 'EH9 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Geography'
-qualification.award = 'NQ'
+qualification.subject = 'Computing'
+qualification.award = 'Higher'
 qualification.grade = 'B'
-qualification.start_date = Date.new(2012, 8, 23)
-qualification.end_date = Date.new(2015, 6, 8)
+qualification.start_date = Date.new(2014, 8, 23)
+qualification.end_date = Date.new(2013, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Maths'
-qualification.award = 'Standard'
+qualification.subject = 'Computing'
+qualification.award = 'HND'
 qualification.grade = 'A'
-qualification.start_date = Date.new(2015, 8, 23)
+qualification.start_date = Date.new(2014, 8, 23)
 qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'PE'
-qualification.award = 'NQ'
-qualification.grade = 'A'
-qualification.start_date = Date.new(2015, 8, 23)
-qualification.end_date = Date.new(2015, 6, 8)
+qualification.subject = 'Art'
+qualification.award = 'HNC'
+qualification.grade = 'B'
+qualification.start_date = Date.new(2014, 8, 23)
+qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 school = School.new application: app
@@ -2665,27 +2605,27 @@ school.postcode = 'NN11 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Art'
-qualification.award = 'Higher'
-qualification.grade = 'B'
-qualification.start_date = Date.new(2012, 8, 23)
-qualification.end_date = Date.new(2015, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Computing'
+qualification.subject = 'Maths'
 qualification.award = 'HNC'
-qualification.grade = 'C'
+qualification.grade = 'Pass'
 qualification.start_date = Date.new(2013, 8, 23)
 qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Geography'
+qualification.subject = 'Woodworking'
 qualification.award = 'HND'
-qualification.grade = 'C'
+qualification.grade = 'B'
 qualification.start_date = Date.new(2012, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
+qualification.end_date = Date.new(2014, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'Biology'
+qualification.award = 'NQ'
+qualification.grade = 'Pass'
+qualification.start_date = Date.new(2015, 8, 23)
+qualification.end_date = Date.new(2014, 6, 8)
 qualification.save! validate: false
 
 job = Job.new application: app
@@ -2737,30 +2677,37 @@ ref.reference_2_relationship = 'parallelism'
 ref.reference_2_telephone = '44-(351)167-5329'
 ref.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 42
-course.college_offer = :rejected
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
-course.save! validate: false
-
-course = CourseSelection.new application_id: app.id, course_id: 136
+course = CourseSelection.new application_id: app.id, course_id: 123
 course.college_offer = :conditional_offer
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 61
+course = CourseSelection.new application_id: app.id, course_id: 143
 course.college_offer = :definite_offer
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-app.course_selections_count = 3
+course = CourseSelection.new application_id: app.id, course_id: 46
+course.college_offer = :rejected
+course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
+course.save! validate: false
+
+course = CourseSelection.new application_id: app.id, course_id: 50
+course.college_offer = :conditional_offer
+course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
+course.save! validate: false
+
+app.course_selections_count = 4
 app.save validate: false
+
+app.create_application_payment.save!
 
 student = Student.new
 student.first_name = 'Joshua'
 student.family_name = 'Reyes'
 student.email = 'creyesg@noaa.gov'
-student.scottish_candidate_number = '173755244'
-student.national_insurance_number = 'NJ720733A'
+student.scottish_candidate_number = '179218372'
+student.national_insurance_number = 'NJ120943B'
 student.password = 'secret'
 student.password_confirmation = 'secret'
 student.confirmed_at = DateTime.now
@@ -2779,14 +2726,14 @@ app.permanent_address_1 = 'Green Ridge Park'
 app.permanent_postcode = 'ST20 2GR'
 app.permanent_city = 'Glasgow'
 app.permanent_country = 'United Kingdom'
-app.submitted_date = Date.strptime('2016-11-27')
+app.submitted_date = Date.strptime('2017-05-07')
 app.correspondence_house_number = '8395'
 app.correspondence_address_1 = 'Hermina Junction'
 app.correspondence_address_2 = 'Buckland'
 app.correspondence_postcode = 'CT16 2GR'
 app.correspondence_city = 'Glasgow'
 app.correspondence_country = 'United Kingdom'
-app.status = :all_decisions_made
+app.status = :awaiting_decisions
 app.current_stage = :submit_stage
 app.save! validate: false
 
@@ -2800,26 +2747,26 @@ school.postcode = 'BH21 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Computing'
+qualification.subject = 'Chemistry'
 qualification.award = 'NQ'
-qualification.grade = 'D'
+qualification.grade = 'Pass'
 qualification.start_date = Date.new(2013, 8, 23)
-qualification.end_date = Date.new(2014, 6, 8)
+qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'English'
-qualification.award = 'HND'
-qualification.grade = 'B'
-qualification.start_date = Date.new(2015, 8, 23)
+qualification.subject = 'Computing'
+qualification.award = 'Higher'
+qualification.grade = 'Pass'
+qualification.start_date = Date.new(2014, 8, 23)
 qualification.end_date = Date.new(2014, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
 qualification.subject = 'PE'
-qualification.award = 'HNC'
-qualification.grade = 'Pass'
-qualification.start_date = Date.new(2015, 8, 23)
+qualification.award = 'Standard'
+qualification.grade = 'D'
+qualification.start_date = Date.new(2014, 8, 23)
 qualification.end_date = Date.new(2013, 6, 8)
 qualification.save! validate: false
 
@@ -2833,27 +2780,27 @@ school.postcode = 'BS41 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Art'
-qualification.award = 'Standard'
-qualification.grade = 'Pass'
-qualification.start_date = Date.new(2014, 8, 23)
+qualification.subject = 'Biology'
+qualification.award = 'Higher'
+qualification.grade = 'B'
+qualification.start_date = Date.new(2015, 8, 23)
 qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Chemistry'
-qualification.award = 'Higher'
-qualification.grade = 'C'
+qualification.subject = 'Technological Studies'
+qualification.award = 'NQ'
+qualification.grade = 'A'
 qualification.start_date = Date.new(2015, 8, 23)
 qualification.end_date = Date.new(2014, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Art'
-qualification.award = 'Higher'
+qualification.subject = 'Computing'
+qualification.award = 'HNC'
 qualification.grade = 'A'
-qualification.start_date = Date.new(2015, 8, 23)
-qualification.end_date = Date.new(2015, 6, 8)
+qualification.start_date = Date.new(2012, 8, 23)
+qualification.end_date = Date.new(2013, 6, 8)
 qualification.save! validate: false
 
 job = Job.new application: app
@@ -2905,17 +2852,16 @@ ref.reference_2_relationship = '24/7'
 ref.reference_2_telephone = '44-(240)678-3099'
 ref.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 135
-course.college_offer = :conditional_offer
+course = CourseSelection.new application_id: app.id, course_id: 49
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
 app.course_selections_count = 1
 app.save validate: false
 
-payment = app.create_payment
+payment = app.create_application_payment
 payment.status = :authorized
-payment.paid_at = '2017-03-04'
+payment.paid_at = '2016-07-20'
 payment.payment_type = :paypal
 payment.save! validate: false
 
@@ -2923,8 +2869,8 @@ student = Student.new
 student.first_name = 'Jane'
 student.family_name = 'Hughes'
 student.email = 'jhughesh@gov.uk'
-student.scottish_candidate_number = '172216870'
-student.national_insurance_number = 'NJ877361D'
+student.scottish_candidate_number = '171746302'
+student.national_insurance_number = 'NJ345718A'
 student.password = 'secret'
 student.password_confirmation = 'secret'
 student.confirmed_at = DateTime.now
@@ -2944,7 +2890,7 @@ app.permanent_address_2 = 'Newtown'
 app.permanent_postcode = 'RG20 2GR'
 app.permanent_city = 'Glasgow'
 app.permanent_country = 'United Kingdom'
-app.submitted_date = Date.strptime('2016-12-22')
+app.submitted_date = Date.strptime('2016-10-16')
 app.status = :cancelled
 app.current_stage = :submit_stage
 app.save! validate: false
@@ -2959,26 +2905,26 @@ school.postcode = 'BS14 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Computing'
-qualification.award = 'Higher'
-qualification.grade = 'D'
+qualification.subject = 'Art'
+qualification.award = 'HNC'
+qualification.grade = 'A'
 qualification.start_date = Date.new(2012, 8, 23)
 qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'English'
+qualification.subject = 'Woodworking'
 qualification.award = 'NQ'
 qualification.grade = 'Pass'
 qualification.start_date = Date.new(2015, 8, 23)
-qualification.end_date = Date.new(2013, 6, 8)
+qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'English'
-qualification.award = 'NQ'
+qualification.subject = 'Art'
+qualification.award = 'HND'
 qualification.grade = 'D'
-qualification.start_date = Date.new(2015, 8, 23)
+qualification.start_date = Date.new(2014, 8, 23)
 qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
@@ -2992,27 +2938,27 @@ school.postcode = 'LS6 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Computing'
-qualification.award = 'Standard'
-qualification.grade = 'B'
-qualification.start_date = Date.new(2014, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
+qualification.subject = 'Geography'
+qualification.award = 'HND'
+qualification.grade = 'A'
+qualification.start_date = Date.new(2013, 8, 23)
+qualification.end_date = Date.new(2015, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'PE'
+qualification.award = 'HND'
+qualification.grade = 'A'
+qualification.start_date = Date.new(2012, 8, 23)
+qualification.end_date = Date.new(2014, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
 qualification.subject = 'Physics'
-qualification.award = 'Standard'
-qualification.grade = 'B'
+qualification.award = 'HNC'
+qualification.grade = 'A'
 qualification.start_date = Date.new(2014, 8, 23)
-qualification.end_date = Date.new(2014, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Technological Studies'
-qualification.award = 'Higher'
-qualification.grade = 'D'
-qualification.start_date = Date.new(2012, 8, 23)
-qualification.end_date = Date.new(2014, 6, 8)
+qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 job = Job.new application: app
@@ -3064,48 +3010,41 @@ ref.reference_2_relationship = 'Exclusive'
 ref.reference_2_telephone = '44-(995)797-4055'
 ref.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 83
-course.college_offer = :conditional_offer
+course = CourseSelection.new application_id: app.id, course_id: 61
+course.college_offer = :definite_offer
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 109
-course.college_offer = :conditional_offer
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
-course.save! validate: false
-
-course = CourseSelection.new application_id: app.id, course_id: 33
-course.college_offer = :conditional_offer
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
-course.save! validate: false
-
-course = CourseSelection.new application_id: app.id, course_id: 76
+course = CourseSelection.new application_id: app.id, course_id: 60
 course.college_offer = :rejected
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 4
-course.college_offer = :conditional_offer
+course = CourseSelection.new application_id: app.id, course_id: 48
+course.college_offer = :definite_offer
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-app.course_selections_count = 5
+course = CourseSelection.new application_id: app.id, course_id: 57
+course.college_offer = :rejected
+course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
+course.save! validate: false
+
+app.course_selections_count = 4
 app.save validate: false
 
-payment = app.create_payment
+payment = app.create_application_payment
 payment.status = :failed
-payment.paid_at = '2017-05-03'
-payment.payment_type = :credit_card
-payment.last_four_digits = 1234
-payment.card_holder = 'Jane Hughes'
+payment.paid_at = '2016-08-22'
+payment.payment_type = :paypal
 payment.save! validate: false
 
 student = Student.new
 student.first_name = 'Gregory'
 student.family_name = 'Reid'
 student.email = 'jreidi@zdnet.com'
-student.scottish_candidate_number = '178488058'
-student.national_insurance_number = 'NJ596680B'
+student.scottish_candidate_number = '171855802'
+student.national_insurance_number = 'NJ524633B'
 student.password = 'secret'
 student.password_confirmation = 'secret'
 student.confirmed_at = DateTime.now
@@ -3124,14 +3063,14 @@ app.permanent_address_1 = 'Cardinal Terrace'
 app.permanent_postcode = 'AB39 2GR'
 app.permanent_city = 'Glasgow'
 app.permanent_country = 'United Kingdom'
-app.submitted_date = Date.strptime('2016-11-10')
+app.submitted_date = Date.strptime('2016-10-28')
 app.correspondence_house_number = '005'
 app.correspondence_address_1 = 'Carberry Street'
 app.correspondence_address_2 = 'Newton'
 app.correspondence_postcode = 'NG34 2GR'
 app.correspondence_city = 'Glasgow'
 app.correspondence_country = 'United Kingdom'
-app.status = :all_rejected
+app.status = :completed
 app.current_stage = :submit_stage
 app.save! validate: false
 
@@ -3145,27 +3084,27 @@ school.postcode = 'SN13 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Art'
-qualification.award = 'NQ'
-qualification.grade = 'B'
-qualification.start_date = Date.new(2015, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Physics'
+qualification.subject = 'Woodworking'
 qualification.award = 'Standard'
-qualification.grade = 'C'
+qualification.grade = 'B'
 qualification.start_date = Date.new(2015, 8, 23)
 qualification.end_date = Date.new(2013, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'English'
-qualification.award = 'HNC'
-qualification.grade = 'Pass'
-qualification.start_date = Date.new(2012, 8, 23)
+qualification.subject = 'Woodworking'
+qualification.award = 'NQ'
+qualification.grade = 'D'
+qualification.start_date = Date.new(2014, 8, 23)
 qualification.end_date = Date.new(2015, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'Biology'
+qualification.award = 'HNC'
+qualification.grade = 'A'
+qualification.start_date = Date.new(2015, 8, 23)
+qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 school = School.new application: app
@@ -3178,27 +3117,27 @@ school.postcode = 'EC3M 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Woodworking'
+qualification.subject = 'Art'
 qualification.award = 'Higher'
-qualification.grade = 'A'
-qualification.start_date = Date.new(2013, 8, 23)
+qualification.grade = 'C'
+qualification.start_date = Date.new(2014, 8, 23)
 qualification.end_date = Date.new(2014, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Physics'
+qualification.subject = 'Computing'
 qualification.award = 'Standard'
-qualification.grade = 'A'
-qualification.start_date = Date.new(2012, 8, 23)
-qualification.end_date = Date.new(2014, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Maths'
-qualification.award = 'NQ'
 qualification.grade = 'Pass'
 qualification.start_date = Date.new(2014, 8, 23)
-qualification.end_date = Date.new(2013, 6, 8)
+qualification.end_date = Date.new(2016, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'Woodworking'
+qualification.award = 'NQ'
+qualification.grade = 'D'
+qualification.start_date = Date.new(2015, 8, 23)
+qualification.end_date = Date.new(2014, 6, 8)
 qualification.save! validate: false
 
 job = Job.new application: app
@@ -3250,27 +3189,36 @@ ref.reference_2_relationship = 'encryption'
 ref.reference_2_telephone = '44-(859)845-9504'
 ref.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 113
-course.college_offer = :rejected
+course = CourseSelection.new application_id: app.id, course_id: 131
+course.college_offer = :conditional_offer
+course.student_choice = :declined
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 158
-course.college_offer = :rejected
+course = CourseSelection.new application_id: app.id, course_id: 76
+course.college_offer = :definite_offer
+course.student_choice = :firm_choice
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 145
-course.college_offer = :rejected
+course = CourseSelection.new application_id: app.id, course_id: 39
+course.college_offer = :definite_offer
+course.student_choice = :declined
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-app.course_selections_count = 3
+course = CourseSelection.new application_id: app.id, course_id: 82
+course.college_offer = :definite_offer
+course.student_choice = :declined
+course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
+course.save! validate: false
+
+app.course_selections_count = 4
 app.save validate: false
 
-payment = app.create_payment
+payment = app.create_application_payment
 payment.status = :authorized
-payment.paid_at = '2016-11-26'
+payment.paid_at = '2016-11-05'
 payment.payment_type = :credit_card
 payment.last_four_digits = 1234
 payment.card_holder = 'Gregory Reid'
@@ -3280,8 +3228,8 @@ student = Student.new
 student.first_name = 'Antonio'
 student.family_name = 'Richardson'
 student.email = 'drichardsonj@google.co.uk'
-student.scottish_candidate_number = '170237447'
-student.national_insurance_number = 'NJ268488B'
+student.scottish_candidate_number = '178339281'
+student.national_insurance_number = 'NJ919940D'
 student.password = 'secret'
 student.password_confirmation = 'secret'
 student.confirmed_at = DateTime.now
@@ -3301,8 +3249,8 @@ app.permanent_address_1 = 'Bashford Lane'
 app.permanent_postcode = 'BS14 2GR'
 app.permanent_city = 'Glasgow'
 app.permanent_country = 'United Kingdom'
-app.submitted_date = Date.strptime('2016-12-24')
-app.status = :awaiting_payment
+app.submitted_date = Date.strptime('2017-02-25')
+app.status = :all_decisions_made
 app.current_stage = :submit_stage
 app.save! validate: false
 
@@ -3316,27 +3264,27 @@ school.postcode = 'WF9 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Biology'
+qualification.subject = 'Computing'
+qualification.award = 'Standard'
+qualification.grade = 'A'
+qualification.start_date = Date.new(2012, 8, 23)
+qualification.end_date = Date.new(2014, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'PE'
+qualification.award = 'NQ'
+qualification.grade = 'B'
+qualification.start_date = Date.new(2012, 8, 23)
+qualification.end_date = Date.new(2013, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'PE'
 qualification.award = 'NQ'
 qualification.grade = 'D'
 qualification.start_date = Date.new(2012, 8, 23)
-qualification.end_date = Date.new(2015, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Geography'
-qualification.award = 'HND'
-qualification.grade = 'C'
-qualification.start_date = Date.new(2015, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Art'
-qualification.award = 'HND'
-qualification.grade = 'B'
-qualification.start_date = Date.new(2013, 8, 23)
-qualification.end_date = Date.new(2014, 6, 8)
+qualification.end_date = Date.new(2013, 6, 8)
 qualification.save! validate: false
 
 school = School.new application: app
@@ -3349,27 +3297,27 @@ school.postcode = 'DL10 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Technological Studies'
-qualification.award = 'Standard'
-qualification.grade = 'D'
-qualification.start_date = Date.new(2013, 8, 23)
-qualification.end_date = Date.new(2013, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
 qualification.subject = 'Geography'
-qualification.award = 'HND'
+qualification.award = 'NQ'
 qualification.grade = 'Pass'
 qualification.start_date = Date.new(2014, 8, 23)
 qualification.end_date = Date.new(2013, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Chemistry'
-qualification.award = 'Standard'
-qualification.grade = 'B'
+qualification.subject = 'Physics'
+qualification.award = 'Higher'
+qualification.grade = 'Pass'
+qualification.start_date = Date.new(2014, 8, 23)
+qualification.end_date = Date.new(2013, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'Maths'
+qualification.award = 'HNC'
+qualification.grade = 'A'
 qualification.start_date = Date.new(2013, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
+qualification.end_date = Date.new(2014, 6, 8)
 qualification.save! validate: false
 
 job = Job.new application: app
@@ -3421,32 +3369,38 @@ ref.reference_2_relationship = 'instruction set'
 ref.reference_2_telephone = '44-(590)169-0449'
 ref.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 33
-course.college_offer = :conditional_offer
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
-course.save! validate: false
-
-course = CourseSelection.new application_id: app.id, course_id: 157
+course = CourseSelection.new application_id: app.id, course_id: 37
 course.college_offer = :definite_offer
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 19
-course.college_offer = :rejected
+course = CourseSelection.new application_id: app.id, course_id: 31
+course.college_offer = :definite_offer
+course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
+course.save! validate: false
+
+course = CourseSelection.new application_id: app.id, course_id: 134
+course.college_offer = :conditional_offer
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
 app.course_selections_count = 3
 app.save validate: false
 
-app.create_payment.save!
+payment = app.create_application_payment
+payment.status = :authorized
+payment.paid_at = '2016-10-25'
+payment.payment_type = :credit_card
+payment.last_four_digits = 1234
+payment.card_holder = 'Antonio Richardson'
+payment.save! validate: false
 
 student = Student.new
 student.first_name = 'Beverly'
 student.family_name = 'Kelly'
 student.email = 'kkellyk@usnews.com'
-student.scottish_candidate_number = '178206737'
-student.national_insurance_number = 'NJ380191D'
+student.scottish_candidate_number = '178289624'
+student.national_insurance_number = 'NJ266649D'
 student.password = 'secret'
 student.password_confirmation = 'secret'
 student.confirmed_at = DateTime.now
@@ -3466,8 +3420,8 @@ app.permanent_address_2 = 'Eaton'
 app.permanent_postcode = 'DN22 2GR'
 app.permanent_city = 'Glasgow'
 app.permanent_country = 'United Kingdom'
-app.submitted_date = Date.strptime('2016-12-07')
-app.status = :cancelled
+app.submitted_date = Date.strptime('2017-03-10')
+app.status = :awaiting_decisions
 app.current_stage = :submit_stage
 app.save! validate: false
 
@@ -3481,27 +3435,27 @@ school.postcode = 'IV1 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'PE'
-qualification.award = 'NQ'
-qualification.grade = 'Pass'
-qualification.start_date = Date.new(2014, 8, 23)
-qualification.end_date = Date.new(2015, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Technological Studies'
-qualification.award = 'Standard'
-qualification.grade = 'A'
-qualification.start_date = Date.new(2015, 8, 23)
-qualification.end_date = Date.new(2014, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Physics'
+qualification.subject = 'Chemistry'
 qualification.award = 'Higher'
 qualification.grade = 'C'
-qualification.start_date = Date.new(2015, 8, 23)
+qualification.start_date = Date.new(2012, 8, 23)
 qualification.end_date = Date.new(2015, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'Computing'
+qualification.award = 'HND'
+qualification.grade = 'B'
+qualification.start_date = Date.new(2012, 8, 23)
+qualification.end_date = Date.new(2015, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'Biology'
+qualification.award = 'NQ'
+qualification.grade = 'Pass'
+qualification.start_date = Date.new(2013, 8, 23)
+qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 school = School.new application: app
@@ -3514,27 +3468,27 @@ school.postcode = 'GL54 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
+qualification.subject = 'PE'
+qualification.award = 'Higher'
+qualification.grade = 'A'
+qualification.start_date = Date.new(2012, 8, 23)
+qualification.end_date = Date.new(2014, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
 qualification.subject = 'Art'
+qualification.award = 'HND'
+qualification.grade = 'C'
+qualification.start_date = Date.new(2013, 8, 23)
+qualification.end_date = Date.new(2016, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'Biology'
 qualification.award = 'Higher'
 qualification.grade = 'B'
 qualification.start_date = Date.new(2012, 8, 23)
-qualification.end_date = Date.new(2013, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Technological Studies'
-qualification.award = 'HNC'
-qualification.grade = 'D'
-qualification.start_date = Date.new(2012, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Technological Studies'
-qualification.award = 'NQ'
-qualification.grade = 'B'
-qualification.start_date = Date.new(2012, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
+qualification.end_date = Date.new(2015, 6, 8)
 qualification.save! validate: false
 
 job = Job.new application: app
@@ -3586,22 +3540,16 @@ ref.reference_2_relationship = 'Expanded'
 ref.reference_2_telephone = '44-(953)973-0689'
 ref.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 22
-course.college_offer = :definite_offer
+course = CourseSelection.new application_id: app.id, course_id: 47
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 137
-course.college_offer = :conditional_offer
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
-course.save! validate: false
-
-app.course_selections_count = 2
+app.course_selections_count = 1
 app.save validate: false
 
-payment = app.create_payment
-payment.status = :failed
-payment.paid_at = '2016-08-07'
+payment = app.create_application_payment
+payment.status = :authorized
+payment.paid_at = '2016-09-14'
 payment.payment_type = :paypal
 payment.save! validate: false
 
@@ -3609,8 +3557,8 @@ student = Student.new
 student.first_name = 'Jeremy'
 student.family_name = 'Hill'
 student.email = 'philll@tuttocitta.it'
-student.scottish_candidate_number = '171737524'
-student.national_insurance_number = 'NJ566308C'
+student.scottish_candidate_number = '172619509'
+student.national_insurance_number = 'NJ322572A'
 student.password = 'secret'
 student.password_confirmation = 'secret'
 student.confirmed_at = DateTime.now
@@ -3629,8 +3577,8 @@ app.permanent_address_1 = 'Gina Avenue'
 app.permanent_postcode = 'NR34 2GR'
 app.permanent_city = 'Glasgow'
 app.permanent_country = 'United Kingdom'
-app.submitted_date = Date.strptime('2016-10-31')
-app.status = :completed
+app.submitted_date = Date.strptime('2016-10-29')
+app.status = :cancelled
 app.current_stage = :submit_stage
 app.save! validate: false
 
@@ -3644,27 +3592,27 @@ school.postcode = 'B12 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'English'
-qualification.award = 'Standard'
-qualification.grade = 'A'
-qualification.start_date = Date.new(2013, 8, 23)
-qualification.end_date = Date.new(2015, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Technological Studies'
-qualification.award = 'NQ'
-qualification.grade = 'A'
-qualification.start_date = Date.new(2013, 8, 23)
-qualification.end_date = Date.new(2015, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'English'
-qualification.award = 'NQ'
-qualification.grade = 'D'
+qualification.subject = 'Computing'
+qualification.award = 'HNC'
+qualification.grade = 'Pass'
 qualification.start_date = Date.new(2015, 8, 23)
-qualification.end_date = Date.new(2014, 6, 8)
+qualification.end_date = Date.new(2015, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'Woodworking'
+qualification.award = 'Standard'
+qualification.grade = 'B'
+qualification.start_date = Date.new(2015, 8, 23)
+qualification.end_date = Date.new(2016, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'Maths'
+qualification.award = 'HNC'
+qualification.grade = 'A'
+qualification.start_date = Date.new(2015, 8, 23)
+qualification.end_date = Date.new(2013, 6, 8)
 qualification.save! validate: false
 
 school = School.new application: app
@@ -3677,27 +3625,27 @@ school.postcode = 'L74 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Chemistry'
-qualification.award = 'Standard'
-qualification.grade = 'Pass'
+qualification.subject = 'Art'
+qualification.award = 'NQ'
+qualification.grade = 'C'
+qualification.start_date = Date.new(2015, 8, 23)
+qualification.end_date = Date.new(2013, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'Woodworking'
+qualification.award = 'HND'
+qualification.grade = 'A'
 qualification.start_date = Date.new(2014, 8, 23)
 qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Technological Studies'
-qualification.award = 'Higher'
+qualification.subject = 'PE'
+qualification.award = 'HNC'
 qualification.grade = 'D'
-qualification.start_date = Date.new(2013, 8, 23)
-qualification.end_date = Date.new(2013, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'Chemistry'
-qualification.award = 'Higher'
-qualification.grade = 'Pass'
-qualification.start_date = Date.new(2012, 8, 23)
-qualification.end_date = Date.new(2014, 6, 8)
+qualification.start_date = Date.new(2015, 8, 23)
+qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 job = Job.new application: app
@@ -3749,30 +3697,27 @@ ref.reference_2_relationship = 'leading edge'
 ref.reference_2_telephone = '44-(451)545-3693'
 ref.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 147
-course.college_offer = :conditional_offer
-course.student_choice = :declined
+course = CourseSelection.new application_id: app.id, course_id: 58
+course.college_offer = :rejected
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 22
-course.college_offer = :definite_offer
-course.student_choice = :firm_choice
+course = CourseSelection.new application_id: app.id, course_id: 53
+course.college_offer = :rejected
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 94
+course = CourseSelection.new application_id: app.id, course_id: 55
 course.college_offer = :conditional_offer
-course.student_choice = :declined
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
 app.course_selections_count = 3
 app.save validate: false
 
-payment = app.create_payment
-payment.status = :authorized
-payment.paid_at = '2016-11-18'
+payment = app.create_application_payment
+payment.status = :failed
+payment.paid_at = '2016-07-08'
 payment.payment_type = :credit_card
 payment.last_four_digits = 1234
 payment.card_holder = 'Jeremy Hill'
@@ -3782,8 +3727,8 @@ student = Student.new
 student.first_name = 'Aaron'
 student.family_name = 'Chapman'
 student.email = 'cchapmanm@naver.com'
-student.scottish_candidate_number = '172745695'
-student.national_insurance_number = 'NJ925763D'
+student.scottish_candidate_number = '173135238'
+student.national_insurance_number = 'NJ682239C'
 student.password = 'secret'
 student.password_confirmation = 'secret'
 student.confirmed_at = DateTime.now
@@ -3803,8 +3748,8 @@ app.permanent_address_2 = 'Sheffield'
 app.permanent_postcode = 'S1 2GR'
 app.permanent_city = 'Glasgow'
 app.permanent_country = 'United Kingdom'
-app.submitted_date = Date.strptime('2017-03-10')
-app.status = :cancelled
+app.submitted_date = Date.strptime('2017-03-13')
+app.status = :payment_failed
 app.current_stage = :submit_stage
 app.save! validate: false
 
@@ -3818,27 +3763,27 @@ school.postcode = 'LS9 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Geography'
+qualification.subject = 'Woodworking'
 qualification.award = 'Higher'
-qualification.grade = 'Pass'
-qualification.start_date = Date.new(2015, 8, 23)
-qualification.end_date = Date.new(2014, 6, 8)
+qualification.grade = 'C'
+qualification.start_date = Date.new(2012, 8, 23)
+qualification.end_date = Date.new(2015, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Geography'
+qualification.subject = 'Art'
+qualification.award = 'HNC'
+qualification.grade = 'D'
+qualification.start_date = Date.new(2012, 8, 23)
+qualification.end_date = Date.new(2013, 6, 8)
+qualification.save! validate: false
+
+qualification = Qualification.new school: school
+qualification.subject = 'Physics'
 qualification.award = 'NQ'
 qualification.grade = 'Pass'
-qualification.start_date = Date.new(2015, 8, 23)
+qualification.start_date = Date.new(2014, 8, 23)
 qualification.end_date = Date.new(2014, 6, 8)
-qualification.save! validate: false
-
-qualification = Qualification.new school: school
-qualification.subject = 'PE'
-qualification.award = 'HNC'
-qualification.grade = 'C'
-qualification.start_date = Date.new(2013, 8, 23)
-qualification.end_date = Date.new(2016, 6, 8)
 qualification.save! validate: false
 
 school = School.new application: app
@@ -3851,24 +3796,24 @@ school.postcode = 'DL10 3FB'
 school.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Computing'
+qualification.subject = 'Technological Studies'
 qualification.award = 'HND'
-qualification.grade = 'B'
-qualification.start_date = Date.new(2013, 8, 23)
+qualification.grade = 'C'
+qualification.start_date = Date.new(2012, 8, 23)
 qualification.end_date = Date.new(2014, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
-qualification.subject = 'Physics'
-qualification.award = 'HNC'
-qualification.grade = 'A'
-qualification.start_date = Date.new(2013, 8, 23)
+qualification.subject = 'PE'
+qualification.award = 'Standard'
+qualification.grade = 'Pass'
+qualification.start_date = Date.new(2012, 8, 23)
 qualification.end_date = Date.new(2015, 6, 8)
 qualification.save! validate: false
 
 qualification = Qualification.new school: school
 qualification.subject = 'Woodworking'
-qualification.award = 'HND'
+qualification.award = 'Higher'
 qualification.grade = 'Pass'
 qualification.start_date = Date.new(2015, 8, 23)
 qualification.end_date = Date.new(2013, 6, 8)
@@ -3923,29 +3868,17 @@ ref.reference_2_relationship = 'Enhanced'
 ref.reference_2_telephone = '44-(267)656-2487'
 ref.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 155
+course = CourseSelection.new application_id: app.id, course_id: 89
 course.college_offer = :rejected
 course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
-course = CourseSelection.new application_id: app.id, course_id: 126
-course.college_offer = :conditional_offer
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
-course.save! validate: false
-
-course = CourseSelection.new application_id: app.id, course_id: 99
-course.college_offer = :conditional_offer
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
-course.save! validate: false
-
-app.course_selections_count = 3
+app.course_selections_count = 1
 app.save validate: false
 
-payment = app.create_payment
+payment = app.create_application_payment
 payment.status = :failed
-payment.paid_at = '2016-07-06'
-payment.payment_type = :credit_card
-payment.last_four_digits = 1234
-payment.card_holder = 'Aaron Chapman'
+payment.paid_at = '2016-06-18'
+payment.payment_type = :paypal
 payment.save! validate: false
 

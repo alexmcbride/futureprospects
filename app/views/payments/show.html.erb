@@ -78,16 +78,9 @@
 
     <hr>
 
-    <div class="well">
-      <h3 class="no-top-margin">What Next?</h3>
-      <p>Your application will now be sent to your selected colleges in order to be considered. You will be contacted
-        when a decision has been made. You can track the status of your application of your application by signing in.</p>
-
-      <br>
-
-      <div class="text-right">
-        <%= link_to 'Continue', root_path, class: 'next-button', role: 'button' %>
-      </div>
+    <div class="text-right">
+      <% path = session.key?(:payment_redirect) ? session[:payment_redirect] : root_path %>
+      <%= link_to 'Continue', path, class: 'next-button', role: 'button' %>
     </div>
   </div>
 </div>

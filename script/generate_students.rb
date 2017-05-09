@@ -198,7 +198,7 @@ def student(file, tokens, schools, jobs, refs)
   file.puts ''
 
   def payment(file, status, full_name)
-    file.puts 'payment = app.create_payment'
+    file.puts 'payment = app.create_application_payment'
     file.puts "payment.status = :#{status}"
     file.puts "payment.paid_at = '#{(Date.new(2016, 6, 1)..Date.today).to_a.sample}'"
     type = Payment.payment_types.map{|k,v|k}.sample.to_sym
@@ -214,7 +214,7 @@ def student(file, tokens, schools, jobs, refs)
   # Payments
   status = status.to_sym
   if status == :awaiting_payment
-    file.puts 'app.create_payment.save!'
+    file.puts 'app.create_application_payment.save!'
     file.puts ''
   elsif status == :payment_failed || status == :cancelled
     payment file, :failed, full_name

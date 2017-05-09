@@ -21,7 +21,7 @@ class StudentMailerPreview < ActionMailer::Preview
 
   # Previews application completed mail
   def application_completed
-    application = Application.find 13
+    application = Application.where(status: :completed).first
     student = application.student
     StudentMailer.application_completed(student, application)
   end

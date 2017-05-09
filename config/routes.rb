@@ -69,6 +69,7 @@ Rails.application.routes.draw do
 
   get 'applications/submit', to: 'new_applications#submit', as: 'applications_submit'
   post 'applications/submit', to: 'new_applications#submit_next', as: 'applications_submit_next'
+  get 'applications/completed', to: 'new_applications#completed', as: 'applications_completed'
   get 'applications/:id', to: 'new_applications#show', as: 'application'
 
   # Courses
@@ -89,9 +90,6 @@ Rails.application.routes.draw do
   get 'decisions/review', to: 'decisions#review', as: 'decisions_review'
   post 'decisions/review', to: 'decisions#review_post', as: 'decisions_review_post'
   get 'decisions/completed', to: 'decisions#completed', as: 'decisions_completed'
-  get 'decisions/change', to: 'decisions#change', as: 'decisions_change'
-  post 'decisions/change', to: 'decisions#change_post', as: 'decisions_change_post'
-  get 'decisions/change/payment', to: 'decisions#change_payment', as: 'decisions_change_payment'
 
   # Root
   get 'home/index'

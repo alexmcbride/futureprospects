@@ -57,7 +57,7 @@
           <p>We are waiting to receive a payment for the application fee of <strong><%= number_to_currency @application.calculate_fee_pounds, unit: '£' %></strong>.</p>
           <p>The payment needs to be received by the <strong><%= format_date @application.payment_expiry_time %></strong> or your application will be cancelled. You can make a payment either with a debit or credit card, or through PayPal. Once payment is received your application will be sent to your chosen colleges to be considered.</p>
           <div class="text-right">
-            <%= link_to 'Make Payment', payment_redirect_path(session, applications_completed_path), role: 'button', class: 'link-button' %>
+            <%= link_to 'Make Payment', payment_redirect_path(applications_completed_path), role: 'button', class: 'link-button' %>
           </div>
         <% elsif @application.cancelled? %>
           <div class="alert alert-danger"><strong>Your application has been cancelled.</strong></div>

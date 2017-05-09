@@ -40,7 +40,7 @@ class DecisionsController < ApplicationController
     elsif which == :insurance
       CourseSelection.decline_insurance @application
     end
-    redirect_to decisions_review_path(@application), notice: 'All choices declined'
+    redirect_to decisions_review_path, notice: 'All choices declined'
   end
 
   # GET /decisions/review
@@ -51,7 +51,7 @@ class DecisionsController < ApplicationController
   def review_post
     @application.save_completed
 
-    redirect_to decisions_completed_path(@application), notice: 'Application completed'
+    redirect_to decisions_completed_path, notice: 'Application completed'
   end
 
   # GET /decisions/completed

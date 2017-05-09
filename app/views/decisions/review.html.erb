@@ -27,7 +27,7 @@
             <small style="color: #787878;"><%= selection.course.college.name %></small>
           </h3>
           <p><%= selection.rejected? ? selection.college_offer.humanize : selection.student_choice.humanize %></p>
-          <p><%= selection.note %></p>
+          <p><%= selection.note.present? ? selection.note : '&nbsp'.html_safe %></p>
         </div>
       <% end %>
     </div>
@@ -37,7 +37,7 @@
     <div class="row">
       <div class="col-sm-6">
         <p class="text-darkish small">Go back and make different choices.</p>
-        <%= link_to decisions_path, class: 'btn btn-default', role: 'button' do %>
+        <%= link_to decisions_firm_path, class: 'btn btn-default', role: 'button' do %>
           <%= icon('eraser') %>
           Make Changes
         <% end %>

@@ -14,16 +14,14 @@ class StudentMailerPreview < ActionMailer::Preview
 
   # Previews application cancelled mail
   def application_cancelled
-    student = Student.find 2
-    application = student.current_application
-    StudentMailer.application_cancelled(student, application)
+    application = Application.where(status: :cancelled).first
+    StudentMailer.application_cancelled(application.student, application)
   end
 
   # Previews application completed mail
   def application_completed
     application = Application.where(status: :completed).first
-    student = application.student
-    StudentMailer.application_completed(student, application)
+    StudentMailer.application_completed(application.student, application)
   end
 
   # Previews payment_received email

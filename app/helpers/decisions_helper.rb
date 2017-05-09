@@ -3,7 +3,7 @@ module DecisionsHelper
     content_tag(:div, class: "list-group-item#{' active' if selected}") do
       concat(text)
       if selected
-        concat(icon('arrow-right', class: 'pull-right', style: 'font-size: 15pt;'))
+        concat(icon('arrow-circle-right', class: 'pull-right', style: 'font-size: 15pt;'))
       end
       if completed
         concat(icon('check', class: 'pull-right', style: 'color: green; font-size: 18pt;'))

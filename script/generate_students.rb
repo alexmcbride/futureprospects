@@ -170,7 +170,7 @@ def student(file, tokens, schools, jobs, refs)
     file.puts course + " = CourseSelection.new application_id: #{app}.id, course_id: #{id}"
 
     offer = nil
-    if status == :all_decisions_made or status == :completed
+    if status == :awaiting_replies or status == :completed
       offer = [:definite_offer, :conditional_offer].sample
       file.puts "course.college_offer = :#{offer}"
       file.puts "course.offer_date = '#{submitted + rand(7..21).days}'"
@@ -222,7 +222,7 @@ def student(file, tokens, schools, jobs, refs)
     file.puts ''
   elsif status == :payment_failed || status == :cancelled
     payment file, :failed, full_name
-  elsif [:awaiting_decisions, :all_decisions_made, :all_rejected, :completed].include? status
+  elsif [:awaiting_decisions, :awaiting_replies, :all_rejected, :completed].include? status
     payment file, :authorized, full_name
   end
 

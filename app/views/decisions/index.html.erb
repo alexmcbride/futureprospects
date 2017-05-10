@@ -5,11 +5,11 @@
 
 <div class="row">
   <div class="col-md-3">
-    <%= render 'sidebar', stage: @application.all_decisions_made? ? :view : :index %>
+    <%= render 'sidebar', stage: @application.awaiting_replies? ? :view : :index %>
   </div>
 
   <div class="col-md-9">
-    <% if @application.all_decisions_made? %>
+    <% if @application.awaiting_replies? %>
       <h2 class="no-top-margin">All Decisions Made</h2>
       <p>This page lets you keep track of your courses and what decisions have been made on them. All of your selected
       colleges have made their decisions and you can view them below. A decision may be accompanied by a note, either
@@ -38,7 +38,7 @@
       <% end %>
     </div>
 
-    <% if @application.all_decisions_made? %>
+    <% if @application.awaiting_replies? %>
       <div class="text-right">
         <p class="small text-darkish">Proceed to select your first choice of study.</p>
         <%= link_to decisions_firm_path, class: 'btn btn-primary' do %>

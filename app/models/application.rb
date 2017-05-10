@@ -31,7 +31,7 @@ class Application < ApplicationRecord
   enum gender: [:male, :female, :other]
 
   # Enum for the application status.
-  enum status: [:submitting, :awaiting_payment, :payment_failed, :cancelled, :awaiting_decisions, :all_decisions_made,
+  enum status: [:submitting, :awaiting_payment, :payment_failed, :cancelled, :awaiting_decisions, :awaiting_replies,
                 :all_rejected, :completed, :replies_overdue]
 
   # Enum for current application stage.
@@ -287,7 +287,7 @@ class Application < ApplicationRecord
   # Task for handling overdue replies, that is course selections that have been without a decision for too long. As
   # above called as a rake task once a day.
   def self.handle_overdue_replies
-    applications = Application.where(status: :all_decisions_made).where('CURRENT_DATE>decision_due')
+    applications = Application.where(status: :awaiting_replies).where('CURRENT_DATE>decision_due')
 
     applications.each do |application|
       application.update_status :replies_overdue
@@ -544,8 +544,8 @@ class Application < ApplicationRecord
         puts 'nah...'
 
         # Update application.
-        self.status = all_selections_rejected? ? :all_rejected : :all_decisions_made
-        self.decision_due = get_decision_due
+        self.status = all_selections_rejected? ? :all_rejected : :awaiting_replies
+        self.replies_due = get_replies_due
         self.save! validate: false
 
         # Email student to inform them that all of their decisions have been made.
@@ -556,7 +556,7 @@ class Application < ApplicationRecord
     # Gets the date that a student decision is due.
     #
     # Returns - the decision due date.
-    def get_decision_due
+    def get_replies_due
       today = Date.today
       year = today.year
       if today < Date.new(year, 3, 31)

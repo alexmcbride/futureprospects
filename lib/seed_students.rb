@@ -31,7 +31,7 @@ app.correspondence_address_2 = 'Dean'
 app.correspondence_postcode = 'OX7 2GR'
 app.correspondence_city = 'Glasgow'
 app.correspondence_country = 'United Kingdom'
-app.status = :all_decisions_made
+app.status = :awaiting_replies
 app.current_stage = :submit_stage
 app.save! validate: false
 
@@ -1599,7 +1599,7 @@ app.permanent_postcode = 'M34 2GR'
 app.permanent_city = 'Glasgow'
 app.permanent_country = 'United Kingdom'
 app.submitted_date = Date.strptime('2017-02-08')
-app.status = :all_decisions_made
+app.status = :awaiting_replies
 app.current_stage = :submit_stage
 app.save! validate: false
 
@@ -2117,7 +2117,7 @@ app.permanent_postcode = 'CT15 2GR'
 app.permanent_city = 'Glasgow'
 app.permanent_country = 'United Kingdom'
 app.submitted_date = Date.strptime('2016-11-02')
-app.status = :all_decisions_made
+app.status = :awaiting_replies
 app.current_stage = :submit_stage
 app.save! validate: false
 

@@ -67,6 +67,6 @@ class DecisionsController < ApplicationController
     end
 
     def check_can_view
-      user_not_authorized unless (@application.awaiting_decisions? || @application.all_decisions_made? || @application.all_rejected?)
+      user_not_authorized unless (@application.awaiting_decisions? || @application.awaiting_replies? || @application.all_rejected?)
     end
 end

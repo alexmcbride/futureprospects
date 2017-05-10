@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20170510212934) do
     t.integer  "current_stage"
     t.string   "permanent_city"
     t.string   "correspondence_city"
-    t.date     "decision_due"
+    t.date     "replies_due"
     t.index ["created_at"], name: "index_applications_on_created_at", using: :btree
     t.index ["student_id"], name: "index_applications_on_student_id", using: :btree
   end

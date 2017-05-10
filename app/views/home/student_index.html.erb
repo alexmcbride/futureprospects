@@ -12,7 +12,7 @@
       <%= home_stage_item 'Create Application ', @application.nil? || @application.submitting? %>
       <%= home_stage_item 'Make Payment ', @application.present? && (@application.awaiting_payment? || @application.payment_failed?) %>
       <%= home_stage_item 'Track Application ', @application.present? && @application.awaiting_decisions? %>
-      <%= home_stage_item 'Make Choices ', @application.present? && (@application.all_decisions_made? || @application.all_rejected?) %>
+      <%= home_stage_item 'Make Choices ', @application.present? && (@application.awaiting_replies? || @application.all_rejected?) %>
       <%= home_stage_item 'Completed ', @application.present? && @application.completed? %>
     </ul>
   </div>
@@ -69,7 +69,7 @@
         <% elsif @application.replies_overdue? %>
           <div class="alert alert-danger"><strong>Your application has been cancelled.</strong></div>
           <p>We did not receive your choices within the requisite time. We were due to receive your replies by
-            <strong><%= format_date @application.decision_due %></strong>. Unfortunately, it is now too late to process
+            <strong><%= format_date @application.replies_due %></strong>. Unfortunately, it is now too late to process
             your application before the start of the next academic year.</p>
         <% elsif @application.awaiting_decisions? %>
           <p><strong>Your application has been sent to your chosen colleges to be considered.</strong></p>
@@ -80,7 +80,7 @@
           <div class="text-right">
             <%= link_to 'Track Application', decisions_path, role: 'button', class: 'link-button' %>
           </div>
-        <% elsif @application.all_decisions_made? || @application.all_rejected?  %>
+        <% elsif @application.awaiting_replies? || @application.all_rejected?  %>
           <p><strong>All of your decisions have been made.</strong></p>
             <p>All of your selected colleges have made their decisions, and you are now able to make your own. You can
             now prioritise your decisions in order to choose the course and college that's right for you. You can also

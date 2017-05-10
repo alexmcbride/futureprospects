@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170510135954) do
+ActiveRecord::Schema.define(version: 20170510212934) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20170510135954) do
     t.integer  "current_stage"
     t.string   "permanent_city"
     t.string   "correspondence_city"
+    t.date     "decision_due"
     t.index ["created_at"], name: "index_applications_on_created_at", using: :btree
     t.index ["student_id"], name: "index_applications_on_student_id", using: :btree
   end
@@ -83,7 +84,6 @@ ActiveRecord::Schema.define(version: 20170510135954) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "note"
-    t.datetime "offer_date"
     t.index ["application_id", "course_id"], name: "index_course_selections_on_application_id_and_course_id", unique: true, using: :btree
     t.index ["application_id"], name: "index_course_selections_on_application_id", using: :btree
     t.index ["course_id"], name: "index_course_selections_on_course_id", using: :btree

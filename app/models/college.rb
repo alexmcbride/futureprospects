@@ -70,13 +70,14 @@ class College < ApplicationRecord
     end
   end
 
-  def handle_clearance
-    applications = self.find_clearance
-    applications.each do |application|
-      courses = Course.find_clearance(application, self).includes(:college).to_a
-      if courses.any?
-        StudentMailer.clearance(application.student, courses).deliver_later
+  private
+    def handle_clearance
+      applications = self.find_clearance
+      applications.each do |application|
+        courses = Course.find_clearance(application, self).includes(:college).to_a
+        if courses.any?
+          StudentMailer.clearance(application.student, courses).deliver_later
+        end
       end
     end
-  end
 end

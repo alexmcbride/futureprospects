@@ -66,6 +66,11 @@
             <strong><%= format_date @application.payment_expiry_time %></strong>. This payment was not made in due time.
             For this reason we have cancelled your application. If you would like to discuss the matter further, please
             contact the <%= mail_to 'futureprospectsapp@gmail.com', 'administrative staff' %>.</p>
+        <% elsif @application.replies_overdue? %>
+          <div class="alert alert-danger"><strong>Your application has been cancelled.</strong></div>
+          <p>We did not receive your choices within the requisite time. We were due to receive your replies by
+            <strong><%= format_date @application.decision_due %></strong>. Unfortunately, it is now too late to process
+            your application before the start of the next academic year.</p>
         <% elsif @application.awaiting_decisions? %>
           <p><strong>Your application has been sent to your chosen colleges to be considered.</strong></p>
           <p>Once you have received all of your

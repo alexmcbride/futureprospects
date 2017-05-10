@@ -32,7 +32,7 @@ class Application < ApplicationRecord
 
   # Enum for the application status.
   enum status: [:submitting, :awaiting_payment, :payment_failed, :cancelled, :awaiting_decisions, :all_decisions_made,
-                :all_rejected, :completed]
+                :all_rejected, :completed, :replies_overdue]
 
   # Enum for current application stage.
   enum current_stage: [:intro_stage, :profile_stage, :education_stage, :employment_stage, :references_stage,
@@ -77,7 +77,8 @@ class Application < ApplicationRecord
   has_many :course_selections
   has_many :payments
 
-  before_save :update_status_for_decisions
+  # Callbacks.
+  before_save :update_for_awaiting_decisions, on: :update # Detects when all colleges have made their decisions.
 
   # Allows support of nested forms for the course offers form.
   accepts_nested_attributes_for :course_selections, reject_if:  lambda {|attr| attr[:college_offer].blank?}
@@ -286,33 +287,13 @@ class Application < ApplicationRecord
   # Task for handling overdue replies, that is course selections that have been without a decision for too long. As
   # above called as a rake task once a day.
   def self.handle_overdue_replies
-    applications = CourseSelection.find_overdue_applications.includes(:student)
+    applications = Application.where(status: :all_decisions_made).where('CURRENT_DATE>decision_due')
+
     applications.each do |application|
-      application.cancel
+      application.update_status :replies_overdue
       puts "Cancelled application for: #{application.student.username}..."
       StudentMailer.reply_overdue(application.student, application)
     end
-  end
-
-  # Determines if the student can still reply to an offer on this application.
-  #
-  # Returns - true if they can reply.
-  def can_reply?
-    self.course_selections.order(:offer_date).last.can_reply?
-  end
-
-  # Determines if the student cannot reply to an offer on this application.
-  #
-  # Returns - true if they can reply.
-  def reply_overdue?
-    !can_reply?
-  end
-
-  # Determines the reply date for the application.
-  #
-  # Returns - the reply date object.
-  def reply_date
-    self.course_selections.order(:offer_date).last.reply_date
   end
 
   # Finds all course selections that do not have an offer.
@@ -558,17 +539,34 @@ class Application < ApplicationRecord
 
   private
     # Checks if all selections have offers, if they do then marks application as completed.
-    def update_status_for_decisions
+    def update_for_awaiting_decisions
       if awaiting_decisions? && all_selections_have_updates?
-        if all_selections_rejected?
-          self.status = :all_rejected
-        else
-          self.status = :all_decisions_made
-        end
-        self.save!
+        puts 'nah...'
+
+        # Update application.
+        self.status = all_selections_rejected? ? :all_rejected : :all_decisions_made
+        self.decision_due = get_decision_due
+        self.save! validate: false
 
         # Email student to inform them that all of their decisions have been made.
         StudentMailer.decisions_made(self.student, self).deliver_later
+      end
+    end
+
+    # Gets the date that a student decision is due.
+    #
+    # Returns - the decision due date.
+    def get_decision_due
+      today = Date.today
+      year = today.year
+      if today < Date.new(year, 3, 31)
+        Date.new(year, 5, 6)
+      elsif today < Date.new(year, 5, 7)
+        Date.new(year, 6, 4)
+      elsif today < Date.new(year, 6, 4)
+        Date.new(year, 6, 25)
+      else #if today < Date.new(year, 7, 16)
+        Date.new(year, 7, 23)
       end
     end
 

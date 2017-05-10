@@ -7,4 +7,11 @@ namespace :site_tasks do
     Application.handle_failed_payments
     puts 'Task end: failed payments'
   end
+
+  desc 'Cancels applications that have not received timely replies'
+  task :handle_overdue_replies => :environment do
+    puts 'Task: handle overdue replies task started'
+    Application.handle_overdue_replies
+    puts 'Task end: overdue replies'
+  end
 end

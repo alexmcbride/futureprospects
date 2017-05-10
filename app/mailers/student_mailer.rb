@@ -25,12 +25,6 @@ class StudentMailer < ApplicationMailer
     mail(to: @student.email, subject: 'Future Prospects - Application Cancelled')
   end
 
-  def application_completed(student, application)
-    @student = student
-    @application = application
-    mail(to: @student.email, subject: 'Future Prospects - Application Completed')
-  end
-
   def payment_received(student, payment)
     @student = student
     @payment = payment
@@ -53,5 +47,11 @@ class StudentMailer < ApplicationMailer
     @student = student
     @courses = courses
     mail(to: student.email, subject: 'Future Prospects - Clearance')
+  end
+
+  def reply_overdue(student, application)
+    @student = student
+    @application = application
+    mail(to: @student.email, subject: 'Future Prospects - Application Cancelled')
   end
 end

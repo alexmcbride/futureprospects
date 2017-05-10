@@ -1,6 +1,6 @@
 <h1>Future Prospects - Application Cancelled</h1>
 
-<p><%= @student.full_name %>,</p>
+<p>Hello <%= @student.full_name %>,</p>
 
 <p>This email is to inform you that your application cannot be processed due to non-payment for the amount of
   <strong><%= number_to_currency @application.calculate_fee_pounds, unit: '£' %></strong>.</p>

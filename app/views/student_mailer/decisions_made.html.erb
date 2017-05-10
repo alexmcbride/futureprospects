@@ -11,8 +11,10 @@
   <% end %>
 </ul>
 
-<p>Please sign in to the Future Prospects site to <%= link_to 'see what decisions have been made', root_url %>. You can
-now make your own choices and decide which of your offers is right for you.</p>
+<p>Next, you need to <%= link_to 'sign in', new_student_session_url %> to Future Prospects to view what the decisions
+  are, you can then proceed to make your own choices.</p>
+
+<p>You must do this before <strong><%= format_date @application.reply_date %></strong> or your application will be rejected.</p>
 
 <p>Sincerely,
   <br><br>

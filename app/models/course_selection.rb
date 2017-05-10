@@ -13,7 +13,8 @@ class CourseSelection < ApplicationRecord
   validate :course_is_open, on: :create
   validate :course_not_full, on: :create
   validate :application_can_add, on: :create
-  validates :note, presence: true, if: :rejected? || :conditional?
+  validates :note, presence: true, if: :rejected? || :conditional_offer
+  # validates :offer_date, presence: true, if: :rejected? || :conditional_offer? || :definite_offer?
 
   # Associations
   belongs_to :application, counter_cache: true
@@ -71,6 +72,11 @@ class CourseSelection < ApplicationRecord
     result.first['count']
   end
 
+  # Gets the colleges that the application has applied to.
+  #
+  # * +application+ - the application to find colleges for.
+  #
+  # Returns - ActiveRecord::Relation.
   def self.selected_colleges(application)
     application.course_selections
         .select('DISTINCT (colleges.*)')
@@ -78,22 +84,74 @@ class CourseSelection < ApplicationRecord
         .where(student_choice: [:firm_choice, :insurance_choice])
   end
 
+  # Finds applications that are past the date that a student's reply is due.
+  #
+  # Returns - ActiveRecord::Relation.
+  def self.find_overdue_applications
+    year = Date.today.year
+    Application.select('DISTINCT applications.*')
+        .joins(:course_selections)
+        .where("(course_selections.offer_date<=date '#{year}-03-31' AND CURRENT_DATE>date '#{year}-05-06') OR " +
+               "(course_selections.offer_date<=date '#{year}-05-07' AND CURRENT_DATE>date '#{year}-06-04') OR " +
+               "(course_selections.offer_date<=date '#{year}-06-04' AND CURRENT_DATE>date '#{year}-06-25') OR " +
+               "(course_selections.offer_date<=date '#{year}-07-16' AND CURRENT_DATE>date '#{year}-07-23')")
+  end
+
+  # Gets the final reply date for the course selection.
+  #
+  # Returns - the reply Date
+  def reply_date
+    # Get year for course start
+    year = Date.today.year
+
+    # 31 March 2017	- 6 May 2017
+    # 7 May 2017 - 4 June 2017
+    # 4 June 2017 - 25 June 2017
+    # 16 July 2017 - 23 July 2017
+    if offer_date < Date.new(year, 3, 31)
+      Date.new(year, 5, 6)
+    elsif offer_date < Date.new(year, 5, 7)
+      Date.new(year, 6, 4)
+    elsif offer_date < Date.new(year, 6, 4)
+      Date.new(year, 6, 25)
+    elsif offer_date < Date.new(year, 7, 16)
+      Date.new(year, 7, 23)
+    end
+  end
+
+  # Gets if the student can still reply to this decision.
+  #
+  # Returns - a boolean true if they can still reply.
+  def can_reply?
+    Date.today < self.reply_date
+  end
+
+  # Determines if the student has made all their choices.
+  #
+  # Returns - boolean true if they do have all choices.
   def has_all_choices?
     self.application.course_selections.all? {|s| s.student_choice.present? || s.rejected?}
   end
 
+  # Updates course selection for firm_choice
+  #
+  # Returns - true if the student has made all their choices
   def make_firm_choice
     self.student_choice = :firm_choice
     save!
     has_all_choices?
   end
 
+  # Updates course selection for insurance choice.
   def make_insurance_choice
     self.student_choice = :insurance_choice
     save!
     CourseSelection.decline_all(self.application)
   end
 
+  # Clears all of a student's choices.
+  #
+  # * +application+ - the application to clear choices for.
   def self.clear_all_choices(application)
     application.course_selections.each do |selection|
       selection.student_choice = nil
@@ -101,6 +159,9 @@ class CourseSelection < ApplicationRecord
     end
   end
 
+  # Declines all of a student's choices.
+  #
+  # * +application+ - the application to decline choices for.
   def self.decline_all(application)
     application.course_selections.each do |selection|
       unless selection.firm_choice? or selection.insurance_choice?
@@ -110,6 +171,9 @@ class CourseSelection < ApplicationRecord
     end
   end
 
+  # Declines student's insurance choice.
+  #
+  # * +application+ - the application to decline for.
   def self.decline_insurance(application)
     application.course_selections.each do |selection|
       unless selection.firm_choice?

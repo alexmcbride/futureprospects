@@ -38,7 +38,13 @@
       <% end %>
     </div>
 
-    <% if @application.all_decisions_made? %>
+    <% if !@application.can_reply? %>
+        <hr>
+        <h4>Out of Time</h4>
+        <p>Sorry, you have not made your decisions within the allotted time frame. Your decisions were due by
+          <strong><%= @application.reply_date %></strong>. It is now too late to process your application before the start of the next
+        academic year.</p>
+    <% elsif @application.all_decisions_made? %>
       <div class="text-right">
         <p class="small text-darkish">Proceed to select your first choice of study.</p>
         <%= link_to decisions_firm_path, class: 'btn btn-primary' do %>

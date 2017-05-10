@@ -1,0 +1,16 @@
+<h1>Future Prospects - Application Cancelled</h1>
+
+<p>Hello <%= @student.full_name %>,</p>
+
+<p>This email is to inform you that your application has been cancelled, as we have not received the reply to your
+  offers within the required timeframe.</p>
+
+<p>Your decisions were due to be received by <strong><%= format_date @application.reply_date %></strong>.</p>
+
+<p>Unfortunately this means that we do not have time to process your application before the start of the next academic
+  year. If you would like to discuss this decision, please contact
+  <%= mail_to 'futureprospectsapp@gmail.com', 'administrative staff' %>.</p>
+
+<p>Sincerely,
+  <br><br>
+  Future Prospects</p>

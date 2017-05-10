@@ -283,6 +283,23 @@ class Application < ApplicationRecord
     end
   end
 
+  def self.handle_overdue_replies
+    applications = CourseSelection.find_overdue_applications.includes(:student)
+    applications.each do |application|
+      application.cancel
+      puts "Cancelled application for: #{application.student.username}..."
+      StudentMailer.reply_overdue(application.student, application)
+    end
+  end
+
+  def can_reply?
+    self.course_selections.order(:offer_date).last.can_reply?
+  end
+
+  def reply_date
+    self.course_selections.order(:offer_date).last.reply_date
+  end
+
   # Finds all course selections that do not have an offer.
   #
   # Returns - a relation of course selections.

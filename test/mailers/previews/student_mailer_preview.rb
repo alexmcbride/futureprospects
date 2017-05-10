@@ -47,4 +47,9 @@ class StudentMailerPreview < ActionMailer::Preview
     student = course.course_selections.first.application.student
     StudentMailer.clearance(student, [course])
   end
+
+  def reply_overdue
+    @application = CourseSelection.find_overdue_applications.first
+    StudentMailer.reply_overdue(@application.student, @application)
+  end
 end

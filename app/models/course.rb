@@ -206,6 +206,7 @@ class Course < ApplicationRecord
   # Returns - an ActiveRecord::Relation with
   def self.find_clearance(application, college=nil)
     categories = application.course_selections.select('courses.category_id').joins(:course)
+
     scope = Course.joins(:course_selections)
         .select('DISTINCT(courses.*)')
         .where('courses.status' => :open)
@@ -220,6 +221,7 @@ class Course < ApplicationRecord
   end
 
   private
+    #
     def find_clearance
       Application.select('DISTINCT (applications.*)')
           .joins(course_selections: :course)

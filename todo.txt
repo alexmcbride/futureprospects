@@ -57,6 +57,13 @@ investigate scopes?
 
 clearance opt-out?
 
-reply dates?
-
 don't get clearance emails for courses you've been rejected from?
+
+student view clearance page?
+
+trigger all colleges clearance at one time
+
+prevent create application after last decision date? final application date.
+
+change course selections offer_date to decision date, make code much simpler
+also add new app status for decision overdue

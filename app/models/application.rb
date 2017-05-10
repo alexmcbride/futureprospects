@@ -283,6 +283,8 @@ class Application < ApplicationRecord
     end
   end
 
+  # Task for handling overdue replies, that is course selections that have been without a decision for too long. As
+  # above called as a rake task once a day.
   def self.handle_overdue_replies
     applications = CourseSelection.find_overdue_applications.includes(:student)
     applications.each do |application|
@@ -292,10 +294,23 @@ class Application < ApplicationRecord
     end
   end
 
+  # Determines if the student can still reply to an offer on this application.
+  #
+  # Returns - true if they can reply.
   def can_reply?
     self.course_selections.order(:offer_date).last.can_reply?
   end
 
+  # Determines if the student cannot reply to an offer on this application.
+  #
+  # Returns - true if they can reply.
+  def reply_overdue?
+    !can_reply?
+  end
+
+  # Determines the reply date for the application.
+  #
+  # Returns - the reply date object.
   def reply_date
     self.course_selections.order(:offer_date).last.reply_date
   end
@@ -511,12 +526,18 @@ class Application < ApplicationRecord
     end
   end
 
+  # Creates a new application payment with a status of null.
+  #
+  # Returns - the new payment object.
   def create_application_payment
     Payment.new application: self,
                 amount: self.calculate_fee,
                 description: "Application fee (#{pluralize self.course_selections_count, 'course'})"
   end
 
+  # Gets the most recent unpaid payment for the application.
+  #
+  # Returns - a payment object.
   def unpaid_payment
     self.payments.where(status: nil).or(self.payments.where(status: :failed)).last
   end
@@ -551,6 +572,9 @@ class Application < ApplicationRecord
       end
     end
 
+    # Determines if all course selections have a rejected status
+    #
+    # Returns -  a boolean indicating if they're rejected.
     def all_selections_rejected?
       self.course_selections.all? {|s| s.rejected?}
     end

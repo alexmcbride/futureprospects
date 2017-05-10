@@ -54,3 +54,9 @@ put some kind of message in application when all your college's decisions have b
 put --choose-- on select in app (profile etc.) also look at genders (prefer not to say)
 
 investigate scopes?
+
+clearance opt-out?
+
+reply dates?
+
+don't get clearance emails for courses you've been rejected from?

@@ -16,16 +16,22 @@ Rails.application.routes.draw do
   namespace :staff do
     get 'courses/:id/remove', to: 'courses#remove', as: 'course_remove'
     resources :courses
+
     get 'categories/:id/remove', to: 'categories#remove', as: 'category_remove'
     resources :categories
+
+    get 'colleges/:id/clearance', to: 'colleges#clearance', as: 'college_clearance'
+    post 'colleges/:id/clearance', to: 'colleges#clearance_update', as: 'college_clearance_update'
     get 'colleges/:id/remove', to: 'colleges#remove', as: 'college_remove'
     resources :colleges
+
     get 'members/:id/permissions', to: 'members#permissions', as: 'member_permissions'
     post 'members/:id/permissions', to: 'members#permissions_update', as: 'member_permissions_update'
     post 'members/:id/promote_admin', to: 'members#promote_admin', as: 'member_promote_admin'
     post 'members/:id/demote_admin', to: 'members#demote_admin', as: 'member_demote_admin'
     get 'members/:id/remove', to: 'members#remove', as: 'member_remove'
     resources :members
+
     resources :applications
   end
 

@@ -41,4 +41,10 @@ class StudentMailerPreview < ActionMailer::Preview
     application = student.applications.first
     StudentMailer.decisions_made(student, application)
   end
+
+  def clearance
+    course = Course.where('course_selections_count>0').first
+    student = course.course_selections.first.application.student
+    StudentMailer.clearance(student, [course])
+  end
 end

@@ -48,4 +48,10 @@ class StudentMailer < ApplicationMailer
     @application = application
     mail(to: @student.email, subject: 'Future Prospects - Decisions Made')
   end
+
+  def clearance(student, courses)
+    @student = student
+    @courses = courses
+    mail(to: student.email, subject: 'Future Prospects - Clearance')
+  end
 end

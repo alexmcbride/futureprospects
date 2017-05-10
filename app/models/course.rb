@@ -126,34 +126,6 @@ class Course < ApplicationRecord
     false
   end
 
-  # Updates attributes and takes action depending on status change (e.g. cancelled etc).
-  #
-  # * +params+ - The request params including the update data.
-  #
-  # Returns - a boolean indicating if the operation was successful.
-  def update_with_status(params)
-    # Check if status has just been switched to cancelled
-    if !self.cancelled? && params[:status] == 'cancelled'
-      return cancel
-    end
-
-    self.update params
-  end
-
-  # Cancels course and emails all students who had applied for it.
-  #
-  # Returns - a boolean indicating if the operation was successful.
-  def cancel
-    # Ignore if already cancelled.
-    unless self.cancelled?
-      self.status = :cancelled
-      self.save
-      send_mass_cancellation_email
-      return true
-    end
-    false
-  end
-
   # Finds all courses with an open status.
   #
   # * +category+ - optional category the include the where clause
@@ -167,7 +139,73 @@ class Course < ApplicationRecord
     end
   end
 
+  # Updates attributes and takes action depending on status change (e.g. cancelled etc).
+  #
+  # * +params+ - The request params including the update data.
+  #
+  # Returns - a boolean indicating if the operation was successful.
+  def update_with_status(params)
+    # Check if status has just been switched to cancelled
+    if params[:status] == 'cancelled'
+      cancel
+    end
+
+    # Check enter clearance mode.
+    if params[:status] == 'clearance'
+      clearance
+    end
+
+    self.update params
+  end
+
+  # Cancels course and emails all students who had applied for it.
+  #
+  # Returns - a boolean indicating if the operation was successful.
+  def cancel
+    # Ignore if already cancelled.
+    unless self.cancelled?
+      self.status = :cancelled
+      self.save
+
+      # Send email to all students.
+      self.course_selections.each do |selection|
+        student = selection.application.student
+        StudentMailer.course_cancelled(student, self).deliver_later
+      end
+
+      return true
+    end
+    false
+  end
+
+  # Puts course into clearance mode and emails any students eligable for clearance.
+  #
+  # Returns - true if clearance was enabled.
+  def clearance
+    unless self.clearance?
+      self.status = :clearance
+      self.save
+
+      # Send email to all matching applications.
+      applications = find_clearance
+      applications.each do |application|
+        StudentMailer.clearance(application.student, [self]).deliver_later
+      end
+
+      return true
+    end
+
+    false
+  end
+
   private
+    def find_clearance
+      Application.select('DISTINCT (applications.*)')
+          .joins(course_selections: :course)
+          .where('applications.status' => :all_rejected)
+          .where('courses.category_id' => self.category_id)
+    end
+
     # ActiveRecord callback, called before validation, that adds a default status if one does not exist.
     def default_to_open_status
       unless self.status
@@ -180,14 +218,6 @@ class Course < ApplicationRecord
     def spaces_greater_than_applicants
       if self.spaces < self.course_selections_count
         self.errors.add(:spaces, 'cannot be less than number of applicants')
-      end
-    end
-
-    # Sends a cancellation email to all student's who have applied for the course.
-    def send_mass_cancellation_email
-      self.course_selections.each do |selection|
-        student = selection.application.student
-        StudentMailer.course_cancelled(student, self).deliver_later
       end
     end
 end

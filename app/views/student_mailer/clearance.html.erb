@@ -1,0 +1,20 @@
+<h1>Future Prospects - Clearance</h1>
+
+<p>Hello <%= @student.full_name %>,</p>
+
+<p>We're sorry that your previous application was unsuccessful, however you have qualified for clearance courses. This
+  is where we match students who have received no offers to courses with spaces still left to fill.</p>
+
+<p>Here are the clearance courses you currently qualify for.</p>
+
+<ul>
+  <% @courses.each do |course| %>
+    <li><%= link_to course.title, course_url(course) %> - <%= course.college.name %></li>
+  <% end %>
+</ul>
+
+<p>We may contact you about more offers in the future!</p>
+
+<p>Sincerely,
+  <br><br>
+  Future Prospects</p>

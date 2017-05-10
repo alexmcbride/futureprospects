@@ -257,6 +257,11 @@ end
 crumb :staff_new_college do
   parent :staff_colleges
   link 'New', new_staff_college_path
+  end
+
+crumb :staff_college_clearance do |college|
+  parent :staff_show_college, college
+  link 'Clearance', staff_college_clearance_path(college)
 end
 
 crumb :staff_members do

@@ -1,5 +1,5 @@
 class Staff::CollegesController < Staff::StaffController
-  before_action :set_college, only: [:show, :edit, :update, :remove, :destroy]
+  before_action :set_college, only: [:show, :edit, :update, :remove, :destroy, :clearance]
 
   # GET /staff/colleges
   def index
@@ -71,6 +71,14 @@ class Staff::CollegesController < Staff::StaffController
     end
   end
 
+  def clearance
+    authorize @college
+  end
+
+  def clearance_update
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_college
@@ -79,6 +87,6 @@ class Staff::CollegesController < Staff::StaffController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def college_params
-      params.require(:college).permit(:name, :description, :telephone, :email, :website, :address, :postcode, :image, :image_cache)
+      params.require(:college).permit(:name, :description, :telephone, :email, :website, :address, :postcode, :image, :image_cache, :clearance)
     end
 end

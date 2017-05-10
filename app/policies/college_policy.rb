@@ -82,4 +82,11 @@ class CollegePolicy < BaseApplicationPolicy
   def clearance?
     edit?
   end
+
+  # Checks if the user can perform this action on the model.
+  #
+  # Returns - a boolean indicating if the action is allowed.
+  def clearance_update?
+    edit?
+  end
 end

@@ -1,4 +1,4 @@
-<% breadcrumb :staff_show_college, @college %>
+<% breadcrumb :staff_college_clearance, @college %>
 <% @title = 'Clearance' %>
 
 <div class="row">
@@ -12,6 +12,29 @@
     <hr>
 
     <h4>Clearance Matches</h4>
-    
+
+    <% if @applications.any? %>
+      <p>These students will be emailed in regards to clearance courses.</p>
+
+      <ul>
+        <% @applications.each do |application| %>
+          <li><%= link_to application.student.full_name, staff_application_path(application) %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p><em>There are no clearance matches for this college.</em></p>
+    <% end %>
+
+    <hr>
+
+    <%= form_for @college, url: staff_college_clearance_update_path(@college), method: :post do |f| %>
+      <%= f.hidden_field :id %>
+      <%= f.hidden_field :clearance, value: !@college.clearance? %>
+      <%= f.button class: 'btn btn-primary' do %>
+        <%= icon('refresh') %>
+        <%= @college.clearance? ? 'Disable Clearance' : 'Enable Clearance' %>
+      <% end %>
+    <% end %>
+
   </div>
 </div>

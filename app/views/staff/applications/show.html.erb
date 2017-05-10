@@ -29,14 +29,16 @@
       <h3 class="no-top-margin">Course Selections</h3>
       <p class="text-darkish">The student has made the following course selections.</p>
       <ol class="list-group">
-        <% policy_scope(@application.course_selections).includes(:course).each do |selection| %>
+        <% policy_scope(@application.course_selections).includes(course: [:college, :category]).each do |selection| %>
           <li class="list-group-item list-group-item-info">
             <div class="row">
               <div class="col-sm-9" title="<%= selection.course.title %> - <%= selection.course.category.name %>">
                 <%= truncate selection.course.title, length: 83 %>
+                <br>
+                <small><%= selection.course.college.name %> | <%= selection.course.category.name %></small>
               </div>
               <div class="col-sm-3 text-right">
-                <%= selection.college_offer.humanize if selection.college_offer %>
+                <strong><%= selection.college_offer.humanize if selection.college_offer %></strong>
               </div>
             </div>
           </li>

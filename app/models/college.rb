@@ -52,4 +52,31 @@ class College < ApplicationRecord
       true
     end
   end
+
+  # Finds all applications that have a rejected status and
+  #
+  def find_clearance
+    applications = Application.where('applications.status' => :all_rejected)
+
+    applications.map {|a| a if Course.find_clearance(a, self).includes(:college).any? }
+  end
+
+  def update_for_clearance(params)
+    if self.update params
+      if self.clearance?
+        handle_clearance
+      end
+      true
+    end
+  end
+
+  def handle_clearance
+    applications = self.find_clearance
+    applications.each do |application|
+      courses = Course.find_clearance(application, self).includes(:college).to_a
+      if courses.any?
+        StudentMailer.clearance(application.student, courses).deliver_later
+      end
+    end
+  end
 end

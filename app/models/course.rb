@@ -198,10 +198,32 @@ class Course < ApplicationRecord
     false
   end
 
+  # Finds all clearance courses for the specified application.
+  #
+  # * +application+ - the application to find clearance courses for.
+  # * +college+ - an optional college to limit the courses for.
+  #
+  # Returns - an ActiveRecord::Relation with
+  def self.find_clearance(application, college=nil)
+    categories = application.course_selections.select('courses.category_id').joins(:course)
+    scope = Course.joins(:course_selections)
+        .select('DISTINCT(courses.*)')
+        .where('courses.status' => :open)
+        .where('courses.course_selections_count<courses.spaces')
+        .where(category_id: categories)
+
+    if college
+      scope = scope.where('courses.college_id' => college.id)
+    end
+
+    scope
+  end
+
   private
     def find_clearance
       Application.select('DISTINCT (applications.*)')
           .joins(course_selections: :course)
+          .where('courses.college_id' => self.college_id)
           .where('applications.status' => :all_rejected)
           .where('courses.category_id' => self.category_id)
     end

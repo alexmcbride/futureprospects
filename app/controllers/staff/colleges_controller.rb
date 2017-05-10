@@ -1,5 +1,5 @@
 class Staff::CollegesController < Staff::StaffController
-  before_action :set_college, only: [:show, :edit, :update, :remove, :destroy, :clearance]
+  before_action :set_college, only: [:show, :edit, :update, :remove, :destroy, :clearance, :clearance_update]
 
   # GET /staff/colleges
   def index
@@ -73,10 +73,14 @@ class Staff::CollegesController < Staff::StaffController
 
   def clearance
     authorize @college
+
+    @applications = @college.find_clearance
   end
 
   def clearance_update
-
+    authorize @college
+    @college.update_for_clearance college_params
+    redirect_to staff_college_clearance_path(@college), notice: 'Clearance updated'
   end
 
   private

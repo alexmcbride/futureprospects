@@ -74,6 +74,6 @@ class Staff::ApplicationsController < Staff::StaffController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def application_params
-      params.require(:application).permit(course_selections_attributes: [:id, :college_offer, :note, :offer_date])
+      params.require(:application).permit(course_selections_attributes: [:id, :college_offer, :note])
     end
 end

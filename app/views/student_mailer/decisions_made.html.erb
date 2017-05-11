@@ -11,10 +11,11 @@
   <% end %>
 </ul>
 
-<p>Next, you need to <%= link_to 'sign in', new_student_session_url %> to Future Prospects to view what the decisions
-  are, you can then proceed to make your own choices.</p>
+<p>Next you need to <%= link_to 'sign in', new_student_session_url %> to Future Prospects to view what the decisions
+  are, you can then proceed to reply with your own choices, so you can prioritise your offers.</p>
 
-<p>You must do this before <strong><%= format_date @application.reply_date %></strong> or your application will be rejected.</p>
+<p>You must do this before <strong><%= format_date @application.replies_due %></strong> or your application will be
+  automatically cancelled, as after this date we are not able to process any applications.</p>
 
 <p>Sincerely,
   <br><br>

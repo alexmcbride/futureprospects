@@ -37,15 +37,13 @@
           <% end %>
         <% elsif @application.submitting? %>
           <p><strong>You've started your application but not finished it.</strong></p>
-          <p>You need to complete your application in order to apply for a course. Your application allows you to tell us about yourself, what skills, qualities, and experience you have, and what you can offer.</p>
-          <p>You can also use it to tell us what courses you'd like to study. Once submitted you'll need to make a
-            payment for the application fee. After that, your application will be sent to your chosen colleges to be
-            considered.</p>
+          <p>You need to complete your application in order to apply for a course. Your application allows you to tell us about yourself, what skills, qualities, and experience you have, and what you can offer. You can also use it to tell us what courses you'd like to study.</p>
+          <p>Once submitted a payment will need to be made for the application fee. After that, your application will be sent to your chosen colleges to be considered.</p>
           <div class="text-right">
             <%= link_to 'Continue Application', applications_continue_path, role: 'button', class: 'link-button' %>
           </div>
         <% elsif @application.awaiting_payment? %>
-          <p><strong>Your application has been submitted but we haven't received your application fee yet.</strong></p>
+          <p><strong>Your application has been submitted but your application fee has not been paid yet.</strong></p>
           <p>We are waiting to receive a payment for the application fee of <strong><%= number_to_currency @application.calculate_fee_pounds, unit: '£' %></strong>.
             The payment needs to be made before your application can be processed. You can make a payment either with a debit or credit card, or through PayPal.</p>
           <p>Once payment is received your application will be sent to your chosen colleges to be considered.</p>
@@ -55,7 +53,8 @@
         <% elsif @application.payment_failed? %>
           <p><strong>You made a payment but it was not successful.</strong></p>
           <p>We are waiting to receive a payment for the application fee of <strong><%= number_to_currency @application.calculate_fee_pounds, unit: '£' %></strong>.</p>
-          <p>The payment needs to be received by the <strong><%= format_date @application.payment_expiry_time %></strong> or your application will be cancelled. You can make a payment either with a debit or credit card, or through PayPal. Once payment is received your application will be sent to your chosen colleges to be considered.</p>
+            <p>The payment needs to be received by the <strong><%= format_date @application.payment_expiry_time %></strong> or your application will be cancelled. You can make a payment either with a debit or credit card, or through PayPal.</p>
+            <p>Once payment is received your application will be sent to your chosen colleges to be considered.</p>
           <div class="text-right">
             <%= link_to 'Make Payment', payment_redirect_path(applications_completed_path), role: 'button', class: 'link-button' %>
           </div>
@@ -73,18 +72,17 @@
             your application before the start of the next academic year.</p>
         <% elsif @application.awaiting_decisions? %>
           <p><strong>Your application has been sent to your chosen colleges to be considered.</strong></p>
-          <p>Once you have received all of your
-            decisions you can then prioritise them so you can choose the college and course that's right for you. You
-            will be notified once your decisions have been made, until then you can keep up-to-date with what's happening
-            with your application in the track application section.</p>
+            <p>You will be contacted once all of your decisions have been made. You can then prioritise them so you can choose the college and course that's right for you.</p>
+            <p>Until then you can keep up-to-date with what's happening with your application in the track application section.</p>
           <div class="text-right">
             <%= link_to 'Track Application', decisions_path, role: 'button', class: 'link-button' %>
           </div>
         <% elsif @application.awaiting_replies? || @application.all_rejected?  %>
           <p><strong>All of your decisions have been made.</strong></p>
-            <p>All of your selected colleges have made their decisions, and you are now able to make your own. You can
-            now prioritise your decisions in order to choose the course and college that's right for you. You can also
+            <p>All of your selected colleges have made their decisions, and you are now able to reply with your own. You can
+            prioritise your offers in order to choose the course and college that's right for you. You can also
             decline your offers, if you decide not to take them.</p>
+            <p>You must make your decision before <strong><%= format_date @application.replies_due %></strong>.</p>
           <div class="text-right">
             <%= link_to 'Make Your Choices', decisions_path, role: 'button', class: 'link-button' %>
           </div>

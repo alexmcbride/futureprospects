@@ -558,11 +558,9 @@ class Application < ApplicationRecord
     # Checks if all selections have offers, if they do then marks application as completed.
     def update_for_awaiting_decisions
       if awaiting_decisions? && all_selections_have_updates?
-        puts 'nah...'
-
         # Update application.
         self.status = all_selections_rejected? ? :all_rejected : :awaiting_replies
-        self.replies_due = get_replies_due
+        self.replies_due = Application.get_replies_due
         self.save! validate: false
 
         # Email student to inform them that all of their decisions have been made.

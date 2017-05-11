@@ -19,8 +19,8 @@
   <div class="col-sm-9">
     <h3 class="no-top-margin">Add Courses</h3>
     <p>
-      Add the courses that you wish to apply for, up to a maximum of five. Use the auto-complete search box below to
-      select the course and then click the add button. You will be charged the specified amount as an application fee
+      Add up to <strong>five courses</strong> that you wish to apply for. Use the auto-complete search box below to
+      select the course and then click the add button. You will be charged the specified application fee
       when your application is submitted.
     </p>
     <%= form_for @course_selection, url: applications_courses_add_path, method: :post do |f| %>
@@ -51,7 +51,7 @@
           <% else %>
             <div class="row">
               <div class="col-xs-8">
-                <p class="text-darkish small">These are the courses you are applying for. You can remove them by clicking the remove button</p>
+                <p class="text-darkish small">These are the courses you are applying for.</p>
               </div>
               <div class="col-xs-4 text-right">
                 <strong>

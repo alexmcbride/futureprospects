@@ -73,7 +73,7 @@ class Payment < ApplicationRecord
 
     # We always save, whether it was successful or not.
     self.paid_at = DateTime.now
-    self.save!
+    self.save! validate: false
     response.success?
   end
 

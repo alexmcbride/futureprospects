@@ -11,8 +11,6 @@
   <%= form_errors @application %>
 
   <%= f.fields_for :course_selections, policy_scope(@application.course_selections).includes(course: [:category, :college]).order(:course_id) do |g| %>
-    <%= g.hidden_field :offer_date, value: DateTime.now.to_s %>
-
     <div class="well">
       <div class="row">
         <div class="col-sm-8">

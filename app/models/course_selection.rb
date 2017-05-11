@@ -117,31 +117,39 @@ class CourseSelection < ApplicationRecord
     end
   end
 
-  # Declines all of a student's choices.
-  #
-  # * +application+ - the application to decline choices for.
-  def self.decline_all(application)
-    application.course_selections.each do |selection|
-      unless selection.firm_choice? or selection.insurance_choice?
-        selection.student_choice = :declined
-        selection.save!
-      end
-    end
-  end
-
-  # Declines student's insurance choice.
-  #
-  # * +application+ - the application to decline for.
-  def self.decline_insurance(application)
-    application.course_selections.each do |selection|
-      unless selection.firm_choice?
-        selection.student_choice = :declined
-        selection.save!
-      end
+  def self.decline(which, application)
+    if which == :all
+      decline_all application
+    elsif which == :insurance
+      decline_insurance application
     end
   end
 
   private
+    # Declines all of a student's choices.
+    #
+    # * +application+ - the application to decline choices for.
+    def self.decline_all(application)
+      application.course_selections.each do |selection|
+        unless selection.firm_choice? or selection.insurance_choice?
+          selection.student_choice = :declined
+          selection.save!
+        end
+      end
+    end
+
+    # Declines student's insurance choice.
+    #
+    # * +application+ - the application to decline for.
+    def self.decline_insurance(application)
+      application.course_selections.each do |selection|
+        unless selection.firm_choice?
+          selection.student_choice = :declined
+          selection.save!
+        end
+      end
+    end
+
     # Adds a validation error if the course selection is not unique.
     def course_is_unique
       if CourseSelection.exists? self.application_id, self.course_id

@@ -67,7 +67,7 @@ def student(file, tokens, schools, jobs, refs)
   file.puts app + ".permanent_postcode = '#{tokens[22]} 2GR'"
   file.puts app + ".permanent_city = 'Glasgow'"
   file.puts app + ".permanent_country = '#{tokens[8]}'"
-  submitted = (Date.new(2016, 10, 1)..Date.today).to_a.sample
+  submitted = (Date.new(2017, 1, 1)..Date.today).to_a.sample
   file.puts app + ".submitted_date = Date.strptime('#{submitted}')"
   unless tokens[20].empty?
     file.puts app + ".correspondence_house_number = '#{tokens[17]}'"
@@ -80,6 +80,11 @@ def student(file, tokens, schools, jobs, refs)
   status = Application.statuses.map {|k, v| k}.sample.to_sym
   file.puts app + ".status = :#{status}"
   file.puts app + '.current_stage = :submit_stage'
+
+  if [:awaiting_replies, :all_rejected, :completed, :replies_overdue].include? status
+    file.puts app + ".replies_due = '#{Application.get_replies_due(submitted)}'"
+  end
+
   file.puts app + '.save! validate: false'
   file.puts ''
 
@@ -173,14 +178,11 @@ def student(file, tokens, schools, jobs, refs)
     if status == :awaiting_replies or status == :completed
       offer = [:definite_offer, :conditional_offer].sample
       file.puts "course.college_offer = :#{offer}"
-      file.puts "course.offer_date = '#{submitted + rand(7..21).days}'"
     elsif status == :all_rejected
       file.puts "course.college_offer = :rejected"
-      file.puts "course.offer_date = '#{submitted + rand(7..21).days}'"
     elsif status != :awaiting_decisions
       offer = CourseSelection.college_offers.map {|k, v| k}.sample.to_sym
       file.puts "course.college_offer = :#{offer}"
-      file.puts "course.offer_date = '#{submitted + rand(7..21).days}'"
     end
 
     if status == :completed

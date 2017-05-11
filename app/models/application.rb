@@ -537,6 +537,23 @@ class Application < ApplicationRecord
     self.course_selections.any? && self.course_selections.map {|c| c.college_offer.present?}.all?
   end
 
+  # Gets the date that a student decision is due.
+  #
+  # Returns - the decision due date.
+  def self.get_replies_due(today=nil)
+    today = Date.today if today.nil?
+    year = today.year
+    if today < Date.new(year, 3, 31)
+      Date.new(year, 5, 6)
+    elsif today < Date.new(year, 5, 7)
+      Date.new(year, 6, 4)
+    elsif today < Date.new(year, 6, 4)
+      Date.new(year, 6, 25)
+    else #if today < Date.new(year, 7, 16)
+      Date.new(year, 7, 23)
+    end
+  end
+
   private
     # Checks if all selections have offers, if they do then marks application as completed.
     def update_for_awaiting_decisions
@@ -550,23 +567,6 @@ class Application < ApplicationRecord
 
         # Email student to inform them that all of their decisions have been made.
         StudentMailer.decisions_made(self.student, self).deliver_later
-      end
-    end
-
-    # Gets the date that a student decision is due.
-    #
-    # Returns - the decision due date.
-    def get_replies_due
-      today = Date.today
-      year = today.year
-      if today < Date.new(year, 3, 31)
-        Date.new(year, 5, 6)
-      elsif today < Date.new(year, 5, 7)
-        Date.new(year, 6, 4)
-      elsif today < Date.new(year, 6, 4)
-        Date.new(year, 6, 25)
-      else #if today < Date.new(year, 7, 16)
-        Date.new(year, 7, 23)
       end
     end
 

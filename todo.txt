@@ -1,69 +1,37 @@
-search terms should be:
-*Course Id
-*Course Title
-*Course Description
-*Entry qualifications
-*Career Prospects
 
 remove pundit verify_authorized from global staff controller once permissions done
 
 test heroku application cancel with real email
 
-listen gem? (look it up)
-
 comments - name, date, etc. at top of each file.
 
-heroku - sms messaging
+heroku - sms messaging / error handling
 
-heroku - error handling
-
-PDF: prawn / https://github.com/rposborne/wkhtmltopdf-heroku maybe better????
+PDF: prawn / https://github.com/rposborne/wkhtmltopdf-heroku maybe better???? / make PDF pretty? move PDF generation into some sort of view?
 Excel: alxsx
-
-dates validate - end date after start date, dates not in future...
 
 plain text emails
 
-markdown preview
-
 staff show (created / first sign in)
-
-staff permission groups
-
-remove email, scn, nin from application, display from student, edit through profile.
 
 mobile - have course category list turn into drop down (possible?)
 
-make PDF pretty? move PDF generation into some sort of view?
-
-search within a category?
-
 add user test@test.com for testing, show things like auth fail select options.
-
-staff applications edit improve validation error messages
-
-rename awaiting decisions to awaiting college?
-
-move decisionscontroller stuff into model?
-
-application course selection query (only see apps for own college) when the app is unsubmitted?
-maybe only site_admin can see unsubmitted apps?
 
 put some kind of message in application when all your college's decisions have been made but waiting for other colleges.
 
-put --choose-- on select in app (profile etc.) also look at genders (prefer not to say)
-
 investigate scopes?
-
-clearance opt-out?
-
-don't get clearance emails for courses you've been rejected from?
-
-student view clearance page?
 
 trigger all colleges clearance at one time
 
-prevent create application after last decision date? final application date.
+----
 
-change course selections offer_date to decision date, make code much simpler
-also add new app status for decision overdue
+- move decisionscontroller stuff into model?
+- application course selection query (only see apps for own college) when the app is unsubmitted?
+- maybe only site_admin can see unsubmitted apps?
+- put --choose-- on select in app (profile etc.) also look at genders (prefer not to say)
+- don't get clearance emails for courses you've been rejected from?
+- student view clearance page?
+- prevent create application after last decision date? final application date.
+- replies due year to course year
+- dates validate - end date after start date, dates not in future...

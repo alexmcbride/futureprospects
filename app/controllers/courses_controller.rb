@@ -14,8 +14,9 @@ class CoursesController < ApplicationController
   #
   # Shows courses in a particular category.
   def category
+    @search_term = params[:search]
     @category = Category.left_outer_joins(:courses).find params[:id] # Left outer join as courses can be empty
-    @courses = Course.find_open_courses(@category).paginate(:page => params[:page]).includes(:college).order(:title)
+    @courses = Course.find_open_courses.full_search(@search_term, @category).paginate(:page => params[:page]).includes(:college).order(:title)
     render :index
   end
 

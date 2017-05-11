@@ -11,7 +11,7 @@
       <div class="panel-body">
         <h2><%= icon('search', class: 'index-icon') %> Search Courses</h2>
         <p>Search our course listings to find the one that's perfect for you.</p>
-        <%= render partial: 'shared/course_search' %>
+        <%= render 'shared/course_search', path: courses_path %>
 
         <h2><%= icon('info-circle', class: 'index-icon') %> Browse Courses</h2>
         <p>Browse the categories list to view all of the opportunities we offer.</p>

@@ -72,8 +72,12 @@ class Course < ApplicationRecord
   # * +search_term+ - the term to search for.
   #
   # Returns - an ActiveRecord:Relation containing the search results
-  def self.full_search(search_term)
-    Course.search_for(search_term, profile: :full).includes(:category, :college)
+  def self.full_search(search_term, category=nil)
+    scope = Course.search_for(search_term, profile: :full).includes(:category, :college)
+    if category
+      scope = scope.where(category_id: category.id)
+    end
+    scope
   end
 
   # Checks if the course is full.

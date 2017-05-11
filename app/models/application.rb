@@ -530,45 +530,58 @@ class Application < ApplicationRecord
     StudentMailer.application_completed(self.student, self).deliver_later
   end
 
-  # Determines if all selections have had offers made.
-  #
-  # Returns - true if they all have offers.
-  def all_selections_have_updates?
-    self.course_selections.any? && self.course_selections.map {|c| c.college_offer.present?}.all?
-  end
-
   # Gets the date that a student decision is due.
   #
+  # * +year+ - an optional year int to use.
+  #
   # Returns - the decision due date.
-  def self.get_replies_due(today=nil)
-    today = Date.today if today.nil?
-    year = today.year
+  def self.calculate_replies_due(year=nil)
+    today = Date.today
+    year = today.year if year.nil?
     if today < Date.new(year, 3, 31)
       Date.new(year, 5, 6)
     elsif today < Date.new(year, 5, 7)
       Date.new(year, 6, 4)
     elsif today < Date.new(year, 6, 4)
       Date.new(year, 6, 25)
-    else #if today < Date.new(year, 7, 16)
+    else
       Date.new(year, 7, 23)
     end
   end
 
   private
-    # Checks if all selections have offers, if they do then marks application as completed.
-    def update_for_awaiting_decisions
-      if awaiting_decisions? && all_selections_have_updates?
-        # Update application.
-        self.status = all_selections_rejected? ? :all_rejected : :awaiting_replies
-        self.replies_due = Application.get_replies_due
-        self.save! validate: false
+    # Calculates the date that replies are due for this application.
+    #
+    # Returns - the date object.
+    def calculate_replies_due
+      # We get the date of the next course start, in case the decision is being made a different year. For instance,
+      # a decision made in Dec 2016 for a course starting Aug 2017.
+      date = Course.joins(:course_selections).where('course_selections.application_id' => self.id).order(:start_date).first.start_date
+      Application.calculate_replies_due date.year
+    end
 
-        # Email student to inform them that all of their decisions have been made.
+    # Called when updating. Checks if we're in awaiting_decisions state and if all selections have offers, if so they
+    # updates application to new state.
+    def update_for_awaiting_decisions
+      if awaiting_decisions? && all_selections_have_college_offers?
+        # Move to awaiting_replies state.
+        self.status = all_selections_rejected? ? :all_rejected : :awaiting_replies # This makes clearance easier later.
+        self.replies_due = calculate_replies_due # Store the final replies due date.
+        self.save! validate: false # don't let validation errors stop this train.
+
+        # Email student to inform them that all of their course selections have received decisions.
         StudentMailer.decisions_made(self.student, self).deliver_later
       end
     end
 
-    # Determines if all course selections have a rejected status
+    # Determines if all selections have had offers made.
+    #
+    # Returns - true if they all have offers.
+    def all_selections_have_college_offers?
+      self.course_selections.any? && self.course_selections.map {|c| c.college_offer.present?}.all?
+    end
+
+    # Determines if all course selections have a rejected offer.
     #
     # Returns -  a boolean indicating if they're rejected.
     def all_selections_rejected?

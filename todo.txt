@@ -29,7 +29,6 @@ add sort order to applications (submitted, updated etc.)
 
 ----
 
-- put --choose-- on select in app (profile etc.) also look at genders (prefer not to say)
 - don't get clearance emails for courses you've been rejected from?
 - student view clearance page?
 - prevent create application after last decision date? final application date.

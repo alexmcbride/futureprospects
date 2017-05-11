@@ -67,7 +67,7 @@ def student(file, tokens, schools, jobs, refs)
   file.puts app + ".permanent_postcode = '#{tokens[22]} 2GR'"
   file.puts app + ".permanent_city = 'Glasgow'"
   file.puts app + ".permanent_country = '#{tokens[8]}'"
-  submitted = (Date.new(2017, 1, 1)..Date.today).to_a.sample
+  submitted = (Date.new(2016, 5, 1)..Date.today).to_a.sample
   file.puts app + ".submitted_date = Date.strptime('#{submitted}')"
   unless tokens[20].empty?
     file.puts app + ".correspondence_house_number = '#{tokens[17]}'"
@@ -82,7 +82,7 @@ def student(file, tokens, schools, jobs, refs)
   file.puts app + '.current_stage = :submit_stage'
 
   if [:awaiting_replies, :all_rejected, :completed, :replies_overdue].include? status
-    file.puts app + ".replies_due = '#{Application.get_replies_due(submitted)}'"
+    file.puts app + ".replies_due = '#{Application.calculate_replies_due(submitted.year)}'"
   end
 
   file.puts app + '.save! validate: false'

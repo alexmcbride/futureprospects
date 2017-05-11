@@ -6,7 +6,11 @@ class Qualification < ApplicationRecord
   validates :start_date, presence: true
   validates :end_date, presence: true
 
+  # Associations.
   belongs_to :school
+
+  # Common validators.
+  include DateValidator
 
   # Gets the date range the qualification runs for
   #

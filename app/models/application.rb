@@ -28,7 +28,7 @@ class Application < ApplicationRecord
   PAYMENT_EXPIRY_DAYS = 7
 
   # Enums for student gender.
-  enum gender: [:male, :female, :other]
+  enum gender: [:male, :female, :other, :prefer_not_to_say]
 
   # Enum for the application status.
   enum status: [:submitting, :awaiting_payment, :payment_failed, :cancelled, :awaiting_decisions, :awaiting_replies,

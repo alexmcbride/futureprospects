@@ -382,3 +382,7 @@ li.home-category-item {
   background-color: #1E6583;
 }
 
+.application-info-list {
+  @extend .list-unstyled;
+  line-height: 1.6em;
+}

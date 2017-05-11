@@ -28,7 +28,8 @@
           <%= form_text_field f, :middle_name, {label: '* Middle name'} %>
           <%= form_text_field f, :family_name %>
           <%= form_text_field f, :previous_name, {label: '* Previous name'} %>
-          <%= form_select f, :gender, options_for_select(Application.genders.keys.map { |w| [w.humanize, w] }) %>
+          <% options = '<option disabled="disabled" selected="selected">-- Choose --</option>'.html_safe + options_for_select(Application.genders.keys.map { |w| [w.humanize, w] }, @application.gender) %>
+          <%= form_select f, :gender, options %>
         </div>
 
         <div class="col-sm-6 col-xs-12">

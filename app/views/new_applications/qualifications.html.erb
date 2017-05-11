@@ -55,7 +55,7 @@
     <% else %>
       <p class="text-darkish small">You can remove a qualification by clicking the remove button.</p>
       <div class="list-group">
-        <% @school.qualifications.each do |qualification| %>
+        <% @school.qualifications.order(end_date: :desc).each do |qualification| %>
           <div class="list-group-item well">
             <div class="row">
               <div class="col-sm-6">

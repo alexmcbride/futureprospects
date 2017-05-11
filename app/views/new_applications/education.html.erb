@@ -38,7 +38,7 @@
       <% else %>
         <p class="text-darkish small">You can add the qualifications gain at each school by selecting the add qualifications option.</p>
         <div class="list-group">
-          <% @application.schools.each do |school| %>
+          <% @application.schools.order(:name).each do |school| %>
             <div class="list-group-item well">
               <div class="row">
                 <div class="col-sm-6">

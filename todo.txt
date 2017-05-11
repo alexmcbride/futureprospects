@@ -1,4 +1,3 @@
-
 remove pundit verify_authorized from global staff controller once permissions done
 
 test heroku application cancel with real email
@@ -24,14 +23,14 @@ investigate scopes?
 
 trigger all colleges clearance at one time
 
+move loose styles into css file.
+
+add sort order to applications (submitted, updated etc.)
+
 ----
 
-- move decisionscontroller stuff into model?
-- application course selection query (only see apps for own college) when the app is unsubmitted?
-- maybe only site_admin can see unsubmitted apps?
 - put --choose-- on select in app (profile etc.) also look at genders (prefer not to say)
 - don't get clearance emails for courses you've been rejected from?
 - student view clearance page?
 - prevent create application after last decision date? final application date.
 - replies due year to course year
-- dates validate - end date after start date, dates not in future...

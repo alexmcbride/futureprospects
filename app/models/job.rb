@@ -1,5 +1,6 @@
 # Model class to represent a student's job.
 class Job < ApplicationRecord
+  # Validators
   validates :employer, presence: true, length: {maximum: 35}
   validates :address_1, presence: true, length: {maximum: 35}
   validates :address_2, presence: false, length: {maximum: 35}
@@ -11,5 +12,9 @@ class Job < ApplicationRecord
   validates :start_date, presence: true
   validates :end_date, presence: true
 
+  # Associations.
   belongs_to :application
+
+  # Common validators.
+  include DateValidator
 end

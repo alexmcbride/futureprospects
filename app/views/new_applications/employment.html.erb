@@ -31,7 +31,7 @@
     <% else %>
       <p class="text-darkish small">You can remove a job by clicking the remove button.</p>
       <div class="list-group">
-        <% @application.jobs.each do |job| %>
+        <% @application.jobs.order(end_date: :desc).each do |job| %>
           <div class="list-group-item well">
             <div class="row">
               <div class="col-xs-6">

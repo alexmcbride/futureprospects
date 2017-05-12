@@ -211,7 +211,7 @@ class Course < ApplicationRecord
   # * +college+ - an optional college to limit the courses for.
   #
   # Returns - an ActiveRecord::Relation with
-  def self.find_clearance(application, college=nil)
+  def self.clearance_courses(application, college=nil)
     scope = Course.available
                 .select('DISTINCT courses.*')
                 .joins(:college)

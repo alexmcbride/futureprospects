@@ -25,13 +25,14 @@ move loose styles into css file.
 
 add sort order to applications (submitted, updated etc.)
 
+make references proper n stuff
+
 ----
 
-- student view clearance page?
 - prevent create application after last decision date? final application date.
-
-make references proper n stuff
 
 staff home page / activity list...
 
 devise log in as other use / add to admin?
+
+apply for clearance?

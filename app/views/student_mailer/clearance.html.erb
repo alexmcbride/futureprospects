@@ -9,9 +9,13 @@
 
 <ul>
   <% @courses.each do |course| %>
-    <li><%= link_to course.title, course_url(course) %> - <%= course.college.name %></li>
+    <li><%= course.title %> - <%= course.college.name %></li>
   <% end %>
 </ul>
+
+<p>In order to view for and apply for clearance courses, please see the clearance section of the Future Prospects site:</p>
+
+<p><%= link_to 'Browse Clearance', courses_clearance_url %></p>
 
 <p>We may contact you about more offers in the future!</p>
 

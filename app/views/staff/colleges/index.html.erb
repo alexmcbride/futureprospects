@@ -17,7 +17,7 @@
       <% @colleges.each do |staff_college| %>
         <tr>
           <td><%= link_to staff_college.name, staff_college_path(staff_college), class: 'table-link' %></td>
-          <td><%= link_to staff_college.clearance? ? 'Yes' : 'No', staff_college_path(staff_college), class: 'table-link' %></td>
+          <td><%= staff_college.clearance? ? 'Yes' : 'No' %></td>
           <td><%= link_to icon('pencil-square'), edit_staff_college_path(staff_college), title: 'Edit' %></td>
           <td><%= link_to icon('trash'), staff_college_remove_path(staff_college), title: 'Delete' %></td>
         </tr>

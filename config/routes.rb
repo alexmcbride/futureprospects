@@ -77,6 +77,7 @@ Rails.application.routes.draw do
   post 'applications/submit', to: 'new_applications#submit_next', as: 'applications_submit_next'
   get 'applications/completed', to: 'new_applications#completed', as: 'applications_completed'
   get 'applications/:id', to: 'new_applications#show', as: 'application'
+  post 'applications/clearance', to: 'new_applications#clearance', as: 'applications_clearance'
 
   # Courses
   get 'courses/search', to: 'courses#search', as: 'courses_search'

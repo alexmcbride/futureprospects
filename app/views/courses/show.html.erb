@@ -43,7 +43,7 @@
 
         <% if student_signed_in? %>
           <% if current_student.has_current_application? %>
-            <%= form_for @course_selection, url: applications_courses_add_path(current_student.current_application), method: :post do |f| %>
+            <%= form_for @course_selection, url: applications_courses_add_path, method: :post do |f| %>
               <%= f.hidden_field :course_id %>
               <%= f.submit 'Apply for Course', class: 'btn btn-success btn-block', style: 'margin-bottom: 5px;' %>
             <% end %>

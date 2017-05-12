@@ -48,6 +48,12 @@ class StudentMailerPreview < ActionMailer::Preview
     StudentMailer.clearance(student, [course])
   end
 
+  def clearance_application
+    application = Application.where(status: :all_rejected).first
+    course = application.course_selections.first.course
+    StudentMailer.clearance_application(application.student, course)
+  end
+
   def reply_overdue
     @application = CourseSelection.find_overdue_applications.first
     StudentMailer.reply_overdue(@application.student, @application)

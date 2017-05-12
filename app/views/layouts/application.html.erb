@@ -78,7 +78,6 @@
                   <li><%= link_to 'Edit Profile', edit_registration_path(current_user) %></li>
                   <% if student_signed_in? %>
                     <li role="separator" class="divider"></li>
-                    <li><%= link_to 'View Applications', applications_path %></li>
                     <li><%= link_to 'View Payments', payments_path %></li>
                   <% end %>
                   <li role="separator" class="divider"></li>

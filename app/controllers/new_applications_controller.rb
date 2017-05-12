@@ -4,7 +4,7 @@ class NewApplicationsController < ApplicationController
                                            :qualifications, :qualifications_add, :qualifications_remove,
                                            :education_remove, :education_edit, :education_update,
                                            :employment_edit, :employment_update, :employment_remove, :courses_remove,
-                                           :completed]
+                                           :completed, :clearance]
 
   # GET: /applications
   #
@@ -35,7 +35,7 @@ class NewApplicationsController < ApplicationController
     end
   end
 
-  # GET /applications/:id/continue
+  # GET /applications/continue
   #
   # Continues an existing application, redirects to the path of first incomplete stage.
   def continue
@@ -55,20 +55,20 @@ class NewApplicationsController < ApplicationController
     end
   end
 
-  # GET: /applications/:id/intro
+  # GET: /applications/intro
   #
   # Shows intro stage.
   def intro
     @application.save_intro
   end
 
-  # GET: /applications/:id/profile
+  # GET: /applications/profile
   #
   # Displays profile form.
   def profile
   end
 
-  # POST: /applications/:id/profile
+  # POST: /applications/profile
   #
   # Updates application profile.
   def profile_next
@@ -81,14 +81,14 @@ class NewApplicationsController < ApplicationController
     end
   end
 
-  # GET: /applications/:id/education
+  # GET: /applications/education
   #
   # Displays add education form.
   def education
     @school = School.new
   end
 
-  # POST: /applications/:id/education/add
+  # POST: /applications/education/add
   #
   # Adds a new educational establishment to the application.
   def education_add
@@ -103,7 +103,7 @@ class NewApplicationsController < ApplicationController
     end
   end
 
-  # DELETE: /applications/:id/education
+  # DELETE: /applications/education
   #
   # Removes an education establishment from the application.
   def education_remove
@@ -122,7 +122,7 @@ class NewApplicationsController < ApplicationController
     @school = School.find params[:id]
   end
 
-  # PATCH: /applications/:id/education
+  # PATCH: /applications/education
   #
   # Updated the school.
   def education_update
@@ -134,7 +134,7 @@ class NewApplicationsController < ApplicationController
     end
   end
 
-  # POST: /applications/:id/education_next
+  # POST: /applications/education_next
   #
   # Submits the education stage
   def education_next
@@ -184,14 +184,14 @@ class NewApplicationsController < ApplicationController
     end
   end
 
-  # GET: /applications/:id/employment
+  # GET: /applications/employment
   #
   # Displays add employment form.
   def employment
     @job = Job.new
   end
 
-  # POST: /applications/:id/employment
+  # POST: /applications/employment
   #
   # Adds new job to the application.
   def employment_add
@@ -206,7 +206,7 @@ class NewApplicationsController < ApplicationController
     end
   end
 
-  # DELETE: /applications/:id/employment
+  # DELETE: /applications/employment/:id
   #
   # Removes job from the application.
   def employment_remove
@@ -230,7 +230,7 @@ class NewApplicationsController < ApplicationController
     end
   end
 
-  # POST: /applications/:id/employment/next
+  # POST: /applications/employment/next
   #
   # Submits employment stage.
   def employment_next
@@ -240,14 +240,14 @@ class NewApplicationsController < ApplicationController
     end
   end
 
-  # GET: /applications/:id/references
+  # GET: /applications/references
   #
   # Shows references form.
   def references
     @reference = @application.create_reference
   end
 
-  # POST: /applications/:id/references
+  # POST: /applications/references
   #
   # Submits references stage.
   def references_next
@@ -261,13 +261,14 @@ class NewApplicationsController < ApplicationController
     end
   end
 
-  # GET /applications/:id/statement
+  # GET /applicationsstatement
   #
   # Displays personal statement form.
   def statement
   end
 
   # POST /applications/:id/statement
+  #
   # Submits personal statement stage
   def statement_next
     respond_to do |format|
@@ -287,7 +288,7 @@ class NewApplicationsController < ApplicationController
     @course_selections = @application.course_selections.includes(:course)
   end
 
-  # POST /applications/:id/courses
+  # POST /applications/courses
   #
   # Adds course to application.
   def courses_add
@@ -302,7 +303,7 @@ class NewApplicationsController < ApplicationController
     end
   end
 
-  # DELETE /applications/:id/courses
+  # DELETE /applicationscourses
   #
   # Removes course from application.
   def courses_remove
@@ -314,7 +315,7 @@ class NewApplicationsController < ApplicationController
     end
   end
 
-  # POST /applications/:id/courses/next
+  # POST /applicationscourses/next
   #
   # Submits courses stage.
   def courses_next
@@ -329,13 +330,13 @@ class NewApplicationsController < ApplicationController
     end
   end
 
-  # GET /applications/:id/submit
+  # GET /applications/submit
   #
   # Shows submit stage.
   def submit
   end
 
-  # POST /applications/:id/submit
+  # POST /applications/submit
   #
   # Submits final stage.
   def submit_next
@@ -349,8 +350,20 @@ class NewApplicationsController < ApplicationController
     end
   end
 
+  # GET /applications/completed
+  #
+  # Displays the application completed page.
   def completed
+  end
 
+  # POST /applications/clearance
+  #
+  # Adds the post course to clearance.
+  def clearance
+    # TODO: add some way to view application errors?
+    @application = current_student.current_application
+    course = @application.apply_clearance(params[:course_id])
+    redirect_to root_path, notice: "Clearance course '#{course.title}' applied for"
   end
 
   private

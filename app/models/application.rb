@@ -542,6 +542,21 @@ class Application < ApplicationRecord
     end
   end
 
+  # Applies to a clearance course.
+  #
+  # * +course_id+ - the ID of the course to apply for.
+  #
+  # Returns - the applied for course.
+  def apply_clearance(course_id)
+    course = Course.available.find course_id
+    CourseSelection.create! application: self, course: course
+    update_status :awaiting_decisions
+
+    StudentMailer.clearance_application(self.student, course).deliver_later
+
+    course
+  end
+
   private
     # Calculates the date that replies are due for this application. We have to figure out the date of the next course
     # start, in case the decision is being made a different year. For instance, a decision made in Dec 2016 for a course

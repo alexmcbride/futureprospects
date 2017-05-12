@@ -55,6 +55,12 @@ class StudentMailer < ApplicationMailer
     mail(to: student.email, subject: 'Future Prospects - Clearance')
   end
 
+  def clearance_application(student, course)
+    @student = student
+    @course = course
+    mail(to: student.email, subject: 'Future Prospects - Clearance Application')
+  end
+
   def reply_overdue(student, application)
     @student = student
     @application = application

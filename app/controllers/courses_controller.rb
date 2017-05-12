@@ -50,10 +50,14 @@ class CoursesController < ApplicationController
 
   def clearance
     @courses = (if student_signed_in?
-      Course.find_clearance(current_student.current_application).includes(:college).includes(:category).order('courses.title')
+      Course.clearance_courses(current_student.current_application).includes(:college).includes(:category).order('courses.title')
     else
       Course.all_clearance_courses.includes(:college).includes(:category)
     end).paginate(page: params[:page], per_page: 10)
+  end
+
+  def clearance_apply
+
   end
 
   private

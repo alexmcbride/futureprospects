@@ -1,0 +1,17 @@
+<h1>Future Prospects - Clearance Application</h1>
+
+<p>Hello <%= @student.full_name %>,</p>
+
+<p>You have applied for the following clearance course:</p>
+
+<p><strong><%= link_to @course.title, course_url(@course) %></strong></p>
+
+<p>Your application has gone back to the awaiting decisions state and will be considered by the selected college:</p>
+
+<p><strong><%= @course.college.name %></strong></p>
+
+<p>You will receive an notification once a decision has been made.</p>
+
+<p>Sincerely,
+  <br><br>
+  Future Prospects</p>

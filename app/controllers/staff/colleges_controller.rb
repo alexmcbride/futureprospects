@@ -74,7 +74,7 @@ class Staff::CollegesController < Staff::StaffController
   def clearance
     authorize @college
 
-    @applications = @college.find_clearance
+    @applications = @college.clearance_applications
   end
 
   def clearance_update

@@ -55,7 +55,7 @@ class College < ApplicationRecord
 
   # Finds all applications that have a rejected status and
   #
-  def find_clearance
+  def clearance_applications
     # select distinct a.* from applications a
     # join course_selections s on a.id=s.application_id
     # join courses c on c.id=s.course_id
@@ -92,9 +92,9 @@ class College < ApplicationRecord
   private
     # Finds clearance applications and emails students.
     def handle_clearance
-      applications = self.find_clearance
+      applications = self.clearance_applications
       applications.each do |application|
-        courses = Course.find_clearance(application, self).includes(:college).to_a
+        courses = Course.clearance_courses(application, self).includes(:college).to_a
         if courses.any?
           StudentMailer.clearance(application.student, courses).deliver_later
         end

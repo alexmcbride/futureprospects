@@ -175,11 +175,12 @@ class Application < ApplicationRecord
     MAX_COURSES - self.course_selections_count
   end
 
-  # Checks if a student can still add courses to their application.
+  # Checks if a student can still add courses to their application, which they can either if they have fewer than the
+  # max allowed courses, or they are in clearance.
   #
   # Returns - true if can add courses.
   def can_add_course?
-    self.available_courses > 0
+    self.available_courses > 0 || self.all_rejected?
   end
 
   # Cancels this application by setting status to :cancelled.
@@ -204,6 +205,20 @@ class Application < ApplicationRecord
     selection.application = self
     if selection.valid?
       return selection.save
+    end
+    false
+  end
+
+  # Adds clearance course selection.
+  #
+  # * +selection+ - the course selection to add.
+  #
+  # Returns - true if the selection was added, otherwise false.
+  def add_clearance_course(selection)
+    if add_course selection
+      update_status :awaiting_decisions
+      StudentMailer.clearance_application(self.student, selection.course).deliver_later
+      return true
     end
     false
   end

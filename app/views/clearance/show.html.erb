@@ -1,0 +1,17 @@
+<%
+  @title = 'Clearance Application'
+%>
+
+<p>You have applied for the following clearance course:</p>
+
+<div class="well">
+  <h3 style="margin-top: 4px;"><strong><%= @selection.course.title %></strong></h3>
+  <p><%= @selection.course.category.name %> &mdash; <%= @selection.course.college.name %></p>
+</div>
+
+
+<p>Your application has now been switched to awaiting decisions status and your application has been sent to the
+selected college for consideration. Once a decision has been made you will be notified of this event. You can check
+back to check the status of your application using the track application feature.</p>
+
+<p><%= link_to 'Continue', root_path, class: 'btn btn-default', role: 'button' %></p>

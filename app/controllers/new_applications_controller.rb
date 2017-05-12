@@ -4,7 +4,7 @@ class NewApplicationsController < ApplicationController
                                            :qualifications, :qualifications_add, :qualifications_remove,
                                            :education_remove, :education_edit, :education_update,
                                            :employment_edit, :employment_update, :employment_remove, :courses_remove,
-                                           :completed, :clearance]
+                                           :completed]
 
   # GET: /applications
   #
@@ -357,16 +357,6 @@ class NewApplicationsController < ApplicationController
   #
   # Displays the application completed page.
   def completed
-  end
-
-  # POST /applications/clearance
-  #
-  # Adds the post course to clearance.
-  def clearance
-    # TODO: add some way to view application errors?
-    @application = current_student.current_application
-    course = @application.apply_clearance(params[:course_id])
-    redirect_to root_path, notice: "Clearance course '#{course.title}' applied for"
   end
 
   private

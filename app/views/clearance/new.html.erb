@@ -1,0 +1,21 @@
+<%
+  breadcrumb :clearance_new
+  @title = 'Clearance Apply'
+%>
+<%= form_for @selection, url: create_clearance_path, method: :post do |f| %>
+  <%= form_errors @selection %>
+
+  <p>Confirm that you want to apply for this clearance course.</p>
+
+  <div class="well">
+    <h3 style="margin-top: 4px;"><strong><%= @selection.course.title %></strong></h3>
+    <p><%= @selection.course.category.name %> &mdash; <%= @selection.course.college.name %></p>
+  </div>
+
+  <p>You can only apply for a single clearance course. Your application will go back to awaiting decisions status, and be
+  sent to the selected college for a decision to be made.</p>
+
+  <%= f.hidden_field :course_id %>
+  <%= f.hidden_field :application_id %>
+  <%= f.submit 'Apply for Course', class: 'btn btn-primary' %>
+<% end %>

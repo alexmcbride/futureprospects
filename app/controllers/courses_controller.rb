@@ -56,7 +56,11 @@ class CoursesController < ApplicationController
     end).paginate(page: params[:page], per_page: 10)
   end
 
-  def clearance_apply
+  def clearance_show
+
+  end
+
+  def clearance_create
 
   end
 

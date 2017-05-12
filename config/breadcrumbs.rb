@@ -21,9 +21,14 @@ crumb :course do |course|
   link course.title, course
 end
 
-crumb :courses_clearance do
-  parent :courses
-  link 'Clearance', courses_clearance_path
+crumb :clearance do
+  parent :root
+  link 'Clearance', clearance_path
+end
+
+crumb :clearance_new do
+  parent :clearance
+  link 'New', new_clearance_path
 end
 
 # colleges

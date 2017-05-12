@@ -11,6 +11,9 @@ class NewApplicationsController < ApplicationController
   # Shows a list of the student's previous applications.
   def index
     @applications = current_student.applications.where.not(status: :submitting)
+    if @applications.count == 1
+      redirect_to application_path(@applications.first)
+    end
   end
 
   # GET: /applications/:id

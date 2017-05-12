@@ -6,7 +6,7 @@
 <% if @applications.any? %>
   <ul>
     <% @applications.each do |application| %>
-      <li><%= link_to 'Application - ' + format_date(application.submitted_date), application_path(application) %></li>
+      <li><%= link_to 'View Application &mdash; '.html_safe + format_date(application.submitted_date), application_path(application) %></li>
     <% end %>
   </ul>
 <% else %>

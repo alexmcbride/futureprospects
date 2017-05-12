@@ -17,8 +17,6 @@ add user test@test.com for testing, show things like auth fail select options.
 
 put some kind of message in application when all your college's decisions have been made but waiting for other colleges.
 
-investigate scopes?
-
 trigger all colleges clearance at one time
 
 move loose styles into css file.
@@ -35,4 +33,4 @@ staff home page / activity list...
 
 devise log in as other use / add to admin?
 
-apply for clearance?
+register validation errors (scn or nin, inform recover account?)

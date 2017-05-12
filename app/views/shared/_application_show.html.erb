@@ -164,7 +164,7 @@
           </tr>
           </thead>
           <tbody>
-            <% application.schools.each do |school| %>
+            <% application.schools.includes(:qualifications).each do |school| %>
               <% school.qualifications.each do |qual| %>
                 <tr>
                   <td><%= qual.subject %></td>

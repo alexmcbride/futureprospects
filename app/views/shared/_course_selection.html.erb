@@ -1,5 +1,5 @@
 <div class="table-responsive">
-  <table class="table table-condensed table-striped">
+  <table class="table table-condensed">
     <thead>
     <tr>
       <th>Course</th>
@@ -15,7 +15,7 @@
           <td title="<%= selection.course.title %>"><%= truncate selection.course.title, length: 50 %></td>
           <td><%= selection.course.college.name %></td>
           <td><%= selection.college_offer.humanize if selection.college_offer %></td>
-          <td><%= selection.student_choice.humanize if selection.student_choice %></td>
+          <td><%= selection.student_choice ? selection.student_choice.humanize : 'None' %></td>
           <td><%= selection.note %></td>
         </tr>
     <% end %>

@@ -178,7 +178,7 @@ def student(file, tokens, schools, jobs, refs)
     if status == :awaiting_replies or status == :completed
       offer = [:definite_offer, :conditional_offer].sample
       file.puts "course.college_offer = :#{offer}"
-    elsif status == :all_rejected
+    elsif status == :all_rejected || status == :clearance
       file.puts "course.college_offer = :rejected"
     elsif status != :awaiting_decisions
       offer = CourseSelection.college_offers.map {|k, v| k}.sample.to_sym

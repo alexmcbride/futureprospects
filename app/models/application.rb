@@ -31,12 +31,19 @@ class Application < ApplicationRecord
   enum gender: [:male, :female, :other, :prefer_not_to_say]
 
   # Enum for the application status.
-  enum status: [:submitting, :awaiting_payment, :payment_failed, :cancelled, :awaiting_decisions, :awaiting_replies,
-                :all_rejected, :completed, :replies_overdue]
+  enum status: [:submitting,
+                :awaiting_payment, :payment_failed, :cancelled,
+                :awaiting_decisions, :all_rejected,
+                :awaiting_replies, :replies_overdue,
+                :clearance,
+                :completed]
 
   # Enum for current application stage.
   enum current_stage: [:intro_stage, :profile_stage, :education_stage, :employment_stage, :references_stage,
                       :statement_stage, :courses_stage, :submit_stage]
+
+  # Pagination
+  self.per_page = 10
 
   # Validators
   validates :title, presence: true, length: { maximum: 35 }
@@ -180,7 +187,7 @@ class Application < ApplicationRecord
   #
   # Returns - true if can add courses.
   def can_add_course?
-    self.available_courses > 0 || self.all_rejected?
+    self.available_courses > 0 || self.all_rejected? || self.clearance?
   end
 
   # Cancels this application by setting status to :cancelled.

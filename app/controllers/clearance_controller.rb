@@ -28,7 +28,7 @@ class ClearanceController < ApplicationController
   def create
     @selection = CourseSelection.new selection_params
     if @application.add_clearance_course @selection
-      redirect_to clearance_path(@selection), notice: 'Applied for clearance course'
+      redirect_to clearance_show_path(@selection), notice: 'Applied for clearance course'
     else
       render :new
     end
@@ -50,6 +50,6 @@ class ClearanceController < ApplicationController
     # Sets the application object and verifies that the student can view the page.
     def set_application
       @application = current_student.current_application
-      @application.all_rejected? or user_not_authorized
+      @application.clearance? or user_not_authorized
     end
 end

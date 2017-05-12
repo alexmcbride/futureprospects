@@ -77,7 +77,7 @@
           <div class="text-right">
             <%= link_to 'Track Application', decisions_path, role: 'button', class: 'link-button' %>
           </div>
-        <% elsif @application.awaiting_replies? %>
+        <% elsif @application.awaiting_replies? || @application.all_rejected? %>
           <p><strong>All of your decisions have been made.</strong></p>
             <p>All of your selected colleges have made their decisions, and you are now able to reply with your own. You can
             prioritise your offers in order to choose the course and college that's right for you. You can also
@@ -86,7 +86,7 @@
           <div class="text-right">
             <%= link_to 'Make Your Choices', decisions_path, role: 'button', class: 'link-button' %>
           </div>
-        <% elsif @application.all_rejected? %>
+        <% elsif @application.clearance? %>
           <p><strong>Clearance</strong></p>
           <p>You qualify for clearance. This is where we match up students who have not received a place with courses that
           still have spaces. This lets us keep our student numbers up and gives you more choices. You will also be

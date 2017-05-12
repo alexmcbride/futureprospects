@@ -253,7 +253,7 @@ class Course < ApplicationRecord
       Application.select('DISTINCT (applications.*)')
           .joins(course_selections: :course)
           .where('courses.college_id' => self.college_id)
-          .where('applications.status' => :all_rejected)
+          .where('applications.status' => [:all_rejected, :clearance])
           .where('courses.category_id' => self.category_id)
     end
 

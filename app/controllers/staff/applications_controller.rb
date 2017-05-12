@@ -7,8 +7,8 @@ class Staff::ApplicationsController < Staff::StaffController
     @applications = policy_scope(Application)
                         .filter(params)
                         .order(:submitted_date)
-                        .paginate(page: params[:page], per_page: 15)
                         .includes(:student)
+                        .paginate(page: params[:page], per_page: 15)
 
     # Stuff for filter sidebar
     @categories = Category.order(:name)

@@ -64,7 +64,7 @@ class College < ApplicationRecord
 
     Application.select(' distinct applications.*')
         .joins(course_selections: :course)
-        .where('applications.status' => :all_rejected)
+        .where('applications.status' => [:all_rejected, :clearance])
         .where('courses.category_id' => Course.available.select('courses.category_id').where('courses.college_id' => self.id))
   end
 
@@ -94,6 +94,9 @@ class College < ApplicationRecord
     def handle_clearance
       applications = self.clearance_applications
       applications.each do |application|
+
+        application.update_status :clearance
+
         courses = Course.clearance_courses(application, self).includes(:college).to_a
         if courses.any?
           StudentMailer.clearance(application.student, courses).deliver_later

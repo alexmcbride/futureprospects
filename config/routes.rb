@@ -86,7 +86,7 @@ Rails.application.routes.draw do
 
   # Clearance
   get 'clearance', to: 'clearance#index'
-  get 'clearance/:id', to: 'clearance#show'
+  get 'clearance/:id', to: 'clearance#show', as: 'clearance_show'
   get 'clearance/:id/new', to: 'clearance#new', as: 'new_clearance'
   post 'clearance/:id/create', to: 'clearance#create', as: 'create_clearance'
 

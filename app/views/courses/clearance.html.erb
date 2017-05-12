@@ -1,0 +1,27 @@
+<%
+  breadcrumb :courses_clearance
+  @title = 'Clearance'
+%>
+
+<p>Clearance courses are courses with spaces still left near to the start of term time. They typically have relaxed
+entry requirements, and are a good fit for anyone who had their original choices rejected. If you decide to apply for a
+  course, you can do so in the normal way.</p>
+
+<% if College.where(clearance: true).empty? %>
+  <div class="alert alert-info">
+    There are currently no colleges in clearance mode.
+  </div>
+<% end %>
+
+<div class="list-group">
+  <% @courses.each do |course| %>
+    <%= link_to course, class: 'list-group-item list-group-item-heading' do %>
+      <h3 class="no-top-margin"><%= course.title %></h3>
+      <div><%= course.college.name %> &mdash; <%= course.category.name %></div>
+    <% end %>
+  <% end %>
+</div>
+
+<div class="digg_pagination text-center">
+  <%= will_paginate @courses %>
+</div>

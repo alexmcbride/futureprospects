@@ -284,7 +284,7 @@ class NewApplicationsController < ApplicationController
   # Displays add courses form.
   def courses
     @course_selection = CourseSelection.new
-    @course_selections = @application.find_course_selections
+    @course_selections = @application.course_selections.includes(:course)
   end
 
   # POST /applications/:id/courses
@@ -292,7 +292,7 @@ class NewApplicationsController < ApplicationController
   # Adds course to application.
   def courses_add
     @course_selection = CourseSelection.new course_params
-    @course_selections = @application.find_course_selections
+    @course_selections = @application.course_selections.includes(:course)
     respond_to do |format|
       if @application.add_course @course_selection
         format.html { redirect_to applications_courses_path, notice: 'Course added to application' }
@@ -323,7 +323,7 @@ class NewApplicationsController < ApplicationController
         format.html { redirect_to applications_submit_path }
       else
         @course_selection = CourseSelection.new
-        @course_selections = @application.find_course_selections
+        @course_selections = @application.course_selections.includes(:course)
         format.html { render :courses }
       end
     end

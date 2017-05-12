@@ -13,8 +13,6 @@ plain text emails
 
 staff show (created / first sign in)
 
-mobile - have course category list turn into drop down (possible?)
-
 add user test@test.com for testing, show things like auth fail select options.
 
 put some kind of message in application when all your college's decisions have been made but waiting for other colleges.
@@ -29,7 +27,11 @@ add sort order to applications (submitted, updated etc.)
 
 ----
 
-- don't get clearance emails for courses you've been rejected from?
 - student view clearance page?
 - prevent create application after last decision date? final application date.
-- replies due year to course year
+
+make references proper n stuff
+
+staff home page / activity list...
+
+devise log in as other use / add to admin?

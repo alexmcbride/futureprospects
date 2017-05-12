@@ -4,6 +4,15 @@
     application. If you've already created your application, please <%= link_to 'sign in', new_student_session_path %> to track its status.</p>
 </div>
 
+<% if College.clearance_any? %>
+  <div class="well">
+    <h3>Clearance!</h3>
+    <p>Clearance has started, where we match students who did not receive a place to courses with open spaces. Please
+    feel free to browse our complete list of clearance courses.</p>
+    <p><%= link_to 'Browse Clearance', courses_clearance_path %></p>
+  </div>
+<% end %>
+
 <div class="row">
   <!-- Search Courses Column -->
   <div class="col-sm-6">

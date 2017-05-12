@@ -27,7 +27,7 @@ class Application < ApplicationRecord
   # The number of days until a payment expires.
   PAYMENT_EXPIRY_DAYS = 7
 
-  # Enums for student gender.
+  # Enum for student gender.
   enum gender: [:male, :female, :other, :prefer_not_to_say]
 
   # Enum for the application status.
@@ -109,13 +109,6 @@ class Application < ApplicationRecord
   # Returns - true if the application is owned by the student.
   def owned_by?(student)
     student.id == self.student_id
-  end
-
-  # Finds all of this applications course selections.
-  #
-  # Returns - ActiveRecord::Relation with course selections.
-  def find_course_selections
-    CourseSelection.includes(:course).where application_id: self.id
   end
 
   # Gets all of the applications that have at least one course selection at the specified college.
@@ -550,13 +543,15 @@ class Application < ApplicationRecord
   end
 
   private
-    # Calculates the date that replies are due for this application.
+    # Calculates the date that replies are due for this application. We have to figure out the date of the next course
+    # start, in case the decision is being made a different year. For instance, a decision made in Dec 2016 for a course
+    # starting Aug 2017.
     #
     # Returns - the date object.
     def calculate_replies_due
-      # We get the date of the next course start, in case the decision is being made a different year. For instance,
-      # a decision made in Dec 2016 for a course starting Aug 2017.
-      date = Course.joins(:course_selections).where('course_selections.application_id' => self.id).order(:start_date).first.start_date
+      date = Course.joins(:course_selections)
+                 .where('course_selections.application_id' => self.id)
+                 .order(:start_date).first.start_date
       Application.calculate_replies_due date.year
     end
 
@@ -564,12 +559,9 @@ class Application < ApplicationRecord
     # updates application to new state.
     def update_for_awaiting_decisions
       if awaiting_decisions? && all_selections_have_college_offers?
-        # Move to awaiting_replies state.
         self.status = all_selections_rejected? ? :all_rejected : :awaiting_replies # This makes clearance easier later.
         self.replies_due = calculate_replies_due # Store the final replies due date.
         self.save! validate: false # don't let validation errors stop this train.
-
-        # Email student to inform them that all of their course selections have received decisions.
         StudentMailer.decisions_made(self.student, self).deliver_later
       end
     end

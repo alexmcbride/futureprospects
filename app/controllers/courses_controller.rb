@@ -48,6 +48,14 @@ class CoursesController < ApplicationController
     end
   end
 
+  def clearance
+    @courses = (if student_signed_in?
+      Course.find_clearance(current_student.current_application).includes(:college).includes(:category).order('courses.title')
+    else
+      Course.all_clearance_courses.includes(:college).includes(:category)
+    end).paginate(page: params[:page], per_page: 10)
+  end
+
   private
     # Sets categories for courses what need it.
     def set_categories

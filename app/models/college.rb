@@ -56,11 +56,23 @@ class College < ApplicationRecord
   # Finds all applications that have a rejected status and
   #
   def find_clearance
-    applications = Application.where('applications.status' => :all_rejected)
+    # select distinct a.* from applications a
+    # join course_selections s on a.id=s.application_id
+    # join courses c on c.id=s.course_id
+    # where a.status=6
+    # and c.category_id in (select c.category_id from courses c where c.college_id=1 and c.status=0 and c.course_selections_count<c.spaces);
 
-    applications.map {|a| a if Course.find_clearance(a, self).includes(:college).any? }
+    Application.select(' distinct applications.*')
+        .joins(course_selections: :course)
+        .where('applications.status' => :all_rejected)
+        .where('courses.category_id' => Course.available.select('courses.category_id').where('courses.college_id' => self.id))
   end
 
+  # Updates college and enables clearance, if needed.
+  #
+  # * +params+ - the request params.
+  #
+  # Returns - true if successful, otherwise false.
   def update_for_clearance(params)
     if self.update params
       if self.clearance?
@@ -70,7 +82,15 @@ class College < ApplicationRecord
     end
   end
 
+  # Determines if any colleges are in clearance mode.
+  #
+  # Returns - true if one or more colleges are in clearance, otherwise false.
+  def self.clearance_any?
+    College.where(clearance: true).any?
+  end
+
   private
+    # Finds clearance applications and emails students.
     def handle_clearance
       applications = self.find_clearance
       applications.each do |application|

@@ -14,7 +14,7 @@
     <h4>Clearance Matches</h4>
 
     <% if @applications.any? %>
-      <p>These students will be emailed in regards to clearance courses.</p>
+      <p>These students currently qualify for clearance at this college.</p>
 
       <ul>
         <% @applications.each do |application| %>
@@ -30,8 +30,11 @@
     <%= form_for @college, url: staff_college_clearance_update_path(@college), method: :post do |f| %>
       <%= f.hidden_field :id %>
       <%= f.hidden_field :clearance, value: !@college.clearance? %>
+
+      <p class="small text-darkish">Enable clearance mode and send clearance emails.</p>
       <%= f.button class: 'btn btn-primary' do %>
         <%= icon('refresh') %>
+        &nbsp;
         <%= @college.clearance? ? 'Disable Clearance' : 'Enable Clearance' %>
       <% end %>
     <% end %>

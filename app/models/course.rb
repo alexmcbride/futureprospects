@@ -11,6 +11,9 @@ class Course < ApplicationRecord
   scoped_search relation: :category, on: :name, profile: :full
   scoped_search relation: :college, on: :name, profile: :full
 
+  # Scope for courses that are open and have spaces left.
+  scope :available, -> { where(status: :open).where('course_selections_count<spaces') }
+
   # Image Upload
   mount_uploader :image, CourseImageUploader
 
@@ -156,7 +159,7 @@ class Course < ApplicationRecord
 
     # Check enter clearance mode.
     if params[:status] == 'clearance'
-      clearance
+      enable_clearance
     end
 
     self.update params
@@ -185,7 +188,7 @@ class Course < ApplicationRecord
   # Puts course into clearance mode and emails any students eligable for clearance.
   #
   # Returns - true if clearance was enabled.
-  def clearance
+  def enable_clearance
     unless self.clearance?
       self.status = :clearance
       self.save
@@ -209,14 +212,33 @@ class Course < ApplicationRecord
   #
   # Returns - an ActiveRecord::Relation with
   def self.find_clearance(application, college=nil)
-    categories = application.course_selections.select('courses.category_id').joins(:course)
+    scope = Course.available
+                .select('DISTINCT courses.*')
+                .joins(:college)
+                .left_outer_joins(:course_selections)
+                .where('colleges.clearance' => true)
+                .where('courses.category_id' => Course.select('DISTINCT courses.category_id').joins(:course_selections).where('course_selections.application_id' => application.id))
+                .where('course_selections.application_id IS NULL OR course_selections.application_id!=?', application.id)
 
-    scope = Course.joins(:course_selections)
-        .select('DISTINCT(courses.*)')
-        .where('courses.status' => :open)
-        .where('courses.course_selections_count<courses.spaces')
-        .where('courses.category_id' => categories)
-        .where.not('course_selections.application_id' => application.id)
+    # Add college check
+    if college
+      scope = scope.where('courses.college_id' => college.id)
+    end
+
+    scope
+  end
+
+  # Gets all clearance courses.
+  #
+  # * +college+ - optional college to limit results to.
+  #
+  # Returns - an ActiveRecord::Relation with courses.
+  def self.all_clearance_courses(college=nil)
+    scope = Course.joins(:college)
+                .select('DISTINCT(courses.*)')
+                .where('courses.status' => :open)
+                .where('courses.course_selections_count<courses.spaces')
+                .where('colleges.clearance' => true)
 
     if college
       scope = scope.where('courses.college_id' => college.id)

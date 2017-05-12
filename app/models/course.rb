@@ -215,7 +215,8 @@ class Course < ApplicationRecord
         .select('DISTINCT(courses.*)')
         .where('courses.status' => :open)
         .where('courses.course_selections_count<courses.spaces')
-        .where(category_id: categories)
+        .where('courses.category_id' => categories)
+        .where.not('course_selections.application_id' => application.id)
 
     if college
       scope = scope.where('courses.college_id' => college.id)

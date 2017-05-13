@@ -12,7 +12,7 @@
     <p>Review your choices and make sure they are correct. Once you finalise them you won't be able to change them. If
     you spot an error or change your mind, select 'make changes' to go back to the start.</p>
     <div class="list-group">
-      <% @application.final_course_selections.each do |selection| %>
+      <% @application.course_selections_with_college_offers.each do |selection| %>
         <div class="list-group-item list-group-item-heading" style="background-color: #F5F5F5;">
           <% if selection.firm_choice? %>
             <%= icon('check-circle', class: 'pull-right', style: 'font-size: 6.8em; color: #4CBB17;') %>

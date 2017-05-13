@@ -38,6 +38,6 @@ class ApplicationPolicy < BaseApplicationPolicy
   end
 
   def update?
-    edit?
+    record.awaiting_decisions? && edit?
   end
 end

@@ -194,4 +194,17 @@ module ApplicationHelper
   def address(resource, separator='<br>')
     [resource.address_1, (resource.address_2 if resource.address_2.present?), resource.city, resource.postcode, resource.country].compact.join(separator).html_safe
   end
+
+  # Displays a tab for the tab view.
+  #
+  # * +tab+ - the tab to display
+  # * +default+ - whether this is the default tab or not (default false)
+  #
+  # Returns the HTML for displaying the tab.
+  def tab(tab, default=false)
+    selected = params.key?(:tab) ? params[:tab].to_sym : (tab if default)
+    content_tag(:li, class: ('active' if selected == tab)) do
+      link_to(tab.to_s.titleize, clearance_path(tab: tab))
+    end
+  end
 end

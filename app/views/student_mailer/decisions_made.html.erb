@@ -6,7 +6,7 @@
   <%= pluralize @application.course_selections_count, 'course' %>:</p>
 
 <ul>
-  <% @application.course_selections.each do |selection| %>
+  <% @application.course_selections_without_choices.each do |selection| %>
       <li><%= link_to selection.course.title, course_url(selection.course) %> &mdash; <%= selection.course.college.name %> </li>
   <% end %>
 </ul>

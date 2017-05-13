@@ -8,7 +8,7 @@
 <p>Your choices are as follows:</p>
 
 <ul>
-  <% @application.final_course_selections.each do |selection| %>
+  <% @application.course_selections_with_college_offers.each do |selection| %>
     <li><%= selection.student_choice.humanize %> &mdash; <%= selection.course.title %> (<%= selection.course.college.name %>)</li>
   <% end %>
 </ul>

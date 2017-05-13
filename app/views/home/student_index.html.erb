@@ -87,7 +87,7 @@
             <%= link_to 'Make Your Choices', decisions_path, role: 'button', class: 'link-button' %>
           </div>
         <% elsif @application.clearance? %>
-          <p><strong>Clearance</strong></p>
+          <p><strong>Welcome to Clearance!</strong></p>
           <p>You qualify for clearance. This is where we match up students who have not received a place with courses that
           still have spaces. This lets us keep our student numbers up and gives you more choices. You will also be
           automatically notified when clearance courses suitable for you become available. </p>
@@ -95,7 +95,7 @@
             <%= link_to clearance_path, role: 'button', class: 'link-button' do %>
               <%= icon('refresh') %>
               &nbsp;
-              Clearance
+              View Clearance Courses
             <% end %>
           </div>
         <% elsif @application.completed? %>

@@ -321,8 +321,12 @@ class Application < ApplicationRecord
   # Finds all course selections that do have an offer.
   #
   # Returns - a relation of course selections.
-  def final_course_selections
+  def course_selections_with_college_offers
     self.course_selections.where.not(college_offer: :rejected).order(:student_choice)
+  end
+
+  def course_selections_without_choices
+    self.course_selections.where(student_choice: nil).order(:student_choice)
   end
 
   # Generates a PayPal payment URL with the specified params.
@@ -581,8 +585,14 @@ class Application < ApplicationRecord
     # updates application to new state.
     def update_for_awaiting_decisions
       if awaiting_decisions? && all_selections_have_college_offers?
-        self.status = all_selections_rejected? ? :all_rejected : :awaiting_replies # This makes clearance easier later.
-        self.replies_due = calculate_replies_due # Store the final replies due date.
+        if all_selections_rejected?
+          self.status = :all_rejected
+          CourseSelection.update_all_student_choices self, :declined
+        else
+          self.status = :awaiting_replies
+          self.replies_due = calculate_replies_due # Store the final replies due date.
+        end
+
         self.save! validate: false
 
         StudentMailer.decisions_made(self.student, self).deliver_later

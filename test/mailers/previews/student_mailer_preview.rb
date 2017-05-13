@@ -37,9 +37,8 @@ class StudentMailerPreview < ActionMailer::Preview
   end
 
   def decisions_made
-    student = Student.find 2
-    application = student.applications.first
-    StudentMailer.decisions_made(student, application)
+    application = Application.where(status: :awaiting_replies).first
+    StudentMailer.decisions_made(application.student, application)
   end
 
   def clearance

@@ -12,7 +12,7 @@
     <p>This is your insurance choice, your next preferred choice of course. It's a good idea to pick an insurance, in case
     you aren't able to get into your first choice of college, however you may choose to decline the insurance choice if you wish.</p>
     <div class="list-group">
-      <% @application.final_course_selections.each do |selection| %>
+      <% @application.course_selections_with_college_offers.each do |selection| %>
         <div class="list-group-item list-group-item-heading">
           <div class="row">
             <div class="col-sm-9">

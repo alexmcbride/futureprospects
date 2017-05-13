@@ -67,7 +67,7 @@ def student(file, tokens, schools, jobs, refs)
   file.puts app + ".permanent_postcode = '#{tokens[22]} 2GR'"
   file.puts app + ".permanent_city = 'Glasgow'"
   file.puts app + ".permanent_country = '#{tokens[8]}'"
-  submitted = (Date.new(2016, 5, 1)..Date.today).to_a.sample
+  submitted = (Date.new(2016, 1, 1)..Date.today).to_a.sample
   file.puts app + ".submitted_date = Date.strptime('#{submitted}')"
   unless tokens[20].empty?
     file.puts app + ".correspondence_house_number = '#{tokens[17]}'"
@@ -180,6 +180,7 @@ def student(file, tokens, schools, jobs, refs)
       file.puts "course.college_offer = :#{offer}"
     elsif status == :all_rejected || status == :clearance
       file.puts "course.college_offer = :rejected"
+      file.puts "course.student_choice = :declined"
     elsif status != :awaiting_decisions
       offer = CourseSelection.college_offers.map {|k, v| k}.sample.to_sym
       file.puts "course.college_offer = :#{offer}"

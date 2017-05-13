@@ -120,6 +120,13 @@ class CourseSelection < ApplicationRecord
     end
   end
 
+  def self.update_all_student_choices(application, choice)
+    CourseSelection.where(application_id: application.id).each do |selection|
+      selection.student_choice = choice
+      selection.save
+    end
+  end
+
   private
     # Declines all of a student's choices.
     #

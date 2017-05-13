@@ -4,30 +4,41 @@
 %>
 
 <p>Clearance courses are courses with spaces still left near to the start of term time. They typically have relaxed
-  entry requirements, and are a good fit for anyone who had their original choices rejected. </p>
+  entry requirements, and are a good fit for anyone who had their original choices declined.</p>
 
 <% if College.where(clearance: true).empty? %>
-    <div class="alert alert-info">
-      There are currently no colleges in clearance mode.
-    </div>
-<% end %>
-
-<div class="list-group">
-  <% @courses.each do |course| %>
-      <%= content_tag :div, class: 'list-group-item list-group-item-heading' do %>
-          <div class="row">
-            <div class="col-sm-10">
-              <h3 class="no-top-margin"><%= link_to course.title, course %></h3>
-              <%= course.college.name %> &mdash; <%= course.category.name %>
-            </div>
-            <div class="col-sm-2 text-right">
-              <%= link_to 'Apply Clearance', new_clearance_path(course), class: 'btn btn-default', role: 'button', style: 'margin-top: 8px;' %>
-            </div>
-          </div>
-      <% end %>
+  <div class="alert alert-info">
+    There are currently no colleges in clearance mode.
+  </div>
+<% else %>
+  <% if student_signed_in? %>
+    <ul class="nav nav-tabs">
+      <%= tab :recommended, true %>
+      <%= tab :view_all %>
+    </ul>
   <% end %>
-</div>
 
-<div class="digg_pagination text-center">
-  <%= will_paginate @courses %>
-</div>
+  <div class="panel panel-default" style="border-top: 0; border-radius: 0">
+    <div class="panel-body">
+      <div class="list-group">
+        <% @courses.each do |course| %>
+            <%= content_tag :div, class: 'list-group-item list-group-item-heading' do %>
+                <div class="row">
+                  <div class="col-sm-10">
+                    <h3 class="no-top-margin"><%= link_to truncate(course.title, length: 70), course %></h3>
+                    <%= course.college.name %> &mdash; <%= course.category.name %>
+                  </div>
+                  <div class="col-sm-2 text-right">
+                    <%= link_to 'Apply Clearance', new_clearance_path(course), class: 'btn btn-default', role: 'button', style: 'margin-top: 8px;' %>
+                  </div>
+                </div>
+            <% end %>
+        <% end %>
+    </div>
+    </div>
+
+    <div class="digg_pagination text-center">
+      <%= will_paginate @courses %>
+    </div>
+  </div>
+<% end %>

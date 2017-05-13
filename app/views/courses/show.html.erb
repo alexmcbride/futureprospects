@@ -42,13 +42,16 @@
         </ul>
 
         <% if student_signed_in? %>
-          <% if current_student.has_current_application? %>
+          <% application = current_student.current_application %>
+          <% if application.nil? %>
+            <%= link_to 'Create Application', applications_create_path, class: 'btn btn-success btn-block', role: 'button', method: :post %>
+          <% elsif application.clearance? %>
+            <%= link_to 'Apply Clearance', new_clearance_path(@course), class: 'btn btn-success btn-block', role: 'button' %>
+          <% else %>
             <%= form_for @course_selection, url: applications_courses_add_path, method: :post do |f| %>
               <%= f.hidden_field :course_id %>
               <%= f.submit 'Apply for Course', class: 'btn btn-success btn-block', style: 'margin-bottom: 5px;' %>
             <% end %>
-          <% else %>
-            <%= link_to 'Create Application', applications_create_path, class: 'btn btn-success btn-block', role: 'button', method: :post %>
           <% end %>
         <% else %>
           <%= link_to 'Register for Course', new_registration_path(:student), class: 'btn btn-success btn-block', role: 'button' %>

@@ -26,9 +26,15 @@
       </div>
     <% end %>
 
+    <% if @application.awaiting_other_colleges? current_staff.college %>
+        <div class="alert alert-warning">
+          This application is waiting on decisions from other colleges.
+        </div>
+    <% end %>
+
     <div class="well">
       <h3 class="no-top-margin">Course Selections</h3>
-      <p class="text-darkish">The student has made the following course selections.</p>
+      <p class="text-darkish">These are the student's course selections.</p>
       <ol class="list-group">
         <% policy_scope(@application.course_selections).includes(course: [:college, :category]).each do |selection| %>
           <li class="list-group-item list-group-item-info">
@@ -55,8 +61,8 @@
       </div>
     </div>
 
-    <h3>View Application</h3>
-
-    <%= render 'shared/application_show', application: @application %>
+    <% cache @application do %>
+      <%= render 'shared/application_show', application: @application %>
+    <% end %>
   </div> <!-- col -->
 </div> <!-- row -->

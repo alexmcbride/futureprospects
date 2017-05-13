@@ -85,10 +85,10 @@ Rails.application.routes.draw do
   resources :courses
 
   # Clearance
-  get 'clearance', to: 'clearance#index'
-  get 'clearance/:id', to: 'clearance#show', as: 'clearance_show'
-  get 'clearance/:id/new', to: 'clearance#new', as: 'new_clearance'
   post 'clearance/:id/create', to: 'clearance#create', as: 'create_clearance'
+  get 'clearance/:id/new', to: 'clearance#new', as: 'new_clearance'
+  get 'clearance/:id', to: 'clearance#show', as: 'clearance_show'
+  get 'clearance', to: 'clearance#index'
 
   # Colleges
   resources :colleges

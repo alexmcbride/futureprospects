@@ -155,6 +155,18 @@ class Application < ApplicationRecord
         .where.not('course_selections.college_offer' => nil).map {|s| s.id}
   end
 
+  # Determines if this application is awaiting on decisions from other colleges.
+  #
+  # * +college+ - the college to check against.
+  #
+  # Returns true if awaiting other colleges, otherwise false.
+  def awaiting_other_colleges?(college)
+    CourseSelection.joins(:course)
+        .where.not('courses.college_id' => college.id)
+        .where('course_selections.application_id' => self.id)
+        .where('course_selections.college_offer' => nil).any?
+  end
+
   # Checks that all added schools have at least one qualification.
   #
   # Returns - true if the schools are valid.

@@ -54,3 +54,4 @@ Thumbs.db
 /doc
 /app/doc
 .yardoc
+/tmp/caching-dev.txt

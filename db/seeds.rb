@@ -28,6 +28,7 @@ cogc.telephone = '0141 375 5555'
 cogc.email = 'enquiries@cityofglasgowcollege.ac.uk'
 cogc.website = 'https://www.cityofglasgowcollege.ac.uk'
 cogc.image.filename = 'college-cogc.jpg'
+cogc.clearance = true
 cogc.save
 
 

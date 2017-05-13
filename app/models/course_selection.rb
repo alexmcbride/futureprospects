@@ -48,13 +48,10 @@ class CourseSelection < ApplicationRecord
   #
   # Returns - an integer with the number of applicants.
   def self.count_applicants(college)
-    sql = 'SELECT COUNT(DISTINCT s.application_id)
-           FROM course_selections s
-           JOIN courses c ON s.course_id=c.id
-           WHERE c.college_id=%d'
-    sql = ActiveRecord::Base.send(:sanitize_sql, [sql, college.id]) # Sanitise SQL
-    result = ActiveRecord::Base.connection.execute(sql)
-    result.first['count']
+    CourseSelection.select('DISTINCT course_selections.application_id')
+        .joins(:course)
+        .where('courses.college_id' => college.id)
+        .count
   end
 
   # Calculates the number of course selections for the specified college
@@ -63,13 +60,7 @@ class CourseSelection < ApplicationRecord
   #
   # Returns - an integer with the number of course selections.
   def self.count_courses(college)
-    sql = "SELECT COUNT(*)
-           FROM course_selections s
-           JOIN courses c ON s.course_id=c.id
-           WHERE c.college_id=#{college.id};"
-    sql = ActiveRecord::Base.send(:sanitize_sql, [sql, college.id]) # Sanitise SQL
-    result = ActiveRecord::Base.connection.execute(sql)
-    result.first['count']
+    CourseSelection.joins(:course).where('courses.college_id' => college.id).count
   end
 
   # Gets the colleges that the application has applied to.
@@ -117,6 +108,10 @@ class CourseSelection < ApplicationRecord
     end
   end
 
+  # Declines choices on an application.
+  #
+  # * +which+ - which offer to decline (either :all or :insurance)
+  # * +application+ - the application to decline the offers for.
   def self.decline(which, application)
     if which == :all
       decline_all application

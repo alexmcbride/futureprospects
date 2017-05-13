@@ -7,7 +7,7 @@
     <div class="panel panel-default">
       <div class="panel-body">
         <h2>College Home</h2>
-        <p>This is the staff section where you can blah blah...</p>
+        <p>This is the staff section where you can manage the college and stuff.</p>
       </div>
     </div>
   </div>
@@ -15,7 +15,16 @@
   <div class="col-sm-6">
     <div class="panel panel-default">
       <div class="panel-body">
-        <h2>Latest Activity</h2>
+        <h2>Attention Needed</h2>
+        <p>The following applications need attention.</p>
+        <div class="list-group">
+          <% @applications.each do |application| %>
+            <%= link_to staff_application_path(application), class: 'list-group-item' do %>
+              <%= application.student.full_name %>
+                  <span class="badge"><%= format_date application.updated_at %></span>
+            <% end %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

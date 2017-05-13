@@ -36,3 +36,5 @@ devise log in as other use / add to admin?
 register validation errors (scn or nin, inform recover account?)
 
 optimize clearance queries
+
+look at alternative to will_paginate (it doesn't work with distinct...)

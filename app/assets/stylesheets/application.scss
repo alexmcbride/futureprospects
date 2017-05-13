@@ -382,6 +382,12 @@ li.home-category-item {
   background-color: #1E6583;
 }
 
+.app-navbar {
+  @extend .navbar;
+  @extend .navbar-default;
+  border-radius: 0;
+}
+
 .application-info-list {
   @extend .list-unstyled;
   line-height: 1.6em;

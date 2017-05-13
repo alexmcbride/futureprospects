@@ -141,9 +141,8 @@ staff.add_role :can_edit_courses
 staff.add_role :can_remove_courses
 
 staff.add_role :can_view_colleges
-staff.add_role :can_add_colleges
 staff.add_role :can_edit_colleges
-staff.add_role :can_remove_colleges
+staff.add_role :can_manage_clearance
 
 staff.add_role :can_view_staff
 staff.add_role :can_add_staff

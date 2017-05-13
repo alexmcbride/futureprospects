@@ -30,7 +30,7 @@
               <tr>
                 <td></td>
                 <td><%= permission_checkbox @member, :can_edit_courses, 'Courses Edit' %></td>
-                <td></td>
+                <td><%= permission_checkbox @member, :can_manage_clearance, 'Manage Clearance' %></td>
                 <td><%= permission_checkbox @member, :can_edit_staff, 'Staff Edit' %></td>
                 <td><%= permission_checkbox @member, :can_edit_category, 'Category Edit' %></td>
               </tr>

@@ -80,7 +80,7 @@ class CollegePolicy < BaseApplicationPolicy
   #
   # Returns - a boolean indicating if the action is allowed.
   def clearance?
-    edit?
+    user.has_role? :site_admin or (user.college_id == record.id and user.has_role?(:can_manage_clearance))
   end
 
   # Checks if the user can perform this action on the model.

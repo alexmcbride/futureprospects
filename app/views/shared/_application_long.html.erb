@@ -1,0 +1,272 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-sm-6">
+        <h3 class="no-top-margin">Permanent Address</h3>
+        <div class="row">
+          <div class="col-xs-4">House Number:</div>
+          <div class="col-xs-8"><%= application.permanent_house_number %></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">Address 1:</div>
+          <div class="col-xs-8"><%= application.permanent_address_1 %></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">Address 2:</div>
+          <div class="col-xs-8"><%= application.permanent_address_2 or '' %></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">City:</div>
+          <div class="col-xs-8"><%= application.permanent_city %></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">Post Code:</div>
+          <div class="col-xs-8"><%= application.permanent_postcode %></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">Country:</div>
+          <div class="col-xs-8"><%= application.permanent_country %></div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <h3 class="no-top-margin">Correspondence Address</h3>
+        <div class="row">
+          <div class="col-xs-4">House Number:</div>
+          <div class="col-xs-8"><%= application.correspondence_house_number or '' %></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">Address 1:</div>
+          <div class="col-xs-8"><%= application.correspondence_address_1 or '' %></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">Address 2:</div>
+          <div class="col-xs-8"><%= application.correspondence_address_2 or '' %></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">City:</div>
+          <div class="col-xs-8"><%= application.correspondence_city or '' %></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">Post Code:</div>
+          <div class="col-xs-8"><%= application.correspondence_postcode or '' %></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">Country:</div>
+          <div class="col-xs-8"><%= application.correspondence_country or '' %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+
+    <% if application.schools.any? %>
+        <h3 class="no-top-margin">Education</h3>
+        <div class="table-responsive">
+          <table class="table table-condensed">
+            <thead>
+            <tr>
+              <th>Name</th>
+              <th>Address</th>
+              <th>Address 2</th>
+              <th>City</th>
+              <th>Post Code</th>
+              <th>Country</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% application.schools.each do |school| %>
+                <tr>
+                  <td><%= school.name %></td>
+                  <td><%= school.address_1 %></td>
+                  <td><%= school.address_2 %></td>
+                  <td><%= school.city %></td>
+                  <td><%= school.postcode %></td>
+                  <td><%= school.country %></td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+        <h4 class="no-top-margin">Qualifications</h4>
+        <div class="table-responsive">
+          <table class="table table-condensed">
+            <thead>
+            <tr>
+              <th>Subject</th>
+              <th>Award</th>
+              <th>Grade</th>
+              <th>Start</th>
+              <th>End</th>
+              <th>School</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% application.schools.includes(:qualifications).each do |school| %>
+                <% school.qualifications.each do |qual| %>
+                    <tr>
+                      <td><%= qual.subject %></td>
+                      <td><%= qual.grade %></td>
+                      <td><%= qual.award %></td>
+                      <td><%= format_date qual.start_date %></td>
+                      <td><%= format_date qual.end_date %></td>
+                      <td><%= school.name %></td>
+                    </tr>
+                <% end %>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+    <% else %>
+        <p><em>There are no schools in this application.</em></p>
+    <% end %>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h3 class="no-top-margin">Employment</h3>
+    <% if application.jobs.any? %>
+        <div class="table-responsive">
+          <table class="table table-condensed">
+            <thead>
+            <tr>
+              <th>Employer</th>
+              <th>Address</th>
+              <th>Job Title</th>
+              <th>Duties</th>
+              <th>Start</th>
+              <th>End</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% application.jobs.each do |job| %>
+                <tr>
+                  <td><%= job.employer %></td>
+                  <td><%= address job %></td>
+                  <td><%= job.job_title %></td>
+                  <td><%= job.duties %></td>
+                  <td><%= format_date job.start_date %></td>
+                  <td><%= format_date job.end_date %></td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+    <% else %>
+        <p><em>There are no jobs in this application.</em></p>
+    <% end %>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-sm-6">
+        <h3 class="no-top-margin">Personal Statement</h3>
+      </div>
+      <div class="col-sm-6 text-right small text-darkish">
+        <%= application.personal_statement ? application.personal_statement.length : 0 %> characters
+      </div>
+    </div>
+
+    <%= markdown application.personal_statement if application.personal_statement %>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="row">
+      <% if application.reference.present? %>
+          <div class="col-sm-6">
+            <h3 class="no-top-margin">Reference 1</h3>
+            <div class="row">
+              <div class="col-xs-4">Full Name:</div>
+              <div class="col-xs-8"><%= application.reference.reference_1_full_name if application.reference %></div>
+            </div>
+            <div class="row">
+              <div class="col-xs-4">Occupation:</div>
+              <div class="col-xs-8"><%= application.reference.reference_1_occupation if application.reference %></div>
+            </div>
+            <div class="row">
+              <div class="col-xs-4">Relationship:</div>
+              <div class="col-xs-8"><%= application.reference.reference_1_relationship if application.reference %></div>
+            </div>
+            <div class="row">
+              <div class="col-xs-4">Telephone:</div>
+              <div class="col-xs-8"><%= application.reference.reference_1_telephone if application.reference %></div>
+            </div>
+            <div class="row">
+              <div class="col-xs-4">Email:</div>
+              <div class="col-xs-8"><%= mail_to application.reference.reference_1_email if application.reference %></div>
+            </div>
+            <div class="row">
+              <div class="col-xs-4">Address 1:</div>
+              <div class="col-xs-8"><%= application.reference.reference_1_address_1 %></div>
+            </div>
+            <div class="row">
+              <div class="col-xs-4">Address 2:</div>
+              <div class="col-xs-8"><%= application.reference.reference_1_address_2 %></div>
+            </div>
+            <div class="row">
+              <div class="col-xs-4">City:</div>
+              <div class="col-xs-8"><%= application.reference.reference_1_city %></div>
+            </div>
+            <div class="row">
+              <div class="col-xs-4">Post Code:</div>
+              <div class="col-xs-8"><%= application.reference.reference_1_postcode %></div>
+            </div>
+            <div class="row">
+              <div class="col-xs-4">Country:</div>
+              <div class="col-xs-8"><%= application.reference.reference_1_country %></div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <h3 class="no-top-margin">Reference 2</h3>
+            <div class="row">
+              <div class="col-xs-4">Full Name:</div>
+              <div class="col-xs-8"><%= application.reference.reference_2_full_name if application.reference %></div>
+            </div>
+            <div class="row">
+              <div class="col-xs-4">Occupation:</div>
+              <div class="col-xs-8"><%= application.reference.reference_2_occupation if application.reference %></div>
+            </div>
+            <div class="row">
+              <div class="col-xs-4">Relationship:</div>
+              <div class="col-xs-8"><%= application.reference.reference_2_relationship if application.reference %></div>
+            </div>
+            <div class="row">
+              <div class="col-xs-4">Telephone:</div>
+              <div class="col-xs-8"><%= application.reference.reference_2_telephone if application.reference %></div>
+            </div>
+            <div class="row">
+              <div class="col-xs-4">Email:</div>
+              <div class="col-xs-8"><%= mail_to application.reference.reference_2_email if application.reference %></div>
+            </div>
+            <div class="row">
+              <div class="col-xs-4">Address 1:</div>
+              <div class="col-xs-8"><%= application.reference.reference_2_address_1 %></div>
+            </div>
+            <div class="row">
+              <div class="col-xs-4">Address 2:</div>
+              <div class="col-xs-8"><%= application.reference.reference_2_address_2 %></div>
+            </div>
+            <div class="row">
+              <div class="col-xs-4">City:</div>
+              <div class="col-xs-8"><%= application.reference.reference_2_city %></div>
+            </div>
+            <div class="row">
+              <div class="col-xs-4">Post Code:</div>
+              <div class="col-xs-8"><%= application.reference.reference_2_postcode %></div>
+            </div>
+            <div class="row">
+              <div class="col-xs-4">Country:</div>
+              <div class="col-xs-8"><%= application.reference.reference_2_country %></div>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>

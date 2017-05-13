@@ -60,7 +60,7 @@
               <td><%= link_to application.student.full_name, staff_application_path(application) %></td>
               <td title="<%= format_datetime application.submitted_date %>"><%= format_date application.submitted_date %></td>
               <td title="<%= format_datetime application.updated_at %>"><%= format_date application.updated_at %></td>
-              <td><%= @awaiting_ids.include?(application.id) ? 'Awaiting decisions (others)' : application.status.humanize %></td>
+              <td><%= application.status.humanize %></td>
             </tr>
           <% end %>
         </tbody>

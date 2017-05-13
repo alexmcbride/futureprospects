@@ -13,14 +13,17 @@ class Staff::ApplicationsController < Staff::StaffController
     # Stuff for filter sidebar
     @categories = Category.order(:name)
     @colleges = policy_scope(College)
-
-    # This is an optimisation to stop the query having to be done up for every application that's being iterated over.
-    @awaiting_ids = Application.awaiting_other_colleges(current_staff.college_id)
   end
 
   # GET /staff/applications/1
   # GET /staff/applications/1.json
   def show
+    @application = Application.find params[:id]
+    authorize @application
+  end
+
+  # GET /staff/applications/1/full
+  def full
     @application = Application.includes(schools: [:qualifications])
                        .includes(:jobs)
                        .includes(:reference)

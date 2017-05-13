@@ -37,7 +37,7 @@ class StudentMailerPreview < ActionMailer::Preview
   end
 
   def decisions_made
-    application = Application.where(status: :awaiting_replies).first
+    application = Application.find 1
     StudentMailer.decisions_made(application.student, application)
   end
 

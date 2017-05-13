@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     get 'members/:id/remove', to: 'members#remove', as: 'member_remove'
     resources :members
 
+    get 'applications/:id/full', to: 'applications#full', as: 'application_full'
     resources :applications
   end
 

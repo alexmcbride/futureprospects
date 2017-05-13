@@ -161,6 +161,10 @@ class Application < ApplicationRecord
   #
   # Returns true if awaiting other colleges, otherwise false.
   def awaiting_other_colleges?(college)
+    if college.nil?
+      return false
+    end
+
     CourseSelection.joins(:course)
         .where.not('courses.college_id' => college.id)
         .where('course_selections.application_id' => self.id)
@@ -338,7 +342,9 @@ class Application < ApplicationRecord
   end
 
   def course_selections_without_choices
-    self.course_selections.where(student_choice: nil).order(:student_choice)
+    CourseSelection.where(application_id: self.id)
+        .where(student_choice: nil)
+        .order(:student_choice)
   end
 
   # Generates a PayPal payment URL with the specified params.
@@ -599,7 +605,7 @@ class Application < ApplicationRecord
       if awaiting_decisions? && all_selections_have_college_offers?
         if all_selections_rejected?
           self.status = :all_rejected
-          CourseSelection.update_all_student_choices self, :declined
+          CourseSelection.update_all_student_choices self, :skipped
         else
           self.status = :awaiting_replies
           self.replies_due = calculate_replies_due # Store the final replies due date.

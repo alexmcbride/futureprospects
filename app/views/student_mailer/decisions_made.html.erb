@@ -2,11 +2,13 @@
 
 <p>Hello <%= @student.full_name %>,</p>
 
+<% selections = @application.course_selections_without_choices %>
+
 <p>This email is to inform you that your have received decisions on the following
-  <%= pluralize @application.course_selections_count, 'course' %>:</p>
+  <%= pluralize selections.count, 'course' %>:</p>
 
 <ul>
-  <% @application.course_selections_without_choices.each do |selection| %>
+  <% selections.each do |selection| %>
       <li><%= link_to selection.course.title, course_url(selection.course) %> &mdash; <%= selection.course.college.name %> </li>
   <% end %>
 </ul>

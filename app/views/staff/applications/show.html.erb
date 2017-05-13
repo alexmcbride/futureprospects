@@ -61,8 +61,9 @@
       </div>
     </div>
 
-    <% cache @application do %>
-      <%= render 'shared/application_show', application: @application %>
-    <% end %>
+    <%= render 'shared/application_profile', application: @application %>
+
+    <p><%= link_to 'View Full Application', staff_application_full_path %></p>
+
   </div> <!-- col -->
 </div> <!-- row -->

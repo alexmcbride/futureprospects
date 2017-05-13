@@ -10,7 +10,7 @@
     </tr>
     </thead>
     <tbody>
-    <% application.course_selections.includes(course: :college).each do |selection| %>
+    <% application.course_selections.includes(course: :college).order(:student_choice).each do |selection| %>
         <tr>
           <td title="<%= selection.course.title %>"><%= truncate selection.course.title, length: 50 %></td>
           <td><%= selection.course.college.name %></td>

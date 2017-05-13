@@ -33,6 +33,11 @@ class ApplicationPolicy < BaseApplicationPolicy
     user.has_role?(:site_admin) || (user.has_role?(:can_view_applications) && record.belongs_to_college(user.college_id))
   end
 
+  # Determines if the user is authorized to view the show action.
+  def full?
+    show?
+  end
+
   def edit?
     user.has_role?(:site_admin) || (user.has_role?(:can_edit_applications) && record.belongs_to_college(user.college_id))
   end

@@ -180,7 +180,7 @@ def student(file, tokens, schools, jobs, refs)
       file.puts "course.college_offer = :#{offer}"
     elsif status == :all_rejected || status == :clearance
       file.puts "course.college_offer = :rejected"
-      file.puts "course.student_choice = :declined"
+      file.puts "course.student_choice = :skipped"
     elsif status != :awaiting_decisions
       offer = CourseSelection.college_offers.map {|k, v| k}.sample.to_sym
       file.puts "course.college_offer = :#{offer}"

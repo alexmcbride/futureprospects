@@ -218,7 +218,7 @@ class Course < ApplicationRecord
                 .left_outer_joins(:course_selections)
                 .where('colleges.clearance' => true)
                 .where('courses.category_id' => Course.select('DISTINCT courses.category_id').joins(:course_selections).where('course_selections.application_id' => application.id))
-                .where('course_selections.application_id IS NULL OR course_selections.application_id!=?', application.id)
+                .where.not('courses.id' => application.course_selections.select(:course_id))
 
     # Add college check
     if college

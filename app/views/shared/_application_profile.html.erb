@@ -1,0 +1,59 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h3 class="no-top-margin">Personal Profile</h3>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="col-xs-4">Title:</div>
+          <div class="col-xs-8"><%= application.title %></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">First Name:</div>
+          <div class="col-xs-8"><%= application.first_name %></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">Middle Name:</div>
+          <div class="col-xs-8"><%= application.middle_name or '' %></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">Family Name:</div>
+          <div class="col-xs-8"><%= application.family_name %></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">Previous Name:</div>
+          <div class="col-xs-8"><%= application.previous_name or '' %></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">Gender:</div>
+          <div class="col-xs-8"><%= application.gender.humanize %></div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="col-xs-4">SC Number:</div>
+          <div class="col-xs-8"><%= application.scottish_candidate_number %></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">NI Number:</div>
+          <div class="col-xs-8"><%= application.national_insurance_number %></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">Email:</div>
+          <div class="col-xs-8"><%= mail_to application.email %></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">Telephone:</div>
+          <div class="col-xs-8"><%= application.telephone %></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">Mobile:</div>
+          <div class="col-xs-8"><%= application.mobile or '' %></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">Disability:</div>
+          <div class="col-xs-8"><%= application.disability or '' %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

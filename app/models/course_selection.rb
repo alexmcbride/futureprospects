@@ -4,7 +4,7 @@ class CourseSelection < ApplicationRecord
 
   # Enums
   enum college_offer: [:rejected, :conditional_offer, :definite_offer]
-  enum student_choice: [:firm_choice, :insurance_choice, :declined]
+  enum student_choice: [:firm_choice, :insurance_choice, :declined, :skipped]
 
   # Validators
   validates :application_id, presence: true
@@ -14,7 +14,6 @@ class CourseSelection < ApplicationRecord
   validate :course_not_full, on: :create
   validate :application_can_add, on: :create
   validates :note, presence: true, if: :rejected? || :conditional_offer
-  # validates :offer_date, presence: true, if: :rejected? || :conditional_offer? || :definite_offer?
 
   # Associations
   belongs_to :application, counter_cache: true
@@ -103,7 +102,7 @@ class CourseSelection < ApplicationRecord
   # * +application+ - the application to clear choices for.
   def self.clear_all_choices(application)
     application.course_selections.each do |selection|
-      selection.student_choice = nil
+      selection.student_choice = :skipped
       selection.save!
     end
   end

@@ -1,14 +1,14 @@
 # Controller class to manage applying for a clearance course.
 class ClearanceController < ApplicationController
   before_action :authenticate_student!, except: [:index]
-  before_action :set_application, except: [:show]
+  before_action :set_application, except: [:show, :index]
 
   # GET /clearance
   #
   # Gets a list of clearance courses, either all clearance courses, or just for the logged in user.
   def index
     @courses = (if student_signed_in?
-                  Course.clearance_courses(@application).includes(:college).includes(:category).order('courses.title')
+                  Course.clearance_courses(current_student.current_application).includes(:college).includes(:category).order('courses.title')
                 else
                   Course.all_clearance_courses.includes(:college).includes(:category)
                 end).paginate(page: params[:page], per_page: 10)

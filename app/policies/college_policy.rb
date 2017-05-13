@@ -66,7 +66,7 @@ class CollegePolicy < BaseApplicationPolicy
   #
   # Returns - a boolean indicating if the action is allowed.
   def remove?
-    user.has_role? :site_admin or (user.college_id == record.id and user.has_role?(:can_remove_colleges))
+    user.has_role? :site_admin
   end
 
   # Checks if the user can perform this action on the model.

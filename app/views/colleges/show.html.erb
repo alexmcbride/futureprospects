@@ -5,11 +5,9 @@
 <div class="col-md-3">
   <div class="row">
     <div class="list-group small">
-      <% cache @colleges do %>
-        <% @colleges.each do |college| %>
-          <% active = 'active' if college == @college %>
-          <%= link_to college.name, college, class: "list-group-item #{active}" %>
-        <% end %>
+      <% @colleges.each do |college| %>
+        <% active = 'active' if college == @college %>
+        <%= link_to college.name, college, class: "list-group-item #{active}" %>
       <% end %>
     </div>
   </div>

@@ -11,11 +11,9 @@
     <div class="list-group small">
       <% active = 'active' if @category.nil? %>
       <%= link_to 'All Courses', courses_path, class: "list-group-item #{active}" %>
-      <% cache @categories do %>
-        <% @categories.each do |category| %>
-          <% active = category == @category ? 'active' : '' %>
-          <%= link_to category.name, courses_category_path(category), class: "list-group-item #{active}" %>
-        <% end %>
+      <% @categories.each do |category| %>
+        <% active = category == @category ? 'active' : '' %>
+        <%= link_to category.name, courses_category_path(category), class: "list-group-item #{active}" %>
       <% end %>
     </div>
   </div>

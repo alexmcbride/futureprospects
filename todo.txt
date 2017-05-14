@@ -41,4 +41,4 @@ look at alternative to will_paginate (it doesn't work with distinct...)
 
 normalize buttons across site, especially courses stuff, which is old.
 
-caching?
+merge tasks into one.

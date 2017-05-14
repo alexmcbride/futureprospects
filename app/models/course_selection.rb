@@ -102,7 +102,7 @@ class CourseSelection < ApplicationRecord
   # * +application+ - the application to clear choices for.
   def self.clear_all_choices(application)
     application.course_selections.each do |selection|
-      selection.student_choice = :skipped
+      selection.student_choice = :skipped # So we can differentiate from nil.
       selection.save!
     end
   end

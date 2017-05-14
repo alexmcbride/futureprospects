@@ -17,10 +17,8 @@
         <h3>Browse Colleges</h3>
         <p>You can browse details of the various colleges supported by Future Prospects.</p>
         <div class="list-group">
-          <% cache @colleges do %>
-            <% @colleges.each do |college| %>
-              <%= link_to college.name, college, class: 'list-group-item' %>
-            <% end %>
+          <% @colleges.each do |college| %>
+            <%= link_to college.name, college, class: 'list-group-item' %>
           <% end %>
         </div>
       </div>

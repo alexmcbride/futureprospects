@@ -36,7 +36,7 @@
       <h3 class="no-top-margin">Course Selections</h3>
       <p class="text-darkish">These are the student's course selections.</p>
       <ol class="list-group">
-        <% policy_scope(@application.course_selections).includes(course: [:college, :category]).each do |selection| %>
+        <% policy_scope(@application.course_selections).includes(course: [:college, :category]).order(college_offer: :desc).each do |selection| %>
           <li class="list-group-item list-group-item-info">
             <div class="row">
               <div class="col-sm-9" title="<%= selection.course.title %> - <%= selection.course.category.name %>">

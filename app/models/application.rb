@@ -203,7 +203,7 @@ class Application < ApplicationRecord
   #
   # Returns - true if can add courses.
   def can_add_course?
-    self.available_courses > 0 || self.all_rejected? || self.clearance?
+    self.available_courses > 0 || self.clearance?
   end
 
   # Cancels this application by setting status to :cancelled.
@@ -605,8 +605,10 @@ class Application < ApplicationRecord
       if awaiting_decisions? && all_selections_have_college_offers?
         if all_selections_rejected?
           self.status = :all_rejected
+          # We mark courses as skipped, meaning that a student choice was not asked for.
           CourseSelection.update_all_student_choices self, :skipped
         else
+          # Waiting for student.
           self.status = :awaiting_replies
           self.replies_due = calculate_replies_due # Store the final replies due date.
         end

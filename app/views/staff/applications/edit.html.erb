@@ -12,7 +12,7 @@
 
   <%= form_errors @application %>
 
-  <%= f.fields_for :course_selections, policy_scope(@application.course_selections).includes(course: [:category, :college]).order(college_offer: :desc) do |g| %>
+  <%= f.fields_for :course_selections, policy_scope(@application.course_selections_without_choices).includes(course: [:category, :college]).order(college_offer: :desc) do |g| %>
     <div class="well">
       <div class="row">
         <div class="col-sm-8">

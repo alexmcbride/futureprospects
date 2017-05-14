@@ -19,6 +19,12 @@
   </div>
 
   <div class="col-md-6">
+    <% if @course.clearance? %>
+      <div class="alert alert-warning">
+        This is a clearance course.
+      </div>
+    <% end %>
+
     <h3 class="no-top-margin"><%= @course.title %></h3>
     <%= render 'shared/course_info', course: @course %>
   </div>
@@ -41,20 +47,22 @@
           <li class="list-group-item list-group-item-heading">Status: <%= @course.status.humanize %></li>
         </ul>
 
-        <% if student_signed_in? %>
-          <% application = current_student.current_application %>
-          <% if application.nil? %>
-            <%= link_to 'Create Application', applications_create_path, class: 'btn btn-success btn-block', role: 'button', method: :post %>
-          <% elsif application.clearance? %>
-            <%= link_to 'Apply Clearance', new_clearance_path(@course), class: 'btn btn-success btn-block', role: 'button' %>
-          <% else %>
-            <%= form_for @course_selection, url: applications_courses_add_path, method: :post do |f| %>
-              <%= f.hidden_field :course_id %>
-              <%= f.submit 'Apply for Course', class: 'btn btn-success btn-block', style: 'margin-bottom: 5px;' %>
+        <% if @course.can_apply? %>
+          <% if student_signed_in? %>
+            <% application = current_student.current_application %>
+            <% if application.nil? %>
+              <%= link_to 'Create Application', applications_create_path, class: 'btn btn-success btn-block', role: 'button', method: :post %>
+            <% elsif application.clearance? %>
+              <%= link_to 'Apply Clearance', new_clearance_path(@course), class: 'btn btn-success btn-block', role: 'button' %>
+            <% else %>
+              <%= form_for @course_selection, url: applications_courses_add_path, method: :post do |f| %>
+                <%= f.hidden_field :course_id %>
+                <%= f.submit 'Apply for Course', class: 'btn btn-success btn-block', style: 'margin-bottom: 5px;' %>
+              <% end %>
             <% end %>
+          <% else %>
+            <%= link_to 'Register for Course', new_registration_path(:student), class: 'btn btn-success btn-block', role: 'button' %>
           <% end %>
-        <% else %>
-          <%= link_to 'Register for Course', new_registration_path(:student), class: 'btn btn-success btn-block', role: 'button' %>
         <% end %>
 
         <%= link_to 'View College Details', @course.college, class: 'btn btn-success btn-block', role: 'button' %>

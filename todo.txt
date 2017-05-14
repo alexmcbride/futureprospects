@@ -27,7 +27,7 @@ make references proper n stuff
 
 ----
 
-- prevent create application after last decision date? final application date.
+prevent create application after last decision date? final application date.
 
 staff home page / activity list...
 
@@ -37,8 +37,10 @@ register validation errors (scn or nin, inform recover account?)
 
 optimize clearance queries
 
-look at alternative to will_paginate (it doesn't work with distinct...)
+look at alternative to will_paginate (it doesn't work with distinct (applications)...)
 
 normalize buttons across site, especially courses stuff, which is old.
 
 merge tasks into one.
+
+check course in clearance in courses/show (clearance alert, hide/show apply button?)

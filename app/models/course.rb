@@ -90,6 +90,20 @@ class Course < ApplicationRecord
     self.course_selections_count >= self.spaces
   end
 
+  # Determines if the course is in clearance
+  #
+  # Returns true if the course is in clearance.
+  def clearance?
+    can_apply? && self.college.clearance?
+  end
+
+  # Determines if the course can be applied to.
+  #
+  # Returns true if course can be applied to.
+  def can_apply?
+    self.open? && self.course_selections_count < self.spaces
+  end
+  
   # Filters the courses based on the request params (:title, :category_id, :status, and :college_id)
   #
   # * +params+ - the request params containing filtering information.
@@ -139,11 +153,13 @@ class Course < ApplicationRecord
   #
   # Returns - An ActiveRecord::Relation including the course results.
   def self.find_open_courses(category=nil)
+    scope = Course.available
+
     if category
-      Course.where(status: :open, category_id: category.id)
-    else
-      Course.where(status: :open)
+      scope = scope.where(category_id: category.id)
     end
+
+    scope
   end
 
   # Updates attributes and takes action depending on status change (e.g. cancelled etc).
@@ -182,26 +198,6 @@ class Course < ApplicationRecord
 
       return true
     end
-    false
-  end
-
-  # Puts course into clearance mode and emails any students eligable for clearance.
-  #
-  # Returns - true if clearance was enabled.
-  def enable_clearance
-    unless self.clearance?
-      self.status = :clearance
-      self.save
-
-      # Send email to all matching applications.
-      applications = find_clearance
-      applications.each do |application|
-        StudentMailer.clearance(application.student, [self]).deliver_later
-      end
-
-      return true
-    end
-
     false
   end
 
@@ -248,7 +244,27 @@ class Course < ApplicationRecord
   end
 
   private
+    # Puts course into clearance mode and emails any students eligable for clearance.
     #
+    # Returns - true if clearance was enabled.
+    def enable_clearance
+      unless self.clearance?
+        self.status = :clearance
+        self.save
+
+        # Send email to all matching applications.
+        applications = find_clearance
+        applications.each do |application|
+          StudentMailer.clearance(application.student, [self]).deliver_later
+        end
+
+        return true
+      end
+
+      false
+    end
+
+    # Finds applications eligable for clearance.
     def find_clearance
       Application.select('DISTINCT (applications.*)')
           .joins(course_selections: :course)

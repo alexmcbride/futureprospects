@@ -6,7 +6,7 @@ class DecisionsController < ApplicationController
   def index
   end
 
-  # get /decisions/firm
+  # GET /decisions/firm
   def firm
     CourseSelection.clear_all_choices @application
   end
@@ -52,7 +52,6 @@ class DecisionsController < ApplicationController
 
   # GET /decisions/completed
   def completed
-
   end
 
   private

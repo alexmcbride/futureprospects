@@ -11,9 +11,9 @@ class CourseSelection < ApplicationRecord
   validates :course_id, presence: true
   validate :course_is_unique, on: :create
   validate :course_is_open, on: :create
-  validate :course_not_full, on: :create
-  validate :application_can_add, on: :create
-  validates :note, presence: true, if: :rejected? || :conditional_offer
+  validate :course_is_not_full, on: :create
+  validate :can_add_course_to_application, on: :create
+  validates :note, presence: true, if: :rejected? || :conditional_offer?
 
   # Associations
   belongs_to :application, counter_cache: true
@@ -168,14 +168,14 @@ class CourseSelection < ApplicationRecord
     end
 
     # Adds a validation error if the application already has max number courses added.
-    def application_can_add
+    def can_add_course_to_application
       unless self.application.can_add_course?
         self.errors.add(:maximum, "of #{pluralize Application::MAX_COURSES, 'course'} has been reached")
       end
     end
 
     # Adds a validation error if the course is full.
-    def course_not_full
+    def course_is_not_full
       if self.course.full?
         self.errors.add(:course, 'is full')
       end

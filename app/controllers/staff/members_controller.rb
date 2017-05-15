@@ -78,7 +78,7 @@ class Staff::MembersController < Staff::StaffController
     authorize @member
     respond_to do |format|
       if @member.remove_user params[:member_username]
-        format.html { redirect_to staff_members_url, notice: 'User was successfully destroyed.' }
+        format.html { redirect_to staff_members_url, notice: 'User was successfully removed.' }
       else
         format.html { render :remove }
       end

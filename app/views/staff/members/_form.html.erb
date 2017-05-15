@@ -4,7 +4,7 @@
   <% if current_staff.has_role? :site_admin %>
     <div class="form-group">
       <%= f.label :college_id %>
-      <%= f.select :college_id, options_for_collections_with_default(@colleges, :id, :name, @member.college), {}, class: 'form-control' %>
+      <%= f.select :college_id, options_for_collections_with_default(@colleges, :id, :name, @member.college_id), {}, class: 'form-control' %>
     </div>
   <% end %>
 

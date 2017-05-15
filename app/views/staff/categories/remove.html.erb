@@ -1,41 +1,27 @@
 <% breadcrumb :staff_remove_category, @category %>
 <% @title = 'Remove Category' %>
 
-<div class="row">
-  <div class="col-sm-3">
-    <%= render 'staff/shared/courses_sidenav', page: :categories %>
-  </div>
-  <div class="col-sm-9">
-    <div class="alert-warning alert">
-      <%= icon 'exclamation-circle' %>
-      Warning: This action cannot be undone.
-    </div>
-
-    <p>Are you sure you want to delete the following category?</p>
-    <p><strong><%= @category.name %></strong></p>
-    <p>You can only delete a category if it has no courses in it. For security purposes you must type the full name of
-      the category exactly as it appears in order for it to be deleted.</p>
-
-    <%= form_for @category, url: staff_category_path(@category), method: :delete do |f| %>
-      <%= hidden_field_tag :_method, 'delete' %>
-
-      <%= form_errors @category %>
-
-      <div class="form-group">
-        <%= text_field_tag :category_name, nil, class: 'form-control', autocomplete: :off %>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-6">
-          <%= link_to 'Go back', staff_categories_path %>
-        </div>
-        <div class="col-xs-6 text-right">
-          <%= button_tag(:class => "btn btn-danger") do |s| %>
-              <%= icon('exclamation-triangle') %>
-              Delete Category
-          <% end %>
-        </div>
-      </div>
-    <% end %>
-  </div>
+<div class="alert-warning alert">
+  <%= icon 'exclamation-circle' %>
+  Warning: This action cannot be undone.
 </div>
+
+<p>Are you sure you want to delete the following category?</p>
+<p><strong><%= @category.name %></strong></p>
+<p>You can only delete a category if it has no courses in it. For security purposes you must type the full name of
+  the category exactly as it appears in order for it to be deleted.</p>
+
+<%= form_for @category, url: staff_category_path(@category), method: :delete do |f| %>
+  <%= hidden_field_tag :_method, 'delete' %>
+
+  <%= form_errors @category %>
+
+  <div class="form-group">
+    <%= text_field_tag :category_name, nil, class: 'form-control', autocomplete: :off %>
+  </div>
+
+  <%= button_tag(:class => "btn btn-danger") do |s| %>
+      <%= icon('exclamation-triangle') %>
+      Delete Category
+  <% end %>
+<% end %>

@@ -225,7 +225,7 @@ crumb :staff_remove_course do |course|
 end
 
 crumb :staff_categories do
-  parent :staff_courses
+  parent :root
   link 'Categories', staff_categories_path
 end
 
@@ -236,11 +236,13 @@ end
 
 crumb :staff_edit_category do |category|
   parent :staff_categories
+  link category.name, nil
   link 'Edit', edit_staff_category_path(category)
 end
 
 crumb :staff_remove_category do |category|
   parent :staff_categories
+  link category.name, nil
   link 'Remove', staff_category_remove_path(category)
 end
 

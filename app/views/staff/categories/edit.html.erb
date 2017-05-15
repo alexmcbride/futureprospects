@@ -1,12 +1,5 @@
 <% breadcrumb :staff_edit_category, @category %>
 <% @title = 'Edit Category' %>
 
-<div class="row">
-  <div class="col-md-3 col-sm-12">
-    <%= render 'staff/shared/courses_sidenav', page: :categories %>
-  </div>
-  <div class="col-md-9 col-sm-12">
-    <p class="text-darkish small">Update the name of the category.</p>
-    <%= render 'form', category: @category, path: staff_category_path(@category) %>
-  </div>
-</div>
+  <p class="text-darkish small">Update the name of the category.</p>
+  <%= render 'form', category: @category, path: staff_category_path(@category) %>

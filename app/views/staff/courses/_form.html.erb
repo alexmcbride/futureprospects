@@ -11,19 +11,21 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= f.label :title %>
-    <%= f.text_field :title, class:'form-control' %>
-  </div>
-
   <div class="row">
     <div class="col-sm-6">
+      <div class="form-group">
+        <%= f.label :title %>
+        <%= f.text_field :title, class:'form-control' %>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
       <div class="form-group">
         <%= f.label :category_id, 'Category' %>
         <%= f.select :category_id, options_from_collection_for_select(@categories, :id, :name, course.category_id), {}, class:'form-control' %>
       </div>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-2">
       <div class="form-group">
         <%= f.label :status %>
         <%= f.select :status, options_for_select(Course.statuses.keys.map {|k| [k.humanize, k]}, course.status), {}, class:'form-control' %>

@@ -2,17 +2,17 @@
 <% @title = 'Manage Categories' %>
 
 <div class="row">
-  <div class="col-md-3 col-sm-12">
-    <%= render 'shared/courses_sidenav', page: :categories %>
+  <div class="col-xs-12">
 
-    <p class="text-darkish small">Use the button below to create a new category.</p>
-    <%= link_to new_staff_category_path, class: 'btn btn-default btn-block', role: 'button' do %>
-      <%= icon('plus-circle') %>
-      Add New Category
-    <% end %>
-    <br>
-  </div>
-  <div class="col-md-9 col-sm-12">
+    <p class="text-darkish small">Add a new category to the list.</p>
+
+    <%= render 'form', category: @category, path: staff_categories_path %>
+
+
+    <hr>
+
+    <h3>Categories</h3>
+
     <div class="table-responsive">
       <table class="table table-striped">
         <thead>

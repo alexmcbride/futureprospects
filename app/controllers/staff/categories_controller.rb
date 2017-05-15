@@ -4,18 +4,13 @@ class Staff::CategoriesController < Staff::StaffController
   # GET /staff/categories
   def index
     @categories = Category.order(:name)
+    @category = Category.new
     skip_policy_scope
   end
 
   # GET /staff/categories/1
   def show
     authorize @category
-  end
-
-  # GET /staff/categories/new
-  def new
-    authorize Category
-    @category = Category.new
   end
 
   # GET /staff/categories/1/edit
@@ -31,7 +26,9 @@ class Staff::CategoriesController < Staff::StaffController
       if @category.save
         format.html { redirect_to staff_categories_path, notice: "Category '#{@category.name} was successfully created." }
       else
-        format.html { render :new }
+        @categories = Category.order(:name)
+        skip_policy_scope
+        format.html { render :index }
       end
     end
   end

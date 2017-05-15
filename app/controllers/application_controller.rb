@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   #
   # * +return_path+ - the path to return to once the payment is complete.
   #
-  # Returns - the path to redirect to for the payment to be processed.
+  # Returns the path to redirect to for the payment to be processed.
   def payment_redirect_path(return_path)
     session[:payment_redirect] = return_path
     payment_method_path

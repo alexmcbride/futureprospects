@@ -15,7 +15,7 @@ class CourseSelectionPolicy < BaseApplicationPolicy
 
     # Resolves the scope for the policy
     #
-    # Returns - the scope this user can access.
+    # Returns the scope this user can access.
     def resolve
       if user.has_role? :site_admin
         scope.all

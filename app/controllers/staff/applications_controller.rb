@@ -4,11 +4,15 @@ class Staff::ApplicationsController < Staff::StaffController
   # GET /staff/applications
   # GET /staff/applications.json
   def index
+    unless params.key? :status
+      params[:status] = :awaiting_decisions
+    end
+
     @applications = policy_scope(Application)
-                        .filter(params)
-                        .order(:submitted_date)
-                        .includes(:student)
-                        .paginate(page: params[:page], per_page: 15)
+        .filter(params)
+        .order(:submitted_date)
+        .includes(:student)
+        .paginate(page: params[:page], per_page: 15)
 
     # Stuff for filter sidebar
     @categories = Category.order(:name)

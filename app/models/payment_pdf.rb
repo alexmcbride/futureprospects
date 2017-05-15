@@ -17,14 +17,14 @@ class PaymentPdf < Prawn::Document
 
   # Gets the filename of the file.
   #
-  # Returns - the filename string.
+  # Returns the filename string.
   def filename
     'future_prospects_invoice.pdf'
   end
 
   # Gets the mime-type of the file.
   #
-  # Returns - the mime-type string.
+  # Returns the mime-type string.
   def mime_type
     'application/pdf'
   end

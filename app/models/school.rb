@@ -12,7 +12,7 @@ class School < ApplicationRecord
 
   # Checks if the school has at least one qualification
   #
-  # Returns - a boolean indicating if the school has at least a single qualification.
+  # Returns a boolean indicating if the school has at least a single qualification.
   def qualifications_valid?
     not self.qualifications.empty?
   end
@@ -21,7 +21,7 @@ class School < ApplicationRecord
   #
   # * +qualification+ - the qualification to add.
   #
-  # Returns - a boolean indicating if the operation was successful.
+  # Returns a boolean indicating if the operation was successful.
   def add_qualification(qualification)
     if qualification.valid?
       qualification.school = self

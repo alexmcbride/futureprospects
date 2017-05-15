@@ -41,7 +41,7 @@ class CourseImageUploader < BaseUploader
 
   # Gets a list of allowed image file extensions.
   #
-  # Returns - the list of strings.
+  # Returns the list of strings.
   def extension_whitelist
     %w(jpg jpeg gif png)
   end

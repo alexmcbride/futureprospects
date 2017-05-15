@@ -21,7 +21,7 @@ class CourseSelection < ApplicationRecord
 
   # Checks if a course selection already exists.
   #
-  # Returns - a boolean indicating if the selection exists.
+  # Returns a boolean indicating if the selection exists.
   def exists?
     CourseSelection.exists? self.application_id, self.course_id
   end
@@ -34,7 +34,7 @@ class CourseSelection < ApplicationRecord
   #
   # * +params+ - the rquest params including the course_id.
   #
-  # Returns - a new CourseSelection object with the course_id set.
+  # Returns a new CourseSelection object with the course_id set.
   def self.from_course_id(params)
     selection = CourseSelection.new
     selection.course_id = params[:course_id]
@@ -45,7 +45,7 @@ class CourseSelection < ApplicationRecord
   #
   # * +college+ - the college to count applicants for.
   #
-  # Returns - an integer with the number of applicants.
+  # Returns an integer with the number of applicants.
   def self.count_applicants(college)
     CourseSelection.select('DISTINCT course_selections.application_id')
         .joins(:course)
@@ -57,7 +57,7 @@ class CourseSelection < ApplicationRecord
   #
   # * +college+ - the college to count course selection for.
   #
-  # Returns - an integer with the number of course selections.
+  # Returns an integer with the number of course selections.
   def self.count_courses(college)
     CourseSelection.joins(:course).where('courses.college_id' => college.id).count
   end
@@ -66,7 +66,7 @@ class CourseSelection < ApplicationRecord
   #
   # * +application+ - the application to find colleges for.
   #
-  # Returns - ActiveRecord::Relation.
+  # Returns ActiveRecord::Relation.
   def self.selected_colleges(application)
     application.course_selections
         .select('DISTINCT (colleges.*)')
@@ -76,14 +76,14 @@ class CourseSelection < ApplicationRecord
 
   # Determines if the student has made all their choices.
   #
-  # Returns - boolean true if they do have all choices.
+  # Returns boolean true if they do have all choices.
   def has_all_choices?
     self.application.course_selections.all? {|s| s.student_choice.present? || s.rejected?}
   end
 
   # Updates course selection for firm_choice
   #
-  # Returns - true if the student has made all their choices
+  # Returns true if the student has made all their choices
   def make_firm_choice
     self.student_choice = :firm_choice
     save!

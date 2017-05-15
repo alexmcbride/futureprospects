@@ -10,7 +10,7 @@ class Student < User
 
   # Creates a new application, filled with some info we already know.
   #
-  # Returns - a new application object, or nil if one already exists.
+  # Returns a new application object, or nil if one already exists.
   def create_application
     unless self.has_current_application?
       Application.create_for_student self
@@ -19,7 +19,7 @@ class Student < User
 
   # Finds the current application, which is an application made in the last year.
   #
-  # Returns - the student's current application, which is defined as any application active in the last year.
+  # Returns the student's current application, which is defined as any application active in the last year.
   def current_application
     # Get from last year for Postgresql
     @current_application ||= self.applications.where("created_at > (CURRENT_DATE - INTERVAL '1 year')").first
@@ -27,14 +27,14 @@ class Student < User
 
   # Checks if the student has a current application
   #
-  # Returns - a boolean indicating if the student has a current_application.
+  # Returns a boolean indicating if the student has a current_application.
   def has_current_application?
     not self.current_application.nil?
   end
 
   # Gets all payments made by this student.
   #
-  # Returns - an ActiveRecord::Relation containing the payment objects.
+  # Returns an ActiveRecord::Relation containing the payment objects.
   def all_payments
     Payment.joins(:application).where('applications.student_id=?', id)
   end

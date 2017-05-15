@@ -18,14 +18,14 @@ class College < ApplicationRecord
 
   # Calculates the number applicants to this college.
   #
-  # Returns - integer for number of applications.
+  # Returns integer for number of applications.
   def count_applicants
     CourseSelection.count_applicants self
   end
 
   # Calculates the number of courses that have been applied for.
   #
-  # Returns - integer for number of course selections.
+  # Returns integer for number of course selections.
   def count_course_selections
     CourseSelection.count_courses self
   end
@@ -34,7 +34,7 @@ class College < ApplicationRecord
   #
   # * +college_name+ - the name of the college, as entered by the user.
   #
-  # Returns - a boolean indicating if the operation was successful.
+  # Returns a boolean indicating if the operation was successful.
   def remove_college(college_name)
     if self.name != college_name
       errors.add(:college_name, "does not match '#{name}'")
@@ -72,7 +72,7 @@ class College < ApplicationRecord
   #
   # * +params+ - the request params.
   #
-  # Returns - true if successful, otherwise false.
+  # Returns true if successful, otherwise false.
   def update_for_clearance(params)
     if self.update params
       if self.clearance?
@@ -84,7 +84,7 @@ class College < ApplicationRecord
 
   # Determines if any colleges are in clearance mode.
   #
-  # Returns - true if one or more colleges are in clearance, otherwise false.
+  # Returns true if one or more colleges are in clearance, otherwise false.
   def self.clearance_any?
     College.where(clearance: true).any?
   end

@@ -10,14 +10,14 @@ class Staff < User
 
   # Finds all of the job titles for the college the staff member belongs to.
   #
-  # Returns - an ActiveRecord::Relation containing all of the job_titles at this staff member's college.
+  # Returns an ActiveRecord::Relation containing all of the job_titles at this staff member's college.
   def college_job_titles
     Staff.where(college_id: self.college_id).select(:job_title).distinct
   end
 
   # Finds all staff job titles of staff members at all colleges.
   #
-  # Returns - an ActiveRecord::Relation containing all of the job_titles at the colleges.
+  # Returns an ActiveRecord::Relation containing all of the job_titles at the colleges.
   def self.all_job_titles
     Staff.select(:job_title).distinct
   end
@@ -54,7 +54,7 @@ class Staff < User
   #
   # * +params+ - the request params containing filter data.
   #
-  # Returns - An ActiveRecord::Relation contaning the results of the filtering operation.
+  # Returns An ActiveRecord::Relation contaning the results of the filtering operation.
   def self.filter(params)
     staff = Staff.all
     if params[:full_name].present?

@@ -16,7 +16,7 @@ module StudentValidator
   #
   # * +scn+ - the number to validate.
   #
-  # Returns - a boolean indicating if the number is valid.
+  # Returns a boolean indicating if the number is valid.
   def self.validate_scn(scn)
     nums = scn.chars.map { |c| c.to_i }
     check_digit = generate_check_digit nums
@@ -31,7 +31,7 @@ module StudentValidator
   #
   # * +year+ - an optional DateTime object to use for the first two digits.
   #
-  # Returns - a valid scottish candidate number.
+  # Returns a valid scottish candidate number.
   def self.generate_scn(year=nil)
     year = DateTime.now.year if year.nil?
     tens = year % 1000 / 10
@@ -55,7 +55,7 @@ module StudentValidator
   #
   # * +nums+ - an array containing each number of the SCN,
   #
-  # Returns - the check digit.
+  # Returns the check digit.
   def self.generate_check_digit(nums)
     weights = [3, 2, 7, 6, 5, 4, 3, 2]
     sum = 0

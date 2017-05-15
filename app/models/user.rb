@@ -26,35 +26,35 @@ class User < ApplicationRecord
 
   # Gets login, username, or email, depending on which is set.
   #
-  # Returns - the user's username or email, depending on what they used to login.
+  # Returns the user's username or email, depending on what they used to login.
   def login
     @login || self.username || self.email
   end
 
   # Gets the user's first_name and family_name concatenated together.
   #
-  # Returns - the user's full name.
+  # Returns the user's full name.
   def full_name
     "#{self.first_name} #{self.family_name}"
   end
 
   # Determines if this user is a student.
   #
-  # Returns - a boolean true if this user is a student.
+  # Returns a boolean true if this user is a student.
   def student?
     self.type == 'Student'
   end
 
   # Determines if this user is staff.
   #
-  # Returns - a boolean true if this user is a staff member.
+  # Returns a boolean true if this user is a staff member.
   def staff?
     self.type == 'Staff'
   end
 
   # Generates a random eight character password.
   #
-  # Returns -  the generated password.
+  # Returns  the generated password.
   def self.generate_password
     Devise.friendly_token.first 8
   end
@@ -63,7 +63,7 @@ class User < ApplicationRecord
   #
   # * +username+ - the username, entered by the user, to test if it matches.
   #
-  # Returns - a boolean indicating if the user was removed or a validation error added.
+  # Returns a boolean indicating if the user was removed or a validation error added.
   def remove_user(username)
     if username == self.username
       self.destroy!
@@ -104,7 +104,7 @@ class User < ApplicationRecord
     # * +first_name+ - the user's first name
     # * +family_name+ - the user's family name
     #
-    # Returns - the generated username.
+    # Returns the generated username.
     def generate_username(first_name, family_name)
       initial = first_name[0].downcase
       family_name = family_name.downcase
@@ -116,7 +116,7 @@ class User < ApplicationRecord
     #
     # * +username+ - the username to check.
     #
-    # Returns - a boolean true if the username is free.
+    # Returns a boolean true if the username is free.
     def username_free?(username)
       User.find_by_username(username).nil?
     end

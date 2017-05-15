@@ -14,14 +14,14 @@ class Qualification < ApplicationRecord
 
   # Gets the date range the qualification runs for
   #
-  # Returns - the duration of the qualification
+  # Returns the duration of the qualification
   def duration
     self.start_date..self.end_date
   end
 
   # Gets if the course end date is in the future
   #
-  # Returns - a boolean indicating if the qualification end date is in the future.
+  # Returns a boolean indicating if the qualification end date is in the future.
   def future_end_date?
     end_date > DateTime.now
   end

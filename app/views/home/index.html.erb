@@ -5,9 +5,9 @@
 </div>
 
 <% if College.clearance_any? %>
-  <div class="well">
-    <h3 style="margin-top: 5px;">Clearance Has Started!</h3>
-    <p>Clearance is where we match students who did not receive a place to courses with open spaces. Please
+  <div class="jumbotron">
+    <h2 style="margin-top: 5px;">Clearance Has Started!</h2>
+    <p>Clearance is where we match students that did not receive a place to courses that still have open spaces. Please
     feel free to browse our complete list of clearance courses.</p>
     <p class="text-right"><%= link_to 'Browse Courses', clearance_path, class: 'btn btn-default', role: 'button' %></p>
   </div>

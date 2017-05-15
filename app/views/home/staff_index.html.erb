@@ -21,7 +21,7 @@
           <% @applications.each do |application| %>
             <%= link_to staff_application_path(application), class: 'list-group-item' do %>
               <%= application.student.full_name %>
-                  <span class="badge"><%= format_date application.updated_at %></span>
+                  <span class="badge"><%= application.status.titleize %></span>
             <% end %>
           <% end %>
         </div>

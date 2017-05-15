@@ -13,56 +13,56 @@ class BaseApplicationPolicy
 
   # Default index? access rights.
   #
-  # Returns - false
+  # Returns false
   def index?
     false
   end
 
   # Default show? access rights.
   #
-  # Returns - if the record exists in the scope.
+  # Returns if the record exists in the scope.
   def show?
     scope.where(:id => record.id).exists?
   end
 
   # Default create? access rights.
   #
-  # Returns - false
+  # Returns false
   def create?
     false
   end
 
   # Default new? access rights.
   #
-  # Returns - false
+  # Returns false
   def new?
     create?
   end
 
   # Default update? access rights.
   #
-  # Returns - false
+  # Returns false
   def update?
     false
   end
 
   # Default edit? access rights.
   #
-  # Returns - false
+  # Returns false
   def edit?
     update?
   end
 
   # Default destroy? access rights.
   #
-  # Returns - false
+  # Returns false
   def destroy?
     false
   end
 
   # Default scope access rights.
   #
-  # Returns - the default policy
+  # Returns the default policy
   def scope
     Pundit.policy_scope!(user, record.class)
   end
@@ -79,7 +79,7 @@ class BaseApplicationPolicy
 
     # Resolve the permissions for the scope.
     #
-    # Returns - all scope.
+    # Returns all scope.
     def resolve
       scope
     end

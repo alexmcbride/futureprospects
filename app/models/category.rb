@@ -12,7 +12,7 @@ class Category < ApplicationRecord
   #
   # * +category_name+ - The name of the category, as entered by the user.
   #
-  # Returns - true if the category could be removed.
+  # Returns true if the category could be removed.
   def remove?(category_name)
     if category_name != self.name
       self.errors.add(:name, "does not match '#{self.name}'")

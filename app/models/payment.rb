@@ -51,7 +51,7 @@ class Payment < ApplicationRecord
 
   # Authorizes the payment
   #
-  # Returns - a boolean indicating if the payment was authorized.
+  # Returns a boolean indicating if the payment was authorized.
   def authorize
     # Take correct payment depending on type.
     response = if self.paypal?
@@ -84,7 +84,7 @@ class Payment < ApplicationRecord
   # * +return_url+ - the URL the buyer is returned to. This return action then needs to call authorize.
   # * +cancel_url+ - the URL the buyer is returned to, if they cancel their PayPal purchase.
   #
-  # Returns - the PayPal URL to direct to the buyer to.
+  # Returns the PayPal URL to direct to the buyer to.
   def generate_paypal_url(ip, return_url, cancel_url)
     items = {name: 'Future Prospects',
              description: description,
@@ -115,7 +115,7 @@ class Payment < ApplicationRecord
 
   # Gets the amount paid in pounds
   #
-  # Returns - the amount in pounds.
+  # Returns the amount in pounds.
   def amount_pounds
     amount / 100
   end
@@ -124,7 +124,7 @@ class Payment < ApplicationRecord
   #
   # * +application+ - the application to check.
   #
-  # Returns - true if the application owns it, otherwise false.
+  # Returns true if the application owns it, otherwise false.
   def owner?(application)
     application_id == application.id
   end
@@ -141,7 +141,7 @@ class Payment < ApplicationRecord
 
     # Makes a credit card purchase
     #
-    # Returns - an ActiveMerchant Response object
+    # Returns an ActiveMerchant Response object
     def credit_card_purchase
       card = credit_card
       self.last_four_digits = card.last_digits
@@ -151,7 +151,7 @@ class Payment < ApplicationRecord
 
     # Makes a PayPal purchase
     #
-    # Returns - an ActiveMerchant Response object
+    # Returns an ActiveMerchant Response object
     def paypal_purchase
       PAYPAL_GATEWAY.purchase(self.amount,
                               currency: CURRENCY,
@@ -162,7 +162,7 @@ class Payment < ApplicationRecord
 
     # Creates a new CreditCard object from the options.
     #
-    # Returns - a new credit card object, or nil if the object wasn't built.
+    # Returns a new credit card object, or nil if the object wasn't built.
     def credit_card
       card = ActiveMerchant::Billing::CreditCard.new(
           brand: card_brand,
@@ -179,7 +179,7 @@ class Payment < ApplicationRecord
     #
     # * +expiry+ - the string to parse (format: mm/yyyy)
     #
-    # Returns - a tuple with (month, year) as integers.
+    # Returns a tuple with (month, year) as integers.
     def self.try_parse_expiry(expiry)
       begin
         expiry = Date.strptime expiry, '%m/%Y'

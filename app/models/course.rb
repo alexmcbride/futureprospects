@@ -1,6 +1,6 @@
 # Model class to represent a college course.
 class Course < ApplicationRecord
-  enum status: [:open, :cancelled, :closed, :clearance]
+  enum status: [:open, :cancelled, :closed]
 
   # Pagination
   self.per_page = 10
@@ -42,21 +42,21 @@ class Course < ApplicationRecord
 
   # Gets the number of years the course lasts for.
   #
-  # Returns - the years as an integer.
+  # Returns the years as an integer.
   def years
     ((end_date - start_date).to_i / 365.0).ceil
   end
 
   # Gets the duration the course will last for.
   #
-  # Returns - a duration between two dates.
+  # Returns a duration between two dates.
   def duration
     start_date..end_date
   end
 
   # Gets if the course is full time or part time.
   #
-  # Returns - a string with the course type.
+  # Returns a string with the course type.
   def course_type
     'Full Time'
   end
@@ -65,7 +65,7 @@ class Course < ApplicationRecord
   #
   # * +search_term+ - the term to search for.
   #
-  # Returns - an ActiveRecord:Relation containing the search results.
+  # Returns an ActiveRecord:Relation containing the search results.
   def self.search(search_term)
     Course.search_for(search_term, profile: :title)
   end
@@ -74,7 +74,7 @@ class Course < ApplicationRecord
   #
   # * +search_term+ - the term to search for.
   #
-  # Returns - an ActiveRecord:Relation containing the search results
+  # Returns an ActiveRecord:Relation containing the search results
   def self.full_search(search_term, category=nil)
     scope = Course.search_for(search_term, profile: :full).includes(:category, :college)
     if category
@@ -85,7 +85,7 @@ class Course < ApplicationRecord
 
   # Checks if the course is full.
   #
-  # Returns - a boolean indicating if the course has spaces.
+  # Returns a boolean indicating if the course has spaces.
   def full?
     self.course_selections_count >= self.spaces
   end
@@ -103,12 +103,12 @@ class Course < ApplicationRecord
   def can_apply?
     self.open? && self.course_selections_count < self.spaces
   end
-  
+
   # Filters the courses based on the request params (:title, :category_id, :status, and :college_id)
   #
   # * +params+ - the request params containing filtering information.
   #
-  # Returns - an ActiveRecord::Relation containing the results of the filtering operation.
+  # Returns an ActiveRecord::Relation containing the results of the filtering operation.
   def self.filter(params)
     scope = Course.search params[:title]
     unless params[:category_id].nil? or params[:category_id] == '0'
@@ -127,7 +127,7 @@ class Course < ApplicationRecord
   #
   # * +title+ - the title to match against, entered by the user, as a security precaution.
   #
-  # Returns - a boolean indicating if the operation was successful.
+  # Returns a boolean indicating if the operation was successful.
   def remove(title)
     if title != self.title
       self.errors.add(:title, "does not match '#{self.title}'")
@@ -151,7 +151,7 @@ class Course < ApplicationRecord
   #
   # * +category+ - optional category the include the where clause
   #
-  # Returns - An ActiveRecord::Relation including the course results.
+  # Returns An ActiveRecord::Relation including the course results.
   def self.find_open_courses(category=nil)
     scope = Course.available
 
@@ -166,16 +166,11 @@ class Course < ApplicationRecord
   #
   # * +params+ - The request params including the update data.
   #
-  # Returns - a boolean indicating if the operation was successful.
+  # Returns a boolean indicating if the operation was successful.
   def update_with_status(params)
     # Check if status has just been switched to cancelled
     if params[:status] == 'cancelled'
       cancel
-    end
-
-    # Check enter clearance mode.
-    if params[:status] == 'clearance'
-      enable_clearance
     end
 
     self.update params
@@ -183,7 +178,7 @@ class Course < ApplicationRecord
 
   # Cancels course and emails all students who had applied for it.
   #
-  # Returns - a boolean indicating if the operation was successful.
+  # Returns a boolean indicating if the operation was successful.
   def cancel
     # Ignore if already cancelled.
     unless self.cancelled?
@@ -206,7 +201,7 @@ class Course < ApplicationRecord
   # * +application+ - the application to find clearance courses for.
   # * +college+ - an optional college to limit the courses for.
   #
-  # Returns - an ActiveRecord::Relation with
+  # Returns an the courses as a relation.
   def self.clearance_courses(application, college=nil)
     scope = Course.available
                 .select('DISTINCT courses.*')
@@ -228,7 +223,7 @@ class Course < ApplicationRecord
   #
   # * +college+ - optional college to limit results to.
   #
-  # Returns - an ActiveRecord::Relation with courses.
+  # Returns an ActiveRecord::Relation containing the courses.
   def self.all_clearance_courses(college=nil)
     scope = Course.joins(:college)
                 .select('DISTINCT(courses.*)')
@@ -244,35 +239,6 @@ class Course < ApplicationRecord
   end
 
   private
-    # Puts course into clearance mode and emails any students eligable for clearance.
-    #
-    # Returns - true if clearance was enabled.
-    def enable_clearance
-      unless self.clearance?
-        self.status = :clearance
-        self.save
-
-        # Send email to all matching applications.
-        applications = find_clearance
-        applications.each do |application|
-          StudentMailer.clearance(application.student, [self]).deliver_later
-        end
-
-        return true
-      end
-
-      false
-    end
-
-    # Finds applications eligable for clearance.
-    def find_clearance
-      Application.select('DISTINCT (applications.*)')
-          .joins(course_selections: :course)
-          .where('courses.college_id' => self.college_id)
-          .where('applications.status' => [:all_rejected, :clearance])
-          .where('courses.category_id' => self.category_id)
-    end
-
     # ActiveRecord callback, called before validation, that adds a default status if one does not exist.
     def default_to_open_status
       unless self.status

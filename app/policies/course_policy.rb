@@ -15,7 +15,7 @@ class CoursePolicy < BaseApplicationPolicy
 
     # Resolves the scope for the policy
     #
-    # Returns - the scope this user can access.
+    # Returns the scope this user can access.
     def resolve
       if user.has_role? :site_admin
         scope.all
@@ -29,14 +29,14 @@ class CoursePolicy < BaseApplicationPolicy
 
   # Checks if the user can perform this action on the model.
   #
-  # Returns - a boolean indicating if the action is allowed.
+  # Returns a boolean indicating if the action is allowed.
   def show?
     user.has_role? :site_admin or (user.college_id == record.college_id && user.has_role?(:can_view_courses))
   end
 
   # Checks if the user can perform this action on the model.
   #
-  # Returns - a boolean indicating if the action is allowed.
+  # Returns a boolean indicating if the action is allowed.
   def new?
     # No college as not added yet.
     user.has_role? :site_admin or user.has_role?(:can_add_courses)
@@ -44,35 +44,35 @@ class CoursePolicy < BaseApplicationPolicy
 
   # Checks if the user can perform this action on the model.
   #
-  # Returns - a boolean indicating if the action is allowed.
+  # Returns a boolean indicating if the action is allowed.
   def create?
     user.has_role? :site_admin or (user.college_id == record.college_id && user.has_role?(:can_add_courses))
   end
 
   # Checks if the user can perform this action on the model.
   #
-  # Returns - a boolean indicating if the action is allowed.
+  # Returns a boolean indicating if the action is allowed.
   def edit?
     user.has_role? :site_admin or (user.college_id == record.college_id && user.has_role?(:can_edit_courses))
   end
 
   # Checks if the user can perform this action on the model.
   #
-  # Returns - a boolean indicating if the action is allowed.
+  # Returns a boolean indicating if the action is allowed.
   def update?
     edit?
   end
 
   # Checks if the user can perform this action on the model.
   #
-  # Returns - a boolean indicating if the action is allowed.
+  # Returns a boolean indicating if the action is allowed.
   def remove?
     user.has_role? :site_admin or (user.college_id == record.college_id && user.has_role?(:can_remove_courses))
   end
 
   # Checks if the user can perform this action on the model.
   #
-  # Returns - a boolean indicating if the action is allowed.
+  # Returns a boolean indicating if the action is allowed.
   def destroy?
     remove?
   end

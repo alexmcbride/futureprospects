@@ -16,7 +16,7 @@ class CollegeImageUploader < BaseUploader
 
   # Determines the directory in which images are stored once uploaded.
   #
-  # Returns - the direction as a string.
+  # Returns the direction as a string.
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
@@ -43,7 +43,7 @@ class CollegeImageUploader < BaseUploader
 
   # Gets a list of allowed image file extensions.
   #
-  # Returns - the list of strings.
+  # Returns the list of strings.
   def extension_whitelist
     %w(jpg jpeg gif png)
   end

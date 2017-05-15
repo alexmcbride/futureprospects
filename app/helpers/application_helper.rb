@@ -10,7 +10,7 @@ module ApplicationHelper
   #
   # * +flash_type+ - the type of flash message.
   #
-  # Returns - the bootstrap class to use e.g. warning, success etc.
+  # Returns the bootstrap class to use e.g. warning, success etc.
   def bootstrap_class_for(flash_type)
     { notice: 'alert-success',
       alert: 'alert-warning',
@@ -22,7 +22,7 @@ module ApplicationHelper
 
   # Displays any queued flash messages in a bootstrap friendly way.
   #
-  # Returns - the HTML for a pretty bootstrap alert containing the flash message.
+  # Returns the HTML for a pretty bootstrap alert containing the flash message.
   def flash_messages
     flash.each do |msg_type, message|
       concat(content_tag(:div, message, class: "text-center alert #{bootstrap_class_for(msg_type)} fade in") do
@@ -38,7 +38,7 @@ module ApplicationHelper
   #
   # * +obj+ - the form to show error for.
   #
-  # Returns - HTML with pretty bootstrap errors.
+  # Returns HTML with pretty bootstrap errors.
   def form_errors(obj)
     if obj.errors.any?
       content_tag(:div, class: 'panel panel-danger') do
@@ -62,7 +62,7 @@ module ApplicationHelper
   #
   # * +text+ - the text to convert.
   #
-  # Returns - the HTML the markdown was converted to.
+  # Returns the HTML the markdown was converted to.
   def markdown(text)
     options = {
         filter_html:     true,
@@ -88,7 +88,7 @@ module ApplicationHelper
   #
   # * +url+ - the url to process.
   #
-  # Returns - a clean URL string.
+  # Returns a clean URL string.
   def clean_url(url)
     (URI.split url).compact.slice(1, 1).join
   end
@@ -100,7 +100,7 @@ module ApplicationHelper
   # * +selected+ - optional boolean to indicate if the stage is selected (active).
   # * +completed+ - optional boolean to indicate if the stage is completed (green tick).
   #
-  # Returns - the HTML of the item.
+  # Returns the HTML of the item.
   def stage_item(name, path, stage, current)
     selected = stage == current
     completed = Application.stage_complete?(stage, current)
@@ -129,7 +129,7 @@ module ApplicationHelper
   #
   # * +last_four_digits+ - the last four digits of the card number
   #
-  # Returns - the masked card number as a string.
+  # Returns the masked card number as a string.
   def credit_card_number(last_four_digits)
     ((('#' * 4) + '-') * 3) + last_four_digits
   end
@@ -138,7 +138,7 @@ module ApplicationHelper
   #
   # * +date+ - the date to format.
   #
-  # Returns - the formatted date.
+  # Returns the formatted date.
   def format_date(date)
     date.strftime '%d/%m/%Y' if date
   end
@@ -147,7 +147,7 @@ module ApplicationHelper
   #
   # * +date+ - the date to format.
   #
-  # Returns - the formatted date.
+  # Returns the formatted date.
   def format_expiry(date)
     date.strftime '%m/%y' if date
   end
@@ -156,28 +156,28 @@ module ApplicationHelper
   #
   # * +date+ - the datetime to format.
   #
-  # Returns - the formatted datetime.
+  # Returns the formatted datetime.
   def format_datetime(dt)
     dt.strftime '%d/%m/%Y - %H:%m' if dt
   end
 
   # Gets any current user
   #
-  # Returns - the current user.
+  # Returns the current user.
   def current_user
     current_student or current_staff
   end
 
   # Gets if any user is signed in
   #
-  # Returns - true if the user is signed in.
+  # Returns true if the user is signed in.
   def user_signed_in?
     student_signed_in? or staff_signed_in?
   end
 
   # Adds the little markdown guide ? thing next to some text fields
   #
-  # Returns - HTML for the little markdown guide thing.
+  # Returns HTML for the little markdown guide thing.
   def markdown_support_text
     content_tag(:div, class: 'pull-right text-darkish small', style: 'margin-top: 5px;') do
       concat(icon('arrow-circle-down'))
@@ -190,7 +190,7 @@ module ApplicationHelper
   #
   # * +separator+ - the line separator.
   #
-  # Returns - the address as a string.
+  # Returns the address as a string.
   def address(resource, separator='<br>')
     [resource.address_1, (resource.address_2 if resource.address_2.present?), resource.city, resource.postcode, resource.country].compact.join(separator).html_safe
   end
@@ -201,10 +201,11 @@ module ApplicationHelper
   # * +default+ - whether this is the default tab or not (default false)
   #
   # Returns the HTML for displaying the tab.
-  def tab(tab, default=false)
-    selected = params.key?(:tab) ? params[:tab].to_sym : (tab if default)
+  def tab(tab, default=false, tab_name=:tab)
+    tab = tab.to_sym
+    selected = params.key?(tab_name) ? params[tab_name].to_sym : (tab if default)
     content_tag(:li, class: ('active' if selected == tab)) do
-      link_to(tab.to_s.titleize, clearance_path(tab: tab))
+      link_to(tab.to_s.titleize, request.path + "?#{tab_name}=#{tab}")
     end
   end
 end

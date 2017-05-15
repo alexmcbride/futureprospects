@@ -28,18 +28,23 @@ class Application < ApplicationRecord
   PAYMENT_EXPIRY_DAYS = 7
 
   # The dates between which new applications are allowed.
-  APPLICATION_DURATION = (Date.new(Date.today.year, 1, 1)...Date.new(Date.today.year, 7, 16))
+  NEW_APPLICATIONS_ALLOWED = (Date.new(Date.today.year, 1, 1)...Date.new(Date.today.year, 7, 16))
 
   # Enum for student gender.
   enum gender: [:male, :female, :other, :prefer_not_to_say]
 
   # Enum for the application status.
-  enum status: [:submitting,
-                :awaiting_payment, :payment_failed, :cancelled,
-                :awaiting_decisions, :all_rejected,
-                :awaiting_replies, :replies_overdue,
-                :clearance,
-                :completed]
+  enum status: [:submitting,         # Student filling in application
+                :awaiting_payment,   # Application submitted, awaiting payment
+                :payment_failed,     # Payment failed, still within 7 days
+                :cancelled,          # Payment failed, outwith 7 days
+                :awaiting_decisions, # Payment received, waiting for colleges
+                :all_rejected,       # Decisions in, all rejected (eligible for clearance)
+                :awaiting_replies,   # Decisions in, waiting for students
+                :replies_overdue,    # Student hasn't replied within allotted time
+                :clearance,          # Student offered clearance courses
+                :completed           # Decisions made, replies received, finished.
+  ]
 
   # Enum for current application stage.
   enum current_stage: [:intro_stage, :profile_stage, :education_stage, :employment_stage, :references_stage,
@@ -165,11 +170,13 @@ class Application < ApplicationRecord
   # Determines if the application is waiting on this college.
   #
   # * +college+ - the college to check for.
+  #
+  # Returns true or false.
   def awaiting_college?(college)
     self.course_selections.joins(:course).where('courses.college_id' => college.id, college_offer: nil).any?
   end
 
-  # Determines if this application is awaiting on decisions from other colleges.
+  # Determines if this application is waiting on decisions from other colleges.
   #
   # * +college+ - the college to check against.
   #
@@ -654,7 +661,7 @@ class Application < ApplicationRecord
 
     # Determines if applications are open.
     def applications_are_open
-      unless APPLICATION_DURATION.include? Date.today
+      unless NEW_APPLICATIONS_ALLOWED.include? Date.today
         self.errors.add(:applications, 'are closed')
       end
     end

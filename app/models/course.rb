@@ -12,7 +12,7 @@ class Course < ApplicationRecord
   scoped_search relation: :college, on: :name, profile: :full
 
   # Scope for courses that are open and have spaces left.
-  scope :available, -> { where(status: :open).order(:updated_at) }
+  scope :available, -> { where(status: :open) }
 
   # Image Upload
   mount_uploader :image, CourseImageUploader

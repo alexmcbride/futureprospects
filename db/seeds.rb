@@ -79,8 +79,6 @@ clyde.website = 'http://www.glasgowclyde.ac.uk'
 clyde.image.filename = 'college-clyde.jpg'
 clyde.save
 
-
-
 # Seed categories
 category_names = 'Accounting
 Administration, Human Resources & Law
@@ -120,10 +118,6 @@ roles = %w(can_view_courses can_add_courses can_edit_courses can_remove_courses 
 roles.each do |role|
   Role.create! name: role
 end
-
-# File was getting too big, so split it into smaller sections.
-require 'seed_courses'
-require 'seed_students'
 
 def add_roles(roles, staff)
   roles.each do |role|
@@ -199,4 +193,6 @@ staff = Staff.create! first_name: 'Marilyn', family_name: 'Payne', email: 'mpayn
 add_roles roles.sample(3), staff
 
 
-
+# File was getting too big, so split it into smaller sections.
+require 'seed_courses'
+require 'seed_students'

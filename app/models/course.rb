@@ -33,7 +33,7 @@ class Course < ApplicationRecord
   validate :spaces_greater_than_applicants, on: :update
 
   # Callbacks
-  before_validation :default_to_open_status
+  # before_validation :default_to_open_status
 
   # Foreign Keys
   belongs_to :college

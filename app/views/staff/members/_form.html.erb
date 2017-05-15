@@ -1,10 +1,12 @@
 <%= form_for(member, url: path) do |f| %>
   <%= form_errors member %>
 
-  <div class="form-group">
-    <%= f.label :college_id %>
-    <%= f.select :college_id, options_from_collection_for_select(@colleges, :id, :name), {}, class: 'form-control' %>
-  </div>
+  <% if current_staff.has_role? :site_admin %>
+    <div class="form-group">
+      <%= f.label :college_id %>
+      <%= f.select :college_id, options_for_collections_with_default(@colleges, :id, :name, @member.college), {}, class: 'form-control' %>
+    </div>
+  <% end %>
 
   <div class="row">
     <div class="col-sm-6">
@@ -55,6 +57,6 @@
   <% end %>
 
   <div class="actions text-right">
-    <%= f.submit class: 'btn btn-default' %>
+    <%= f.submit class: 'btn btn-primary' %>
   </div>
 <% end %>

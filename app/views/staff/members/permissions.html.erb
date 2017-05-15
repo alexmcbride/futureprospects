@@ -69,7 +69,7 @@
           <%= form_for @member, url: staff_member_promote_admin_path(@member), method: :post do |f| %>
             <p class="text-darkish">You can promote this user to be an admin, they will have full access to all site
               functionality, including the ability to delete users, courses, colleges, applications, and more. Be careful
-              about who you give this power to!</p>
+              who you give this power to!</p>
             <%= f.submit 'Promote to Admin', class: 'btn btn-default' %>
           <% end %>
         <% end %>

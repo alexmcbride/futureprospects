@@ -1,7 +1,7 @@
 # Model class to represent a staff member. Inherits from User and uses Single-Table Inheritance.
 class Staff < User
   validates :job_title, presence: true, length: {maximum: 35}
-  validates :college_id, presence: false
+  validates :college_id, presence: true
 
   belongs_to :college
 

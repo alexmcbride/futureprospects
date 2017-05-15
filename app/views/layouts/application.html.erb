@@ -60,11 +60,25 @@
 
             <% if staff_signed_in? %>
               <li><%= link_to 'Applications', staff_applications_path %></li>
-              <li><%= link_to 'Courses', staff_courses_path %></li>
-              <li><%= link_to 'Categories', staff_categories_path %></li>
-              <li><%= link_to 'College', staff_colleges_path %></li>
-              <li><%= link_to 'Staff', staff_members_path %></li>
-              <li><%= link_to 'Reports', nil %></li>
+
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Courses <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to 'Courses', staff_courses_path %></li>
+                  <li><%= link_to 'Categories', staff_categories_path %></li>
+                </ul>
+              </li>
+
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Colleges <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to 'Colleges', staff_colleges_path %></li>
+                  <li><%= link_to 'Staff', staff_members_path %></li>
+                  <li class="divider"></li>
+                  <li><%= link_to 'Reports', nil %></li>
+                </ul>
+              </li>
+
             <% else %>
               <li><%= link_to 'Courses', courses_path %></li>
               <li><%= link_to 'Colleges', colleges_path %></li>

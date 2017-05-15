@@ -30,8 +30,7 @@
 
       <div class="form-group">
         <%= g.label :college_offer, 'Make Decision' %>
-        <% options = '<option disabled="disabled" selected="selected">-- Choose --</option>'.html_safe + options_for_select(CourseSelection.college_offers.map {|k, v| [k.humanize, k]}, g.object.college_offer) %>
-        <%= g.select :college_offer, options, {}, class: 'form-control' %>
+        <%= g.select :college_offer, options_for_select_with_default(CourseSelection.college_offers.map {|k, v| [k.humanize, k]}, g.object.college_offer), {}, class: 'form-control' %>
       </div>
 
       <div class="form-group">
@@ -43,7 +42,7 @@
 
   <div class="actions text-right">
     <p class="small text-darkish">Update application with decisions.</p>
-    <%= f.submit 'Update Decisions', class: 'btn btn-default' %>
+    <%= f.submit 'Update Decisions', class: 'btn btn-primary' %>
   </div>
 
 <% end %>

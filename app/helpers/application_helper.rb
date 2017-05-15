@@ -209,4 +209,26 @@ module ApplicationHelper
       link_to(tab.to_s.titleize, request.query_parameters.merge({tab_name => tab}))
     end
   end
+
+  # Returns options for collections with a default option.
+  #
+  # * +collection+ - the collection for the options.
+  # * +value+ - the value to use from the collection.
+  # * +text+ - the text to use from the collection.
+  # * +selected+ - an optional selected element.
+  #
+  # Returns the HTML for the options.
+  def options_for_collections_with_default(collection, value, text, selected=nil)
+    '<option disabled="disabled" selected="selected">-- Choose --</option>'.html_safe + options_from_collection_for_select(collection, value, text, selected)
+  end
+
+  # Returns options for collections with a default option.
+  #
+  # * +container+ - the container for the options.
+  # * +selected+ - an optional selected element.
+  #
+  # Returns the HTML for the options.
+  def options_for_select_with_default(container, selected=nil)
+    '<option disabled="disabled" selected="selected">-- Choose --</option>'.html_safe + options_for_select(container, selected)
+  end
 end

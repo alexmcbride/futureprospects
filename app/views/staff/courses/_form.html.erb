@@ -7,7 +7,8 @@
   <% if current_staff.has_role? :site_admin %>
     <div class="form-group">
       <%= f.label :college %>
-      <%= f.select :college_id, options_from_collection_for_select(@colleges, :id, :name, course.college_id), {}, class:'form-control' %>
+      <% options = options_for_collections_with_default(@colleges, :id, :name, course.college_id) %>
+      <%= f.select :college_id, options, {}, class:'form-control' %>
     </div>
   <% end %>
 
@@ -22,13 +23,15 @@
     <div class="col-sm-4">
       <div class="form-group">
         <%= f.label :category_id, 'Category' %>
-        <%= f.select :category_id, options_from_collection_for_select(@categories, :id, :name, course.category_id), {}, class:'form-control' %>
+        <% options = options_for_collections_with_default(@categories, :id, :name, course.category_id) %>
+        <%= f.select :category_id, options, {}, class:'form-control' %>
       </div>
     </div>
     <div class="col-sm-2">
       <div class="form-group">
         <%= f.label :status %>
-        <%= f.select :status, options_for_select(Course.statuses.keys.map {|k| [k.humanize, k]}, course.status), {}, class:'form-control' %>
+        <% options = options_for_select_with_default(Course.statuses.keys.map {|k| [k.humanize, k]}, course.status) %>
+        <%= f.select :status, options, {}, class:'form-control' %>
       </div>
     </div>
   </div>
@@ -102,6 +105,6 @@
 
   <div class="actions text-right">
     <p class="text-darkish small">Save changes when completed.</p>
-    <%= f.submit class: 'btn btn-default' %>
+    <%= f.submit class: 'btn btn-primary' %>
   </div>
 <% end %>

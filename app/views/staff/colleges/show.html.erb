@@ -28,17 +28,17 @@
       </div>
     </div>
 
-    <%= link_to edit_staff_college_path(@college), class: 'btn btn-default btn-block' do %>
+    <%= link_to edit_staff_college_path(@college), class: 'btn btn-primary btn-block' do %>
       <%= icon('edit') %>
       Edit College Details
     <% end %>
 
-    <%= link_to staff_college_remove_path(@college), class: 'btn btn-default btn-block' do %>
+    <%= link_to staff_college_remove_path(@college), class: 'btn btn-primary btn-block' do %>
       <%= icon('trash') %>
       Delete College
     <% end %>
 
-    <%= link_to staff_college_clearance_path(@college), class: 'btn btn-default btn-block' do %>
+    <%= link_to staff_college_clearance_path(@college), class: 'btn btn-primary btn-block' do %>
       <%= icon('refresh') %>
       College Clearance
     <% end %>
@@ -47,7 +47,7 @@
 
     <p class="text-darkish small">
       Created <%= distance_of_time_in_words_to_now @college.created_at %> ago<br>
-      Last Updated <%= distance_of_time_in_words_to_now @college.updated_at %> ago
+      Last updated <%= distance_of_time_in_words_to_now @college.updated_at %> ago
     </p>
   </div>
 

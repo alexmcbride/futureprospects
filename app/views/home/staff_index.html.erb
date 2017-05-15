@@ -1,13 +1,42 @@
-<div class="jumbotron">
-  <h2><%= college_and_job %></h2>
-</div>
-
 <div class="row">
   <div class="col-sm-6">
     <div class="panel panel-default">
       <div class="panel-body">
         <h2>College Home</h2>
-        <p>This is the staff section where you can manage the college and stuff.</p>
+        <p>Your information.</p>
+
+        <div style="line-height: 1.6em; margin-bottom: 15px;">
+          <div class="row">
+            <div class="col-xs-3">Username:</div>
+            <div class="col-xs-9"><%= current_staff.username %></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3">Job Title:</div>
+            <div class="col-xs-9"><%= current_staff.job_title %></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3">Fullname:</div>
+            <div class="col-xs-9"><%= current_staff.full_name %></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3">Email:</div>
+            <div class="col-xs-9"><%= current_staff.email %></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3">College:</div>
+            <div class="col-xs-9"><%= current_staff.college ? current_staff.college.name : 'N/A' %></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3">Last Sign In:</div>
+            <div class="col-xs-9"><%= format_datetime current_staff.last_sign_in_at %></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3">Last Sign In IP:</div>
+            <div class="col-xs-9"><%= current_staff.last_sign_in_ip %></div>
+          </div>
+        </div>
+
+        <p><%= link_to 'Edit Profile', edit_staff_registration_path %> | <%= link_to 'View Permissions', staff_member_path(current_staff) %></p>
       </div>
     </div>
   </div>
@@ -21,10 +50,10 @@
           <% @applications.each do |application| %>
             <%= link_to staff_application_path(application), class: 'list-group-item' do %>
               <%= application.student.full_name %>
-                  <span class="badge"><%= application.status.titleize %></span>
             <% end %>
           <% end %>
         </div>
+        <p class="text-right"><%= link_to 'View All', staff_applications_path %></p>
       </div>
     </div>
   </div>

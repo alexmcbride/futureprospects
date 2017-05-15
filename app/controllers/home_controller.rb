@@ -10,9 +10,7 @@ class HomeController < ApplicationController
         @application = current_student.current_application
         format.html { render :student_index }
       elsif staff_signed_in?
-        @applications = policy_scope(Application).includes(:student)
-                            .where(status: :awaiting_decisions)
-                            .order(updated_at: :desc)
+        @applications = policy_scope(Application.awaiting).includes(:student)
         format.html { render :staff_index }
       else
         format.html { render :index }

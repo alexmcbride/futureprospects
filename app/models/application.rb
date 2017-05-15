@@ -45,6 +45,8 @@ class Application < ApplicationRecord
   # Pagination
   self.per_page = 10
 
+  scope :awaiting, -> { where(status: :awaiting_decisions) }
+
   # Validators
   validates :title, presence: true, length: { maximum: 35 }
   validates :first_name, presence: true, length: { maximum: 35 }
@@ -155,6 +157,13 @@ class Application < ApplicationRecord
         .where.not('course_selections.college_offer' => nil).map {|s| s.id}
   end
 
+  # Determines if the application is waiting on this college.
+  #
+  # * +college+ - the college to check for.
+  def awaiting_college?(college)
+    self.course_selections.joins(:course).where('courses.college_id' => college.id, college_offer: nil).any?
+  end
+
   # Determines if this application is awaiting on decisions from other colleges.
   #
   # * +college+ - the college to check against.
@@ -165,10 +174,12 @@ class Application < ApplicationRecord
       return false
     end
 
-    CourseSelection.joins(:course)
-        .where.not('courses.college_id' => college.id)
+    college_ids = Course.select('courses.college_id')
+        .joins(:course_selections)
         .where('course_selections.application_id' => self.id)
-        .where('course_selections.college_offer' => nil).any?
+        .where('course_selections.college_offer' => nil).map{|r|r.college_id}
+
+    college_ids.any? && !college_ids.include?(college.id)
   end
 
   # Checks that all added schools have at least one qualification.

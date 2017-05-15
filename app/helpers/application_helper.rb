@@ -149,7 +149,7 @@ module ApplicationHelper
   #
   # Returns the formatted datetime.
   def format_datetime(dt)
-    dt.strftime '%d/%m/%Y - %H:%m' if dt
+    (dt.strftime '%d/%m/%Y &mdash; %H:%m').html_safe if dt
   end
 
   # Formats an expiry date (dd/yy) for a credit card payment.

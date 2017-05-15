@@ -93,7 +93,7 @@ module ApplicationHelper
     (URI.split url).compact.slice(1, 1).join
   end
 
-  # Generates HTML for a list-item on the stages sidebar.
+  # Generates HTML for a list-item on the application stages sidebar.
   #
   # * +name+ - the name of the stage.
   # * +path+ - the path to the stage (url).
@@ -143,15 +143,6 @@ module ApplicationHelper
     date.strftime '%d/%m/%Y' if date
   end
 
-  # Formats an expiry date (dd/yy)
-  #
-  # * +date+ - the date to format.
-  #
-  # Returns the formatted date.
-  def format_expiry(date)
-    date.strftime '%m/%y' if date
-  end
-
   # Formats a datetime as dd/mm/yyyy - H:m.
   #
   # * +date+ - the datetime to format.
@@ -161,21 +152,30 @@ module ApplicationHelper
     dt.strftime '%d/%m/%Y - %H:%m' if dt
   end
 
-  # Gets any current user
+  # Formats an expiry date (dd/yy) for a credit card payment.
+  #
+  # * +date+ - the date to format.
+  #
+  # Returns the formatted date.
+  def format_expiry(date)
+    date.strftime '%m/%y' if date
+  end
+
+  # Gets any current user.
   #
   # Returns the current user.
   def current_user
     current_student or current_staff
   end
 
-  # Gets if any user is signed in
+  # Gets if any user is signed in.
   #
   # Returns true if the user is signed in.
   def user_signed_in?
     student_signed_in? or staff_signed_in?
   end
 
-  # Adds the little markdown guide ? thing next to some text fields
+  # Adds the little markdown guide ? thing next to text fields
   #
   # Returns HTML for the little markdown guide thing.
   def markdown_support_text
@@ -186,7 +186,7 @@ module ApplicationHelper
     end
   end
 
-  # Generates an address
+  # Generates an address from a resource.
   #
   # * +separator+ - the line separator.
   #
@@ -199,13 +199,14 @@ module ApplicationHelper
   #
   # * +tab+ - the tab to display
   # * +default+ - whether this is the default tab or not (default false)
+  # * +tab_name+ - the name for the tab used in the query string.
   #
   # Returns the HTML for displaying the tab.
   def tab(tab, default=false, tab_name=:tab)
     tab = tab.to_sym
     selected = params.key?(tab_name) ? params[tab_name].to_sym : (tab if default)
     content_tag(:li, class: ('active' if selected == tab)) do
-      link_to(tab.to_s.titleize, request.path + "?#{tab_name}=#{tab}")
+      link_to(tab.to_s.titleize, request.query_parameters.merge({tab_name => tab}))
     end
   end
 end

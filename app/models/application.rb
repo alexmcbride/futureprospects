@@ -413,6 +413,9 @@ class Application < ApplicationRecord
     unless params[:category_id].nil? or params[:category_id] == '0'
       scope = scope.joins(course_selections: :course).where('courses.category_id=?', params[:category_id])
     end
+    unless params[:order].nil?
+      scope = scope.order(params[:order])
+    end
     scope
   end
 

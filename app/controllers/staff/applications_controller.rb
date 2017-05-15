@@ -8,6 +8,10 @@ class Staff::ApplicationsController < Staff::StaffController
       params[:status] = :awaiting_decisions
     end
 
+    unless params.key? :order
+      params[:order] = :submitted_date
+    end
+
     @applications = policy_scope(Application)
         .filter(params)
         .order(:submitted_date)

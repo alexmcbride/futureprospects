@@ -37,6 +37,12 @@
           <%= select_tag :status, options, {class: 'form-control'} %>
         </div>
 
+        <div class="form-group">
+          <%= label_tag :order, 'Order' %>
+          <% options = options_for_select([['Family Name', :family_name], ['Submitted', :submitted_date], ['Created', :created_at], ['Updated', :updated_at]], params[:order]) %>
+          <%= select_tag :order, options, {class: 'form-control'} %>
+        </div>
+
         <%= submit_tag 'Apply Filter', class: 'btn btn-block' %>
       <% end %>
     </div>

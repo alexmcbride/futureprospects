@@ -1,7 +1,7 @@
 # Model class to represent a staff member. Inherits from User and uses Single-Table Inheritance.
 class Staff < User
   validates :job_title, presence: true, length: {maximum: 35}
-  validates :college_id, presence: true
+  validates :college_id, presence: true, unless: :is_admin?
 
   belongs_to :college
 
@@ -69,4 +69,12 @@ class Staff < User
     end
     staff
   end
+
+  private
+    # Determines if the staff member is an admin.
+    #
+    # Returns true if they are an admin.
+    def is_admin?
+      self.email == 'admin@admin.com'
+    end
 end

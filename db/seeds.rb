@@ -115,11 +115,11 @@ category_names.split(/\n/).each do |line|
 end
 
 # Roles
-# Role.create! name: :site_admin
-# roles = %w(can_view_courses can_add_courses can_edit_courses can_remove_courses can_view_colleges can_add_colleges can_edit_colleges can_remove_colleges)
-# roles.each do |role|
-#   Role.create! name: role
-# end
+Role.create! name: :site_admin
+roles = %w(can_view_courses can_add_courses can_edit_courses can_remove_courses can_view_colleges can_add_colleges can_edit_colleges can_remove_colleges)
+roles.each do |role|
+  Role.create! name: role
+end
 
 # File was getting too big, so split it into smaller sections.
 require 'seed_courses'

@@ -1,27 +1,14 @@
 remove pundit verify_authorized from global staff controller once permissions done
 
-test heroku application cancel with real email
-
-comments - name, date, etc. at top of each file.
-
 heroku - sms messaging / error handling
 
 PDF: prawn / https://github.com/rposborne/wkhtmltopdf-heroku maybe better???? / make PDF pretty? move PDF generation into some sort of view?
 Excel: alxsx
 
-plain text emails
-
-add user test@test.com for testing, show things like auth fail select options.
-
 move loose styles into css file.
-
-make references proper n stuff
-
-----
 
 prevent create application after last decision date? final application date.
 
-devise log in as other use / add to admin?
+comments - name, date, etc. at top of each file.
 
-optimize clearance queries
-
+add user test@test.com for testing, show things like auth fail select options.

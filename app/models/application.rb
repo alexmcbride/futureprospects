@@ -27,6 +27,9 @@ class Application < ApplicationRecord
   # The number of days until a payment expires.
   PAYMENT_EXPIRY_DAYS = 7
 
+  # The dates between which new applications are allowed.
+  APPLICATION_DURATION = (Date.new(Date.today.year, 1, 1)...Date.new(Date.today.year, 7, 16))
+
   # Enum for student gender.
   enum gender: [:male, :female, :other, :prefer_not_to_say]
 
@@ -40,11 +43,12 @@ class Application < ApplicationRecord
 
   # Enum for current application stage.
   enum current_stage: [:intro_stage, :profile_stage, :education_stage, :employment_stage, :references_stage,
-                      :statement_stage, :courses_stage, :submit_stage]
+                       :statement_stage, :courses_stage, :submit_stage]
 
   # Pagination
   self.per_page = 15
 
+  # Scopes.
   scope :awaiting, -> { where(status: :awaiting_decisions) }
 
   # Validators
@@ -74,6 +78,7 @@ class Application < ApplicationRecord
   validates :status, presence: true
   validates :submitted_date, presence: false
   validates :current_stage, presence: true
+  validate :applications_are_open, on: :create
 
   # Validations shared between application and student.
   include StudentValidator
@@ -595,7 +600,7 @@ class Application < ApplicationRecord
       Date.new(year, 6, 4)
     elsif today < Date.new(year, 6, 4)
       Date.new(year, 6, 25)
-    else
+    elsif today < FINAL_APPLICATION_DATE
       Date.new(year, 7, 23)
     end
   end
@@ -645,5 +650,12 @@ class Application < ApplicationRecord
     # Returns  a boolean indicating if they're rejected.
     def all_selections_rejected?
       self.course_selections.all? {|s| s.rejected?}
+    end
+
+    # Determines if applications are open.
+    def applications_are_open
+      unless APPLICATION_DURATION.include? Date.today
+        self.errors.add(:applications, 'are closed')
+      end
     end
 end

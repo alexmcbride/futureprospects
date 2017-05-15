@@ -11,17 +11,9 @@ Excel: alxsx
 
 plain text emails
 
-staff show (created / first sign in)
-
 add user test@test.com for testing, show things like auth fail select options.
 
-put some kind of message in application when all your college's decisions have been made but waiting for other colleges.
-
-trigger all colleges clearance at one time
-
 move loose styles into css file.
-
-add sort order to applications (submitted, updated etc.)
 
 make references proper n stuff
 
@@ -29,18 +21,7 @@ make references proper n stuff
 
 prevent create application after last decision date? final application date.
 
-staff home page / activity list...
-
 devise log in as other use / add to admin?
-
-register validation errors (scn or nin, inform recover account?)
 
 optimize clearance queries
 
-look at alternative to will_paginate (it doesn't work with distinct (applications)...)
-
-normalize buttons across site, especially courses stuff, which is old.
-
-merge tasks into one.
-
-check course in clearance in courses/show (clearance alert, hide/show apply button?)

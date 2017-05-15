@@ -310,7 +310,7 @@ class Application < ApplicationRecord
   # Method called by rake task that cancels any applications with an outstanding payment over 7 days old. To run this
   # you can do it manually `ruby bin\rake site_tasks:handle_failed_payments`, on Heroku it is run by the scheduler once
   # every 24 hours. See for more details: https://devcenter.heroku.com/articles/scheduler
-  def self.handle_failed_payments
+  def self.process_failed_payments
     payments = Payment.select(:application_id)
                    .where(status: :failed)
                    .where("paid_at < CURRENT_DATE - INTERVAL '#{PAYMENT_EXPIRY_DAYS} days'")
@@ -328,7 +328,7 @@ class Application < ApplicationRecord
 
   # Task for handling overdue replies, that is course selections that have been without a decision for too long. As
   # above called as a rake task once a day.
-  def self.handle_overdue_replies
+  def self.process_overdue_replies
     applications = Application.where(status: :awaiting_replies).where('CURRENT_DATE>decision_due')
 
     applications.each do |application|

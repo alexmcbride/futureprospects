@@ -38,7 +38,7 @@
         </div>
 
         <div class="form-group">
-          <%= label_tag :order, 'Order' %>
+          <%= label_tag :order, 'Order By' %>
           <% options = options_for_select([['Family Name', :family_name], ['Submitted', :submitted_date], ['Created', :created_at], ['Updated', :updated_at]], params[:order]) %>
           <%= select_tag :order, options, {class: 'form-control'} %>
         </div>
@@ -49,7 +49,7 @@
   </div>
 
   <div class="col-md-9 col-sm-12">
-    <ul class="nav nav-tabs nav-tabs-justified">
+    <ul class="nav nav-tabs">
       <%= tab :awaiting_decisions, true, :status %>
       <%= tab :completed, false,:status %>
       <%= tab :all_statuses, false, :status %>

@@ -5,11 +5,11 @@
 </div>
 
 <% if College.clearance_any? %>
-  <div class="jumbotron">
-    <h2 style="margin-top: 5px;">Clearance Has Started!</h2>
-    <p>Clearance is where we match students that did not receive a place to courses that still have open spaces. Please
-    feel free to browse our complete list of clearance courses.</p>
-    <p class="text-right"><%= link_to 'Browse Courses', clearance_path, class: 'btn btn-default', role: 'button' %></p>
+  <div class="alert alert-warning alert-dismissable">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <h3 class="no-top-margin">Clearance Has Started!</h3>
+    <p>Clearance is where we match students who did not receive a place to courses that still have open spaces. Please
+    feel free to browse our <%= link_to 'list of clearance courses', clearance_path, style: 'color: white; text-decoration: underline;' %>.</p>
   </div>
 <% end %>
 

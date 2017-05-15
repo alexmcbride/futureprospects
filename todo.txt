@@ -7,8 +7,6 @@ Excel: alxsx
 
 move loose styles into css file.
 
-prevent create application after last decision date? final application date.
-
 comments - name, date, etc. at top of each file.
 
 add user test@test.com for testing, show things like auth fail select options.

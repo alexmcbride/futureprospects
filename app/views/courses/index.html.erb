@@ -10,26 +10,33 @@
 
     <div class="list-group small">
       <% active = 'active' if @category.nil? %>
-      <%= link_to 'All Courses', courses_path, class: "list-group-item #{active}" %>
+      <%= link_to 'All Courses', courses_path(college: params[:college]), class: "list-group-item #{active}" %>
       <% @categories.each do |category| %>
         <% active = category == @category ? 'active' : '' %>
-        <%= link_to category.name, courses_category_path(category), class: "list-group-item #{active}" %>
+        <%= link_to category.name, courses_category_path(category, college: params[:college]), class: "list-group-item #{active}" %>
       <% end %>
     </div>
   </div>
 
   <!-- Main Content -->
   <div class="col-md-9">
+    <ul class="nav nav-tabs">
+      <li<%= ' class="active"'.html_safe unless params[:college] %>><%= link_to 'All Colleges', request.path %></li>
+      <% College.order(:name).each do |college| %>
+        <li<%= ' class="active"'.html_safe if params[:college] == college.id.to_s %>><%= link_to college.name, request.path + "?college=#{college.id}" %></li>
+      <% end %>
+    </ul>
+
     <% if @search_term %>
       <p class="text-right text-darkish">Search results for "<%= @search_term %>"</p>
     <% end %>
 
     <% if @courses.empty? %>
-      <p class="text-center text-warning"><em>There are no courses to display.</em></p>
+      <p class="text-center text-warning" style="margin-top: 20px;"><em>There are no courses to display.</em></p>
     <% else %>
       <div class="list-group">
         <% @courses.each do |course| %>
-          <a href="<%= url_for(course) %>" class="course-item list-group-item">
+          <a href="<%= url_for(course) %>" class="course-item list-group-item" style="border-top: 0; border-radius: 0;">
             <div class="row" title="<%= course.title %>">
               <div class="col-sm-2 col-xs-12">
                 <%= image_tag course.image.thumb, class: 'img-responsive course-image', alt: course.title %>

@@ -8,6 +8,10 @@ class CoursesController < ApplicationController
     @search_term = params[:search]
     # Do search using scoped_search. If search term is empty then all records are returned.
     @courses = Course.find_open_courses.full_search(@search_term).order(:title).paginate(:page => params[:page])
+
+    if params[:college]
+      @courses = @courses.where(college_id: params[:college])
+    end
   end
 
   # GET /courses/category/1
@@ -17,6 +21,11 @@ class CoursesController < ApplicationController
     @search_term = params[:search]
     @category = Category.left_outer_joins(:courses).find params[:id] # Left outer join as courses can be empty
     @courses = Course.find_open_courses.full_search(@search_term, @category).paginate(:page => params[:page]).includes(:college).order(:title)
+
+    if params[:college]
+      @courses = @courses.where(college_id: params[:college])
+    end
+
     render :index
   end
 

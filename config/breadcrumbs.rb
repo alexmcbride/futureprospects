@@ -9,7 +9,13 @@ end
 crumb :courses do |category|
   parent :root
   link 'Courses', courses_path
-  unless category.nil?
+
+  college = College.find params[:college] if params[:college]
+
+  if category.nil?
+    link college.name, courses_path(category, college: params[:college]) if college
+  else
+    link college.name, courses_category_path(category, college: params[:college]) if college
     link category.name, courses_category_path(category)
   end
 end

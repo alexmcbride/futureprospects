@@ -36,6 +36,6 @@ class Student < User
   #
   # Returns an ActiveRecord::Relation containing the payment objects.
   def all_payments
-    Payment.joins(:application).where('applications.student_id=?', id)
+    Payment.joins(:application).where('applications.student_id=?', id).where.not(status: nil)
   end
 end

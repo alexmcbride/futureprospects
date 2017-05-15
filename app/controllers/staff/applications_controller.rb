@@ -2,21 +2,21 @@ class Staff::ApplicationsController < Staff::StaffController
   before_action :set_application, only: [:update, :destroy]
 
   # GET /staff/applications
-  # GET /staff/applications.json
   def index
+    # Default filter option if not set.
     unless params.key? :status
       params[:status] = :awaiting_decisions
     end
 
+    # Default sort order if not set.
     unless params.key? :order
       params[:order] = :submitted_date
     end
 
     @applications = policy_scope(Application)
         .filter(params)
-        .order(:submitted_date)
         .includes(:student)
-        .paginate(page: params[:page], per_page: 15)
+        .page(params[:page])
 
     # Stuff for filter sidebar
     @categories = Category.order(:name)
@@ -24,7 +24,6 @@ class Staff::ApplicationsController < Staff::StaffController
   end
 
   # GET /staff/applications/1
-  # GET /staff/applications/1.json
   def show
     @application = Application.find params[:id]
     authorize @application
@@ -53,7 +52,6 @@ class Staff::ApplicationsController < Staff::StaffController
   end
 
   # PATCH/PUT /staff/applications/1
-  # PATCH/PUT /staff/applications/1.json
   def update
     authorize @application
     respond_to do |format|
@@ -66,12 +64,10 @@ class Staff::ApplicationsController < Staff::StaffController
   end
 
   # DELETE /staff/applications/1
-  # DELETE /staff/applications/1.json
   def destroy
     @application.destroy
     respond_to do |format|
       format.html { redirect_to staff_applications_url, notice: 'Application was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

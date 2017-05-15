@@ -32,10 +32,10 @@
       <%= f.hidden_field :clearance, value: !@college.clearance? %>
 
       <p class="small text-darkish">Enable clearance mode and send clearance emails.</p>
-      <%= f.button class: 'btn btn-primary' do %>
-        <%= icon('refresh') %>
+      <%= f.button class: 'btn btn-danger' do %>
+        <%= icon('exclamation-triangle') %>
         &nbsp;
-        <%= @college.clearance? ? 'Disable Clearance' : 'Enable Clearance' %>
+        <%= @college.clearance? ? 'Disable College Clearance' : 'Enable College Clearance' %>
       <% end %>
     <% end %>
 

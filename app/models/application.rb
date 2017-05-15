@@ -43,7 +43,7 @@ class Application < ApplicationRecord
                       :statement_stage, :courses_stage, :submit_stage]
 
   # Pagination
-  self.per_page = 10
+  self.per_page = 15
 
   scope :awaiting, -> { where(status: :awaiting_decisions) }
 
@@ -424,7 +424,7 @@ class Application < ApplicationRecord
     unless params[:category_id].nil? or params[:category_id] == '0'
       scope = scope.joins(course_selections: :course).where('courses.category_id=?', params[:category_id])
     end
-    unless params[:order].nil?
+    unless params[:order].nil? or params[:order] == 'none'
       scope = scope.order(params[:order])
     end
     scope

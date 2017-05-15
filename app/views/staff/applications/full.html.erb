@@ -5,17 +5,7 @@
 
 <div class="row">
   <div class="col-md-3 col-sm-12">
-    <div class="well">
-      <h3 class="no-top-margin">Information</h3>
-      <ul class="application-info-list">
-        <li>Username: <%= @application.student.username %></li>
-        <li>Submitted: <%= format_date @application.submitted_date %></li>
-        <li>Created: <%= format_date @application.created_at %></li>
-        <li>Updated: <%= format_date @application.updated_at %></li>
-        <li>Status: <%= @application.status.humanize %></li>
-        <li>Replies Due: <%= (format_date @application.replies_due) or 'Never' %></li>
-      </ul>
-    </div>
+    <%= render 'shared/application_sidebar', application: @application %>
   </div>
 
   <div class="col-md-9 col-sm-12">

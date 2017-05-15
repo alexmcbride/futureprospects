@@ -6,25 +6,27 @@
         <p>Welcome to Future Prospects.</p>
 
         <div style="line-height: 1.6em; margin-bottom: 15px;">
-          <div class="row">
-            <div class="col-xs-3">Username:</div>
-            <div class="col-xs-9"><%= current_staff.username %></div>
-          </div>
-          <div class="row">
-            <div class="col-xs-3">Job Title:</div>
-            <div class="col-xs-9"><%= current_staff.job_title %></div>
-          </div>
-          <div class="row">
-            <div class="col-xs-3">Fullname:</div>
-            <div class="col-xs-9"><%= current_staff.full_name %></div>
-          </div>
+          <% unless current_staff.has_role? :site_admin %>
+            <div class="row">
+              <div class="col-xs-3">Username:</div>
+              <div class="col-xs-9"><%= current_staff.username %></div>
+            </div>
+            <div class="row">
+              <div class="col-xs-3">Job Title:</div>
+              <div class="col-xs-9"><%= current_staff.job_title %></div>
+            </div>
+            <div class="row">
+              <div class="col-xs-3">Fullname:</div>
+              <div class="col-xs-9"><%= current_staff.full_name %></div>
+            </div>
+            <div class="row">
+              <div class="col-xs-3">College:</div>
+              <div class="col-xs-9"><%= current_staff.college ? current_staff.college.name : 'N/A' %></div>
+            </div>
+          <% end %>
           <div class="row">
             <div class="col-xs-3">Email:</div>
             <div class="col-xs-9"><%= current_staff.email %></div>
-          </div>
-          <div class="row">
-            <div class="col-xs-3">College:</div>
-            <div class="col-xs-9"><%= current_staff.college ? current_staff.college.name : 'N/A' %></div>
           </div>
           <div class="row">
             <div class="col-xs-3">Last Sign In:</div>
@@ -45,15 +47,19 @@
     <div class="panel panel-default">
       <div class="panel-body">
         <h2>Attention Needed</h2>
-        <p>The following applications are awaiting decisions.</p>
+        <p>The following applications are awaiting attention.</p>
         <div class="list-group">
           <% @applications.each do |application| %>
             <%= link_to staff_application_path(application), class: 'list-group-item' do %>
-              <%= application.student.full_name %>
+              <div class="row">
+                <div class="col-xs-4"><%= application.student.full_name %></div>
+                <div class="col-xs-4 text-right text-darkish"><%= application.status.titleize %></div>
+                <div class="col-xs-4 text-right text-darkish"><%= format_date application.updated_at %></div>
+              </div>
             <% end %>
           <% end %>
         </div>
-        <p class="text-right"><%= link_to 'View All', staff_applications_path %></p>
+        <p class="text-right"><%= link_to 'View Applications', staff_applications_path %></p>
       </div>
     </div>
   </div>

@@ -10,7 +10,7 @@ class HomeController < ApplicationController
         @application = current_student.current_application
         format.html { render :student_index }
       elsif staff_signed_in?
-        @applications = policy_scope(Application.awaiting).includes(:student).limit(10)
+        @applications = policy_scope(Application.awaiting).current.includes(:student).limit(10)
         format.html { render :staff_index }
       else
         format.html { render :index }

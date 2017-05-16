@@ -27,9 +27,6 @@ class Application < ApplicationRecord
   # The number of days until a payment expires.
   PAYMENT_EXPIRY_DAYS = 7
 
-  # The dates between which new applications are allowed.
-  NEW_APPLICATIONS_ALLOWED = (Date.new(Date.today.year, 1, 1)...Date.new(Date.today.year, 7, 16))
-
   # Enum for student gender.
   enum gender: [:male, :female, :other, :prefer_not_to_say]
 
@@ -53,9 +50,12 @@ class Application < ApplicationRecord
   # Pagination
   self.per_page = 15
 
-  # Scopes.
+  # Scopes
   scope :awaiting, -> {where(status: :awaiting_decisions)}
   scope :submitting, -> {where(status: :submitting)}
+  scope :current, -> {where(created_at: current_year)}
+  scope :old, -> {where('created_at<=?', current_year.first)}
+  scope :college, ->(college_id){select('DISTINCT applications.*').joins(course_selections: :course).where('courses.college_id' => college_id)}
 
   # Validators
   validates :title, presence: true, length: { maximum: 35 }
@@ -66,7 +66,6 @@ class Application < ApplicationRecord
   validates :gender, presence: true
   validates :telephone, presence: true, length: { maximum: 20 }
   validates :mobile, presence: false, length: { maximum: 20 }
-  validates :email, presence: true, length: { maximum: 254 }
   validates :disability, presence: false, length: { maximum: 100 }
   validates :personal_statement, presence: false, length: { maximum: STATEMENT_LENGTH }
   validates :permanent_house_number, presence: true, length: { maximum: 12 }
@@ -85,9 +84,6 @@ class Application < ApplicationRecord
   validates :submitted_date, presence: false
   validates :current_stage, presence: true
   validate :applications_are_open, on: :create
-
-  # Validations shared between application and student.
-  include StudentValidator
 
   # Foreign Keys
   belongs_to :student
@@ -122,6 +118,11 @@ class Application < ApplicationRecord
     application
   end
 
+  def self.current_year(year=nil)
+    year = Date.today.year unless year
+    (Date.new(year, 1, 1)...Date.new(year, 7, 16))
+  end
+
   def full_name
     "#{first_name} #{family_name}"
   end
@@ -133,15 +134,6 @@ class Application < ApplicationRecord
   # Returns true if the application is owned by the student.
   def owned_by?(student)
     student.id == self.student_id
-  end
-
-  # Gets all of the applications that have at least one course selection at the specified college.
-  #
-  # * +college_id+ - the college to check for.
-  #
-  # Returns an ActiveRecord::Relation containing the applications.
-  def self.college_applications(college_id)
-    Application.select('DISTINCT applications.*').joins(course_selections: :course).where('courses.college_id=?', college_id)
   end
 
   # Checks if this applications has a course selection for the specified college.
@@ -331,9 +323,7 @@ class Application < ApplicationRecord
     payments = Payment.select(:application_id)
                    .where(status: :failed)
                    .where("paid_at < CURRENT_DATE - INTERVAL '#{PAYMENT_EXPIRY_DAYS} days'")
-    applications = Application.includes(:student)
-                       .where(status: :payment_failed)
-                       .where(id: payments)
+    applications = Application.current.includes(:student).where(status: :payment_failed).where(id: payments)
 
     # Cancel application and emails student.
     applications.each do |application|
@@ -346,7 +336,7 @@ class Application < ApplicationRecord
   # Task for handling overdue replies, that is course selections that have been without a decision for too long. As
   # above called as a rake task once a day.
   def self.process_overdue_replies
-    applications = Application.where(status: :awaiting_replies).where('CURRENT_DATE>decision_due')
+    applications = Application.current.where(status: :awaiting_replies).where('CURRENT_DATE>decision_due')
 
     applications.each do |application|
       application.update_status :replies_overdue
@@ -666,7 +656,7 @@ class Application < ApplicationRecord
 
     # Determines if applications are open.
     def applications_are_open
-      unless NEW_APPLICATIONS_ALLOWED.include? Date.today
+      unless Application.current_year.include? Date.today
         self.errors.add(:applications, 'are closed')
       end
     end

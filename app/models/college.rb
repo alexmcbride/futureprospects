@@ -20,14 +20,14 @@ class College < ApplicationRecord
   #
   # Returns integer for number of applications.
   def count_applicants
-    CourseSelection.count_applicants self
+    Application.current.college(self.id).count
   end
 
   # Calculates the number of courses that have been applied for.
   #
   # Returns integer for number of course selections.
   def count_course_selections
-    CourseSelection.count_courses self
+    Application.current.joins(course_selections: :course).where('courses.college_id' => self.id).count
   end
 
   # Removes the college, plus all staff, courses, and course selections, if the names match.
@@ -56,13 +56,8 @@ class College < ApplicationRecord
   # Finds all applications that have a rejected status and
   #
   def clearance_applications
-    # select distinct a.* from applications a
-    # join course_selections s on a.id=s.application_id
-    # join courses c on c.id=s.course_id
-    # where a.status=6
-    # and c.category_id in (select c.category_id from courses c where c.college_id=1 and c.status=0 and c.course_selections_count<c.spaces);
-
-    Application.select(' distinct applications.*')
+    Application.current
+        .select(' distinct applications.*')
         .joins(course_selections: :course)
         .where('applications.status' => [:all_rejected, :clearance])
         .where('courses.category_id' => Course.available.select('courses.category_id').where('courses.college_id' => self.id))

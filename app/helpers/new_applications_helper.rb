@@ -19,7 +19,23 @@ module NewApplicationsHelper
     end
   end
 
-  # Outputs an emal field with bootstrap style
+  # Outputs a text field with bootstrap style
+  #
+  # * +form+ - the form to add the text field to
+  # * +item+ - the item (e.g. :title) to add.
+  # * +args+ - various options hash.
+  #
+  # Returns  - HTML
+  def form_disabled_field(name, value, label)
+    content_tag(:div, class: 'form-group') do
+      concat(label_tag(name, label, class: 'control-label col-xs-4'))
+      concat(content_tag(:div, class: 'col-xs-8') do
+        concat(text_field_tag(name, value, class: 'form-control', disabled: true))
+      end)
+    end
+  end
+
+  # Outputs an email field with bootstrap style
   #
   # * +form+ - the form to add the email field to
   # * +item+ - the item (e.g. :title) to add.
@@ -37,6 +53,8 @@ module NewApplicationsHelper
       end)
     end
   end
+
+
 
   # Outputs a select control with bootstrap style.
   #

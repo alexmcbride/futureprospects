@@ -12,10 +12,19 @@ add user test@test.com for testing, show things like auth fail select options.
 
 confirm close tab alert?
 
-sort out applications by years
+sort out applications by years (add archive flag or do everything by dates? if everything comes from same place (e.g. student application), does it matter?)
+
+ACADEMIC YEAR
+-------------
+
+- staff#courses#index shows overall applicants, rather than current. (maybe reset at end of each year?)
+- staff#reports#courses same as above for applicants
+
 
 REPORTS
 -------
+
+year dropdown
 
 http://chartkick.com/ - good rails chart plugin
 https://github.com/ankane/groupdate - allows grouping queries by date

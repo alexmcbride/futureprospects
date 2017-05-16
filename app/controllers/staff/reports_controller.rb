@@ -20,14 +20,14 @@ class Staff::ReportsController < Staff::StaffController
   def course
     skip_authorization
 
+    # Default tab
+    params[:tab] = 'all_applicants' if !params.key? :tab
+
     @course = Course.find params[:id]
-
-    params[:tab] = 'successful' if !params.key? :tab
-
     @selections = (if params[:tab] == 'successful'
-      @course.course_selections.successful
+      @course.course_selections.successful.current
     else
-      @course.course_selections
+      @course.course_selections.current
     end)
   end
 

@@ -14,6 +14,7 @@ class Staff::ApplicationsController < Staff::StaffController
     end
 
     @applications = policy_scope(Application)
+        .current
         .filter(params)
         .includes(:student)
         .page(params[:page])

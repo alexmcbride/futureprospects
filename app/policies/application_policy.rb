@@ -21,7 +21,7 @@ class ApplicationPolicy < BaseApplicationPolicy
         scope.all
       elsif user.has_role? :can_view_applications
         # Get list of apps that have at least one course selection for staff member's college.
-        scope.college_applications user.college_id
+        scope.college user.college_id
       else
         scope.none
       end

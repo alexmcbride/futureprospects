@@ -20,11 +20,12 @@ class CourseSelection < ApplicationRecord
   belongs_to :course, counter_cache: true
 
   # Scopes
-  scope :successful, -> {CourseSelection.completed.where(college_offer: [:conditional_offer, :definite_offer], student_choice: [:firm_choice, :insurance_choice])}
-  scope :ordered, -> {CourseSelection.order(:college_offer)}
-  scope :completed, -> {CourseSelection.joins(:application).where('applications.status' => :completed)}
-  scope :schools, ->{CourseSelection.joins(application: :schools)}
-  scope :jobs, ->{CourseSelection.joins(application: :jobs)}
+  scope :successful, -> {completed.where(college_offer: [:conditional_offer, :definite_offer], student_choice: [:firm_choice, :insurance_choice])}
+  scope :ordered, -> {order(:college_offer)}
+  scope :completed, -> {joins(:application).where('applications.status' => :completed)}
+  scope :schools, ->{joins(application: :schools)}
+  scope :jobs, ->{joins(application: :jobs)}
+  scope :current, ->{joins(:application).where('applications.created_at' => Application.current_year)}
 
   # Checks if a course selection already exists.
   #
@@ -35,38 +36,6 @@ class CourseSelection < ApplicationRecord
 
   def self.exists?(application_id, course_id)
     not CourseSelection.where('application_id=? AND course_id=?', application_id, course_id).empty?
-  end
-
-  # Creates a new CourseSelection object based on the course_id.
-  #
-  # * +params+ - the rquest params including the course_id.
-  #
-  # Returns a new CourseSelection object with the course_id set.
-  def self.from_course_id(params)
-    selection = CourseSelection.new
-    selection.course_id = params[:course_id]
-    selection
-  end
-
-  # Calculates the number of applicants for the specified college
-  #
-  # * +college+ - the college to count applicants for.
-  #
-  # Returns an integer with the number of applicants.
-  def self.count_applicants(college)
-    CourseSelection.select('DISTINCT course_selections.application_id')
-        .joins(:course)
-        .where('courses.college_id' => college.id)
-        .count
-  end
-
-  # Calculates the number of course selections for the specified college
-  #
-  # * +college+ - the college to count course selection for.
-  #
-  # Returns an integer with the number of course selections.
-  def self.count_courses(college)
-    CourseSelection.joins(:course).where('courses.college_id' => college.id).count
   end
 
   # Gets the colleges that the application has applied to.

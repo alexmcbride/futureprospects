@@ -67,7 +67,8 @@ def student(file, tokens, schools, jobs, refs)
   file.puts app + ".permanent_postcode = '#{tokens[22]} 2GR'"
   file.puts app + ".permanent_city = 'Glasgow'"
   file.puts app + ".permanent_country = '#{tokens[8]}'"
-  submitted = (Date.new(2016, 1, 1)..Date.today).to_a.sample
+  submitted = Application.current_year([2015, 2016, 2017].sample).to_a.sample
+  file.puts app + ".created_at = Date.strptime('#{submitted}')"
   file.puts app + ".submitted_date = Date.strptime('#{submitted}')"
   unless tokens[20].empty?
     file.puts app + ".correspondence_house_number = '#{tokens[17]}'"

@@ -33,13 +33,12 @@
         </div>
 
         <div class="col-sm-6 col-xs-12">
-
-          <%= form_email_field f, :email %>
+          <%= form_disabled_field :email, @application.student.email, 'Email' %>
           <%= form_text_field f, :telephone %>
           <%= form_text_field f, :mobile, {label: '* Mobile'} %>
           <%= form_text_field f, :disability, {label: '* Disability'} %>
-          <%= form_text_field f, :scottish_candidate_number, {label: 'SC Number <a title="Scottish Candidate Number" class="help-cursor">(?)</a>'.html_safe} %>
-          <%= form_text_field f, :national_insurance_number, {label: 'NI Number <a title="National Insurance Number" class="help-cursor">(?)</a>'.html_safe} %>
+          <%= form_disabled_field :scottish_candidate_number, @application.student.scottish_candidate_number, 'SC Number' %>
+          <%= form_disabled_field :national_insurance_number, @application.student.national_insurance_number, 'NI Number' %>
         </div>
       </div>
 

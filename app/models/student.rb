@@ -22,7 +22,7 @@ class Student < User
   # Returns the student's current application, which is defined as any application active in the last year.
   def current_application
     # Get from last year for Postgresql
-    @current_application ||= self.applications.where("created_at > (CURRENT_DATE - INTERVAL '1 year')").first
+    @current_application ||= self.applications.current.first
   end
 
   # Checks if the student has a current application

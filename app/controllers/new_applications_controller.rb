@@ -33,7 +33,7 @@ class NewApplicationsController < ApplicationController
       if @application.nil?
         format.html { redirect_to root_path, notice: 'Application has already been created' }
       else
-        format.html { redirect_to applications_intro_path(@application) }
+        format.html { redirect_to applications_intro_path }
       end
     end
   end
@@ -387,7 +387,7 @@ class NewApplicationsController < ApplicationController
     # Sets current application object,  checks if student is owner of application, and checks application not cancelled.
     def set_application
       @application = current_student.current_application
-      user_not_authorized unless @application.submitting?
+      user_not_authorized unless @application && @application.submitting?
     end
 
     # Sanitises submitted form parameters
@@ -428,8 +428,7 @@ class NewApplicationsController < ApplicationController
     # Sanitises submitted form parameters
     def application_params
       params.require(:application).permit(:title, :first_name, :middle_name, :family_name, :previous_name, :gender,
-                     :telephone, :mobile, :email, :disability, :scottish_candidate_number,
-                     :national_insurance_number, :permanent_house_number, :permanent_address_1, :permanent_address_2,
+                     :telephone, :mobile, :disability, :permanent_house_number, :permanent_address_1, :permanent_address_2,
                      :permanent_city, :permanent_postcode, :permanent_country, :correspondence_house_number, :correspondence_address_1,
                      :correspondence_address_2, :correspondence_city, :correspondence_postcode, :correspondence_country)
     end

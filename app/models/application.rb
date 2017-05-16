@@ -54,7 +54,8 @@ class Application < ApplicationRecord
   self.per_page = 15
 
   # Scopes.
-  scope :awaiting, -> { where(status: :awaiting_decisions) }
+  scope :awaiting, -> {where(status: :awaiting_decisions)}
+  scope :submitting, -> {where(status: :submitting)}
 
   # Validators
   validates :title, presence: true, length: { maximum: 35 }

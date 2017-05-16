@@ -17,4 +17,16 @@ class Job < ApplicationRecord
 
   # Common validators.
   include DateValidator
+
+  # Searches for job with the specified name.
+  #
+  # * +term+ - the name to search for.
+  #
+  # Returns a relation containing the matching jobs.
+  def self.search(term)
+    if term.nil? or term.empty?
+      return Job.none
+    end
+    Job.select('DISTINCT employer, address_1, address_2, city, postcode, country').where('LOWER(employer) LIKE LOWER(?)', "%#{term}%")
+  end
 end

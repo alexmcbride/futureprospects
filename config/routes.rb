@@ -51,6 +51,7 @@ Rails.application.routes.draw do
   post 'applications/education/next', to: 'new_applications#education_next', as: 'applications_education_next'
   get 'applications/education/:id/edit/', to: 'new_applications#education_edit', as: 'applications_education_edit'
   patch 'applications/education/:id', to: 'new_applications#education_update', as: 'applications_education_update'
+  get 'applications/education/search', to: 'new_applications#education_search', as: 'applications_education_search'
 
   get 'applications/qualifications/:id', to: 'new_applications#qualifications', as: 'applications_qualifications'
   post 'applications/qualifications/:id', to: 'new_applications#qualifications_add', as: 'applications_qualifications_add'
@@ -62,6 +63,7 @@ Rails.application.routes.draw do
   post 'applications/employment/next', to: 'new_applications#employment_next', as: 'applications_employment_next'
   get 'applications/employment/:id/edit', to: 'new_applications#employment_edit', as: 'applications_employment_edit'
   patch 'applications/employment/:id', to: 'new_applications#employment_update', as: 'applications_employment_update'
+  get 'applications/employment/search', to: 'new_applications#employment_search', as: 'applications_employment_search'
 
   get 'applications/references', to: 'new_applications#references', as: 'applications_references'
   post 'applications/references', to: 'new_applications#references_next', as: 'applications_references_next'

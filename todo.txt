@@ -3,10 +3,21 @@ remove pundit verify_authorized from global staff controller once permissions do
 heroku - sms messaging / error handling
 
 PDF: prawn / https://github.com/rposborne/wkhtmltopdf-heroku maybe better???? / make PDF pretty? move PDF generation into some sort of view?
-Excel: alxsx
 
 move loose styles into css file.
 
 comments - name, date, etc. at top of each file.
 
 add user test@test.com for testing, show things like auth fail select options.
+
+confirm close tab alert?
+
+autofill educational establishment / employer?
+
+REPORTS
+-------
+
+http://chartkick.com/ - good rails chart plugin
+https://github.com/ankane/groupdate - allows grouping queries by date
+Excel: alxsx (axlsx_rails) / email excel doc?
+use json to provide chart data (then can be reused by excel generator?)

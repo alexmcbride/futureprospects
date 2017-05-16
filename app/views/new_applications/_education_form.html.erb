@@ -1,3 +1,27 @@
+<script type="text/javascript">
+  $(function() {
+      $("#school_name").autocomplete({
+          minLength: 1,
+          source: '<%= url_for applications_education_search_url %>',
+          focus: function( event, ui ) {
+              $( "#school_name" ).val( ui.item.name );
+              return false;
+          },
+          select: function( event, ui ) {
+              $( "#school_name" ).val( ui.item.name );
+              $( "#school_address_1" ).val( ui.item.address_1 );
+              $( "#school_address_2" ).val( ui.item.address_2 );
+              $( "#school_city" ).val( ui.item.city );
+              $( "#school_postcode" ).val( ui.item.postcode );
+              $( "#school_country" ).val( ui.item.country );
+              return false;
+          }
+      }).autocomplete( "instance" )._renderItem = function( ul, item ) {
+          return $("<li>").append(item.name).appendTo(ul);
+      };
+  });
+</script>
+
 <%= form_for @school, url: path, :html => {:class => 'form-horizontal', :role => 'form' } do |f|%>
 
   <%= f.hidden_field :id %>

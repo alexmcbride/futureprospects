@@ -36,4 +36,16 @@ class School < ApplicationRecord
     self.qualifications.destroy_all
     self.destroy
   end
+
+  # Searches for a school with the specified name.
+  #
+  # * +term+ - the name to search for.
+  #
+  # Returns a relation containing the matching schools.
+  def self.search(term)
+    if term.nil? or term.empty?
+      return School.none
+    end
+    School.select('DISTINCT name, address_1, address_2, city, postcode, country').where('LOWER(name) LIKE LOWER(?)', "%#{term}%")
+  end
 end

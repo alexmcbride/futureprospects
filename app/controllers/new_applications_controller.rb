@@ -6,7 +6,7 @@ class NewApplicationsController < ApplicationController
                                            :employment_edit, :employment_update, :employment_remove, :courses_remove,
                                            :completed]
 
-  # GET: /applications
+  # GET /applications
   #
   # Shows a list of the student's previous applications.
   def index
@@ -16,7 +16,7 @@ class NewApplicationsController < ApplicationController
     end
   end
 
-  # GET: /applications/:id
+  # GET /applications/:id
   #
   # Shows a particular student application.
   def show
@@ -24,7 +24,7 @@ class NewApplicationsController < ApplicationController
     @application.owned_by?(current_student) or user_not_authorized
   end
 
-  # POST: /applications
+  # POST /applications
   #
   # Creates a new application.
   def create
@@ -58,20 +58,20 @@ class NewApplicationsController < ApplicationController
     end
   end
 
-  # GET: /applications/intro
+  # GET /applications/intro
   #
   # Shows intro stage.
   def intro
     @application.save_intro
   end
 
-  # GET: /applications/profile
+  # GET /applications/profile
   #
   # Displays profile form.
   def profile
   end
 
-  # POST: /applications/profile
+  # POST /applications/profile
   #
   # Updates application profile.
   def profile_next
@@ -84,14 +84,14 @@ class NewApplicationsController < ApplicationController
     end
   end
 
-  # GET: /applications/education
+  # GET /applications/education
   #
   # Displays add education form.
   def education
     @school = School.new
   end
 
-  # POST: /applications/education/add
+  # POST /applications/education/add
   #
   # Adds a new educational establishment to the application.
   def education_add
@@ -106,7 +106,19 @@ class NewApplicationsController < ApplicationController
     end
   end
 
-  # DELETE: /applications/education
+  # GET /applications/education/search.json?term=<term>
+  #
+  # Searches for previously used school name.
+  def education_search
+    schools = School.search(params[:term])
+    respond_to do |format|
+      format.json do
+        render :json => schools, :only => [:name, :address_1, :address_2, :city, :postcode, :country]
+      end
+    end
+  end
+
+  # DELETE /applications/education
   #
   # Removes an education establishment from the application.
   def education_remove
@@ -118,14 +130,14 @@ class NewApplicationsController < ApplicationController
     end
   end
 
-  # GET: /applications/education/:id/edit
+  # GET /applications/education/:id/edit
   #
   # Shows the edit school form.
   def education_edit
     @school = School.find params[:id]
   end
 
-  # PATCH: /applications/education
+  # PATCH /applications/education
   #
   # Updated the school.
   def education_update
@@ -137,7 +149,7 @@ class NewApplicationsController < ApplicationController
     end
   end
 
-  # POST: /applications/education_next
+  # POST /applications/education_next
   #
   # Submits the education stage
   def education_next
@@ -151,7 +163,7 @@ class NewApplicationsController < ApplicationController
     end
   end
 
-  # GET: /applications/qualifications/:id
+  # GET /applications/qualifications/:id
   #
   # Displays the add qualifications form.
   def qualifications
@@ -159,7 +171,7 @@ class NewApplicationsController < ApplicationController
     @qualification = Qualification.new
   end
 
-  # POST: /applications/qualifications/:id
+  # POST /applications/qualifications/:id
   #
   # Adds a qualification to the school.
   def qualifications_add
@@ -176,7 +188,7 @@ class NewApplicationsController < ApplicationController
     end
   end
 
-  # DELETE: /applications/qualifications/:id
+  # DELETE /applications/qualifications/:id
   #
   # Removes a qualification from a school.
   def qualifications_remove
@@ -187,14 +199,14 @@ class NewApplicationsController < ApplicationController
     end
   end
 
-  # GET: /applications/employment
+  # GET /applications/employment
   #
   # Displays add employment form.
   def employment
     @job = Job.new
   end
 
-  # POST: /applications/employment
+  # POST /applications/employment
   #
   # Adds new job to the application.
   def employment_add
@@ -209,7 +221,19 @@ class NewApplicationsController < ApplicationController
     end
   end
 
-  # DELETE: /applications/employment/:id
+  # GET /applications/employment/search.json?term=<term>
+  #
+  # Searches for previously used school name.
+  def employment_search
+    jobs = Job.search(params[:term])
+    respond_to do |format|
+      format.json do
+        render :json => jobs, :only => [:employer, :address_1, :address_2, :city, :postcode, :country]
+      end
+    end
+  end
+
+  # DELETE /applications/employment/:id
   #
   # Removes job from the application.
   def employment_remove
@@ -233,7 +257,7 @@ class NewApplicationsController < ApplicationController
     end
   end
 
-  # POST: /applications/employment/next
+  # POST /applications/employment/next
   #
   # Submits employment stage.
   def employment_next
@@ -243,14 +267,14 @@ class NewApplicationsController < ApplicationController
     end
   end
 
-  # GET: /applications/references
+  # GET /applications/references
   #
   # Shows references form.
   def references
     @reference = @application.create_reference
   end
 
-  # POST: /applications/references
+  # POST /applications/references
   #
   # Submits references stage.
   def references_next

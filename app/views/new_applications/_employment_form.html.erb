@@ -1,3 +1,28 @@
+
+<script type="text/javascript">
+    $(function() {
+        $("#job_employer").autocomplete({
+            minLength: 1,
+            source: '<%= url_for applications_employment_search_url %>',
+            focus: function( event, ui ) {
+                $( "#job_employer" ).val( ui.item.employer );
+                return false;
+            },
+            select: function( event, ui ) {
+                $( "#job_employer" ).val( ui.item.employer );
+                $( "#job_address_1" ).val( ui.item.address_1 );
+                $( "#job_address_2" ).val( ui.item.address_2 );
+                $( "#job_city" ).val( ui.item.city );
+                $( "#job_postcode" ).val( ui.item.postcode );
+                $( "#job_country" ).val( ui.item.country );
+                return false;
+            }
+        }).autocomplete( "instance" )._renderItem = function( ul, item ) {
+            return $("<li>").append(item.employer).appendTo(ul);
+        };
+    });
+</script>
+
 <%= form_for @job, :html => {:class => 'form-horizontal', :role => 'form' }, url: path do |f| %>
   <%= form_errors @job %>
 

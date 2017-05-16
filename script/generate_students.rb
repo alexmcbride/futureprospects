@@ -77,7 +77,10 @@ def student(file, tokens, schools, jobs, refs)
     file.puts app + ".correspondence_city = 'Glasgow'"
     file.puts app + ".correspondence_country = '#{tokens[21]}'"
   end
-  status = Application.statuses.map {|k, v| k}.sample.to_sym
+
+  status = [:submitting, :awaiting_payment, :payment_failed, :cancelled, :awaiting_decisions, :all_rejected,
+            :awaiting_replies, :replies_overdue, :clearance, :completed, :completed, :completed, :completed].sample
+
   file.puts app + ".status = :#{status}"
   file.puts app + '.current_stage = :submit_stage'
 

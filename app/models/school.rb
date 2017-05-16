@@ -10,6 +10,8 @@ class School < ApplicationRecord
   belongs_to :application
   has_many :qualifications
 
+  scope :course, ->(course){School.joins(application: :course_selections).where('course_selections.course_id' => course.id)}
+
   # Checks if the school has at least one qualification
   #
   # Returns a boolean indicating if the school has at least a single qualification.

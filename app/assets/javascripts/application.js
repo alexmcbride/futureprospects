@@ -16,6 +16,8 @@
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.en-GB.js
 //= require jquery-ui/widgets/autocomplete
+//= require Chart.bundle
+//= require chartkick
 //= require_tree .
 
 /* Make sure Bootstrap datepicker uses correct date format */

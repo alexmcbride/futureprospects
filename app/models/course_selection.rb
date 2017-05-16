@@ -19,6 +19,13 @@ class CourseSelection < ApplicationRecord
   belongs_to :application, counter_cache: true
   belongs_to :course, counter_cache: true
 
+  # Scopes
+  scope :successful, -> {CourseSelection.completed.where(college_offer: [:conditional_offer, :definite_offer], student_choice: [:firm_choice, :insurance_choice])}
+  scope :ordered, -> {CourseSelection.order(:college_offer)}
+  scope :completed, -> {CourseSelection.joins(:application).where('applications.status' => :completed)}
+  scope :schools, ->{CourseSelection.joins(application: :schools)}
+  scope :jobs, ->{CourseSelection.joins(application: :jobs)}
+
   # Checks if a course selection already exists.
   #
   # Returns a boolean indicating if the selection exists.

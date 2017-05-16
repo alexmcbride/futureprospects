@@ -18,6 +18,8 @@ class Job < ApplicationRecord
   # Common validators.
   include DateValidator
 
+  scope :course, ->(course){Job.joins(application: :course_selections).where('course_selections.course_id'=>course.id)}
+
   # Searches for job with the specified name.
   #
   # * +term+ - the name to search for.

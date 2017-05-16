@@ -12,6 +12,8 @@ add user test@test.com for testing, show things like auth fail select options.
 
 confirm close tab alert?
 
+sort out applications by years
+
 REPORTS
 -------
 

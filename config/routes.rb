@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     resources :applications
 
     get 'reports/courses', to: 'reports#courses', as: 'reports_courses'
+    get 'reports/course/:id', to: 'reports#course', as: 'reports_course'
     get 'reports/applications', to: 'reports#applications', as: 'reports_applications'
     resources :reports
   end

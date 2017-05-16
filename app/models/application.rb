@@ -122,6 +122,10 @@ class Application < ApplicationRecord
     application
   end
 
+  def full_name
+    "#{first_name} #{family_name}"
+  end
+
   # Checks if the application is owned by this student
   #
   # * +student+ - the student to check against.
@@ -608,7 +612,7 @@ class Application < ApplicationRecord
       Date.new(year, 6, 4)
     elsif today < Date.new(year, 6, 4)
       Date.new(year, 6, 25)
-    elsif today < FINAL_APPLICATION_DATE
+    else
       Date.new(year, 7, 23)
     end
   end

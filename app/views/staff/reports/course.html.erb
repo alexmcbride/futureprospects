@@ -43,7 +43,7 @@
       <div class="col-md-6">
         <h4>College Decisions</h4>
         <p class="text-darkish small">Breakdown of college decisions for this course.</p>
-        <%= pie_chart @selections.group(:college_offer).count.map{|k,v| [k.titleize,v]} %>
+        <%= pie_chart @selections.group(:college_offer).count.map{|k,v| [k ? k.titleize : 'None',v]}.compact %>
       </div>
       <div class="col-md-6">
         <h4>Student Replies</h4>

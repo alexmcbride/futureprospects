@@ -331,3 +331,18 @@ crumb :staff_applications_edit do |application|
   parent :staff_applications_show, application
   link 'Decisions', edit_staff_application_path(application)
 end
+
+crumb :staff_reports do
+  parent :root
+  link 'Reports', staff_reports_path
+end
+
+crumb :staff_reports_courses do
+  parent :staff_reports
+  link 'Course Applicants', staff_reports_courses_path
+end
+
+crumb :staff_reports_applications do
+  parent :staff_reports
+  link 'College Applications', staff_reports_applications_path
+end

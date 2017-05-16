@@ -34,6 +34,10 @@ Rails.application.routes.draw do
 
     get 'applications/:id/full', to: 'applications#full', as: 'application_full'
     resources :applications
+
+    get 'reports/courses', to: 'reports#courses', as: 'reports_courses'
+    get 'reports/applications', to: 'reports#applications', as: 'reports_applications'
+    resources :reports
   end
 
   # Application routes

@@ -51,16 +51,8 @@ class Application < ApplicationRecord
   #   * +:replies_overdue+ - Student hasn't replied within allotted time
   #   * +:clearance+ - Student offered clearance courses
   #   * +:completed+ - Decisions made, replies received, finished.
-  enum status: [:submitting,
-                :awaiting_payment,
-                :payment_failed,
-                :cancelled,
-                :awaiting_decisions,
-                :all_rejected,
-                :awaiting_replies,
-                :replies_overdue,
-                :clearance,
-                :completed
+  enum status: [:submitting, :awaiting_payment, :payment_failed, :cancelled, :awaiting_decisions, :all_rejected,
+                :awaiting_replies, :replies_overdue, :clearance, :completed
   ]
 
   # @!attribute current_stage
@@ -139,12 +131,34 @@ class Application < ApplicationRecord
   validates :current_stage, presence: true
   validate :applications_are_open, on: :create
 
-  # Associations.
+  # @!attribute student
+  #   @return [Student]
+  #   Student relation
   belongs_to :student
+
+  # @!attribute schools
+  #   @return [School[]]
+  #   Schools relation
   has_many :schools
+
+  # @!attribute jobs
+  #   @return [Job[]]
+  #   Jobs relation
   has_many :jobs
+
+  # @!attribute reference
+  #   @return [Reference]
+  #   Reference relation
   has_one :reference
+
+  # @!attribute course_selections
+  #   @return [CourseSelection[]]
+  #   Course selections relation
   has_many :course_selections
+
+  # @!attribute payments
+  #   @return [Payment[]]
+  #   Payments relation
   has_many :payments
 
   # Callbacks.
@@ -390,7 +404,7 @@ class Application < ApplicationRecord
   end
 
   # Method called by rake task that cancels any applications with an outstanding payment over 7 days old. To run this
-  # you can do it manually `ruby bin\rake site_tasks:handle_failed_payments`, on Heroku it is run by the scheduler once
+  # you can do it manually `ruby bin\\rake site_tasks:handle_failed_payments`, on Heroku it is run by the scheduler once
   # every 24 hours. See for more details: https://devcenter.heroku.com/articles/scheduler
   def self.process_failed_payments
     payments = Payment.select(:application_id)

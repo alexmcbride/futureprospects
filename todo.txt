@@ -30,6 +30,8 @@ test counter cache, student apply for courses, make sure number goes up.
 
 add remove all to applications filter.
 
+add multiple applications for single students (e.g. on for 2016, another for 2017 etc).
+
 REPORTS
 -------
 

@@ -1,7 +1,7 @@
-# Name: Alex McBride
-# Date: 28/04/2017
-# Project: Future Prospects
-# Class: Application - model class for a student application.
+# * Name: Alex McBride
+# * Date: 17/05/2017
+# * Project: Future Prospects
+# * Application model class for a student application.
 class Application < ApplicationRecord
   # Imports
   include ActionView::Helpers::TextHelper
@@ -27,38 +27,88 @@ class Application < ApplicationRecord
   # The number of days until a payment expires.
   PAYMENT_EXPIRY_DAYS = 7
 
-  # Enum for student gender.
+  # @!attribute gender
+  #   @return [symbol]
+  #   Enum for student gender.
+  #
+  #   * +:male+ - the student is male.
+  #   * +:female+ - the student is female.
+  #   * +:other+ - the student has a non-binary gender.
+  #   * +:prefer_not_to_say+ - the student would prefer not to say.
   enum gender: [:male, :female, :other, :prefer_not_to_say]
 
-  # Enum for the application status.
-  enum status: [:submitting,         # Student filling in application
-                :awaiting_payment,   # Application submitted, awaiting payment
-                :payment_failed,     # Payment failed, still within 7 days
-                :cancelled,          # Payment failed, outwith 7 days
-                :awaiting_decisions, # Payment received, waiting for colleges
-                :all_rejected,       # Decisions in, all rejected (eligible for clearance)
-                :awaiting_replies,   # Decisions in, waiting for students
-                :replies_overdue,    # Student hasn't replied within allotted time
-                :clearance,          # Student offered clearance courses
-                :completed           # Decisions made, replies received, finished.
+  # @!attribute status
+  #   @return [symbol]
+  #   Enum for application status.
+  #
+  #   * +:submitting+ - Student filling in application
+  #   * +:awaiting_payment+ - Application submitted, awaiting payment
+  #   * +:payment_failed+ - Payment failed, still within 7 days
+  #   * +:cancelled+ - Payment failed, outwith 7 days
+  #   * +:awaiting_decisions+ - Payment received, waiting for colleges
+  #   * +:all_rejected+ - Decisions in, all rejected (eligible for clearance)
+  #   * +:awaiting_replies+ - Decisions in, waiting for students
+  #   * +:replies_overdue+ - Student hasn't replied within allotted time
+  #   * +:clearance+ - Student offered clearance courses
+  #   * +:completed+ - Decisions made, replies received, finished.
+  enum status: [:submitting,
+                :awaiting_payment,
+                :payment_failed,
+                :cancelled,
+                :awaiting_decisions,
+                :all_rejected,
+                :awaiting_replies,
+                :replies_overdue,
+                :clearance,
+                :completed
   ]
 
-  # Enum for current application stage.
+  # @!attribute current_stage
+  #   @return [symbol]
+  #   Enum for the current application stage.
+  #   * +:intro_stage+ - Student is on the introduction stage.
+  #   * +:profile_stage+ - Student is on the profile stage.
+  #   * +:education_stage+ - Student is on the education stage.
+  #   * +:employment_stage+ - Student is on the employment stage.
+  #   * +:references_stage+ - Student is on the references stage.
+  #   * +:statement_stage+ - Student is on the statement stage.
+  #   * +:courses_stage+ - Student is on the courses stage.
+  #   * +:submit_stage+ - Student is on the submit stage.
   enum current_stage: [:intro_stage, :profile_stage, :education_stage, :employment_stage, :references_stage,
                        :statement_stage, :courses_stage, :submit_stage]
 
   # Default number of applications per page of pagination (for will_paginate)
   self.per_page = 15
 
-  # Scopes
+  ##
+  # Finds all applications with :awaiting_decisions status.
   scope :awaiting, -> {where(status: :awaiting_decisions)}
+
+  ##
+  # Finds all applications with :submitting status.
   scope :submitting, -> {where(status: :submitting)}
+
+  ##
+  # Finds all applications created during the current academic year.
   scope :current, -> {where(created_at: current_year)}
+
+  ##
+  # Finds all applications created before the current academic year.
   scope :old, -> {where('created_at<=?', current_year.first)}
+
+  ##
+  # Finds all applications from a specific college.
+  #
+  # * +college_id+ - the ID of the college to filter applications by.
   scope :college, ->(college_id){select('DISTINCT applications.*').joins(course_selections: :course).where('courses.college_id' => college_id)}
-  scope :by_year, ->(params) do
-    year = params[:year].to_i # Returns zero if int does not parse
-    params[:year].nil? || year == 0 ? current : where(created_at: Date.new(year, 1, 1)..Date.new(year, 12, 31))
+
+  ##
+  # Finds all applications that were created the specified year.
+  #
+  # * +year+ - year to limit scope to.
+  scope :by_year, ->(year) do
+    year = year.to_i # Returns zero if int does not parse
+    year.nil? || year == 0 ? current : where(created_at: Date.new(year, 1, 1)..Date.new(year, 12, 31))
   end
 
   # Validators
@@ -107,7 +157,7 @@ class Application < ApplicationRecord
   #
   # * +student+ - the existing student.
   #
-  # Returns an Application object.
+  # @return [Application]
   def self.create_for_student(student)
     application = Application.new
     application.first_name = student.first_name
@@ -121,7 +171,7 @@ class Application < ApplicationRecord
 
   # Determines if this application is for the current academic year.
   #
-  # Returns a boolean.
+  # @return [boolean]
   def current_year?
     Application.current_year.include? self.created_at
   end
@@ -130,7 +180,7 @@ class Application < ApplicationRecord
   #
   # * +year+ - an optional year (fixnum) to find the academic year for (e.g. 2016)
   #
-  # Returns a range of dates.
+  # @return [Date..Date]
   def self.current_year(year=nil)
     year = Date.today.year unless year
     (Date.new(year, 1, 1)..Date.new(year, 7, 16))
@@ -139,7 +189,7 @@ class Application < ApplicationRecord
   # Gets the student's full name. This is not always present, you should prefer Student.full_name which is guaranteed
   # to be set.
   #
-  # Returns a string.
+  # @return [string]
   def full_name
     "#{first_name} #{family_name}"
   end
@@ -148,7 +198,7 @@ class Application < ApplicationRecord
   #
   # * +student+ - the student to check against.
   #
-  # Returns a boolean.
+  # @return [boolean]
   def owned_by?(student)
     student.id == self.student_id
   end
@@ -157,7 +207,7 @@ class Application < ApplicationRecord
   #
   # * +college_id+ - the college to check for.
   #
-  # Returns true if it does belong, otherwise false.
+  # @return [boolean]
   def belongs_to_college(college_id)
     self.course_selections.joins(:course).where('courses.college_id=?', college_id).any?
   end
@@ -167,7 +217,7 @@ class Application < ApplicationRecord
   #
   # * +college_id+ - the ID of the college to look for applications. If this is nil then an empty array is returned.
   #
-  # Returns an array of application IDs.
+  # @return [array[fixnum]]
   def self.awaiting_other_colleges(college_id)
     if college_id.nil?
       return []
@@ -185,7 +235,7 @@ class Application < ApplicationRecord
   #
   # * +college+ - the college to check for.
   #
-  # Returns true or false.
+  # @return [boolean]
   def awaiting_college?(college)
     self.course_selections.joins(:course).where('courses.college_id' => college.id, college_offer: nil).any?
   end
@@ -194,7 +244,7 @@ class Application < ApplicationRecord
   #
   # * +college+ - the college to check against.
   #
-  # Returns true if awaiting other colleges, otherwise false.
+  # @return [boolean]
   def awaiting_other_colleges?(college)
     if college.nil?
       return false
@@ -210,7 +260,7 @@ class Application < ApplicationRecord
 
   # Checks that all added schools have at least one qualification.
   #
-  # Returns true if the schools are valid.
+  # @return [boolean]
   def schools_valid?
     valid = true
     self.schools.each do |school|
@@ -222,6 +272,12 @@ class Application < ApplicationRecord
     valid
   end
 
+  # Determines if the specified stage is complete.
+  #
+  # * +stage+ - the stage the application is at.
+  # * +current+ - the stage the student is viewing.
+  #
+  # @return [boolean]
   def self.stage_complete?(stage, current)
     current = Application.current_stages[current]
     stage = Application.current_stages[stage]
@@ -230,7 +286,7 @@ class Application < ApplicationRecord
 
   # Calculates the number of courses the student can still add.
   #
-  # Returns integer
+  # @return [fixnum]
   def available_courses
     MAX_COURSES - self.course_selections_count
   end
@@ -238,7 +294,7 @@ class Application < ApplicationRecord
   # Checks if a student can still add courses to their application, which they can either if they have fewer than the
   # max allowed courses, or they are in clearance.
   #
-  # Returns true if can add courses.
+  # @return [boolean]
   def can_add_course?
     self.available_courses > 0 || self.clearance?
   end
@@ -260,7 +316,7 @@ class Application < ApplicationRecord
   #
   # * +selection+ - The selection to add.
   #
-  # Returns: a boolean indicating if the selection was added or not.
+  # @return [boolean]
   def add_course(selection)
     selection.application = self
     if selection.valid?
@@ -273,7 +329,7 @@ class Application < ApplicationRecord
   #
   # * +selection+ - the course selection to add.
   #
-  # Returns true if the selection was added, otherwise false.
+  # @return [boolean]
   def add_clearance_course(selection)
     if add_course selection
       update_status :awaiting_decisions
@@ -283,25 +339,25 @@ class Application < ApplicationRecord
     false
   end
 
-  # Calculates the student's application fee.
+  # Calculates the student's application fee in pence.
   #
-  # Returns the application fee amount in pence.
+  # @return [fixnum]
   def calculate_fee
     Application::courses_fee(course_selections_count > 1 ? :multiple : :single)
   end
 
   # Calculates the student's application fee.
   #
-  # Returns the application fee amount in pounds.
+  # @return [fixnum]
   def calculate_fee_pounds
     calculate_fee / PENCE_IN_POUND
   end
 
-  # Gets the course fee for the submission type (e.g. :single or :multiple)
+  # Gets the course fee for the submission type (e.g. :single or :multiple) in pence
   #
   # * +type+ - :single or :multiple
   #
-  # Returns the course fee in pence.
+  # @return [fixnum]
   def self.courses_fee(type)
     if type == :single
       SINGLE_COURSE_FEE
@@ -312,19 +368,19 @@ class Application < ApplicationRecord
     end
   end
 
-  # Gets the course fee for the submission type (e.g. :single or :multiple)
+  # Gets the course fee for the submission type (e.g. :single or :multiple) in pounds
   #
   # * +type+ - :single or :multiple
   #
-  # Returns the course fee in pounds.
+  # @return [fixnum]
   def self.courses_fee_pounds(type)
     courses_fee(type) / PENCE_IN_POUND
   end
 
   # Gets the expiry time of the first failed payment made on this application. This is used to determine when the an
-  # application with a failed payment gets cancelled.
+  # application with a failed payment gets cancelled. If there are no payments then it returns nil.
   #
-  # Returns the expiry datetime, or nil if there are no failed payments.
+  # @return [DateTime]
   def payment_expiry_time
     payment = self.payments.where(status: :failed).order(:paid_at).first
     unless payment.nil?
@@ -350,8 +406,8 @@ class Application < ApplicationRecord
     end
   end
 
-  # Task for handling overdue replies, that is course selections that have been without a decision for too long. As
-  # above called as a rake task once a day.
+  # Task for handling overdue replies, that is course selections that have been without a decision for too long. Called
+  # as a rake task once a day.
   def self.process_overdue_replies
     applications = Application.current.where(status: :awaiting_replies).where('CURRENT_DATE>decision_due')
 
@@ -364,18 +420,21 @@ class Application < ApplicationRecord
 
   # Finds all course selections that do not have an offer.
   #
-  # Returns a relation of course selections.
+  # @return [ActiveRecord::Relation]
   def pending_course_selections
     self.course_selections.order('college_offer IS NULL', college_offer: :desc)
   end
 
   # Finds all course selections that do have an offer.
   #
-  # Returns a relation of course selections.
+  # @return [ActiveRecord::Relation]
   def course_selections_with_college_offers
     self.course_selections.where.not(college_offer: :rejected).order(:student_choice)
   end
 
+  # Finds all course selections without student choices.
+  #
+  # @return [ActiveRecord::Relation]
   def course_selections_without_choices
     CourseSelection.where(application_id: self.id)
         .where(student_choice: nil)
@@ -388,7 +447,7 @@ class Application < ApplicationRecord
   # * +return_url+ - the URL the buyer is returned to. This return action then needs to call authorize.
   # * +cancel_url+ - the URL the buyer is returned to, if they cancel their PayPal purchase.
   #
-  # Returns the PayPal URL to direct to the buyer to.
+  # @return [string]
   def generate_paypal_url(ip, return_url, cancel_url)
     unpaid_payment.generate_paypal_url ip, return_url, cancel_url
   end
@@ -405,12 +464,12 @@ class Application < ApplicationRecord
     payment
   end
 
-  # Authorizes payment.
+  # Authorizes any unpaid payment object attached to the application.
   #
   # * +params+ - the payment params from the payment form
   # * +remote_up+ - the buyer's IP, needed for PayPal.
   #
-  # Returns the payment object.
+  # @return [Payment]
   def authorize_payment(params, remote_ip)
     payment = self.unpaid_payment
     payment.update_attributes params
@@ -433,7 +492,7 @@ class Application < ApplicationRecord
   #
   # * +params+ - the params with the filter data
   #
-  # Returns an ActiveRecord::Relation containing application data.
+  # @return [ActiveRecord::Relation]
   def self.filter(params)
     scope = Application.all
     unless params[:name].nil? || params[:name].empty?
@@ -467,7 +526,7 @@ class Application < ApplicationRecord
   #
   # * +params+ - the request params containing profile data.
   #
-  # Returns boolean indicating if the stage was saved.
+  # @return [boolean]
   def save_profile(params)
     self.attributes = params
     self.status = :submitting
@@ -481,7 +540,7 @@ class Application < ApplicationRecord
 
   # Attempts to save the education stage.
   #
-  # Returns boolean indicating if the stage was saved.
+  # @return [boolean]
   def save_education
     if self.schools_valid?
       self.current_stage = :employment_stage
@@ -493,7 +552,7 @@ class Application < ApplicationRecord
 
   # Attempts to save the employment stage.
   #
-  # Returns boolean indicating if the stage was saved.
+  # @return [boolean]
   def save_employment
     self.current_stage = :references_stage
     self.save
@@ -502,7 +561,7 @@ class Application < ApplicationRecord
 
   # Retrieve reference or create new one as needed.
   #
-  # Returns the reference.
+  # @return [Reference]
   def create_reference
     self.reference or Reference.new
   end
@@ -512,7 +571,7 @@ class Application < ApplicationRecord
   # * +reference+ - the reference object to add or update.
   # * +params+ - the request params containing reference data.
   #
-  # Returns boolean indicating if the stage was saved.
+  # @return [boolean]
   def save_references(reference, params)
     reference.attributes = params
     if reference.valid?
@@ -528,7 +587,7 @@ class Application < ApplicationRecord
   #
   # * +params+ - the request params containing statement data.
   #
-  # Returns boolean indicating if the stage was saved.
+  # @return [boolean]
   def save_statement(params)
     self.attributes = params
     if self.personal_statement.empty? or self.personal_statement.length == 0
@@ -545,7 +604,7 @@ class Application < ApplicationRecord
 
   # Attempts to save the course selection.
   #
-  # Returns boolean indicating if the stage was saved.
+  # @return [boolean]
   def save_courses
     if self.course_selections.empty?
       self.errors.add(:you, 'must apply for at least one course')
@@ -559,7 +618,7 @@ class Application < ApplicationRecord
   #
   # * +confirmed+ - a boolean indicating if the student has confirmed the submission.
   #
-  # Returns boolean indicating if the stage was saved.
+  # @return [boolean]
   def save_submit(confirmed)
     unless confirmed
       self.errors.add(:confirm, 'box must be checked in order to submit.')
@@ -584,7 +643,7 @@ class Application < ApplicationRecord
 
   # Creates a new application payment with a status of null.
   #
-  # Returns the new payment object.
+  # @return [Payment]
   def create_application_payment
     Payment.new application: self,
                 amount: self.calculate_fee,
@@ -593,7 +652,7 @@ class Application < ApplicationRecord
 
   # Gets the most recent unpaid payment for the application.
   #
-  # Returns a payment object.
+  # @return [Payment]
   def unpaid_payment
     self.payments.where(status: nil).or(self.payments.where(status: :failed)).last
   end
@@ -609,7 +668,7 @@ class Application < ApplicationRecord
   #
   # * +year+ - an optional year int to use.
   #
-  # Returns the decision due date.
+  # @return [Date]
   def self.calculate_replies_due(year=nil)
     today = Date.today
     year = today.year if year.nil?
@@ -629,7 +688,7 @@ class Application < ApplicationRecord
     # start, in case the decision is being made a different year. For instance, a decision made in Dec 2016 for a course
     # starting Aug 2017.
     #
-    # Returns the date object.
+    # @return [Date]
     def calculate_replies_due
       date = Course.joins(:course_selections)
                  .where('course_selections.application_id' => self.id)
@@ -659,19 +718,19 @@ class Application < ApplicationRecord
 
     # Determines if all selections have had offers made.
     #
-    # Returns true if they all have offers.
+    # @return [boolean]
     def all_selections_have_college_offers?
       self.course_selections.any? && self.course_selections.map {|c| c.college_offer.present?}.all?
     end
 
     # Determines if all course selections have a rejected offer.
     #
-    # Returns  a boolean indicating if they're rejected.
+    # @return [boolean]
     def all_selections_rejected?
       self.course_selections.all? {|s| s.rejected?}
     end
 
-    # Determines if applications are open.
+    # Determines if applications are open and adds validation errors if they're not.
     def applications_are_open
       unless Application.current_year.include? Date.today
         self.errors.add(:applications, 'are closed')

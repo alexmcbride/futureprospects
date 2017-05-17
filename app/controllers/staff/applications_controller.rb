@@ -14,7 +14,7 @@ class Staff::ApplicationsController < Staff::StaffController
     end
 
     @applications = policy_scope(Application)
-        .by_year(params)
+        .by_year(params[:year])
         .filter(params)
         .includes(:student)
         .page(params[:page])

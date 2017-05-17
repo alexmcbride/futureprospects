@@ -1,6 +1,12 @@
 # Model class to represent a college course.
 class Course < ApplicationRecord
-  # Enum for course status.
+  # @!attribute status
+  #   @return [symbol]
+  #   Enum for course status.
+  #
+  #   * +:open+ - the course is open and accepting applications.
+  #   * +:cancelled+ - the course has been cancelled.
+  #   * +:closed+ - the course is closed.
   enum status: [:open, :cancelled, :closed]
 
   # Pagination
@@ -12,8 +18,12 @@ class Course < ApplicationRecord
   scoped_search relation: :category, on: :name, profile: :full
   scoped_search relation: :college, on: :name, profile: :full
 
-  # Scope for courses that are open and have spaces left.
+  ##
+  # Scope to courses with :open status.
   scope :available, -> { where(status: :open) }
+
+  ##
+  # Scope to courses with spaces still to fill.
   scope :with_spaces, -> {where('current_selections_count<spaces')}
 
   # Image Upload
@@ -38,27 +48,40 @@ class Course < ApplicationRecord
   # before_validation :default_to_open_status
 
   # Foreign Keys
+  # @!attribute college
+  #   @return [College]
+  #   College relation.
   belongs_to :college
+
+  # Foreign Keys
+  # @!attribute category
+  #   @return [Category]
+  #   Category relation.
   belongs_to :category, counter_cache: true
+
+  # Foreign Keys
+  # @!attribute course_selections
+  #   @return [CourseSelection]
+  #   Course selections relation.
   has_many :course_selections
 
   # Gets the number of years the course lasts for.
   #
-  # Returns the years as an integer.
+  # @return [fixnum] the number of years.
   def years
     ((end_date - start_date).to_i / 365.0).ceil
   end
 
   # Gets the duration the course will last for.
   #
-  # Returns a duration between two dates.
+  # @return [Date..Date] a range of dates dates.
   def duration
     start_date..end_date
   end
 
   # Gets if the course is full time or part time.
   #
-  # Returns a string with the course type.
+  # @return [string] the course type.
   def course_type
     'Full Time'
   end
@@ -67,7 +90,7 @@ class Course < ApplicationRecord
   #
   # * +search_term+ - the term to search for.
   #
-  # Returns an ActiveRecord:Relation containing the search results.
+  # @return [ActiveRecord:Relation] the search results.
   def self.search(search_term)
     Course.search_for(search_term, profile: :title)
   end
@@ -76,7 +99,7 @@ class Course < ApplicationRecord
   #
   # * +search_term+ - the term to search for.
   #
-  # Returns an ActiveRecord:Relation containing the search results
+  # @return [ActiveRecord:Relation] the search results
   def self.full_search(search_term, category=nil)
     scope = Course.search_for(search_term, profile: :full).includes(:category, :college)
     if category
@@ -87,21 +110,21 @@ class Course < ApplicationRecord
 
   # Checks if the course is full.
   #
-  # Returns a boolean indicating if the course has spaces.
+  # @return [boolean] true if the course is full.
   def full?
     self.current_selections_count >= self.spaces
   end
 
   # Determines if the course is in clearance
   #
-  # Returns true if the course is in clearance.
+  # @return [boolean] true if the course is in clearance.
   def clearance?
     can_apply? && self.college.clearance?
   end
 
   # Determines if the course can be applied to.
   #
-  # Returns true if course can be applied to.
+  # @return [boolean] true if course can be applied to.
   def can_apply?
     self.open? && self.current_selections_count < self.spaces
   end
@@ -110,7 +133,7 @@ class Course < ApplicationRecord
   #
   # * +params+ - the request params containing filtering information.
   #
-  # Returns an ActiveRecord::Relation containing the results of the filtering operation.
+  # @return [ActiveRecord::Relation] the results of the filtering operation.
   def self.filter(params)
     scope = Course.search params[:title]
     unless params[:category_id].nil? or params[:category_id] == '0'
@@ -129,7 +152,7 @@ class Course < ApplicationRecord
   #
   # * +title+ - the title to match against, entered by the user, as a security precaution.
   #
-  # Returns a boolean indicating if the operation was successful.
+  # @return [boolean] true if the operation was successful.
   def remove(title)
     if title != self.title
       self.errors.add(:title, "does not match '#{self.title}'")
@@ -153,7 +176,7 @@ class Course < ApplicationRecord
   #
   # * +category+ - optional category the include the where clause
   #
-  # Returns An ActiveRecord::Relation including the course results.
+  # @return [ActiveRecord::Relation] the course results.
   def self.find_open_courses(category=nil)
     scope = Course.available
 
@@ -168,7 +191,7 @@ class Course < ApplicationRecord
   #
   # * +params+ - The request params including the update data.
   #
-  # Returns a boolean indicating if the operation was successful.
+  # @return [boolean] true if the operation was successful.
   def update_with_status(params)
     # Check if status has just been switched to cancelled
     if params[:status] == 'cancelled'
@@ -180,7 +203,7 @@ class Course < ApplicationRecord
 
   # Cancels course and emails all students who had applied for it.
   #
-  # Returns a boolean indicating if the operation was successful.
+  # @return [boolean] true if the operation was successful.
   def cancel
     # Ignore if already cancelled.
     unless self.cancelled?
@@ -203,7 +226,7 @@ class Course < ApplicationRecord
   # * +application+ - the application to find clearance courses for.
   # * +college+ - an optional college to limit the courses for.
   #
-  # Returns an the courses as a relation.
+  # @return [ActiveRecord::Relation] an the courses as a relation.
   def self.clearance_courses(application, college=nil)
     scope = Course.available
                 .select('DISTINCT courses.*')
@@ -225,7 +248,7 @@ class Course < ApplicationRecord
   #
   # * +college+ - optional college to limit results to.
   #
-  # Returns an ActiveRecord::Relation containing the courses.
+  # @return [ActiveRecord::Relation] the course results.
   def self.all_clearance_courses(college=nil)
     scope = Course.joins(:college)
                 .select('DISTINCT(courses.*)')
@@ -241,6 +264,8 @@ class Course < ApplicationRecord
   end
 
   # Daily task that checks for the start of a new academic year and resets counter caches.
+  #
+  # @return [nil]
   def self.process_start_of_new_academic_year
     # Check this is first day of academic year
     if Application.current_year.first == Date.today

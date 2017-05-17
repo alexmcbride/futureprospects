@@ -23,6 +23,8 @@ ACADEMIC YEAR
 transition year to year? / daily task? / at start of jan reset courses.course_selections_count / or create second
 counter_cache, called current_selections_count that is reset each year?
 
+test counter cache, student apply for courses, make sure number goes up.
+
 
 REPORTS
 -------

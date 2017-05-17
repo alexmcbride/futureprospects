@@ -12,13 +12,13 @@ class Application < ApplicationRecord
   # The maximum number of allowed courses.
   MAX_COURSES = 5
 
-  # The cost of a single course.
-  SINGLE_COURSE_FEE = 1000 # Amounts are in pence.
+  # The cost of a single course in pence. Note: all monetary values are stored in pence.
+  SINGLE_COURSE_FEE = 1000
 
-  # The cost of multiple courses.
+  # The cost of multiple courses in pence.
   MULTIPLE_COURSE_FEE = 2000
 
-  # Cost of changing courses.
+  # Cost of changing courses in pence.
   COURSE_CHANGE_FEE = 1000
 
   # Used for converting pence into pounds.
@@ -47,7 +47,7 @@ class Application < ApplicationRecord
   enum current_stage: [:intro_stage, :profile_stage, :education_stage, :employment_stage, :references_stage,
                        :statement_stage, :courses_stage, :submit_stage]
 
-  # Pagination
+  # Default number of applications per page of pagination (for will_paginate)
   self.per_page = 15
 
   # Scopes
@@ -56,8 +56,7 @@ class Application < ApplicationRecord
   scope :current, -> {where(created_at: current_year)}
   scope :old, -> {where('created_at<=?', current_year.first)}
   scope :college, ->(college_id){select('DISTINCT applications.*').joins(course_selections: :course).where('courses.college_id' => college_id)}
-
-  scope :by_year, ->(year) do
+  scope :by_year, ->(params) do
     year = params[:year].to_i # Returns zero if int does not parse
     params[:year].nil? || year == 0 ? current : where(created_at: Date.new(year, 1, 1)..Date.new(year, 12, 31))
   end
@@ -90,7 +89,7 @@ class Application < ApplicationRecord
   validates :current_stage, presence: true
   validate :applications_are_open, on: :create
 
-  # Foreign Keys
+  # Associations.
   belongs_to :student
   has_many :schools
   has_many :jobs
@@ -108,14 +107,11 @@ class Application < ApplicationRecord
   #
   # * +student+ - the existing student.
   #
-  # Returns the new application.
+  # Returns an Application object.
   def self.create_for_student(student)
     application = Application.new
-    application.email = student.email
     application.first_name = student.first_name
     application.family_name = student.family_name
-    application.scottish_candidate_number = student.scottish_candidate_number
-    application.national_insurance_number = student.national_insurance_number
     application.status = :submitting
     application.current_stage = :intro_stage
     application.student = student
@@ -123,11 +119,27 @@ class Application < ApplicationRecord
     application
   end
 
+  # Determines if this application is for the current academic year.
+  #
+  # Returns a boolean.
+  def current_year?
+    Application.current_year.include? self.created_at
+  end
+
+  # Determines the date range of the current academic year
+  #
+  # * +year+ - an optional year (fixnum) to find the academic year for (e.g. 2016)
+  #
+  # Returns a range of dates.
   def self.current_year(year=nil)
     year = Date.today.year unless year
     (Date.new(year, 1, 1)..Date.new(year, 7, 16))
   end
 
+  # Gets the student's full name. This is not always present, you should prefer Student.full_name which is guaranteed
+  # to be set.
+  #
+  # Returns a string.
   def full_name
     "#{first_name} #{family_name}"
   end
@@ -136,7 +148,7 @@ class Application < ApplicationRecord
   #
   # * +student+ - the student to check against.
   #
-  # Returns true if the application is owned by the student.
+  # Returns a boolean.
   def owned_by?(student)
     student.id == self.student_id
   end
@@ -438,17 +450,6 @@ class Application < ApplicationRecord
     end
     unless params[:order].nil? or params[:order] == 'none'
       scope = scope.order(params[:order])
-    end
-    scope
-  end
-
-  def self.by_year(params)
-    scope = Application.all
-    year = params[:year].to_i # Returns zero if int does not parse
-    if params[:year].nil? || year == 0
-      scope = scope.current
-    else
-      scope = scope.where(created_at: Date.new(year, 1, 1)..Date.new(year, 12, 31))
     end
     scope
   end

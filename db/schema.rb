@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170516174928) do
+ActiveRecord::Schema.define(version: 20170517132243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,12 +97,13 @@ ActiveRecord::Schema.define(version: 20170516174928) do
     t.string   "level"
     t.integer  "college_id"
     t.integer  "category_id"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.string   "image"
     t.integer  "spaces"
     t.integer  "status"
-    t.integer  "course_selections_count", default: 0, null: false
+    t.integer  "course_selections_count",  default: 0, null: false
+    t.integer  "current_selections_count", default: 0, null: false
     t.index ["category_id"], name: "index_courses_on_category_id", using: :btree
     t.index ["college_id"], name: "index_courses_on_college_id", using: :btree
     t.index ["title"], name: "index_courses_on_title", using: :btree

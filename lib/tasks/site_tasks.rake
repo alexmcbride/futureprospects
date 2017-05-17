@@ -10,5 +10,9 @@ namespace :site_tasks do
     puts 'Task: process overdue replies task started'
     Application.process_overdue_replies
     puts 'Task end: overdue replies'
+
+    puts 'Task: process start of new academic year'
+    Course.process_start_of_new_academic_year
+    puts 'Task end: start of new academic year'
   end
 end

@@ -54,7 +54,6 @@ def student(file, tokens, schools, jobs, refs)
   unless tokens[13].empty?
     file.puts app + ".mobile = '#{tokens[13]}'"
   end
-  file.puts app + ".email = '#{tokens[14]}'"
   unless tokens[15].empty?
     file.puts app + ".disability = '#{tokens[15]}'"
   end
@@ -205,6 +204,7 @@ def student(file, tokens, schools, jobs, refs)
   end
 
   file.puts "app.course_selections_count = #{num}"
+  # file.puts "app.current_selections_count = #{num}" if Application.current_year.include? submitted
   file.puts 'app.save validate: false'
   file.puts ''
 

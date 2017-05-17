@@ -1,5 +1,6 @@
 # Model class to represent a college course.
 class Course < ApplicationRecord
+  # Enum for course status.
   enum status: [:open, :cancelled, :closed]
 
   # Pagination
@@ -13,6 +14,7 @@ class Course < ApplicationRecord
 
   # Scope for courses that are open and have spaces left.
   scope :available, -> { where(status: :open) }
+  scope :with_spaces, -> {where('current_selections_count<spaces')}
 
   # Image Upload
   mount_uploader :image, CourseImageUploader
@@ -87,7 +89,7 @@ class Course < ApplicationRecord
   #
   # Returns a boolean indicating if the course has spaces.
   def full?
-    self.course_selections_count >= self.spaces
+    self.current_selections_count >= self.spaces
   end
 
   # Determines if the course is in clearance
@@ -101,7 +103,7 @@ class Course < ApplicationRecord
   #
   # Returns true if course can be applied to.
   def can_apply?
-    self.open? && self.course_selections_count < self.spaces
+    self.open? && self.current_selections_count < self.spaces
   end
 
   # Filters the courses based on the request params (:title, :category_id, :status, and :college_id)
@@ -227,8 +229,8 @@ class Course < ApplicationRecord
   def self.all_clearance_courses(college=nil)
     scope = Course.joins(:college)
                 .select('DISTINCT(courses.*)')
+                .with_spaces
                 .where('courses.status' => :open)
-                .where('courses.course_selections_count<courses.spaces')
                 .where('colleges.clearance' => true)
 
     if college
@@ -236,6 +238,20 @@ class Course < ApplicationRecord
     end
 
     scope
+  end
+
+  # Daily task that checks for the start of a new academic year and resets counter caches.
+  def self.process_start_of_new_academic_year
+    # Check this is first day of academic year
+    if Application.current_year.first == Date.today
+      puts 'Detected start of new academic year, resetting counter caches...'
+
+      # Reset all current_selections_count counter caches to zero.
+      Course.all.each do |course|
+        course.current_selections_count = 0
+        course.save!
+      end
+    end
   end
 
   private
@@ -249,7 +265,7 @@ class Course < ApplicationRecord
     # Checks that a staff member doesn't try to change spaces to be a number
     # less than the current number of applicants.
     def spaces_greater_than_applicants
-      if self.spaces < self.course_selections_count
+      if self.spaces < self.current_selections_count
         self.errors.add(:spaces, 'cannot be less than number of applicants')
       end
     end

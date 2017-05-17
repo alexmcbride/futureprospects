@@ -27,6 +27,10 @@ class CourseSelection < ApplicationRecord
   scope :jobs, ->{joins(application: :jobs)}
   scope :current, ->{joins(:application).where('applications.created_at' => Application.current_year)}
 
+  # Callbacks.
+  after_create :increase_current_selections_count
+  after_destroy :decrease_current_selections_count
+
   # Checks if a course selection already exists.
   #
   # Returns a boolean indicating if the selection exists.
@@ -103,6 +107,21 @@ class CourseSelection < ApplicationRecord
   end
 
   private
+    # Callback to auto-increase course_selections count for current year
+    def increase_current_selections_count
+      if self.application.current_year?
+        self.course.current_selections_count += 1
+        self.course.save validate: false
+      end
+    end
+
+    # Callback to auto-decrease course_selections count for current year.
+    # TODO: is this needed, I don't think CourseSelections can be destroyed?
+    def decrease_current_selections_count
+      self.course.current_selections_count -= 1
+      self.course.save validate: false
+    end
+
     # Declines all of a student's choices.
     #
     # * +application+ - the application to decline choices for.

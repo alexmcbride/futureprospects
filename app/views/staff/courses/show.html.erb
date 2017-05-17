@@ -36,6 +36,15 @@
 
           <div class="row">
             <div class="col-xs-3">
+              Applicants:
+            </div>
+            <div class="col-xs-9">
+              <%= @course.current_selections_count %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-3">
               Status:
             </div>
             <div class="col-xs-9">
@@ -60,7 +69,9 @@
               <%= @course.category.name %>
             </div>
           </div>
+        </div>
 
+        <div class="col-sm-6">
           <div class="row">
             <div class="col-xs-3">
               College:
@@ -69,9 +80,7 @@
               <%= @course.college.name %>
             </div>
           </div>
-        </div>
 
-        <div class="col-sm-6">
           <div class="row">
             <div class="col-xs-3">
               Start Date:

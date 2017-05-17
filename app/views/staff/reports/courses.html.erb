@@ -18,7 +18,7 @@
         <td><%= link_to course.title, staff_reports_course_path(course) %></td>
         <td><%= course.category.name %></td>
         <td><%= course.college.name %></td>
-        <td><%= course.course_selections_count %></td>
+        <td><%= course.current_selections_count %></td>
       </tr>
     <% end %>
   </tbody>

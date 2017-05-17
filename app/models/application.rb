@@ -443,7 +443,7 @@ class Application < ApplicationRecord
       scope = scope.where(status: params[:status])
     end
     unless params[:college_id].nil? or params[:college_id] == '0'
-      scope = scope.college_applications params[:college_id]
+      scope = scope.college params[:college_id]
     end
     unless params[:category_id].nil? or params[:category_id] == '0'
       scope = scope.joins(course_selections: :course).where('courses.category_id=?', params[:category_id])

@@ -45,7 +45,7 @@
 
         <div class="form-group">
           <%= label_tag :year, 'Academic Year' %>
-          <% options = options_for_select(@years.map{|d,a| ["#{d.year} &mdash; #{d.year+1} (#{a})".html_safe, d.year]}, params[:year]) %>
+          <% options = options_for_select(@years.map{|d,a| ["#{d.year} &mdash; #{d.year+1}".html_safe, d.year]}, params[:year]) %>
           <%= select_tag :year, options, {class: 'form-control'} %>
         </div>
 

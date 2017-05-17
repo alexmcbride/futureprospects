@@ -26,6 +26,10 @@ counter_cache, called current_selections_count that is reset each year?
 test counter cache, student apply for courses, make sure number goes up.
 
 
+-- ADD STUFF about academic year to GRADED UNIT DIARY
+
+add remove all to applications filter.
+
 REPORTS
 -------
 

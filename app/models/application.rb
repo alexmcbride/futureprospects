@@ -57,6 +57,11 @@ class Application < ApplicationRecord
   scope :old, -> {where('created_at<=?', current_year.first)}
   scope :college, ->(college_id){select('DISTINCT applications.*').joins(course_selections: :course).where('courses.college_id' => college_id)}
 
+  scope :by_year, ->(year) do
+    year = params[:year].to_i # Returns zero if int does not parse
+    params[:year].nil? || year == 0 ? current : where(created_at: Date.new(year, 1, 1)..Date.new(year, 12, 31))
+  end
+
   # Validators
   validates :title, presence: true, length: { maximum: 35 }
   validates :first_name, presence: true, length: { maximum: 35 }
@@ -120,7 +125,7 @@ class Application < ApplicationRecord
 
   def self.current_year(year=nil)
     year = Date.today.year unless year
-    (Date.new(year, 1, 1)...Date.new(year, 7, 16))
+    (Date.new(year, 1, 1)..Date.new(year, 7, 16))
   end
 
   def full_name
@@ -433,6 +438,17 @@ class Application < ApplicationRecord
     end
     unless params[:order].nil? or params[:order] == 'none'
       scope = scope.order(params[:order])
+    end
+    scope
+  end
+
+  def self.by_year(params)
+    scope = Application.all
+    year = params[:year].to_i # Returns zero if int does not parse
+    if params[:year].nil? || year == 0
+      scope = scope.current
+    else
+      scope = scope.where(created_at: Date.new(year, 1, 1)..Date.new(year, 12, 31))
     end
     scope
   end

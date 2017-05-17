@@ -20,7 +20,7 @@
         <tr>
           <th>Student</th>
           <th>Decision</th>
-          <th>Choice</th>
+          <th>Replies</th>
           <th>Status</th>
         </tr>
         </thead>
@@ -60,9 +60,9 @@
 
     <hr>
 
-    <h4>Applications by Day</h4>
-    <p class="text-darkish small">Number of applications broken down by day.</p>
-    <%= line_chart @selections.joins(:application).group_by_day('applications.submitted_date').count %>
+    <h4>Applications by Week</h4>
+    <p class="text-darkish small">Number of applications for this course broken down by week.</p>
+    <%= line_chart @selections.joins(:application).group_by_week('applications.submitted_date').count %>
 
   </div>
 </div>

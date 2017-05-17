@@ -43,6 +43,12 @@
           <%= select_tag :order, options, {class: 'form-control'} %>
         </div>
 
+        <div class="form-group">
+          <%= label_tag :year, 'Academic Year' %>
+          <% options = options_for_select(@years.map{|d,a| ["#{d.year} &mdash; #{d.year+1} (#{a})".html_safe, d.year]}, params[:year]) %>
+          <%= select_tag :year, options, {class: 'form-control'} %>
+        </div>
+
         <%= submit_tag 'Apply Filter', class: 'btn btn-block' %>
       <% end %>
     </div>

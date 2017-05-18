@@ -4,6 +4,8 @@ heroku - sms messaging / error handling
 
 PDF: prawn / https://github.com/rposborne/wkhtmltopdf-heroku maybe better???? / make PDF pretty? move PDF generation into some sort of view?
 
+google analytics
+
 move loose styles into css file.
 
 comments - name, date, etc. at top of each file.

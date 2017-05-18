@@ -11,20 +11,35 @@
 </ul>
 
 <h3>Courses</h3>
-<p class="text-darkish small">Breakdown of number of applicantions for each course.</p>
-<%= bar_chart @college.courses.select(:title, :current_selections_count).group(:title, :current_selections_count).count(:id) %>
+<p class="text-darkish small">Breakdown of number of applicantions per course.</p>
+<%= bar_chart staff_reports_college_course_applicants_path(@college.id) %>
 
 <div class="row">
   <div class="col-md-6">
     <h3>College Offers</h3>
     <p class="text-darkish small">Breakdown of offers made by the college.</p>
-    <%= pie_chart CourseSelection.current.joins(:course).where('courses.college_id': @college.id).group(:college_offer).count.map {|k, v| [ k ? k.titleize : 'Pending', v]} %>
+    <%= pie_chart staff_reports_college_offers_path(@college.id) %>
   </div>
 
   <div class="col-md-6">
     <h3>Student Replies</h3>
     <p class="text-darkish small">Breakdown of replies from students.</p>
-    <%= pie_chart CourseSelection.current.joins(:course).where('courses.college_id': @college.id).group(:student_choice).count.map {|k, v| [ k ? k.titleize : 'Pending', v] if k != 'skipped'}.compact %>
+    <%= pie_chart staff_reports_college_choices_path(@college.id) %>
   </div>
 </div>
 
+<div class="row">
+  <div class="col-md-6">
+    <h3>Gender</h3>
+    <p class="text-darkish small">Breakdown of applicant gender.</p>
+    <%= pie_chart staff_reports_college_genders_path(@college.id) %>
+  </div>
+</div>
+
+<h3>Birth Date</h3>
+<p class="text-darkish small">Breakdown of applicants by age.</p>
+<%= line_chart staff_reports_college_birth_dates_path(@college.id) %>
+
+<h3>Educational Establishment</h3>
+<p class="text-darkish small">Breakdown of applicants by education establishments attended.</p>
+<%= bar_chart staff_reports_college_schools_path(@college.id)%>

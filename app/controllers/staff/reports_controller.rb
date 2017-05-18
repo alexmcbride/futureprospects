@@ -37,5 +37,46 @@ class Staff::ReportsController < Staff::StaffController
     @college = College.find params[:id]
     authorize @college
   end
-end
 
+  # GET /staff/reports/colleges/:id/course_applicants
+  def college_course_applicants
+    authorize :report, :college?
+    college = College.find params[:id]
+    render json: CourseSelection.current.college(college).group('courses.title').count
+  end
+
+  # GET /staff/reports/colleges/:id/course_applicants
+  def college_offers
+    authorize :report, :college?
+    college = College.find params[:id]
+    render json: CourseSelection.current.college(college).group(:college_offer).count.map {|k, v| [ k ? k.titleize : 'Pending', v]}
+  end
+
+  # GET /staff/reports/colleges/:id/course_applicants
+  def college_choices
+    authorize :report, :college?
+    college = College.find params[:id]
+    render json: CourseSelection.current.college(college).group(:student_choice).count.map {|k, v| [ k ? k.titleize : 'Pending', v] if k != 'skipped'}.compact
+  end
+
+  # GET /staff/reports/colleges/:id/gender
+  def college_genders
+    authorize :report, :college?
+    college = College.find params[:id]
+    render json: Application.current.college(college).group(:gender).count
+  end
+
+  # GET /staff/reports/colleges/:id/gender
+  def college_birth_dates
+    authorize :report, :college?
+    college = College.find params[:id]
+    render json: Application.current.college(college).group('EXTRACT(YEAR FROM age(CURRENT_DATE, birth_date))').count
+  end
+
+  # GET /staff/reports/colleges/:id/gender
+  def college_schools
+    authorize :report, :college?
+    college = College.find params[:id]
+    render json: Application.current.college(college).joins(:schools).group('schools.name').count
+  end
+end

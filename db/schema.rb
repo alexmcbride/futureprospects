@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170517132243) do
+ActiveRecord::Schema.define(version: 20170518094926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20170517132243) do
     t.string   "permanent_city"
     t.string   "correspondence_city"
     t.date     "replies_due"
+    t.date     "birth_date"
     t.index ["created_at"], name: "index_applications_on_created_at", using: :btree
     t.index ["student_id"], name: "index_applications_on_student_id", using: :btree
   end

@@ -130,6 +130,7 @@ class Application < ApplicationRecord
   validates :submitted_date, presence: false
   validates :current_stage, presence: true
   validate :applications_are_open, on: :create
+  validates :birth_date, presence: true
 
   # @!attribute student
   #   @return [Student]

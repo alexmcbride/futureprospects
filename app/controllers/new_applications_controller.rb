@@ -430,6 +430,6 @@ class NewApplicationsController < ApplicationController
       params.require(:application).permit(:title, :first_name, :middle_name, :family_name, :previous_name, :gender,
                      :telephone, :mobile, :disability, :permanent_house_number, :permanent_address_1, :permanent_address_2,
                      :permanent_city, :permanent_postcode, :permanent_country, :correspondence_house_number, :correspondence_address_1,
-                     :correspondence_address_2, :correspondence_city, :correspondence_postcode, :correspondence_country)
+                     :correspondence_address_2, :correspondence_city, :correspondence_postcode, :correspondence_country, :birth_date)
     end
 end

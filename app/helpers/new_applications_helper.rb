@@ -87,10 +87,11 @@ module NewApplicationsHelper
     label = args[:label]
     label_col = (args[:label_col] or 4)
     input_col = (args[:input_col] or 8)
+    value = args[:value]
     content_tag(:div, class: 'form-group') do
       concat(form.label(item, label, class: "control-label col-xs-#{label_col}"))
       concat(content_tag(:div, class: "col-xs-#{input_col}") do
-        concat(form.text_field(item, class: 'form-control datepicker-field', 'data-provide' => 'datepicker', placeholder: 'dd/mm/yyyy' ))
+        concat(form.text_field(item, value: value, class: 'form-control datepicker-field', 'data-provide' => 'datepicker', placeholder: 'dd/mm/yyyy' ))
       end)
     end
   end

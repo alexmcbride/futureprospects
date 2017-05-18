@@ -1,0 +1,30 @@
+<%
+  breadcrumb :staff_reports_college, @college
+  @title = 'College Report'
+%>
+
+<h3>Totals</h3>
+<ul>
+  <li>Total Students: <strong><%= @college.count_applicants %></strong></li>
+  <li>Total Applications: <strong><%= @college.count_course_selections %></strong></li>
+  <li>Successful Applications: <strong><%= CourseSelection.college(@college).successful.count %></strong></li>
+</ul>
+
+<h3>Courses</h3>
+<p class="text-darkish small">Breakdown of number of applicantions for each course.</p>
+<%= bar_chart @college.courses.select(:title, :current_selections_count).group(:title, :current_selections_count).count(:id) %>
+
+<div class="row">
+  <div class="col-md-6">
+    <h3>College Offers</h3>
+    <p class="text-darkish small">Breakdown of offers made by the college.</p>
+    <%= pie_chart CourseSelection.current.joins(:course).where('courses.college_id': @college.id).group(:college_offer).count.map {|k, v| [ k ? k.titleize : 'Pending', v]} %>
+  </div>
+
+  <div class="col-md-6">
+    <h3>Student Replies</h3>
+    <p class="text-darkish small">Breakdown of replies from students.</p>
+    <%= pie_chart CourseSelection.current.joins(:course).where('courses.college_id': @college.id).group(:student_choice).count.map {|k, v| [ k ? k.titleize : 'Pending', v] if k != 'skipped'}.compact %>
+  </div>
+</div>
+

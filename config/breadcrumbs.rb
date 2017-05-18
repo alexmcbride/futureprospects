@@ -347,7 +347,12 @@ crumb :staff_reports_course do |course|
   link course.title, staff_reports_course_path(course)
 end
 
-crumb :staff_reports_applications do
+crumb :staff_reports_colleges do
   parent :staff_reports
-  link 'College Applications', staff_reports_applications_path
+  link 'Colleges', staff_reports_colleges_path
+end
+
+crumb :staff_reports_college do |college|
+  parent :staff_reports_colleges
+  link college.name, staff_reports_college_path(college)
 end

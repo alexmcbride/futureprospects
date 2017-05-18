@@ -26,7 +26,7 @@ class CourseSelection < ApplicationRecord
   scope :schools, ->{joins(application: :schools)}
   scope :jobs, ->{joins(application: :jobs)}
   scope :current, ->{joins(:application).where('applications.created_at' => Application.current_year)}
-  scope :college, ->(college){joins(:course).where('courses.college_id' => college.id)}
+  scope :college, ->(college_id){joins(:course).where('courses.college_id' => college_id)}
 
   # Callbacks.
   after_create :increase_current_selections_count

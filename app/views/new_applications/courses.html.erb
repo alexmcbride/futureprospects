@@ -6,6 +6,31 @@
                     message: 'Are you sure you want to remove the following course?'} %>
 
 <script>
+  function registerAutocomplete(name, id, source) {
+      $(name).autocomplete({
+          minLength: 1,
+          source: source,
+          focus: function(event, ui) {
+              $(name).val(ui.item.title);
+              $(id).val(ui.item.id);
+              return false;
+          },
+          select: function(event, ui) {
+              $(name).val(ui.item.title);
+              $(id).val(ui.item.id);
+              return false;
+          }
+      }).autocomplete('instance')._renderItem = function(ul, item) {
+          return $( "<li>" )
+              .append( '<div class="text-capitalize"><strong>' +
+                  item.title +
+                  '</strong><br>' +
+                  item.college.name + ' &raquo; ' + item.category.name +
+                  '</div>')
+              .appendTo( ul );
+      };
+  }
+
   $(function() {
      registerAutocomplete('#selected_course', '#course_selection_course_id', '<%= url_for courses_search_path(:json) %>');
   });
@@ -27,11 +52,11 @@
       <%= form_errors @course_selection %>
       <%= f.hidden_field :course_id %>
       <div class="row">
-        <div class="col-sm-10">
+        <div class="col-md-9">
           <%= text_field_tag 'selected_course', params[:selected_course], placeholder: 'Enter the title of the course', class: 'form-control full-width courses-autocomplete' %>
         </div>
-        <div class="col-sm-2">
-          <%= f.submit 'Add Course', class: 'add-button-md btn-block' %>
+        <div class="col-md-3">
+          <%= f.submit 'Add Course', class: 'btn btn-default btn-block' %>
         </div>
       </div>
     <% end %>
@@ -49,17 +74,7 @@
             <p class="text-darkish small text-center"><em>Any courses you add will appear here.</em></p>
             <br>
           <% else %>
-            <div class="row">
-              <div class="col-xs-8">
-                <p class="text-darkish small">These are the courses you are applying for.</p>
-              </div>
-              <div class="col-xs-4 text-right">
-                <strong>
-                  <%= pluralize @application.available_courses, 'course' %> left &mdash;
-                  <%= number_to_currency @application.calculate_fee_pounds, unit: '£' %> fee
-                </strong>
-              </div>
-            </div>
+            <p class="text-darkish small">These are the courses you are applying for.</p>
             <div class="list-group">
               <% @course_selections.each do |selection| %>
                   <div class="list-group-item well">
@@ -92,6 +107,13 @@
                     </div>
                   </div>
               <% end %>
+            </div>
+
+            <div class="text-right">
+              <strong>
+                <%= pluralize @application.available_courses, 'course' %> left &mdash;
+                <%= number_to_currency @application.calculate_fee_pounds, unit: '£' %> fee
+              </strong>
             </div>
             <hr>
           <% end %>

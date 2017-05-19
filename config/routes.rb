@@ -48,6 +48,7 @@ Rails.application.routes.draw do
     get 'reports/courses/:id/course_ages', to: 'reports#course_ages', as: 'reports_course_ages'
     get 'reports/courses/:id/course_genders', to: 'reports#course_genders', as: 'reports_course_genders'
     get 'reports/colleges/:id/course_applicants', to: 'reports#college_course_applicants', as: 'reports_college_course_applicants'
+    get 'reports/colleges/:id/categories', to: 'reports#college_categories', as: 'reports_college_categories'
     get 'reports/colleges/:id/offers', to: 'reports#college_offers', as: 'reports_college_offers'
     get 'reports/colleges/:id/choices', to: 'reports#college_choices', as: 'reports_college_choices'
     get 'reports/colleges/:id/genders', to: 'reports#college_genders', as: 'reports_college_genders'

@@ -18,7 +18,7 @@ $awards = ['Higher', 'Standard', 'NQ', 'HNC', 'HND']
 $starts = ['Date.new(2015, 8, 23)', 'Date.new(2014, 8, 23)', 'Date.new(2013, 8, 23)', 'Date.new(2012, 8, 23)']
 $ends = ['Date.new(2016, 6, 8)', 'Date.new(2015, 6, 8)', 'Date.new(2014, 6, 8)', 'Date.new(2013, 6, 8)']
 
-$course_ids = Course.limit(5).order(:id).map {|c| c.id}
+$course_ids = Course.limit(8).order(:id).map {|c| c.id}
 
 def student(file, tokens, schools, jobs, refs)
   @first_name = tokens[1]
@@ -66,7 +66,7 @@ def student(file, tokens, schools, jobs, refs)
   file.puts app + ".permanent_postcode = '#{tokens[22]} 2GR'"
   file.puts app + ".permanent_city = 'Glasgow'"
   file.puts app + ".permanent_country = '#{tokens[8]}'"
-  submitted = Application.current_year([2016, 2017, 2017].sample).to_a.sample
+  submitted = Application.current_year([2016, 2017, 2017, 2017].sample).to_a.sample
   file.puts app + ".created_at = Date.strptime('#{submitted}')"
   file.puts app + ".submitted_date = Date.strptime('#{submitted}')"
   unless tokens[20].empty?

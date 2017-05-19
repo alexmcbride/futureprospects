@@ -9,6 +9,7 @@
 </div>
 
 <p class="text-darkish">Reports, information, charts, about applicants to this college.</p>
+<hr>
 
 <h4>Totals</h4>
 <ul>
@@ -16,12 +17,18 @@
   <li>Total Applications: <strong><%= @college.count_course_selections %></strong></li>
   <li>Successful Applications: <strong><%= CourseSelection.college(@college.id).successful.count %></strong></li>
 </ul>
+<hr>
 
 <h4>Courses</h4>
-<p class="text-darkish small">Breakdown of number of applicantions per course.</p>
+<p class="text-darkish small">Breakdown of number of applications per course.</p>
 <%= bar_chart staff_reports_college_course_applicants_path(@college.id) %>
-
 <hr>
+
+<h4>Categories</h4>
+<p class="text-darkish small">Breakdown of number of applications per category.</p>
+<%= bar_chart staff_reports_college_categories_path(@college.id) %>
+<hr>
+
 
 <div class="row">
   <div class="col-md-6">

@@ -3,8 +3,27 @@
   @title = 'Reports'
 %>
 
-<ul>
-  <% @colleges.each do |college| %>
-    <li><%= link_to college.name, staff_reports_college_path(college) %></li>
-  <% end %>
-</ul>
+<p class="text-darkish">Choose which college you want to view reports for.</p>
+
+<div class="table-responsive">
+  <table class="table table-condensed">
+    <thead>
+    <tr>
+      <th>College</th>
+      <th>Courses</th>
+      <th>Students</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @colleges.each do |college| %>
+      <% cache college do %>
+        <tr>
+          <td><%= link_to college.name, staff_reports_college_path(college) %></td>
+          <td><%= pluralize college.courses.count, 'course' %></td>
+          <td><%= pluralize college.courses.joins(:course_selections).count('DISTINCT application_id'), 'student' %></td>
+        </tr>
+      <% end %>
+    <% end %>
+    </tbody>
+  </table>
+</div>

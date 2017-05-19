@@ -3,75 +3,80 @@
   @title = 'Course Report'
 %>
 
-<h3><%= @course.title %></h3>
+<h3>'<%= @course.title %>' Report</h3>
 
 <p class="text-darkish">Reports, information, charts, about applicants to this course.</p>
 
-<div class="table-responsive">
-  <table class="table table-condensed table-striped">
-    <thead>
-    <tr>
-      <th>Student</th>
-      <th>Decision</th>
-      <th>Replies</th>
-      <th>Status</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% @selections.order(college_offer: :desc).each do |selection| %>
-        <tr>
-          <td><%= link_to selection.application.full_name, staff_application_path(selection.application) %></td>
-          <td><%= selection.college_offer ? selection.college_offer.titleize : 'None' %></td>
-          <td><%= selection.student_choice ? selection.student_choice.titleize : 'None' %></td>
-          <td><%= selection.application.status.titleize %></td>
-        </tr>
-    <% end %>
-    </tbody>
-  </table>
-</div>
-
-<p class="text-right text-darkish">
-  <%= pluralize @course.current_selections_count, 'Student' %> / <%= pluralize @course.spaces, 'Space' %>
-</p>
-
-<hr>
-
-<div class="row">
-  <div class="col-md-6">
-    <h4>College Offers</h4>
-    <p class="text-darkish small">Breakdown of college offers for this course.</p>
-    <%= pie_chart staff_reports_course_offers_path(@course.id, tab: params[:tab]) %>
+<% if @selections.any? %>
+  <div class="table-responsive">
+    <table class="table table-condensed table-striped">
+      <thead>
+      <tr>
+        <th>Student Name</th>
+        <th>College Decision</th>
+        <th>Student Reply</th>
+        <th>Application Status</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @selections.order(college_offer: :desc).each do |selection| %>
+          <tr>
+            <td><%= link_to selection.application.full_name, staff_application_path(selection.application) %></td>
+            <td><%= selection.college_offer ? selection.college_offer.titleize : 'Pending' %></td>
+            <td><%= selection.student_choice ? selection.skipped? ? 'None' : selection.student_choice.titleize : 'Pending' %></td>
+            <td><%= selection.application.status.titleize %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
   </div>
-  <div class="col-md-6">
-    <h4>Student Replies</h4>
-    <p class="text-darkish small">Breakdown of student replies for this course.</p>
-    <%= pie_chart staff_reports_course_replies_path(@course.id, tab: params[:tab]) %>
+
+  <p class="text-right text-darkish">
+    <%= pluralize @course.current_selections_count, 'Student' %> / <%= pluralize @course.spaces, 'Space' %>
+  </p>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-md-6">
+      <h4>College Offers</h4>
+      <p class="text-darkish small">Breakdown of college offers for this course.</p>
+      <%= pie_chart staff_reports_course_offers_path(@course.id, tab: params[:tab]) %>
+    </div>
+    <div class="col-md-6">
+      <h4>Student Replies</h4>
+      <p class="text-darkish small">Breakdown of student replies for this course.</p>
+      <%= pie_chart staff_reports_course_replies_path(@course.id, tab: params[:tab]) %>
+    </div>
   </div>
-</div>
 
-<hr>
+  <hr>
 
-<div class="row">
-  <div class="col-md-6">
-    <h4>Gender</h4>
-    <p class="text-darkish small">Breakdown of college offers for this course.</p>
-    <%= pie_chart staff_reports_course_genders_path(@course.id) %>
+  <div class="row">
+    <div class="col-md-6">
+      <h4>Gender</h4>
+      <p class="text-darkish small">Breakdown of applicant gender for this course.</p>
+      <%= pie_chart staff_reports_course_genders_path(@course.id) %>
+    </div>
+    <div class="col-md-6">
+      <h4>Ages</h4>
+      <p class="text-darkish small">Breakdown of applicant ages offers for this course.</p>
+      <%= line_chart staff_reports_course_ages_path(@course.id) %>
+    </div>
   </div>
-  <div class="col-md-6">
-    <h4>Ages</h4>
-    <p class="text-darkish small">Breakdown of college offers for this course.</p>
-    <%= line_chart staff_reports_course_ages_path(@course.id) %>
-  </div>
-</div>
 
-<hr>
+  <hr>
 
-<h4>Schools</h4>
-<p class="text-darkish small">Breakdown of schools the applicants have studied at.</p>
-<%= bar_chart staff_reports_course_schools_path(@course.id, tab: params[:tab]) %>
+  <h4>Schools</h4>
+  <p class="text-darkish small">Breakdown of schools the applicants have studied at.</p>
+  <%= bar_chart staff_reports_course_schools_path(@course.id, tab: params[:tab]) %>
 
-<hr>
+  <hr>
 
-<h4>Applications by Week</h4>
-<p class="text-darkish small">Number of applications for this course broken down by week.</p>
-<%= line_chart staff_reports_course_applications_by_week_path(@course.id, tab: params[:tab]) %>
+  <h4>Applications by Week</h4>
+  <p class="text-darkish small">Number of applications for this course broken down by week.</p>
+  <%= line_chart staff_reports_course_applications_by_week_path(@course.id, tab: params[:tab]) %>
+
+<% else %>
+  <p class="text-darkish small text-center"><em>There are no applicants for this course</em></p>
+<% end %>

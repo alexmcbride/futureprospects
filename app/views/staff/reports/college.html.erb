@@ -3,9 +3,9 @@
   @title = 'College Report'
 %>
 
-<h3><%= @college.name %></h3>
+<h3>'<%= @college.name %>' Reports</h3>
 
-<p class="text-darkish small">View full report for the selected college.</p>
+<p class="text-darkish small">View full report for the college.</p>
 <p>
   <%= link_to staff_reports_show_college_path(@college), class: 'btn btn-primary', role: 'button' do %>
       <%= icon('graduation-cap ') %>
@@ -13,6 +13,10 @@
   <% end %>
 </p>
 
+<hr>
+
+<h4>Course Reports</h4>
+<p class="text-darkish small">View report for individual course.</p>
 <div class="table-responsive">
   <table class="table table-condensed">
     <thead>
@@ -32,4 +36,8 @@
     <% end %>
     </tbody>
   </table>
+</div>
+
+<div class="digg_pagination text-center">
+  <%= will_paginate @courses %>
 </div>

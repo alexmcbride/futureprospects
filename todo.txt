@@ -48,23 +48,7 @@ year dropdown??
 http://chartkick.com/ - good rails chart plugin
 https://github.com/ankane/groupdate - allows grouping queries by date
 Excel: alxsx (axlsx_rails) / email excel doc?
-use json to provide chart data (then can be reused by excel generator?)
 
-The following reports are required:
+show breakdown per category.
 
-Course Applicants, showing
-•	student name details
-•	qualifications
-•	previous educational establishment
-•	decision
-•	totals – number of students by decision category.
-
-College Applications, broken down by:
-•	course, number of students by decision category
-Subject Area, showing:
-•	total number of applicants
-•	totals – by gender, by age, by previous educational establishment
-
-- add to permissions...
-
-All reports will be able to viewed online and some will require to be able to exported to MS Excel or MS Word.
+reports permissions

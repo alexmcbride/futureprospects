@@ -3,7 +3,11 @@
   @title = 'College Report'
 %>
 
-<h3><%= @college.name %></h3>
+<div class="row">
+  <div class="col-sm-8"><h3 class="no-top-margin"><%= @college.name %></h3></div>
+  <div class="col-sm-4 text-right"><%= link_to 'Download Excel', staff_reports_show_college_path(@college, format: :xlsx) %></div>
+</div>
+
 <p class="text-darkish">Reports, information, charts, about applicants to this college.</p>
 
 <h4>Totals</h4>

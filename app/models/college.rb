@@ -2,6 +2,7 @@
 class College < ApplicationRecord
   # Image Upload
   mount_uploader :image, CollegeImageUploader
+  acts_as_xlsx
 
   # Validators
   validates :name, presence: true, length: { maximum: 70 }, uniqueness: true

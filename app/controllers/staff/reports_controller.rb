@@ -20,6 +20,19 @@ class Staff::ReportsController < Staff::StaffController
   def show_college
     authorize :report, :college?
     @college = College.find params[:id]
+
+    respond_to do |format|
+      format.html
+      format.xlsx {
+        p = Axlsx::Package.new do |p|
+          p.workbook.add_worksheet(name: 'College') do |sheet|
+            sheet.add_row [@college.name]
+          end
+        end
+
+        send_data p.to_stream.read, filename: "college.xlsx",  type: "application/xlsx"
+      }
+    end
   end
 
   # GET /staff/reports/course/:id

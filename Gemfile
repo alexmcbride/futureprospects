@@ -74,4 +74,4 @@ gem 'recaptcha', '~> 4.1.0', require: 'recaptcha/rails' # recaptcha
 gem 'prawn' # PDF generation
 gem 'chartkick' # chart generation
 gem 'groupdate' # makes grouping by dates easier (for charts)
-gem 'hightop' # makes grouping and counting easier (for charts)
+gem 'axlsx' # excel

@@ -18,7 +18,7 @@ $awards = ['Higher', 'Standard', 'NQ', 'HNC', 'HND']
 $starts = ['Date.new(2015, 8, 23)', 'Date.new(2014, 8, 23)', 'Date.new(2013, 8, 23)', 'Date.new(2012, 8, 23)']
 $ends = ['Date.new(2016, 6, 8)', 'Date.new(2015, 6, 8)', 'Date.new(2014, 6, 8)', 'Date.new(2013, 6, 8)']
 
-$course_ids = Course.order(:id).map {|c| c.id}
+$course_ids = Course.limit(5).order(:id).map {|c| c.id}
 
 def student(file, tokens, schools, jobs, refs)
   @first_name = tokens[1]
@@ -88,6 +88,7 @@ def student(file, tokens, schools, jobs, refs)
     file.puts app + ".replies_due = '#{Application.calculate_replies_due(submitted.year)}'"
   end
 
+  file.puts app + ".birth_date = Date.strptime('#{(Date.new(1989, 1, 1)..Date.new(1999, 12, 31)).to_a.sample}')"
   file.puts app + '.save! validate: false'
   file.puts ''
 

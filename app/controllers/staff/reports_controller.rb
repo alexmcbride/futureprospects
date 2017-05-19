@@ -16,6 +16,7 @@ class Staff::ReportsController < Staff::StaffController
                    .paginate(page: params[:page], per_page: 20)
   end
 
+  # GET /staff/reports/college/:id/show
   def show_college
     authorize :report, :college?
     @college = College.find params[:id]
@@ -33,12 +34,13 @@ class Staff::ReportsController < Staff::StaffController
   ##
   # JSON background loaders for charts
   #
-
+  # GET /staff/reports/courses/:id/course_genders
   def course_genders
     authorize :report, :course?
     render json: Application.current.joins(:course_selections).where('course_selections.course_id': params[:id]).group(:gender).count.map{|k,v|[k.humanize, v] }
   end
 
+  # GET /staff/reports/courses/:id/course_ages
   def course_ages
     authorize :report, :course?
     render json: Application.current.joins(:course_selections).where('course_selections.course_id': params[:id]).group('EXTRACT(YEAR FROM age(CURRENT_DATE, birth_date))').count
@@ -47,25 +49,26 @@ class Staff::ReportsController < Staff::StaffController
   # GET /staff/reports/courses/:id/course_offers
   def course_offers
     authorize :report, :course?
-    render json: CourseSelection.current.college(params[:id]).group(:college_offer).count.map{|k,v| [k ? k.titleize : 'None',v]}.compact
+    render json: CourseSelection.current.course(params[:id]).group(:college_offer).count.map{|k,v| [k ? k.titleize : 'None',v]}.compact
   end
 
   # GET /staff/reports/courses/:id/course_replies
   def course_replies
     authorize :report, :course?
-    render json: CourseSelection.current.college(params[:id]).group(:student_choice).count.map{|k,v| [k ? k.titleize : 'Pending',v] if k != 'skipped'}.compact
+    render json: CourseSelection.current.course(params[:id]).group(:student_choice).count.map{|k,v| [k ? k.titleize : 'Pending',v] if k != 'skipped'}.compact
   end
 
   # GET /staff/reports/courses/:id/course_schools
   def course_schools
     authorize :report, :course?
-    render json: CourseSelection.current.college(params[:id]).schools.group('schools.name').count
+    render json: CourseSelection.current.course(params[:id]).schools.group('schools.name').count
   end
 
   # GET /staff/reports/courses/:id/course_applications_by_week
   def course_applications_by_week
     authorize :report, :course?
-    render json: CourseSelection.current.college(params[:id]).joins(:application).group_by_week('applications.submitted_date').count
+    render json: CourseSelection.current.course(params[:id]).joins(:application)
+                     .group_by_week('applications.submitted_date').count
   end
 
   # GET /staff/reports/colleges/:id/course_applicants
@@ -104,6 +107,7 @@ class Staff::ReportsController < Staff::StaffController
     render json: Application.current.college(params[:id]).joins(:schools).group('schools.name').count
   end
 
+  # GET /staff/reports/courses/:id/applications_by_week
   def college_applications_by_week
     authorize :report, :college?
     render json: Application.current.college(params[:id]).group_by_week('applications.created_at').count

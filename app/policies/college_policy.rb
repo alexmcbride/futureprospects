@@ -93,7 +93,7 @@ class CollegePolicy < BaseApplicationPolicy
   # Checks if the user can perform this action on the model.
   #
   # Returns a boolean indicating if the action is allowed.
-  def college?
+  def show_college?
     show?
   end
 end

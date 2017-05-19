@@ -1,7 +1,7 @@
 # * Name: Alex McBride
 # * Date: 17/05/2017
 # * Project: Future Prospects
-# * Model class to represent a college course. Courses are children of College and Category, and are linked to an Application by the CourseSelection join association.
+# * Model class to represent a college course. Courses are children of College and Category, and are linked to an Application by the CourseSelection join table.
 class Course < ApplicationRecord
   # @!attribute status
   #   @return [symbol]
@@ -23,7 +23,7 @@ class Course < ApplicationRecord
 
   ##
   # Finds courses with +:open+ status.
-  scope :available, -> { where(status: :open) }
+  scope :available, -> {where(status: :open)}
 
   ##
   # Finds courses with spaces still to fill.
@@ -46,9 +46,6 @@ class Course < ApplicationRecord
   validates :status, presence: true
   validates :image, presence: true
   validate :spaces_greater_than_applicants, on: :update
-
-  # Callbacks
-  # before_validation :default_to_open_status
 
   # Foreign Keys
   # @!attribute college
@@ -283,13 +280,6 @@ class Course < ApplicationRecord
   end
 
   private
-    # ActiveRecord callback, called before validation, that adds a default status if one does not exist.
-    def default_to_open_status
-      unless self.status
-        self.status = :open
-      end
-    end
-
     # Checks that a staff member doesn't try to change spaces to be a number
     # less than the current number of applicants.
     def spaces_greater_than_applicants

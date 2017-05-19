@@ -41,12 +41,12 @@
     <div class="col-md-6">
       <h4>College Offers</h4>
       <p class="text-darkish small">Breakdown of college offers for this course.</p>
-      <%= pie_chart staff_reports_course_offers_path(@course.id, tab: params[:tab]) %>
+      <%= pie_chart staff_reports_course_offers_path(@course.id, tab: params[:tab], format: :json) %>
     </div>
     <div class="col-md-6">
       <h4>Student Replies</h4>
       <p class="text-darkish small">Breakdown of student replies for this course.</p>
-      <%= pie_chart staff_reports_course_replies_path(@course.id, tab: params[:tab]) %>
+      <%= pie_chart staff_reports_course_replies_path(@course.id, tab: params[:tab], format: :json) %>
     </div>
   </div>
 
@@ -56,12 +56,12 @@
     <div class="col-md-6">
       <h4>Gender</h4>
       <p class="text-darkish small">Breakdown of applicant gender for this course.</p>
-      <%= pie_chart staff_reports_course_genders_path(@course.id) %>
+      <%= pie_chart staff_reports_course_genders_path(@course.id, format: :json) %>
     </div>
     <div class="col-md-6">
       <h4>Ages</h4>
       <p class="text-darkish small">Breakdown of applicant ages offers for this course.</p>
-      <%= line_chart staff_reports_course_ages_path(@course.id) %>
+      <%= line_chart staff_reports_course_ages_path(@course.id, format: :json) %>
     </div>
   </div>
 
@@ -69,13 +69,13 @@
 
   <h4>Schools</h4>
   <p class="text-darkish small">Breakdown of schools the applicants have studied at.</p>
-  <%= bar_chart staff_reports_course_schools_path(@course.id, tab: params[:tab]) %>
+  <%= bar_chart staff_reports_course_schools_path(@course.id, tab: params[:tab], format: :json) %>
 
   <hr>
 
   <h4>Applications by Week</h4>
   <p class="text-darkish small">Number of applications for this course broken down by week.</p>
-  <%= line_chart staff_reports_course_applications_by_week_path(@course.id, tab: params[:tab]) %>
+  <%= line_chart staff_reports_course_applications_by_week_path(@course.id, tab: params[:tab], format: :json) %>
 
 <% else %>
   <p class="text-darkish small text-center"><em>There are no applicants for this course</em></p>

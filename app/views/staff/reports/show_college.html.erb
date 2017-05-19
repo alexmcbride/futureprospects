@@ -5,7 +5,23 @@
 
 <div class="row">
   <div class="col-sm-8"><h3 class="no-top-margin"><%= @college.name %></h3></div>
-  <div class="col-sm-4 text-right"><%= link_to 'Download Excel', staff_reports_show_college_path(@college, format: :xlsx) %></div>
+  <div class="col-sm-4 text-right">
+    <%= link_to 'Download for Excel', staff_reports_show_college_path(@college, format: :xlsx) %>
+
+    &nbsp;|&nbsp;
+
+    <div class="btn-group btn-group-sm">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        <%= @year %> &mdash; <%= @year + 1 %>
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <% @years.each do |date, count| %>
+          <li><%= link_to "#{date.year} &mdash; #{date.year + 1}".html_safe, request.path + "?year=#{date.year}" %> </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 </div>
 
 <p class="text-darkish">Reports, information, charts, about applicants to this college.</p>
@@ -13,60 +29,57 @@
 
 <h4>Totals</h4>
 <ul>
-  <li>Total Students: <strong><%= @college.count_applicants %></strong></li>
-  <li>Total Applications: <strong><%= @college.count_course_selections %></strong></li>
-  <li>Successful Applications: <strong><%= CourseSelection.college(@college.id).successful.count %></strong></li>
+  <li>Total Students: <strong><%= @college.count_applicants(@year) %></strong></li>
+  <li>Total Applications: <strong><%= @college.count_course_selections(@year) %></strong></li>
+  <li>Successful Applications: <strong><%= CourseSelection.current(@year).college(@college.id).successful.count %></strong></li>
 </ul>
 <hr>
 
 <h4>Courses</h4>
 <p class="text-darkish small">Breakdown of number of applications per course.</p>
-<%= bar_chart staff_reports_college_course_applicants_path(@college.id) %>
+<%= bar_chart staff_reports_college_course_applicants_path(@college.id, year: @year, format: :json) %>
 <hr>
 
 <h4>Categories</h4>
 <p class="text-darkish small">Breakdown of number of applications per category.</p>
-<%= bar_chart staff_reports_college_categories_path(@college.id) %>
-<hr>
-
-
-<div class="row">
-  <div class="col-md-6">
-    <h4>Gender</h4>
-    <p class="text-darkish small">Breakdown of applicant gender.</p>
-    <%= pie_chart staff_reports_college_genders_path(@college.id) %>
-  </div>
-  <div class="col-md-6">
-    <h4>Ages</h4>
-    <p class="text-darkish small">Breakdown of applicants by age.</p>
-    <%= line_chart staff_reports_college_birth_dates_path(@college.id) %>
-  </div>
-</div>
-
+<%= bar_chart staff_reports_college_categories_path(@college.id, year: @year, format: :json) %>
 <hr>
 
 <div class="row">
   <div class="col-md-6">
     <h4>College Offers</h4>
     <p class="text-darkish small">Breakdown of offers made by the college.</p>
-    <%= pie_chart staff_reports_college_offers_path(@college.id) %>
+    <%= pie_chart staff_reports_college_offers_path(@college.id, year: @year, format: :json) %>
   </div>
 
   <div class="col-md-6">
     <h4>Student Replies</h4>
     <p class="text-darkish small">Breakdown of replies from students.</p>
-    <%= pie_chart staff_reports_college_choices_path(@college.id) %>
+    <%= pie_chart staff_reports_college_choices_path(@college.id, year: @year, format: :json) %>
   </div>
 </div>
+<hr>
 
+<div class="row">
+  <div class="col-md-6">
+    <h4>Gender</h4>
+    <p class="text-darkish small">Breakdown of applicant gender.</p>
+    <%= pie_chart staff_reports_college_genders_path(@college.id, year: @year, format: :json) %>
+  </div>
+  <div class="col-md-6">
+    <h4>Ages</h4>
+    <p class="text-darkish small">Breakdown of applicants by age.</p>
+    <%= line_chart staff_reports_college_birth_dates_path(@college.id, year: @year, format: :json) %>
+  </div>
+</div>
 <hr>
 
 <h4>Educational Establishment</h4>
-<p class="text-darkish small">Breakdown of applicants by education establishments attended.</p>
-<%= bar_chart staff_reports_college_schools_path(@college.id) %>
+<p class="text-darkish small">Breakdown of applicants by educational establishment.</p>
+<%= bar_chart staff_reports_college_schools_path(@college.id, year: @year, format: :json) %>
 
 <hr>
 
 <h4>Applications by Week</h4>
 <p class="text-darkish small">Breakdown of applicants per week.</p>
-<%= line_chart staff_reports_college_applications_by_week_path(@college.id) %>
+<%= line_chart staff_reports_college_applications_by_week_path(@college.id, year: @year, format: :json) %>

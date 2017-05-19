@@ -19,15 +19,15 @@ class College < ApplicationRecord
   # Calculates the number applicants to this college.
   #
   # Returns integer for number of applications.
-  def count_applicants
-    Application.current.college(self.id).count
+  def count_applicants(year=nil)
+    Application.current(year).college(self.id).count
   end
 
   # Calculates the number of courses that have been applied for.
   #
   # Returns integer for number of course selections.
-  def count_course_selections
-    Application.current.joins(course_selections: :course).where('courses.college_id' => self.id).count
+  def count_course_selections(year=nil)
+    Application.current(year).joins(course_selections: :course).where('courses.college_id' => self.id).count
   end
 
   # Removes the college, plus all staff, courses, and course selections, if the names match.

@@ -1,3 +1,15 @@
+
+TWEAKS
+------
+
+- sms messaging
+- error handling
+- google analytics
+- openauth
+- top ten courses...
+
+-------------
+
 remove pundit verify_authorized from global staff controller once permissions done
 
 heroku - sms messaging / error handling
@@ -14,13 +26,13 @@ add user test@test.com for testing, show things like auth fail select options.
 
 confirm close tab alert?
 
-sort out applications by years (add archive flag or do everything by dates? if everything comes from same place (e.g. student application), does it matter?)
-
 course ratings
 
 top ten lists?
 
 mention this document in evaulation
+
+test app with no seed data.
 
 ACADEMIC YEAR
 -------------
@@ -50,5 +62,3 @@ https://github.com/ankane/groupdate - allows grouping queries by date
 Excel: alxsx (axlsx_rails) / email excel doc?
 
 show breakdown per category.
-
-reports permissions

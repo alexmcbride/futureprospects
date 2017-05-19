@@ -22,8 +22,7 @@ class Staff::ApplicationsController < Staff::StaffController
     # Stuff for filter sidebar
     @categories = Category.order(:name)
     @colleges = policy_scope(College)
-    @years = policy_scope(Application).group_by_year('applications.created_at', reverse: true).count
-    puts @years
+    @years = policy_scope(Application).years.count
   end
 
   # GET /staff/applications/1

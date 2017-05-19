@@ -19,6 +19,7 @@
                 <td><%= permission_checkbox @member, :can_view_colleges, 'Colleges View' %></td>
                 <td><%= permission_checkbox @member, :can_view_staff, 'Staff View' %></td>
                 <td><%= permission_checkbox @member, :can_view_categories, 'Categories View' %></td>
+                <td><%= permission_checkbox @member, :can_view_reports, 'Reports View' %></td>
               </tr>
               <tr>
                 <td><%= permission_checkbox @member, :can_edit_applications, 'Applications Edit' %></td>
@@ -26,6 +27,7 @@
                 <td><%= permission_checkbox @member, :can_edit_colleges, 'Colleges Edit' %></td>
                 <td><%= permission_checkbox @member, :can_add_staff, 'Staff Add' %></td>
                 <td><%= permission_checkbox @member, :can_add_category, 'Category Add' %></td>
+                <td><%= permission_checkbox @member, :can_download_reports, 'Reports Download' %></td>
               </tr>
               <tr>
                 <td></td>
@@ -33,6 +35,7 @@
                 <td><%= permission_checkbox @member, :can_manage_clearance, 'Manage Clearance' %></td>
                 <td><%= permission_checkbox @member, :can_edit_staff, 'Staff Edit' %></td>
                 <td><%= permission_checkbox @member, :can_edit_category, 'Category Edit' %></td>
+                <td></td>
               </tr>
               <tr>
                 <td></td>
@@ -40,10 +43,12 @@
                 <td></td>
                 <td><%= permission_checkbox @member, :can_remove_staff, 'Staff Remove' %></td>
                 <td><%= permission_checkbox @member, :can_remove_category, 'Category Remove' %></td>
+                <td></td>
               </tr>
               <tr>
                 <td colspan="3"></td>
                 <td><%= permission_checkbox @member, :can_promote_staff, 'Staff Promote' %></td>
+                <td colspan="2"></td>
               </tr>
             </tbody>
           </table>

@@ -25,7 +25,7 @@ class CourseSelection < ApplicationRecord
   scope :completed, -> {joins(:application).where('applications.status' => :completed)}
   scope :schools, ->{joins(application: :schools)}
   scope :jobs, ->{joins(application: :jobs)}
-  scope :current, ->{joins(:application).where('applications.created_at' => Application.current_year)}
+  scope :current, ->(year=nil){joins(:application).where('applications.created_at' => Application.current_year(year))}
   scope :college, ->(college_id){joins(:course).where('courses.college_id' => college_id)}
   scope :course, ->(course_id){where(course_id: course_id)}
 

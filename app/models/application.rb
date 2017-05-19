@@ -82,7 +82,7 @@ class Application < ApplicationRecord
 
   ##
   # Finds all applications created during the current academic year.
-  scope :current, -> {where(created_at: current_year)}
+  scope :current, -> (year=nil){where(created_at: current_year(year))}
 
   ##
   # Finds all applications created before the current academic year.
@@ -102,6 +102,8 @@ class Application < ApplicationRecord
     year = year.to_i # Returns zero if int does not parse
     year.nil? || year == 0 ? current : where(created_at: Date.new(year, 1, 1)..Date.new(year, 12, 31))
   end
+
+  scope :years, -> {group_by_year('applications.created_at', reverse: true)}
 
   # Validators
   validates :title, presence: true, length: { maximum: 35 }

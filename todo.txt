@@ -62,3 +62,9 @@ https://github.com/ankane/groupdate - allows grouping queries by date
 Excel: alxsx (axlsx_rails) / email excel doc?
 
 show breakdown per category.
+
+applications by year?
+
+view report of all time?
+
+when switching year just redownload all json? do it with js

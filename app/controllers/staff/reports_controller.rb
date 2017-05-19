@@ -45,7 +45,13 @@ class Staff::ReportsController < Staff::StaffController
     authorize :report, :course?
     @course = Course.find params[:id]
     authorize @course
-    @selections = @course.course_selections.current
+
+    respond_to do |format|
+      format.html {
+        @years = CourseSelection.joins(:course, :application).where(course_id: @course.id).group_by_year('applications.created_at', reverse: true).count
+        @year = params[:year] ? params[:year].to_i : @years.first[0].year
+      }
+    end
   end
 
   # GET /staff/reports/courses/:id/course_genders.json
@@ -53,7 +59,7 @@ class Staff::ReportsController < Staff::StaffController
   # Provides course genders JSON for background loading of charts.
   def course_genders
     authorize :report, :course?
-    render json: Application.current
+    render json: Application.current(params[:year].to_i)
                      .joins(:course_selections)
                      .where('course_selections.course_id': params[:id])
                      .group(:gender)
@@ -67,7 +73,7 @@ class Staff::ReportsController < Staff::StaffController
   # Provides course ages JSON for background loading of charts.
   def course_ages
     authorize :report, :course?
-    render json: Application.current
+    render json: Application.current(params[:year].to_i)
                      .joins(:course_selections)
                      .where('course_selections.course_id': 2)
                      .group('EXTRACT(YEAR FROM age(CURRENT_DATE, birth_date))')
@@ -81,7 +87,7 @@ class Staff::ReportsController < Staff::StaffController
   # Provides course offers JSON for background loading of charts.
   def course_offers
     authorize :report, :course?
-    render json: CourseSelection.current
+    render json: CourseSelection.current(params[:year].to_i)
                      .course(params[:id])
                      .group(:college_offer)
                      .order(:college_offer)
@@ -95,7 +101,7 @@ class Staff::ReportsController < Staff::StaffController
   # Provides course replies JSON for background loading of charts.
   def course_replies
     authorize :report, :course?
-    render json: CourseSelection.current
+    render json: CourseSelection.current(params[:year].to_i)
                      .course(params[:id])
                      .group(:student_choice)
                      .order(:student_choice)
@@ -109,7 +115,7 @@ class Staff::ReportsController < Staff::StaffController
   # Provides course schools JSON for background loading of charts.
   def course_schools
     authorize :report, :course?
-    render json: CourseSelection.current
+    render json: CourseSelection.current(params[:year].to_i)
                      .course(params[:id])
                      .schools
                      .group('schools.name')
@@ -122,7 +128,7 @@ class Staff::ReportsController < Staff::StaffController
   # Provides course applications JSON for background loading of charts.
   def course_applications_by_week
     authorize :report, :course?
-    render json: CourseSelection.current
+    render json: CourseSelection.current(params[:year].to_i)
                      .course(params[:id])
                      .joins(:application)
                      .group_by_week('applications.submitted_date')

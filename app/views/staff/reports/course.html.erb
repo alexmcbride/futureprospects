@@ -3,11 +3,29 @@
   @title = 'Course Report'
 %>
 
-<h3>'<%= @course.title %>' Report</h3>
+<div class="row">
+  <div class="col-sm-10">
+    <h3 class="no-top-margin">'<%= @course.title %>' Report</h3>
+  </div>
+  <div class="col-sm-2 text-right">
+    <div class="btn-group btn-group-sm">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        <%= @year %> &mdash; <%= @year + 1 %>
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <% @years.each do |date, _| %>
+            <li><%= link_to "#{date.year} &mdash; #{date.year + 1}".html_safe, request.path + "?year=#{date.year}" %> </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
 
 <p class="text-darkish">Reports, information, charts, about applicants to this course.</p>
 
-<% if @selections.any? %>
+<% selections = @course.course_selections.current(@year).includes(:application).order(college_offer: :desc) %>
+<% if selections.any? %>
   <div class="table-responsive">
     <table class="table table-condensed table-striped">
       <thead>
@@ -19,7 +37,7 @@
       </tr>
       </thead>
       <tbody>
-      <% @selections.order(college_offer: :desc).each do |selection| %>
+      <% selections.each do |selection| %>
           <tr>
             <td><%= link_to selection.application.full_name, staff_application_path(selection.application) %></td>
             <td><%= selection.college_offer ? selection.college_offer.titleize : 'Pending' %></td>
@@ -32,7 +50,7 @@
   </div>
 
   <p class="text-right text-darkish">
-    <%= pluralize @course.current_selections_count, 'Student' %> / <%= pluralize @course.spaces, 'Space' %>
+    <%= pluralize selections.count, 'Student' %> / <%= pluralize @course.spaces, 'Space' %>
   </p>
 
   <hr>
@@ -41,12 +59,12 @@
     <div class="col-md-6">
       <h4>College Offers</h4>
       <p class="text-darkish small">Breakdown of college offers for this course.</p>
-      <%= pie_chart staff_reports_course_offers_path(@course.id, tab: params[:tab], format: :json) %>
+      <%= pie_chart staff_reports_course_offers_path(@course.id, year: @year, tab: params[:tab], format: :json) %>
     </div>
     <div class="col-md-6">
       <h4>Student Replies</h4>
       <p class="text-darkish small">Breakdown of student replies for this course.</p>
-      <%= pie_chart staff_reports_course_replies_path(@course.id, tab: params[:tab], format: :json) %>
+      <%= pie_chart staff_reports_course_replies_path(@course.id, year: @year, tab: params[:tab], format: :json) %>
     </div>
   </div>
 
@@ -56,12 +74,12 @@
     <div class="col-md-6">
       <h4>Gender</h4>
       <p class="text-darkish small">Breakdown of applicant gender for this course.</p>
-      <%= pie_chart staff_reports_course_genders_path(@course.id, format: :json) %>
+      <%= pie_chart staff_reports_course_genders_path(@course.id, year: @year, format: :json) %>
     </div>
     <div class="col-md-6">
       <h4>Ages</h4>
       <p class="text-darkish small">Breakdown of applicant ages offers for this course.</p>
-      <%= line_chart staff_reports_course_ages_path(@course.id, format: :json) %>
+      <%= line_chart staff_reports_course_ages_path(@course.id, year: @year, format: :json) %>
     </div>
   </div>
 
@@ -69,13 +87,13 @@
 
   <h4>Schools</h4>
   <p class="text-darkish small">Breakdown of schools the applicants have studied at.</p>
-  <%= bar_chart staff_reports_course_schools_path(@course.id, tab: params[:tab], format: :json) %>
+  <%= bar_chart staff_reports_course_schools_path(@course.id, year: @year, tab: params[:tab], format: :json) %>
 
   <hr>
 
   <h4>Applications by Week</h4>
   <p class="text-darkish small">Number of applications for this course broken down by week.</p>
-  <%= line_chart staff_reports_course_applications_by_week_path(@course.id, tab: params[:tab], format: :json) %>
+  <%= line_chart staff_reports_course_applications_by_week_path(@course.id, year: @year, tab: params[:tab], format: :json) %>
 
 <% else %>
   <p class="text-darkish small text-center"><em>There are no applicants for this course</em></p>

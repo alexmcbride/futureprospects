@@ -16,7 +16,7 @@
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu" role="menu">
-        <% @years.each do |date, count| %>
+        <% @years.each do |date, _| %>
           <li><%= link_to "#{date.year} &mdash; #{date.year + 1}".html_safe, request.path + "?year=#{date.year}" %> </li>
         <% end %>
       </ul>

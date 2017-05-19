@@ -36,21 +36,25 @@ Rails.application.routes.draw do
     resources :applications
 
     get 'reports', to: 'reports#index', as: 'reports'
-    get 'reports/courses', to: 'reports#courses', as: 'reports_courses'
+    get 'reports/colleges/:id', to: 'reports#college', as: 'reports_college'
+    get 'reports/colleges/:id/show', to: 'reports#show_college', as: 'reports_show_college'
     get 'reports/courses/:id', to: 'reports#course', as: 'reports_course'
+
+    # Reports Json Routes
+    get 'reports/courses/:id/course_applications_by_week', to: 'reports#course_applications_by_week', as: 'reports_course_applications_by_week'
     get 'reports/courses/:id/course_offers', to: 'reports#course_offers', as: 'reports_course_offers'
     get 'reports/courses/:id/course_replies', to: 'reports#course_replies', as: 'reports_course_replies'
     get 'reports/courses/:id/course_schools', to: 'reports#course_schools', as: 'reports_course_schools'
-    get 'reports/courses/:id/course_applications_by_week', to: 'reports#course_applications_by_week', as: 'reports_course_applications_by_week'
-    get 'reports/colleges', to: 'reports#colleges', as: 'reports_colleges'
-    get 'reports/colleges/:id', to: 'reports#college', as: 'reports_college'
+    get 'reports/courses/:id/course_ages', to: 'reports#course_ages', as: 'reports_course_ages'
+    get 'reports/courses/:id/course_genders', to: 'reports#course_genders', as: 'reports_course_genders'
     get 'reports/colleges/:id/course_applicants', to: 'reports#college_course_applicants', as: 'reports_college_course_applicants'
     get 'reports/colleges/:id/offers', to: 'reports#college_offers', as: 'reports_college_offers'
     get 'reports/colleges/:id/choices', to: 'reports#college_choices', as: 'reports_college_choices'
     get 'reports/colleges/:id/genders', to: 'reports#college_genders', as: 'reports_college_genders'
     get 'reports/colleges/:id/birth_dates', to: 'reports#college_birth_dates', as: 'reports_college_birth_dates'
     get 'reports/colleges/:id/schools', to: 'reports#college_schools', as: 'reports_college_schools'
-    #college_course_applicants
+    get 'reports/colleges/:id/applications_by_week', to: 'reports#college_applications_by_week', as: 'reports_college_applications_by_week'
+
   end
 
   # Application routes

@@ -3,7 +3,8 @@
   @title = 'Reports'
 %>
 
-<p>Here you can view the following reports:</p>
-
-<p><%= link_to 'Course Applicants', staff_reports_courses_path %></p>
-<p><%= link_to 'College Applications', staff_reports_colleges_path %></p>
+<ul>
+  <% @colleges.each do |college| %>
+    <li><%= link_to college.name, staff_reports_college_path(college) %></li>
+  <% end %>
+</ul>

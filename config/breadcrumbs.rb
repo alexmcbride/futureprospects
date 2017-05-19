@@ -337,22 +337,27 @@ crumb :staff_reports do
   link 'Reports', staff_reports_path
 end
 
-crumb :staff_reports_courses do
+crumb :staff_reports_college do |college|
   parent :staff_reports
-  link 'Courses', staff_reports_courses_path
+  link college.name, staff_reports_college_path(college)
+end
+
+crumb :staff_reports_show_college do |college|
+  parent :staff_reports_college, college
+  link 'Show', staff_reports_show_college_path(college)
 end
 
 crumb :staff_reports_course do |course|
-  parent :staff_reports_courses
+  parent :staff_reports_college, course.college
   link course.title, staff_reports_course_path(course)
 end
-
-crumb :staff_reports_colleges do
-  parent :staff_reports
-  link 'Colleges', staff_reports_colleges_path
-end
-
-crumb :staff_reports_college do |college|
-  parent :staff_reports_colleges
-  link college.name, staff_reports_college_path(college)
-end
+#
+# crumb :staff_reports_colleges do
+#   parent :staff_reports
+#   link 'Colleges', staff_reports_colleges_path
+# end
+#
+# crumb :staff_reports_college do |college|
+#   parent :staff_reports_colleges
+#   link college.name, staff_reports_college_path(college)
+# end

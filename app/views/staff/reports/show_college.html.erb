@@ -1,0 +1,61 @@
+<%
+  breadcrumb :staff_reports_show_college, @college
+  @title = 'College Report'
+%>
+
+<h3><%= @college.name %></h3>
+<p class="text-darkish">Reports, information, charts, about applicants to this college.</p>
+
+<h4>Totals</h4>
+<ul>
+  <li>Total Students: <strong><%= @college.count_applicants %></strong></li>
+  <li>Total Applications: <strong><%= @college.count_course_selections %></strong></li>
+  <li>Successful Applications: <strong><%= CourseSelection.college(@college.id).successful.count %></strong></li>
+</ul>
+
+<h4>Courses</h4>
+<p class="text-darkish small">Breakdown of number of applicantions per course.</p>
+<%= bar_chart staff_reports_college_course_applicants_path(@college.id) %>
+
+<hr>
+
+<div class="row">
+  <div class="col-md-6">
+    <h4>Gender</h4>
+    <p class="text-darkish small">Breakdown of applicant gender.</p>
+    <%= pie_chart staff_reports_college_genders_path(@college.id) %>
+  </div>
+  <div class="col-md-6">
+    <h4>Ages</h4>
+    <p class="text-darkish small">Breakdown of applicants by age.</p>
+    <%= line_chart staff_reports_college_birth_dates_path(@college.id) %>
+  </div>
+</div>
+
+<hr>
+
+<div class="row">
+  <div class="col-md-6">
+    <h4>College Offers</h4>
+    <p class="text-darkish small">Breakdown of offers made by the college.</p>
+    <%= pie_chart staff_reports_college_offers_path(@college.id) %>
+  </div>
+
+  <div class="col-md-6">
+    <h4>Student Replies</h4>
+    <p class="text-darkish small">Breakdown of replies from students.</p>
+    <%= pie_chart staff_reports_college_choices_path(@college.id) %>
+  </div>
+</div>
+
+<hr>
+
+<h4>Educational Establishment</h4>
+<p class="text-darkish small">Breakdown of applicants by education establishments attended.</p>
+<%= bar_chart staff_reports_college_schools_path(@college.id) %>
+
+<hr>
+
+<h4>Applications by Week</h4>
+<p class="text-darkish small">Breakdown of applicants per week.</p>
+<%= line_chart staff_reports_college_applications_by_week_path(@college.id) %>

@@ -7,62 +7,71 @@
 
 <p class="text-darkish">Reports, information, charts, about applicants to this course.</p>
 
-<ul class="nav nav-tabs">
-  <%= tab :all_applicants, true %>
-  <%= tab :successful %>
-</ul>
-
-<div class="panel panel-default" style="border-top: 0; border-radius: 0">
-  <div class="panel-body">
-    <div class="table-responsive">
-      <table class="table table-condensed table-striped">
-        <thead>
+<div class="table-responsive">
+  <table class="table table-condensed table-striped">
+    <thead>
+    <tr>
+      <th>Student</th>
+      <th>Decision</th>
+      <th>Replies</th>
+      <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @selections.order(college_offer: :desc).each do |selection| %>
         <tr>
-          <th>Student</th>
-          <th>Decision</th>
-          <th>Replies</th>
-          <th>Status</th>
+          <td><%= link_to selection.application.full_name, staff_application_path(selection.application) %></td>
+          <td><%= selection.college_offer ? selection.college_offer.titleize : 'None' %></td>
+          <td><%= selection.student_choice ? selection.student_choice.titleize : 'None' %></td>
+          <td><%= selection.application.status.titleize %></td>
         </tr>
-        </thead>
-        <tbody>
-        <% @selections.order(college_offer: :desc).each do |selection| %>
-            <tr>
-              <td><%= link_to selection.application.full_name, staff_application_path(selection.application) %></td>
-              <td><%= selection.college_offer ? selection.college_offer.titleize : 'None' %></td>
-              <td><%= selection.student_choice ? selection.student_choice.titleize : 'None' %></td>
-              <td><%= selection.application.status.titleize %></td>
-            </tr>
-        <% end %>
-        </tbody>
-      </table>
-    </div>
+    <% end %>
+    </tbody>
+  </table>
+</div>
 
-    <hr>
+<p class="text-right text-darkish">
+  <%= pluralize @course.current_selections_count, 'Student' %> / <%= pluralize @course.spaces, 'Space' %>
+</p>
 
-    <div class="row">
-      <div class="col-md-6">
-        <h4>College Offers</h4>
-        <p class="text-darkish small">Breakdown of college offers for this course.</p>
-        <%= pie_chart staff_reports_course_offers_path(@course.id, tab: params[:tab]) %>
-      </div>
-      <div class="col-md-6">
-        <h4>Student Replies</h4>
-        <p class="text-darkish small">Breakdown of student replies for this course.</p>
-        <%= pie_chart staff_reports_course_replies_path(@course.id, tab: params[:tab]) %>
-      </div>
-    </div>
+<hr>
 
-    <hr>
-
-    <h4>Schools</h4>
-    <p class="text-darkish small">Breakdown of schools the applicants have studied at.</p>
-    <%= bar_chart staff_reports_course_schools_path(@course.id, tab: params[:tab]) %>
-
-    <hr>
-
-    <h4>Applications by Week</h4>
-    <p class="text-darkish small">Number of applications for this course broken down by week.</p>
-    <%= line_chart staff_reports_course_applications_by_week_path(@course.id, tab: params[:tab]) %>
-
+<div class="row">
+  <div class="col-md-6">
+    <h4>College Offers</h4>
+    <p class="text-darkish small">Breakdown of college offers for this course.</p>
+    <%= pie_chart staff_reports_course_offers_path(@course.id, tab: params[:tab]) %>
+  </div>
+  <div class="col-md-6">
+    <h4>Student Replies</h4>
+    <p class="text-darkish small">Breakdown of student replies for this course.</p>
+    <%= pie_chart staff_reports_course_replies_path(@course.id, tab: params[:tab]) %>
   </div>
 </div>
+
+<hr>
+
+<div class="row">
+  <div class="col-md-6">
+    <h4>Gender</h4>
+    <p class="text-darkish small">Breakdown of college offers for this course.</p>
+    <%= pie_chart staff_reports_course_genders_path(@course.id) %>
+  </div>
+  <div class="col-md-6">
+    <h4>Ages</h4>
+    <p class="text-darkish small">Breakdown of college offers for this course.</p>
+    <%= line_chart staff_reports_course_ages_path(@course.id) %>
+  </div>
+</div>
+
+<hr>
+
+<h4>Schools</h4>
+<p class="text-darkish small">Breakdown of schools the applicants have studied at.</p>
+<%= bar_chart staff_reports_course_schools_path(@course.id, tab: params[:tab]) %>
+
+<hr>
+
+<h4>Applications by Week</h4>
+<p class="text-darkish small">Number of applications for this course broken down by week.</p>
+<%= line_chart staff_reports_course_applications_by_week_path(@course.id, tab: params[:tab]) %>

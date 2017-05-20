@@ -188,10 +188,7 @@ class Staff::ReportsController < Staff::StaffController
   # Provides college ages JSON for background loading of charts.
   def college_birth_dates
     authorize :report, :college?
-    render json: Application.current(params[:year].to_i)
-                     .college(params[:id])
-                     .group('EXTRACT(YEAR FROM age(CURRENT_DATE, birth_date))')
-                     .count
+    render json: Application.report_ages(params[:id], params[:year].to_i)
   end
 
   # GET /staff/reports/colleges/:id/gender.json
@@ -219,6 +216,41 @@ class Staff::ReportsController < Staff::StaffController
   end
 
   private
+    def add_table(sheet, header=[], rows=[], name='Default')
+      tmp = [sheet.add_row(header)]
+
+      rows.each do |row|
+        tmp << sheet.add_row(row)
+      end
+
+      table_ref = "#{tmp.first.cells.first.reference}:#{tmp.last.cells.last.reference}".tr('$', '')
+      sheet.add_table table_ref, name: name, style_info: {name: 'TableStyleLight13'}
+
+      tmp
+    end
+
+    def get_reference(cell)
+      cell.reference.tr('$', '')
+    end
+
+    def add_blank_row(sheet)
+      sheet.add_row
+      sheet.rows.last.index + 2
+    end
+
+    def add_piechart(sheet, title, table, start=[3, 0], size=[5, 14])
+      # get left column
+      labels = "#{get_reference(table.second.cells.first)}:#{get_reference(table.last.cells.first)}"
+      data = "#{get_reference(table.second.cells.second)}:#{get_reference(table.last.cells.last)}"
+
+      sheet.add_chart(Axlsx::Pie3DChart) do |chart|
+        chart.title = title
+        chart.add_series :data => sheet[data], :labels => sheet[labels]
+        chart.start_at start[0], start[1]
+        chart.end_at start[0]+size[0], start[1]+size[1]
+      end
+    end
+
     # Generates a spreadsheet that can be downloaded.
     #
     # @return [StringIO] a stream of bytes that can be sent to the browser.
@@ -228,91 +260,36 @@ class Staff::ReportsController < Staff::StaffController
       # TODO: move into separate file?
       Axlsx::Package.new do |p|
         p.workbook.add_worksheet(name: 'College') do |sheet|
-          # Heading
-          sheet.add_row [college.name]
-          sheet.add_row ['Total Students', college.count_applicants]
-          sheet.add_row ['Total Applications', college.count_course_selections]
-          sheet.add_row ['Successful Applications', CourseSelection.successful_current_college(college.id).count]
-          sheet.add_row
+          rows =[['College', college.name],
+                 ['Total Students', college.count_applicants],
+                 ['Total Applications', college.count_course_selections],
+                 ['Successful Applications', CourseSelection.successful_current_college(college.id).count]]
+          add_table sheet, ['Item', 'Value'], rows
 
-          # Course table
-          sheet.add_row ['Course', 'Category', 'Applicants', 'Spaces']
-          count = 0
-          college.courses.includes(:category).each do |course|
-            sheet.add_row [course.title, course.category.name, course.current_selections_count, course.spaces]
-            count += 1
-          end
-          sheet.add_table "A6:D#{6+count}", name: 'Courses', style_info: {name: 'TableStyleLight13'}
+          add_blank_row sheet
+          rows = college.courses
+                     .includes(:category)
+                     .map {|c| [c.title, c.category.name, c.current_selections_count, c.spaces]}
+          add_table sheet, ['Course', 'Category', 'Applicants', 'Spaces'], rows, 'Courses'
         end
 
         p.workbook.add_worksheet(name: 'Breakdown') do |sheet|
           # College offers
-          sheet.add_row
-          sheet.add_row ['College Offer', 'Applicants']
-          CourseSelection.report_college_offers(college.id).each do |offer, count|
-            sheet.add_row([offer, count])
-          end
-          index = sheet.rows.last.index + 1
-          sheet.add_table "A2:B#{index}", name: 'College Offers', style_info: {name: 'TableStyleLight13'}
-
-          # College offers pie chart
-          sheet.add_chart(Axlsx::Pie3DChart) do |chart|
-            chart.title = 'College Offers'
-            chart.add_series :data => sheet["B3:B#{index}"], :labels => sheet["A3:A#{index}"]
-            chart.start_at 3, 1
-            chart.end_at 8, 14
-          end
+          rows = CourseSelection.report_college_offers(college.id).map {|offer, count|[offer, count]}
+          table = add_table sheet, ['College Offer', 'Applicants'], rows, 'College Offers'
+          add_piechart sheet, 'College Offers', table, [3, 0], [4, 13]
 
           # Student choices
-          (15-index).times {sheet.add_row}
-          sheet << ['Student Choices', 'Applicants']
-          CourseSelection.report_college_choices(college.id).each do |offer, count|
-            sheet << [offer, count]
-          end
-          index = sheet.rows.last.index + 1
-          sheet.add_table "A16:B#{index}", name: 'Student Choices Offers', style_info: {name: 'TableStyleLight13'}
-
-          # Student replies pie chart
-          sheet.add_chart(Axlsx::Pie3DChart) do |chart|
-            chart.title = 'Student Choices'
-            chart.add_series :data => sheet["B17:B#{index}"], :labels => sheet["A17:A#{index}"]
-            chart.start_at 3, 15
-            chart.end_at 8, 28
-          end
+          add_blank_row sheet
+          rows = CourseSelection.report_college_choices(college.id).map { |offer, count| [offer, count]}
+          table = add_table sheet, ['Student Choices', 'Applicants'], rows, 'Student Choices Offers'
+          add_piechart sheet, 'Student Choices', table, [8, 0], [4, 13]
 
           # Gender
-          i = 1
-          row = sheet.rows[i]
-          7.times {row.add_cell '      '}
-          row.add_cell 'Gender'
-          row.add_cell 'Applicants'
-          Application.report_gender(college.id).each do |gender, count|
-            i += 1
-            row = sheet.rows[i]
-            7.times {row.add_cell '      '}
-            row.add_cell gender
-            row.add_cell count
-          end
-          index = row.index + 1
-          sheet.add_table "J2:K#{index}", name: 'Student Genders', style_info: {name: 'TableStyleLight13'}
-
-          # Gender pie chart
-          sheet.add_chart(Axlsx::Pie3DChart) do |chart|
-            chart.title = 'Gender'
-            chart.add_series :data => sheet["K3:K#{index}"], :labels => sheet["J3:J#{index}"]
-            chart.start_at 12, 1
-            chart.end_at 17, 14
-          end
-
-          # Student ages
-          # sheet.add_chart(Axlsx::Line3DChart, :title => "Simple 3D Line Chart", :rotX => 30, :rotY => 20) do |chart|
-          #   chart.start_at 0, 5
-          #   chart.end_at 10, 20
-          #   chart.add_series :data => sheet["A3:A6"], :title => sheet["A2"], :color => "0000FF"
-          #   chart.add_series :data => sheet["B3:B6"], :title => sheet["B2"], :color => "FF0000"
-          #   chart.catAxis.title = 'X Axis'
-          #   chart.valAxis.title = 'Y Axis'
-          # end
+          add_blank_row sheet
+          rows = Application.report_gender(college.id).map { |gender, count| [gender, count]}
+          table = add_table sheet, ['Gender', 'Applicants'], rows, 'Student Gender'
+          add_piechart sheet, 'Student Gender', table, [13, 0], [4, 13]
         end
       end.to_stream.read
     end

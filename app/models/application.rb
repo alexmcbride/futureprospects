@@ -107,6 +107,8 @@ class Application < ApplicationRecord
 
   scope :report_gender, ->(college_id, year=nil){current(year).college(college_id).group(:gender).order(:gender).count}
 
+  scope :report_ages, ->(college_id, year=nil){current(year).college(college_id).group('EXTRACT(YEAR FROM age(CURRENT_DATE, birth_date))').count}
+
   # Validators
   validates :title, presence: true, length: { maximum: 35 }
   validates :first_name, presence: true, length: { maximum: 35 }

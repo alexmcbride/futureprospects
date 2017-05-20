@@ -79,7 +79,7 @@
     <div class="col-md-6">
       <h4>Ages</h4>
       <p class="text-darkish small">Breakdown of applicant ages offers for this course.</p>
-      <%= line_chart staff_reports_course_ages_path(@course.id, year: @year, format: :json) %>
+      <%= line_chart staff_reports_course_ages_path(@course.id, year: @year, format: :json), xtitle: 'Age', ytitle: 'Students' %>
     </div>
   </div>
 
@@ -87,13 +87,13 @@
 
   <h4>Schools</h4>
   <p class="text-darkish small">Breakdown of schools the applicants have studied at.</p>
-  <%= bar_chart staff_reports_course_schools_path(@course.id, year: @year, tab: params[:tab], format: :json) %>
+  <%= bar_chart staff_reports_course_schools_path(@course.id, year: @year, tab: params[:tab], format: :json), xtitle: 'Students', ytitle: 'Schools' %>
 
   <hr>
 
   <h4>Applications by Week</h4>
   <p class="text-darkish small">Number of applications for this course broken down by week.</p>
-  <%= line_chart staff_reports_course_applications_by_week_path(@course.id, year: @year, tab: params[:tab], format: :json) %>
+  <%= line_chart staff_reports_course_applications_by_week_path(@course.id, year: @year, tab: params[:tab], format: :json), xtitle: 'Weeks', ytitle: 'Students' %>
 
 <% else %>
   <p class="text-darkish small text-center"><em>There are no applicants for this course</em></p>

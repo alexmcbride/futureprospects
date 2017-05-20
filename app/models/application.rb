@@ -105,6 +105,8 @@ class Application < ApplicationRecord
 
   scope :years, -> {group_by_year('applications.created_at', reverse: true)}
 
+  scope :report_gender, ->(college_id, year=nil){current(year).college(college_id).group(:gender).order(:gender).count}
+
   # Validators
   validates :title, presence: true, length: { maximum: 35 }
   validates :first_name, presence: true, length: { maximum: 35 }
@@ -199,7 +201,7 @@ class Application < ApplicationRecord
   #
   # @return [Date..Date]
   def self.current_year(year=nil)
-    year = Date.today.year unless year
+    year = Date.today.year unless year && year > 0
     (Date.new(year, 1, 1)..Date.new(year, 7, 16))
   end
 

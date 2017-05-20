@@ -69,17 +69,17 @@
   <div class="col-md-6">
     <h4>Ages</h4>
     <p class="text-darkish small">Breakdown of applicants by age.</p>
-    <%= line_chart staff_reports_college_birth_dates_path(@college.id, year: @year, format: :json) %>
+    <%= line_chart staff_reports_college_birth_dates_path(@college.id, year: @year, format: :json), xtitle: 'Age', ytitle: 'Students' %>
   </div>
 </div>
 <hr>
 
 <h4>Educational Establishment</h4>
 <p class="text-darkish small">Breakdown of applicants by educational establishment.</p>
-<%= bar_chart staff_reports_college_schools_path(@college.id, year: @year, format: :json) %>
+<%= bar_chart staff_reports_college_schools_path(@college.id, year: @year, format: :json), xtitle: 'Students', ytitle: 'Schools' %>
 
 <hr>
 
 <h4>Applications by Week</h4>
 <p class="text-darkish small">Breakdown of applicants per week.</p>
-<%= line_chart staff_reports_college_applications_by_week_path(@college.id, year: @year, format: :json) %>
+<%= line_chart staff_reports_college_applications_by_week_path(@college.id, year: @year, format: :json), xtitle: 'Weeks', ytitle: 'Students' %>

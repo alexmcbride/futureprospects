@@ -28,6 +28,12 @@ class CourseSelection < ApplicationRecord
   scope :current, ->(year=nil){joins(:application).where('applications.created_at' => Application.current_year(year))}
   scope :college, ->(college_id){joins(:course).where('courses.college_id' => college_id)}
   scope :course, ->(course_id){where(course_id: course_id)}
+  scope :years, ->(course_id){joins(:course, :application).where(course_id: course_id).group_by_year('applications.created_at', reverse: true)}
+
+  # Report Scopes
+  scope :successful_current_college, ->(college_id, year=nil){current(year).college(college_id).successful}
+  scope :report_college_offers, ->(college_id, year=nil){current(year).college(college_id).group(:college_offer).order(:college_offer).count.map {|k, v| [ k ? k.titleize : 'Pending', v]}}
+  scope :report_college_choices, ->(college_id, year=nil){current(year).college(college_id).group(:student_choice).order(:student_choice).count.map {|k, v| [ k ? k.titleize : 'Pending', v] if k != 'skipped'}.compact}
 
   # Callbacks.
   after_create :increase_current_selections_count

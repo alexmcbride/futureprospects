@@ -34,7 +34,7 @@ class Staff::ReportsController < Staff::StaffController
         @years = policy_scope(Application).years.count
         @year = params[:year] ? params[:year].to_i : @years.first[0].year
       }
-      format.xlsx {send_data download_spreadsheet, filename: "college.xlsx",  type: "application/xlsx"}
+      format.xlsx { send_data download_spreadsheet(@college), filename: 'college.xlsx',  type: 'application/xlsx' }
     end
   end
 
@@ -48,7 +48,7 @@ class Staff::ReportsController < Staff::StaffController
 
     respond_to do |format|
       format.html {
-        @years = CourseSelection.joins(:course, :application).where(course_id: @course.id).group_by_year('applications.created_at', reverse: true).count
+        @years = CourseSelection.years(@course.id).count
         @year = params[:year] ? params[:year].to_i : @years.first[0].year
       }
     end
@@ -164,12 +164,7 @@ class Staff::ReportsController < Staff::StaffController
   # Provides college offers JSON for background loading of charts.
   def college_offers
     authorize :report, :college?
-    render json: CourseSelection.current(params[:year].to_i)
-                     .college(params[:id])
-                     .group(:college_offer)
-                     .order(:college_offer)
-                     .count
-                     .map {|k, v| [ k ? k.titleize : 'Pending', v]}
+    render json: CourseSelection.report_college_offers(params[:id], params[:year].to_i)
   end
 
   # GET /staff/reports/colleges/:id/course_applicants.json
@@ -177,13 +172,7 @@ class Staff::ReportsController < Staff::StaffController
   # Provides college choices JSON for background loading of charts.
   def college_choices
     authorize :report, :college?
-    render json: CourseSelection.current(params[:year].to_i)
-                     .college(params[:id])
-                     .group(:student_choice)
-                     .order(:student_choice)
-                     .count
-                     .map {|k, v| [ k ? k.titleize : 'Pending', v] if k != 'skipped'}
-                     .compact
+    render json: CourseSelection.report_college_choices(params[:id], params[:year].to_i)
   end
 
   # GET /staff/reports/colleges/:id/gender.json
@@ -191,11 +180,7 @@ class Staff::ReportsController < Staff::StaffController
   # Provides college genders JSON for background loading of charts.
   def college_genders
     authorize :report, :college?
-    render json: Application.current(params[:year].to_i)
-                     .college(params[:id])
-                     .group(:gender)
-                     .order(:gender)
-                     .count
+    render json: Application.report_gender(params[:id], params[:year].to_i)
   end
 
   # GET /staff/reports/colleges/:id/gender.json
@@ -237,16 +222,98 @@ class Staff::ReportsController < Staff::StaffController
     # Generates a spreadsheet that can be downloaded.
     #
     # @return [StringIO] a stream of bytes that can be sent to the browser.
-    def download_spreadsheet
+    def download_spreadsheet(college)
       raise Pundit::NotAuthorizedError unless current_staff.has_role? :can_download_reports
 
-      # TODO: move into seperate file?
-      p = Axlsx::Package.new do |p|
+      # TODO: move into separate file?
+      Axlsx::Package.new do |p|
         p.workbook.add_worksheet(name: 'College') do |sheet|
-          sheet.add_row [@college.name]
-        end
-      end
+          # Heading
+          sheet.add_row [college.name]
+          sheet.add_row ['Total Students', college.count_applicants]
+          sheet.add_row ['Total Applications', college.count_course_selections]
+          sheet.add_row ['Successful Applications', CourseSelection.successful_current_college(college.id).count]
+          sheet.add_row
 
-      p.to_stream.read
+          # Course table
+          sheet.add_row ['Course', 'Category', 'Applicants', 'Spaces']
+          count = 0
+          college.courses.includes(:category).each do |course|
+            sheet.add_row [course.title, course.category.name, course.current_selections_count, course.spaces]
+            count += 1
+          end
+          sheet.add_table "A6:D#{6+count}", name: 'Courses', style_info: {name: 'TableStyleLight13'}
+        end
+
+        p.workbook.add_worksheet(name: 'Breakdown') do |sheet|
+          # College offers
+          sheet.add_row
+          sheet.add_row ['College Offer', 'Applicants']
+          CourseSelection.report_college_offers(college.id).each do |offer, count|
+            sheet.add_row([offer, count])
+          end
+          index = sheet.rows.last.index + 1
+          sheet.add_table "A2:B#{index}", name: 'College Offers', style_info: {name: 'TableStyleLight13'}
+
+          # College offers pie chart
+          sheet.add_chart(Axlsx::Pie3DChart) do |chart|
+            chart.title = 'College Offers'
+            chart.add_series :data => sheet["B3:B#{index}"], :labels => sheet["A3:A#{index}"]
+            chart.start_at 3, 1
+            chart.end_at 8, 14
+          end
+
+          # Student choices
+          (15-index).times {sheet.add_row}
+          sheet << ['Student Choices', 'Applicants']
+          CourseSelection.report_college_choices(college.id).each do |offer, count|
+            sheet << [offer, count]
+          end
+          index = sheet.rows.last.index + 1
+          sheet.add_table "A16:B#{index}", name: 'Student Choices Offers', style_info: {name: 'TableStyleLight13'}
+
+          # Student replies pie chart
+          sheet.add_chart(Axlsx::Pie3DChart) do |chart|
+            chart.title = 'Student Choices'
+            chart.add_series :data => sheet["B17:B#{index}"], :labels => sheet["A17:A#{index}"]
+            chart.start_at 3, 15
+            chart.end_at 8, 28
+          end
+
+          # Gender
+          i = 1
+          row = sheet.rows[i]
+          7.times {row.add_cell '      '}
+          row.add_cell 'Gender'
+          row.add_cell 'Applicants'
+          Application.report_gender(college.id).each do |gender, count|
+            i += 1
+            row = sheet.rows[i]
+            7.times {row.add_cell '      '}
+            row.add_cell gender
+            row.add_cell count
+          end
+          index = row.index + 1
+          sheet.add_table "J2:K#{index}", name: 'Student Genders', style_info: {name: 'TableStyleLight13'}
+
+          # Gender pie chart
+          sheet.add_chart(Axlsx::Pie3DChart) do |chart|
+            chart.title = 'Gender'
+            chart.add_series :data => sheet["K3:K#{index}"], :labels => sheet["J3:J#{index}"]
+            chart.start_at 12, 1
+            chart.end_at 17, 14
+          end
+
+          # Student ages
+          # sheet.add_chart(Axlsx::Line3DChart, :title => "Simple 3D Line Chart", :rotX => 30, :rotY => 20) do |chart|
+          #   chart.start_at 0, 5
+          #   chart.end_at 10, 20
+          #   chart.add_series :data => sheet["A3:A6"], :title => sheet["A2"], :color => "0000FF"
+          #   chart.add_series :data => sheet["B3:B6"], :title => sheet["B2"], :color => "FF0000"
+          #   chart.catAxis.title = 'X Axis'
+          #   chart.valAxis.title = 'Y Axis'
+          # end
+        end
+      end.to_stream.read
     end
 end

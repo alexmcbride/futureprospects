@@ -1,21 +1,17 @@
+# Class to represent reports headless policy. Reports are also governed by normal show policies, containing in
+# +CoursePolicy+ and +CollegePolicy+. The combined policies are used to determine if the report can be viewed or downloaded.
 class ReportPolicy < Struct.new(:user, :report)
-  def index?
+  # Whether the report can be viewed.
+  #
+  # @return [Boolean]
+  def view?
     user.has_role?(:site_admin) || user.has_role?(:can_view_reports)
   end
 
-  def courses?
-    index?
-  end
-
-  def course?
-    index?
-  end
-
-  def colleges?
-    index?
-  end
-
-  def college?
-    index?
+  # Whether the report can be downloaded.
+  #
+  # @return [Boolean]
+  def download?
+    user.has_role?(:site_admin) || user.has_role?(:can_download_reports)
   end
 end

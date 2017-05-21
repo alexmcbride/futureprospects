@@ -73,8 +73,10 @@ class PaymentsController < ApplicationController
   def show
     respond_to do |format|
       format.html
+
+      # Download PDF invoice.
       format.pdf do
-        pdf = PaymentPdf.new @payment, view_context
+        pdf = @payment.to_pdf(view_context)
         send_data pdf.render, filename: pdf.filename, type: pdf.mime_type
       end
     end

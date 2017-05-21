@@ -349,15 +349,5 @@ end
 
 crumb :staff_reports_course do |course|
   parent :staff_reports_college, course.college
-  link course.title, staff_reports_course_path(course)
+  link course.title, staff_reports_show_course_path(course)
 end
-#
-# crumb :staff_reports_colleges do
-#   parent :staff_reports
-#   link 'Colleges', staff_reports_colleges_path
-# end
-#
-# crumb :staff_reports_college do |college|
-#   parent :staff_reports_colleges
-#   link college.name, staff_reports_college_path(college)
-# end

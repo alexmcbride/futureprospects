@@ -129,6 +129,15 @@ class Payment < ApplicationRecord
     application_id == application.id
   end
 
+  # Creates a PDF invoice for the payment.
+  #
+  # @param context [ActionView::Base] the context to use (for calling helpers)
+  #
+  # @return [PdfPayment]
+  def to_pdf(context)
+    PaymentPdf.new self, context
+  end
+
   private
     # Custom validator to check cc details are correct.
     def validate_card_details

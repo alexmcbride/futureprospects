@@ -80,7 +80,7 @@ class CoursePolicy < BaseApplicationPolicy
   # Checks if the user can perform this action on the model.
   #
   # Returns a boolean indicating if the action is allowed.
-  def course?
+  def show_course?
     show?
   end
 end

@@ -4,10 +4,14 @@
 %>
 
 <div class="row">
-  <div class="col-sm-10">
+  <div class="col-sm-8">
     <h3 class="no-top-margin">'<%= @course.title %>' Report</h3>
   </div>
-  <div class="col-sm-2 text-right">
+  <div class="col-sm-4 text-right">
+    <%= link_to 'Download Excel', staff_reports_show_course_path(@course, format: :xlsx, year: @year) %>
+
+    &nbsp;|&nbsp;
+
     <div class="btn-group btn-group-sm">
       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
         <%= @year %> &mdash; <%= @year + 1 %>
@@ -40,8 +44,8 @@
       <% selections.each do |selection| %>
           <tr>
             <td><%= link_to selection.application.full_name, staff_application_path(selection.application) %></td>
-            <td><%= selection.college_offer ? selection.college_offer.titleize : 'Pending' %></td>
-            <td><%= selection.student_choice ? selection.skipped? ? 'None' : selection.student_choice.titleize : 'Pending' %></td>
+            <td><%= selection.college_offer_text %></td>
+            <td><%= selection.student_choice_text  %></td>
             <td><%= selection.application.status.titleize %></td>
           </tr>
       <% end %>

@@ -84,6 +84,15 @@ class College < ApplicationRecord
     College.where(clearance: true).any?
   end
 
+  # Converts the college data into a spreadsheet that can be downloaded by the user.
+  #
+  # @param year [Fixnum] the year of data to include in the spreadsheet.
+  #
+  # @return [Spreadsheet]
+  def to_spreadsheet(year=Date.today.year)
+    CollegeSpreadsheet.generate self, year
+  end
+
   private
     # Finds clearance applications and emails students.
     def handle_clearance

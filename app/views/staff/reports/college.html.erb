@@ -29,7 +29,7 @@
     <tbody>
     <% @courses.each do |course| %>
       <tr>
-        <td><%= link_to course.title, staff_reports_course_path(course) %></td>
+        <td><%= link_to course.title, staff_reports_show_course_path(course) %></td>
         <td><%= course.category.name %></td>
         <td><%= course.current_selections_count %></td>
       </tr>

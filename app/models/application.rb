@@ -103,11 +103,29 @@ class Application < ApplicationRecord
     year.nil? || year == 0 ? current : where(created_at: Date.new(year, 1, 1)..Date.new(year, 12, 31))
   end
 
+  ##
+  # Gets the years that the range of students applications cover.
   scope :years, -> {group_by_year('applications.created_at', reverse: true)}
 
+  ##
+  # Gets the results of the report gender query.
   scope :report_gender, ->(college_id, year=nil){current(year).college(college_id).group(:gender).order(:gender).count}
 
+  ##
+  # Gets the results of the report ages query.
   scope :report_ages, ->(college_id, year=nil){current(year).college(college_id).group('EXTRACT(YEAR FROM age(CURRENT_DATE, birth_date))').count}
+
+  ##
+  # Gets the results of the report schools query.
+  scope :report_schools, ->(college_id, year=nil){current(year).college(college_id).joins(:schools).group('schools.name').order('schools.name').count}
+
+  ##
+  # Gets the results of the report course genders query.
+  scope :report_course_genders, ->(course_id, year=nil) { current(year).joins(:course_selections).where('course_selections.course_id': course_id).group(:gender).order(:gender).count.map{|k,v|[k.humanize, v] }}
+
+  ##
+  # Gets the results of the report course ages query.
+  scope :report_course_ages, ->(course_id, year=nil){current(year).joins(:course_selections).where('course_selections.course_id': course_id).group('EXTRACT(YEAR FROM age(CURRENT_DATE, birth_date))').count.to_a.sort {|x, y|x[0]<=>y[0]}}
 
   # Validators
   validates :title, presence: true, length: { maximum: 35 }

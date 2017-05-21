@@ -1,10 +1,10 @@
-# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
 Rails.application.routes.draw do
+  # Payments
   get 'payments/payment_method', to: 'payments#payment_method', as: 'payment_method'
   post 'payments/payment_method/continue', to: 'payments#payment_method_continue', as: 'payment_method_continue'
   resources :payments
 
+  # Devise authentication
   devise_for :staff, :skip => [:registrations] # Skip staff sign-up
   devise_scope :staff do
     # We skip registrations to stop staff sign up, but we still need to enable staff profile editing
@@ -14,17 +14,21 @@ Rails.application.routes.draw do
   devise_for :students, controllers: { registrations: 'registrations'}
 
   namespace :staff do
+    # Courses
     get 'courses/:id/remove', to: 'courses#remove', as: 'course_remove'
     resources :courses
 
+    # Categories
     get 'categories/:id/remove', to: 'categories#remove', as: 'category_remove'
     resources :categories
 
+    # Colleges
     get 'colleges/:id/clearance', to: 'colleges#clearance', as: 'college_clearance'
     post 'colleges/:id/clearance', to: 'colleges#clearance_update', as: 'college_clearance_update'
     get 'colleges/:id/remove', to: 'colleges#remove', as: 'college_remove'
     resources :colleges
 
+    # Members
     get 'members/:id/permissions', to: 'members#permissions', as: 'member_permissions'
     post 'members/:id/permissions', to: 'members#permissions_update', as: 'member_permissions_update'
     post 'members/:id/promote_admin', to: 'members#promote_admin', as: 'member_promote_admin'
@@ -32,13 +36,15 @@ Rails.application.routes.draw do
     get 'members/:id/remove', to: 'members#remove', as: 'member_remove'
     resources :members
 
+    # Applications
     get 'applications/:id/full', to: 'applications#full', as: 'application_full'
     resources :applications
 
+    # Reports
     get 'reports', to: 'reports#index', as: 'reports'
     get 'reports/colleges/:id', to: 'reports#college', as: 'reports_college'
     get 'reports/colleges/:id/show', to: 'reports#show_college', as: 'reports_show_college'
-    get 'reports/courses/:id', to: 'reports#course', as: 'reports_course'
+    get 'reports/courses/:id/show', to: 'reports#show_course', as: 'reports_show_course'
 
     # Reports Json Routes
     get 'reports/courses/:id/course_applications_by_week', to: 'reports#course_applications_by_week', as: 'reports_course_applications_by_week'
@@ -52,7 +58,7 @@ Rails.application.routes.draw do
     get 'reports/colleges/:id/offers', to: 'reports#college_offers', as: 'reports_college_offers'
     get 'reports/colleges/:id/choices', to: 'reports#college_choices', as: 'reports_college_choices'
     get 'reports/colleges/:id/genders', to: 'reports#college_genders', as: 'reports_college_genders'
-    get 'reports/colleges/:id/birth_dates', to: 'reports#college_birth_dates', as: 'reports_college_birth_dates'
+    get 'reports/colleges/:id/ages', to: 'reports#college_ages', as: 'reports_college_ages'
     get 'reports/colleges/:id/schools', to: 'reports#college_schools', as: 'reports_college_schools'
     get 'reports/colleges/:id/applications_by_week', to: 'reports#college_applications_by_week', as: 'reports_college_applications_by_week'
 

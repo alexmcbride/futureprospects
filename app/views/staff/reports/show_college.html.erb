@@ -6,7 +6,7 @@
 <div class="row">
   <div class="col-sm-8"><h3 class="no-top-margin"><%= @college.name %></h3></div>
   <div class="col-sm-4 text-right">
-    <%= link_to 'Download for Excel', staff_reports_show_college_path(@college, format: :xlsx) %>
+    <%= link_to 'Download Excel', staff_reports_show_college_path(@college, format: :xlsx, year: @year) %>
 
     &nbsp;|&nbsp;
 
@@ -69,7 +69,7 @@
   <div class="col-md-6">
     <h4>Ages</h4>
     <p class="text-darkish small">Breakdown of applicants by age.</p>
-    <%= line_chart staff_reports_college_birth_dates_path(@college.id, year: @year, format: :json), xtitle: 'Age', ytitle: 'Students' %>
+    <%= line_chart staff_reports_college_ages_path(@college.id, year: @year, format: :json), xtitle: 'Age', ytitle: 'Students' %>
   </div>
 </div>
 <hr>

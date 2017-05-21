@@ -29,6 +29,14 @@ class Course < ApplicationRecord
   # Finds courses with spaces still to fill.
   scope :with_spaces, -> {where('current_selections_count<spaces')}
 
+  ##
+  # Finds all courses at the specified college.
+  scope :college, ->(college_id){where(college_id: college_id)}
+
+  ##
+  # Finds all courses with applicants for the specified year.
+  scope :current, ->(year){joins(course_selections: :application).where('applications.created_at' => Application.current_year(year))}
+
   # Image Upload
   mount_uploader :image, CourseImageUploader
 
@@ -277,6 +285,15 @@ class Course < ApplicationRecord
         course.save!
       end
     end
+  end
+
+  # Converts the college data into a spreadsheet that can be downloaded by the user.
+  #
+  # @param year [Fixnum] the year of data to include in the spreadsheet.
+  #
+  # @return [Spreadsheet]
+  def to_spreadsheet(year=Date.today.year)
+    CourseSpreadsheet.generate self, year
   end
 
   private

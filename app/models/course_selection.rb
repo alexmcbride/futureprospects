@@ -20,20 +20,39 @@ class CourseSelection < ApplicationRecord
   belongs_to :course, counter_cache: true
 
   # Scopes
-  scope :successful, -> {completed.where(college_offer: [:conditional_offer, :definite_offer], student_choice: [:firm_choice, :insurance_choice])}
-  scope :ordered, -> {order(:college_offer)}
-  scope :completed, -> {joins(:application).where('applications.status' => :completed)}
-  scope :schools, ->{joins(application: :schools)}
-  scope :jobs, ->{joins(application: :jobs)}
-  scope :current, ->(year=nil){joins(:application).where('applications.created_at' => Application.current_year(year))}
-  scope :college, ->(college_id){joins(:course).where('courses.college_id' => college_id)}
-  scope :course, ->(course_id){where(course_id: course_id)}
-  scope :years, ->(course_id){joins(:course, :application).where(course_id: course_id).group_by_year('applications.created_at', reverse: true)}
+  scope :successful, -> { completed.where(college_offer: [:conditional_offer, :definite_offer], student_choice: [:firm_choice, :insurance_choice]) }
+
+  scope :ordered, -> { order(:college_offer) }
+
+  scope :completed, -> { joins(:application).where('applications.status' => :completed) }
+
+  scope :schools, ->{ joins(application: :schools) }
+
+  scope :jobs, -> { joins(application: :jobs) }
+
+  scope :current, -> (year=nil) { joins(:application).where('applications.created_at' => Application.current_year(year)) }
+
+  scope :college, -> (college_id) { joins(:course).where('courses.college_id' => college_id) }
+
+  scope :course, -> (course_id) { where(course_id: course_id) }
+
+  scope :years, -> (course_id) { joins(:course, :application).where(course_id: course_id).group_by_year('applications.created_at', reverse: true) }
+
 
   # Report Scopes
-  scope :successful_current_college, ->(college_id, year=nil){current(year).college(college_id).successful}
-  scope :report_college_offers, ->(college_id, year=nil){current(year).college(college_id).group(:college_offer).order(:college_offer).count.map {|k, v| [ k ? k.titleize : 'Pending', v]}}
-  scope :report_college_choices, ->(college_id, year=nil){current(year).college(college_id).group(:student_choice).order(:student_choice).count.map {|k, v| [ k ? k.titleize : 'Pending', v] if k != 'skipped'}.compact}
+  scope :report_current_college, -> (college_id, year=nil) { current(year).college(college_id).successful }
+
+  scope :report_college_offers, -> (college_id, year=nil) { current(year).college(college_id).group(:college_offer).order(:college_offer).count.map {|k, v| [ k ? k.titleize : 'Pending', v]} }
+
+  scope :report_college_choices, -> (college_id, year=nil) { current(year).college(college_id).group(:student_choice).order(:student_choice).count.map {|k, v| [ k ? k.titleize : 'Pending', v] if k != 'skipped'}.compact }
+
+  scope :report_courses, -> (college_id, year=nil) { current(year).college(college_id).group('courses.title', 'courses.id').order('courses.title').count }
+
+  scope :report_course_offers, -> (course_id, year=nil){current(year).course(course_id).group(:college_offer).order(:college_offer).count.map{|k,v| [k ? k.titleize : 'Pending',v]}.compact}
+
+  scope :report_course_choices, -> (course_id, year=nil) { current(year).course(course_id).group(:student_choice).order(:student_choice).count.map{|k,v| [k ? k.titleize : 'Pending',v] if k != 'skipped'}.compact}
+
+  scope :report_course_schools, ->(course_id, year=nil) {current(year).course(course_id).schools.group('schools.name').order('schools.name').count}
 
   # Callbacks.
   after_create :increase_current_selections_count
@@ -107,11 +126,29 @@ class CourseSelection < ApplicationRecord
     end
   end
 
+  # Updates all student choices in the specified application to the same choice.
+  #
+  # @param application [Application] the application to update.
+  # @param choice [Symbol] the choice to update it to.
   def self.update_all_student_choices(application, choice)
     CourseSelection.where(application_id: application.id).each do |selection|
       selection.student_choice = choice
       selection.save
     end
+  end
+
+  # Gets pretty college offer text.
+  #
+  # @return [String]
+  def college_offer_text
+    self.college_offer ? self.college_offer.titleize : 'Pending'
+  end
+
+  # Gets pretty student choice text.
+  #
+  # @return [String]
+  def student_choice_text
+    self.student_choice ? self.skipped? ? 'None' : self.student_choice.titleize : 'Pending'
   end
 
   private

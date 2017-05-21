@@ -3,7 +3,7 @@ class CollegeSpreadsheet
   # Generates a spreadsheet for the specified college and year.
   #
   # @param college [College] the college to generate a spreadsheet for.
-  # @param year [Fixnum] the year to use when generating the spreadsheet.
+  # @param year [Fixnum] the year to use when generating the spreadsheet]
   #
   # @return [Spreadsheet]
   def self.generate(college, year)

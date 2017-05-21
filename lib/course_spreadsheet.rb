@@ -19,8 +19,12 @@ class CourseSpreadsheet
     spreadsheet.add_blank_row
 
     # Students
-    rows = course.course_selections.current(year).map{|s| [s.application.full_name, s.college_offer_text, s.student_choice_text, s.application.status.titleize]}
-    table = spreadsheet.add_table ['Student', 'Offer', 'Reply', 'Status'], rows, 'Students'
+    rows = course.course_selections.current(year).map{|s| [s.application.full_name,
+                                                           s.college_offer_text,
+                                                           s.student_choice_text,
+                                                           s.application.status.titleize,
+                                                           s.application.submitted_date]}
+    table = spreadsheet.add_table ['Student', 'Offer', 'Reply', 'Status', 'Submitted'], rows, 'Students'
     spreadsheet.add_blank_row
 
     # Breakdown

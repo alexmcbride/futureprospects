@@ -12,12 +12,6 @@ TWEAKS
 
 remove pundit verify_authorized from global staff controller once permissions done
 
-heroku - sms messaging / error handling
-
-PDF: prawn / https://github.com/rposborne/wkhtmltopdf-heroku maybe better???? / make PDF pretty? move PDF generation into some sort of view?
-
-google analytics
-
 move loose styles into css file.
 
 comments - name, date, etc. at top of each file.
@@ -28,45 +22,12 @@ confirm close tab alert?
 
 course ratings
 
-top ten lists?
-
 mention this document in evaulation
 
 test app with no seed data.
 
 test destroy courses/college/category
 
-ACADEMIC YEAR
--------------
-
-- staff#courses#index shows overall applicants, rather than current. (maybe reset at end of each year?)
-- staff#reports#courses same as above for applicants
-
-transition year to year? / daily task? / at start of jan reset courses.course_selections_count / or create second
-counter_cache, called current_selections_count that is reset each year?
-
-test counter cache, student apply for courses, make sure number goes up.
-
-
--- ADD STUFF about academic year to GRADED UNIT DIARY
-
 add remove all to applications filter.
 
-add multiple applications for single students (e.g. on for 2016, another for 2017 etc).
-
-REPORTS
--------
-
-year dropdown??
-
-http://chartkick.com/ - good rails chart plugin
-https://github.com/ankane/groupdate - allows grouping queries by date
-Excel: alxsx (axlsx_rails) / email excel doc?
-
-show breakdown per category.
-
-applications by year?
-
-view report of all time?
-
-when switching year just redownload all json? do it with js
+add multiple applications for single students to seed data (e.g. on for 2016, another for 2017 etc).

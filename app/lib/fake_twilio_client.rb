@@ -10,11 +10,10 @@ class FakeTwilioClient
     #
     # @param args [Hash] the args used when sending a message.
     def create(args={})
-      puts '---- SMS ----'
+      puts "SMS text message sent - #{DateTime.now}"
       puts "From: #{args[:from]}"
       puts "To: #{args[:to]}"
       puts "Body: #{args[:body]}"
-      puts '---- END ----'
     end
   end
 end

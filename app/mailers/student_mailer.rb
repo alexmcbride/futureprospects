@@ -12,7 +12,7 @@ class StudentMailer < ApplicationMailer
     @course = course
     mail(to: @student.email, subject: 'Future Prospects - Course Cancelled')
 
-    StudentMessenger.course_cancelled student, course
+    StudentMessenger.new.course_cancelled student, course
   end
 
   def application_submitted(student, application)
@@ -20,7 +20,7 @@ class StudentMailer < ApplicationMailer
     @application = application
     mail(to: @student.email, subject: 'Future Prospects - Application Submitted')
 
-    StudentMessenger.application_submitted(student, application)
+    StudentMessenger.new.application_submitted(student, self)
   end
 
   def application_cancelled(student, application)
@@ -28,7 +28,7 @@ class StudentMailer < ApplicationMailer
     @application = application
     mail(to: @student.email, subject: 'Future Prospects - Application Cancelled')
 
-    StudentMessenger.application_cancelled(student, application)
+    StudentMessenger.new.application_cancelled(student, application)
   end
 
   def application_completed(student, application)
@@ -36,7 +36,7 @@ class StudentMailer < ApplicationMailer
     @application = application
     mail(to: @student.email, subject: 'Future Prospects - Application Completed')
 
-    StudentMessenger.application_completed(student, application)
+    StudentMessenger.new.application_completed(student, application)
   end
 
   def payment_received(student, payment)
@@ -44,7 +44,7 @@ class StudentMailer < ApplicationMailer
     @payment = payment
     mail(to: @student.email, subject: 'Future Prospects - Payment Received')
 
-    StudentMessenger.payment_received(student, payment)
+    StudentMessenger.new.payment_received(student, payment)
   end
 
   def payment_failed(student, payment)
@@ -52,7 +52,7 @@ class StudentMailer < ApplicationMailer
     @payment = payment
     mail(to: @student.email, subject: 'Future Prospects - Payment Failed')
 
-    StudentMessenger.payment_failed(student, payment)
+    StudentMessenger.new.payment_failed(student, payment)
   end
 
   def decisions_made(student, application)
@@ -60,7 +60,7 @@ class StudentMailer < ApplicationMailer
     @application = application
     mail(to: @student.email, subject: 'Future Prospects - Decisions Made')
 
-    StudentMessenger.decisions_made(student, application)
+    StudentMessenger.new.decisions_made(student, application)
   end
 
   def clearance(student, courses)
@@ -68,7 +68,7 @@ class StudentMailer < ApplicationMailer
     @courses = courses
     mail(to: student.email, subject: 'Future Prospects - Clearance')
 
-    StudentMessenger.clearance(student, courses)
+    StudentMessenger.new.clearance(student, courses)
   end
 
   def clearance_application(student, course)
@@ -76,7 +76,7 @@ class StudentMailer < ApplicationMailer
     @course = course
     mail(to: student.email, subject: 'Future Prospects - Clearance Application')
 
-    StudentMessenger.clearance_application(student, course)
+    StudentMessenger.new.clearance_application(student, course)
   end
 
   def reply_overdue(student, application)
@@ -84,6 +84,6 @@ class StudentMailer < ApplicationMailer
     @application = application
     mail(to: @student.email, subject: 'Future Prospects - Application Cancelled')
 
-    StudentMessenger.reply_overdue(student, application)
+    StudentMessenger.new.reply_overdue(student, application)
   end
 end

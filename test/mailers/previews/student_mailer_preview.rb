@@ -1,14 +1,14 @@
 class StudentMailerPreview < ActionMailer::Preview
   def course_cancelled
-    student = Student.find 2
-    course = student.applications.first.course_selections.first.course
-    StudentMailer.course_cancelled(student, course)
+    application =  Application.current.first
+    course = application.course_selections.first.course
+    StudentMailer.course_cancelled(application.student, course)
   end
 
   # Previews application_submitted email
   def application_submitted
-    student = Student.find 2
-    application = student.current_application
+    application = Application.current.where.not(status: :submitting).first
+    student = application.student
     StudentMailer.application_submitted(student, application)
   end
 
@@ -26,9 +26,9 @@ class StudentMailerPreview < ActionMailer::Preview
 
   # Previews payment_received email
   def payment_received
-    student = Student.find 2
-    payment = student.applications.first.payments.first
-    StudentMailer.payment_received(student, payment)
+    application = Application.current.where(status: :awaiting_decisions).first
+    payment = application.payments.first
+    StudentMailer.payment_received(application.student, payment)
   end
 
   def payment_failed
@@ -54,7 +54,7 @@ class StudentMailerPreview < ActionMailer::Preview
   end
 
   def reply_overdue
-    @application = CourseSelection.find_overdue_applications.first
+    @application = Application.order(:replies_due).first
     StudentMailer.reply_overdue(@application.student, @application)
   end
 end

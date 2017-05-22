@@ -722,6 +722,19 @@ class Application < ApplicationRecord
     end
   end
 
+  # Sends a text message to the student, if they have entered a mobile number.
+  #
+  # @param body [String] the message to send.
+  #
+  # @return [Boolean] true if the message was sent.
+  def send_text_message(body)
+    # TODO: validate mobile number?
+    if self.mobile.present?
+      TWILIO_CLIENT.messages.create(from: ENV['TWILIO_PHONE_NUMBER'], to: self.mobile, body: body)
+      true
+    end or false
+  end
+
   private
     # Calculates the date that replies are due for this application. We have to figure out the date of the next course
     # start, in case the decision is being made a different year. For instance, a decision made in Dec 2016 for a course

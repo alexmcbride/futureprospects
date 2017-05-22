@@ -75,3 +75,4 @@ gem 'prawn' # PDF generation
 gem 'chartkick' # chart generation
 gem 'groupdate' # makes grouping by dates easier (for charts)
 gem 'axlsx' # excel
+gem 'twilio-ruby', '~> 4.11.1' # SMS text messages with Twilio

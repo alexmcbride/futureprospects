@@ -38,4 +38,16 @@ class Student < User
   def all_payments
     Payment.joins(:application).where('applications.student_id=?', id).where.not(status: nil)
   end
+
+  # Sends a text message to the student, if they have a current application and have entered a mobile number.
+  #
+  # @param body [String] the message to send.
+  #
+  # @return [Boolean] true if the message was sent.
+  def send_text_message(body)
+    app = current_application
+    if app.present?
+      app.send_text_message body
+    end or false
+  end
 end

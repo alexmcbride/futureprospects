@@ -69,5 +69,8 @@ Rails.application.configure do
         :password  => ENV['PAYPAL_PASSWORD'],
         :signature => ENV['PAYPAL_SIGNATURE']
     )
+
+    # Client for sending SMS text messages.
+    ::TWILIO_CLIENT = FakeTwilioClient.new # Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_SECRET']
   end
 end

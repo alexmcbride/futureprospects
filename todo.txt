@@ -10,17 +10,13 @@ TWEAKS
 
 -------------
 
-split css imports into right sections (kickchart only in reports etc)
-
-make reports stuff top ten etc.
+college reports top ten courses/categories
 
 add sms to devise
 
 add enable sms checkbox to profile enter mobile text field
 
 payment display spread over several parts of app
-
-improve courses#show register/apply option
 
 remove pundit verify_authorized from global staff controller once permissions done
 
@@ -44,4 +40,3 @@ add remove all to applications filter.
 
 add multiple applications for single students to seed data (e.g. on for 2016, another for 2017 etc).
 
-college reports top ten courses/categories

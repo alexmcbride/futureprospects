@@ -15,15 +15,17 @@ crumb :courses do |category|
   if category.nil?
     link college.name, courses_path(category, college: params[:college]) if college
   else
-    link college.name, courses_category_path(category, college: params[:college]) if college
     link category.name, courses_category_path(category)
+    link college.name, courses_category_path(category, college: params[:college]) if college
   end
 end
 
 # courses/:id
 crumb :course do |course|
   parent :root
-  parent :courses, course.category
+  link 'Courses', courses_path
+  link course.category.name, courses_category_path(course.category)
+  link course.college.name, courses_category_path(course.category, college: course.college_id)
   link course.title, course
 end
 

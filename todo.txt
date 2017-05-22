@@ -10,7 +10,15 @@ TWEAKS
 
 -------------
 
+split css imports into right sections (kickchart only in reports etc)
+
+make reports stuff top ten etc.
+
 add sms to devise
+
+add enable sms checkbox to profile enter mobile text field
+
+payment display spread over several parts of app
 
 improve courses#show register/apply option
 

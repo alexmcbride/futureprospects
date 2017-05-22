@@ -25,7 +25,7 @@ class StudentMessenger
   end
 
   def payment_received(student, payment)
-    student.send_text_message 'Future Prospects - we have received your payment. Next your application will be sent to ' +
+    student.send_text_message 'Future Prospects - we have received your payment. Your application will now be sent to ' +
                                   'your chosen colleges to be considered. To track your application please sign in: ' +
                                   'http://futureprospects.herokuapp.com.'
   end

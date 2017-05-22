@@ -16,8 +16,8 @@
               $( "#school_country" ).val( ui.item.country );
               return false;
           }
-      }).autocomplete( "instance" )._renderItem = function( ul, item ) {
-          return $("<li>").append(item.name).appendTo(ul);
+      }).autocomplete("instance")._renderItem = function(ul, item) {
+          return $("<li>").append("<div>" + item.name + "</div>").appendTo(ul);
       };
   });
 </script>

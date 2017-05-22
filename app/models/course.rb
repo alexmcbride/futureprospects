@@ -221,6 +221,7 @@ class Course < ApplicationRecord
       # Send email to all students.
       self.course_selections.each do |selection|
         StudentMailer.course_cancelled(selection.application.student, self).deliver_later
+        StudentMessenger.new.course_cancelled student, self
       end
 
       return true

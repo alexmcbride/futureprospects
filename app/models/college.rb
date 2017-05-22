@@ -104,6 +104,7 @@ class College < ApplicationRecord
         courses = Course.clearance_courses(application, self).includes(:college).to_a
         if courses.any?
           StudentMailer.clearance(application.student, courses).deliver_later
+          StudentMessenger.new.clearance(application.student, courses)
         end
       end
     end

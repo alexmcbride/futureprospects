@@ -372,7 +372,10 @@ class Application < ApplicationRecord
   def add_clearance_course(selection)
     if add_course selection
       update_status :awaiting_decisions
+
       StudentMailer.clearance_application(self.student, selection.course).deliver_later
+      StudentMessenger.new.clearance_application(self.student, selection.ccourse)
+
       return true
     end
     false
@@ -441,7 +444,9 @@ class Application < ApplicationRecord
     applications.each do |application|
       application.cancel
       puts "Cancelled application for: #{application.student.username}..."
+
       StudentMailer.application_cancelled(application.student, application)
+      StudentMessenger.new.application_cancelled(student, application)
     end
   end
 
@@ -453,7 +458,9 @@ class Application < ApplicationRecord
     applications.each do |application|
       application.update_status :replies_overdue
       puts "Cancelled application for: #{application.student.username}..."
+
       StudentMailer.reply_overdue(application.student, application)
+      StudentMessenger.new.reply_overdue(application.student, application)
     end
   end
 
@@ -517,10 +524,12 @@ class Application < ApplicationRecord
     if payment.valid?
       if payment.authorize
         update_status :awaiting_decisions
-        StudentMailer.payment_received(self.student, payment).deliver_later
+        StudentMailer.payment_received(student, payment).deliver_later
+        StudentMessenger.new.payment_received(student, payment)
       else
         update_status :payment_failed
-        StudentMailer.payment_failed(self.student, payment).deliver_later
+        StudentMailer.payment_failed(student, payment).deliver_later
+        StudentMessenger.new.payment_failed(student, payment)
       end
     end
 
@@ -672,7 +681,7 @@ class Application < ApplicationRecord
       create_application_payment.save!
 
       StudentMailer.application_submitted(student, self).deliver_later
-
+      StudentMessenger.new.application_submitted(student, self)
       true
     else
       self.errors.add(:section, "'#{self.current_stage.humanize}' has not been completed")
@@ -700,7 +709,9 @@ class Application < ApplicationRecord
   def save_completed
     self.status = :completed
     self.save!
-    StudentMailer.application_completed(self.student, self).deliver_later
+
+    StudentMailer.application_completed(student, self).deliver_later
+    StudentMessenger.new.application_completed(student, self)
   end
 
   # Gets the date that a student decision is due.
@@ -764,7 +775,8 @@ class Application < ApplicationRecord
 
         self.save! validate: false
 
-        StudentMailer.decisions_made(self.student, self).deliver_later
+        StudentMailer.decisions_made(student, self).deliver_later
+        StudentMessenger.new.decisions_made(student, self)
       end
     end
 

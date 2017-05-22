@@ -12,6 +12,8 @@ TWEAKS
 
 add sms to devise
 
+improve courses#show register/apply option
+
 remove pundit verify_authorized from global staff controller once permissions done
 
 move loose styles into css file.

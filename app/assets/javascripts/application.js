@@ -30,3 +30,16 @@ $(function () {
         format: 'mm/yyyy'
     });
 });
+
+/* Register event-handler that flips brand image on mouse over. */
+function registerBrandHover(imgOn, imgOff) {
+    $(document).ready(function(){
+        $('#brand-link').hover(function(){
+            $('#brand-image').attr('src', imgOn);
+        }, function() {
+            $('#brand-image').attr('src', imgOff);
+        });
+    });
+}
+
+

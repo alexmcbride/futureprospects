@@ -1,3 +1,19 @@
+<% content_for :head do %>
+  <script type="text/javascript">
+      $(document).ready(function(){
+          $(".custom-modal-button").click(function(e){
+              // Get data from btn and then show the modal dialog.
+              var btn = $(e.target);
+              var name = btn.attr('data-modal-name');
+              var path = btn.attr('data-modal-path');
+              $('#modalName').html(name);
+              $('#modalLink').attr('href', path);
+              $('#customModal').modal();
+          });
+      });
+  </script>
+<% end %>
+
 <!-- Remove Institution Modal Dialog -->
 <div class="modal fade" tabindex="-1" role="dialog" id="customModal">
   <div class="modal-dialog" role="document">
@@ -23,17 +39,3 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
-<script type="text/javascript">
-    $(document).ready(function(){
-        $(".custom-modal-button").click(function(e){
-            // Get data from btn and then show the modal dialog.
-            var btn = $(e.target);
-            var name = btn.attr('data-modal-name');
-            var path = btn.attr('data-modal-path');
-            $('#modalName').html(name);
-            $('#modalLink').attr('href', path);
-            $('#customModal').modal();
-        });
-    });
-</script>

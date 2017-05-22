@@ -110,7 +110,7 @@ class NewApplicationsController < ApplicationController
   #
   # Searches for previously used school name.
   def education_search
-    schools = School.search(params[:term])
+    schools = School.search(params[:term]).limit(10)
     respond_to do |format|
       format.json do
         render :json => schools, :only => [:name, :address_1, :address_2, :city, :postcode, :country]
@@ -225,7 +225,7 @@ class NewApplicationsController < ApplicationController
   #
   # Searches for previously used school name.
   def employment_search
-    jobs = Job.search(params[:term])
+    jobs = Job.search(params[:term]).limit(10)
     respond_to do |format|
       format.json do
         render :json => jobs, :only => [:employer, :address_1, :address_2, :city, :postcode, :country]

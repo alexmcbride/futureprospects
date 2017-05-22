@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= "#{@title} - " unless @title.nil? %>Future Prospects</title>
+    <title><%= "#{@title} - " unless @title %>Future Prospects</title>
     <%= csrf_meta_tags %>
     <meta name="description" content="Future Prospects allows students to apply to a wide range of courses at selected colleges throughout Scotland.">
     <meta name="keywords" content="Student,College,Course,Application,Scotland,Future,Prospects,Education">
@@ -20,21 +20,18 @@
 
     <%= javascript_include_tag 'application' %>
 
+    <%# Render page specific head content. %>
+    <%= yield :head %>
+
+    <script type="text/javascript">
+        <%# We do this here so we can include the Ruby image paths. %>
+        registerBrandHover('<%= image_path 'future-prospects-logo-hover.png' %>', '<%= image_path 'future-prospects-logo.png' %>');
+    </script>
+
     <!-- HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js" type="text/javascript"></script>
     <![endif]-->
-
-    <script>
-      /* Swap brand images on hover */
-      $(document).ready(function(){
-         $('#brand-link').hover(function(){
-             $('#brand-image').attr('src', '<%= image_path 'future-prospects-logo-hover.png' %>');
-         }, function() {
-             $('#brand-image').attr('src', '<%= image_path 'future-prospects-logo.png' %>');
-         });
-      });
-    </script>
   </head>
   <body>
 

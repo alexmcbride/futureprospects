@@ -54,7 +54,7 @@
               <%= link_to 'Create Application', applications_create_path, class: 'btn btn-success btn-block', role: 'button', method: :post %>
             <% elsif application.clearance? %>
               <%= link_to 'Apply Clearance', new_clearance_path(@course), class: 'btn btn-success btn-block', role: 'button' %>
-            <% else %>
+            <% elsif application.submitting? %>
               <%= form_for @course_selection, url: applications_courses_add_path, method: :post do |f| %>
                 <%= f.hidden_field :course_id %>
                 <%= f.submit 'Apply for Course', class: 'btn btn-success btn-block', style: 'margin-bottom: 5px;' %>
@@ -66,10 +66,6 @@
         <% end %>
 
         <%= link_to 'View College Details', @course.college, class: 'btn btn-success btn-block', role: 'button' %>
-
-        <% if staff_signed_in? %>
-          <%= link_to 'Edit Course', edit_staff_course_path(@course), class: 'btn btn-success btn-block', role: 'button' %>
-        <% end %>
       </div>
     </div>
   </div>

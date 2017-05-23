@@ -8,6 +8,7 @@ class DecisionsController < ApplicationController
 
   # GET /decisions/firm
   def firm
+    # Wipe any previous choices at the start.
     CourseSelection.clear_all_choices @application
   end
 
@@ -36,7 +37,7 @@ class DecisionsController < ApplicationController
   def decline
     which = params[:which_to_decline].to_sym
     CourseSelection.decline which, @application
-    redirect_to decisions_review_path, notice: 'All choices declined'
+    redirect_to decisions_review_path, notice: 'Choices successfully declined'
   end
 
   # GET /decisions/review
@@ -61,6 +62,7 @@ class DecisionsController < ApplicationController
     end
 
     def check_can_view
+      # TODO: move into Application as can_make_decision? Application should control who makes decisions.
       user_not_authorized unless (@application.awaiting_decisions? || @application.awaiting_replies? || @application.all_rejected?)
     end
 end

@@ -746,6 +746,13 @@ class Application < ApplicationRecord
     end or false
   end
 
+  # Determines if the application can receive decisions.
+  #
+  # @return [Boolean]
+  def can_make_decision?
+    self.awaiting_decisions? || self.awaiting_replies? || self.all_rejected?
+  end
+
   private
     # Calculates the date that replies are due for this application. We have to figure out the date of the next course
     # start, in case the decision is being made a different year. For instance, a decision made in Dec 2016 for a course

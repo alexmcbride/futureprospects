@@ -53,20 +53,38 @@
       <br>
 
       <div class="form-group">
-        <%= f.submit 'Sign up', class: 'btn btn-primary btn-block btn-md' %>
+        <%= f.submit 'Sign up', class: 'btn btn-primary btn-md', style: 'padding-left: 50px; padding-right: 50px;' %>
       </div>
     <% end %>
-    <div class="text-right">
-      <%= render 'devise/shared/links' %>
-    </div>
+
   </div>
 
   <div class="col-sm-3">
-    <p class="text-darkish">Or register for the site using an open authentication provider.</p>
-    <%= link_to student_google_oauth2_omniauth_authorize_path, class: 'btn btn-primary btn-block', role: 'button' do %>
-      <%= icon('google') %>
-        &nbsp;
-        Register with Google
-    <% end %>
+    <div class="well">
+      <p class="text-darkish small">Register using another provider.</p>
+      <%= link_to student_google_oauth2_omniauth_authorize_path, class: 'btn btn-primary btn-block', role: 'button', style: 'background-color: #db4a39; border: 0;' do %>
+        <%= icon('google') %>
+          &nbsp;
+          Register with Google
+      <% end %>
+
+      <%= link_to student_facebook_omniauth_authorize_path , class: 'btn btn-primary btn-block', role: 'button', style: 'background-color: #3b5998; border: 0;' do %>
+          <%= icon('facebook') %>
+          &nbsp;
+          Register with Facebook
+      <% end %>
+
+      <%= link_to student_google_oauth2_omniauth_authorize_path, class: 'btn btn-primary btn-block', role: 'button', style: 'background-color: #0084b4; border: 0;' do %>
+          <%= icon('twitter') %>
+          &nbsp;
+          Register with Twitter
+      <% end %>
+    </div>
+
+    <hr>
+
+    <div>
+      <%= render 'devise/shared/links' %>
+    </div>
   </div>
 </div>

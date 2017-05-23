@@ -1,6 +1,6 @@
 class DecisionsController < ApplicationController
   before_action :set_application
-  before_action :check_can_view, except: [:completed]
+  before_action :authorize_user, except: [:completed]
 
   # GET /decisions/:id
   def index
@@ -61,8 +61,8 @@ class DecisionsController < ApplicationController
       @application = current_student.current_application
     end
 
-    def check_can_view
-      # TODO: move into Application as can_make_decision? Application should control who makes decisions.
-      user_not_authorized unless (@application.awaiting_decisions? || @application.awaiting_replies? || @application.all_rejected?)
+    # Checks the user can view this controller.
+    def authorize_user
+      user_not_authorized unless @application.can_make_decision?
     end
 end

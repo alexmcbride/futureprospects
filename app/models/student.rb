@@ -1,6 +1,6 @@
 # Model class to represent a student. Inherits from User and uses Single-Table Inheritance.
 class Student < User
-  devise :omniauthable, :omniauth_providers => [:google_oauth2]
+  devise :omniauthable, :omniauth_providers => [:google_oauth2, :facebook]
 
   # Some validations are shared between student and application
   include StudentValidator
@@ -11,12 +11,12 @@ class Student < User
   # Attributes
   attr_reader :current_application
 
-  ##
-  # Finds students with the specified open-auth data.
+  # Finds the student with the specified open authentication provider.
   #
-  # @param data [Hash] the oauth data (provider and uid).
-  # @return [ActiveRecord::Relation]
-  scope :find_open_auth, ->(data){where(provider: data.provider, uid: data.uid)}
+  # @param provider [String] the oauth provider.
+  # @param uid [String] the oauth unique identifier.
+  # @return [Array<Student>] the student object or nil.
+  scope :find_open_auth, ->(provider, uid){ where(provider: provider, uid: uid) }
 
   # Creates a new application, filled with some info we already know.
   #
@@ -85,7 +85,7 @@ class Student < User
     student.provider = data['provider']
     student.uid = data['uid']
     student.email = data['info']['email']
-    student.password_confirmation = @student.password = Devise.friendly_token[0,20] # Dummy password
+    student.password_confirmation = student.password = Devise.friendly_token[0,20] # Dummy password
     student.skip_confirmation! # Google has verified the email
     student
   end

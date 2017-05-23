@@ -60,7 +60,8 @@ gem 'gretel' # breadcrumb
 gem 'carrierwave', '~> 1.0' # image upload
 gem 'figaro' # configuration (for heroku)
 gem 'devise' # authentication
-gem 'omniauth-google-oauth2' # devise open-auth
+gem 'omniauth-google-oauth2' # google oauth
+gem 'omniauth-facebook' # facebook oauth
 #gem 'devise-bootstrapped' # authentication views
 gem 'rolify' # roles
 gem 'font-awesome-sass', '~> 4.7.0' # glyphs and icons

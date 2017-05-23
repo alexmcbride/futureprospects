@@ -7,7 +7,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def google_oauth2
     data = request.env['omniauth.auth']
 
-    # Try find student for provider, if found authenticate normally, otherwise redirect to oauth signup page.
+    # Try find student for provider, if found authenticate normally otherwise redirect to oauth signup page.
     @student = Student.find_open_auth(data).first
     if @student && @student.persisted?
       flash[:notice] = I18n.t 'devise.omniauth_callbacks.success', :kind => 'Google'
@@ -22,7 +22,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   # GET /students/oauth/new
   #
-  # Action to display oauth sign-up form, although signing up with oauth, we still need some info from the student.
+  # Action to display oauth sign-up form, although signing up with oauth we still need some info from the student.
   def new
     @student = Student.new_from_oauth session['devise.google_data']
   end
@@ -32,7 +32,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # Post action for oauth signup form.
   def create
     @student = Student.create_from_oauth session['devise.google_data'], student_params
-    if @student
+    if @student.save
       sign_in_and_redirect @student, :event => :authentication
     else
       render :new

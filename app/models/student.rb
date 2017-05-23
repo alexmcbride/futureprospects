@@ -8,7 +8,11 @@ class Student < User
   # Foreign Keys
   has_many :applications
 
+  # Attributes
   attr_reader :current_application
+
+  # Scopes
+  scope :find_open_auth, ->(data){where(provider: data.provider, uid: data.uid)}
 
   # Creates a new application, filled with some info we already know.
   #
@@ -53,4 +57,32 @@ class Student < User
     end or false
   end
 
+  # Create new student from oauth data.
+  #
+  # @param data [Hash] the data from an oauth provider.
+  #
+  # @return [Student]
+  def self.create_from_oauth(data)
+    student = Student.new
+    student.email = data['info']['email']
+    student.first_name = data['info']['first_name']
+    student.family_name = data['info']['last_name']
+    student
+  end
+
+  # Update new student from oauth data.
+  #
+  # @param data [Hash] the data from an oauth provider.
+  # @param params [Hash] the data to update the student with
+  #
+  # @return [Student] true if saved.
+  def self.update_from_oauth(data, params)
+    student = Student.new params
+    student.provider = data['provider']
+    student.uid = data['uid']
+    student.email = data['info']['email']
+    student.password_confirmation = @student.password = Devise.friendly_token[0,20] # Dummy password
+    student.skip_confirmation! # Google has verified the email
+    student
+  end
 end

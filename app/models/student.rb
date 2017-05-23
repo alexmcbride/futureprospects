@@ -11,12 +11,16 @@ class Student < User
   # Attributes
   attr_reader :current_application
 
-  # Scopes
+  ##
+  # Finds students with the specified open-auth data.
+  #
+  # @param data [Hash] the oauth data (provider and uid).
+  # @return [ActiveRecord::Relation]
   scope :find_open_auth, ->(data){where(provider: data.provider, uid: data.uid)}
 
   # Creates a new application, filled with some info we already know.
   #
-  # Returns a new application object, or nil if one already exists.
+  # @return [Application]
   def create_application
     unless self.has_current_application?
       Application.create_for_student self
@@ -25,7 +29,7 @@ class Student < User
 
   # Finds the current application, which is an application made in the last year.
   #
-  # Returns the student's current application, which is defined as any application active in the last year.
+  # @return [Application]
   def current_application
     # Get from last year for Postgresql
     @current_application ||= self.applications.current.first
@@ -33,14 +37,14 @@ class Student < User
 
   # Checks if the student has a current application
   #
-  # Returns a boolean indicating if the student has a current_application.
+  # @return [Boolean]
   def has_current_application?
     not self.current_application.nil?
   end
 
   # Gets all payments made by this student.
   #
-  # Returns an ActiveRecord::Relation containing the payment objects.
+  # @return [ActiveRecord::Relation]
   def all_payments
     Payment.joins(:application).where('applications.student_id=?', id).where.not(status: nil)
   end
@@ -62,7 +66,7 @@ class Student < User
   # @param data [Hash] the data from an oauth provider.
   #
   # @return [Student]
-  def self.create_from_oauth(data)
+  def self.new_from_oauth(data)
     student = Student.new
     student.email = data['info']['email']
     student.first_name = data['info']['first_name']
@@ -70,13 +74,13 @@ class Student < User
     student
   end
 
-  # Update new student from oauth data.
+  # Create new student from oauth data with params data (e.g. from a form).
   #
   # @param data [Hash] the data from an oauth provider.
-  # @param params [Hash] the data to update the student with
+  # @param params [Hash] the data to update the student with.
   #
-  # @return [Student] true if saved.
-  def self.update_from_oauth(data, params)
+  # @return [Student]
+  def self.create_from_oauth(data, params)
     student = Student.new params
     student.provider = data['provider']
     student.uid = data['uid']

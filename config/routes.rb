@@ -11,7 +11,11 @@ Rails.application.routes.draw do
     get 'staff/edit', to: 'devise/registrations#edit', as: 'edit_staff_registration'
     put 'staff', to: 'devise/registrations#update', as: 'staff_registration'
   end
-  devise_for :students, controllers: { registrations: 'registrations'}
+  devise_for :students, controllers: { registrations: 'registrations', omniauth_callbacks: 'omniauth_callbacks'}
+  devise_scope :student do
+    get 'students/oauth/new', to: 'omniauth_callbacks#new', as: 'new_student_oauth'
+    post 'students/oauth/new', to: 'omniauth_callbacks#create', as: 'create_student_oauth'
+  end
 
   namespace :staff do
     # Courses

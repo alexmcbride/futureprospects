@@ -51,7 +51,7 @@ gem 'bcrypt', git: 'https://github.com/codahale/bcrypt-ruby.git', :require => 'b
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-# Custom Gems
+# Project Gems
 gem 'bootstrap-sass', '~> 3.3.6' # bootstrap
 gem 'will_paginate', '~> 3.1.0' # pagination
 gem 'scoped_search' # search
@@ -60,6 +60,7 @@ gem 'gretel' # breadcrumb
 gem 'carrierwave', '~> 1.0' # image upload
 gem 'figaro' # configuration (for heroku)
 gem 'devise' # authentication
+gem 'omniauth-google-oauth2' # devise open-auth
 #gem 'devise-bootstrapped' # authentication views
 gem 'rolify' # roles
 gem 'font-awesome-sass', '~> 4.7.0' # glyphs and icons

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170518094926) do
+ActiveRecord::Schema.define(version: 20170523091037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -231,6 +231,8 @@ ActiveRecord::Schema.define(version: 20170518094926) do
     t.string   "job_title"
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
+    t.string   "provider"
+    t.string   "uid"
     t.index ["college_id"], name: "index_users_on_college_id", using: :btree
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree

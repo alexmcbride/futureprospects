@@ -1,8 +1,16 @@
 # Model class to represent a User.
 class User < ApplicationRecord
   # Include devise modules.
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable,
-         :lockable, :timeoutable, :authentication_keys => [:login]
+  devise :database_authenticatable,
+         :registerable,
+         :recoverable,
+         :rememberable,
+         :trackable,
+         :validatable,
+         :confirmable,
+         :lockable,
+         :timeoutable,
+         :authentication_keys => [:login]
 
   # Relations
   has_many :applications

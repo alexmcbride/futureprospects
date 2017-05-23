@@ -1,5 +1,7 @@
 # Model class to represent a student. Inherits from User and uses Single-Table Inheritance.
 class Student < User
+  devise :omniauthable, :omniauth_providers => [:google_oauth2]
+
   # Some validations are shared between student and application
   include StudentValidator
 
@@ -50,4 +52,5 @@ class Student < User
       app.send_text_message body
     end or false
   end
+
 end

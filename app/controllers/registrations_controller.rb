@@ -18,6 +18,6 @@ class RegistrationsController < Devise::RegistrationsController
     # Configures allowed parameters for Devise.
     def configure_permitted_parameters
       devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :first_name, :family_name, :scottish_candidate_number,
-                                                         :national_insurance_number])
+                                                         :national_insurance_number, :confirmed_at])
     end
 end

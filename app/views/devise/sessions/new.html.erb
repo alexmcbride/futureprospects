@@ -4,7 +4,7 @@
 %>
 
 <div class="row">
-  <div class="col-sm-7 col-sm-offset-1">
+  <div class="<%= resource.student? ? 'col-sm-7 col-sm-offset-1' : 'col-sm-6 col-sm-offset-3' %>">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <% if resource.staff? %>
         <p>Sign in to the site in order to manage your college area.</p>
@@ -39,12 +39,14 @@
     </div>
   </div>
 
-  <div class="col-sm-3">
-    <p class="text-darkish">Or sign in using an open auth provider.</p>
-    <%= link_to student_google_oauth2_omniauth_authorize_path, class: 'btn btn-primary btn-block', role: 'button' do %>
-        <%= icon('google') %>
-        &nbsp;
-        Sign In with Google
-    <% end %>
-  </div>
+  <% if resource.student? %>
+    <div class="col-sm-3">
+      <p class="text-darkish">Or sign in using an open auth provider.</p>
+      <%= link_to student_google_oauth2_omniauth_authorize_path, class: 'btn btn-primary btn-block', role: 'button' do %>
+          <%= icon('google') %>
+          &nbsp;
+          Sign In with Google
+      <% end %>
+    </div>
+  <% end %>
 </div>

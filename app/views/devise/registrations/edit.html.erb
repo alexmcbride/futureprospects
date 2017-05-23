@@ -12,6 +12,13 @@
 
           <div class="row">
             <div class="col-xs-12">
+              <% if resource.provider.present? %>
+                <div class="row slight-margin-bottom">
+                  <div class="col-xs-6">Provider</div>
+                  <div class="col-xs-6"><strong><%= resource.provider %></strong></div>
+                </div>
+              <% end %>
+
               <div class="row slight-margin-bottom">
                 <div class="col-xs-6">Username</div>
                 <div class="col-xs-6"><strong><%= resource.username %></strong></div>

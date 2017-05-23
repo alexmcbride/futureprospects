@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= "#{@title} - " unless @title %>Future Prospects</title>
+    <title><%= "#{@title} - " unless @title.nil? %>Future Prospects</title>
     <%= csrf_meta_tags %>
     <meta name="description" content="Future Prospects allows students to apply to a wide range of courses at selected colleges throughout Scotland.">
     <meta name="keywords" content="Student,College,Course,Application,Scotland,Future,Prospects,Education">

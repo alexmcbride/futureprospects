@@ -1,10 +1,10 @@
 <ul class="list-unstyled">
   <%- if controller_name != 'sessions' %>
-    <li><%= link_to "Sign in", new_session_path(resource_name) %></li>
+    <li><%= link_to "Need to sign in?", new_session_path(resource_name) %></li>
   <% end -%>
 
   <%- if devise_mapping.registerable? && !resource.staff? && controller_name != 'registrations' %>
-    <li><%= link_to "Register", new_registration_path(resource_name) %></li>
+    <li><%= link_to "Need to register?", new_registration_path(resource_name) %></li>
   <% end -%>
 
   <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>

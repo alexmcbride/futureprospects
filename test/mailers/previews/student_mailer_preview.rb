@@ -57,4 +57,10 @@ class StudentMailerPreview < ActionMailer::Preview
     @application = Application.order(:replies_due).first
     StudentMailer.reply_overdue(@application.student, @application)
   end
+
+  def oauth_registration
+    student = Student.all.first
+    student.provider = 'Facebook'
+    StudentMailer.oauth_registration student
+  end
 end

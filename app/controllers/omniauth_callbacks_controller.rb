@@ -35,6 +35,10 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def create
     @student = Student.create_from_oauth session['devise.oauth_data'], student_params
     if @student.save
+      # Send welcome email as it's not sent by Devise.
+      StudentMailer.oauth_registration(@student).deliver_later
+
+      # Sign in normally.
       sign_in_and_redirect @student, :event => :authentication
     else
       render :new

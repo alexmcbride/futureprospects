@@ -58,7 +58,7 @@ class Staff::StudentsController < Staff::StaffController
         students = Student.where('LOWER(first_name) LIKE ? OR LOWER(family_name) LIKE ? OR LOWER(username) LIKE ? or LOWER(EMAIL) LIKE ?', term, term, term, term)
                        .order(:first_name, :family_name)
                        .limit 15
-        format.json { render json: students, only: [:id, :first_name, :family_name] }
+        format.json { render json: students, only: [:id, :first_name, :family_name, :email] }
       else
         format.json { head :ok } # blank json response
       end

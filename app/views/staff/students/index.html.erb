@@ -19,7 +19,7 @@
           }
       }).autocomplete("instance")._renderItem = function(ul, item) {
           return $("<li>")
-              .append("<div>" + item.first_name + ' ' + item.family_name + "</div>")
+              .append("<div>" + item.first_name + ' ' + item.family_name + " &mdash; " + item.email + "</div>")
               .appendTo(ul);
       };
     })

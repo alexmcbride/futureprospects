@@ -118,8 +118,8 @@
 <% if current_staff.has_role?(:site_admin) || current_staff.has_role?(:can_view_applications) %>
   <hr>
   <h4>Applications</h4>
-  <p class="text-darkish small">A list of the student's applications.</p>
   <% if @staff_student.applications.any? %>
+    <p class="text-darkish">A list of the student's applications.</p>
     <div class="table-responsive">
       <table class="table table-condensed">
         <thead>

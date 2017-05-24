@@ -66,4 +66,9 @@ class StudentMailer < ApplicationMailer
     @application = application
     mail(to: @student.email, subject: 'Future Prospects - Application Cancelled')
   end
+
+  def oauth_registration(student)
+    @student = student
+    mail(to: @student.email, subject: 'Future Prospects - Account Created')
+  end
 end

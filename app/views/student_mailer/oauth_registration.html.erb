@@ -1,0 +1,16 @@
+<h1>Future Prospects - Account Created</h1>
+
+<p>Welcome <%= @student.full_name %>,</p>
+
+<p>You have created an account with us using the <strong><%= @student.provider.titleize %></strong> authentication
+  provider.</p>
+
+<p>The following username has been generated for you automatically:</p>
+
+<p><strong><%= @student.username %></strong></p>
+
+<p>Please keep a note of this for future reference.</p>
+
+<p>You can now <%= link_to 'sign in', new_student_session_url %> to create your application.</p>
+
+<p>Regards,<br><br>Future Prospects</p>

@@ -21,20 +21,24 @@ class Course < ApplicationRecord
   scoped_search relation: :category, on: :name, profile: :full
   scoped_search relation: :college, on: :name, profile: :full
 
-  ##
   # Finds courses with +:open+ status.
+  #
+  # @return [Array<Course>]
   scope :available, -> {where(status: :open)}
 
-  ##
   # Finds courses with spaces still to fill.
+  #
+  # @return [Array<Course>]
   scope :with_spaces, -> {where('current_selections_count<spaces')}
 
-  ##
   # Finds all courses at the specified college.
+  #
+  # @return [Array<Course>]
   scope :college, ->(college_id){where(college_id: college_id)}
 
-  ##
   # Finds all courses with applicants for the specified year.
+  #
+  # @return [Array<Course>]
   scope :current, ->(year){joins(course_selections: :application).where('applications.created_at' => Application.current_year(year))}
 
   # Image Upload
@@ -55,22 +59,19 @@ class Course < ApplicationRecord
   validates :image, presence: true
   validate :spaces_greater_than_applicants, on: :update
 
-  # Foreign Keys
   # @!attribute college
   #   @return [College]
-  #   Gets the college the course belongs to.
+  #   The course's parent college.
   belongs_to :college
 
-  # Foreign Keys
   # @!attribute category
   #   @return [Category]
-  #   Gets the category the course belongs to.
+  #   The course's parent category
   belongs_to :category, counter_cache: true
 
-  # Foreign Keys
   # @!attribute course_selections
   #   @return [CourseSelection]
-  #   Gets the course selections, the intersection table between course and application.
+  #   The many-to-many association between courses and applications.
   has_many :course_selections, dependent: :destroy
 
   # Gets the number of years the course lasts for.
@@ -97,7 +98,6 @@ class Course < ApplicationRecord
   # Searches course titles for the specified term.
   #
   # @param search_term [String] the term to search for.
-  #
   # @return [ActiveRecord:Relation] the search results.
   def self.search(search_term)
     Course.search_for(search_term, profile: :title)
@@ -106,7 +106,6 @@ class Course < ApplicationRecord
   # Searches course titles, categories, and colleges for the specified term.
   #
   # @param search_term [String] the term to search for.
-  #
   # @return [ActiveRecord:Relation] the search results
   def self.full_search(search_term, category=nil)
     scope = Course.search_for(search_term, profile: :full).includes(:category, :college)
@@ -140,7 +139,6 @@ class Course < ApplicationRecord
   # Filters the courses based on the request params (+:title+, +:category_id+, +:status+, and +:college_id+)
   #
   # @param params [Array<string>] the request params containing filtering information.
-  #
   # @return [ActiveRecord::Relation] the results of the filtering operation.
   def self.filter(params)
     scope = Course.search params[:title]
@@ -159,7 +157,6 @@ class Course < ApplicationRecord
   # Removes the course if there are no course selections that include this course.
   #
   # @param title [String] the title to match against, entered by the user, as a security precaution.
-  #
   # @return [boolean] true if the operation was successful.
   def remove(title)
     if title != self.title
@@ -183,7 +180,6 @@ class Course < ApplicationRecord
   # Finds all courses with an open status.
   #
   # @param category [Category] optional category the include the where clause
-  #
   # @return [ActiveRecord::Relation] the course results.
   def self.find_open_courses(category=nil)
     scope = Course.available
@@ -198,7 +194,6 @@ class Course < ApplicationRecord
   # Updates attributes and takes action depending on status change (e.g. +:cancelled' etc).
   #
   # @param params [Array<String>] the request params including the update data.
-  #
   # @return [boolean] true if the operation was successful.
   def update_with_status(params)
     # Check if status has just been switched to cancelled
@@ -234,7 +229,6 @@ class Course < ApplicationRecord
   #
   # @param application [Application] the application to find clearance courses for.
   # @param college [College] an optional college to limit the courses to.
-  #
   # @return [ActiveRecord::Relation] the course results.
   def self.clearance_courses(application, college=nil)
     scope = Course.available
@@ -257,7 +251,6 @@ class Course < ApplicationRecord
   # has spaces left to fill).
   #
   # @param college [College] optional college to limit results to.
-  #
   # @return [ActiveRecord::Relation] the course results.
   def self.all_clearance_courses(college=nil)
     scope = Course.joins(:college)
@@ -290,7 +283,6 @@ class Course < ApplicationRecord
   # Converts the college data into a spreadsheet that can be downloaded by the user.
   #
   # @param year [Fixnum] the year of data to include in the spreadsheet.
-  #
   # @return [Spreadsheet]
   def to_spreadsheet(year=Date.today.year)
     CourseSpreadsheet.generate self, year

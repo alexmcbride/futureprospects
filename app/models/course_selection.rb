@@ -1,9 +1,27 @@
-# Model class for a CourseSelection. Stores the courses associated with a particular application.
+# * Name: Alex McBride
+# * Date: 24/05/2017
+# * Project: Future Prospects
+# * Model class for a CourseSelection. Stores the courses associated with a particular application.
 class CourseSelection < ApplicationRecord
   include ActionView::Helpers::TextHelper
 
-  # Enums
+  # @!attribute college_offer
+  #   @return [symbol]
+  #   Enum for college offers or decisions.
+  #
+  #   * +:rejected+ - the application has been rejected.
+  #   * +:conditional_offer+ - the application has a conditional offer.
+  #   * +:definite_offer+ - the application has a definite offer.
   enum college_offer: [:rejected, :conditional_offer, :definite_offer]
+
+  # @!attribute student_choice
+  #   @return [symbol]
+  #   Enum for student choices or replies.
+  #
+  #   * +:firm_choice+ - the student has made this their firm choice.
+  #   * +:insurance_choice+ - the student has made this their insurance choice.
+  #   * +:declined+ - the student has declined this offer.
+  #   * +:skipped+ - the student's choice was not asked for (e.g. the college rejected the application).
   enum student_choice: [:firm_choice, :insurance_choice, :declined, :skipped]
 
   # Validators
@@ -15,43 +33,112 @@ class CourseSelection < ApplicationRecord
   validate :can_add_course_to_application, on: :create
   validates :note, presence: true, if: :rejected? || :conditional_offer?
 
-  # Associations
+  # @!attribute application
+  #   @return [Application]
+  #   The application the course selection belongs to.
   belongs_to :application, counter_cache: true
+
+  # @!attribute course
+  #   @return [Course]
+  #   The course the course selection belongs to.
   belongs_to :course, counter_cache: true
 
-  # Scopes
+  # Finds courses selections that are successful (e.g. where the college made an offer and the student accepted it).
+  #
+  # @return [Array<CourseSelection>]
   scope :successful, -> { completed.where(college_offer: [:conditional_offer, :definite_offer], student_choice: [:firm_choice, :insurance_choice]) }
 
+  # Scope to order course selections by college_offer (so nice ones with offers appear at the top)
+  #
+  # @return [Array<CourseSelection>]
   scope :ordered, -> { order(:college_offer) }
 
+  # Finds courses selections that have a status of +:completed+.
+  #
+  # @return [Array<CourseSelection>]
   scope :completed, -> { joins(:application).where('applications.status' => :completed) }
 
+  # Scope to join course_selections with schools.
+  #
+  # @return [Array<CourseSelection>]
   scope :schools, ->{ joins(application: :schools) }
 
+  # Scope to join course_selections with jobs.
+  #
+  # @return [Array<CourseSelection>]
   scope :jobs, -> { joins(application: :jobs) }
 
+  # Scope to find course selections only in the specified year.
+  #
+  # @param year [Fixnum]
+  # @return [Array<CourseSelection>]
   scope :current, -> (year=nil) { joins(:application).where('applications.created_at' => Application.current_year(year)) }
 
+  # Scope to find course_selections for courses at the specified college.
+  #
+  # @param college_id [Fixnum]
+  # @return [Array<CourseSelection>]
   scope :college, -> (college_id) { joins(:course).where('courses.college_id' => college_id) }
 
+  # Scope to find course_selections for the specified course.
+  #
+  # @param course_id [Fixnum]
+  # @return [Array<CourseSelection>]
   scope :course, -> (course_id) { where(course_id: course_id) }
 
+  # Scope to find course_selections for the specified course grouped by year.
+  #
+  # @param course_id [Fixnum]
+  # @return [Array<CourseSelection>]
   scope :years, -> (course_id) { joins(:course, :application).where(course_id: course_id).group_by_year('applications.created_at', reverse: true) }
 
-
-  # Report Scopes
+  # Scope for finding course selections with the specified college and year.
+  #
+  # @param college_id [Fixnum]
+  # @param year [Fixnum]
+  # @return [Array<CourseSelection>]
   scope :report_current_college, -> (college_id, year=nil) { current(year).college(college_id).successful }
 
+  # Scope for finding course selections with the specified college and year grouped by college offer.
+  #
+  # @param college_id [Fixnum]
+  # @param year [Fixnum]
+  # @return [Array<CourseSelection>]
   scope :report_college_offers, -> (college_id, year=nil) { current(year).college(college_id).group(:college_offer).order(:college_offer).count.map {|k, v| [ k ? k.titleize : 'Pending', v]} }
 
+  # Scope for finding course selections with the specified college and year grouped by student choice.
+  #
+  # @param college_id [Fixnum]
+  # @param year [Fixnum]
+  # @return [Array<CourseSelection>]
   scope :report_college_choices, -> (college_id, year=nil) { current(year).college(college_id).group(:student_choice).order(:student_choice).count.map {|k, v| [ k ? k.titleize : 'Pending', v] if k != 'skipped'}.compact }
 
+  # Scope for finding course selections with the specified college and year grouped by course.
+  #
+  # @param college_id [Fixnum]
+  # @param year [Fixnum]
+  # @return [Array<CourseSelection>]
   scope :report_courses, -> (college_id, year=nil) { current(year).college(college_id).group('courses.title', 'courses.id').limit(10).order('count_id DESC').count('id') }
 
+  # Scope for finding course selections with the specified course and year grouped by college offer.
+  #
+  # @param college_id [Fixnum]
+  # @param year [Fixnum]
+  # @return [Array<CourseSelection>]
   scope :report_course_offers, -> (course_id, year=nil){current(year).course(course_id).group(:college_offer).order(:college_offer).count.map{|k,v| [k ? k.titleize : 'Pending',v]}.compact}
 
+  # Scope for finding course selections with the specified course and year grouped by student choice.
+  #
+  # @param college_id [Fixnum]
+  # @param year [Fixnum]
+  # @return [Array<CourseSelection>]
   scope :report_course_choices, -> (course_id, year=nil) { current(year).course(course_id).group(:student_choice).order(:student_choice).count.map{|k,v| [k ? k.titleize : 'Pending',v] if k != 'skipped'}.compact}
 
+  # Scope for finding course selections with the specified course and year grouped by school.
+  #
+  # @param college_id [Fixnum]
+  # @param year [Fixnum]
+  # @return [Array<CourseSelection>]
   scope :report_course_schools, ->(course_id, year=nil) {current(year).course(course_id).schools.group('schools.name').order('schools.name').count}
 
   # Callbacks.
@@ -60,20 +147,24 @@ class CourseSelection < ApplicationRecord
 
   # Checks if a course selection already exists.
   #
-  # Returns a boolean indicating if the selection exists.
+  # @return [Boolean]
   def exists?
     CourseSelection.exists? self.application_id, self.course_id
   end
 
+  # Checks if a particular course selection already exists.
+  #
+  # @param application_id [Fixnum]
+  # @param course_id [Fixnum]
+  # @return [Boolean]
   def self.exists?(application_id, course_id)
     not CourseSelection.where('application_id=? AND course_id=?', application_id, course_id).empty?
   end
 
   # Gets the colleges that the application has applied to.
   #
-  # * +application+ - the application to find colleges for.
-  #
-  # Returns ActiveRecord::Relation.
+  # @param application [Application] the application to find colleges for.
+  # @return [Array<College>]
   def self.selected_colleges(application)
     application.course_selections
         .select('DISTINCT (colleges.*)')
@@ -83,14 +174,14 @@ class CourseSelection < ApplicationRecord
 
   # Determines if the student has made all their choices.
   #
-  # Returns boolean true if they do have all choices.
+  # @return [Boolean] true if they have made all their choices.
   def has_all_choices?
     self.application.course_selections.all? {|s| s.student_choice.present? || s.rejected?}
   end
 
-  # Updates course selection for firm_choice
+  # Updates course selection for firm choice
   #
-  # Returns true if the student has made all their choices
+  # @return [Boolean] true if the student has made all their choices
   def make_firm_choice
     self.student_choice = :firm_choice
     save!
@@ -106,7 +197,7 @@ class CourseSelection < ApplicationRecord
 
   # Clears all of a student's choices.
   #
-  # * +application+ - the application to clear choices for.
+  # @param application [Application] the application to clear choices for.
   def self.clear_all_choices(application)
     application.course_selections.each do |selection|
       selection.student_choice = :skipped # So we can differentiate from nil.
@@ -114,10 +205,10 @@ class CourseSelection < ApplicationRecord
     end
   end
 
-  # Declines choices on an application.
+  # Declines student choices on an application.
   #
-  # * +which+ - which offer to decline (either :all or :insurance)
-  # * +application+ - the application to decline the offers for.
+  # @param which [Symbol] which choice to decline (either +:all+ or +:insurance+).
+  # @param application [Application] the application to decline the offers for.
   def self.decline(which, application)
     if which == :all
       decline_all application
@@ -169,7 +260,7 @@ class CourseSelection < ApplicationRecord
 
     # Declines all of a student's choices.
     #
-    # * +application+ - the application to decline choices for.
+    # @param application [Application] the application to decline choices for.
     def self.decline_all(application)
       application.course_selections.each do |selection|
         unless selection.firm_choice? or selection.insurance_choice?
@@ -181,7 +272,7 @@ class CourseSelection < ApplicationRecord
 
     # Declines student's insurance choice.
     #
-    # * +application+ - the application to decline for.
+    # @param application [Application] the application to decline for.
     def self.decline_insurance(application)
       application.course_selections.each do |selection|
         unless selection.firm_choice?

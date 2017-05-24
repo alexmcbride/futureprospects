@@ -1,4 +1,7 @@
-# Model class to represent a student's job.
+# * Name: Alex McBride
+# * Date: 24/05/2017
+# * Project: Future Prospects
+# * Model class to represent a job in the student's employment history.
 class Job < ApplicationRecord
   # Validators
   validates :employer, presence: true, length: {maximum: 35}
@@ -12,19 +15,24 @@ class Job < ApplicationRecord
   validates :start_date, presence: true
   validates :end_date, presence: true
 
-  # Associations.
+  # @!attribute application
+  #   @return [Application]
+  #   The application the job belongs to.
   belongs_to :application
 
   # Common validators.
   include DateValidator
 
+  # Scope to find jobs for applications containing course selections the specified course.
+  #
+  # @param course [Course] the course to include in the query.
+  # @return [Array<CourseSelection>]
   scope :course, ->(course){Job.joins(application: :course_selections).where('course_selections.course_id'=>course.id)}
 
   # Searches for job with the specified name.
   #
-  # * +term+ - the name to search for.
-  #
-  # Returns a relation containing the matching jobs.
+  # @param term [String] the name to search for.
+  # @return [Array<Job]
   def self.search(term)
     if term.nil? or term.empty?
       return Job.none

@@ -1,4 +1,7 @@
-# Model class to represent a college
+# * Name: Alex McBride
+# * Date: 24/05/2017
+# * Project: Future Prospects
+# * Model class to represent a college.
 class College < ApplicationRecord
   # Image Upload
   mount_uploader :image, CollegeImageUploader
@@ -12,29 +15,36 @@ class College < ApplicationRecord
   validates :email, presence: true, length: { maximum: 255 }, uniqueness: true
   validates :website, presence: true, length: { maximum: 255 }, uniqueness: true
 
-  # Foreign Key
+  # @!attribute courses
+  #   @return [Course[]]
+  #   The college's one-to-many association with courses.
   has_many :courses, dependent: :destroy
+
+  # @!attribute staff
+  #   @return [Staff[]]
+  #   The college's one-to-many association with staff.
   has_many :staff, dependent: :destroy
 
   # Calculates the number applicants to this college.
   #
-  # Returns integer for number of applications.
+  # @param year [Fixnum] an optional year to count applicants in.
+  # @return [Fixnum]
   def count_applicants(year=nil)
     Application.current(year).college(self.id).count
   end
 
   # Calculates the number of courses that have been applied for.
   #
-  # Returns integer for number of course selections.
+  # @param year [Fixnum] an optional year to count course selections in.
+  # @return [Fixnum]
   def count_course_selections(year=nil)
     Application.current(year).joins(course_selections: :course).where('courses.college_id' => self.id).count
   end
 
-  # Removes the college, plus all staff, courses, and course selections, if the names match.
+  # Removes the college if the specified name matches.
   #
-  # * +college_name+ - the name of the college, as entered by the user.
-  #
-  # Returns a boolean indicating if the operation was successful.
+  # @param college_name [String] the name of the college, as entered by the user.
+  # @return [Boolean] true if the operation was successful.
   def remove_college(college_name)
     if self.name != college_name
       errors.add(:college_name, "does not match '#{name}'")
@@ -46,8 +56,9 @@ class College < ApplicationRecord
     end
   end
 
-  # Finds all applications that have a rejected status and
+  # Finds all applications at this college that are eligable for clearance.
   #
+  # @return [Array<Application>]
   def clearance_applications
     Application.current
         .select(' distinct applications.*')
@@ -58,9 +69,8 @@ class College < ApplicationRecord
 
   # Updates college and enables clearance, if needed.
   #
-  # * +params+ - the request params.
-  #
-  # Returns true if successful, otherwise false.
+  # @param params [Hash] the request params.
+  # @return [Boolean] true if successful.
   def update_for_clearance(params)
     if self.update params
       if self.clearance?
@@ -72,7 +82,7 @@ class College < ApplicationRecord
 
   # Determines if any colleges are in clearance mode.
   #
-  # Returns true if one or more colleges are in clearance, otherwise false.
+  # @return [Boolean]
   def self.clearance_any?
     College.where(clearance: true).any?
   end
@@ -80,7 +90,6 @@ class College < ApplicationRecord
   # Converts the college data into a spreadsheet that can be downloaded by the user.
   #
   # @param year [Fixnum] the year of data to include in the spreadsheet.
-  #
   # @return [Spreadsheet]
   def to_spreadsheet(year=Date.today.year)
     CollegeSpreadsheet.generate self, year

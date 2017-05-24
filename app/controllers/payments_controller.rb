@@ -36,7 +36,8 @@ class PaymentsController < ApplicationController
     session[:payment_type] = params[:payment_type].to_sym if params[:payment_type]
 
     if session[:payment_type] == :paypal
-      redirect_to @application.generate_paypal_url request.remote_ip, new_payment_url, payment_method_url
+      payment = @application.unpaid_payment
+      redirect_to payment.generate_paypal_url(request.remote_ip, new_payment_url, payment_method_url)
     elsif session[:payment_type] == :credit_card
       redirect_to new_payment_path
     else

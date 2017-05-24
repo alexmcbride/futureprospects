@@ -6,7 +6,7 @@ class Category < ApplicationRecord
   validates :name, presence: true, length: { maximum: 40}, uniqueness: true
 
   # Foreign Keys
-  has_many :courses
+  has_many :courses, dependent: :destroy
 
   # Removes category if the supplied name matches and there are no courses.
   #
@@ -26,7 +26,6 @@ class Category < ApplicationRecord
 
     # delete with courses if no errors
     if self.errors.empty?
-      self.courses.destroy_all
       self.destroy
       return true
     end

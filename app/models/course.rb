@@ -71,7 +71,7 @@ class Course < ApplicationRecord
   # @!attribute course_selections
   #   @return [CourseSelection]
   #   Gets the course selections, the intersection table between course and application.
-  has_many :course_selections
+  has_many :course_selections, dependent: :destroy
 
   # Gets the number of years the course lasts for.
   #

@@ -89,18 +89,4 @@ class Student < User
     student.skip_confirmation! # Google has verified the email
     student
   end
-
-  # Removes the student from the system.
-  #
-  # @param username [String] the student's username as a precaution.
-  # @return [Boolean] true if the student was removed.
-  def remove(username)
-    if username == self.username
-      self.destroy
-      true
-    else
-      self.errors.add(:username, "does not match '#{self.username}'")
-      false
-    end
-  end
 end

@@ -13,8 +13,8 @@ class College < ApplicationRecord
   validates :website, presence: true, length: { maximum: 255 }, uniqueness: true
 
   # Foreign Key
-  has_many :courses
-  has_many :staff
+  has_many :courses, dependent: :destroy
+  has_many :staff, dependent: :destroy
 
   # Calculates the number applicants to this college.
   #
@@ -40,13 +40,6 @@ class College < ApplicationRecord
       errors.add(:college_name, "does not match '#{name}'")
       false
     else
-      # Remove any course selection for student's that have applied to this college.
-      courses.each do |course|
-        course.course_selections.destroy_all
-      end
-      # Remove any courses & staff members
-      staff.destroy_all
-      courses.destroy_all
       # Remove college
       destroy
       true

@@ -38,7 +38,7 @@ class Staff::StudentsController < Staff::StaffController
   # DELETE /staff/students/1
   def destroy
     authorize @staff_student
-    if @staff_student.remove params[:username]
+    if @staff_student.remove_user params[:username]
       redirect_to staff_students_url, notice: 'Student was successfully removed.'
     else
       render :remove
@@ -54,6 +54,7 @@ class Staff::StudentsController < Staff::StaffController
     respond_to do |format|
       if term
         term = "%#{term.downcase}%"
+        # TODO: replace with scoped_search?
         students = Student.where('LOWER(first_name) LIKE ? OR LOWER(family_name) LIKE ? OR LOWER(username) LIKE ? or LOWER(EMAIL) LIKE ?', term, term, term, term)
                        .order(:first_name, :family_name)
                        .limit 15

@@ -3,12 +3,13 @@ TWEAKS
 
 - error handling
 - google analytics
-- openauth
 - top ten courses...
 
 -------------
 
 staff view payments?
+
+students scoped_search??
 
 email on oauth registration? / add sms to devise
 

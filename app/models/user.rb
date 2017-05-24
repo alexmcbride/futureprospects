@@ -12,10 +12,10 @@ class User < ApplicationRecord
          :timeoutable,
          :authentication_keys => [:login]
 
-  # Relations
-  has_many :applications
-  belongs_to :college
+  # Attributes
   attr_accessor :login
+
+  # Callbacks
   before_create :before_create
 
   # Validators

@@ -45,6 +45,15 @@
         <% end %>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-xs-4">
+        <strong>Created:</strong>
+      </div>
+      <div class="col-xs-8">
+        <%= time_ago_in_words @staff_student.created_at %> ago
+      </div>
+    </div>
   </div>
 
   <div class="col-sm-6">
@@ -81,10 +90,19 @@
       </div>
       <div class="col-xs-8">
         <% if @staff_student.last_sign_in_ip.nil? %>
-            None
+          None
         <% else %>
-            <%= @staff_student.last_sign_in_ip %>
+          <%= @staff_student.last_sign_in_ip %>
         <% end %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-4">
+        <strong>Updated:</strong>
+      </div>
+      <div class="col-xs-8">
+        <%= time_ago_in_words @staff_student.updated_at %> ago
       </div>
     </div>
   </div>
@@ -92,16 +110,8 @@
 
 <br>
 
-<div class="row">
-  <div class="col-sm-6">
-    <%= link_to 'Edit', edit_staff_student_path(@staff_student) %> |
-    <%= link_to 'Remove', staff_student_remove_path(@staff_student) %>
-  </div>
-  <div class="col-sm-6 small text-right text-darkish">
-    Created <%= (distance_of_time_in_words_to_now @staff_student.created_at).capitalize  %> ago<br>
-    Updated <%= (distance_of_time_in_words_to_now @staff_student.updated_at).capitalize %> ago
-  </div>
-</div>
+<%= link_to 'Edit', edit_staff_student_path(@staff_student) %> |
+<%= link_to 'Remove', staff_student_remove_path(@staff_student) %>
 
 <% if current_staff.has_role? :can_view_applications %>
   <hr>

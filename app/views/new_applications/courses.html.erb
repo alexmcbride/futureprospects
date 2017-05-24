@@ -51,13 +51,12 @@
     <%= form_for @course_selection, url: applications_courses_add_path, method: :post do |f| %>
       <%= form_errors @course_selection %>
       <%= f.hidden_field :course_id %>
-      <div class="row">
-        <div class="col-md-9">
-          <%= text_field_tag 'selected_course', params[:selected_course], placeholder: 'Enter the title of the course', class: 'form-control full-width courses-autocomplete' %>
-        </div>
-        <div class="col-md-3">
-          <%= f.submit 'Add Course', class: 'btn btn-default btn-block' %>
-        </div>
+
+      <div class="input-group">
+        <%= text_field_tag :selected_course, params[:selected_course], placeholder: 'Enter the title of the course', class: 'form-control full-width courses-autocomplete' %>
+        <span class="input-group-btn">
+          <%= f.submit 'Add Course', class: 'btn btn-default' %>
+        </span>
       </div>
     <% end %>
 

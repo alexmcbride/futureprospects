@@ -216,7 +216,7 @@ class CourseSelection < ApplicationRecord
 
     # Adds a validation error if the course is full.
     def course_is_not_full
-      if self.course.full?
+      if self.course && self.course.full?
         self.errors.add(:course, 'is full')
       end
     end

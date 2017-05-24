@@ -43,7 +43,7 @@
   <% if resource.student? %>
     <div class="col-sm-3">
       <div class="well">
-        <p class="text-darkish small">Sign in using another provider.</p>
+        <p class="text-darkish small">...or sign in using another provider.</p>
         <%= link_to student_google_oauth2_omniauth_authorize_path, class: 'btn btn-primary btn-block', role: 'button', style: 'background-color: #db4a39; border: 0;' do %>
             <%= icon('google') %>
             &nbsp;

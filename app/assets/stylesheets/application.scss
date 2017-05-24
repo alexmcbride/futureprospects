@@ -184,6 +184,19 @@ li.home-category-item {
   line-height: 1.6em;
 }
 
+#college-dropdown {
+  display: none;
+}
+
+#college-tabs {
+  display: block;
+}
+
+.courses-panel {
+  border-top: 0;
+  border-radius: 0;
+}
+
 /* Styles for extra small mobile screens */
 @media (max-width: 767px) {
   .course-item {
@@ -208,6 +221,20 @@ li.home-category-item {
 
   .courses-autocomplete {
     margin-bottom: 8px;
+  }
+
+  #college-dropdown {
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  #college-tabs {
+    display: none;
+  }
+
+  .courses-panel {
+    border-top: 1px solid #ecf0f1;
+    border-radius: 4px;
   }
 }
 

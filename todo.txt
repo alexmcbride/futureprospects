@@ -13,9 +13,9 @@ remove pundit verify_authorized from global staff controller once permissions do
 
 -------------
 
-students scoped_search??
+pretty 404 page?
 
-email on oauth registration? / add sms to devise
+students scoped_search??
 
 add enable sms checkbox to profile enter mobile text field
 

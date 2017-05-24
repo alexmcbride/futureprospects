@@ -164,27 +164,27 @@ class Application < ApplicationRecord
   # @!attribute schools
   #   @return [School[]]
   #   Schools relation
-  has_many :schools
+  has_many :schools, dependent: :destroy
 
   # @!attribute jobs
   #   @return [Job[]]
   #   Jobs relation
-  has_many :jobs
+  has_many :jobs, dependent: :destroy
 
   # @!attribute reference
   #   @return [Reference]
   #   Reference relation
-  has_one :reference
+  has_one :reference, dependent: :destroy
 
   # @!attribute course_selections
   #   @return [CourseSelection[]]
   #   Course selections relation
-  has_many :course_selections
+  has_many :course_selections, dependent: :destroy
 
   # @!attribute payments
   #   @return [Payment[]]
   #   Payments relation
-  has_many :payments
+  has_many :payments, dependent: :destroy
 
   # Callbacks.
   before_save :update_for_awaiting_decisions, on: :update # Detects when all colleges have made their decisions.

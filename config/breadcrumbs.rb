@@ -353,3 +353,23 @@ crumb :staff_reports_course do |course|
   parent :staff_reports_college, course.college
   link course.title, staff_reports_show_course_path(course)
 end
+
+crumb :staff_students do
+  parent :root
+  link 'Students', staff_students_path
+end
+
+crumb :staff_students_show do |student|
+  parent :staff_students
+  link student.full_name, staff_student_path(student)
+end
+
+crumb :staff_students_edit do |student|
+  parent :staff_students_show, student
+  link 'Edit', edit_staff_student_path(student)
+end
+
+crumb :staff_students_remove do |student|
+  parent :staff_students_show, student
+  link 'Remove', nil
+end

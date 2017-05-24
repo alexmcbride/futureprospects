@@ -6,7 +6,7 @@ class Student < User
   include StudentValidator
 
   # Foreign Keys
-  has_many :applications
+  has_many :applications, dependent: :destroy
 
   # Attributes
   attr_reader :current_application
@@ -88,5 +88,19 @@ class Student < User
     student.password_confirmation = student.password = Devise.friendly_token[0,20] # Dummy password
     student.skip_confirmation! # Google has verified the email
     student
+  end
+
+  # Removes the student from the system.
+  #
+  # @param username [String] the student's username as a precaution.
+  # @return [Boolean] true if the student was removed.
+  def remove(username)
+    if username == self.username
+      self.destroy
+      true
+    else
+      self.errors.add(:username, "does not match '#{self.username}'")
+      false
+    end
   end
 end

@@ -1,0 +1,74 @@
+<%
+  @title = 'Students'
+  breadcrumb :staff_students
+%>
+
+<% content_for :head do %>
+  <script>
+    $(function () {
+      $( "#search" ).autocomplete({
+          minLength: 1,
+          source: '<%= url_for staff_students_search_url(:json) %>',
+          focus: function(event, ui) {
+              $("#search").val(ui.item.first_name + ' ' + ui.item.family_name);
+              return false;
+          },
+          select: function(event, ui) {
+              window.location.href = '/staff/students/' + ui.item.id;
+              return false;
+          }
+      }).autocomplete("instance")._renderItem = function(ul, item) {
+          return $("<li>")
+              .append("<div>" + item.first_name + ' ' + item.family_name + "</div>")
+              .appendTo(ul);
+      };
+    })
+  </script>
+<% end %>
+
+<%= form_tag do %>
+
+
+  <div class="input-group">
+    <%= text_field_tag :search, nil, class: 'form-control', placeholder: 'Search for student name or email' %>
+    <span class="input-group-btn">
+      <button class="btn btn-default" type="button" onclick="$('#search').val('');" title="Clear">
+        <%= icon('times') %>
+      </button>
+    </span>
+  </div>
+<% end %>
+
+<br>
+
+<div class="table-responsive">
+  <table class="table table-condensed table-striped">
+    <thead>
+      <tr>
+        <th>First name</th>
+        <th>Family name</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @staff_students.each do |staff_student| %>
+        <tr>
+          <td><%= staff_student.first_name %></td>
+          <td><%= staff_student.family_name %></td>
+          <td><%= staff_student.username %></td>
+          <td><%= staff_student.email %></td>
+          <td><%= link_to 'Show', staff_student_path(staff_student) %></td>
+          <td><%= link_to 'Edit', edit_staff_student_path(staff_student) %></td>
+          <td><%= link_to 'Remove', staff_student_remove_path(staff_student) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="digg_pagination text-center">
+  <%= will_paginate @staff_students %>
+</div>

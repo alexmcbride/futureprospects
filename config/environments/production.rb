@@ -96,7 +96,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  # Init payment methods using ActiveMerchant.
+  # Init stuff
   config.after_initialize do
     ActiveMerchant::Billing::Base.mode = :test # sandbox mode
 

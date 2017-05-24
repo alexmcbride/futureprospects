@@ -8,6 +8,8 @@ TWEAKS
 
 -------------
 
+staff view payments?
+
 email on oauth registration? / add sms to devise
 
 college reports top ten courses/categories

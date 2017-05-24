@@ -1,0 +1,39 @@
+<%= form_for(staff_student, url: staff_students_path(staff_student)) do |f| %>
+  <p class="text-darkish">Update the information for this student.</p>
+
+  <%= form_errors staff_student %>
+
+  <div class="form-group">
+    <%= f.label :email %>
+    <%= f.email_field :email, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :family_name %>
+    <%= f.text_field :family_name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :username %>
+    <%= f.text_field :username, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :scottish_candidate_number %>
+    <%= f.text_field :scottish_candidate_number, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :national_insurance_number %>
+    <%= f.text_field :national_insurance_number, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

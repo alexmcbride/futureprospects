@@ -8,7 +8,7 @@ class School < ApplicationRecord
   validates :country, presence: true, length: { maximum: 35 }
 
   belongs_to :application
-  has_many :qualifications
+  has_many :qualifications, dependent: :destroy
 
   scope :course, ->(course){School.joins(application: :course_selections).where('course_selections.course_id' => course.id)}
 

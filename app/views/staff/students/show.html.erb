@@ -1,0 +1,136 @@
+<%
+  @title = 'View Student'
+  breadcrumb :staff_students_show, @staff_student
+%>
+
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="row member-margin">
+      <div class="col-xs-4">
+        <strong>Username:</strong>
+      </div>
+      <div class="col-xs-8">
+        <%= @staff_student.username %>
+      </div>
+    </div>
+
+    <div class="row member-margin">
+      <div class="col-xs-4">
+        <strong>First Name:</strong>
+      </div>
+      <div class="col-xs-8">
+        <%= @staff_student.first_name %>
+      </div>
+    </div>
+
+    <div class="row member-margin">
+      <div class="col-xs-4">
+        <strong>NI Number:</strong>
+      </div>
+      <div class="col-xs-8">
+        <%= @staff_student.national_insurance_number %>
+      </div>
+    </div>
+
+    <div class="row member-margin">
+      <div class="col-xs-4">
+        <strong>Last Sign-in:</strong>
+      </div>
+      <div class="col-xs-8">
+        <% if @staff_student.last_sign_in_at.nil? %>
+            Never
+        <% else %>
+            <%= (distance_of_time_in_words_to_now @staff_student.last_sign_in_at).capitalize %> ago
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="row member-margin">
+      <div class="col-xs-4">
+        <strong>Email:</strong>
+      </div>
+      <div class="col-xs-8">
+        <%= mail_to @staff_student.email %>
+      </div>
+    </div>
+
+    <div class="row member-margin">
+      <div class="col-xs-4">
+        <strong>Family Name:</strong>
+      </div>
+      <div class="col-xs-8">
+        <%= @staff_student.family_name %>
+      </div>
+    </div>
+
+    <div class="row member-margin">
+      <div class="col-xs-4">
+        <strong>SC Number:</strong>
+      </div>
+      <div class="col-xs-8">
+        <%= @staff_student.scottish_candidate_number %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-4">
+        <strong>Last Sign-in IP:</strong>
+      </div>
+      <div class="col-xs-8">
+        <% if @staff_student.last_sign_in_ip.nil? %>
+            None
+        <% else %>
+            <%= @staff_student.last_sign_in_ip %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+
+<div class="row">
+  <div class="col-sm-6">
+    <%= link_to 'Edit', edit_staff_student_path(@staff_student) %> |
+    <%= link_to 'Remove', staff_student_remove_path(@staff_student) %>
+  </div>
+  <div class="col-sm-6 small text-right text-darkish">
+    Created <%= (distance_of_time_in_words_to_now @staff_student.created_at).capitalize  %> ago<br>
+    Updated <%= (distance_of_time_in_words_to_now @staff_student.updated_at).capitalize %> ago
+  </div>
+</div>
+
+<% if current_staff.has_role? :can_view_applications %>
+  <hr>
+  <h4>Applications</h4>
+  <p class="text-darkish small">A list of the student's applications.</p>
+  <% if @staff_student.applications.any? %>
+    <div class="table-responsive">
+      <table class="table table-condensed">
+        <thead>
+        <tr>
+          <th>Created</th>
+          <th>Updated</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+          <% @staff_student.applications.each do |application| %>
+            <tr>
+              <td><%= link_to format_date(application.created_at), staff_application_path(application) %></td>
+              <td><%= format_date application.updated_at %></td>
+              <td><%= application.status.titleize %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <p>This student does not have any applications.</p>
+  <% end %>
+<% end %>
+

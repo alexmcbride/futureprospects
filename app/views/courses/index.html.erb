@@ -32,6 +32,11 @@
 
   <!-- Main Content -->
   <div class="col-md-9">
+    <% if @search_term %>
+      <!-- Display search results string is needed. -->
+      <p class="text-right text-darkish">Search results for "<%= @search_term %>"</p>
+    <% end %>
+
     <!-- Drop-down only shown when on extra-small screen. -->
     <% options = '<option value="0">All Colleges</option>'.html_safe + options_from_collection_for_select(College.order(:name), :id, :name, params[:college]) %>
     <%= select_tag :college, options, id: 'college-dropdown', class: 'form-control'  %>
@@ -43,11 +48,6 @@
         <li<%= ' class="active"'.html_safe if params[:college] == college.id.to_s %>><%= link_to college.name, request.path + "?college=#{college.id}" %></li>
       <% end %>
     </ul>
-
-    <% if @search_term %>
-      <!-- Display search results string is needed. -->
-      <p class="text-right text-darkish">Search results for "<%= @search_term %>"</p>
-    <% end %>
 
     <!-- Display courses list. -->
     <% if @courses.empty? %>

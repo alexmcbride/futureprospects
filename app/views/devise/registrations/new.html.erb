@@ -55,6 +55,12 @@
         <%= f.submit 'Sign up', class: 'btn btn-primary', style: 'padding-left: 50px; padding-right: 50px;' %>
       </div>
     <% end %>
+
+    <hr>
+
+    <div>
+      <%= render 'devise/shared/links' %>
+    </div>
   </div>
 
   <div class="col-sm-3">
@@ -77,10 +83,6 @@
           &nbsp;
           Register with Twitter
       <% end %>
-    </div>
-
-    <div class="small">
-      <%= render 'devise/shared/links' %>
     </div>
   </div>
 </div>

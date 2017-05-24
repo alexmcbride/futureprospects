@@ -110,8 +110,10 @@
 
 <br>
 
-<%= link_to 'Edit', edit_staff_student_path(@staff_student) %> |
-<%= link_to 'Remove', staff_student_remove_path(@staff_student) %>
+<div>
+  <%= link_to 'Edit', edit_staff_student_path(@staff_student) %> |
+  <%= link_to 'Remove', staff_student_remove_path(@staff_student) %>
+</div>
 
 <% if current_staff.has_role?(:site_admin) || current_staff.has_role?(:can_view_applications) %>
   <hr>
@@ -140,7 +142,18 @@
       </table>
     </div>
   <% else %>
-    <p>This student does not have any applications.</p>
+    <p class="text-darkish"><em>This student does not have any applications.</em></p>
   <% end %>
 <% end %>
 
+<% if current_staff.has_role?(:site_admin) || current_staff.has_role?(:can_payments_students) %>
+  <hr>
+  <h4>Payments</h4>
+  <% payments = @staff_student.all_payments %>
+  <% if payments.any? %>
+    <p class="text-darkish small">A list of the student's payments.</p>
+    <%= render 'shared/payments_table', payments: payments %>
+  <% else %>
+    <p class="text-darkish"><em>This student has not made any payments.</em></p>
+  <% end %>
+<% end %>

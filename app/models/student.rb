@@ -44,7 +44,7 @@ class Student < User
 
   # Gets all payments made by this student.
   #
-  # @return [ActiveRecord::Relation]
+  # @return [Array<Payment>]
   def all_payments
     Payment.joins(:application).where('applications.student_id=?', id).where.not(status: nil)
   end

@@ -51,30 +51,41 @@ gem 'bcrypt', git: 'https://github.com/codahale/bcrypt-ruby.git', :require => 'b
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-# Project Gems
-gem 'bootstrap-sass', '~> 3.3.6' # bootstrap
-gem 'will_paginate', '~> 3.1.0' # pagination
-gem 'scoped_search' # search
-gem 'redcarpet'  # markdown
-gem 'gretel' # breadcrumb
-gem 'carrierwave', '~> 1.0' # image upload
-gem 'figaro' # configuration (for heroku)
+# Authentication
 gem 'devise' # authentication
 gem 'omniauth-google-oauth2' # google oauth
 gem 'omniauth-facebook' # facebook oauth
-#gem 'devise-bootstrapped' # authentication views
+gem 'omniauth-twitter' # twitter oauth
 gem 'rolify' # roles
+gem 'pundit' # permissions
+gem 'recaptcha', '~> 4.1.0', require: 'recaptcha/rails' # recaptcha
+
+# Layouts
+gem 'bootstrap-sass', '~> 3.3.6' # bootstrap
+gem 'bootstrap-datepicker-rails' # bootstrap datepicker control
+#gem 'devise-bootstrapped' # authentication views (only needed when generating views)
+gem 'will_paginate', '~> 3.1.0' # pagination
+gem 'redcarpet'  # markdown
+gem 'gretel' # breadcrumb
 gem 'font-awesome-sass', '~> 4.7.0' # glyphs and icons
 gem 'jquery-ui-rails' # jquery-ui (autocomplete)
-gem 'bootstrap-datepicker-rails' # bootstrap datepicker control
+
+# Image upload
+gem 'carrierwave', '~> 1.0' # image upload
 gem 'mini_magick' # Image resizing (requires ImageMagick installed too)
 gem 'fog-aws' # Cloud storage (through Amazon Web Services)
-gem 'pundit' # permissions
+
+# Payments
 gem 'braintree' # braintree payments
 gem 'activemerchant' # general payments
-gem 'recaptcha', '~> 4.1.0', require: 'recaptcha/rails' # recaptcha
+
+# Charts, spreadsheets, and PDFs
 gem 'prawn' # PDF generation
 gem 'chartkick' # chart generation
 gem 'groupdate' # makes grouping by dates easier (for charts)
 gem 'axlsx' # excel
+
+# Misc
+gem 'scoped_search' # search
+gem 'figaro' # configuration (for heroku)
 gem 'twilio-ruby', '~> 4.11.1' # SMS text messages with Twilio

@@ -1,6 +1,6 @@
 # Model class to represent a student. Inherits from User and uses Single-Table Inheritance.
 class Student < User
-  devise :omniauthable, :omniauth_providers => [:google_oauth2, :facebook]
+  devise :omniauthable, :omniauth_providers => [:google_oauth2, :facebook, :twitter]
 
   # Some validations are shared between student and application
   include StudentValidator
@@ -68,6 +68,8 @@ class Student < User
   # @return [Student]
   def self.new_from_oauth(data)
     student = Student.new
+    student.provider = data['provider']
+    student.uid = data['uid']
     student.email = data['info']['email']
     student.first_name = data['info']['first_name']
     student.family_name = data['info']['last_name']
@@ -81,10 +83,8 @@ class Student < User
   #
   # @return [Student]
   def self.create_from_oauth(data, params)
-    student = Student.new params
-    student.provider = data['provider']
-    student.uid = data['uid']
-    student.email = data['info']['email']
+    student = new_from_oauth data
+    student.update_attributes params
     student.password_confirmation = student.password = Devise.friendly_token[0,20] # Dummy password
     student.skip_confirmation! # Google has verified the email
     student

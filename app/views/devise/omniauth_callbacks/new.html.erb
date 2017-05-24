@@ -6,37 +6,47 @@
 <div class="row">
   <div class="col-sm-8 col-sm-offset-2">
     <%= form_for(@student, url: create_student_oauth_path, method: :post) do |f| %>
-        <%= devise_error_messages! %>
+      <%= devise_error_messages! %>
 
-        <p>We need a little personal info in order to create your account. Once your account is setup you will
-          be able to create your application.</p>
+      <p>We need a little personal info in order to set up your account. Once your account is setup you will
+        be able to create your application.</p>
 
+      <% unless @student.email %>
         <div class="form-group">
-          <%= f.label :first_name, class: 'text-capitalize'  %><br>
-          <%= f.text_field :first_name, autofocus: false, class: 'form-control' %>
+          <%= f.label :email, class: 'text-capitalize'  %><br>
+          <%= f.email_field :email, autofocus: false, class: 'form-control' %>
         </div>
+      <% end %>
 
-        <div class="form-group">
-          <%= f.label :family_name, class: 'text-capitalize'  %><br>
-          <%= f.text_field :family_name, autofocus: false, class: 'form-control' %>
-        </div>
+      <div class="form-group">
+        <%= f.label :first_name, class: 'text-capitalize'  %><br>
+        <%= f.text_field :first_name, autofocus: false, class: 'form-control' %>
+      </div>
 
-        <div class="form-group">
-          <%= f.label :scottish_candidate_number, class: 'text-capitalize'  %><br>
-          <%= f.text_field :scottish_candidate_number, autofocus: false, class: 'form-control' %>
-        </div>
+      <div class="form-group">
+        <%= f.label :family_name, class: 'text-capitalize'  %><br>
+        <%= f.text_field :family_name, autofocus: false, class: 'form-control' %>
+      </div>
 
-        <div class="form-group">
-          <%= f.label :national_insurance_number, class: 'text-capitalize'  %><br>
-          <%= f.text_field :national_insurance_number, autofocus: false, class: 'form-control' %>
-        </div>
+      <div class="form-group">
+        <%= f.label :scottish_candidate_number, class: 'text-capitalize'  %><br>
+        <%= f.text_field :scottish_candidate_number, autofocus: false, class: 'form-control' %>
+      </div>
 
-        <br>
+      <div class="form-group">
+        <%= f.label :national_insurance_number, class: 'text-capitalize'  %><br>
+        <%= f.text_field :national_insurance_number, autofocus: false, class: 'form-control' %>
+      </div>
 
-        <div class="form-group">
-          <%= f.submit 'Complete Registration', class: 'btn btn-primary btn-md' %>
-        </div>
-    <% end %>
+      <br>
+
+      <div class="form-group">
+        <%= f.submit 'Complete Registration', class: 'btn btn-primary btn-md' %>
+      </div>
+
+      <p class="text-darkish text-right small">Authentication provider: <strong><%= @student.provider.titleize %></strong></p>
+
+  <% end %>
 
   </div>
 </div>

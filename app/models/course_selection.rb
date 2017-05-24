@@ -46,7 +46,7 @@ class CourseSelection < ApplicationRecord
 
   scope :report_college_choices, -> (college_id, year=nil) { current(year).college(college_id).group(:student_choice).order(:student_choice).count.map {|k, v| [ k ? k.titleize : 'Pending', v] if k != 'skipped'}.compact }
 
-  scope :report_courses, -> (college_id, year=nil) { current(year).college(college_id).group('courses.title', 'courses.id').order('courses.title').count }
+  scope :report_courses, -> (college_id, year=nil) { current(year).college(college_id).group('courses.title', 'courses.id').limit(10).order('count_id DESC').count('id') }
 
   scope :report_course_offers, -> (course_id, year=nil){current(year).course(course_id).group(:college_offer).order(:college_offer).count.map{|k,v| [k ? k.titleize : 'Pending',v]}.compact}
 

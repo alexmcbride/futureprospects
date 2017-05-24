@@ -36,12 +36,12 @@
 <hr>
 
 <h4>Courses</h4>
-<p class="text-darkish small">Breakdown of number of applications per course.</p>
+<p class="text-darkish small">Breakdown of the top applications per course.</p>
 <%= bar_chart staff_reports_college_course_applicants_path(@college.id, year: @year, format: :json) %>
 <hr>
 
 <h4>Categories</h4>
-<p class="text-darkish small">Breakdown of number of applications per category.</p>
+<p class="text-darkish small">Breakdown of top applications per category.</p>
 <%= bar_chart staff_reports_college_categories_path(@college.id, year: @year, format: :json) %>
 <hr>
 
@@ -75,7 +75,7 @@
 <hr>
 
 <h4>Educational Establishment</h4>
-<p class="text-darkish small">Breakdown of applicants by educational establishment.</p>
+<p class="text-darkish small">Breakdown of the top educational establishments in applications.</p>
 <%= bar_chart staff_reports_college_schools_path(@college.id, year: @year, format: :json), xtitle: 'Students', ytitle: 'Schools' %>
 
 <hr>

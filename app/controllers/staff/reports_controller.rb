@@ -140,8 +140,9 @@ class Staff::ReportsController < Staff::StaffController
                      .where('courses.college_id': params[:id])
                      .where('applications.created_at' => Application.current_year(params[:year].to_i))
                      .group('categories.name')
-                     .order('categories.name')
-                     .count
+                     .order('count_id DESC')
+                     .limit(10)
+                     .count('id')
   end
 
   # GET /staff/reports/colleges/:id/course_applicants.json

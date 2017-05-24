@@ -7,8 +7,6 @@ TWEAKS
 
 -------------
 
-staff view payments?
-
 students scoped_search??
 
 email on oauth registration? / add sms to devise

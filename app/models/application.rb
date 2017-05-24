@@ -117,7 +117,7 @@ class Application < ApplicationRecord
 
   ##
   # Gets the results of the report schools query.
-  scope :report_schools, ->(college_id, year=nil){current(year).college(college_id).joins(:schools).group('schools.name').order('schools.name').count}
+  scope :report_schools, ->(college_id, year=nil){current(year).college(college_id).joins(:schools).group('schools.name').order('count_id DESC').limit(10).count('id')}
 
   ##
   # Gets the results of the report course genders query.

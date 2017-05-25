@@ -1,10 +1,12 @@
+# * Name: Alex McBride
+# * Date: 24/05/2017
+# * Project: Future Prospects
 # Helper class for generating a college spreadsheet.
 class CollegeSpreadsheet
   # Generates a spreadsheet for the specified college and year.
   #
   # @param college [College] the college to generate a spreadsheet for.
   # @param year [Fixnum] the year to use when generating the spreadsheet]
-  #
   # @return [Spreadsheet]
   def self.generate(college, year)
     spreadsheet = Spreadsheet.new
@@ -65,7 +67,6 @@ class CollegeSpreadsheet
   #
   # @param college_id [Fixnum]
   # @param year [Fixnum]
-  #
   # @return [Hash]
   def self.get_course_counts(college_id, year)
     counts = {}

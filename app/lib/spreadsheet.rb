@@ -1,3 +1,6 @@
+# * Name: Alex McBride
+# * Date: 24/05/2017
+# * Project: Future Prospects
 # Helper class for the Axlxs spreadsheet library. Simplifies the task of creating basic spreadsheets.
 class Spreadsheet
   # Creates a new Spreadsheet object.
@@ -16,7 +19,6 @@ class Spreadsheet
   # Creates a new worksheet.
   #
   # @param name [String] the name of the worksheet.
-  #
   # @return [Axlsx::Worksheet]
   def add_worksheet(name)
     @worksheet = @package.workbook.add_worksheet(name: name)
@@ -27,7 +29,6 @@ class Spreadsheet
   # @param header [Array<String>] an array of values to use for the table header
   # @param rows [Array<String>] an array of values to use for the table rows
   # @param name [String] the name of the table
-  #
   # @return [Array<Axlsx::Row>]
   def add_table(header=[], rows=[], name='Default')
     table_rows = [@worksheet.add_row(header)]
@@ -108,7 +109,6 @@ class Spreadsheet
     # Helper method for getting a cell reference (e.g. A1 or H6 etc).
     #
     # @param cell [Axlsx::Cell] the cell to find reference for
-    #
     # @return [String]
     def get_reference(cell)
       cell.reference.tr('$', '')

@@ -1,14 +1,15 @@
+# * Name: Alex McBride
+# * Date: 24/05/2017
+# * Project: Future Prospects
 # Class to represent a PDF payment invoice. Inherits from Prawn PDF generator's Document class.
 class PaymentPdf < Prawn::Document
   include ActionView::Helpers::NumberHelper
 
   # Constructor.
   #
-  # * +payment+ - the payment class.
-  # * +context+ - a view context, for calling helpers.
-  # * +options+ - options to pass to Prawn.
-  # * +&block+ - block to pass to Prawn.
-  #
+  # @param payment [Payment] the payment class.
+  # @param context [ViewContext] a view context, for calling helpers.
+  # @param options [Hash] options to pass to Prawn.
   def initialize(payment, context, options={}, &block)
     super options, &block
     Prawn::Font::AFM.hide_m17n_warning = true # disable font warnings
@@ -17,20 +18,23 @@ class PaymentPdf < Prawn::Document
 
   # Gets the filename of the file.
   #
-  # Returns the filename string.
+  # @return [String] the filename string.
   def filename
     'future_prospects_invoice.pdf'
   end
 
   # Gets the mime-type of the file.
   #
-  # Returns the mime-type string.
+  # @return [String] the mime-type string.
   def mime_type
     'application/pdf'
   end
 
   private
     # Creates the PDF file based on the payment.
+    #
+    # @param payment [Payment] the payment object
+    # @oram content [ViewContext] the view context, for calling helpers.
     def create_pdf(payment, context)
       text '<b><u>Future Prospects</u></b>', size: 18, inline_format: true
       text ' '

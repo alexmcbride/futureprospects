@@ -1,5 +1,11 @@
-# Fake Twilio client for development, just dumps any SMS messaqes to the debug output.
+# * Name: Alex McBride
+# * Date: 24/05/2017
+# * Project: Future Prospects
+# Fake Twilio client for development, just dumps any SMS messages to the debug output.
 class FakeTwilioClient
+  # Returns a new messages object.
+  #
+  # @return [Messages]
   def messages
     Messages.new
   end

@@ -1,12 +1,14 @@
+# * Name: Alex McBride
+# * Date: 24/05/2017
+# * Project: Future Prospects
 # Module to define HTML helpers for the applications section.
 module NewApplicationsHelper
   # Outputs a text field with bootstrap style
   #
-  # * +form+ - the form to add the text field to
-  # * +item+ - the item (e.g. :title) to add.
-  # * +args+ - various options hash.
-  #
-  # Returns  - HTML
+  # @param form [ActionView::Helpers::FormHelper] the form to add the text field to
+  # @param item [Symbol] the item (e.g. :title) to add.
+  # @param args [Hash] various options hash.
+  # @return [String]
   def form_text_field(form, item, args={})
     label = args[:label]
     label_col = (args[:label_col] or 4)
@@ -19,13 +21,12 @@ module NewApplicationsHelper
     end
   end
 
-  # Outputs a text field with bootstrap style
+  # Outputs a text field with bootstrap style marked as disabled.
   #
-  # * +form+ - the form to add the text field to
-  # * +item+ - the item (e.g. :title) to add.
-  # * +args+ - various options hash.
-  #
-  # Returns  - HTML
+  # @param name [Symbol] the name of the field.
+  # @param value [String] the value of the field.
+  # @param label [String] the label to display next to the field.
+  # @return [String]
   def form_disabled_field(name, value, label)
     content_tag(:div, class: 'form-group') do
       concat(label_tag(name, label, class: 'control-label col-xs-4'))
@@ -37,11 +38,10 @@ module NewApplicationsHelper
 
   # Outputs an email field with bootstrap style
   #
-  # * +form+ - the form to add the email field to
-  # * +item+ - the item (e.g. :title) to add.
-  # * +args+ - various options hash.
-  #
-  # Returns  - HTML
+  # @param form [ActionView::Helpers::FormHelper] the form to add the email field to
+  # @param item [Symbol] the item (e.g. :title) to add.
+  # @param args [Hash] various options hash.
+  # @return [String]
   def form_email_field(form, item, args={})
     label = args[:label]
     label_col = (args[:label_col] or 4)
@@ -58,10 +58,10 @@ module NewApplicationsHelper
 
   # Outputs a select control with bootstrap style.
   #
-  # * +form+ - the form to add the select field to.
-  # * +item+ - the item (e.g. :title) to add.
-  # * +choices+ - the select fields options.
-  # * +args+ - various options hash.
+  # @param form [ActionView::Helpers::FormHelper] the form to add the select field to.
+  # @param item [Symbol] the item (e.g. :title) to add.
+  # @param choices [Array] the select fields options.
+  # @param args [Hash] various options hash.
   #
   # Returns  - HTML
   def form_select(form, item, choices, args={})
@@ -78,9 +78,9 @@ module NewApplicationsHelper
 
   # Outputs a date field with bootstrap style
   #
-  # * +form+ - the form to add the date field to.
-  # * +item+ - the item (e.g. :title) to add.
-  # * +args+ - various options hash.
+  # @param form [ActionView::Helpers::FormHelper] the form to add the date field to.
+  # @param item [Symbol] the item (e.g. :title) to add.
+  # @param args [hash] various options hash.
   #
   # Returns  - HTML
   def form_date(form, item, args={})

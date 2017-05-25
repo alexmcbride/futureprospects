@@ -1,4 +1,7 @@
-# Model class to represent a payment.
+# * Name: Alex McBride
+# * Date: 25/05/2017
+# * Project: Future Prospects
+# * Model class to represent a payment
 class Payment < ApplicationRecord
   # The currency to use for the payments.
   CURRENCY = 'GBP'
@@ -7,12 +10,33 @@ class Payment < ApplicationRecord
   require 'active_merchant'
   require 'active_merchant/billing/rails'
 
-  # Enums
+  # @!attribute status
+  #   @return [symbol]
+  #   Enum for payment status.
+  #
+  #   * +:authorized+ - the payment was successfully authorized.
+  #   * +:failed+ - the payment authorization failed.
   enum status: [:authorized, :failed]
+
+  # @!attribute status
+  #   @return [symbol]
+  #   Enum for payment type.
+  #
+  #   * +:credit_card+ - a braintree credit card payment.
+  #   * +:paypal+ - a paypal payment.
   enum payment_type: [:credit_card, :paypal]
+
+  # @!attribute card_brands
+  #   @return [symbol]
+  #   Enum for card brands.
+  #
+  #   * +:visa+ - a visa card payment.
+  #   * +:mastercard+ - a mastercard payment.
   enum card_brands: [:visa, :mastercard]
 
-  # Relations
+  # @!attribute application
+  #   @return [Application]
+  #   The payment's parent application.
   belongs_to :application
 
   # Validators
@@ -22,36 +46,49 @@ class Payment < ApplicationRecord
   validates :description, presence: true
   validate :validate_card_details, if: :credit_card?
 
-  # The card brand (e.g. visa, mastercard etc).
+  # @!attribute card_brand
+  #   @return [Symbol]
+  #   the card brand (e.g. +:visa+, +:mastercard+ etc).
   attr_accessor :card_brand
 
-  # The card number.
+  # @!attribute card_number
+  #   @return [String]
+  #   The credit card number.
   attr_accessor :card_number
 
-  # The card verification number
+  # @!attribute card_cvv
+  #   @return [String]
+  #   The credit card vericiation code.
   attr_accessor :card_cvv
 
-  # The expiry date
+  # @!attribute card_expiry
+  #   @return [String]
+  #   The credit card expiry date.
   attr_accessor :card_expiry
 
-  # The card holder's first name
-  attr_accessor :card_first_name
-
-  # The card holder's last name
+  # @!attribute card_last_name
+  #   @return [String]
+  #   The card holder's last name
   attr_accessor :card_last_name
 
-  # The remote IP of the payer.
+  # @!attribute remote_ip
+  #   @return [String]
+  #   The remote IP of the payer (needed by PayPal).
   attr_accessor :remote_ip
 
-  # The payers PayPal ID
+  # @!attribute paypal_payer_id
+  #   @return [String]
+  #   The payers PayPal ID.
   attr_accessor :paypal_payer_id
 
-  # The token returned by PayPal.
+  # @!attribute paypal_token
+  #   @return [String]
+  #   The token returned by PayPal.
   attr_accessor :paypal_token
 
-  # Authorizes the payment
+  # Authorizes the payment with the relevant provider.
   #
-  # Returns a boolean indicating if the payment was authorized.
+  # @return [Boolean] true if the payment was authorized.
   def authorize
     # Take correct payment depending on type.
     response = if self.paypal?
@@ -79,12 +116,10 @@ class Payment < ApplicationRecord
 
   # Generates a PayPal payment URL with the specified params.
   #
-  # * +amount+ - the amount to charge the student
-  # * +ip+ - the buyer's IP address
-  # * +return_url+ - the URL the buyer is returned to. This return action then needs to call authorize.
-  # * +cancel_url+ - the URL the buyer is returned to, if they cancel their PayPal purchase.
-  #
-  # Returns the PayPal URL to direct to the buyer to.
+  # @param ip [String] the buyer's IP address
+  # @param return_url [String] the URL the buyer is returned to. This return action then needs to call authorize.
+  # @param cancel_url [String] the URL the buyer is returned to, if they cancel their PayPal purchase.
+  # @return [String] the PayPal URL to direct to the buyer to.
   def generate_paypal_url(ip, return_url, cancel_url)
     items = {name: 'Future Prospects',
              description: description,
@@ -104,7 +139,7 @@ class Payment < ApplicationRecord
 
   # Updates payment with info from PayPal token.
   #
-  # * +token+ - the token given to us by PayPal.
+  # @param token [String] the token given to us by PayPal.
   def update_from_paypal(token)
     if self.paypal?
       details = PAYPAL_GATEWAY.details_for token
@@ -115,16 +150,15 @@ class Payment < ApplicationRecord
 
   # Gets the amount paid in pounds
   #
-  # Returns the amount in pounds.
+  # @return [Fixnum] the amount in pounds.
   def amount_pounds
     amount / 100
   end
 
   # Checks if the specified application 'owns' this payment.
   #
-  # * +application+ - the application to check.
-  #
-  # Returns true if the application owns it, otherwise false.
+  # @param application [Application] the application to check.
+  # @return [Boolean] true if the application owns it, otherwise false.
   def owner?(application)
     application_id == application.id
   end
@@ -132,7 +166,6 @@ class Payment < ApplicationRecord
   # Creates a PDF invoice for the payment.
   #
   # @param context [ActionView::Base] the context to use (for calling helpers)
-  #
   # @return [PdfPayment]
   def to_pdf(context)
     PaymentPdf.new self, context
@@ -150,7 +183,7 @@ class Payment < ApplicationRecord
 
     # Makes a credit card purchase
     #
-    # Returns an ActiveMerchant Response object
+    # @return [ActiveMerchant::Response]
     def credit_card_purchase
       card = credit_card
       self.last_four_digits = card.last_digits
@@ -160,7 +193,7 @@ class Payment < ApplicationRecord
 
     # Makes a PayPal purchase
     #
-    # Returns an ActiveMerchant Response object
+    # @return [ActiveMerchant::Response]
     def paypal_purchase
       PAYPAL_GATEWAY.purchase(self.amount,
                               currency: CURRENCY,
@@ -171,7 +204,7 @@ class Payment < ApplicationRecord
 
     # Creates a new CreditCard object from the options.
     #
-    # Returns a new credit card object, or nil if the object wasn't built.
+    # @return [ActiveMerchant::CreditCard] a new credit card object, or nil if the object wasn't built.
     def credit_card
       card = ActiveMerchant::Billing::CreditCard.new(
           brand: card_brand,
@@ -186,9 +219,8 @@ class Payment < ApplicationRecord
 
     # Parses a Date object from a string.
     #
-    # * +expiry+ - the string to parse (format: mm/yyyy)
-    #
-    # Returns a tuple with (month, year) as integers.
+    # @param expiry [String ]the string to parse (format: mm/yyyy).
+    # @return [(Fixnum, Fixnum)] a tuple with (month, year) as integers.
     def self.try_parse_expiry(expiry)
       begin
         expiry = Date.strptime expiry, '%m/%Y'

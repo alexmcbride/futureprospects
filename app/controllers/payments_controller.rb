@@ -1,8 +1,12 @@
+# * Name: Alex McBride
+# * Date: 25/05/2017
+# * Project: Future Prospects
+# * Controller class to manage payments.
 # Handles credit-card and paypal payments.
-# A payment item is created with a null status and inserted into payments table. The other controller then redirects to
-# payments/payment_method, this controller then takes over from there. Optionally the calling controller can set
-# session[:payment_redirect] with a path the payment controller will redirect to once the payment has finished.
-# Otherwise it will redirect to root.
+# A payment item is created with a null status and inserted into payments table. The calling controller redirects to
+# +payments#payment_method+, from where this controller takes over. Optionally the calling controller can set
+# +session[:payment_redirect]+ with a path the payment controller will redirect to once the payment has finished. If no
+# path is supplied it redirects to root.
 class PaymentsController < ApplicationController
   # Callbacks
   before_action :authenticate_student!
@@ -57,7 +61,7 @@ class PaymentsController < ApplicationController
 
   # POST /payments
   #
-  # Authorizes either credit card or paypal payments depending on the form that posts to it..
+  # Authorizes either credit card or paypal payments depending on the form that posts to it.
   def create
     @payment = @application.authorize_payment payment_params, request.remote_ip
     if @payment.authorized?

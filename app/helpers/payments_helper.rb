@@ -1,10 +1,12 @@
+# * Name: Alex McBride
+# * Date: 25/05/2017
+# * Project: Future Prospects
 # Module to define helpers for the payments controller.
 module PaymentsHelper
   # Helper method for getting card symbol from string
   #
-  # * +value+ - card value
-  #
-  # Returns a symbol that can be used to set payment brand type.
+  # @param value [Symbol] card value
+  # @return [Symbol] a symbol that can be used to set payment brand type.
   def card_values(value)
     if value == 'visa'
       :visa
@@ -15,9 +17,8 @@ module PaymentsHelper
 
   # Creates card brand select field options
   #
-  # * +payment+ - the payment type
-  #
-  # Returns the card options HTML.
+  # @param payment [Payment] the payment object
+  # @return [String] the card options HTML.
   def card_options(payment)
     options = options_for_select(Payment::card_brands.map {|k, v| [k.humanize, card_values(k)] }, payment.card_brand)
     "<option disabled=\"disabled\"#{ 'selected="selected"' unless payment.card_brand}>-- Choose --</option>".html_safe + options
@@ -25,10 +26,9 @@ module PaymentsHelper
 
   # Payments stage item HTML.
   #
-  # * +value+ - the value of the item
-  # * +selected+ - whether the item is selected or not.
-  #
-  # Returns the HTML to display the item.
+  # @param value [Symbol] the value of the item
+  # @param selected [Boolean] whether the item is selected or not.
+  # @return [String] the HTML to display the item.
   def payment_stage_item(value, selected=false, completed=false)
     if selected
       content_tag(:li, class: 'list-group-item active') do

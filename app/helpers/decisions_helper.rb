@@ -1,4 +1,14 @@
+# * Name: Alex McBride
+# * Date: 24/05/2017
+# * Project: Future Prospects
+# Module for decision controller helpers. These are functions that can be called in views.
 module DecisionsHelper
+  # Displays a decision stage sidebar item.
+  #
+  # @param text [String] the text of the stage.
+  # @param selected [Boolean] whether the stage is selected.
+  # @param completed [Boolean] whether the stage is completed.
+  # @return [String]
   def decision_stage_item(text, selected, completed=false)
     content_tag(:div, class: "list-group-item#{' active' if selected}") do
       concat(text)
@@ -11,6 +21,10 @@ module DecisionsHelper
     end
   end
 
+  # Displays a list item for the decisions controller.
+  #
+  # @param selection [CourseSelection] the course selection to display.
+  # @return [String] the HTML to be displated.
   def decision_list_item(selection)
     content_tag(:div, class: 'list-group-item list-group-item-heading', style: 'background-color: #F5F5F5; clear: both;') do
       yield if block_given?

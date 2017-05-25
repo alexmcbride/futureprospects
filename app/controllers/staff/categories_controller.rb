@@ -1,24 +1,29 @@
+# * Name: Alex McBride
+# * Date: 25/05/2017
+# * Project: Future Prospects
+# * Controller class to allow staff member to manage course categories.
 class Staff::CategoriesController < Staff::StaffController
   before_action :set_staff_category, only: [:show, :edit, :update, :remove, :destroy]
 
   # GET /staff/categories
+  #
+  # Display a list of categories (including the add new category form).
   def index
     @categories = Category.order(:name)
     @category = Category.new
     skip_policy_scope
   end
 
-  # GET /staff/categories/1
-  def show
-    authorize @category
-  end
-
   # GET /staff/categories/1/edit
+  #
+  # Displays the edit category form.
   def edit
     authorize @category
   end
 
   # POST /staff/categories
+  #
+  # Creates a new category and redirects to the index action.
   def create
     authorize Category
     @category = Category.new(staff_category_params)
@@ -34,6 +39,8 @@ class Staff::CategoriesController < Staff::StaffController
   end
 
   # PATCH/PUT /staff/categories/1
+  #
+  # Updates an existing category and redirects to the index action.
   def update
     authorize @category
     respond_to do |format|
@@ -46,11 +53,15 @@ class Staff::CategoriesController < Staff::StaffController
   end
 
   # GET /staff/categories/1/remove
+  #
+  # Displays the remove category form.
   def remove
     authorize @category
   end
 
   # DELETE /staff/categories/1
+  #
+  # Deletes the category and redirects to the index action.
   def destroy
     authorize @category
     respond_to do |format|
@@ -63,12 +74,12 @@ class Staff::CategoriesController < Staff::StaffController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    # Sets the main category object for the controller.
     def set_staff_category
       @category = Category.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # Sanitises parameters.
     def staff_category_params
       params.require(:category).permit(:name)
     end

@@ -1,8 +1,14 @@
-# Model class to represent a staff member. Inherits from User and uses Single-Table Inheritance.
+# * Name: Alex McBride
+# * Date: 25/05/2017
+# * Project: Future Prospects
+# * Model class to represent a staff member. Inherits from User and uses Single-Table Inheritance.
 class Staff < User
   validates :job_title, presence: true, length: {maximum: 35}
   validates :college_id, presence: true, unless: :is_admin?
 
+  # @!attribute college
+  #   @return [College]
+  #   The staff member's parent college.
   belongs_to :college
 
   # The number of staff members to display per page when paginated.
@@ -10,21 +16,21 @@ class Staff < User
 
   # Finds all of the job titles for the college the staff member belongs to.
   #
-  # Returns an ActiveRecord::Relation containing all of the job_titles at this staff member's college.
+  # @return [Array<String>]
   def college_job_titles
     Staff.where(college_id: self.college_id).select(:job_title).distinct
   end
 
-  # Finds all staff job titles of staff members at all colleges.
+  # Finds all staff member job titles across all colleges.
   #
-  # Returns an ActiveRecord::Relation containing all of the job_titles at the colleges.
+  # @return [Array<String>]
   def self.all_job_titles
     Staff.select(:job_title).distinct
   end
 
-  # Changes a staff member's roles.
+  # Changes a staff member's roles to those specified.
   #
-  # * +new_roles+ - the new roles for the staff member
+  # @param new_roles [Array<Symbol>] the new roles for the staff member
   def change_roles(new_roles)
     old_roles = self.roles.map {|r| r.name.to_s}
 
@@ -40,21 +46,20 @@ class Staff < User
     old_roles.each {|r| self.remove_role r }
   end
 
-  # Promotes a user to admin by adding a :site_admin flag to their roles.
+  # Promotes a user to admin by adding a +:site_admin+ flag to their roles.
   def promote_admin
     self.add_role :site_admin
   end
 
-  # Demotes a user from admin by removing the :site_admin flag from their roles.
+  # Demotes a user from admin by removing the +:site_admin+ flag from their roles.
   def demote_admin
     self.remove_role :site_admin
   end
 
-  # Filter staff list based on parameters (:full_name, :college, and :job_title).
+  # Filter staff list based on parameters (+:full_name+, +:college+, and +:job_title+).
   #
-  # * +params+ - the request params containing filter data.
-  #
-  # Returns An ActiveRecord::Relation contaning the results of the filtering operation.
+  # @param params [Hash] the request params containing filter data.
+  # @return [Array<Staff>]
   def self.filter(params)
     staff = Staff.all
     if params[:full_name].present?
@@ -73,7 +78,7 @@ class Staff < User
   private
     # Determines if the staff member is an admin.
     #
-    # Returns true if they are an admin.
+    # @return [Boolean] true if they are an admin.
     def is_admin?
       self.email == 'admin@admin.com'
     end

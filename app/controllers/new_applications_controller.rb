@@ -1,3 +1,7 @@
+# * Name: Alex McBride
+# * Date: 24/05/2017
+# * Project: Future Prospects
+# * Controller class to manage creating a new student application.
 class NewApplicationsController < ApplicationController
   before_action :authenticate_student!
   before_action :set_application, except: [:index, :show, :create,
@@ -26,7 +30,7 @@ class NewApplicationsController < ApplicationController
 
   # POST /applications
   #
-  # Creates a new application.
+  # Creates a new application for the student, already filed in with some data that we know, then redirects to intro.
   def create
     respond_to do |format|
       @application = current_student.create_application
@@ -40,7 +44,7 @@ class NewApplicationsController < ApplicationController
 
   # GET /applications/continue
   #
-  # Continues an existing application, redirects to the path of first incomplete stage.
+  # Continues an existing application, by redirecting the student to their first incomplete stage.
   def continue
     # Redirects student to the first incomplete part of their application.
     paths = { intro_stage: applications_intro_path,
@@ -67,13 +71,13 @@ class NewApplicationsController < ApplicationController
 
   # GET /applications/profile
   #
-  # Displays profile form.
+  # Displays profile stage.
   def profile
   end
 
   # POST /applications/profile
   #
-  # Updates application profile.
+  # Updates application profile and redirects to education.
   def profile_next
     respond_to do |format|
       if @application.save_profile application_params
@@ -93,7 +97,7 @@ class NewApplicationsController < ApplicationController
 
   # POST /applications/education/add
   #
-  # Adds a new educational establishment to the application.
+  # Adds a new educational establishment to the application and redirects back to education.
   def education_add
     @school = School.new school_params
     @school.application = @application
@@ -106,9 +110,9 @@ class NewApplicationsController < ApplicationController
     end
   end
 
-  # GET /applications/education/search.json?term=<term>
+  # GET /applications/education/search.json?term=<String>
   #
-  # Searches for previously used school name.
+  # Searches for previously used school name for use in autocomplete forms.
   def education_search
     schools = School.search(params[:term]).limit(10)
     respond_to do |format|
@@ -118,9 +122,9 @@ class NewApplicationsController < ApplicationController
     end
   end
 
-  # DELETE /applications/education
+  # DELETE /applications/education/:id
   #
-  # Removes an education establishment from the application.
+  # Removes an educational establishment from the application then redirects back to education.
   def education_remove
     school = School.find params[:id]
     id = school.application_id
@@ -137,9 +141,9 @@ class NewApplicationsController < ApplicationController
     @school = School.find params[:id]
   end
 
-  # PATCH /applications/education
+  # PATCH /applications/education/:id
   #
-  # Updated the school.
+  # Update the school and redirects back to education.
   def education_update
     @school = School.find params[:id]
     if @school.update(school_params)
@@ -151,7 +155,7 @@ class NewApplicationsController < ApplicationController
 
   # POST /applications/education_next
   #
-  # Submits the education stage
+  # Submits the education stage and redirects to employment.
   def education_next
     respond_to do |format|
       if @application.save_education
@@ -173,7 +177,7 @@ class NewApplicationsController < ApplicationController
 
   # POST /applications/qualifications/:id
   #
-  # Adds a qualification to the school.
+  # Adds a qualification to the school and redirects to qualifications.
   def qualifications_add
     @school = School.find params[:id]
     @application = @school.application
@@ -190,7 +194,7 @@ class NewApplicationsController < ApplicationController
 
   # DELETE /applications/qualifications/:id
   #
-  # Removes a qualification from a school.
+  # Removes a qualification from a school and redirects to qualifications.
   def qualifications_remove
     qualification = Qualification.find params[:id]
     qualification.destroy
@@ -208,7 +212,7 @@ class NewApplicationsController < ApplicationController
 
   # POST /applications/employment
   #
-  # Adds new job to the application.
+  # Adds new job to the application and redirects back to employment.
   def employment_add
     @job = Job.new job_params
     @job.application = @application
@@ -223,7 +227,7 @@ class NewApplicationsController < ApplicationController
 
   # GET /applications/employment/search.json?term=<term>
   #
-  # Searches for previously used school name.
+  # Searches for previously used school name for use in autocomplete forms.
   def employment_search
     jobs = Job.search(params[:term]).limit(10)
     respond_to do |format|
@@ -235,7 +239,7 @@ class NewApplicationsController < ApplicationController
 
   # DELETE /applications/employment/:id
   #
-  # Removes job from the application.
+  # Removes job from the application and redirects to employment.
   def employment_remove
     @job = (Job.find params[:id] or not_found)
     @job.destroy
@@ -244,10 +248,16 @@ class NewApplicationsController < ApplicationController
     end
   end
 
+  # GET /applications/employment/:id/edit
+  #
+  # Displays the edit job form.
   def employment_edit
     @job = Job.find params[:id]
   end
 
+  # PATCH/PUT /applications/employment/:id
+  #
+  # Updates the job with the new params and redirects back to employment.
   def employment_update
     @job = Job.find params[:id]
     if @job.update job_params
@@ -259,7 +269,7 @@ class NewApplicationsController < ApplicationController
 
   # POST /applications/employment/next
   #
-  # Submits employment stage.
+  # Submits employment stage and redirects to references.
   def employment_next
     respond_to do |format|
       @application.save_employment
@@ -269,14 +279,14 @@ class NewApplicationsController < ApplicationController
 
   # GET /applications/references
   #
-  # Shows references form.
+  # Shows references form. There is just a single references model that holds both references.
   def references
     @reference = @application.create_reference
   end
 
   # POST /applications/references
   #
-  # Submits references stage.
+  # Submits references stage and redirects to statement.
   def references_next
     @reference = @application.create_reference
     respond_to do |format|
@@ -296,7 +306,7 @@ class NewApplicationsController < ApplicationController
 
   # POST /applications/:id/statement
   #
-  # Submits personal statement stage
+  # Submits personal statement stage and redirects to courses.
   def statement_next
     respond_to do |format|
       if @application.save_statement statement_params
@@ -309,7 +319,7 @@ class NewApplicationsController < ApplicationController
 
   # GET /applications/:id/courses
   #
-  # Displays add courses form.
+  # Displays the add courses form.
   def courses
     @course_selection = CourseSelection.new
     @course_selections = @application.course_selections.includes(:course)
@@ -317,7 +327,7 @@ class NewApplicationsController < ApplicationController
 
   # POST /applications/courses
   #
-  # Adds course to application.
+  # Adds course to application and redirects back to courses.
   def courses_add
     @course_selection = CourseSelection.new course_params
     @course_selections = @application.course_selections.includes(:course)
@@ -330,9 +340,9 @@ class NewApplicationsController < ApplicationController
     end
   end
 
-  # DELETE /applicationscourses
+  # DELETE /applications/courses/:id
   #
-  # Removes course from application.
+  # Removes course from application and redirects back to courses.
   def courses_remove
     @selection = (CourseSelection.find params[:id] or not_found)
     id = @selection.application_id
@@ -344,7 +354,7 @@ class NewApplicationsController < ApplicationController
 
   # POST /applicationscourses/next
   #
-  # Submits courses stage.
+  # Submits courses stage and redirects to submit.
   def courses_next
     respond_to do |format|
       if @application.save_courses
@@ -365,7 +375,7 @@ class NewApplicationsController < ApplicationController
 
   # POST /applications/submit
   #
-  # Submits final stage.
+  # Submits final stage and redirects to +PaymentsController+.
   def submit_next
     respond_to do |format|
       confirmed = !params[:confirm].nil?

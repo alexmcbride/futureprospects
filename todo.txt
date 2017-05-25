@@ -13,6 +13,8 @@ remove pundit verify_authorized from global staff controller once permissions do
 
 -------------
 
+make brand logo higher res (maybe replace jquery with CSS?)
+
 pretty 404 page?
 
 students scoped_search??

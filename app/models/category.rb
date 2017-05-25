@@ -1,4 +1,7 @@
-# Model class to represent a course category.
+# * Name: Alex McBride
+# * Date: 25/05/2017
+# * Project: Future Prospects
+# * Model class to represent a course category.
 class Category < ApplicationRecord
   include ActionView::Helpers::TextHelper
 

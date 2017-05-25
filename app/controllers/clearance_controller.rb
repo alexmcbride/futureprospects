@@ -1,4 +1,7 @@
-# Controller class to manage applying for a clearance course.
+# * Name: Alex McBride
+# * Date: 24/05/2017
+# * Project: Future Prospects
+# * Controller class to manage applying for a clearance course.
 class ClearanceController < ApplicationController
   before_action :authenticate_student!, except: [:index]
   before_action :set_application, except: [:show, :index]

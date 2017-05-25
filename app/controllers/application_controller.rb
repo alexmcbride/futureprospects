@@ -1,4 +1,7 @@
-# Base controller that all controllers inherit from.
+# * Name: Alex McBride
+# * Date: 24/05/2017
+# * Project: Future Prospects
+# * Base controller that all controllers inherit from.
 class ApplicationController < ActionController::Base
   include Pundit
   protect_from_forgery with: :exception
@@ -7,16 +10,15 @@ class ApplicationController < ActionController::Base
 
   # Helper method to use when redirecting to take a payment.
   #
-  # * +return_path+ - the path to return to once the payment is complete.
-  #
-  # Returns the path to redirect to for the payment to be processed.
+  # @param return_path [String] the path to return to once the payment is complete.
+  # @return [String] the path to redirect to for the payment to be processed.
   def payment_redirect_path(return_path)
     session[:payment_redirect] = return_path
     payment_method_path
   end
 
   protected
-    # Throws a not found exception, displaying the 404 page
+    # Throws a not found exception, displaying the 404 error page.
     def not_found
       raise ActionController::RoutingError.new('Not Found')
     end
@@ -29,6 +31,8 @@ class ApplicationController < ActionController::Base
     end
 
     # Gets the currently signed in user.
+    #
+    # @return [User]
     def current_user
       current_student or current_staff
     end

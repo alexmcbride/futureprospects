@@ -1,4 +1,7 @@
-# Model class to represent a User.
+# * Name: Alex McBride
+# * Date: 25/05/2017
+# * Project: Future Prospects
+# * Model class to represent a User. Both Staff and Student inherit from this class using single-table inheritance. The discriminator is stored in the +type+ attribute.
 class User < ApplicationRecord
   # Include devise modules.
   devise :database_authenticatable,
@@ -12,7 +15,9 @@ class User < ApplicationRecord
          :timeoutable,
          :authentication_keys => [:login]
 
-  # Attributes
+  # @!attribute login
+  #   @return [String]
+  #   Attribute to hold the user's current login email or username, depending on what was entered in the signin form.
   attr_accessor :login
 
   # Callbacks
@@ -27,51 +32,50 @@ class User < ApplicationRecord
 
   # Sets the login name - either username or email address.
   #
-  # * +login+ - the user's login.
+  # @param login [String]- the user's login.
   def login=(login)
     @login = login
   end
 
   # Gets login, username, or email, depending on which is set.
   #
-  # Returns the user's username or email, depending on what they used to login.
+  # @return [String]
   def login
     @login || self.username || self.email
   end
 
   # Gets the user's first_name and family_name concatenated together.
   #
-  # Returns the user's full name.
+  # @return [String]
   def full_name
     "#{self.first_name} #{self.family_name}"
   end
 
   # Determines if this user is a student.
   #
-  # Returns a boolean true if this user is a student.
+  # @return [Boolean] true if this user is a student.
   def student?
     self.type == 'Student'
   end
 
   # Determines if this user is staff.
   #
-  # Returns a boolean true if this user is a staff member.
+  # @return [Boolean] true if this user is a staff member.
   def staff?
     self.type == 'Staff'
   end
 
   # Generates a random eight character password.
   #
-  # Returns  the generated password.
+  # @return [String]
   def self.generate_password
     Devise.friendly_token.first 8
   end
 
-  # Removes the user if the username matches
+  # Removes the user if the username matches.
   #
-  # * +username+ - the username, entered by the user, to test if it matches.
-  #
-  # Returns a boolean indicating if the user was removed or a validation error added.
+  # @param username [String] the username, entered by the user, to test if it matches.
+  # @return [Boolean] indicating if the user was removed or a validation error added.
   def remove_user(username)
     if username == self.username
       self.destroy!
@@ -85,7 +89,7 @@ class User < ApplicationRecord
   private
     # Overrides Devise sign in to allow both username and email address to be used.
     #
-    # * +warden_conditions+ - conditions supplied by the warden gem.
+    # @param warden_conditions [Hash] conditions supplied by the warden gem.
     def self.find_for_database_authentication(warden_conditions)
       conditions = warden_conditions.dup
       if (login = conditions.delete(:login))
@@ -109,10 +113,9 @@ class User < ApplicationRecord
 
     # Generate username with initial, family name, then three digit random number
     #
-    # * +first_name+ - the user's first name
-    # * +family_name+ - the user's family name
-    #
-    # Returns the generated username.
+    # @param first_name [String] the user's first name
+    # @param family_name [String] the user's family name
+    # @return [String] the generated username.
     def generate_username(first_name, family_name)
       initial = first_name[0].downcase
       family_name = family_name.downcase
@@ -122,11 +125,9 @@ class User < ApplicationRecord
 
     # Checks if the supplied username is in use or not.
     #
-    # * +username+ - the username to check.
-    #
-    # Returns a boolean true if the username is free.
+    # @param username [String] the username to check.
+    # @return [Boolean] true if the username is free.
     def username_free?(username)
       User.find_by_username(username).nil?
     end
-
 end

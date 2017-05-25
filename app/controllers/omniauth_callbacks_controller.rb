@@ -1,5 +1,7 @@
-# Controller to handle Omniauth callbacks from Devise - for various open auth providers. Open authentication providers
-# redirect to this controller where we register/sign in the student as necessary.
+# * Name: Alex McBride
+# * Date: 24/05/2017
+# * Project: Future Prospects
+# * Controller to handle Omniauth callbacks from Devise - for various open auth providers. Open authentication providers redirect to this controller where we register/sign in the student as necessary.
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # GET /students/auth/google_oauth2/callback
   #
@@ -24,14 +26,14 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   # GET /students/oauth/new
   #
-  # Displays a cut-down signup form, although signing up with oauth we still need some info from the student.
+  # Displays a cut-down sign-up form, although signing up with oauth we still need some info from the student.
   def new
     @student = Student.new_from_oauth session['devise.oauth_data']
   end
 
   # POST /students/oauth/new
   #
-  # Post action to complete signup.
+  # Post action to complete sign-up.
   def create
     @student = Student.create_from_oauth session['devise.oauth_data'], student_params
     if @student.save

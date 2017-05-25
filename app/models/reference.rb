@@ -1,4 +1,7 @@
-# Model class for representing a student's references.
+# * Name: Alex McBride
+# * Date: 25/05/2017
+# * Project: Future Prospects
+# * Model class for representing a student's references.
 class Reference < ApplicationRecord
   validates :reference_1_full_name, presence: true, length: {maximum: 70}
   validates :reference_1_occupation, presence: true, length: {maximum: 70}
@@ -22,5 +25,8 @@ class Reference < ApplicationRecord
   validates :reference_2_telephone, presence: true, length: {maximum: 20}
   validates :reference_2_email, presence: true, length: {maximum: 254}
 
+  # @!attribute application
+  #   @return [Application]
+  #   The references's parent application.
   belongs_to :application
 end

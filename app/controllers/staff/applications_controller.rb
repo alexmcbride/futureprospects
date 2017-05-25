@@ -1,7 +1,13 @@
+# * Name: Alex McBride
+# * Date: 25/05/2017
+# * Project: Future Prospects
+# * Controller class that allows staff to manage student applications.
 class Staff::ApplicationsController < Staff::StaffController
   before_action :set_application, only: [:update, :destroy]
 
   # GET /staff/applications
+  #
+  # Displays the application list, that allows a staff member to choose which application to administer.
   def index
     # Default filter option if not set.
     unless params.key? :status
@@ -15,7 +21,7 @@ class Staff::ApplicationsController < Staff::StaffController
 
     @applications = policy_scope(Application)
         .by_year(params[:year])
-        .filter(params)
+        .filter(params) # Include filter options.
         .includes(:student)
         .page(params[:page])
 
@@ -26,12 +32,16 @@ class Staff::ApplicationsController < Staff::StaffController
   end
 
   # GET /staff/applications/1
+  #
+  # Displays a single student application.
   def show
     @application = Application.find params[:id]
     authorize @application
   end
 
   # GET /staff/applications/1/full
+  #
+  # Displays the student's full application (including all info).
   def full
     @application = Application.includes(schools: [:qualifications])
                        .includes(:jobs)
@@ -41,6 +51,8 @@ class Staff::ApplicationsController < Staff::StaffController
   end
 
   # GET /staff/applications/1/edit
+  #
+  # Displays the application edit form, which allows staff members to make decisions about applications.
   def edit
     @application = Application.find params[:id]
     respond_to do |format|
@@ -54,6 +66,8 @@ class Staff::ApplicationsController < Staff::StaffController
   end
 
   # PATCH/PUT /staff/applications/1
+  #
+  # Updates an application with the staff member's decisions and redirects back to show.
   def update
     authorize @application
     respond_to do |format|
@@ -65,21 +79,13 @@ class Staff::ApplicationsController < Staff::StaffController
     end
   end
 
-  # DELETE /staff/applications/1
-  def destroy
-    @application.destroy
-    respond_to do |format|
-      format.html { redirect_to staff_applications_url, notice: 'Application was successfully destroyed.' }
-    end
-  end
-
   private
-    # Use callbacks to share common setup or constraints between actions.
+    # Sets the main application object for actions that need it.
     def set_application
       @application = Application.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # Sanitise allowed application parameters.
     def application_params
       params.require(:application).permit(course_selections_attributes: [:id, :college_offer, :note])
     end

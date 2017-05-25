@@ -1,9 +1,12 @@
-# Model class to represent a student. Inherits from User and uses Single-Table Inheritance.
+# * Name: Alex McBride
+# * Date: 25/05/2017
+# * Project: Future Prospects
+# * Model class to represent a student. Inherits from User and uses Single-Table Inheritance.
 class Student < User
   # Add oauth providers
   devise :omniauthable, :omniauth_providers => [:google_oauth2, :facebook, :twitter]
 
-  # Constants
+  # Constant regex used for validating national insurance numbers.
   NIN_REGEX = /^(?!BG)(?!GB)(?!NK)(?!KN)(?!TN)(?!NT)(?!ZZ)(?:[A-CEGHJ-PR-TW-Z][A-CEGHJ-NPR-TW-Z])(?:\s*\d\s*){6}([A-D]|\s)$/
 
   # Validators
@@ -12,20 +15,24 @@ class Student < User
   validates :national_insurance_number, presence: true, uniqueness: true, length: {maximum: 9}
   validates_format_of :national_insurance_number, with: NIN_REGEX, multiline: true
 
-  # Foreign Keys
+  # @!attribute applications
+  #   @return [Array<Application>]
+  #   The student's one-to-many association with applications. A student can have many applications, but only one for the current academic year.
   has_many :applications, dependent: :destroy
 
-  # Attributes
+  # @!attribute current_application
+  #   @retrn [Application]
+  #   The student's application for the current academic year.
   attr_reader :current_application
 
-  # Finds the student with the specified open authentication provider.
+  # Finds the student with the specified open authentication provider details.
   #
   # @param provider [String] the oauth provider.
   # @param uid [String] the oauth unique identifier.
   # @return [Array<Student>] the student object or nil.
   scope :find_open_auth, ->(provider, uid){ where(provider: provider, uid: uid) }
 
-  # Creates a new application, filled with some info we already know.
+  # Creates a new application for this student.
   #
   # @return [Application]
   def create_application
@@ -34,7 +41,7 @@ class Student < User
     end
   end
 
-  # Finds the current application, which is an application made in the last year.
+  # Finds the current application, which is an application made for the current academic year.
   #
   # @return [Application]
   def current_application
@@ -42,7 +49,7 @@ class Student < User
     @current_application ||= self.applications.current.first
   end
 
-  # Checks if the student has a current application
+  # Checks if the student has a current application.
   #
   # @return [Boolean]
   def has_current_application?
@@ -59,7 +66,6 @@ class Student < User
   # Sends a text message to the student, if they have a current application and have entered a mobile number.
   #
   # @param body [String] the message to send.
-  #
   # @return [Boolean] true if the message was sent.
   def send_text_message(body)
     app = current_application
@@ -68,10 +74,9 @@ class Student < User
     end or false
   end
 
-  # Create new student from oauth data.
+  # Creates new student based on oauth data.
   #
   # @param data [Hash] the data from an oauth provider.
-  #
   # @return [Student]
   def self.new_from_oauth(data)
     student = Student.new
@@ -83,11 +88,10 @@ class Student < User
     student
   end
 
-  # Create new student from oauth data with params data (e.g. from a form).
+  # Create new student based on oauth data then updates it with the specified params (e.g. data from a form).
   #
   # @param data [Hash] the data from an oauth provider.
   # @param params [Hash] the data to update the student with.
-  #
   # @return [Student]
   def self.create_from_oauth(data, params)
     student = new_from_oauth data
@@ -97,11 +101,10 @@ class Student < User
     student
   end
 
-  # Checks if a scottish candidate number is correct: https://www.hesa.ac.uk/collection/c15051/a/scn
+  # Checks if a scottish candidate number is correct. See for details: https://www.hesa.ac.uk/collection/c15051/a/scn
   #
-  # * +scn+ - the number to validate.
-  #
-  # Returns a boolean indicating if the number is valid.
+  # @param scn [String] the number to validate.
+  # @return [Boolean] true if the number is valid.
   def self.validate_scn(scn)
     nums = scn.chars.map { |c| c.to_i }
     check_digit = generate_check_digit nums
@@ -110,13 +113,13 @@ class Student < User
   end
 
   # Generates a valid scottish candidate number for testing. Optionally specify the year (e.g. 2012).
+  #
   # * First 2 digits are year
   # * Next 6 are randomly generated
   # * Last digit is check digit
   #
-  # * +year+ - an optional DateTime object to use for the first two digits.
-  #
-  # Returns a valid scottish candidate number.
+  # @param year [Fixnum] an optional DateTime object to use for the first two digits.
+  # @return [String] a valid scottish candidate number.
   def self.generate_scn(year=nil)
     year = DateTime.now.year if year.nil?
     tens = year % 1000 / 10
@@ -133,14 +136,15 @@ class Student < User
   end
 
   # Generates a valid check digit for a SCN.
+  #
+  # The algorithm works as follows:
   # * Multiply each char by weight and sum result
   # * Divide sum by 11 and store remainder
-  # * If remainder is 0 then check is 0
+  # * If remainder is 0 then check digit is also 0
   # * Otherwise subtract remainder from 11 to get check digit
   #
-  # * +nums+ - an array containing each number of the SCN,
-  #
-  # Returns the check digit.
+  # @param nums [Array<Fixnum>] an array containing each number of the SCN.
+  # @return [Fixnum] the check digit.
   def self.generate_check_digit(nums)
     weights = [3, 2, 7, 6, 5, 4, 3, 2]
     sum = 0

@@ -1,11 +1,20 @@
+# * Name: Alex McBride
+# * Date: 25/05/2017
+# * Project: Future Prospects
+# * Controller class that allows staff to manage other staff members. Staff members and admin cannot modify their own accounts,
+# only the accounts of others.
 class Staff::MembersController < Staff::StaffController
   before_action :set_member, only: [:show, :edit, :update, :destroy, :remove, :permissions, :permissions_update,
                                     :promote_admin, :demote_admin]
   before_action :set_colleges, only: [:index, :new, :edit]
 
   # GET /staff/users
+  #
+  # Displays list of members based on filter options and +StaffPolicy+ scope.
   def index
     @members = policy_scope(Staff).filter(params).includes(:college).order(:created_at).paginate(page: params[:page])
+
+    # Get list of job titles for filter sidebar.
     if current_staff.has_role? :site_admin
       @job_titles = Staff.all_job_titles.order(:job_title)
     else
@@ -14,17 +23,23 @@ class Staff::MembersController < Staff::StaffController
   end
 
   # GET /staff/users/1
+  #
+  # Displays single staff member
   def show
     authorize @member
   end
 
   # GET /staff/users/new
+  #
+  # Displays the new staff member form.
   def new
     authorize Staff
     @member = Staff.new
   end
 
   # POST /staff/users
+  #
+  # Creates a new database entry for the staff member and redirects to permissions action.
   def create
     @member = Staff.new user_params_with_password
 
@@ -45,11 +60,15 @@ class Staff::MembersController < Staff::StaffController
   end
 
   # GET /staff/users/1/edit
+  #
+  # Displays edit staff member form.
   def edit
     authorize @member
   end
 
   # PATCH/PUT /staff/users/1
+  #
+  # Updates staff member and redirects to show action.
   def update
     # Make sure correct college set
     unless current_staff.has_role? :site_admin
@@ -69,11 +88,15 @@ class Staff::MembersController < Staff::StaffController
   end
 
   # GET /staff/users/1/remove
+  #
+  # Displays remove staff member form.
   def remove
     authorize @member
   end
 
   # DELETE /staff/users/1
+  #
+  # Removes staff member and redirects to index action.
   def destroy
     authorize @member
     respond_to do |format|
@@ -86,12 +109,16 @@ class Staff::MembersController < Staff::StaffController
   end
 
   # GET /staff/users/1/permission
+  #
+  # Displays the change permissions form.
   def permissions
     authorize @member
     @roles = Role.all
   end
 
   # POST /staff/users/1/permission
+  #
+  # Updates the permissions and redirects to the show action.
   def permissions_update
     authorize @member
     @member.change_roles params[:permission].nil? ? [] : params[:permission].map {|k, v| k}
@@ -101,6 +128,8 @@ class Staff::MembersController < Staff::StaffController
   end
 
   # POST /staff/users/1/promote_admin
+  #
+  # Promotes a staff member to admin and then redirects to the show form.
   def promote_admin
     authorize @member
     @member.promote_admin
@@ -110,6 +139,8 @@ class Staff::MembersController < Staff::StaffController
   end
 
   # POST /staff/users/1/demote_admin
+  #
+  # Demotes a staff member from admin and redirects to the show form.
   def demote_admin
     authorize @member
     @member.demote_admin
@@ -129,13 +160,13 @@ class Staff::MembersController < Staff::StaffController
       @colleges = policy_scope(College).select('id, name').order(:name) # only need id, name for select inputs
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # Sanitises input parameters (with password).
     def user_params_with_password
       params.require(:staff).permit(:first_name, :family_name, :email, :college, :college_id, :job_title, :password,
                                     :password_confirmation)
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+  # Sanitises input parameters (without password).
     def user_params
       params.require(:staff).permit(:first_name, :family_name, :email, :college, :college_id, :job_title)
     end

@@ -42,6 +42,7 @@ class Staff::MembersController < Staff::StaffController
   # Creates a new database entry for the staff member and redirects to permissions action.
   def create
     @member = Staff.new user_params_with_password
+    @member.skip_confirmation!
 
     # Non-admin can only add staff to their own college.
     unless current_staff.has_role? :site_admin

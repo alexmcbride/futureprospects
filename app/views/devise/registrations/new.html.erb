@@ -2,7 +2,7 @@
 <% @title = 'Register' %>
 
 <div class="row">
-  <div class="col-sm-7 col-sm-offset-1">
+  <div class="col-md-6 col-md-offset-1">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= devise_error_messages! %>
 
@@ -55,15 +55,9 @@
         <%= f.submit 'Sign up', class: 'btn btn-primary', style: 'padding-left: 50px; padding-right: 50px;' %>
       </div>
     <% end %>
-
-    <hr>
-
-    <div>
-      <%= render 'devise/shared/links' %>
-    </div>
   </div>
 
-  <div class="col-sm-3">
+  <div class="col-md-4">
     <div class="well">
       <p class="text-darkish small">...or register using another provider.</p>
       <%= link_to student_google_oauth2_omniauth_authorize_path, class: 'btn btn-primary btn-block', role: 'button', style: 'background-color: #db4a39; border: 0;' do %>
@@ -83,6 +77,10 @@
           &nbsp;
           Register with Twitter
       <% end %>
+    </div>
+
+    <div>
+      <%= render 'devise/shared/links' %>
     </div>
   </div>
 </div>

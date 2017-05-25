@@ -197,6 +197,10 @@ li.home-category-item {
   border-radius: 0;
 }
 
+.oauth-panel {
+  @extend .pull-right;
+}
+
 /* Styles for extra small mobile screens */
 @media (max-width: 767px) {
   .course-item {
@@ -235,6 +239,10 @@ li.home-category-item {
   .courses-panel {
     border-top: 1px solid #ecf0f1;
     border-radius: 4px;
+  }
+
+  .oauth-panel {
+    display: block;
   }
 }
 

@@ -45,7 +45,7 @@
                 <td><%= permission_checkbox @member, :can_remove_courses, 'Courses Remove' %></td>
                 <td></td>
                 <td><%= permission_checkbox @member, :can_remove_staff, 'Staff Remove' %></td>
-                <td><%= permission_checkbox @member, :can_payments_students, 'Students Payments' %></td>
+                <td><%= permission_checkbox @member, :can_payments_students, 'Student Payments' %></td>
                 <td><%= permission_checkbox @member, :can_remove_category, 'Category Remove' %></td>
                 <td></td>
               </tr>
@@ -67,7 +67,7 @@
     </div>
 
     <% if policy(@member).promote_admin? %>
-        <hr>
+      <hr>
       <div class="well">
         <% if @member.has_role? :site_admin %>
           <%= form_for @member, url: staff_member_demote_admin_path(@member), method: :post do |f| %>

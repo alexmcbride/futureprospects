@@ -5,6 +5,10 @@
 class Category < ApplicationRecord
   include ActionView::Helpers::TextHelper
 
+  # @!attribute name
+  #   @return [String]
+  #   The category name.
+
   # Validators
   validates :name, presence: true, length: { maximum: 40}, uniqueness: true
 
@@ -16,7 +20,6 @@ class Category < ApplicationRecord
   # Removes the category if the supplied name matches and there are no courses currently in the category.
   #
   # @param category_name [String] the name of the category as entered by the user.
-  #
   # @return [Boolean] true if the category was removed.
   def remove?(category_name)
     if category_name != self.name

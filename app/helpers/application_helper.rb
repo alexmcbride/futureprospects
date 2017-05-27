@@ -185,7 +185,7 @@ module ApplicationHelper
   # Generates an address from a resource.
   #
   # @param separator [String] the line separator.
-  # @retur the address as a string.
+  # @return the address as a string.
   def address(resource, separator='<br>')
     [resource.address_1, (resource.address_2 if resource.address_2.present?), resource.city, resource.postcode, resource.country].compact.join(separator).html_safe
   end

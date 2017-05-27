@@ -49,7 +49,7 @@ class DecisionsController < ApplicationController
 
   # POST /decisions/decline?which=<Symbol>
   #
-  # Updates model to decline offers depending on the +which+ query parameter, then redirects to decisions.
+  # Updates the model to decline offers depending on the +which+ query parameter, then redirects to decisions.
   def decline
     which = params[:which_to_decline].to_sym
     CourseSelection.decline which, @application

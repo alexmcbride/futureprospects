@@ -32,8 +32,8 @@
       <%= form_text_field f, :employer %>
       <%= form_text_field f, :job_title %>
       <%= form_text_field f, :duties %>
-      <%= form_date f, :start_date %>
-      <%= form_date f, :end_date %>
+      <%= form_date f, :start_date, value: @job.start_date %>
+      <%= form_date f, :end_date, value: @job.end_date %>
     </div>
 
     <div class="col-sm-6 col-xs-12">

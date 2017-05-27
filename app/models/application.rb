@@ -29,7 +29,7 @@ class Application < ApplicationRecord
 
   # @!attribute gender
   #   @return [symbol]
-  #   Enum for student gender.
+  #   The student's gender.
   #
   #   * +:male+ - the student is male.
   #   * +:female+ - the student is female.
@@ -39,7 +39,7 @@ class Application < ApplicationRecord
 
   # @!attribute status
   #   @return [symbol]
-  #   Enum for application status.
+  #   The current application status.
   #
   #   * +:submitting+ - Student filling in application
   #   * +:awaiting_payment+ - Application submitted, awaiting payment
@@ -56,7 +56,7 @@ class Application < ApplicationRecord
 
   # @!attribute current_stage
   #   @return [symbol]
-  #   Enum for the current application stage.
+  #   The current application stage.
   #
   #   * +:intro_stage+ - Student is on the introduction stage.
   #   * +:profile_stage+ - Student is on the profile stage.
@@ -84,6 +84,7 @@ class Application < ApplicationRecord
 
   # Scope to find all applications created during the current academic year.
   #
+  #  @param year [Fixnum]
   # @return [Array<Application>]
   scope :current, -> (year=nil){where(created_at: current_year(year))}
 
@@ -180,18 +181,134 @@ class Application < ApplicationRecord
   validate :applications_are_open, on: :create
   validates :birth_date, presence: true
 
+  # @!attribute id
+  #   @return [Fixnum]
+  #   The application ID.
+
+  # @!attribute student_id
+  #   @return [Fixnum]
+  #   The student ID foreign key.
+
+  # @!attribute title
+  #   @return [String]
+  #   The student's title.
+
+  # @!attribute first_name
+  #   @return [String]
+  #   The student's first name.
+
+  # @!attribute middle_name
+  #   @return [String]
+  #   The student's middle name.
+
+  # @!attribute family_name
+  #   @return [String]
+  #   The student's family name.
+
+  # @!attribute previous_name
+  #   @return [String]
+  #   The student's previous name.
+
+  # @!attribute telephone
+  #   @return [String]
+  #   The student's telephone number.
+
+  # @!attribute mobile
+  #   @return [String]
+  #   The student's mobile number.
+
+  # @!attribute disability
+  #   @return [String]
+  #   The student's disability if they have one.
+
+  # @!attribute personal_statement
+  #   @return [String]
+  #   The student's personal statement.
+
+  # @!attribute permanent_house_number
+  #   @return [String]
+  #   The student's permanent house number.
+
+  # @!attribute permanent_address_1
+  #   @return [String]
+  #   The student's permanent address line 1.
+
+  # @!attribute permanent_address_2
+  #   @return [String]
+  #   The student's permanent address line 2
+
+  # @!attribute permanent_city
+  #   @return [String]
+  #   The student's permanent city.
+
+  # @!attribute permanent_postcode
+  #   @return [String]
+  #   The student's permanent postcode
+
+  # @!attribute permanent_country
+  #   @return [String]
+  #   The student's permanent country.
+
+  # @!attribute correspondence_house_number
+  #   @return [String]
+  #   The student's correspondence house number.
+
+  # @!attribute correspondence_address_1
+  #   @return [String]
+  #   The student's correspondence address line 1.
+
+  # @!attribute correspondence_address_2
+  #   @return [String]
+  #   The student's correspondence address line 2
+
+  # @!attribute correspondence_city
+  #   @return [String]
+  #   The student's correspondence city.
+
+  # @!attribute correspondence_postcode
+  #   @return [String]
+  #   The student's correspondence postcode
+
+  # @!attribute correspondence__country
+  #   @return [String]
+  #   The student's correspondence country.
+
+  # @!attribute submitted_date
+  #   @return [DateTime]
+  #   The application submission date.
+
+  # @!attribute created_at
+  #   @return [DateTime]
+  #   When the application was first created.
+
+  # @!attribute updated_at
+  #   @return [DateTime]
+  #   When the application was last updated.
+
+  # @!attribute course_selections_count
+  #   @return [Fixnum]
+  #   A cache to hold the number of course_selections associated to this application without having to count them.
+
+  # @!attribute replies_due
+  #   @return [DateTime]
+  #   When the students replies are due by.
+
+  # @!attribute birth_date
+  #   @return [Date]
+  #   The student's birth date.
+
   # @!attribute student
   #   @return [Student]
   #   The student the application belongs to.
   belongs_to :student
 
   # @!attribute schools
-  #   @return [School[]]
+  #   @return [Array<School>]
   #   The application schools association.
   has_many :schools, dependent: :destroy
 
   # @!attribute jobs
-  #   @return [Job[]]
+  #   @return [Array<Job>
   #   The application jobs association.
   has_many :jobs, dependent: :destroy
 
@@ -201,12 +318,12 @@ class Application < ApplicationRecord
   has_one :reference, dependent: :destroy
 
   # @!attribute course_selections
-  #   @return [CourseSelection[]]
+  #   @return [Array<CourseSelection>
   #   The application course_selections association, the intersection table between application and course.
   has_many :course_selections, dependent: :destroy
 
   # @!attribute payments
-  #   @return [Payment[]]
+  #   @return [Array<Payment>
   #   The application payments association.
   has_many :payments, dependent: :destroy
 
@@ -266,7 +383,6 @@ class Application < ApplicationRecord
   # Checks if this applications has a course selection for the specified college.
   #
   # @param college_id [Fixnum] the college to check for.
-  #
   # @return [boolean]
   def belongs_to_college(college_id)
     self.course_selections.joins(:course).where('courses.college_id=?', college_id).any?
@@ -292,7 +408,8 @@ class Application < ApplicationRecord
     college_ids = Course.select('courses.college_id')
         .joins(:course_selections)
         .where('course_selections.application_id' => self.id)
-        .where('course_selections.college_offer' => nil).map{|r|r.college_id}
+        .where('course_selections.college_offer' => nil)
+		.map { |r| r.college_id }
 
     college_ids.any? && !college_ids.include?(college.id)
   end

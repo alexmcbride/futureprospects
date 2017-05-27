@@ -5,7 +5,7 @@
 # Handles credit-card and paypal payments.
 # A payment item is created with a null status and inserted into payments table. The calling controller redirects to
 # +payments#payment_method+, from where this controller takes over. Optionally the calling controller can set
-# +session[:payment_redirect]+ with a path the payment controller will redirect to once the payment has finished. If no
+# session[:payment_redirect] with a path the payment controller will redirect to once the payment has finished. If no
 # path is supplied it redirects to root.
 class PaymentsController < ApplicationController
   # Callbacks
@@ -15,7 +15,7 @@ class PaymentsController < ApplicationController
 
   # GET /payments
   #
-  # Displays list of student's payments.
+  # Displays list of student payments.
   def index
     @payments = current_student.all_payments.order(created_at: :desc)
   end
@@ -34,7 +34,7 @@ class PaymentsController < ApplicationController
 
   # POST  /payments/payment_method/continue
   #
-  # Saves payment method to session and redirects to the new_payment_path, optionally through PayPal if the option is chosen.
+  # Saves payment method to session and redirects to the +new_payment_path+, optionally through PayPal if the option is chosen.
   def payment_method_continue
     # Store payment method in session
     session[:payment_type] = params[:payment_type].to_sym if params[:payment_type]
@@ -61,7 +61,7 @@ class PaymentsController < ApplicationController
 
   # POST /payments
   #
-  # Authorizes either credit card or paypal payments depending on the form that posts to it.
+  # Authorizes either credit card or paypal payment depending on the form that posts to it.
   def create
     @payment = @application.authorize_payment payment_params, request.remote_ip
     if @payment.authorized?
@@ -88,19 +88,19 @@ class PaymentsController < ApplicationController
   end
 
   private
-    # Sets the application for actions what need it, unless the application is cancelled.
+    # Sets the application for actions what need it if the user can view it.
     def set_application
       @application = current_student.current_application
       user_not_authorized unless @application.awaiting_payment? || @application.payment_failed?
     end
 
-    # Sets the payment and checks if the student has permission to view it.
+    # Sets the payment object for the controller.
     def set_payment
       @payment = Payment.find(params[:id])
       user_not_authorized unless @payment.owner? current_student.current_application
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # Sanitizes form parameters.
     def payment_params
       params.require(:payment).permit(:payment_type, :card_brand, :card_number, :card_cvv, :card_expiry, :card_first_name, :card_last_name, :paypal_payer_id, :paypal_token)
     end

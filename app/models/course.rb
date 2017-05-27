@@ -33,11 +33,13 @@ class Course < ApplicationRecord
 
   # Finds all courses at the specified college.
   #
+  # @param college_id [Fixnum] the ID of the college to filter results by.
   # @return [Array<Course>]
   scope :college, ->(college_id){where(college_id: college_id)}
 
   # Finds all courses with applicants for the specified year.
   #
+  # @param year [Fixnum] the year to filter results by.
   # @return [Array<Course>]
   scope :current, ->(year){joins(course_selections: :application).where('applications.created_at' => Application.current_year(year))}
 
@@ -70,7 +72,7 @@ class Course < ApplicationRecord
   belongs_to :category, counter_cache: true
 
   # @!attribute course_selections
-  #   @return [CourseSelection]
+  #   @return [Array<CourseSelection>]
   #   The many-to-many association between courses and applications.
   has_many :course_selections, dependent: :destroy
 
@@ -98,7 +100,7 @@ class Course < ApplicationRecord
   # Searches course titles for the specified term.
   #
   # @param search_term [String] the term to search for.
-  # @return [ActiveRecord:Relation] the search results.
+  # @return [Array<Course>] the search results.
   def self.search(search_term)
     Course.search_for(search_term, profile: :title)
   end
@@ -106,7 +108,7 @@ class Course < ApplicationRecord
   # Searches course titles, categories, and colleges for the specified term.
   #
   # @param search_term [String] the term to search for.
-  # @return [ActiveRecord:Relation] the search results
+  # @return [Array<Course>] the search results
   def self.full_search(search_term, category=nil)
     scope = Course.search_for(search_term, profile: :full).includes(:category, :college)
     if category
@@ -139,7 +141,7 @@ class Course < ApplicationRecord
   # Filters the courses based on the request params (+:title+, +:category_id+, +:status+, and +:college_id+)
   #
   # @param params [Array<string>] the request params containing filtering information.
-  # @return [ActiveRecord::Relation] the results of the filtering operation.
+  # @return [Array<Course>] the results of the filtering operation.
   def self.filter(params)
     scope = Course.search params[:title]
     unless params[:category_id].nil? or params[:category_id] == '0'
@@ -180,7 +182,7 @@ class Course < ApplicationRecord
   # Finds all courses with an open status.
   #
   # @param category [Category] optional category the include the where clause
-  # @return [ActiveRecord::Relation] the course results.
+  # @return [Array<Course>] the course results.
   def self.find_open_courses(category=nil)
     scope = Course.available
 
@@ -193,7 +195,7 @@ class Course < ApplicationRecord
 
   # Updates attributes and takes action depending on status change (e.g. +:cancelled' etc).
   #
-  # @param params [Array<String>] the request params including the update data.
+  # @param params [Hash] the request params including the update data.
   # @return [boolean] true if the operation was successful.
   def update_with_status(params)
     # Check if status has just been switched to cancelled
@@ -229,7 +231,7 @@ class Course < ApplicationRecord
   #
   # @param application [Application] the application to find clearance courses for.
   # @param college [College] an optional college to limit the courses to.
-  # @return [ActiveRecord::Relation] the course results.
+  # @return [Array<Course>] the course results.
   def self.clearance_courses(application, college=nil)
     scope = Course.available
                 .select('DISTINCT courses.*')
@@ -251,7 +253,7 @@ class Course < ApplicationRecord
   # has spaces left to fill).
   #
   # @param college [College] optional college to limit results to.
-  # @return [ActiveRecord::Relation] the course results.
+  # @return [Array<Course>] the course results.
   def self.all_clearance_courses(college=nil)
     scope = Course.joins(:college)
                 .select('DISTINCT(courses.*)')

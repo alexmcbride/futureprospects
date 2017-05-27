@@ -34,7 +34,7 @@ class PaymentPdf < Prawn::Document
     # Creates the PDF file based on the payment.
     #
     # @param payment [Payment] the payment object
-    # @oram content [ViewContext] the view context, for calling helpers.
+    # @param context [ViewContext] the view context, for calling helpers.
     def create_pdf(payment, context)
       text '<b><u>Future Prospects</u></b>', size: 18, inline_format: true
       text ' '

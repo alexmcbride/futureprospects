@@ -30,7 +30,7 @@
           <%= form_text_field f, :previous_name, {label: '* Previous name'} %>
           <% options = options_for_select_with_default(Application.genders.keys.map { |w| [w.humanize, w] }, @application.gender) %>
           <%= form_select f, :gender, options %>
-          <%= form_date f, :birth_date, {value: format_date(@application.birth_date)} %>
+          <%= form_date f, :birth_date, {value: @application.birth_date} %>
         </div>
 
         <div class="col-sm-6 col-xs-12">

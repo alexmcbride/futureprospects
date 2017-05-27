@@ -127,10 +127,9 @@ class NewApplicationsController < ApplicationController
   # Removes an educational establishment from the application then redirects back to education.
   def education_remove
     school = School.find params[:id]
-    id = school.application_id
-    school.destroy_with_qualifications
+    school.destroy
     respond_to do |format|
-      format.html { redirect_to applications_education_path(id), notice: 'Removed school' }
+      format.html { redirect_to applications_education_path, notice: 'Removed school' }
     end
   end
 
@@ -147,7 +146,7 @@ class NewApplicationsController < ApplicationController
   def education_update
     @school = School.find params[:id]
     if @school.update(school_params)
-      redirect_to applications_education_path(@school.application), notice: 'Updated school'
+      redirect_to applications_education_path, notice: 'Updated school'
     else
       render :education_edit
     end
@@ -244,7 +243,7 @@ class NewApplicationsController < ApplicationController
     @job = (Job.find params[:id] or not_found)
     @job.destroy
     respond_to do |format|
-      format.html { redirect_to applications_employment_path(@job.application_id), notice: 'Employment removed' }
+      format.html { redirect_to applications_employment_path, notice: 'Employment removed' }
     end
   end
 
@@ -261,7 +260,7 @@ class NewApplicationsController < ApplicationController
   def employment_update
     @job = Job.find params[:id]
     if @job.update job_params
-      redirect_to applications_employment_path(@job.application), notice: 'Employment updated'
+      redirect_to applications_employment_path, notice: 'Employment updated'
     else
       render :employment_edit
     end
@@ -345,10 +344,9 @@ class NewApplicationsController < ApplicationController
   # Removes course from application and redirects back to courses.
   def courses_remove
     @selection = (CourseSelection.find params[:id] or not_found)
-    id = @selection.application_id
     @selection.destroy
     respond_to do |format|
-      format.html { redirect_to applications_courses_path(id), notice: 'Course removed from application' }
+      format.html { redirect_to applications_courses_path, notice: 'Course removed from application' }
     end
   end
 

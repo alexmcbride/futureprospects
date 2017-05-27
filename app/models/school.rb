@@ -46,12 +46,6 @@ class School < ApplicationRecord
     false
   end
 
-  # Destroys school and any associated qualifications
-  def destroy_with_qualifications
-    self.qualifications.destroy_all
-    self.destroy
-  end
-
   # Searches for a school with the specified name.
   #
   # @param term [String] the name to search for.

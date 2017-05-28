@@ -66,6 +66,11 @@ class Payment < ApplicationRecord
   #   The credit card expiry date.
   attr_accessor :card_expiry
 
+  # @!attribute card_first_name
+  #   @return [String]
+  #   The card holder's first name
+  attr_accessor :card_first_name
+
   # @!attribute card_last_name
   #   @return [String]
   #   The card holder's last name
@@ -85,6 +90,11 @@ class Payment < ApplicationRecord
   #   @return [String]
   #   The token returned by PayPal.
   attr_accessor :paypal_token
+
+  # @!attribute simulate_authentication_error
+  #   @return [String]
+  #   Set this variable to simulate an authentication error through Braintree.
+  attr_accessor :simulate_authentication_error
 
   # Authorizes the payment with the relevant provider.
   #
@@ -188,7 +198,8 @@ class Payment < ApplicationRecord
       card = credit_card
       self.last_four_digits = card.last_digits
       self.card_holder = "#{card_first_name} #{card_last_name}"
-      BRAINTREE_GATEWAY.purchase(self.amount, card)
+      amount = self.simulate_authentication_error == '1' ? 200100 : self.amount
+      BRAINTREE_GATEWAY.purchase(amount, card)
     end
 
     # Makes a PayPal purchase

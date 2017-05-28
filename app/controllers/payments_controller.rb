@@ -102,6 +102,6 @@ class PaymentsController < ApplicationController
 
     # Sanitizes form parameters.
     def payment_params
-      params.require(:payment).permit(:payment_type, :card_brand, :card_number, :card_cvv, :card_expiry, :card_first_name, :card_last_name, :paypal_payer_id, :paypal_token)
+      params.require(:payment).permit(:payment_type, :card_brand, :card_number, :card_cvv, :card_expiry, :card_first_name, :card_last_name, :paypal_payer_id, :paypal_token, :simulate_authentication_error)
     end
 end

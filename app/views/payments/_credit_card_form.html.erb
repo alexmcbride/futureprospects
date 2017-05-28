@@ -43,6 +43,22 @@
     </div>
   </div>
 
+  <% if ENV['TEST_PAYMENTS'] == 'true' %>
+    <div class="alert alert-warning alert-dismissable">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <div class="form-group">
+        <h4 class="no-top-margin">Test Payments</h4>
+        <%= f.label :simulate_authentication_error do %>
+          Simulate `insufficient funds` error
+            &nbsp;
+          <%= f.check_box :simulate_authentication_error %>
+        <% end %>
+      </div>
+
+      <p class="small"><em>Note: this option is appearing because the TEST_PAYMENTS environment variable is set.</em></p>
+    </div>
+  <% end %>
+
   <hr>
 
   <div class="actions text-right">

@@ -6,15 +6,6 @@
 <div class="row">
   <div class="col-sm-3">
     <%= render 'stages_sidebar', stage: :new %>
-
-    <% if @payment.credit_card? %>
-      <div class="alert alert-warning">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <h4>Testing Note</h4>
-        <p>These payments are currently not processed, they are made in sandbox mode. To see suitable testing values to use
-          <%=link_to 'go here', 'https://developers.braintreepayments.com/reference/general/testing/ruby#credit-card-numbers', style: 'color: white; text-decoration: underline;' %>.</p>
-      </div>
-    <% end %>
   </div>
 
   <div class="col-sm-9">

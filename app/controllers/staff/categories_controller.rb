@@ -29,7 +29,7 @@ class Staff::CategoriesController < Staff::StaffController
     @category = Category.new(staff_category_params)
     respond_to do |format|
       if @category.save
-        format.html { redirect_to staff_categories_path, notice: "Category '#{@category.name} was successfully created." }
+        format.html { redirect_to staff_categories_path, notice: "Category '#{@category.name}' was successfully created." }
       else
         @categories = Category.order(:name)
         skip_policy_scope
@@ -45,7 +45,7 @@ class Staff::CategoriesController < Staff::StaffController
     authorize @category
     respond_to do |format|
       if @category.update(staff_category_params)
-        format.html { redirect_to staff_categories_path, notice: "Category '#{@category.name} was successfully updated." }
+        format.html { redirect_to staff_categories_path, notice: "Category '#{@category.name}' was successfully updated." }
       else
         format.html { render :edit }
       end

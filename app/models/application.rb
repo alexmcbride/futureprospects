@@ -552,13 +552,13 @@ class Application < ApplicationRecord
                    .where("paid_at < CURRENT_DATE - INTERVAL '#{PAYMENT_EXPIRY_DAYS} days'")
     applications = Application.current.includes(:student).where(status: :payment_failed).where(id: payments)
 
-    # Cancel application and emails student.
+    # Cancel application and email student.
     applications.each do |application|
       application.cancel
       puts "Cancelled application for: #{application.student.username}..."
 
-      StudentMailer.application_cancelled(application.student, application)
-      StudentMessenger.new.application_cancelled(student, application)
+      StudentMailer.application_cancelled(application.student, application).deliver_later
+      StudentMessenger.new.application_cancelled(application.student, application)
     end
   end
 

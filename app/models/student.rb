@@ -66,12 +66,11 @@ class Student < User
   # Sends a text message to the student, if they have a current application and have entered a mobile number.
   #
   # @param body [String] the message to send.
-  # @return [Boolean] true if the message was sent.
   def send_text_message(body)
     app = current_application
     if app.present?
       app.send_text_message body
-    end or false
+    end
   end
 
   # Creates new student based on oauth data.

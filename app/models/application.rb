@@ -837,13 +837,14 @@ class Application < ApplicationRecord
   # Sends a text message to the student, if they have entered a mobile number.
   #
   # @param body [String] the message to send.
-  # @return [Boolean] true if the message was sent.
   def send_text_message(body)
-    # TODO: validate mobile number?
     if self.mobile.present?
-      TWILIO_CLIENT.messages.create(from: ENV['TWILIO_PHONE_NUMBER'], to: self.mobile, body: body)
-      true
-    end or false
+      begin
+        TWILIO_CLIENT.messages.create(from: ENV['TWILIO_PHONE_NUMBER'], to: self.mobile, body: body)
+      rescue Twilio::REST::RequestError => e
+        puts "Twilio Error: #{e.message}"
+      end
+    end
   end
 
   # Determines if the application can receive decisions.

@@ -33,7 +33,7 @@ def student(file, tokens, schools, jobs, refs)
   file.puts student + ".first_name = '#{tokens[1]}'"
   file.puts student + ".family_name = '#{tokens[2]}'"
   file.puts student + ".email = '#{tokens[14]}'"
-  file.puts student + ".scottish_candidate_number = '#{StudentValidator.generate_scn}'"
+  file.puts student + ".scottish_candidate_number = '#{Student.generate_scn}'"
   file.puts student + ".national_insurance_number = '#{@nin}'"
   file.puts student + ".password = 'secret'"
   file.puts student + ".password_confirmation = 'secret'"
@@ -51,9 +51,9 @@ def student(file, tokens, schools, jobs, refs)
   end
   file.puts app + ".gender = :#{tokens[3].downcase}"
   file.puts app + ".telephone = '#{tokens[12]}'"
-  unless tokens[13].empty?
-    file.puts app + ".mobile = '#{tokens[13]}'"
-  end
+  # unless tokens[13].empty?
+  #   file.puts app + ".mobile = '#{tokens[13]}'"
+  # end
   unless tokens[15].empty?
     file.puts app + ".disability = '#{tokens[15]}'"
   end

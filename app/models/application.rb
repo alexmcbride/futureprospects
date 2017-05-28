@@ -565,7 +565,7 @@ class Application < ApplicationRecord
   # Task for handling overdue replies, that is course selections that have been without a decision for too long. Called
   # as a rake task once a day.
   def self.process_overdue_replies
-    applications = Application.current.where(status: :awaiting_replies).where('CURRENT_DATE>decision_due')
+    applications = Application.current.where(status: :awaiting_replies).where('CURRENT_DATE>replies_due')
 
     applications.each do |application|
       application.update_status :replies_overdue

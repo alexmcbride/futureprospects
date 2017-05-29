@@ -3,6 +3,9 @@
 # * Project: Future Prospects
 # * Model class to represent a college course. Courses are children of College and Category, and are linked to an Application by the CourseSelection join table.
 class Course < ApplicationRecord
+  # Include
+  include DateValidator
+
   # @!attribute status
   #   @return [symbol]
   #   Enum for course status.
@@ -53,7 +56,7 @@ class Course < ApplicationRecord
   validates :career_prospects, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true
-  validates :level, presence: false
+  validates :level, presence: false, length: {maximum: 20}
   validates :category_id, presence: true
   validates :college_id, presence: true
   validates :spaces, presence: true, numericality: {only_integer: true, greater_than: 0, less_than: 120}

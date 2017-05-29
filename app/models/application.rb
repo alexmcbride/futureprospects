@@ -5,6 +5,7 @@
 class Application < ApplicationRecord
   # Imports
   include ActionView::Helpers::TextHelper
+  require 'active_support/core_ext' # For to_date
 
   # The maximum length of a personal statement.
   STATEMENT_LENGTH = 2000
@@ -352,7 +353,7 @@ class Application < ApplicationRecord
   #
   # @return [boolean]
   def current_year?
-    Application.current_year.include? self.created_at
+    Application.current_year.include? self.created_at.to_date
   end
 
   # Determines the date range of the current academic year

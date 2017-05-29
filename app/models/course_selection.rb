@@ -252,10 +252,11 @@ class CourseSelection < ApplicationRecord
     end
 
     # Callback to auto-decrease course_selections count for current year.
-    # TODO: is this needed, I don't think CourseSelections can be destroyed?
     def decrease_current_selections_count
-      self.course.current_selections_count -= 1
-      self.course.save validate: false
+      if self.application.current_year?
+        self.course.current_selections_count -= 1
+        self.course.save validate: false
+      end
     end
 
     # Declines all of a student's choices.

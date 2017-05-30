@@ -7,6 +7,6 @@ class Staff::StaffController < ApplicationController
 
   # These ensure that Pundit is being called for every action
   # TODO: remove from production code?
-  after_action :verify_authorized, except: :index
-  after_action :verify_policy_scoped, only: :index
+  # after_action :verify_authorized, except: :index
+  # after_action :verify_policy_scoped, only: :index
 end

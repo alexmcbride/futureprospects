@@ -10,8 +10,11 @@ class Staff::ReportsController < Staff::StaffController
   #
   # Shows list of colleges.
   def index
-    authorize :report, :view?
-    @colleges = policy_scope College
+    if current_staff.has_role? :site_admin
+      @colleges = policy_scope College
+    else
+      redirect_to staff_reports_college_path(current_staff.college)
+    end
   end
 
   # GET /staff/reports/college/:id

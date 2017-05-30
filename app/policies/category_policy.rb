@@ -1,13 +1,16 @@
+# * Name: Alex McBride
+# * Date: 30/05/2017
+# * Project: Future Prospects
 # Class to represent which users can assess category models. Used for staff permissions.
 class CategoryPolicy < BaseApplicationPolicy
-  # Class to represent lists of categories.
+  # Class to represent resource scope.
   class Scope < Scope
     attr_reader :user, :scope
 
     # Constructor
     #
-    # * +user+ - the user to check for access rights
-    # * +scope+ - the scope to check
+    # @param user [User] the user to check for access rights
+    # @param scope [ActiveRecord::Relation] the scope to check
     def initialize(user, scope)
       @user  = user
       @scope = scope
@@ -15,7 +18,7 @@ class CategoryPolicy < BaseApplicationPolicy
 
     # Resolves the scope for the policy
     #
-    # Returns the scope this user can access.
+    # @param scope [ActiveRecord::Relation] the scope to check
     def resolve
       if user.has_role? :site_admin
         scope.all
@@ -32,49 +35,49 @@ class CategoryPolicy < BaseApplicationPolicy
 
   # Checks if the user can perform this action on the model.
   #
-  # Returns a boolean indicating if the action is allowed.
+  # @return [Boolean]
   def show?
     user.has_role? :site_admin or user.has_role? :can_view_categories
   end
 
   # Checks if the user can perform this action on the model.
   #
-  # Returns a boolean indicating if the action is allowed.
+  # @return [Boolean]
   def new?
     user.has_role? :site_admin or user.has_role? :can_add_category
   end
 
   # Checks if the user can perform this action on the model.
   #
-  # Returns a boolean indicating if the action is allowed.
+  # @return [Boolean]
   def create?
     new?
   end
 
   # Checks if the user can perform this action on the model.
   #
-  # Returns a boolean indicating if the action is allowed.
+  # @return [Boolean]
   def edit?
     user.has_role? :site_admin or user.has_role? :can_edit_category
   end
 
   # Checks if the user can perform this action on the model.
   #
-  # Returns a boolean indicating if the action is allowed.
+  # @return [Boolean]
   def update?
     edit?
   end
 
   # Checks if the user can perform this action on the model.
   #
-  # Returns a boolean indicating if the action is allowed.
+  # @return [Boolean]
   def remove?
     user.has_role? :site_admin or user.has_role? :can_remove_category
   end
 
   # Checks if the user can perform this action on the model.
   #
-  # Returns a boolean indicating if the action is allowed.
+  # @return [Boolean]
   def destroy?
     remove?
   end

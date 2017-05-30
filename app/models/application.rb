@@ -298,6 +298,14 @@ class Application < ApplicationRecord
   #   @return [Date]
   #   The student's birth date.
 
+  # @!attribute created_at
+  #   @return [DateTime]
+  #   The creation date.
+
+  # @!attribute updated_at
+  #   @return [DateTime]
+  #   The last update time.
+
   # @!attribute student
   #   @return [Student]
   #   The student the application belongs to.

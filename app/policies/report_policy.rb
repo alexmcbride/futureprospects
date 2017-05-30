@@ -1,3 +1,6 @@
+# * Name: Alex McBride
+# * Date: 30/05/2017
+# * Project: Future Prospects
 # Class to represent reports headless policy. Reports are also governed by normal show policies, contained in the
 # +CoursePolicy+ and +CollegePolicy+ classes. The combined policies are used to determine if the report can be viewed
 # or downloaded.

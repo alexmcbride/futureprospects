@@ -1,1 +1,10 @@
 --private
+
+--no-private
+--title "Future Prospects"
+
+app/**/*.rb -
+--exclude application_cable/*
+--exclude jobs/*
+--exclude mailers/application_mailer.rb
+--exclude models/application_record.rb

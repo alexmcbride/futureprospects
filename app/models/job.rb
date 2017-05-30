@@ -15,6 +15,66 @@ class Job < ApplicationRecord
   validates :start_date, presence: true
   validates :end_date, presence: true
 
+  # @!attribute id
+  #   @return [Fixnum]
+  #   The job ID.
+
+  # @!attribute application_id
+  #   @return [Fixnum]
+  #   The application that the job belongs to.
+
+  # @!attribute employer
+  #   @return [String]
+  #   The employer's name.
+
+  # @!attribute address_1
+  #   @return [String]
+  #   The employer's address first line.
+
+  # @!attribute address_2
+  #   @return [String]
+  #   The employer's address second line.
+
+  # @!attribute postcode
+  #   @return [String]
+  #   The employer's post code.
+
+  # @!attribute city
+  #   @return [String]
+  #   The employer's city.
+
+  # @!attribute country
+  #   @return [String]
+  #   The employer's country.
+
+  # @!attribute job_title
+  #   @return [String]
+  #   The student's job title.
+
+  # @!attribute duties
+  #   @return [String]
+  #   The student's duties.
+
+  # @!attribute country
+  #   @return [String]
+  #   The employer's country.
+
+  # @!attribute start_date
+  #   @return [Date]
+  #   The start date of the job.
+
+  # @!attribute end_date
+  #   @return [Date]
+  #   The end date of the job.
+
+  # @!attribute created_at
+  #   @return [DateTime]
+  #   The creation date.
+
+  # @!attribute updated_at
+  #   @return [DateTime]
+  #   The last update time.
+
   # @!attribute application
   #   @return [Application]
   #   The application the job belongs to.
@@ -29,7 +89,7 @@ class Job < ApplicationRecord
   # @return [Array<CourseSelection>]
   scope :course, ->(course){Job.joins(application: :course_selections).where('course_selections.course_id'=>course.id)}
 
-  # Searches for job with the specified name.
+  # Searches for jobs that match the specified term.
   #
   # @param term [String] the name to search for.
   # @return [Array<Job]

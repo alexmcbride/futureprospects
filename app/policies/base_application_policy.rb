@@ -1,11 +1,14 @@
-# Abstract class all policies inherit from. Policies are used to control which users have access certain models.
+# * Name: Alex McBride
+# * Date: 30/05/2017
+# * Project: Future Prospects
+# Abstract class all policies inherit from. Policies are used to control which users have access to which models.
 class BaseApplicationPolicy
   attr_reader :user, :record
 
   # Constructor
   #
-  # * +user+ - the user to check for access rights
-  # * +record+ - the model resource to check
+  # @param user [User] the user to check for access rights
+  # @param record [Resource] the scope to check
   def initialize(user, record)
     @user = user
     @record = record
@@ -13,56 +16,56 @@ class BaseApplicationPolicy
 
   # Default index? access rights.
   #
-  # Returns false
+  # @return [Boolean]
   def index?
     false
   end
 
   # Default show? access rights.
   #
-  # Returns if the record exists in the scope.
+  # @return [Boolean]
   def show?
     scope.where(:id => record.id).exists?
   end
 
   # Default create? access rights.
   #
-  # Returns false
+  # @return [Boolean]
   def create?
     false
   end
 
   # Default new? access rights.
   #
-  # Returns false
+  # @return [Boolean]
   def new?
     create?
   end
 
   # Default update? access rights.
   #
-  # Returns false
+  # @return [Boolean]
   def update?
     false
   end
 
   # Default edit? access rights.
   #
-  # Returns false
+  # @return [Boolean]
   def edit?
     update?
   end
 
   # Default destroy? access rights.
   #
-  # Returns false
+  # @return [Boolean]
   def destroy?
     false
   end
 
   # Default scope access rights.
   #
-  # Returns the default policy
+  # @return [ActiveRecord::Relation]
   def scope
     Pundit.policy_scope!(user, record.class)
   end
@@ -71,7 +74,10 @@ class BaseApplicationPolicy
   class Scope
     attr_reader :user, :scope
 
-    # Constructor.
+    # Constructor
+    #
+    # @param user [User] the user to check for access rights
+    # @param scope [ActiveRecord::Relation] the scope to check
     def initialize(user, scope)
       @user = user
       @scope = scope
@@ -79,7 +85,7 @@ class BaseApplicationPolicy
 
     # Resolve the permissions for the scope.
     #
-    # Returns all scope.
+    # @return [ActiveRecord::Relation]
     def resolve
       scope
     end

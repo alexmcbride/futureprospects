@@ -15,6 +15,126 @@ class User < ApplicationRecord
          :timeoutable,
          :authentication_keys => [:login]
 
+  # @!attribute id
+  #   @return [Fixnum]
+  #   The user ID.
+
+  # @!attribute college_id
+  #   @return [Fixnum]
+  #   The college that the user belongs to, if a staff member.
+
+  # @!attribute email
+  #   @return [String]
+  #   The user's email.
+
+  # @!attribute encrypted_password
+  #   @return [String]
+  #   The user's password.
+
+  # @!attribute reset_password_token
+  #   @return [String]
+  #   #   The user's reset password token.
+
+  # @!attribute reset_password_sent_at
+  #   @return [DateTime]
+  #   The time the reset password email was sent.
+
+  # @!attribute remember_created_at
+  #   @return [DateTime]
+  #   The time the user check the remember checkbox.
+
+  # @!attribute sign_in_count
+  #   @return [Fixnum]
+  #   The number of times the user has signed in.
+
+  # @!attribute current_sign_in_at
+  #   @return [DateTime]
+  #   The current time the user signed in.
+
+  # @!attribute last_sign_in_at
+  #   @return [DateTime]
+  #   The last time the user signed in.
+
+  # @!attribute current_sign_in_ip
+  #   @return [IPAddr]
+  #   The current sign in IP.
+
+  # @!attribute last_sign_in_ip
+  #   @return [IPAddr]
+  #   The last sign in IP.
+
+  # @!attribute confirmation_token
+  #   @return [String]
+  #   The token used to confirm the email.
+
+  # @!attribute confirmed_at
+  #   @return [DateTime]
+  #   When the email was confirmed.
+
+  # @!attribute confirmation_sent_at
+  #   @return [DateTime]
+  #   When the confirmation email was sent.
+
+  # @!attribute unconfirmed_email
+  #   @return [String]
+  #   The unconfirmed email address.
+
+  # @!attribute failed_attempts
+  #   @return [Fixnum]
+  #   The number of failed login attempts.
+
+  # @!attribute unlock_token
+  #   @return [String]
+  #   The token used by the unlock account email.
+
+  # @!attribute locked_at
+  #   @return [DateTime]
+  #   When the account was locked.
+
+  # @!attribute type
+  #   @return [String]
+  #   The single-table inheritance discriminator.
+
+  # @!attribute first_name
+  #   @return [String]
+  #   The user's first name.
+
+  # @!attribute family_name
+  #   @return [String]
+  #   The user's second name.
+
+  # @!attribute username
+  #   @return [String]
+  #   The user's automatically generated username.
+
+  # @!attribute scottish_candidate_number
+  #   @return [String]
+  #   The student's scottish candidate number.
+
+  # @!attribute national_insurance_number
+  #   @return [String]
+  #   The student's national insurance number.
+
+  # @!attribute job_title
+  #   @return [String]
+  #   The staff member's job title.
+
+  # @!attribute provider
+  #   @return [String]
+  #   The student's OAuth provider.
+
+  # @!attribute uid
+  #   @return [String]
+  #   The student's OAuth UID.
+
+  # @!attribute created_at
+  #   @return [DateTime]
+  #   The creation date.
+
+  # @!attribute updated_at
+  #   @return [DateTime]
+  #   The last update time.
+
   # @!attribute login
   #   @return [String]
   #   Attribute to hold the user's current login email or username, depending on what was entered in the signin form.

@@ -3,6 +3,14 @@
 # * Project: Future Prospects
 # * Model class to represent User / Role intersection table.
 class UsersRole < ApplicationRecord
+  # @!attribute user_id
+  #   @return [Fixnum]
+  #   The user part of the composite key.
+
+  # @!attribute role_id
+  #   @return [Fixnum]
+  #   The role part of the composite key.
+
   # @!attribute user
   #   @return [User]
   #   The user the role belongs to.

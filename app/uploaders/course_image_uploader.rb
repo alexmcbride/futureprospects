@@ -1,3 +1,7 @@
+# * Name: Alex McBride
+# * Date: 30/05/2017
+# * Project: Future Prospects
+# Class to represent an uploaded college image.
 class CourseImageUploader < BaseUploader
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
@@ -14,7 +18,8 @@ class CourseImageUploader < BaseUploader
   storage :fog
 
   # Override the directory where uploaded files will be stored.
-  # This is a sensible default for uploaders that are meant to be mounted:
+  #
+  # @return [String] the directory.
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
@@ -41,7 +46,7 @@ class CourseImageUploader < BaseUploader
 
   # Gets a list of allowed image file extensions.
   #
-  # Returns the list of strings.
+  # @return [Array<String>] the list of strings.
   def extension_whitelist
     %w(jpg jpeg gif png)
   end

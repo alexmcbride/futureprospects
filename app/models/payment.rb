@@ -46,6 +46,38 @@ class Payment < ApplicationRecord
   validates :description, presence: true
   validate :validate_card_details, if: :credit_card?
 
+  # @!attribute id
+  #   @return [Fixnum]
+  #   The payment ID.
+
+  # @!attribute application_id
+  #   @return [Fixnum]
+  #   The application that the payment is for.
+
+  # @!attribute amount
+  #   @return [Fixnum]
+  #   The amount of the payment in pence.
+
+  # @!attribute last_four_digits
+  #   @return [String]
+  #   The last four digits of the credit card number.
+
+  # @!attribute card_holder
+  #   @return [String]
+  #   The name of the card holder.
+
+  # @!attribute description
+  #   @return [String]
+  #   A description of the payment.
+
+  # @!attribute paid_at
+  #   @return [DateTime]
+  #   The date and time the payment was made.
+
+  # @!attribute updated_at
+  #   @return [DateTime]
+  #   The last update time.
+
   # @!attribute card_brand
   #   @return [Symbol]
   #   the card brand (e.g. +:visa+, +:mastercard+ etc).

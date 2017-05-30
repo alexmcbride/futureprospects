@@ -5,9 +5,21 @@
 class Category < ApplicationRecord
   include ActionView::Helpers::TextHelper
 
+  # @!attribute id
+  #   @return [Fixnum]
+  #   The model ID.
+
   # @!attribute name
   #   @return [String]
   #   The category name.
+
+  # @!attribute created_at
+  #   @return [DateTime]
+  #   The creation date.
+
+  # @!attribute updated_at
+  #   @return [DateTime]
+  #   The last update time.
 
   # Validators
   validates :name, presence: true, length: { maximum: 40}, uniqueness: true

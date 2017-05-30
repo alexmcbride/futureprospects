@@ -33,6 +33,26 @@ class CourseSelection < ApplicationRecord
   validate :can_add_course_to_application, on: :create
   validates :note, presence: true, if: :rejected? || :conditional_offer?
 
+  # @!attribute application_id
+  #   @return [Fixnum]
+  #   The application ID part of the composite key.
+
+  # @!attribute course_id
+  #   @return [Fixnum]
+  #   The course ID part of the composite key.
+
+  # @!attribute created_at
+  #   @return [DateTime]
+  #   The creation date.
+
+  # @!attribute updated_at
+  #   @return [DateTime]
+  #   The last update time.
+
+  # @!attribute note
+  #   @return [String]
+  #   The note left on the course selection by a staff member.
+
   # @!attribute application
   #   @return [Application]
   #   The application the course selection belongs to.

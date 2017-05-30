@@ -64,6 +64,70 @@ class Course < ApplicationRecord
   validates :image, presence: true
   validate :spaces_greater_than_applicants, on: :update
 
+  # @!attribute id
+  #   @return [Fixnum]
+  #   The course ID.
+
+  # @!attribute category_id
+  #   @return [Fixnum]
+  #   The category ID foreign key.
+
+  # @!attribute college_id
+  #   @return [Fixnum]
+  #   The college ID foreign key.
+
+  # @!attribute title
+  #   @return [String]
+  #   The course title.
+
+  # @!attribute description
+  #   @return [String]
+  #   The course description.
+
+  # @!attribute entry_requirements
+  #   @return [String]
+  #   The course entry_requirements.
+
+  # @!attribute career_prospects
+  #   @return [String]
+  #   The course entry_requirements.
+
+  # @!attribute start_date
+  #   @return [Date]
+  #   The course start date.
+
+  # @!attribute end_date
+  #   @return [Date]
+  #   The course end date.
+
+  # @!attribute level
+  #   @return [String]
+  #   The course SCQF level.
+
+  # @!attribute image
+  #   @return [String]
+  #   The uploaded course image path.
+
+  # @!attribute spaces
+  #   @return [Fixnum]
+  #   The number of spaces in the course.
+
+  # @!attribute course_selections_count
+  #   @return [Fixnum]
+  #   The total number of course selections for this course.
+
+  # @!attribute current_selections_count
+  #   @return [Fixnum]
+  #   The number of course selections for this course this academic year.
+
+  # @!attribute created_at
+  #   @return [DateTime]
+  #   The creation date.
+
+  # @!attribute updated_at
+  #   @return [DateTime]
+  #   The last update time.
+
   # @!attribute college
   #   @return [College]
   #   The course's parent college.

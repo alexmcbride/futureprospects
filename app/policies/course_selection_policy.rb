@@ -1,13 +1,16 @@
+# * Name: Alex McBride
+# * Date: 30/05/2017
+# * Project: Future Prospects
 # Class to manage course selection policy.
 class CourseSelectionPolicy < BaseApplicationPolicy
-  # Class to represent lists of categories.
+  # Class to represent resource scope.
   class Scope < Scope
     attr_reader :user, :scope
 
     # Constructor
     #
-    # * +user+ - the user to check for access rights
-    # * +scope+ - the scope to check
+    # @param user [User] the user to check for access rights
+    # @param scope [ActiveRecord::Relation] the scope to check
     def initialize(user, scope)
       @user  = user
       @scope = scope
@@ -15,7 +18,7 @@ class CourseSelectionPolicy < BaseApplicationPolicy
 
     # Resolves the scope for the policy
     #
-    # Returns the scope this user can access.
+    # @return [ActiveRecord::Relation]
     def resolve
       if user.has_role? :site_admin
         scope.all

@@ -15,6 +15,54 @@ class College < ApplicationRecord
   validates :email, presence: true, length: { maximum: 255 }, uniqueness: true
   validates :website, presence: true, length: { maximum: 255 }, uniqueness: true
 
+  # @!attribute id
+  #   @return [Fixnum]
+  #   The model ID.
+
+  # @!attribute name
+  #   @return [String]
+  #   The name of the college.
+
+  # @!attribute description
+  #   @return [String]
+  #   The college description.
+
+  # @!attribute address
+  #   @return [String]
+  #   The college address.
+
+  # @!attribute postcode
+  #   @return [String]
+  #   The college post code.
+
+  # @!attribute telephone
+  #   @return [String]
+  #   The college telephone number.
+
+  # @!attribute email
+  #   @return [String]
+  #   The college email.
+
+  # @!attribute website
+  #   @return [String]
+  #   The college website URL.
+
+  # @!attribute created_at
+  #   @return [DateTime]
+  #   The creation time.
+
+  # @!attribute updated_at
+  #   @return [DateTime]
+  #   The last update time.
+
+  # @!attribute image
+  #   @return [String]
+  #   The uploaded image URL.
+
+  # @!attribute clearance
+  #   @return [Boolean]
+  #   Whether he college is in clearance.
+
   # @!attribute courses
   #   @return [Course[]]
   #   The college's one-to-many association with courses.

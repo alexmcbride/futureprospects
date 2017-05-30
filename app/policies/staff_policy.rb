@@ -1,13 +1,16 @@
+# * Name: Alex McBride
+# * Date: 30/05/2017
+# * Project: Future Prospects
 # Class to represent which users can assess course models. Used for staff permissions.
 class StaffPolicy < BaseApplicationPolicy
-  # Class to represent lists of categories.
+  # Class to represent resource scope.
   class Scope < Scope
     attr_reader :user, :scope
 
     # Constructor
     #
-    # * +user+ - the user to check for access rights
-    # * +scope+ - the scope to check
+    # @param user [User] the user to check for access rights
+    # @param scope [ActiveRecord::Relation] the scope to check
     def initialize(user, other_user)
       @user  = user
       @scope = other_user
@@ -15,7 +18,7 @@ class StaffPolicy < BaseApplicationPolicy
 
     # Resolves the scope for the policy
     #
-    # Returns the scope this user can access.
+    # @return [ActiveRecord::Relation]
     def resolve
       if user.has_role? :site_admin
         scope.all
@@ -29,28 +32,28 @@ class StaffPolicy < BaseApplicationPolicy
 
   # Checks if the user can perform this action on the model.
   #
-  # Returns a boolean indicating if the action is allowed.
+  # @return [Boolean]
   def show?
     user.has_role? :site_admin or (user.college_id == record.college_id and user.has_role? :can_view_staff)
   end
 
   # Checks if the user can perform this action on the model.
   #
-  # Returns a boolean indicating if the action is allowed.
+  # @return [Boolean]
   def new?
     user.has_role? :site_admin or user.has_role? :can_add_staff
   end
 
   # Checks if the user can perform this action on the model.
   #
-  # Returns a boolean indicating if the action is allowed.
+  # @return [Boolean]
   def create?
     user.has_role? :site_admin or (user.college_id == record.college_id and user.has_role? :can_add_staff)
   end
 
   # Checks if the user can perform this action on the model.
   #
-  # Returns a boolean indicating if the action is allowed.
+  # @return [Boolean]
   def edit?
     if user.id == record.id or record.has_role? :site_admin
       return false
@@ -60,14 +63,14 @@ class StaffPolicy < BaseApplicationPolicy
 
   # Checks if the user can perform this action on the model.
   #
-  # Returns a boolean indicating if the action is allowed.
+  # @return [Boolean]
   def update?
     edit?
   end
 
   # Checks if the user can perform this action on the model.
   #
-  # Returns a boolean indicating if the action is allowed.
+  # @return [Boolean]
   def remove?
     if user.id == record.id or record.has_role? :site_admin
       return false
@@ -77,14 +80,14 @@ class StaffPolicy < BaseApplicationPolicy
 
   # Checks if the user can perform this action on the model.
   #
-  # Returns a boolean indicating if the action is allowed.
+  # @return [Boolean]
   def destroy?
     remove?
   end
 
   # Checks if the user can perform this action on the model.
   #
-  # Returns a boolean indicating if the action is allowed.
+  # @return [Boolean]
   def permissions?
     # Can't change your own permissions
     if user.id == record.id
@@ -107,21 +110,21 @@ class StaffPolicy < BaseApplicationPolicy
 
   # Checks if the user can perform this action on the model.
   #
-  # Returns a boolean indicating if the action is allowed.
+  # @return [Boolean]
   def permissions_update?
     permissions?
   end
 
   # Checks if the user can perform this action on the model.
   #
-  # Returns a boolean indicating if the action is allowed.
+  # @return [Boolean]
   def promote_admin?
     user.id != record.id && user.has_role?(:site_admin)
   end
 
   # Checks if the user can perform this action on the model.
   #
-  # Returns a boolean indicating if the action is allowed.
+  # @return [Boolean]
   def demote_admin?
     promote_admin?
   end

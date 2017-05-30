@@ -9,6 +9,45 @@ class School < ApplicationRecord
   validates :city, presence: true, length: {maximum: 35}
   validates :postcode, presence: true, length: { maximum: 8 }
   validates :country, presence: true, length: { maximum: 35 }
+  # @!attribute id
+  #   @return [Fixnum]
+  #   The school ID.
+
+  # @!attribute application_id
+  #   @return [Fixnum]
+  #   The application that the school belongs to.
+
+  # @!attribute name
+  #   @return [String]
+  #   The school's name.
+
+  # @!attribute address_1
+  #   @return [String]
+  #   The school's address first line.
+
+  # @!attribute address_2
+  #   @return [String]
+  #   The school's address second line.
+
+  # @!attribute postcode
+  #   @return [String]
+  #   The school's post code.
+
+  # @!attribute city
+  #   @return [String]
+  #   The school's city.
+
+  # @!attribute country
+  #   @return [String]
+  #   The school's country.
+
+  # @!attribute created_at
+  #   @return [DateTime]
+  #   The creation date.
+
+  # @!attribute updated_at
+  #   @return [DateTime]
+  #   The last update time.
 
   # @!attribute application
   #   @return [Application]

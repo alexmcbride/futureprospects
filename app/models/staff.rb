@@ -64,7 +64,7 @@ class Staff < User
     staff = Staff.all
     if params[:full_name].present?
       sql = 'LOWER(first_name) LIKE :term OR LOWER(family_name) LIKE :term OR LOWER(username) LIKE :term'
-      staff = staff.where(sql, {term: "%#{params[:full_name.downcase]}%"})
+      staff = staff.where(sql, {term: "%#{params[:full_name].downcase}%"})
     end
     if params[:college].present? and params[:college] != '0'
       staff = staff.where(college_id: params[:college])

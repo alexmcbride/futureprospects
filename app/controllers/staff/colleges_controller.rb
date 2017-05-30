@@ -84,7 +84,7 @@ class Staff::CollegesController < Staff::StaffController
     authorize @college
     respond_to do |format|
       if @college.remove_college params[:college_name]
-        format.html { redirect_to staff_colleges_pathll, notice: 'College was successfully removed.' }
+        format.html { redirect_to staff_colleges_path, notice: 'College was successfully removed.' }
       else
         format.html { render :remove }
       end

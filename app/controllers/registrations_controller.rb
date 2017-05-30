@@ -1,8 +1,8 @@
 # * Name: Alex McBride
 # * Date: 25/05/2017
 # * Project: Future Prospects
-# * Controller class that's a custom version of +Devise::RegistrationsController+, which allows the addition of
-# reCAPTCHA support and also custom parameter sanitisation.
+# Controller class that's a custom version of +Devise::RegistrationsController+, which allows the addition of reCAPTCHA
+# support and also custom parameter sanitisation.
 class RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters
 

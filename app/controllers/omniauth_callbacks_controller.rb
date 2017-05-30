@@ -1,7 +1,8 @@
 # * Name: Alex McBride
 # * Date: 24/05/2017
 # * Project: Future Prospects
-# * Controller to handle Omniauth callbacks from Devise - for various open auth providers. Open authentication providers redirect to this controller where we register/sign in the student as necessary.
+# Controller to handle Omniauth callbacks from Devise - for various open auth providers. Open authentication providers
+# redirect to this controller where we register/sign in the student as necessary.
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # GET /students/auth/google_oauth2/callback
   #

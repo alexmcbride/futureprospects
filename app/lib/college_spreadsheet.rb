@@ -63,17 +63,18 @@ class CollegeSpreadsheet
     spreadsheet
   end
 
-  # Gets course counts for the specified college and year
-  #
-  # @param college_id [Fixnum]
-  # @param year [Fixnum]
-  # @return [Hash]
-  def self.get_course_counts(college_id, year)
-    counts = {}
-    CourseSelection.report_courses(college_id, year).each do |attributes, count|
-      title, id = attributes
-      counts[id] = count
+  private
+    # Gets course counts for the specified college and year
+    #
+    # @param college_id [Fixnum]
+    # @param year [Fixnum]
+    # @return [Hash]
+    def self.get_course_counts(college_id, year)
+      counts = {}
+      CourseSelection.report_courses(college_id, year).each do |attributes, count|
+        title, id = attributes
+        counts[id] = count
+      end
+      counts
     end
-    counts
-  end
 end

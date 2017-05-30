@@ -1,7 +1,7 @@
 # * Name: Alex McBride
 # * Date: 24/05/2017
 # * Project: Future Prospects
-# * Controller class to manage creating a new student application.
+# Controller class to manage creating a new student application.
 class NewApplicationsController < ApplicationController
   before_action :authenticate_student!
   before_action :set_application, except: [:index, :show, :create,

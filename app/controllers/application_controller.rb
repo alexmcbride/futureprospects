@@ -1,7 +1,7 @@
 # * Name: Alex McBride
 # * Date: 24/05/2017
 # * Project: Future Prospects
-# * Base controller that all controllers inherit from.
+# Base controller that all controllers inherit from.
 class ApplicationController < ActionController::Base
   include Pundit
   protect_from_forgery with: :exception

@@ -1,7 +1,7 @@
 # * Name: Alex McBride
 # * Date: 24/05/2017
 # * Project: Future Prospects
-# * Controller class for displaying courses.
+# Controller class for displaying courses.
 class CoursesController < ApplicationController
   before_action :set_categories, except: [:search]
 

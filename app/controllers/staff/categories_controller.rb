@@ -1,7 +1,7 @@
 # * Name: Alex McBride
 # * Date: 25/05/2017
 # * Project: Future Prospects
-# * Controller class to allow staff member to manage course categories.
+# Controller class to allow staff member to manage course categories.
 class Staff::CategoriesController < Staff::StaffController
   before_action :set_staff_category, only: [:show, :edit, :update, :remove, :destroy]
 

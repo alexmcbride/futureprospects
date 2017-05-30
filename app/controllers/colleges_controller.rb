@@ -1,7 +1,7 @@
 # * Name: Alex McBride
 # * Date: 24/05/2017
 # * Project: Future Prospects
-# * Controller class to display colleges.
+# Controller class to display colleges.
 class CollegesController < ApplicationController
   # GET /colleges
   #

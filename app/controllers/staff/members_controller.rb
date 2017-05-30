@@ -1,8 +1,8 @@
 # * Name: Alex McBride
 # * Date: 25/05/2017
 # * Project: Future Prospects
-# * Controller class that allows staff to manage other staff members. Staff members and admin cannot modify their own accounts,
-# only the accounts of others.
+# Controller class that allows staff to manage other staff members. Staff members and admin cannot modify their own
+# accounts, only the accounts of others.
 class Staff::MembersController < Staff::StaffController
   before_action :set_member, only: [:show, :edit, :update, :destroy, :remove, :permissions, :permissions_update,
                                     :promote_admin, :demote_admin]

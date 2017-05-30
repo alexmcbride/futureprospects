@@ -1,7 +1,7 @@
 # * Name: Alex McBride
 # * Date: 25/05/2017
 # * Project: Future Prospects
-# * Controller class to allow staff member's to manage a college.
+# Controller class to allow staff member's to manage a college.
 class Staff::CollegesController < Staff::StaffController
   before_action :set_college, only: [:show, :edit, :update, :remove, :destroy, :clearance, :clearance_update]
 

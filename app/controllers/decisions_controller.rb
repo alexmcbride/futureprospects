@@ -1,7 +1,7 @@
 # * Name: Alex McBride
 # * Date: 24/05/2017
 # * Project: Future Prospects
-# * Controller class for tracking student applications and managing student decisions/replies.
+# Controller class for tracking student applications and managing student decisions/replies.
 class DecisionsController < ApplicationController
   before_action :set_application
   before_action :authorize_user, except: [:completed]

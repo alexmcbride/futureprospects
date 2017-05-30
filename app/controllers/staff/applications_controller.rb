@@ -1,7 +1,7 @@
 # * Name: Alex McBride
 # * Date: 25/05/2017
 # * Project: Future Prospects
-# * Controller class that allows staff to manage student applications.
+# Controller class that allows staff to manage student applications.
 class Staff::ApplicationsController < Staff::StaffController
   before_action :set_application, only: [:update, :destroy]
 

@@ -1,10 +1,10 @@
 # * Name: Alex McBride
 # * Date: 25/05/2017
 # * Project: Future Prospects
-# Controller class to handle viewing and downloading college and course reports. Report permissions are governed by +ReportPolicy+,
-# but also the college's or course's normal policy. Both policies and taken into account to determine whether a report
-# can be viewed or downloaded. Many of the methods in this controller are used for background downloading JSON by the
-# charts.
+# Controller class to handle viewing and downloading college and course reports. Report permissions are governed by
+# +ReportPolicy+, but also the college's or course's normal policy. Both policies and taken into account to determine
+# whether a report can be viewed or downloaded. Many of the methods in this controller are used for background
+# downloading JSON by the charts.
 class Staff::ReportsController < Staff::StaffController
   # GET /staff/reports
   #

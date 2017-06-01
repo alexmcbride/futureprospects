@@ -21,10 +21,10 @@ class Staff::ReportsController < Staff::StaffController
   #
   # Shows list of courses at a college.
   def college
-    authorize :report, :view?
     @college = College.find params[:id]
     @courses = policy_scope(Course)
                    .where(college_id: @college.id)
+                   .where('current_selections_count>0')
                    .includes(:category, :college)
                    .order(:category_id, :title)
                    .paginate(page: params[:page], per_page: 20)

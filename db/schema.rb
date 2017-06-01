@@ -79,10 +79,9 @@ ActiveRecord::Schema.define(version: 20170523091037) do
     t.integer  "course_id"
     t.integer  "college_offer"
     t.integer  "student_choice"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.string   "note"
-    t.boolean  "clearance",      default: false, null: false
     t.index ["application_id", "course_id"], name: "index_course_selections_on_application_id_and_course_id", unique: true, using: :btree
     t.index ["application_id"], name: "index_course_selections_on_application_id", using: :btree
     t.index ["course_id"], name: "index_course_selections_on_course_id", using: :btree

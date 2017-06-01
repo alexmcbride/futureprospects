@@ -13,6 +13,8 @@ remove pundit verify_authorized from global staff controller once permissions do
 
 -------------
 
+change college report filename e.g. `city of glasgow college report 2017-2018`
+
 show student, can view application even if it's not for your college??
 
 make brand logo higher res (maybe replace jquery with CSS?)

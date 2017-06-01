@@ -23,7 +23,7 @@
               <p class="small"><%= selection.college_offer.humanize %></p>
             </div>
             <div class="col-sm-3 text-right">
-              <% if selection.student_choice.nil? %>
+              <% if selection.student_choice.nil? || selection.skipped? %>
                 <%= form_tag decisions_insurance_path, method: :post do %>
                   <%= hidden_field_tag :course_selection_id, selection.id %>
                   <%= button_tag class: 'btn btn-primary', title: "Make '#{selection.course.title}' your insurance choice", style: 'margin-top: 10px;' do %>

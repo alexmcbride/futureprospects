@@ -196,7 +196,7 @@ class CourseSelection < ApplicationRecord
   #
   # @return [Boolean] true if they have made all their choices.
   def has_all_choices?
-    self.application.course_selections.all? {|s| s.student_choice.present? || s.rejected?}
+    self.application.course_selections.all? {|s| (s.student_choice.present? && !s.skipped?) || s.rejected?}
   end
 
   # Updates course selection for firm choice
@@ -220,7 +220,7 @@ class CourseSelection < ApplicationRecord
   # @param application [Application] the application to clear choices for.
   def self.clear_all_choices(application)
     application.course_selections.each do |selection|
-      selection.student_choice = :skipped # So we can differentiate from nil.
+      selection.student_choice = :skipped # So we can tell a selection with no choice from one that was never asked.
       selection.save!
     end
   end

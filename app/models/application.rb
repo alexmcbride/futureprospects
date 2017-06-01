@@ -1,7 +1,7 @@
 # * Name: Alex McBride
 # * Date: 17/05/2017
 # * Project: Future Prospects
-# * ActiveRecord model class to represent a student application.
+# ActiveRecord model class to represent a student application.
 class Application < ApplicationRecord
   # Imports
   include ActionView::Helpers::TextHelper
@@ -604,7 +604,7 @@ class Application < ApplicationRecord
   # @return [Array<CourseSelection>]
   def course_selections_without_choices
     CourseSelection.where(application_id: self.id)
-        .where(student_choice: nil)
+        .where('student_choice IS NULL OR student_choice = 3')
         .order(:student_choice)
   end
 

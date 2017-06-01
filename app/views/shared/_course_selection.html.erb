@@ -15,7 +15,7 @@
           <td title="<%= selection.course.title %>"><%= truncate selection.course.title, length: 50 %></td>
           <td><%= selection.course.college.name %></td>
           <td><%= selection.college_offer ? selection.college_offer.humanize : 'Pending' %></td>
-          <td><%= selection.student_choice ? selection.skipped? ? 'None' : selection.student_choice.humanize : 'None' %></td>
+          <td><%= selection.student_choice ? selection.student_choice.humanize : 'None' %></td>
           <td><%= selection.note %></td>
         </tr>
     <% end %>

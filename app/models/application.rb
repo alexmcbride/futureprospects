@@ -497,7 +497,7 @@ class Application < ApplicationRecord
       update_status :awaiting_decisions
 
       StudentMailer.clearance_application(self.student, selection.course).deliver_later
-      StudentMessenger.new.clearance_application(self.student, selection.ccourse)
+      StudentMessenger.new.clearance_application(self.student, selection.course)
 
       return true
     end

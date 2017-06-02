@@ -4320,6 +4320,7 @@ app.title = 'Honorable'
 app.middle_name = 'Brandon'
 app.gender = :male
 app.telephone = '444445451963'
+app.mobile = '07477221815'
 app.personal_statement = 'Curabitur in libero ut massa volutpat convallis. Morbi odio odio elementum eu interdum eu tincidunt in leo. Maecenas pulvinar lobortis est."'
 app.permanent_house_number = '25243'
 app.permanent_address_1 = 'Merchant Terrace'
@@ -4330,7 +4331,7 @@ app.created_at = Date.strptime('2017-07-01')
 app.submitted_date = Date.strptime('2017-07-01')
 app.status = :awaiting_replies
 app.current_stage = :submit_stage
-app.replies_due = '2017-06-25'
+app.replies_due = '2017-1-1'
 app.birth_date = Date.strptime('1992-04-06')
 app.save! validate: false
 
@@ -5537,7 +5538,6 @@ app.title = 'Dr'
 app.middle_name = 'Doris'
 app.gender = :female
 app.telephone = '448396439246'
-app.mobile = '07477221815'
 app.disability = 'Business-focused solution-oriented infrastructure'
 app.personal_statement = 'Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu adipiscing molestie hendrerit at vulputate vitae nisl.'
 app.permanent_house_number = '30367'

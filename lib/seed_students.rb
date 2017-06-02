@@ -5668,15 +5668,12 @@ ref.reference_2_telephone = '44-(240)951-1086'
 ref.save! validate: false
 
 course = CourseSelection.new application_id: app.id, course_id: 3
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
 course = CourseSelection.new application_id: app.id, course_id: 1
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
 course = CourseSelection.new application_id: app.id, course_id: 7
-course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'
 course.save! validate: false
 
 app.course_selections_count = 3

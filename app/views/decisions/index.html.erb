@@ -25,7 +25,7 @@
     <hr>
 
     <div class="list-group">
-      <% @application.course_selections_without_choices.each do |selection| %>
+      <% @application.course_selections_without_choices.order(:college_offer).each do |selection| %>
         <%= decision_list_item selection do %>
           <% if selection.college_offer.nil? %>
             <%= icon('question-circle', class: 'pull-right', style: 'font-size: 6.6em; color: grey;') %>

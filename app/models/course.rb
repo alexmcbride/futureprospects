@@ -18,7 +18,7 @@ class Course < ApplicationRecord
   # Pagination
   self.per_page = 10
 
-  # Search
+  # Enable search
   scoped_search on: :title, profile: :title
   scoped_search on: :title, profile: :full
   scoped_search relation: :category, on: :name, profile: :full

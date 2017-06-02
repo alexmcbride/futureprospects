@@ -199,7 +199,9 @@ def student(file, tokens, schools, jobs, refs)
       end
     end
 
-    file.puts "course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'"
+    unless status == :awaiting_decisions
+      file.puts "course.note = 'Ut vel sem vel urna rutrum rutrum non quis augue.'"
+    end
     file.puts course + '.save! validate: false'
     file.puts ''
     $courses += 1

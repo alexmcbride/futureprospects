@@ -42,7 +42,7 @@ class StudentMailerPreview < ActionMailer::Preview
   end
 
   def clearance
-    application = Application.where(status: :clearance).first
+    application = Application.find 13
     courses = Course.clearance_courses application
     StudentMailer.clearance(application.student, courses)
   end
@@ -54,7 +54,7 @@ class StudentMailerPreview < ActionMailer::Preview
   end
 
   def reply_overdue
-    @application = Application.order(:replies_due).first
+    @application = Application.find 26
     StudentMailer.reply_overdue(@application.student, @application)
   end
 

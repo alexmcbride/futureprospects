@@ -192,7 +192,7 @@ class Payment < ApplicationRecord
 
   # Gets the amount paid in pounds
   #
-  # @return [Fixnum] the amount in pounds.
+  # @return [Float] the amount in pounds.
   def amount_pounds
     amount / 100
   end

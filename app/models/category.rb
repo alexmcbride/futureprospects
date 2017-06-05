@@ -25,7 +25,7 @@ class Category < ApplicationRecord
   validates :name, presence: true, length: { maximum: 40}, uniqueness: true
 
   # @!attribute courses
-  #   @return [Course[]]
+  #   @return [Array<Course>]
   #   The courses association for the category.
   has_many :courses, dependent: :destroy
 

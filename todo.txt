@@ -31,8 +31,6 @@ confirm close tab alert?
 
 test app with no seed data.
 
-test destroy courses/college/category
-
 add remove all to applications filter.
 
 add multiple applications for single students to seed data (e.g. on for 2016, another for 2017 etc).

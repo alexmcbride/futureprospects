@@ -1,7 +1,7 @@
 # * Name: Alex McBride
 # * Date: 24/05/2017
 # * Project: Future Prospects
-# * Module that adds start and end date validation to a model class.
+# Module that adds start and end date validation to a model class.
 module DateValidator
   extend ActiveSupport::Concern
 

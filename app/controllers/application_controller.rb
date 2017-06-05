@@ -25,8 +25,7 @@ class ApplicationController < ActionController::Base
 
     # Redirects unauthorized users back from whence they came.
     def user_not_authorized
-      message = 'You are not authorized to perform this action.'
-      flash[:alert] = message
+      flash[:alert] = 'You are not authorized to perform this action.'
       redirect_to(request.referrer || root_path)
     end
 

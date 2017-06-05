@@ -513,7 +513,7 @@ class Application < ApplicationRecord
 
   # Calculates the student's application fee in pounds.
   #
-  # @return [fixnum]
+  # @return [Float]
   def calculate_fee_pounds
     calculate_fee / PENCE_IN_POUND
   end
@@ -535,7 +535,7 @@ class Application < ApplicationRecord
   # Gets the course fee for the submission type  in pounds
   #
   # @param type [Symbol] either +:single+ or +:multiple+.
-  # @return [fixnum]
+  # @return [Float]
   def self.courses_fee_pounds(type)
     courses_fee(type) / PENCE_IN_POUND
   end

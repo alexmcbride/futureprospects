@@ -55,16 +55,16 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       data = request.env['omniauth.auth']
 
       # Try find student for provider, if found authenticate normally otherwise redirect to oauth signup page.
-      @student = Student.find_open_auth(data.provider, data.uid).first
+      student = Student.find_open_auth(data.provider, data.uid).first
 
-      if @student && @student.persisted?
+      if student&.persisted?
         flash[:notice] = I18n.t 'devise.omniauth_callbacks.success', :kind => data.provider
-        sign_in_and_redirect @student, :event => :authentication
+        sign_in_and_redirect student, :event => :authentication
       else
         # Store auth data in session (remove extra to stop cookie overflow). We mark this with 'devise' so it gets
         # #automatically cleaned up.
         session['devise.oauth_data'] = data.except(:extra)
-        redirect_to new_student_oauth_path, alert: (@student.errors.full_messages.join("\n") if @student)
+        redirect_to new_student_oauth_path, alert: (student.errors.full_messages.join("\n") if student)
       end
     end
 

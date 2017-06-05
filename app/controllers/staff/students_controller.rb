@@ -68,7 +68,6 @@ class Staff::StudentsController < Staff::StaffController
     authorize Student
 
     term = params[:term] ? params[:term].strip : nil
-    puts term
     respond_to do |format|
       if term
         term = "%#{term.downcase}%"

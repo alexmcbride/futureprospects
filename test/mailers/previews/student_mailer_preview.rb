@@ -48,8 +48,8 @@ class StudentMailerPreview < ActionMailer::Preview
   end
 
   def clearance_application
-    application = Application.where(status: :all_rejected).first
-    course = application.course_selections.first.course
+    application = Application.find 13
+    course = application.course_selections.last.course
     StudentMailer.clearance_application(application.student, course)
   end
 

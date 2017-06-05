@@ -41,5 +41,3 @@ function registerBrandHover(imgOn, imgOff) {
         });
     });
 }
-
-

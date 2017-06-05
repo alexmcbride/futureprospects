@@ -71,8 +71,7 @@ class Staff::ReportsController < Staff::StaffController
       # Download the report as a spreadsheet.
       format.xlsx do
         authorize :report, :download?
-        spreadsheet = @course.to_spreadsheet(@year)
-        send_data spreadsheet.get_data, filename: 'Course Report.xlsx',  type: 'application/xlsx'
+        send_data @course.to_spreadsheet(@year).get_data, filename: 'Course Report.xlsx',  type: 'application/xlsx'
       end
     end
   end

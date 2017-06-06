@@ -1,0 +1,24 @@
+attributes:
+  - primary_keys
+  - foreign_key
+  - inheritance
+  - content
+  - timestamps
+disconnected: false
+filename: future prospects erd
+filetype: pdf
+indirect: true
+inheritance: true
+markup: true
+notation: bachman
+orientation: vertical
+polymorphism: false
+sort: true
+warn: true
+title: Future Prospects
+exclude: null
+only: null
+only_recursion_depth: null
+prepend_primary: false
+cluster: false
+splines: spline

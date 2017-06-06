@@ -88,3 +88,5 @@ gem 'axlsx' # excel
 gem 'scoped_search' # search
 gem 'figaro' # configuration (for heroku)
 gem 'twilio-ruby', '~> 4.11.1' # SMS text messages with Twilio
+
+gem "rails-erd"

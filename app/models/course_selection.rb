@@ -34,11 +34,11 @@ class CourseSelection < ApplicationRecord
   validates :note, presence: true, if: :rejected? || :conditional_offer?
 
   # @!attribute application_id
-  #   @return [Fixnum]
+  #   @return [Integer]
   #   The application ID part of the composite key.
 
   # @!attribute course_id
-  #   @return [Fixnum]
+  #   @return [Integer]
   #   The course ID part of the composite key.
 
   # @!attribute created_at
@@ -90,74 +90,74 @@ class CourseSelection < ApplicationRecord
 
   # Scope to find course selections only in the specified year.
   #
-  # @param year [Fixnum]
+  # @param year [Integer]
   # @return [Array<CourseSelection>]
   scope :current, -> (year=nil) { joins(:application).where('applications.created_at' => Application.current_year(year)) }
 
   # Scope to find course_selections for courses at the specified college.
   #
-  # @param college_id [Fixnum]
+  # @param college_id [Integer]
   # @return [Array<CourseSelection>]
   scope :college, -> (college_id) { joins(:course).where('courses.college_id' => college_id) }
 
   # Scope to find course_selections for the specified course.
   #
-  # @param course_id [Fixnum]
+  # @param course_id [Integer]
   # @return [Array<CourseSelection>]
   scope :course, -> (course_id) { where(course_id: course_id) }
 
   # Scope to find course_selections for the specified course grouped by year.
   #
-  # @param course_id [Fixnum]
+  # @param course_id [Integer]
   # @return [Array<CourseSelection>]
   scope :years, -> (course_id) { joins(:course, :application).where(course_id: course_id).group_by_year('applications.created_at', reverse: true) }
 
   # Scope for finding course selections with the specified college and year.
   #
-  # @param college_id [Fixnum]
-  # @param year [Fixnum]
+  # @param college_id [Integer]
+  # @param year [Integer]
   # @return [Array<CourseSelection>]
   scope :report_current_college, -> (college_id, year=nil) { current(year).college(college_id).successful }
 
   # Scope for finding course selections with the specified college and year grouped by college offer.
   #
-  # @param college_id [Fixnum]
-  # @param year [Fixnum]
+  # @param college_id [Integer]
+  # @param year [Integer]
   # @return [Array<CourseSelection>]
   scope :report_college_offers, -> (college_id, year=nil) { current(year).college(college_id).group(:college_offer).order(:college_offer).count.map {|k, v| [ k ? k.titleize : 'Pending', v]} }
 
   # Scope for finding course selections with the specified college and year grouped by student choice.
   #
-  # @param college_id [Fixnum]
-  # @param year [Fixnum]
+  # @param college_id [Integer]
+  # @param year [Integer]
   # @return [Array<CourseSelection>]
   scope :report_college_choices, -> (college_id, year=nil) { current(year).college(college_id).group(:student_choice).order(:student_choice).count.map {|k, v| [ k ? k.titleize : 'Pending', v] if k != 'skipped'}.compact }
 
   # Scope for finding course selections with the specified college and year grouped by course.
   #
-  # @param college_id [Fixnum]
-  # @param year [Fixnum]
+  # @param college_id [Integer]
+  # @param year [Integer]
   # @return [Array<CourseSelection>]
   scope :report_courses, -> (college_id, year=nil) { current(year).college(college_id).group('courses.title', 'courses.id').limit(10).order('count_id DESC').count('id') }
 
   # Scope for finding course selections with the specified course and year grouped by college offer.
   #
-  # @param college_id [Fixnum]
-  # @param year [Fixnum]
+  # @param college_id [Integer]
+  # @param year [Integer]
   # @return [Array<CourseSelection>]
   scope :report_course_offers, -> (course_id, year=nil){current(year).course(course_id).group(:college_offer).order(:college_offer).count.map{|k,v| [k ? k.titleize : 'Pending',v]}.compact}
 
   # Scope for finding course selections with the specified course and year grouped by student choice.
   #
-  # @param college_id [Fixnum]
-  # @param year [Fixnum]
+  # @param college_id [Integer]
+  # @param year [Integer]
   # @return [Array<CourseSelection>]
   scope :report_course_choices, -> (course_id, year=nil) { current(year).course(course_id).group(:student_choice).order(:student_choice).count.map{|k,v| [k ? k.titleize : 'Pending',v] if k != 'skipped'}.compact}
 
   # Scope for finding course selections with the specified course and year grouped by school.
   #
-  # @param college_id [Fixnum]
-  # @param year [Fixnum]
+  # @param college_id [Integer]
+  # @param year [Integer]
   # @return [Array<CourseSelection>]
   scope :report_course_schools, ->(course_id, year=nil) {current(year).course(course_id).schools.group('schools.name').order('schools.name').count}
 
@@ -174,11 +174,11 @@ class CourseSelection < ApplicationRecord
 
   # Checks if a particular course selection already exists.
   #
-  # @param application_id [Fixnum]
-  # @param course_id [Fixnum]
+  # @param application_id [Integer]
+  # @param course_id [Integer]
   # @return [Boolean]
   def self.exists?(application_id, course_id)
-    not CourseSelection.where('application_id=? AND course_id=?', application_id, course_id).empty?
+    CourseSelection.where('application_id=? AND course_id=?', application_id, course_id).any?
   end
 
   # Gets the colleges that the application has applied to.

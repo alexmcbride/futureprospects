@@ -5,7 +5,7 @@
 class CoursesController < ApplicationController
   before_action :set_categories, except: [:search]
 
-  # GET /courses?search=<String>&college=<Fixnum>
+  # GET /courses?search=<String>&college=<Integer>
   #
   # Shows a list of college courses with an optional search term and college ID.
   def index
@@ -19,7 +19,7 @@ class CoursesController < ApplicationController
     end
   end
 
-  # GET courses/category/1?search=<String>&college=<Fixnum>
+  # GET courses/category/1?search=<String>&college=<Integer>
   #
   # Shows courses in a particular category with an optional search term and college ID. This action reuses the index view.
   def category

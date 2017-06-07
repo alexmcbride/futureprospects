@@ -6,7 +6,7 @@ class CollegeSpreadsheet
   # Generates a spreadsheet for the specified college and year.
   #
   # @param college [College] the college to generate a spreadsheet for.
-  # @param year [Fixnum] the year to use when generating the spreadsheet]
+  # @param year [Integer] the year to use when generating the spreadsheet]
   # @return [Spreadsheet]
   def self.generate(college, year)
     spreadsheet = Spreadsheet.new
@@ -66,8 +66,8 @@ class CollegeSpreadsheet
   private
     # Gets course counts for the specified college and year
     #
-    # @param college_id [Fixnum]
-    # @param year [Fixnum]
+    # @param college_id [Integer]
+    # @param year [Integer]
     # @return [Hash]
     def self.get_course_counts(college_id, year)
       counts = {}

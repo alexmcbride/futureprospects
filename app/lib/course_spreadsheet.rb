@@ -6,7 +6,7 @@ class CourseSpreadsheet
   # Generates a spreadsheet for the specified course and year.
   #
   # @param course [Course] the course to generate a spreadsheet for.
-  # @param year [Fixnum] the year to use when generating the spreadsheet.
+  # @param year [Integer] the year to use when generating the spreadsheet.
   # @return [Spreadsheet]
   def self.generate(course, year)
     spreadsheet = Spreadsheet.new

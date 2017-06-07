@@ -4,11 +4,11 @@
 # * Model class to represent User / Role intersection table.
 class UsersRole < ApplicationRecord
   # @!attribute user_id
-  #   @return [Fixnum]
+  #   @return [Integer]
   #   The user part of the composite key.
 
   # @!attribute role_id
-  #   @return [Fixnum]
+  #   @return [Integer]
   #   The role part of the composite key.
 
   # @!attribute user

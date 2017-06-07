@@ -80,6 +80,6 @@ class Staff < User
     #
     # @return [Boolean] true if they are an admin.
     def is_admin?
-      self.email == 'admin@admin.com'
+      has_role? :site_admin
     end
 end

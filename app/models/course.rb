@@ -36,13 +36,13 @@ class Course < ApplicationRecord
 
   # Finds all courses at the specified college.
   #
-  # @param college_id [Fixnum] the ID of the college to filter results by.
+  # @param college_id [Integer] the ID of the college to filter results by.
   # @return [Array<Course>]
   scope :college, ->(college_id){where(college_id: college_id)}
 
   # Finds all courses with applicants for the specified year.
   #
-  # @param year [Fixnum] the year to filter results by.
+  # @param year [Integer] the year to filter results by.
   # @return [Array<Course>]
   scope :current, ->(year){joins(course_selections: :application).where('applications.created_at' => Application.current_year(year))}
 
@@ -65,15 +65,15 @@ class Course < ApplicationRecord
   validate :spaces_greater_than_applicants, on: :update
 
   # @!attribute id
-  #   @return [Fixnum]
+  #   @return [Integer]
   #   The course ID.
 
   # @!attribute category_id
-  #   @return [Fixnum]
+  #   @return [Integer]
   #   The category ID foreign key.
 
   # @!attribute college_id
-  #   @return [Fixnum]
+  #   @return [Integer]
   #   The college ID foreign key.
 
   # @!attribute title
@@ -109,15 +109,15 @@ class Course < ApplicationRecord
   #   The uploaded course image path.
 
   # @!attribute spaces
-  #   @return [Fixnum]
+  #   @return [Integer]
   #   The number of spaces in the course.
 
   # @!attribute course_selections_count
-  #   @return [Fixnum]
+  #   @return [Integer]
   #   The total number of course selections for this course.
 
   # @!attribute current_selections_count
-  #   @return [Fixnum]
+  #   @return [Integer]
   #   The number of course selections for this course this academic year.
 
   # @!attribute created_at
@@ -145,7 +145,7 @@ class Course < ApplicationRecord
 
   # Gets the number of years the course lasts for.
   #
-  # @return [fixnum] the number of years.
+  # @return [Integer] the number of years.
   def years
     ((end_date - start_date).to_i / 365.0).ceil
   end
@@ -352,7 +352,7 @@ class Course < ApplicationRecord
 
   # Converts the college data into a spreadsheet that can be downloaded by the user.
   #
-  # @param year [Fixnum] the year of data to include in the spreadsheet.
+  # @param year [Integer] the year of data to include in the spreadsheet.
   # @return [Spreadsheet]
   def to_spreadsheet(year=Date.today.year)
     CourseSpreadsheet.generate self, year

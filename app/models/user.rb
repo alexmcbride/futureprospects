@@ -16,11 +16,11 @@ class User < ApplicationRecord
          :authentication_keys => [:login]
 
   # @!attribute id
-  #   @return [Fixnum]
+  #   @return [Integer]
   #   The user ID.
 
   # @!attribute college_id
-  #   @return [Fixnum]
+  #   @return [Integer]
   #   The college that the user belongs to, if a staff member.
 
   # @!attribute email
@@ -44,7 +44,7 @@ class User < ApplicationRecord
   #   The time the user check the remember checkbox.
 
   # @!attribute sign_in_count
-  #   @return [Fixnum]
+  #   @return [Integer]
   #   The number of times the user has signed in.
 
   # @!attribute current_sign_in_at
@@ -80,7 +80,7 @@ class User < ApplicationRecord
   #   The unconfirmed email address.
 
   # @!attribute failed_attempts
-  #   @return [Fixnum]
+  #   @return [Integer]
   #   The number of failed login attempts.
 
   # @!attribute unlock_token

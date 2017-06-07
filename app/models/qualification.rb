@@ -10,11 +10,11 @@ class Qualification < ApplicationRecord
   validates :end_date, presence: true
 
   # @!attribute id
-  #   @return [Fixnum]
+  #   @return [Integer]
   #   The qualification ID.
 
   # @!attribute school_id
-  #   @return [Fixnum]
+  #   @return [Integer]
   #   The school that the qualification was attained at.
 
   # @!attribute subject

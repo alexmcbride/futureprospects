@@ -47,15 +47,15 @@ class Payment < ApplicationRecord
   validate :validate_card_details, if: :credit_card?
 
   # @!attribute id
-  #   @return [Fixnum]
+  #   @return [Integer]
   #   The payment ID.
 
   # @!attribute application_id
-  #   @return [Fixnum]
+  #   @return [Integer]
   #   The application that the payment is for.
 
   # @!attribute amount
-  #   @return [Fixnum]
+  #   @return [Integer]
   #   The amount of the payment in pence.
 
   # @!attribute last_four_digits
@@ -263,7 +263,7 @@ class Payment < ApplicationRecord
     # Parses a Date object from a string.
     #
     # @param expiry [String ]the string to parse (format: mm/yyyy).
-    # @return [(Fixnum, Fixnum)] a tuple with (month, year) as integers.
+    # @return [(Integer, Integer)] a tuple with (month, year) as integers.
     def self.try_parse_expiry(expiry)
       begin
         expiry = Date.strptime expiry, '%m/%Y'

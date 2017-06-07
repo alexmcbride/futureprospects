@@ -16,11 +16,11 @@ class Job < ApplicationRecord
   validates :end_date, presence: true
 
   # @!attribute id
-  #   @return [Fixnum]
+  #   @return [Integer]
   #   The job ID.
 
   # @!attribute application_id
-  #   @return [Fixnum]
+  #   @return [Integer]
   #   The application that the job belongs to.
 
   # @!attribute employer

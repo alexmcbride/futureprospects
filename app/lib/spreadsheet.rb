@@ -53,8 +53,8 @@ class Spreadsheet
   #
   # @param title [String] the title of the chart.
   # @param table [Array<Axlsx::Row>] an array of rows containing the data (normally as returned by +add_table+).
-  # @param start [Array<Fixnum>] a tuple holding the start position of the chart.
-  # @param size [Array<Fixnum>] a tuple holding the size of the chart.
+  # @param start [Array<Integer>] a tuple holding the start position of the chart.
+  # @param size [Array<Integer>] a tuple holding the size of the chart.
   def add_piechart(title, table, start=[3, 0], size=[5, 14])
     # get left column
     labels = "#{get_reference(table.second.cells.first)}:#{get_reference(table.last.cells.first)}"
@@ -72,8 +72,8 @@ class Spreadsheet
   #
   # @param title [String] the title of the chart.
   # @param table [Array<Axlsx::Row>] an array of rows containing the data (normally as returned by +add_table+).
-  # @param start [Array<Fixnum>] a tuple holding the start position of the chart.
-  # @param size [Array<Fixnum>] a tuple holding the size of the chart.
+  # @param start [Array<Integer>] a tuple holding the start position of the chart.
+  # @param size [Array<Integer>] a tuple holding the size of the chart.
   def add_linechart(title, table, start=[3, 0], size=[5, 14])
     label = get_reference(table.first.cells.first)
     labels = "#{get_reference(table.second.cells.first)}:#{get_reference(table.last.cells.first)}"
@@ -91,8 +91,8 @@ class Spreadsheet
   #
   # @param title [String] the title of the chart.
   # @param table [Array<Axlsx::Row>] an array of rows containing the data (normally as returned by +add_table+).
-  # @param start [Array<Fixnum>] a tuple holding the start position of the chart.
-  # @param size [Array<Fixnum>] a tuple holding the size of the chart.
+  # @param start [Array<Integer>] a tuple holding the start position of the chart.
+  # @param size [Array<Integer>] a tuple holding the size of the chart.
   def add_barchart(title, table, start=[3, 0], size=[5, 14])
     labels = "#{get_reference(table.second.cells.first)}:#{get_reference(table.last.cells.first)}"
     data = "#{get_reference(table.second.cells.second)}:#{get_reference(table.last.cells.last)}"

@@ -6,7 +6,7 @@ class Category < ApplicationRecord
   include ActionView::Helpers::TextHelper
 
   # @!attribute id
-  #   @return [Fixnum]
+  #   @return [Integer]
   #   The model ID.
 
   # @!attribute name

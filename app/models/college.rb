@@ -16,7 +16,7 @@ class College < ApplicationRecord
   validates :website, presence: true, length: { maximum: 255 }, uniqueness: true
 
   # @!attribute id
-  #   @return [Fixnum]
+  #   @return [Integer]
   #   The model ID.
 
   # @!attribute name
@@ -75,16 +75,16 @@ class College < ApplicationRecord
 
   # Calculates the number applicants to this college.
   #
-  # @param year [Fixnum] an optional year to count applicants in.
-  # @return [Fixnum]
+  # @param year [Integer] an optional year to count applicants in.
+  # @return [Integer]
   def count_applicants(year=nil)
     Application.current(year).college(self.id).count
   end
 
   # Calculates the number of courses that have been applied for.
   #
-  # @param year [Fixnum] an optional year to count course selections in.
-  # @return [Fixnum]
+  # @param year [Integer] an optional year to count course selections in.
+  # @return [Integer]
   def count_course_selections(year=nil)
     Application.current(year).joins(course_selections: :course).where('courses.college_id' => self.id).count
   end
@@ -137,7 +137,7 @@ class College < ApplicationRecord
 
   # Converts the college data into a spreadsheet that can be downloaded by the user.
   #
-  # @param year [Fixnum] the year of data to include in the spreadsheet.
+  # @param year [Integer] the year of data to include in the spreadsheet.
   # @return [Spreadsheet]
   def to_spreadsheet(year=Date.today.year)
     CollegeSpreadsheet.generate self, year

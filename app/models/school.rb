@@ -10,11 +10,11 @@ class School < ApplicationRecord
   validates :postcode, presence: true, length: { maximum: 8 }
   validates :country, presence: true, length: { maximum: 35 }
   # @!attribute id
-  #   @return [Fixnum]
+  #   @return [Integer]
   #   The school ID.
 
   # @!attribute application_id
-  #   @return [Fixnum]
+  #   @return [Integer]
   #   The application that the school belongs to.
 
   # @!attribute name

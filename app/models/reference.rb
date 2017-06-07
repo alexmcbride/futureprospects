@@ -26,11 +26,11 @@ class Reference < ApplicationRecord
   validates :reference_2_email, presence: true, length: {maximum: 254}
 
   # @!attribute id
-  #   @return [Fixnum]
+  #   @return [Integer]
   #   The reference ID.
 
   # @!attribute application_id
-  #   @return [Fixnum]
+  #   @return [Integer]
   #   The application that the references belongs to.
 
   # @!attribute reference_1_full_name

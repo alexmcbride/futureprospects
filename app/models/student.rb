@@ -117,7 +117,7 @@ class Student < User
   # * Next 6 are randomly generated
   # * Last digit is check digit
   #
-  # @param year [Fixnum] an optional DateTime object to use for the first two digits.
+  # @param year [Integer] an optional DateTime object to use for the first two digits.
   # @return [String] a valid scottish candidate number.
   def self.generate_scn(year=nil)
     year = DateTime.now.year if year.nil?
@@ -142,8 +142,8 @@ class Student < User
   # * If remainder is 0 then check digit is also 0
   # * Otherwise subtract remainder from 11 to get check digit
   #
-  # @param nums [Array<Fixnum>] an array containing each number of the SCN.
-  # @return [Fixnum] the check digit.
+  # @param nums [Array<Integer>] an array containing each number of the SCN.
+  # @return [Integer] the check digit.
   def self.generate_check_digit(nums)
     weights = [3, 2, 7, 6, 5, 4, 3, 2]
     sum = 0

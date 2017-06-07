@@ -85,7 +85,7 @@ class Application < ApplicationRecord
 
   # Scope to find all applications created during the current academic year.
   #
-  #  @param year [Fixnum]
+  #  @param year [Integer]
   # @return [Array<Application>]
   scope :current, -> (year=nil){where(created_at: current_year(year))}
 
@@ -96,13 +96,13 @@ class Application < ApplicationRecord
 
   # Scope to find all applications from a specific college.
   #
-  # @param college_id [Fixnum] the ID of the college to filter applications by.
+  # @param college_id [Integer] the ID of the college to filter applications by.
   # @return [Array<Application>]
   scope :college, ->(college_id){select('DISTINCT applications.*').joins(course_selections: :course).where('courses.college_id' => college_id)}
 
   # Scope to find all applications that were created the specified year.
   #
-  # @param year [Fixnum] the year to limit scope to.
+  # @param year [Integer] the year to limit scope to.
   # @return [Array<Application>]
   scope :by_year, ->(year) do
     year = year.to_i # Returns zero if int does not parse
@@ -112,45 +112,45 @@ class Application < ApplicationRecord
   ##
   # Scope to find the years range that student applications cover.
   #
-  # @return [Hash<Fixnum, Fixnum>] the year and number of applications created that year
+  # @return [Hash<Integer, Integer>] the year and number of applications created that year
   scope :years, -> {group_by_year('applications.created_at', reverse: true)}
 
   ##
   # Scope to find the results of the report gender query.
   #
-  # @param college_id [Fixnum] the ID of the college to limit results to.
-  # @param year [Fixnum] optional year to limit results to.
-  # @return [Hash<Symbol, Fixnum>] the gender and number of applications in that gender.
+  # @param college_id [Integer] the ID of the college to limit results to.
+  # @param year [Integer] optional year to limit results to.
+  # @return [Hash<Symbol, Integer>] the gender and number of applications in that gender.
   scope :report_gender, ->(college_id, year=nil){current(year).college(college_id).group(:gender).order(:gender).count}
 
   ##
   # Scope to find the results of the report ages query.
   #
-  # @param college_id [Fixnum] the ID of the college to limit results to.
-  # @param year [Fixnum] optional year to limit results to.
-  # @return [Hash<Fixnum, Fixnum>] the age and number of applications in that group.
+  # @param college_id [Integer] the ID of the college to limit results to.
+  # @param year [Integer] optional year to limit results to.
+  # @return [Hash<Integer, Integer>] the age and number of applications in that group.
   scope :report_ages, ->(college_id, year=nil){current(year).college(college_id).group('EXTRACT(YEAR FROM age(CURRENT_DATE, birth_date))').count}
 
   ##
   # Scope to find the results of the report schools query.
   #
-  # @param college_id [Fixnum] the ID of the college to limit results to.
-  # @param year [Fixnum] optional year to limit results to.
-  # @return [Hash<String, Fixnum>] the school name and number of applications for that school.
+  # @param college_id [Integer] the ID of the college to limit results to.
+  # @param year [Integer] optional year to limit results to.
+  # @return [Hash<String, Integer>] the school name and number of applications for that school.
   scope :report_schools, ->(college_id, year=nil){current(year).college(college_id).joins(:schools).group('schools.name').order('count_id DESC').limit(10).count('id')}
 
   # Scope to find the results of the report course genders query.
   #
-  # @param course_id [Fixnum] the ID of the course to limit results to.
-  # @param year [Fixnum] optional year to limit results to.
-  # @return [Hash<String, Fixnum>] the course title and number of applications for that course.
+  # @param course_id [Integer] the ID of the course to limit results to.
+  # @param year [Integer] optional year to limit results to.
+  # @return [Hash<String, Integer>] the course title and number of applications for that course.
   scope :report_course_genders, ->(course_id, year=nil) { current(year).joins(:course_selections).where('course_selections.course_id': course_id).group(:gender).order(:gender).count.map{|k,v|[k.humanize, v] }}
 
   # Scope to find the results of the report course ages query.
   #
-  # @param course_id [Fixnum] the ID of the course to limit results to.
-  # @param year [Fixnum] optional year to limit results to.
-  # @return [Hash<Fixnum, Fixnum>] the age and number of applications for that age.
+  # @param course_id [Integer] the ID of the course to limit results to.
+  # @param year [Integer] optional year to limit results to.
+  # @return [Hash<Integer, Integer>] the age and number of applications for that age.
   scope :report_course_ages, ->(course_id, year=nil){current(year).joins(:course_selections).where('course_selections.course_id': course_id).group('EXTRACT(YEAR FROM age(CURRENT_DATE, birth_date))').count.to_a.sort {|x, y|x[0]<=>y[0]}}
 
   # Validators
@@ -183,11 +183,11 @@ class Application < ApplicationRecord
   validates :birth_date, presence: true
 
   # @!attribute id
-  #   @return [Fixnum]
+  #   @return [Integer]
   #   The application ID.
 
   # @!attribute student_id
-  #   @return [Fixnum]
+  #   @return [Integer]
   #   The student ID foreign key.
 
   # @!attribute title
@@ -287,7 +287,7 @@ class Application < ApplicationRecord
   #   When the application was last updated.
 
   # @!attribute course_selections_count
-  #   @return [Fixnum]
+  #   @return [Integer]
   #   A cache to hold the number of course_selections associated to this application without having to count them.
 
   # @!attribute replies_due
@@ -366,7 +366,7 @@ class Application < ApplicationRecord
 
   # Determines the date range of the current academic year
   #
-  # @param year [Fixnum] an optional year to find the academic year for (e.g. 2016)
+  # @param year [Integer] an optional year to find the academic year for (e.g. 2016)
   # @return [Date..Date]
   def self.current_year(year=nil)
     year = Date.today.year unless year && year > 0
@@ -391,7 +391,7 @@ class Application < ApplicationRecord
 
   # Checks if this applications has a course selection for the specified college.
   #
-  # @param college_id [Fixnum] the college to check for.
+  # @param college_id [Integer] the college to check for.
   # @return [boolean]
   def belongs_to_college(college_id)
     self.course_selections.joins(:course).where('courses.college_id=?', college_id).any?
@@ -450,7 +450,7 @@ class Application < ApplicationRecord
 
   # Calculates the number of courses the student can still add to their application.
   #
-  # @return [Fixnum]
+  # @return [Integer]
   def available_courses
     MAX_COURSES - self.course_selections_count
   end
@@ -506,7 +506,7 @@ class Application < ApplicationRecord
 
   # Calculates the student's application fee in pence.
   #
-  # @return [fixnum]
+  # @return [Integer]
   def calculate_fee
     Application::courses_fee(course_selections_count > 1 ? :multiple : :single)
   end
@@ -521,7 +521,7 @@ class Application < ApplicationRecord
   # Gets the course fee for the submission type.
   #
   # @param type [Symbol] either +:single+ or +:multiple+.
-  # @return [fixnum]
+  # @return [Integer]
   def self.courses_fee(type)
     if type == :single
       SINGLE_COURSE_FEE
@@ -826,7 +826,7 @@ class Application < ApplicationRecord
 
   # Gets the date that the student decision is due.
   #
-  # @param year [Fixnum] an optional year int to use.
+  # @param year [Integer] an optional year int to use.
   #
   # @return [Date]
   def self.calculate_replies_due(year=nil)

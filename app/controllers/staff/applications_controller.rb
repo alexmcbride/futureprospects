@@ -55,13 +55,9 @@ class Staff::ApplicationsController < Staff::StaffController
   # Displays the application edit form, which allows staff members to make decisions about applications.
   def edit
     @application = Application.find params[:id]
-    respond_to do |format|
-      format.html do
-        authorize @application
-        unless @application.awaiting_decisions?
-          redirect_to staff_applications_path, notice: 'This action cannot be completed at this time'
-        end
-      end
+    authorize @application
+    unless @application.awaiting_decisions?
+      redirect_to staff_applications_path, notice: 'This action cannot be completed at this time'
     end
   end
 
@@ -70,12 +66,10 @@ class Staff::ApplicationsController < Staff::StaffController
   # Updates an application with the staff member's decisions and redirects back to show.
   def update
     authorize @application
-    respond_to do |format|
-      if @application.update(application_params)
-        format.html { redirect_to staff_application_path(@application), notice: 'Application was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
+    if @application.update(application_params)
+      redirect_to staff_application_path(@application), notice: 'Application was successfully updated.'
+    else
+      render :edit
     end
   end
 

@@ -340,7 +340,7 @@ class Application < ApplicationRecord
   before_save :update_for_awaiting_decisions, on: :update # Detects when all colleges have made their decisions.
 
   # Allows support of nested forms for the course offers form.
-  accepts_nested_attributes_for :course_selections, reject_if:  lambda {|attr| attr[:college_offer].blank?}
+  accepts_nested_attributes_for :course_selections#, reject_if:  lambda {|attr| attr[:college_offer].blank?}
 
   # Creates a new application based on existing student.
   #

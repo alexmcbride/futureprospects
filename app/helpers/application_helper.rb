@@ -221,6 +221,7 @@ module ApplicationHelper
   # @param selected [String] an optional selected element.
   # @param [String] the HTML for the options.
   def options_for_select_with_default(container, selected=nil)
+    puts "S #{selected}"
     '<option disabled="disabled" selected="selected">-- Choose --</option>'.html_safe + options_for_select(container, selected)
   end
 end

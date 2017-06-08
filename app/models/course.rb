@@ -44,9 +44,11 @@ class Course < ApplicationRecord
   #
   # @param year [Integer] the year to filter results by.
   # @return [Array<Course>]
-  scope :current, ->(year){joins(course_selections: :application).where('applications.created_at' => Application.current_year(year))}
+  scope :current, ->(year=nil){joins(course_selections: :application).where('applications.created_at' => Application.current_year(year))}
 
-  # Image Upload
+  scope :confirmed, ->{course_selections.current.where(student_choice: [:firm_choice, :insurance_choice])}
+
+  # Image Uploads
   mount_uploader :image, CourseImageUploader
 
   # Validators
@@ -358,12 +360,20 @@ class Course < ApplicationRecord
     CourseSpreadsheet.generate self, year
   end
 
+  # Gets number of confirmed (e.g. firm_choice or insurance_choice) for this course.
+  #
+  # @return [Integer]
+  def confirmed_count
+    self.course_selections.current.where(student_choice: [:firm_choice, :insurance_choice]).count
+  end
+
   private
     # Checks that a staff member doesn't try to change spaces to be a number
     # less than the current number of applicants.
     def spaces_greater_than_applicants
-      if self.spaces < self.current_selections_count
-        self.errors.add(:spaces, 'cannot be less than number of applicants')
+      count = self.confirmed_count
+      if self.spaces < count
+        self.errors.add(:spaces, "cannot be less than number of firm and insurance choices '#{count}'")
       end
     end
 end

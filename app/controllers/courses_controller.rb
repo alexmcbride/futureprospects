@@ -13,26 +13,17 @@ class CoursesController < ApplicationController
     # Do search using scoped_search. If search term is empty then all records are returned.
     @courses = Course.available.full_search(@search_term).order(:title).page(params[:page])
 
-    # Filter by college if needed.
-    if params[:college]
-      @courses = @courses.where(college_id: params[:college])
+    # Load category.
+    @category = nil
+    if params[:category]
+      @courses = @courses.where(category_id: params[:category])
+      @category = Category.find params[:category]
     end
-  end
-
-  # GET courses/category/1?search=<String>&college=<Integer>
-  #
-  # Shows courses in a particular category with an optional search term and college ID. This action reuses the index view.
-  def category
-    @search_term = params[:search]
-    @category = Category.left_outer_joins(:courses).find params[:id] # Left outer join as courses can be empty
-    @courses = Course.available.full_search(@search_term, @category).page(params[:page]).includes(:college).order(:title)
 
     # Filter by college if needed.
     if params[:college]
       @courses = @courses.where(college_id: params[:college])
     end
-
-    render :index
   end
 
   # GET /courses/1

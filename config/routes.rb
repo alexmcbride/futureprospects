@@ -120,7 +120,7 @@ Rails.application.routes.draw do
 
   # Courses
   get 'courses/search', to: 'courses#search', as: 'courses_search'
-  get 'courses/category/:id', to: 'courses#category', as: 'courses_category'
+  # get 'courses/category/:id', to: 'courses#category', as: 'courses_category'
   resources :courses
 
   # Clearance

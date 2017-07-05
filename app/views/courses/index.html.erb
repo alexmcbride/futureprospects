@@ -7,7 +7,17 @@
         // Redirects when college drop-down changes.
         $('#college-dropdown').change(function() {
             var id = $('#college-dropdown').val();
-            window.location.search = (id === '0') ? '' : 'college=' + id;
+            var url = (id === '0') ? '' : 'college=' + id;
+
+            <% if params[:category] %>
+              url += '&category=' + <%= params[:category] %>;
+            <% end %>
+
+            <% if params[:search] %>
+              url += '&search=' + <%= params[:search] %>;
+            <% end %>
+
+            window.location.search = url;
         });
     });
   </script>
@@ -16,16 +26,16 @@
 <%# Find Courses Sidebar %>
 <div class="row">
   <div class="col-md-3">
-    <%= render 'shared/course_search', path: request.path %>
+    <%= render 'shared/course_search', path: courses_path %>
 
     <%# Show categories list. %>
     <h4>Course Categories</h4>
     <div class="list-group small">
       <% active = 'active' if @category.nil? %>
-      <%= link_to 'All Courses', courses_path(college: params[:college]), class: "list-group-item #{active}" %>
+      <%= link_to 'All Courses', courses_path(college: params[:college], search: params[:search]), class: "list-group-item #{active}" %>
       <% @categories.each do |category| %>
         <% active = category == @category ? 'active' : '' %>
-        <%= link_to category.name, courses_category_path(category, college: params[:college]), class: "list-group-item #{active}" %>
+        <%= link_to category.name, courses_path(category: category.id, college: params[:college], search: params[:search]), class: "list-group-item #{active}" %>
       <% end %>
     </div>
   </div>
@@ -34,7 +44,12 @@
   <div class="col-md-9">
     <% if @search_term %>
       <%# Display results string if this is a result of a search query. %>
-      <p class="text-right text-darkish">Search results for "<%= @search_term %>"</p>
+      <p class="text-right text-darkish">
+        Search results for "<%= @search_term %>"
+        <%= link_to courses_path(category: params[:category], college: params[:college]), title: 'Clear search' do %>
+          <%= icon('times') %>
+        <% end %>
+      </p>
     <% end %>
 
     <%# College selection drop-down only shown when on extra-small screen. %>
@@ -43,9 +58,9 @@
 
     <%# College selection tab-bar shown when on larger screen. %>
     <ul class="nav nav-tabs" id="college-tabs">
-      <li<%= ' class="active"'.html_safe unless params[:college] %>><%= link_to 'All Colleges', request.path %></li>
+      <li<%= ' class="active"'.html_safe unless params[:college] %>><%= link_to 'All Colleges', courses_path(category: params[:category], search: params[:search]) %></li>
       <% College.order(:name).each do |college| %>
-        <li<%= ' class="active"'.html_safe if params[:college] == college.id.to_s %>><%= link_to college.name, request.path + "?college=#{college.id}" %></li>
+        <li<%= ' class="active"'.html_safe if params[:college] == college.id.to_s %>><%= link_to college.name, courses_path(category: params[:category], college: college.id, search: params[:search]) %></li>
       <% end %>
     </ul>
 

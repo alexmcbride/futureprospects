@@ -28,7 +28,7 @@
           <% cache @categories do %>
             <ul class="list-inline">
               <% @categories.each do |category| %>
-                <li><%= link_to category.name, courses_category_path(category) %></li>
+                <li><%= link_to category.name, courses_path(category: category.id) %></li>
               <% end %>
             </ul>
           <% end %>

@@ -103,8 +103,10 @@ class NewApplicationsController < ApplicationController
     @school.application = @application
     respond_to do |format|
       if @school.save
+        format.js
         format.html { redirect_to applications_education_path, notice: 'Added school' }
       else
+        format.js
         format.html { render :education }
       end
     end
@@ -129,6 +131,9 @@ class NewApplicationsController < ApplicationController
     school = School.find params[:id]
     school.destroy
     respond_to do |format|
+      format.js do
+        @application = school.application
+      end
       format.html { redirect_to applications_education_path, notice: 'Removed school' }
     end
   end
@@ -184,8 +189,10 @@ class NewApplicationsController < ApplicationController
 
     respond_to do |format|
       if @school.add_qualification @qualification
+        format.js
         format.html { redirect_to applications_qualifications_path(@school), notice: 'Added qualification' }
       else
+        format.js
         format.html { render :qualifications }
       end
     end
@@ -198,6 +205,9 @@ class NewApplicationsController < ApplicationController
     qualification = Qualification.find params[:id]
     qualification.destroy
     respond_to do |format|
+      format.js do
+        @school = qualification.school
+      end
       format.html { redirect_to applications_qualifications_path(qualification.school), notice: 'Removed qualification' }
     end
   end
@@ -217,8 +227,10 @@ class NewApplicationsController < ApplicationController
     @job.application = @application
     respond_to do |format|
       if @job.save
+        format.js
         format.html { redirect_to applications_employment_path, notice: 'Employment added' }
       else
+        format.js
         format.html { render :employment }
       end
     end
@@ -243,6 +255,9 @@ class NewApplicationsController < ApplicationController
     @job = (Job.find params[:id] or not_found)
     @job.destroy
     respond_to do |format|
+      format.js do
+        @application = @job.application
+      end
       format.html { redirect_to applications_employment_path, notice: 'Employment removed' }
     end
   end
@@ -332,9 +347,13 @@ class NewApplicationsController < ApplicationController
     @course_selections = @application.course_selections.includes(:course)
     respond_to do |format|
       if @application.add_course @course_selection
+        format.js
         format.html { redirect_to applications_courses_path, notice: 'Course added to application' }
       else
-        format.html { render :courses }
+        format.js
+        format.html do
+          render :courses
+        end
       end
     end
   end
@@ -346,6 +365,10 @@ class NewApplicationsController < ApplicationController
     @selection = (CourseSelection.find params[:id] or not_found)
     @selection.destroy
     respond_to do |format|
+      format.js do
+        @application = @selection.application
+        @course_selections = @application.course_selections.includes(:course)
+      end
       format.html { redirect_to applications_courses_path, notice: 'Course removed from application' }
     end
   end

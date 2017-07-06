@@ -1,0 +1,72 @@
+<% if jobs.empty? %>
+  <p class="text-darkish small text-center">Any jobs you add will appear here.</p>
+<% else %>
+  <p class="text-darkish small">You can remove a job by clicking the remove button.</p>
+  <div class="list-group">
+    <% jobs.order(end_date: :desc).each do |job| %>
+        <div class="list-group-item well">
+          <div class="row">
+            <div class="col-xs-6">
+              <h4 class="no-top-margin"><strong><%= job.employer %></strong></h4>
+            </div>
+            <div class="col-xs-6 text-right">
+              <%= link_to applications_employment_edit_path(job), class: 'add-button', role: 'button' do %>
+                  <%= icon 'pencil-square', style: 'font-size: 13pt;' %>
+                  &nbsp;
+                  Edit
+              <% end %>
+              <a data-modal-name="<%= job.employer %> &mdash; <%= job.job_title %>"
+                 data-modal-path="<%= applications_employment_remove_path(job) %>"
+                 class="add-button custom-modal-button"
+                 role="button">
+                <%= icon 'trash', style: 'font-size: 13pt;' %>
+                &nbsp;
+                Remove
+              </a>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-4 col-xs-12">
+              <address class="small">
+                <%= job.address_1 %><br>
+                <%= job.address_2 %> <%= '<br>'.html_safe unless job.address_2.empty? %>
+                <%= job.city %><br>
+                <%= job.country %><br>
+                <%= job.postcode %>
+              </address>
+            </div>
+
+            <div class="col-sm-8 col-xs-12">
+              <div class="row small">
+                <div class="col-xs-2">
+                  Job Title:
+                </div>
+                <div class="col-xs-10">
+                  <%= job.job_title %>
+                </div>
+              </div>
+              <div class="row small">
+                <div class="col-xs-2">
+                  Duties:
+                </div>
+                <div class="col-xs-10">
+                  <%= job.duties %>
+                </div>
+              </div>
+              <div class="row small">
+                <div class="col-xs-2">
+                  Duration:
+                </div>
+                <div class="col-xs-10">
+                  <%= format_date job.start_date %>
+                  &mdash;
+                  <%= format_date job.end_date %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    <% end %>
+  </div>
+<% end %>

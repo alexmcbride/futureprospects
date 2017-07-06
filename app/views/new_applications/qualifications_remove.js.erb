@@ -1,0 +1,3 @@
+$('#qualifications-list').html('<%= j render('qualification_list', qualifications: @school.qualifications) %>')
+$('#form-errors').hide().html('<div class="alert alert-success">Qualification successfully removed</div>').fadeIn('fast');
+registerButtons();

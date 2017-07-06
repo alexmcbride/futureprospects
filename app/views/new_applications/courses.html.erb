@@ -1,38 +1,36 @@
 <% breadcrumb :application_courses %>
 <% @title = 'Add Courses' %>
 
-<%= render partial: 'remove_modal',
-           locals: {title: 'Remove Course',
-                    message: 'Are you sure you want to remove the following course?'} %>
+<%= render 'remove_modal', title: 'Remove Job', message: 'Are you sure you want to remove the following job?', remote: true %>
 
 <script>
   function registerAutocomplete(name, id, source) {
-      $(name).autocomplete({
-          minLength: 1,
-          source: source,
-          focus: function(event, ui) {
-              $(name).val(ui.item.title);
-              $(id).val(ui.item.id);
-              return false;
-          },
-          select: function(event, ui) {
-              $(name).val(ui.item.title);
-              $(id).val(ui.item.id);
-              return false;
-          }
-      }).autocomplete('instance')._renderItem = function(ul, item) {
-          return $( "<li>" )
-              .append( '<div class="text-capitalize"><strong>' +
-                  item.title +
-                  '</strong><br>' +
-                  item.college.name + ' &raquo; ' + item.category.name +
-                  '</div>')
-              .appendTo( ul );
-      };
+    $(name).autocomplete({
+      minLength: 1,
+      source: source,
+      focus: function (event, ui) {
+        $(name).val(ui.item.title);
+        $(id).val(ui.item.id);
+        return false;
+      },
+      select: function (event, ui) {
+        $(name).val(ui.item.title);
+        $(id).val(ui.item.id);
+        return false;
+      }
+    }).autocomplete('instance')._renderItem = function (ul, item) {
+      return $("<li>")
+        .append('<div class="text-capitalize"><strong>' +
+          item.title +
+          '</strong><br>' +
+          item.college.name + ' &raquo; ' + item.category.name +
+          '</div>')
+        .appendTo(ul);
+    };
   }
 
-  $(function() {
-     registerAutocomplete('#selected_course', '#course_selection_course_id', '<%= url_for courses_search_path(:json) %>');
+  $(function () {
+    registerAutocomplete('#selected_course', '#course_selection_course_id', '<%= url_for courses_search_path(:json) %>');
   });
 </script>
 
@@ -48,83 +46,37 @@
       select the course and then click the add button. You will be charged the specified application fee
       when your application is submitted.
     </p>
-    <%= form_for @course_selection, url: applications_courses_add_path, method: :post do |f| %>
-      <%= form_errors @course_selection %>
+    <%= form_for @course_selection, url: applications_courses_add_path, method: :post, remote: true do |f| %>
+      <div id="add-course-errors">
+        <%= form_errors @course_selection %>
+        <%= form_errors @application %>
+      </div>
       <%= f.hidden_field :course_id %>
 
       <div class="input-group">
         <%= text_field_tag :selected_course, params[:selected_course], placeholder: 'Enter the title of the course', class: 'form-control full-width courses-autocomplete' %>
         <span class="input-group-btn">
-          <%= f.submit 'Add Course', class: 'btn btn-default' %>
-        </span>
+        <%= f.submit 'Add Course', class: 'btn btn-default' %>
+      </span>
       </div>
     <% end %>
 
-    <%= form_for @application, url: applications_courses_next_path, method: :post do |f| %>
+    <hr>
+    <h3>Course List</h3>
 
-      <hr>
-      <h3>Course List</h3>
-
-      <%= form_errors @application %>
-
-      <div class="row">
-        <div class="col-xs-12">
-          <% if @course_selections.empty? %>
-            <p class="text-darkish small text-center"><em>Any courses you add will appear here.</em></p>
-            <br>
-          <% else %>
-            <p class="text-darkish small">These are the courses you are applying for.</p>
-            <div class="list-group">
-              <% @course_selections.each do |selection| %>
-                  <div class="list-group-item well">
-                    <div class="row">
-                      <div class="col-sm-8">
-                        <h4><strong><%= selection.course.title %></strong></h4>
-                        <ul class="list-inline small">
-                          <li><%= selection.course.college.name %></li>
-                          <li><%= selection.course.level %></li>
-                          <li><%= format_date selection.course.start_date %></li>
-                        </ul>
-                      </div>
-                      <div class="col-sm-4 text-right">
-                        <a class="add-button"
-                           href="<%= course_path(selection.course) %>"
-                           role="button">
-                          <%= icon 'info-circle', style: 'font-size: 13pt;' %>
-                          &nbsp;
-                          View Details
-                        </a>
-                        <a class="add-button custom-modal-button"
-                           role="button"
-                           data-modal-name="<%= selection.course.college.name %> &mdash; <%= selection.course.title %>"
-                           data-modal-path="<%= applications_courses_remove_path(selection) %>">
-                          <%= icon 'trash', style: 'font-size: 13pt;' %>
-                          &nbsp;
-                          Remove
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-              <% end %>
-            </div>
-
-            <div class="text-right">
-              <strong>
-                <%= pluralize @application.available_courses, 'course' %> left &mdash;
-                <%= number_to_currency @application.calculate_fee_pounds, unit: '£' %> fee
-              </strong>
-            </div>
-            <hr>
-          <% end %>
-        </div>
+    <div class="row">
+      <div class="col-xs-12" id="course-list">
+        <%= render 'course_list', selections: @course_selections %>
       </div>
+    </div>
 
-      <div class="row">
-        <div class="col-sm-12 text-right">
-          <p class="text-darkish small">Continue to the next section when ready.</p>
+    <div class="row">
+      <div class="col-sm-12 text-right">
+        <p class="text-darkish small">Continue to the next section when ready.</p>
+        <%= form_for @application, url: applications_courses_next_path, method: :post do |f| %>
           <%= f.submit 'Save and continue...', class: 'next-button' %>
-        </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
   </div>
 </div>

@@ -1,0 +1,3 @@
+$('#course-list').html('<%= j render('course_list', selections: @course_selections) %>')
+$('#add-course-errors').hide().html('<div class="alert alert-success">Course successfully removed</div>').fadeIn('fast');
+registerButtons();

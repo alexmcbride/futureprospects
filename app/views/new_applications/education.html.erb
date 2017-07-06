@@ -1,13 +1,11 @@
 <% breadcrumb :application_education %>
 <% @title = 'Education' %>
 
-<%= render partial: 'remove_modal',
-           locals: {title: 'Remove School',
-                    message: 'Are you sure you want to remove the following school?'} %>
+<%= render 'remove_modal', title: 'Remove School', message: 'Are you sure you want to remove the following school?', remote: true %>
 
 <div class="row">
   <div class="col-sm-3">
-    <%= render partial: 'stages_sidebar', locals: {application: @application, stage: :education_stage} %>
+    <%= render 'stages_sidebar', application: @application, stage: :education_stage %>
   </div>
 
   <div class="col-sm-9">
@@ -23,67 +21,25 @@
 
     <p class="text-darkish small">Add any school, college, university, or other institution where you have gained a qualification.</p>
 
-    <%= render 'education_form', path: applications_education_add_path %>
+    <%= render 'education_form', path: applications_education_add_path, remote: true %>
 
-    <!-- Form used to validate that schools/courses have been added -->
-    <%= form_for @application, url: applications_education_next_path, method: :post do |f| %>
-      <!-- Display schools list -->
-      <hr>
-      <h3 class="no-top-margin">Education History</h3>
-      <%= form_errors @application %>
-      <% if @application.schools.empty? %>
-        <br>
-        <p class="text-darkish text-center small"><em>Any school you add will appear here.</em></p>
-        <br>
-      <% else %>
-        <p class="text-darkish small">You can add the qualifications gain at each school by selecting the add qualifications option.</p>
-        <div class="list-group">
-          <% @application.schools.order(:name).each do |school| %>
-            <div class="list-group-item well">
-              <div class="row">
-                <div class="col-sm-6">
-                  <h4 class="no-top-margin no-bottom-padding"><%= school.name %></h4>
-                  <address class="small">
-                    <%= school.address_1 %><br>
-                    <%= school.address_2 %> <%= '<br>'.html_safe unless school.address_2.nil? or school.address_2.empty? %>
-                    <%= school.city %><br>
-                    <%= school.country %><br>
-                    <%= school.postcode %>
-                  </address>
-                </div> <!-- End col -->
-                <div class="col-sm-6 text-right">
-                  <%= link_to applications_qualifications_path(school), class: 'add-button', role: 'button' do %>
-                    <%= icon 'plus-circle', style: 'font-size: 13pt;' %>
-                    &nbsp;
-                    Add Qualifications (<%= school.qualifications.size %>)
-                  <% end %>
-                  <%= link_to applications_education_edit_path(school), class: 'add-button', role: 'button' do %>
-                      <%= icon 'pencil-square', style: 'font-size: 13pt;' %>
-                      &nbsp;
-                      Edit
-                  <% end %>
-                  <a data-modal-name="<%= school.name %>"
-                     data-modal-path="<%= applications_education_remove_path(school) %>"
-                     class="add-button custom-modal-button"
-                     role="button">
-                    <%= icon 'trash', style: 'font-size: 13pt;' %>
-                    &nbsp;
-                    Remove
-                  </a>
-                </div> <!-- End col -->
-              </div> <!-- End row -->
-            </div> <!-- End list item -->
-          <% end %>
-        </div> <!-- End group -->
-      <% end %>
+    <!-- Display schools list -->
+    <hr>
+    <h3 class="no-top-margin">Education History</h3>
 
-      <div class="row">
-        <div class="col-sm-12 text-right">
-          <hr>
-          <p class="text-darkish small">Continue to the next section when ready.</p>
-            <%= f.submit 'Save and continue...', class: 'next-button' %>
-        </div>
+    <div id="education-list">
+      <%= render 'education_list', schools: @application.schools %>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12 text-right">
+        <hr>
+        <p class="text-darkish small">Continue to the next section when ready.</p>
+        <!-- Form used to validate that schools/courses have been added -->
+        <%= form_for @application, url: applications_education_next_path, method: :post do |f| %>
+          <%= f.submit 'Save and continue...', class: 'next-button' %>
+        <% end %>
       </div>
-    <% end %>
+    </div>
   </div>
 </div>

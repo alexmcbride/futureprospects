@@ -3,7 +3,7 @@
 
 <div class="row">
   <div class="col-sm-3">
-    <%= render partial: 'stages_sidebar', locals: {application: @school.application, stage: :education_stage} %>
+    <%= render 'stages_sidebar', application: @school.application, stage: :education_stage %>
   </div>
 
   <div class="col-sm-9">
@@ -18,7 +18,7 @@
 
     <p class="text-darkish small">Edit the school, college, university, or other institution.</p>
 
-    <%= render 'education_form', path: applications_education_update_path(@school) %>
+    <%= render 'education_form', path: applications_education_update_path(@school), remote: false %>
 
     <p><%= link_to 'Go back...', applications_education_path %></p>
   </div>

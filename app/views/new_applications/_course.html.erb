@@ -1,0 +1,29 @@
+<div class="list-group-item well">
+  <div class="row">
+    <div class="col-sm-8">
+      <h4><strong><%= selection.course.title %></strong></h4>
+      <ul class="list-inline small">
+        <li><%= selection.course.college.name %></li>
+        <li><%= selection.course.level %></li>
+        <li><%= format_date selection.course.start_date %></li>
+      </ul>
+    </div>
+    <div class="col-sm-4 text-right">
+      <a class="add-button"
+         href="<%= course_path(selection.course) %>"
+         role="button">
+        <%= icon 'info-circle', style: 'font-size: 13pt;' %>
+        &nbsp;
+        View Details
+      </a>
+      <a class="add-button custom-modal-button"
+         role="button"
+         data-modal-name="<%= selection.course.college.name %> &mdash; <%= selection.course.title %>"
+         data-modal-path="<%= applications_courses_remove_path(selection) %>">
+        <%= icon 'trash', style: 'font-size: 13pt;' %>
+        &nbsp;
+        Remove
+      </a>
+    </div>
+  </div>
+</div>

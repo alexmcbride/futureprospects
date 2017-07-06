@@ -1,0 +1,37 @@
+<h3 class="no-top-margin">
+  Qualifications
+  <% count = qualifications.size%>
+  <%= "(#{count})" if count > 0 %>
+</h3>
+<% if count == 0 %>
+    <p class="text-darkish small"><em>Any qualifications you add will appear here.</em></p>
+<% else %>
+    <p class="text-darkish small">You can remove a qualification by clicking the remove button.</p>
+    <div class="list-group">
+      <% qualifications.order(end_date: :desc).each do |qualification| %>
+          <div class="list-group-item well">
+            <div class="row">
+              <div class="col-sm-6">
+                <h4 class="no-top-margin"><%= qualification.subject %></h4>
+                <ul class="list-unstyled small">
+                  <li>Award: <%= qualification.award %></li>
+                  <li>Grade: <%= qualification.grade %></li>
+                  <li>Start: <%= format_date qualification.start_date %> &mdash; <%= format_date qualification.end_date %></li>
+                </ul>
+              </div>
+
+              <div class="col-sm-6 text-right">
+                <a class="add-button custom-modal-button"
+                   role="button"
+                   data-modal-name="<%= qualification.subject %> - <%= qualification.award %>"
+                   data-modal-path="<%= applications_qualifications_remove_path(qualification) %>">
+                  <%= icon 'trash', style: 'font-size: 13pt;' %>
+                  &nbsp;
+                  Remove
+                </a>
+              </div>
+            </div>
+          </div>
+      <% end %> <!-- loop -->
+    </div>
+<% end %> <!-- if -->

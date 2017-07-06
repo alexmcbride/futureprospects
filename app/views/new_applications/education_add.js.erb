@@ -1,0 +1,8 @@
+<% if @school.errors.any? %>
+  $('#form-errors').hide().html('<%= j form_errors(@school) %>').fadeIn('fast');
+<% else %>
+  $('#education-list').html('<%= j render('education_list', schools: @application.schools) %>');
+  $('#form-errors').hide().html('<div class="alert alert-success">School successfully added</div>').fadeIn('fast');
+  $('#new_school').trigger('reset');
+  registerButtons();
+<% end %>

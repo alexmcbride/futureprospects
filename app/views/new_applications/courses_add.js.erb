@@ -1,0 +1,9 @@
+<% if @course_selection.errors.any? %>
+  $('#add-course-errors').hide().html('<%= j form_errors @course_selection %>').fadeIn('fast');
+<% else %>
+  $('#course-list').html('<%= j render('course_list', selections: @course_selections) %>')
+  $('#selected_course').val('');
+  $('#course_selection_course_id').val('');
+  $('#add-course-errors').hide().html('<div class="alert alert-success">Course successfully added</div>').fadeIn('fast');
+  registerButtons();
+<% end %>

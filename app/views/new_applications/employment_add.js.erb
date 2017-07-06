@@ -1,0 +1,8 @@
+<% if @job.errors.any? %>
+  $('#form-errors').hide().html('<%= j form_errors(@job) %>').fadeIn('fast');
+<% else %>
+  $('#employment-list').html('<%= j render('employment_list', jobs: @application.jobs) %>');
+  $('#form-errors').hide().html('<div class="alert alert-success">Job successfully added</div>').fadeIn('slow');
+  $('#new_job').trigger("reset");
+  registerButtons();
+<% end %>

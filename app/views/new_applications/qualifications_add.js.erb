@@ -1,0 +1,8 @@
+<% if @qualification.errors.any? %>
+  $('#form-errors').hide().html('<%= j form_errors(@qualification) %>').fadeIn('fast');
+<% else %>
+  $('#qualifications-list').html('<%= j render('qualification_list', qualifications: @school.qualifications) %>');
+  $('#form-errors').hide().html('<div class="alert alert-success">Qualification successfully added</div>').fadeIn('fast');
+  $('#new_qualification').trigger('reset');
+  registerButtons();
+<% end %>

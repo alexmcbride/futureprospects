@@ -1,0 +1,3 @@
+$('#employment-list').html('<%= j render('employment_list', jobs: @application.jobs) %>');
+$('#form-errors').hide().html('<div class="alert alert-success">Job successfully removed</div>').fadeIn('slow');
+registerButtons();

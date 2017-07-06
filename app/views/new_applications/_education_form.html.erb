@@ -24,11 +24,16 @@
   </script>
 <% end %>
 
-<%= form_for @school, url: path, :html => {:class => 'form-horizontal', :role => 'form' } do |f|%>
+<%= form_for @school, url: path, :html => {:class => 'form-horizontal', :role => 'form' } , remote: remote do |f|%>
 
   <%= f.hidden_field :id %>
 
-  <%= form_errors @school %>
+  <div id="form-errors">
+    <%= form_errors @school %>
+    <% if @application %>
+      <%= form_errors @application %>
+    <% end %>
+  </div>
 
   <div class="row">
     <div class="col-sm-6 col-xs-12">

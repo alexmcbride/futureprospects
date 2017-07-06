@@ -18,7 +18,7 @@
 
     <p class="text-darkish small">Edit your employment history.</p>
 
-    <%= render 'employment_form', path: applications_employment_update_path(@job) %>
+    <%= render 'employment_form', path: applications_employment_update_path(@job), remote: false %>
 
     <p><%= link_to 'Go back...', applications_employment_path %></p>
   </div>

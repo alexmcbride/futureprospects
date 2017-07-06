@@ -1,0 +1,19 @@
+<% if selections.empty? %>
+    <p class="text-darkish small text-center"><em>Any courses you add will appear here.</em></p>
+    <br>
+<% else %>
+    <p class="text-darkish small">These are the courses you are applying for.</p>
+    <div class="list-group">
+      <% selections.each do |selection| %>
+          <%= render 'course', selection: selection %>
+      <% end %>
+    </div>
+
+    <div class="text-right">
+      <strong>
+        <%= pluralize @application.available_courses, 'course' %> left &mdash;
+        <%= number_to_currency @application.calculate_fee_pounds, unit: '£' %> fee
+      </strong>
+    </div>
+    <hr>
+<% end %>

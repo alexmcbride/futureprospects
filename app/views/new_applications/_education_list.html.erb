@@ -1,0 +1,45 @@
+<% if schools.empty? %>
+    <br>
+    <p class="text-darkish text-center small"><em>Any school you add will appear here.</em></p>
+    <br>
+<% else %>
+    <p class="text-darkish small">You can add the qualifications gain at each school by selecting the add qualifications option.</p>
+    <div class="list-group">
+      <% schools.order(:name).each do |school| %>
+          <div class="list-group-item well">
+            <div class="row">
+              <div class="col-sm-6">
+                <h4 class="no-top-margin no-bottom-padding"><%= school.name %></h4>
+                <address class="small">
+                  <%= school.address_1 %><br>
+                  <%= school.address_2 %> <%= '<br>'.html_safe unless school.address_2.nil? or school.address_2.empty? %>
+                  <%= school.city %><br>
+                  <%= school.country %><br>
+                  <%= school.postcode %>
+                </address>
+              </div> <!-- End col -->
+              <div class="col-sm-6 text-right">
+                <%= link_to applications_qualifications_path(school), class: 'add-button', role: 'button' do %>
+                    <%= icon 'plus-circle', style: 'font-size: 13pt;' %>
+                    &nbsp;
+                    Add Qualifications (<%= school.qualifications.size %>)
+                <% end %>
+                <%= link_to applications_education_edit_path(school), class: 'add-button', role: 'button' do %>
+                    <%= icon 'pencil-square', style: 'font-size: 13pt;' %>
+                    &nbsp;
+                    Edit
+                <% end %>
+                <a data-modal-name="<%= school.name %>"
+                   data-modal-path="<%= applications_education_remove_path(school) %>"
+                   class="add-button custom-modal-button"
+                   role="button">
+                  <%= icon 'trash', style: 'font-size: 13pt;' %>
+                  &nbsp;
+                  Remove
+                </a>
+              </div> <!-- End col -->
+            </div> <!-- End row -->
+          </div> <!-- End list item -->
+      <% end %>
+    </div> <!-- End group -->
+<% end %>

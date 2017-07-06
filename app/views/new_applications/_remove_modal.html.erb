@@ -1,16 +1,20 @@
 <% content_for :head do %>
   <script type="text/javascript">
-      $(document).ready(function(){
-          $(".custom-modal-button").click(function(e){
-              // Get data from btn and then show the modal dialog.
-              var btn = $(e.target);
-              var name = btn.attr('data-modal-name');
-              var path = btn.attr('data-modal-path');
-              $('#modalName').html(name);
-              $('#modalLink').attr('href', path);
-              $('#customModal').modal();
-          });
+    function registerButtons() {
+      $(".custom-modal-button").click(function(e){
+        // Get data from btn and then show the modal dialog.
+        var btn = $(e.target);
+        var name = btn.attr('data-modal-name');
+        var path = btn.attr('data-modal-path');
+        $('#modalName').html(name);
+        $('#modalLink').attr('href', path);
+        $('#customModal').modal();
       });
+    }
+
+    $(document).ready(function(){
+      registerButtons();
+    });
   </script>
 <% end %>
 
@@ -30,7 +34,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
         <a id="modalLink" href="#"
-           data-method="delete" class="btn btn-primary" role="button">
+           data-method="delete" class="btn btn-primary" role="button" data-remote="true" data-dismiss="modal">
           <%= icon 'trash', style: 'font-size: 13pt;' %>
           &nbsp;
           Remove

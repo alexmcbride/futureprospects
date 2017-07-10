@@ -67,14 +67,11 @@ class Staff::StudentsController < Staff::StaffController
   def search
     authorize Student
 
-    term = params[:term] ? params[:term].strip : nil
     respond_to do |format|
+      term = params[:term] ? params[:term].strip : nil
       if term
-        term = "%#{term.downcase}%"
         # TODO: replace with scoped_search?
-        students = Student.where('LOWER(first_name) LIKE ? OR LOWER(family_name) LIKE ? OR LOWER(username) LIKE ? or LOWER(EMAIL) LIKE ?', term, term, term, term)
-                       .order(:first_name, :family_name)
-                       .limit 15
+        students = Student.search(term).order(:first_name, :family_name).limit 15
         format.json { render json: students, only: [:id, :first_name, :family_name, :email] }
       else
         format.json { head :ok } # blank json response

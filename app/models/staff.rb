@@ -63,7 +63,7 @@ class Staff < User
   def self.filter(params)
     staff = Staff.all
     if params[:full_name].present?
-      sql = 'LOWER(first_name) LIKE :term OR LOWER(family_name) LIKE :term OR LOWER(username) LIKE :term'
+      sql = 'first_name ILIKE :term OR family_name ILIKE :term OR username ILIKE :term'
       staff = staff.where(sql, {term: "%#{params[:full_name].downcase}%"})
     end
     if params[:college].present? and params[:college] != '0'

@@ -97,6 +97,6 @@ class Job < ApplicationRecord
     if term.nil? or term.empty?
       return Job.none
     end
-    Job.select('DISTINCT employer, address_1, address_2, city, postcode, country').where('LOWER(employer) LIKE LOWER(?)', "%#{term}%")
+    Job.select('DISTINCT employer, address_1, address_2, city, postcode, country').where('employer ILIKE ?', "#{term}%")
   end
 end

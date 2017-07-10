@@ -93,6 +93,6 @@ class School < ApplicationRecord
     if term.nil? or term.empty?
       return School.none
     end
-    School.select('DISTINCT name, address_1, address_2, city, postcode, country').where('LOWER(name) LIKE LOWER(?)', "%#{term}%")
+    School.select('DISTINCT name, address_1, address_2, city, postcode, country').where('name ILIKE ?', "#{term}%")
   end
 end

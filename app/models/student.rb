@@ -32,6 +32,17 @@ class Student < User
   # @return [Array<Student>] the student object or nil.
   scope :find_open_auth, ->(provider, uid){ where(provider: provider, uid: uid) }
 
+  # Searches for students that match the specified term.
+  #
+  # @param term [String] the search term.
+  # @return [Array<Student>] an array of students.
+  scope :search, ->(term) do
+    if term.nil? or term.empty?
+      return Student.none
+    end
+    where('first_name ILIKE :term OR family_name ILIKE :term OR username ILIKE :term OR email ILIKE :term', {term: "%#{term}%"})
+  end
+
   # Creates a new application for this student.
   #
   # @return [Application]

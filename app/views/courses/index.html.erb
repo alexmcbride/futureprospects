@@ -42,7 +42,7 @@
 
   <%# Main Content %>
   <div class="col-md-9">
-    <% if @search_term %>
+    <% if @search_term && @search_term.present? %>
       <%# Display results string if this is a result of a search query. %>
       <p class="text-right text-darkish">
         Search results for "<%= @search_term %>"

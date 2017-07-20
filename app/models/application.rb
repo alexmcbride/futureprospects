@@ -375,8 +375,12 @@ class Application < ApplicationRecord
   # @param year [Integer] an optional year to find the academic year for (e.g. 2016)
   # @return [Date..Date]
   def self.current_year(year=nil)
-    year = Date.today.year unless year && year > 0
-    (Date.new(year, 1, 1)..Date.new(year, 7, 16))
+    year = Date.today.year unless (year && year > 0)
+    if ENV['TEST_CREATE_APPLICATION'] == 'true'
+      (Date.new(year, 1, 1)..Date.new(year, 12, 31))
+    else
+      (Date.new(year, 1, 1)..Date.new(year, 7, 16))
+    end
   end
 
   # Gets the student's full name. This is not always present, you should prefer +Student.full_name+ which is guaranteed

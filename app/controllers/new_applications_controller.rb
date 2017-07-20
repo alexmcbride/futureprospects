@@ -36,6 +36,9 @@ class NewApplicationsController < ApplicationController
       @application = current_student.create_application
       if @application.nil?
         format.html { redirect_to root_path, notice: 'Application has already been created' }
+      elsif @application.errors.any?
+        key, error = @application.errors.first
+        format.html { redirect_to root_path, notice: "#{key.capitalize} #{error}"}
       else
         format.html { redirect_to applications_intro_path }
       end

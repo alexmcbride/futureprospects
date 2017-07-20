@@ -353,7 +353,13 @@ class Application < ApplicationRecord
     application.status = :submitting
     application.current_stage = :intro_stage
     application.student = student
-    application.save validate: false # Can't validate at this point
+
+    # Check can create application.
+    application.applications_are_open
+    if application.errors.empty?
+      application.save validate: false # Can't validate at this point
+    end
+
     application
   end
 
@@ -863,6 +869,13 @@ class Application < ApplicationRecord
     self.awaiting_decisions? || self.awaiting_replies? || self.all_rejected?
   end
 
+  # Determines if applications are open and adds validation errors if they're not.
+  def applications_are_open
+    unless Application.current_year.include? Date.today
+      self.errors.add(:applications, 'are closed')
+    end
+  end
+
   private
     # Calculates the date that replies are due for this application. We have to figure out the date of the next course
     # start, in case the decision is being made a different year. For instance, a decision made in Dec 2016 for a course
@@ -909,12 +922,5 @@ class Application < ApplicationRecord
     # @return [boolean]
     def all_selections_rejected?
       self.course_selections.all? {|s| s.rejected?}
-    end
-
-    # Determines if applications are open and adds validation errors if they're not.
-    def applications_are_open
-      unless Application.current_year.include? Date.today
-        self.errors.add(:applications, 'are closed')
-      end
     end
 end

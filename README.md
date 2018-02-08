@@ -10,8 +10,8 @@ Note: the web site sleeps after 30 minutes of inactivity, so can take a few seco
 
 The site home page.
 
-![alt tag](https://github.com/alexmcbride/futureprospects/blob/master/public/futureprospects.png "Future Prospects Home Page")
+![alt tag](https://user-images.githubusercontent.com/1594088/35970804-9d6ae68e-0cc3-11e8-8b64-a02f3c7ac050.png "Future Prospects Home Page")
 
 The courses list page.
 
-![alt tag](https://github.com/alexmcbride/futureprospects/blob/master/public/futureprospects2.png "Future Prospects Courses Page")
+![alt tag](https://user-images.githubusercontent.com/1594088/35970806-9d813e48-0cc3-11e8-9b05-5208f08ff36c.png "Future Prospects Courses Page")
